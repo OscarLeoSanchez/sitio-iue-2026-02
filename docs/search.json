@@ -1,0 +1,183 @@
+[
+  {
+    "objectID": "web/index.html",
+    "href": "web/index.html",
+    "title": "Programación Web",
+    "section": "",
+    "text": "Asignatura\nProgramación Web (IF2003)\n\n\nGrupo\n603 — Ingeniería Informática\n\n\nDocente\nOscar Leonel Sánchez Conde\n\n\nSemestre\n2026-02 — 17 semanas\n\n\nTecnología\nHTML, CSS y JavaScript · ASP.NET Core · Azure\nEl curso se articula alrededor de un proyecto que crece durante todo el semestre. El repositorio se crea en la Semana 2 y el semestre cierra con la aplicación publicada y accesible desde una dirección pública en internet.",
+    "crumbs": [
+      "Programación Web",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "web/index.html#calendario",
+    "href": "web/index.html#calendario",
+    "title": "Programación Web",
+    "section": "Calendario",
+    "text": "Calendario\n\nUnidad 1. Entornos, versionado e IA\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n01\nSocialización. Entornos de desarrollo: VS Code y Visual Studio 2026 Community\nEntorno configurado y página estática ejecutándose localmente\n—\n\n\n02\nManejo de versiones: Git y GitHub\nRepositorio del proyecto con .gitignore, README e historial ordenado\n10%\n\n\n03\nIntroducción al Vibe Coding e ingeniería de prompts\nBitácora de prompts del proyecto: aceptado, corregido y descartado\n—\n\n\n04\nUso responsable de herramientas de IA\nPropuesta de interfaz del proyecto generada con IA y documentada\n—\n\n\n\n\n\nUnidad 2. Frontend\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n05\nHTML5 y CSS3\nPágina principal adaptada a móvil y escritorio\n10%\n\n\n06\nFrameworks CSS: Bootstrap 5 y Tailwind CSS\nSección del proyecto rehecha en cada framework, con sustentación\n—\n\n\n07\nJavaScript ES6 y manipulación del DOM\nComportamiento dinámico sin recarga de página\n—\n\n\n08\nConsumo básico de APIs\nFrontend integrado con una API pública\n10%\n\n\n\n\n\nEvaluación parcial\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n09\nEvaluación parcial (Unidades 1 y 2). Prueba práctica, sustentación técnica y demo del frontend\nAjustes finales según retroalimentación\n20%\n\n\n\n\n\nUnidad 3. Backend con ASP.NET Core\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n10\nArquitectura MVC: modelos, vistas y controladores\nServidor del proyecto respondiendo a sus rutas base\n—\n\n\n11\nRazor y layouts\nInterfaz de la unidad 2 migrada al proyecto de servidor\n10%\n\n\n12\nRouting y validaciones\nFormulario con rutas propias y validación en cliente y servidor\n—\n\n\n13\nBases de datos, SQL Server y Entity Framework Core\nCRUD del proyecto persistido en base de datos\n10%\n\n\n\n\n\nUnidad 4. Servicios, despliegue y entornos\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n14\nWeb APIs y consumo de servicios\nAPI propia consumida desde el frontend\n—\n\n\n15\nPublicación en Azure App Service\nProyecto accesible desde una dirección pública en internet\n—\n\n\n16\nConfiguración de entornos\nProyecto funcionando en local y en producción\n10%\n\n\n17\nEvaluación final. Sustentación técnica individual y demo de la aplicación publicada\nEntrega del repositorio final documentado\n20%",
+    "crumbs": [
+      "Programación Web",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "web/index.html#distribución-evaluativa",
+    "href": "web/index.html#distribución-evaluativa",
+    "title": "Programación Web",
+    "section": "Distribución evaluativa",
+    "text": "Distribución evaluativa\n\n\n\nComponente\nDetalle\nPeso\n\n\n\n\nSeguimiento\nSemanas 2, 5, 8, 11, 13 y 16\n60%\n\n\nEvaluación parcial\nSemana 9\n20%\n\n\nEvaluación final\nSemana 17\n20%\n\n\n\nLa distribución es institucional y no se modifica.",
+    "crumbs": [
+      "Programación Web",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "web/index.html#criterios-de-desempeño",
+    "href": "web/index.html#criterios-de-desempeño",
+    "title": "Programación Web",
+    "section": "Criterios de desempeño",
+    "text": "Criterios de desempeño\n\nConocimiento. Identifica los fundamentos, arquitecturas, tecnologías y herramientas del desarrollo de aplicaciones web.\nDesempeño. Desarrolla aplicaciones web aplicando HTML, CSS, JavaScript, ASP.NET Core, bases de datos, APIs y principios de arquitectura y seguridad.\nProducto. Implementa una aplicación web funcional integrando frontend, backend, bases de datos y servicios web, con funcionalidad, estabilidad, seguridad y portabilidad.",
+    "crumbs": [
+      "Programación Web",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "movil/index.html",
+    "href": "movil/index.html",
+    "title": "Programación Móvil",
+    "section": "",
+    "text": "Asignatura\nProgramación Móvil (IF2004)\n\n\nGrupos\n601 y 602 — Ingeniería Informática\n\n\nDocente\nOscar Leonel Sánchez Conde\n\n\nSemestre\n2026-02 — 17 semanas\n\n\nTecnología\nFlutter y Dart\nEl curso se articula alrededor de un proyecto que crece durante todo el semestre. Casi todos los entregables semanales son un incremento de esa misma aplicación, no ejercicios sueltos. El alcance del proyecto se define en la Semana 3 y se sustenta con una demo en dispositivo real en la Semana 17.",
+    "crumbs": [
+      "Programación Móvil",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "movil/index.html#calendario",
+    "href": "movil/index.html#calendario",
+    "title": "Programación Móvil",
+    "section": "Calendario",
+    "text": "Calendario\nLas semanas con guía publicada aparecen enlazadas. El resto se habilita a medida que avanza el semestre.\n\nUnidad 1. Fundamentos del desarrollo móvil\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n01\nSocialización. Ecosistema móvil e instalación del entorno\nEntorno verificado con flutter doctor\n—\n\n\n02\nFlutter y Dart\nPantalla con estado propio que reacciona a la interacción\n—\n\n\n03\nGit y primer proyecto\nRepositorio con primera versión ejecutable e historial ordenado\n10%\n\n\n\n\n\nUnidad 2. Interfaz, datos y persistencia\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n04\nMaterial Design y widgets\nPantallas principales del proyecto con tema claro y oscuro\n—\n\n\n05\nNavegación\nPantallas conectadas, con información entre ellas\n—\n\n\n06\nFormularios y componentes reutilizables\nFormulario principal validado y dos componentes reutilizables\n10%\n\n\n07\nJSON y APIs REST\nDatos externos integrados con manejo de errores\n—\n\n\n08\nPersistencia local\nProyecto que abre y opera sin conexión\n10%\n\n\n\n\n\nEvaluación parcial\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n09\nEvaluación parcial (Unidades 1 y 2). Prueba práctica, sustentación técnica individual y demo funcional\nAjustes según retroalimentación\n20%\n\n\n\n\n\nUnidad 3. Servicios en la nube y arquitectura\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n10\nFirebase Authentication y Firestore\nRegistro e inicio de sesión con los datos protegidos\n—\n\n\n11\nStorage y notificaciones\nCarga de imagen y recepción de notificación de prueba\n5%\n\n\n12\nMVVM y Repository Pattern\nFuncionalidad reorganizada en vista, modelo de vista y repositorio\n—\n\n\n13\nClean Architecture\nFuncionalidad en tres capas, con fuente de datos intercambiable\n10%\n\n\n\n\n\nUnidad 4. Calidad, publicación e IA\n\n\n\n\n\n\n\n\n\nSem\nTemática\nEntregable independiente\n%\n\n\n\n\n14\nTesting, seguridad y optimización\nPruebas de una funcionalidad y corrección de un problema de rendimiento\n—\n\n\n15\nDesarrollo del proyecto final\nVersión de prueba distribuida y documentación del proyecto\n—\n\n\n16\nIntegración de IA\nFunción con IA integrada y sustentada\n—\n\n\n17\nEvaluación final. Sustentación técnica individual y demo funcional en dispositivo real\nEntrega del repositorio documentado e instalable\n20%\n\n\n\n\n\nPrueba Institucional de Resultados de Aprendizaje\n\n\n\n\n\n\n\n\nSemana\nTemática\n%\n\n\n\n\nPor definir\nPrueba Institucional de Resultados de Aprendizaje. La fecha la fija la universidad y no desplaza la numeración de las semanas\n15%",
+    "crumbs": [
+      "Programación Móvil",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "movil/index.html#distribución-evaluativa",
+    "href": "movil/index.html#distribución-evaluativa",
+    "title": "Programación Móvil",
+    "section": "Distribución evaluativa",
+    "text": "Distribución evaluativa\n\n\n\n\n\n\n\n\nComponente\nDetalle\nPeso\n\n\n\n\nSeguimiento\nSemanas 3, 6, 8, 11 y 13 más la Prueba Institucional\n60%\n\n\nEvaluación parcial\nSemana 9\n20%\n\n\nEvaluación final\nSemana 17\n20%\n\n\n\nLa distribución es institucional y no se modifica.",
+    "crumbs": [
+      "Programación Móvil",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "movil/index.html#criterios-de-desempeño",
+    "href": "movil/index.html#criterios-de-desempeño",
+    "title": "Programación Móvil",
+    "section": "Criterios de desempeño",
+    "text": "Criterios de desempeño\nToda rúbrica del curso se traza a uno de estos tres criterios de la carta descriptiva:\n\nConocimiento. Describe los fundamentos del desarrollo móvil, la arquitectura básica de Flutter, el lenguaje Dart y el flujo de trabajo con Git.\nDesempeño. Desarrolla aplicaciones móviles con Flutter, integrando navegación, consumo de APIs REST y persistencia local, aplicando principios de arquitectura de software y experiencia de usuario.\nProducto. Implementa aplicaciones móviles integrando interfaz, lógica de negocio, persistencia, servicios externos y capacidades inteligentes.",
+    "crumbs": [
+      "Programación Móvil",
+      "Presentación del curso"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Material de clase · 2026-02",
+    "section": "",
+    "text": "Aquí se publican las guías de las dos asignaturas que oriento este semestre. Cada semana tiene su propia guía, con el paso a paso de la sesión, las capturas reales de lo que debe verse en pantalla y los errores frecuentes con su solución."
+  },
+  {
+    "objectID": "index.html#cómo-usar-este-sitio",
+    "href": "index.html#cómo-usar-este-sitio",
+    "title": "Material de clase · 2026-02",
+    "section": "Cómo usar este sitio",
+    "text": "Cómo usar este sitio\nLa guía de cada semana se publica antes de la sesión. Léela antes de clase: la sesión avanza sobre lo que ya leíste, no repitiendo la lectura en voz alta.\nTodas las guías se leen desde el navegador, en el computador o en el teléfono. No hace falta descargar nada ni iniciar sesión.\n\n\n\n\n\n\nTipGuarda este enlace, no los archivos\n\n\n\nLa dirección de este sitio no cambia en todo el semestre y siempre muestra la versión más reciente. Si descargas un archivo y la guía se corrige después, te quedas con la versión vieja."
+  },
+  {
+    "objectID": "index.html#sobre-el-material",
+    "href": "index.html#sobre-el-material",
+    "title": "Material de clase · 2026-02",
+    "section": "Sobre el material",
+    "text": "Sobre el material\nLas guías están escritas para quien no ha usado antes la tecnología del curso. Cada procedimiento se probó en una máquina real antes de publicarse, y las capturas de terminal son salidas auténticas, no montajes.\nSi encuentras un error, un enlace roto o un paso que no funciona en tu equipo, dímelo en clase o por Teams. Se corrige y queda arreglado para todos.\n\nOscar Leonel Sánchez Conde · Institución Universitaria de Envigado · Facultad de Ingenierías · Semestre 2026-02"
+  },
+  {
+    "objectID": "movil/semana-01/index.html",
+    "href": "movil/semana-01/index.html",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "",
+    "text": "Asignatura\nProgramación Móvil (IF2004)\n\n\nGrupos\n601 y 602 - Ingeniería Informática\n\n\nUnidad\nUnidad 1. Fundamentos del desarrollo móvil",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  },
+  {
+    "objectID": "movil/semana-01/index.html#lo-que-vas-a-lograr",
+    "href": "movil/semana-01/index.html#lo-que-vas-a-lograr",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "1 Lo que vas a lograr",
+    "text": "1 Lo que vas a lograr\nAl terminar esta guía tu computador queda con todas las herramientas del semestre instaladas y verificadas. En la Semana 2 creas tu primer proyecto sobre este entorno.\nObjetivos concretos:\n\nInstalar Git, el SDK de Flutter, Android Studio y Visual Studio Code.\nConfigurar el PATH para que los comandos de Flutter funcionen desde cualquier terminal.\nPreparar un emulador o un teléfono Android listo para recibir aplicaciones.\nDiagnosticar la instalación con flutter doctor y dejarla sin errores que bloqueen.\n\n\n\n\n\n\n\nNotaAntes de instalar nada\n\n\n\nReserva 15 GB libres en disco y una conexión estable. La descarga completa supera los 6 GB entre el SDK de Flutter, Android Studio y las imágenes del emulador. En la sala de cómputo usa cable de red si lo tienes disponible.\n\n\n\nRequisitos de la máquina\n\n\n\n\n\n\n\n\nComponente\nMínimo\nRecomendado\n\n\n\n\nSistema operativo\nWindows 10 de 64 bits, macOS 13 o Ubuntu 22.04\nWindows 11 o macOS 14\n\n\nMemoria RAM\n8 GB\n16 GB\n\n\nDisco libre\n15 GB\n30 GB en unidad SSD\n\n\nProcesador\nx86_64 o Apple Silicon con virtualización\n4 núcleos o más\n\n\n\nSi tu equipo tiene 8 GB de RAM, conecta un teléfono Android por cable en vez de usar el emulador. Consume mucha menos memoria y responde más rápido.\n\n\nVersiones de referencia\nEsta guía se probó con estas versiones. Instala la misma línea o una superior.\n\n\n\nHerramienta\nVersión probada\n\n\n\n\nFlutter\n3.41.9 (stable)\n\n\nDart\n3.11.5\n\n\nAndroid SDK\n36.0.0\n\n\nNDK\n28.2.13676358\n\n\nJDK\n21 (OpenJDK)\n\n\nGit\n2.50\n\n\nVisual Studio Code\n1.132\n\n\n\n\n\n\n\n\n\nTipTrabajas en Linux o macOS\n\n\n\nCada paso trae las instrucciones para los tres sistemas. Sigue la subsección que corresponde a tu equipo e ignora las otras dos. El resultado final es el mismo en los tres casos.",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  },
+  {
+    "objectID": "movil/semana-01/index.html#instalación-paso-a-paso",
+    "href": "movil/semana-01/index.html#instalación-paso-a-paso",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "2 Instalación paso a paso",
+    "text": "2 Instalación paso a paso\n\n1 Git\nDescarga desde git-scm.com/install y sigue las instrucciones de tu sistema.\n\nWindows\nDescarga el instalador de 64 bits y ejecútalo. Acepta las opciones por omisión en todas las pantallas. La única que conviene revisar es Adjusting your PATH environment, donde debe quedar marcada la opción recomendada: Git from the command line and also from 3rd-party software.\n\n\nmacOS\nInstala las herramientas de línea de comandos de Apple, que ya traen Git:\nxcode-select --install\nSi usas Homebrew y prefieres una versión más reciente:\nbrew install git\n\n\nLinux\n# Ubuntu y derivadas\nsudo apt update && sudo apt install -y git\n\n# Fedora\nsudo dnf install -y git\n\n\nVerifica y configura tu identidad\nAbre una terminal nueva y comprueba la instalación:\ngit --version\nConfigura tu nombre y correo. Usa el correo institucional, porque con él vas a entregar el repositorio del proyecto más adelante.\ngit config --global user.name \"Tu Nombre Completo\"\ngit config --global user.email \"tucorreo@correo.iue.edu.co\"\n\n\n\n2 SDK de Flutter por instalación manual\nVas a descargar el SDK como archivo comprimido, descomprimirlo en una carpeta tuya y registrarlo en el PATH. Este método no depende de instaladores ni de gestores de paquetes, así que funciona igual en los tres sistemas y te deja el control de dónde queda todo.\nPágina oficial del método: docs.flutter.dev/install/manual.\n\nPaso 2.1: descarga el paquete de tu sistema\nEntra al enlace anterior y elige tu sistema operativo. Descarga el paquete del canal stable.\n\n\n\n\n\n\n\n\nSistema\nArchivo\nNota\n\n\n\n\nWindows\n.zip\nUn solo paquete para todos los equipos\n\n\nmacOS\n.zip\nEscoge Apple Silicon o Intel según tu procesador\n\n\nLinux\n.tar.xz\nUn solo paquete de 64 bits\n\n\n\nEn macOS, si no sabes cuál procesador tienes, abre el menú Apple y entra a Acerca de este Mac. Si dice Chip Apple M1, M2, M3 o M4, descarga el paquete de Apple Silicon.\n\n\nPaso 2.2: descomprime en una carpeta estable\nLa carpeta que elijas queda como la ubicación definitiva del SDK. Si la mueves después, tienes que rehacer el PATH.\n\n\n\n\n\n\nImportanteLa ruta no puede tener espacios, tildes ni eñes\n\n\n\nEvita Archivos de programa, Program Files, Escritorio y OneDrive. El compilador falla con rutas así. Usa una ruta corta y sin acentos.\n\n\nWindows. Descomprime el contenido en C:\\dev\\flutter. Al abrir esa carpeta debes ver adentro bin, packages y el archivo flutter_console.bat.\nmacOS y Linux. Crea la carpeta y descomprime allí:\nmkdir -p ~/development\ncd ~/development\n\n# macOS\nunzip ~/Downloads/flutter_macos_arm64_3.41.9-stable.zip\n\n# Linux\ntar -xf ~/Downloads/flutter_linux_3.41.9-stable.tar.xz\nAjusta el nombre del archivo al que descargaste. El resultado queda en ~/development/flutter.\n\n\nPaso 2.3: agrega Flutter al PATH\nWindows\n\nPresiona la tecla Windows y escribe variables de entorno.\nAbre Editar las variables de entorno de esta cuenta.\nEn el recuadro superior selecciona la variable Path y presiona Editar.\nPresiona Nuevo y escribe C:\\dev\\flutter\\bin.\nAcepta las tres ventanas con Aceptar.\nCierra todas las terminales abiertas. Los cambios solo aplican a las que abras después.\n\nmacOS\nAverigua cuál intérprete usa tu terminal:\necho $SHELL\nSi responde /bin/zsh, edita ~/.zshrc. Si responde /bin/bash, edita ~/.bash_profile. Agrega esta línea al final del archivo:\nexport PATH=\"$HOME/development/flutter/bin:$PATH\"\nAplica el cambio sin cerrar la sesión:\nsource ~/.zshrc\nLinux\nAgrega la línea al final de ~/.bashrc:\nexport PATH=\"$HOME/development/flutter/bin:$PATH\"\nAplica el cambio:\nsource ~/.bashrc\nEn Ubuntu instala además las dependencias que Flutter necesita para compilar:\nsudo apt install -y curl git unzip xz-utils zip libglu1-mesa\n\n\nPaso 2.4: verifica\nAbre una terminal nueva y ejecuta:\nflutter --version\n\n\n\n\n\n\nFigura 1: Salida de flutter --version, git --version y dart --version en un equipo con la instalación completa. Dart viene incluido en el SDK de Flutter, así que no se instala aparte.\n\n\n\nLa primera vez, el comando tarda un poco más porque Flutter descarga sus componentes internos.\n\n\n\n3 Android Studio y el SDK de Android\nDescarga desde developer.android.com/studio.\n\nInstalación según tu sistema\nWindows. Ejecuta el archivo .exe y acepta las opciones por omisión.\nmacOS. Abre el .dmg y arrastra Android Studio a la carpeta Aplicaciones.\nLinux. Descomprime el .tar.gz y ejecuta el lanzador:\nsudo tar -xzf ~/Downloads/android-studio-*.tar.gz -C /opt\n/opt/android-studio/bin/studio.sh\n\n\nConfiguración inicial\nAl abrirlo por primera vez, el asistente te pregunta el tipo de instalación. Elige Standard y confirma. El asistente descarga el SDK de Android, que es la descarga más pesada de toda la guía.\n\n\nPaso 3.1: abre el SDK Manager\nEl SDK Manager es la ventana donde eliges cuáles piezas del SDK de Android quedan instaladas. Se llega por dos rutas según lo que tengas en pantalla:\n\nCon un proyecto abierto: menú Tools, luego SDK Manager.\nEn la pantalla de bienvenida: botón More Actions, luego SDK Manager.\n\n\n\n\n\n\n\nFigura 2: Ruta desde el menú Tools con un proyecto abierto.\n\n\n\nCualquiera de las dos abre la ventana Settings en la sección Languages & Frameworks &gt; Android SDK. Arriba aparece Android SDK Location, que es la carpeta donde queda todo instalado. En Windows suele ser C:\\Users\\TuUsuario\\AppData\\Local\\Android\\Sdk. Anota esa ruta: flutter doctor la reporta y te sirve para diagnosticar.\nLa ventana tiene tres pestañas. Vas a usar las dos primeras.\n\n\nPaso 3.2: pestaña SDK Platforms\nMarca Android 16.0 (“Baklava”), la fila cuya columna API Level dice exactamente 36.0.\n\n\n\n\n\n\nFigura 3: La lista repite el mismo nombre en varias filas. Guíate por la columna API Level, no por el nombre.\n\n\n\n\n\n\n\n\n\nNotaHay varias filas llamadas igual\n\n\n\n36.1 es una versión posterior y 36.0-ext18 o 36.0-ext19 son extensiones. Ninguna sirve como reemplazo. Marca la que dice 36.0 a secas.\n\n\n\n\nPaso 3.3: pestaña SDK Tools\nAquí van las herramientas de compilación. Marca estos siete componentes:\n\n\n\n\n\n\n\nComponente\nPara qué se usa\n\n\n\n\nAndroid SDK Build-Tools\nCompila y empaqueta la aplicación\n\n\nNDK (Side by side)\nFlutter lo exige para compilar la parte nativa\n\n\nAndroid SDK Command-line Tools (latest)\nAcepta las licencias y expone los comandos del SDK\n\n\nCMake\nConstruye la parte nativa junto con el NDK\n\n\nAndroid Emulator\nEjecuta el emulador\n\n\nAndroid Emulator hypervisor driver (installer)\nAcelera el emulador. Solo aparece en Windows\n\n\nAndroid SDK Platform-Tools\nTrae adb, que comunica el equipo con el dispositivo\n\n\n\n\n\n\n\n\n\nFigura 4: Los siete componentes marcados. El resto de la lista no se necesita en este curso.\n\n\n\nLos demás no hacen falta: Android Auto, Google Play services, Project Templates y Support Repository quedan sin marcar.\n\n\n\n\n\n\nImportanteEl NDK debe ser la versión exacta\n\n\n\nFlutter 3.41 pide el NDK 28.2.13676358. Si instalas otra versión, la compilación falla con un mensaje de NDK no encontrado.\nMarca la casilla Show Package Details en la esquina inferior derecha. La lista se despliega y muestra las versiones de cada componente. Busca NDK (Side by side) y marca 28.2.13676358.\n\n\nPresiona Apply y confirma la descarga. Según tu conexión, esta parte tarda entre 10 y 30 minutos.\n\n\n\n\n\n\nAdvertenciaSin las Command-line Tools no puedes aceptar licencias\n\n\n\nEs la causa número uno de que flutter doctor marque error en Android. Verifica que quede marcada antes de aplicar los cambios.\n\n\n\n\nPaso 3.4: acepta las licencias del SDK\nDesde una terminal, responde y a cada pregunta:\nflutter doctor --android-licenses\nEl proceso termina cuando aparece All SDK package licenses accepted.\nAndroid Studio trae su propio JDK, así que no instales Java por separado. Flutter lo detecta en la subcarpeta jbr de la instalación.\n\n\n\n\n\n\nTipAceleración del emulador en Linux\n\n\n\nEl controlador de hipervisor de la tabla es exclusivo de Windows. En Linux, el emulador usa KVM:\nsudo apt install -y qemu-kvm\nsudo adduser $USER kvm\nCierra la sesión y vuelve a entrar para que el cambio de grupo aplique. En macOS no hay que instalar nada: el sistema ya trae su propio hipervisor.\n\n\n\n\n\n4 Visual Studio Code\nDescarga desde code.visualstudio.com.\nWindows. Ejecuta el instalador. En la pantalla de tareas adicionales marca Add to PATH, que habilita el comando code en la terminal.\nmacOS. Descomprime el .zip y arrastra Visual Studio Code a Aplicaciones. Para habilitar el comando en la terminal, abre VS Code, presiona Cmd+Shift+P, escribe shell command y elige Install ‘code’ command in PATH.\nLinux. Descarga el paquete .deb o .rpm e instálalo:\n# Ubuntu y derivadas\nsudo apt install -y ./code_*.deb\n\n# Fedora\nsudo dnf install -y ./code-*.rpm\n\nInstala la extensión de Flutter\nDentro de VS Code, presiona Ctrl+Shift+X (Cmd+Shift+X en macOS) para abrir el panel de extensiones. Busca Flutter, la publicada por Dart Code, y presiona Install. Arrastra consigo la extensión de Dart, así que con esa basta.\nSi prefieres la terminal:\ncode --install-extension Dart-Code.flutter\n\n\n\n5 Un dispositivo donde ejecutar aplicaciones\nEscoge una de las dos opciones. Con 8 GB de RAM, escoge el teléfono físico.\n\nOpción A: emulador\nEn Android Studio entra a More Actions, luego Virtual Device Manager, y presiona Add a new device. Elige un modelo Pixel, selecciona la imagen de API 36 y confirma la descarga.\nArranca el emulador desde la terminal. El primer arranque tarda varios minutos:\nflutter emulators\nflutter emulators --launch &lt;id_del_emulador&gt;\n\n\nOpción B: teléfono Android físico\n\nEntra a Ajustes, luego Acerca del teléfono.\nPresiona siete veces sobre Número de compilación hasta que aparezca el aviso de modo desarrollador.\nVuelve a Ajustes, entra a Opciones de desarrollador y activa Depuración por USB.\nConecta el cable y autoriza el equipo en el diálogo que aparece en el teléfono.\n\nEn Linux, instala además las reglas de dispositivo para que el sistema reconozca el teléfono:\nsudo apt install -y android-sdk-platform-tools-common\n\n\nConfirma que el dispositivo aparece\nflutter devices\n\n\n\n\n\n\nFigura 5: Emuladores registrados y dispositivos conectados. El emulador aparece en la lista una vez termina de arrancar.\n\n\n\n\n\n\n6 Diagnóstico con flutter doctor\nEste comando revisa toda la cadena de herramientas y es el que vas a usar cada vez que algo falle durante el semestre.\nflutter doctor -v\n\n\n\n\n\n\nFigura 6: Diagnóstico completo. Las secciones de Flutter, Android toolchain y Connected device deben quedar en verde para trabajar en Android.\n\n\n\nLee la salida con este criterio:\n\n\n\n\n\n\n\n\nSección\n¿Bloquea el curso?\nQué hacer\n\n\n\n\nFlutter\nSí\nRevisa la ruta y el PATH\n\n\nAndroid toolchain\nSí\nAcepta licencias e instala el SDK\n\n\nConnected device\nSí\nArranca el emulador o conecta el cable\n\n\nChrome\nNo\nSolo afecta compilación para web\n\n\nVisual Studio (C++)\nNo\nSolo afecta aplicaciones de escritorio en Windows\n\n\nXcode y CocoaPods\nNo\nSolo afecta compilación para iOS en macOS\n\n\nNetwork resources\nNo siempre\nRevisa firewall o proxy de la red\n\n\n\nEn la Figura 6 el equipo muestra dos advertencias y ninguna impide desarrollar para Android.",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  },
+  {
+    "objectID": "movil/semana-01/index.html#errores-frecuentes",
+    "href": "movil/semana-01/index.html#errores-frecuentes",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "3 Errores frecuentes",
+    "text": "3 Errores frecuentes\nEmpieza siempre por flutter doctor -v. La salida casi siempre nombra el problema y sugiere el comando que lo corrige.\n\nError 1\n\nflutter no se reconoce como comando\nCausa. El PATH no quedó guardado, o abriste la terminal antes de modificarlo.\nSolución. Cierra todas las terminales y abre una nueva. Si el error sigue, revisa que la ruta esté registrada:\n# Windows, en PowerShell\n$env:Path -split ';' | Select-String flutter\n# macOS y Linux\necho $PATH | tr ':' '\\n' | grep flutter\nDebe imprimir la carpeta bin del SDK. Si no aparece, repite el paso 2.3.\n\n\n\nError 2\n\nAndroid license status unknown\nCausa. Faltan las Android SDK Command-line Tools, o nunca aceptaste las licencias.\nSolución. Instala el componente desde SDK Manager y ejecuta:\nflutter doctor --android-licenses\nResponde y a cada pregunta hasta que aparezca All SDK package licenses accepted.\n\n\n\nError 3\n\nFlutter no encuentra el JDK\n\nCausa. Ninguna herramienta del sistema apunta a un JDK. Flutter normalmente usa el que trae Android Studio, pero no lo encuentra si instalaste Android Studio en una ruta distinta a la predeterminada.\nSolución. Indícale a Flutter dónde está el JDK de Android Studio:\nflutter config --jdk-dir \"ruta/hasta/Android Studio/jbr\"\nVuelve a ejecutar flutter doctor -v para confirmar que la sección de Android quedó en verde.\n\n\n\nError 4\n\nEl emulador no aparece o queda offline\nCausa. El emulador se registra antes de terminar de arrancar, o el servidor de adb quedó colgado.\nSolución. Espera a ver la pantalla de inicio de Android. Si el estado no cambia:\nadb kill-server\nadb start-server\nadb devices\n\n\n\nError 5\n\nEn Linux, doctor pide dependencias del sistema\nCausa. La distribución no trae las bibliotecas que Flutter necesita para compilar.\nSolución. Instala lo que falte según el mensaje:\nsudo apt install -y curl git unzip xz-utils zip libglu1-mesa \\\n  clang cmake ninja-build pkg-config libgtk-3-dev\n\n\n\nError 6\n\nEn macOS, doctor marca Xcode y CocoaPods\nCausa. Flutter revisa también la cadena de iOS, que no se usa en este curso.\nSolución. No lo corrijas. Confirma que las secciones de Flutter, Android toolchain y Connected device estén en verde y continúa. Si más adelante quieres compilar para iPhone, instala Xcode desde la App Store.",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  },
+  {
+    "objectID": "movil/semana-01/index.html#lista-de-chequeo-de-la-semana",
+    "href": "movil/semana-01/index.html#lista-de-chequeo-de-la-semana",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "4 Lista de chequeo de la semana",
+    "text": "4 Lista de chequeo de la semana\n\nAntes de cerrar la semana, confirma que tienes todo esto\n\nGit instalado y configurado con tu nombre y correo institucional\nflutter --version responde con la versión del SDK\nAndroid Studio con la plataforma API 36.0 y los siete componentes de SDK Tools instalados\nNDK en la versión 28.2.13676358 y licencias del SDK aceptadas\nVisual Studio Code con la extensión de Flutter instalada\nEmulador creado o teléfono conectado y visible en flutter devices\nflutter doctor -v sin errores en Flutter, Android toolchain ni Connected device",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  },
+  {
+    "objectID": "movil/semana-01/index.html#recursos",
+    "href": "movil/semana-01/index.html#recursos",
+    "title": "Semana 1. Instalación del entorno de desarrollo móvil",
+    "section": "5 Recursos",
+    "text": "5 Recursos\n\nInstalación manual del SDK: docs.flutter.dev/install/manual\nDescarga de Android Studio: developer.android.com/studio\nDescarga de Visual Studio Code: code.visualstudio.com\nDescarga de Git: git-scm.com/install\nGestión de emuladores: developer.android.com/studio/run/managing-avds\nAlcocer, A. (2023). Flutter Complete Reference. Capítulos 1 y 2.\n\n\nProgramación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.\nTransparencia. La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado. Las salidas de terminal son capturas reales tomadas durante la preparación del material.",
+    "crumbs": [
+      "Programación Móvil",
+      "Unidad 1. Fundamentos del desarrollo móvil",
+      "Semana 1. Instalación del entorno"
+    ]
+  }
+]
