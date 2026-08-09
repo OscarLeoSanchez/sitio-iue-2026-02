@@ -14,23 +14,16 @@ website:
   site-url: "https://oscarleosanchez.github.io/sitio-iue-2026-02/"
   favicon: estilos/favicon.svg
   search:
-    location: navbar
-    type: overlay
-  navbar:
-    background: "#0f2540"
-    foreground: "#ffffff"
-    left:
-      - text: "Inicio"
-        href: index.qmd
-      - text: "Programación Móvil"
-        href: movil/index.qmd
-      - text: "Programación Web"
-        href: web/index.qmd
+    location: sidebar
+    type: textbox
+  # Sin navbar a proposito: cada estudiante entra por el enlace de su curso y
+  # no debe ver el otro. La navegacion vive en la barra lateral de cada curso.
   sidebar:
     - id: movil
       title: "Programación Móvil"
       style: docked
       background: light
+      collapse-level: 2
       contents:
         - text: "Presentación del curso"
           href: movil/index.qmd
@@ -42,20 +35,29 @@ website:
       title: "Programación Web"
       style: docked
       background: light
+      collapse-level: 2
       contents:
         - text: "Presentación del curso"
           href: web/index.qmd
   page-footer:
     background: light
-    left: "Oscar Leonel Sánchez Conde · Facultad de Ingenierías"
-    center: "Institución Universitaria de Envigado · Semestre 2026-02"
-    right: "[Código fuente](https://github.com/OscarLeoSanchez/sitio-iue-2026-02)"
+    left: "Oscar Leonel Sánchez Conde"
+    center: "Institución Universitaria de Envigado. Facultad de Ingenierías"
+    right: "Semestre 2026-02"
 
 format:
   html:
     theme:
       - cosmo
       - estilos/estilo.scss
+    # Anchos nominales de la grilla. Quarto los ajusta al espacio disponible,
+    # asi que el cuerpo termina entre 875px y 930px segun la pantalla. El
+    # centrado del bloque completo se hace en estilo.scss.
+    grid:
+      sidebar-width: 290px
+      body-width: 780px
+      margin-width: 270px
+      gutter-width: 1.5rem
     toc: true
     toc-depth: 3
     toc-title: "En esta guía"
