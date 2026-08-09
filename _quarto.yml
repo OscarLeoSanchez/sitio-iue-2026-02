@@ -12,6 +12,7 @@ website:
   title: "Clases IUE 2026-02"
   description: "Material de Programación Móvil y Programación Web. Institución Universitaria de Envigado."
   site-url: "https://oscarleosanchez.github.io/sitio-iue-2026-02/"
+  favicon: estilos/favicon.svg
   search:
     location: navbar
     type: overlay
