@@ -365,19 +365,16 @@ nav#TOC a.nav-link.active {
   border-right: 1px solid $gris-300;
   background: $gris-050;
 
-  /* Cabecera con el nombre del curso: sin navbar, es el ancla visual */
-  .sidebar-header {
-    background: $azul-900;
-    margin: 0 0 0.9rem;
-    padding: 1.15rem 1rem 1.05rem;
+  /* La cabecera solo debe traer el buscador. Quitar `title` del _quarto.yml no
+     basta: Quarto cae al titulo del sitio y lo sigue enlazando a la raiz, que
+     es la pagina donde aparecen los dos cursos. Se oculta el bloque completo. */
+  .sidebar-title {
+    display: none;
   }
 
-  .sidebar-title {
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.08rem;
-    line-height: 1.25;
-    margin-bottom: 0;
+  .sidebar-header {
+    margin: 0;
+    padding: 1.1rem 0.75rem 0.35rem;
   }
 
   .sidebar-item-container .sidebar-item-text {
@@ -483,6 +480,36 @@ nav#TOC a.nav-link.active {
 .quarto-title-block + .content table td,
 main table td {
   vertical-align: top;
+}
+
+/* Tablas del calendario.
+   Con el ancho automatico del navegador cada tabla se dimensiona sola segun su
+   contenido, asi que las de una unidad no coincidian con las de la siguiente y
+   la pagina se veia desalineada. Con table-layout fijo todas comparten la misma
+   reticula. */
+.calendario table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Semana, tematica, entregable y porcentaje */
+.calendario table:has(thead th:nth-child(4)) {
+  th:nth-child(1) { width: 4.5rem; }
+  th:nth-child(2) { width: 33%; }
+  th:nth-child(4) { width: 5rem; }
+}
+
+/* Las de tres columnas: Prueba Institucional y distribucion evaluativa.
+   La primera columna necesita 11rem para que "Evaluacion parcial" no se
+   parta en dos renglones. */
+.calendario table:not(:has(thead th:nth-child(4))) {
+  th:nth-child(1) { width: 11rem; }
+  th:nth-child(3) { width: 5rem; }
+}
+
+/* Con ancho fijo, una palabra larga podria desbordar la celda */
+.calendario td {
+  overflow-wrap: break-word;
 }
 
 /* En el telefono, la barra que trae el boton de plegado muestra las migas de

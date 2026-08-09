@@ -19,8 +19,9 @@ website:
   # Sin navbar a proposito: cada estudiante entra por el enlace de su curso y
   # no debe ver el otro. La navegacion vive en la barra lateral de cada curso.
   sidebar:
+    # Sin title: Quarto lo renderiza como enlace a la raiz del sitio, que es
+    # justo la pagina donde aparecen los dos cursos.
     - id: movil
-      title: "Programación Móvil"
       style: docked
       background: light
       collapse-level: 2
@@ -32,7 +33,6 @@ website:
             - text: "Semana 1. Instalación del entorno"
               href: movil/semana-01/index.qmd
     - id: web
-      title: "Programación Web"
       style: docked
       background: light
       collapse-level: 2
