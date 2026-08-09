@@ -1,28 +1,28 @@
 ---
 title: "Programación Web"
-subtitle: "IF2003 · Grupo 603 · Ingeniería Informática"
+subtitle: "IF2003. Grupo 603 de Ingeniería Informática"
 number-sections: false
 ---
 
 ::: {.ficha}
-|            |                                                   |
-|------------|---------------------------------------------------|
-| Asignatura | Programación Web (IF2003)                         |
-| Grupo      | 603 — Ingeniería Informática                      |
-| Docente    | Oscar Leonel Sánchez Conde                        |
-| Semestre   | 2026-02 — 17 semanas                              |
-| Tecnología | HTML, CSS y JavaScript · ASP.NET Core · Azure     |
+|            |                                                |
+|------------|------------------------------------------------|
+| Asignatura | Programación Web (IF2003)                      |
+| Grupo      | 603 de Ingeniería Informática                  |
+| Docente    | Oscar Leonel Sánchez Conde                     |
+| Semestre   | 2026-02, con 17 semanas                        |
+| Tecnología | HTML, CSS y JavaScript, ASP.NET Core y Azure   |
 :::
 
-El curso se articula alrededor de **un proyecto que crece durante todo el semestre**. El
-repositorio se crea en la Semana 2 y el semestre cierra con la aplicación publicada y accesible
-desde una dirección pública en internet.
+Durante el semestre construyes una sola aplicación web. Casi todos los entregables semanales son
+un incremento de ese mismo proyecto. Creas el repositorio en la Semana 2 y cierras el semestre
+con la aplicación publicada y accesible desde una dirección pública en internet.
 
 ::: {.callout-note}
 ## Material en preparación
 
-Las guías de este curso se publican a medida que avanza el semestre. Esta página ya muestra el
-calendario completo para que puedas planear tu trabajo.
+Publico las guías de este curso a medida que avanza el semestre. Esta página ya trae el
+calendario completo para que planees tu trabajo.
 :::
 
 ## Calendario
@@ -31,41 +31,41 @@ calendario completo para que puedas planear tu trabajo.
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 01 | Socialización. Entornos de desarrollo: VS Code y Visual Studio 2026 Community | Entorno configurado y página estática ejecutándose localmente | — |
+| 01 | Socialización. Entornos de desarrollo: VS Code y Visual Studio 2026 Community | Entorno configurado y página estática ejecutándose localmente | - |
 | 02 | Manejo de versiones: Git y GitHub | Repositorio del proyecto con `.gitignore`, README e historial ordenado | **10%** |
-| 03 | Introducción al Vibe Coding e ingeniería de prompts | Bitácora de prompts del proyecto: aceptado, corregido y descartado | — |
-| 04 | Uso responsable de herramientas de IA | Propuesta de interfaz del proyecto generada con IA y documentada | — |
+| 03 | Introducción al Vibe Coding e ingeniería de prompts | Bitácora de prompts del proyecto: aceptado, corregido y descartado | - |
+| 04 | Uso responsable de herramientas de IA | Propuesta de interfaz del proyecto generada con IA y documentada | - |
 
 ### Unidad 2. Frontend
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
 | 05 | HTML5 y CSS3 | Página principal adaptada a móvil y escritorio | **10%** |
-| 06 | Frameworks CSS: Bootstrap 5 y Tailwind CSS | Sección del proyecto rehecha en cada framework, con sustentación | — |
-| 07 | JavaScript ES6 y manipulación del DOM | Comportamiento dinámico sin recarga de página | — |
+| 06 | Frameworks CSS: Bootstrap 5 y Tailwind CSS | Sección del proyecto rehecha en cada framework, con sustentación | - |
+| 07 | JavaScript ES6 y manipulación del DOM | Comportamiento dinámico sin recarga de página | - |
 | 08 | Consumo básico de APIs | Frontend integrado con una API pública | **10%** |
 
 ### Evaluación parcial
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 09 | **Evaluación parcial (Unidades 1 y 2).** Prueba práctica, sustentación técnica y demo del frontend | Ajustes finales según retroalimentación | **20%** |
+| 09 | **Evaluación parcial de las Unidades 1 y 2.** Prueba práctica, sustentación técnica y demo del frontend | Ajustes finales según retroalimentación | **20%** |
 
 ### Unidad 3. Backend con ASP.NET Core
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 10 | Arquitectura MVC: modelos, vistas y controladores | Servidor del proyecto respondiendo a sus rutas base | — |
+| 10 | Arquitectura MVC: modelos, vistas y controladores | Servidor del proyecto respondiendo a sus rutas base | - |
 | 11 | Razor y layouts | Interfaz de la unidad 2 migrada al proyecto de servidor | **10%** |
-| 12 | Routing y validaciones | Formulario con rutas propias y validación en cliente y servidor | — |
+| 12 | Routing y validaciones | Formulario con rutas propias y validación en cliente y servidor | - |
 | 13 | Bases de datos, SQL Server y Entity Framework Core | CRUD del proyecto persistido en base de datos | **10%** |
 
 ### Unidad 4. Servicios, despliegue y entornos
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 14 | Web APIs y consumo de servicios | API propia consumida desde el frontend | — |
-| 15 | Publicación en Azure App Service | Proyecto accesible desde una dirección pública en internet | — |
+| 14 | Web APIs y consumo de servicios | API propia consumida desde el frontend | - |
+| 15 | Publicación en Azure App Service | Proyecto accesible desde una dirección pública en internet | - |
 | 16 | Configuración de entornos | Proyecto funcionando en local y en producción | **10%** |
 | 17 | **Evaluación final.** Sustentación técnica individual y demo de la aplicación publicada | Entrega del repositorio final documentado | **20%** |
 
@@ -77,7 +77,7 @@ calendario completo para que puedas planear tu trabajo.
 | Evaluación parcial | Semana 9 | 20% |
 | Evaluación final | Semana 17 | 20% |
 
-La distribución es institucional y no se modifica.
+La institución fija esta distribución.
 
 ## Criterios de desempeño
 

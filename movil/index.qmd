@@ -1,86 +1,85 @@
 ---
 title: "Programación Móvil"
-subtitle: "IF2004 · Grupos 601 y 602 · Ingeniería Informática"
+subtitle: "IF2004. Grupos 601 y 602 de Ingeniería Informática"
 number-sections: false
 ---
 
 ::: {.ficha}
-|            |                                                   |
-|------------|---------------------------------------------------|
-| Asignatura | Programación Móvil (IF2004)                       |
-| Grupos     | 601 y 602 — Ingeniería Informática                |
-| Docente    | Oscar Leonel Sánchez Conde                        |
-| Semestre   | 2026-02 — 17 semanas                              |
-| Tecnología | Flutter y Dart                                     |
+|            |                                            |
+|------------|--------------------------------------------|
+| Asignatura | Programación Móvil (IF2004)                |
+| Grupos     | 601 y 602 de Ingeniería Informática        |
+| Docente    | Oscar Leonel Sánchez Conde                 |
+| Semestre   | 2026-02, con 17 semanas                    |
+| Tecnología | Flutter y Dart                             |
 :::
 
-El curso se articula alrededor de **un proyecto que crece durante todo el semestre**. Casi todos
-los entregables semanales son un incremento de esa misma aplicación, no ejercicios sueltos. El
-alcance del proyecto se define en la Semana 3 y se sustenta con una demo en dispositivo real en la
-Semana 17.
+Durante el semestre construyes una sola aplicación. Casi todos los entregables semanales son un
+incremento de ese mismo proyecto, no ejercicios sueltos. Defines su alcance en la Semana 3 y lo
+sustentas con una demo en dispositivo real en la Semana 17.
 
 ## Calendario
 
-Las semanas con guía publicada aparecen enlazadas. El resto se habilita a medida que avanza el
+Las semanas con guía publicada aparecen enlazadas. Publico las demás a medida que avanza el
 semestre.
 
 ### Unidad 1. Fundamentos del desarrollo móvil
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| **[01](semana-01/index.qmd)** | Socialización. Ecosistema móvil e instalación del entorno | Entorno verificado con `flutter doctor` | — |
-| 02 | Flutter y Dart | Pantalla con estado propio que reacciona a la interacción | — |
+| **[01](semana-01/index.qmd)** | Socialización. Ecosistema móvil e instalación del entorno | Entorno verificado con `flutter doctor` | - |
+| 02 | Flutter y Dart | Pantalla con estado propio que reacciona a la interacción | - |
 | 03 | Git y primer proyecto | Repositorio con primera versión ejecutable e historial ordenado | **10%** |
 
 ### Unidad 2. Interfaz, datos y persistencia
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 04 | Material Design y widgets | Pantallas principales del proyecto con tema claro y oscuro | — |
-| 05 | Navegación | Pantallas conectadas, con información entre ellas | — |
+| 04 | Material Design y widgets | Pantallas principales del proyecto con tema claro y oscuro | - |
+| 05 | Navegación | Pantallas conectadas, con información entre ellas | - |
 | 06 | Formularios y componentes reutilizables | Formulario principal validado y dos componentes reutilizables | **10%** |
-| 07 | JSON y APIs REST | Datos externos integrados con manejo de errores | — |
+| 07 | JSON y APIs REST | Datos externos integrados con manejo de errores | - |
 | 08 | Persistencia local | Proyecto que abre y opera sin conexión | **10%** |
 
 ### Evaluación parcial
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 09 | **Evaluación parcial (Unidades 1 y 2).** Prueba práctica, sustentación técnica individual y demo funcional | Ajustes según retroalimentación | **20%** |
+| 09 | **Evaluación parcial de las Unidades 1 y 2.** Prueba práctica, sustentación técnica individual y demo funcional | Ajustes según retroalimentación | **20%** |
 
 ### Unidad 3. Servicios en la nube y arquitectura
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 10 | Firebase Authentication y Firestore | Registro e inicio de sesión con los datos protegidos | — |
+| 10 | Firebase Authentication y Firestore | Registro e inicio de sesión con los datos protegidos | - |
 | 11 | Storage y notificaciones | Carga de imagen y recepción de notificación de prueba | **5%** |
-| 12 | MVVM y Repository Pattern | Funcionalidad reorganizada en vista, modelo de vista y repositorio | — |
+| 12 | MVVM y Repository Pattern | Funcionalidad reorganizada en vista, modelo de vista y repositorio | - |
 | 13 | Clean Architecture | Funcionalidad en tres capas, con fuente de datos intercambiable | **10%** |
 
 ### Unidad 4. Calidad, publicación e IA
 
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 14 | Testing, seguridad y optimización | Pruebas de una funcionalidad y corrección de un problema de rendimiento | — |
-| 15 | Desarrollo del proyecto final | Versión de prueba distribuida y documentación del proyecto | — |
-| 16 | Integración de IA | Función con IA integrada y sustentada | — |
+| 14 | Testing, seguridad y optimización | Pruebas de una funcionalidad y corrección de un problema de rendimiento | - |
+| 15 | Desarrollo del proyecto final | Versión de prueba distribuida y documentación del proyecto | - |
+| 16 | Integración de IA | Función con IA integrada y sustentada | - |
 | 17 | **Evaluación final.** Sustentación técnica individual y demo funcional en dispositivo real | Entrega del repositorio documentado e instalable | **20%** |
 
 ### Prueba Institucional de Resultados de Aprendizaje
 
 | Semana | Temática | % |
 |:---:|---|:---:|
-| Por definir | Prueba Institucional de Resultados de Aprendizaje. **La fecha la fija la universidad** y no desplaza la numeración de las semanas | **15%** |
+| Por definir | Prueba Institucional de Resultados de Aprendizaje. La universidad fija la fecha, que no desplaza la numeración de las semanas | **15%** |
 
 ## Distribución evaluativa
 
 | Componente | Detalle | Peso |
 |---|---|:---:|
-| Seguimiento | Semanas 3, 6, 8, 11 y 13 más la Prueba Institucional | 60% |
+| Seguimiento | Semanas 3, 6, 8, 11 y 13, más la Prueba Institucional | 60% |
 | Evaluación parcial | Semana 9 | 20% |
 | Evaluación final | Semana 17 | 20% |
 
-La distribución es institucional y no se modifica.
+La institución fija esta distribución.
 
 ## Criterios de desempeño
 
