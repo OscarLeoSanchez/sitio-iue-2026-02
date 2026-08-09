@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Leonel Sánchez Conde">
+
+<title>Semana 1. Entornos de desarrollo y el modelo de la web – Clases IUE 2026-02</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../estilos/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8713356167177fd77be9341a95314561.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-41190d86b0b0d93a182dd79b39ce6b47.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Unidad 1. Entornos, versionado e IA</a></li><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Semana 1. Entornos de desarrollo</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Clases IUE 2026-02</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 1. Entornos, versionado e IA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-01/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Semana 1. Entornos de desarrollo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta guía</h2>
+   
+  <ul>
+  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</a>
+  <ul class="collapse">
+  <li><a href="#versiones-de-referencia" id="toc-versiones-de-referencia" class="nav-link" data-scroll-target="#versiones-de-referencia">Versiones de referencia</a></li>
+  </ul></li>
+  <li><a href="#instalación-paso-a-paso" id="toc-instalación-paso-a-paso" class="nav-link" data-scroll-target="#instalación-paso-a-paso"><span class="header-section-number">2</span> Instalación paso a paso</a>
+  <ul class="collapse">
+  <li><a href="#visual-studio-code" id="toc-visual-studio-code" class="nav-link" data-scroll-target="#visual-studio-code"><span class="paso">1</span> Visual Studio Code</a></li>
+  <li><a href="#sdk-de-.net" id="toc-sdk-de-.net" class="nav-link" data-scroll-target="#sdk-de-.net"><span class="paso">2</span> SDK de .NET</a></li>
+  <li><a href="#visual-studio-2026-community" id="toc-visual-studio-2026-community" class="nav-link" data-scroll-target="#visual-studio-2026-community"><span class="paso">3</span> Visual Studio 2026 Community</a></li>
+  <li><a href="#node.js" id="toc-node.js" class="nav-link" data-scroll-target="#node.js"><span class="paso">4</span> Node.js</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="paso">5</span> Python</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="paso">6</span> Git</a></li>
+  </ul></li>
+  <li><a href="#verificación" id="toc-verificación" class="nav-link" data-scroll-target="#verificación"><span class="header-section-number">3</span> Verificación</a></li>
+  <li><a href="#cómo-funciona-la-web" id="toc-cómo-funciona-la-web" class="nav-link" data-scroll-target="#cómo-funciona-la-web"><span class="header-section-number">4</span> Cómo funciona la web</a></li>
+  <li><a href="#tu-primera-página-servida" id="toc-tu-primera-página-servida" class="nav-link" data-scroll-target="#tu-primera-página-servida"><span class="header-section-number">5</span> Tu primera página servida</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-crea-la-página" id="toc-paso-1-crea-la-página" class="nav-link" data-scroll-target="#paso-1-crea-la-página">Paso 1: crea la página</a></li>
+  <li><a href="#paso-2-levanta-un-servidor" id="toc-paso-2-levanta-un-servidor" class="nav-link" data-scroll-target="#paso-2-levanta-un-servidor">Paso 2: levanta un servidor</a></li>
+  <li><a href="#paso-3-ábrela-desde-el-navegador" id="toc-paso-3-ábrela-desde-el-navegador" class="nav-link" data-scroll-target="#paso-3-ábrela-desde-el-navegador">Paso 3: ábrela desde el navegador</a></li>
+  <li><a href="#paso-4-mira-la-petición-por-dentro" id="toc-paso-4-mira-la-petición-por-dentro" class="nav-link" data-scroll-target="#paso-4-mira-la-petición-por-dentro">Paso 4: mira la petición por dentro</a></li>
+  </ul></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">6</span> Errores frecuentes</a></li>
+  <li><a href="#lista-de-chequeo-de-la-semana" id="toc-lista-de-chequeo-de-la-semana" class="nav-link" data-scroll-target="#lista-de-chequeo-de-la-semana"><span class="header-section-number">7</span> Lista de chequeo de la semana</a></li>
+  <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">8</span> Recursos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Unidad 1. Entornos, versionado e IA</a></li><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Semana 1. Entornos de desarrollo</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Semana 1. Entornos de desarrollo y el modelo de la web</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oscar Leonel Sánchez Conde </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">9 de agosto de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ficha">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Asignatura</td>
+<td>Programación Web (IF2003)</td>
+</tr>
+<tr class="even">
+<td>Grupo</td>
+<td>603 de Ingeniería Informática</td>
+</tr>
+<tr class="odd">
+<td>Unidad</td>
+<td>Unidad 1. Entornos, versionado e IA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="lo-que-vas-a-lograr" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
+<p>Al terminar esta guía tu computador queda con las herramientas del semestre instaladas, y sabes servir una página desde tu propia máquina. En la Semana 2 pones ese trabajo bajo control de versiones con Git.</p>
+<p>Objetivos concretos:</p>
+<ol type="1">
+<li>Instalar VS Code, el SDK de .NET, Visual Studio 2026 Community, Node.js y Python.</li>
+<li>Verificar cada instalación desde la terminal.</li>
+<li>Entender qué pasa entre el navegador y el servidor cuando pides una página.</li>
+<li>Servir tu primera página estática desde <code>localhost</code> y ver la petición en las herramientas de desarrollo.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Antes de instalar nada
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Reserva <strong>20 GB libres en disco</strong> y una conexión estable. Visual Studio 2026 con la carga de trabajo de ASP.NET pasa de 8 GB por sí solo. En la sala de cómputo usa cable de red si lo tienes disponible.</p>
+</div>
+</div>
+<section id="versiones-de-referencia" class="level3">
+<h3 class="anchored" data-anchor-id="versiones-de-referencia">Versiones de referencia</h3>
+<p>Esta guía se probó con estas versiones. Instala la misma línea o una superior.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Herramienta</th>
+<th>Versión probada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Visual Studio Code</td>
+<td>1.132</td>
+</tr>
+<tr class="even">
+<td>SDK de .NET</td>
+<td>10.0.103</td>
+</tr>
+<tr class="odd">
+<td>Visual Studio 2026 Community</td>
+<td>18.3</td>
+</tr>
+<tr class="even">
+<td>Node.js</td>
+<td>22.17.0 (LTS)</td>
+</tr>
+<tr class="odd">
+<td>npm</td>
+<td>11.4.2</td>
+</tr>
+<tr class="even">
+<td>Python</td>
+<td>3.13.4</td>
+</tr>
+<tr class="odd">
+<td>Git</td>
+<td>2.50</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="instalación-paso-a-paso" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="instalación-paso-a-paso"><span class="header-section-number">2</span> Instalación paso a paso</h2>
+<section id="visual-studio-code" class="level3">
+<h3 class="anchored" data-anchor-id="visual-studio-code"><span class="paso">1</span> Visual Studio Code</h3>
+<p>Es el editor que vas a usar todo el semestre. Descarga desde <a href="https://code.visualstudio.com/">code.visualstudio.com</a>.</p>
+<p>En Windows, durante la instalación marca <strong>Add to PATH</strong>. Eso habilita el comando <code>code</code> en la terminal.</p>
+<p>En macOS, descomprime el <code>.zip</code> y arrastra la aplicación a <strong>Aplicaciones</strong>. Para habilitar el comando, abre VS Code, presiona <code>Cmd+Shift+P</code>, escribe <code>shell command</code> y elige <strong>Install ‘code’ command in PATH</strong>.</p>
+<p>Instala la extensión <strong>C# Dev Kit</strong>, publicada por Microsoft:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-dotnettools.csdevkit</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sdk-de-.net" class="level3">
+<h3 class="anchored" data-anchor-id="sdk-de-.net"><span class="paso">2</span> SDK de .NET</h3>
+<p>Es el motor que compila y ejecuta el backend del curso. Descarga la versión <strong>10 LTS</strong> desde <a href="https://dotnet.microsoft.com/download">dotnet.microsoft.com/download</a>.</p>
+<p>Instala el <strong>SDK</strong>, no el Runtime. El Runtime solo ejecuta aplicaciones ya compiladas; el SDK además las construye, que es lo que vas a hacer.</p>
+</section>
+<section id="visual-studio-2026-community" class="level3">
+<h3 class="anchored" data-anchor-id="visual-studio-2026-community"><span class="paso">3</span> Visual Studio 2026 Community</h3>
+<p>Descarga desde <a href="https://visualstudio.microsoft.com/es/vs/community/">visualstudio.microsoft.com</a>.</p>
+<p>En el instalador, marca la carga de trabajo <strong>Desarrollo web y ASP.NET</strong>. Con esa basta para el curso. No marques las otras: cada una suma varios gigabytes que no vas a usar.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Visual Studio 2026 es solo para Windows
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Microsoft retiró Visual Studio para Mac en agosto de 2024, así que no existe una versión para macOS ni para Linux. Si trabajas en alguno de los dos, <strong>omite este paso</strong>: con VS Code, el SDK de .NET y la extensión C# Dev Kit haces todo el curso completo. Desde la Unidad 3 trabajamos con los comandos de <code>dotnet</code>, que son idénticos en los tres sistemas.</p>
+</div>
+</div>
+</section>
+<section id="node.js" class="level3">
+<h3 class="anchored" data-anchor-id="node.js"><span class="paso">4</span> Node.js</h3>
+<p>Descarga la versión <strong>LTS</strong> desde <a href="https://nodejs.org/">nodejs.org</a>. Acepta las opciones por omisión. El instalador trae <code>npm</code> incluido, así que no lo instales aparte.</p>
+<p>Lo vas a necesitar desde la Unidad 2, cuando entren Tailwind y las herramientas del frontend.</p>
+</section>
+<section id="python" class="level3">
+<h3 class="anchored" data-anchor-id="python"><span class="paso">5</span> Python</h3>
+<p>Descarga desde <a href="https://www.python.org/downloads/">python.org/downloads</a>.</p>
+<p>En Windows, <strong>marca la casilla <code>Add python.exe to PATH</code></strong> en la primera pantalla del instalador. Es fácil pasarla por alto y sin ella el comando <code>python</code> no funciona en la terminal.</p>
+<p>En macOS y Linux el sistema ya trae Python. Comprueba con <code>python3 --version</code> antes de instalar nada.</p>
+<p>En este curso no programas en Python. Se usa como herramienta de apoyo, empezando por el servidor local de esta misma guía.</p>
+</section>
+<section id="git" class="level3">
+<h3 class="anchored" data-anchor-id="git"><span class="paso">6</span> Git</h3>
+<p>Descarga desde <a href="https://git-scm.com/downloads">git-scm.com/downloads</a> y acepta las opciones por omisión.</p>
+<p>Esta semana solo lo instalas. El flujo de trabajo con Git y GitHub es el tema completo de la Semana 2.</p>
+</section>
+</section>
+<section id="verificación" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="verificación"><span class="header-section-number">3</span> Verificación</h2>
+<p>Abre una terminal <strong>nueva</strong>, porque las que ya estaban abiertas no ven los cambios en el <code>PATH</code>. Ejecuta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> <span class="at">--version</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> <span class="at">--version</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> <span class="at">--version</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Debes obtener una respuesta por cada comando, parecida a esta:</p>
+<pre class="text"><code>&gt; dotnet --version
+10.0.103
+
+&gt; node --version
+v22.17.0
+
+&gt; npm --version
+11.4.2
+
+&gt; python --version
+Python 3.13.4
+
+&gt; git --version
+git version 2.50.0.windows.2</code></pre>
+<p>Los números pueden ser mayores que los de arriba y no pasa nada. Lo que importa es que ningún comando responda con un error.</p>
+</section>
+<section id="cómo-funciona-la-web" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="cómo-funciona-la-web"><span class="header-section-number">4</span> Cómo funciona la web</h2>
+<p>Cuando escribes una dirección en el navegador, pasa esto:</p>
+<ol type="1">
+<li>El <strong>cliente</strong> (tu navegador) arma una petición HTTP y la envía.</li>
+<li>El <strong>servidor</strong> la recibe, decide qué responder y devuelve una respuesta HTTP.</li>
+<li>El navegador toma esa respuesta y la dibuja en pantalla.</li>
+</ol>
+<p>Nada más. Todo el curso es aprender a controlar los dos lados de ese intercambio: primero el cliente (Unidad 2) y después el servidor (Unidad 3).</p>
+<p>Una petición HTTP lleva un <strong>método</strong>, que declara la intención:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>GET</code></td>
+<td>Pedir un recurso. Es lo que hace el navegador al cargar una página</td>
+</tr>
+<tr class="even">
+<td><code>POST</code></td>
+<td>Enviar datos al servidor, por ejemplo un formulario</td>
+</tr>
+<tr class="odd">
+<td><code>PUT</code></td>
+<td>Reemplazar un recurso que ya existe</td>
+</tr>
+<tr class="even">
+<td><code>DELETE</code></td>
+<td>Borrar un recurso</td>
+</tr>
+</tbody>
+</table>
+<p>Y la respuesta trae un <strong>código de estado</strong>, que dice cómo salió:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Significado</th>
+<th>Cuándo lo vas a ver</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>200</code></td>
+<td>Todo bien</td>
+<td>La página cargó</td>
+</tr>
+<tr class="even">
+<td><code>301</code> y <code>302</code></td>
+<td>Redirección</td>
+<td>La dirección cambió de lugar</td>
+</tr>
+<tr class="odd">
+<td><code>404</code></td>
+<td>No encontrado</td>
+<td>Pediste un archivo que no existe</td>
+</tr>
+<tr class="even">
+<td><code>500</code></td>
+<td>Error del servidor</td>
+<td>Tu código de backend falló</td>
+</tr>
+</tbody>
+</table>
+<p>Los tres primeros dígitos te ubican rápido: <code>2xx</code> funcionó, <code>3xx</code> te mandan a otro lado, <code>4xx</code> te equivocaste tú, <code>5xx</code> se equivocó el servidor.</p>
+</section>
+<section id="tu-primera-página-servida" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="tu-primera-página-servida"><span class="header-section-number">5</span> Tu primera página servida</h2>
+<section id="paso-1-crea-la-página" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-crea-la-página">Paso 1: crea la página</h3>
+<p>Crea una carpeta <code>mi-primera-pagina</code> y adentro un archivo <code>index.html</code> con esto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"es"</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Mi primera pagina<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Programacion Web 2026-02<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Mi nombre es <span class="dt">&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>Tu Nombre<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> y este es mi entorno funcionando.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cambia el nombre por el tuyo.</p>
+</section>
+<section id="paso-2-levanta-un-servidor" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-levanta-un-servidor">Paso 2: levanta un servidor</h3>
+<p>Abre una terminal <strong>dentro de esa carpeta</strong> y ejecuta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> http.server 8000</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La terminal queda ocupada mostrando las peticiones que llegan. Eso es correcto: el servidor está corriendo. Para detenerlo, presiona <code>Ctrl+C</code>.</p>
+</section>
+<section id="paso-3-ábrela-desde-el-navegador" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-ábrela-desde-el-navegador">Paso 3: ábrela desde el navegador</h3>
+<p>Entra a <a href="http://localhost:8000" class="uri">http://localhost:8000</a>.</p>
+<p>Ahora mira la terminal donde dejaste el servidor: apareció una línea por cada archivo que el navegador pidió. Acabas de ver el modelo cliente-servidor en las dos puntas al mismo tiempo.</p>
+</section>
+<section id="paso-4-mira-la-petición-por-dentro" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-mira-la-petición-por-dentro">Paso 4: mira la petición por dentro</h3>
+<p>Con la página abierta, presiona <code>F12</code> para abrir las herramientas de desarrollo y entra a la pestaña <strong>Network</strong>. Recarga con <code>Ctrl+R</code>.</p>
+<p>Aparece la lista de peticiones. Haz clic en la primera y revisa:</p>
+<ul>
+<li>El <strong>método</strong>, que debe ser <code>GET</code>.</li>
+<li>El <strong>código de estado</strong>, que debe ser <code>200</code>.</li>
+<li>Los <strong>encabezados</strong> de la respuesta, entre ellos <code>Content-Type: text/html</code>.</li>
+</ul>
+<p>Ahora escribe en la barra de direcciones <a href="http://localhost:8000/no-existe.html" class="uri">http://localhost:8000/no-existe.html</a> y observa el código <code>404</code> en Network. Ese es el mismo <code>404</code> de la tabla de arriba, ocurriendo en tu máquina.</p>
+</section>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">6</span> Errores frecuentes</h2>
+<div class="error-caso">
+<p><span class="etiqueta">Error 1</span></p>
+<section id="dotnet-o-python-no-se-reconocen-como-comando" class="level3">
+<h3 class="anchored" data-anchor-id="dotnet-o-python-no-se-reconocen-como-comando">dotnet o python no se reconocen como comando</h3>
+<p><strong>Causa.</strong> El instalador no agregó la herramienta al <code>PATH</code>, o abriste la terminal antes de instalarla.</p>
+<p><strong>Solución.</strong> Cierra <strong>todas</strong> las terminales y abre una nueva. Si el error sigue en Windows, vuelve a ejecutar el instalador de Python y marca <code>Add python.exe to PATH</code>. Para .NET, reinstala el SDK.</p>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 2</span></p>
+<section id="la-página-se-ve-pero-nada-funciona-como-debería" class="level3">
+<h3 class="anchored" data-anchor-id="la-página-se-ve-pero-nada-funciona-como-debería">La página se ve, pero nada funciona como debería</h3>
+<p><strong>Causa.</strong> Abriste <code>index.html</code> con doble clic. Fíjate en la barra de direcciones: dice <code>file:///C:/...</code> en vez de <code>http://localhost:8000</code>. No hay servidor, y el navegador está leyendo el archivo del disco.</p>
+<p>Así funciona mientras la página sea solo HTML, pero se rompe en cuanto entren peticiones a una API, rutas o cualquier cosa de servidor. Y esas llegan en la Unidad 2.</p>
+<p><strong>Solución.</strong> Sirve siempre la carpeta con <code>python -m http.server 8000</code> y entra por <code>localhost</code>. Toma la costumbre desde ahora.</p>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 3</span></p>
+<section id="el-puerto-8000-ya-está-en-uso" class="level3">
+<h3 class="anchored" data-anchor-id="el-puerto-8000-ya-está-en-uso">El puerto 8000 ya está en uso</h3>
+<p><strong>Causa.</strong> Dejaste otro servidor corriendo en una terminal que cerraste sin detenerlo.</p>
+<p><strong>Solución.</strong> Usa otro puerto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> http.server 8001</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y entra a <a href="http://localhost:8001" class="uri">http://localhost:8001</a>. Cualquier número entre 1024 y 65535 sirve.</p>
+</section>
+</div>
+</section>
+<section id="lista-de-chequeo-de-la-semana" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="lista-de-chequeo-de-la-semana"><span class="header-section-number">7</span> Lista de chequeo de la semana</h2>
+<div class="checklist">
+<p><strong>Antes de cerrar la semana, confirma que tienes todo esto</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox">VS Code instalado, con la extensión C# Dev Kit</label></li>
+<li><label><input type="checkbox"><code>dotnet --version</code> responde con la versión del SDK</label></li>
+<li><label><input type="checkbox">Visual Studio 2026 con la carga de trabajo de ASP.NET, si trabajas en Windows</label></li>
+<li><label><input type="checkbox"><code>node --version</code> y <code>npm --version</code> responden</label></li>
+<li><label><input type="checkbox"><code>python --version</code> responde</label></li>
+<li><label><input type="checkbox"><code>git --version</code> responde</label></li>
+<li><label><input type="checkbox">Tu <code>index.html</code> se ve en <code>http://localhost:8000</code> con tu nombre</label></li>
+<li><label><input type="checkbox">Viste el <code>200</code> y el <code>404</code> en la pestaña Network</label></li>
+</ul>
+</div>
+</section>
+<section id="recursos" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="recursos"><span class="header-section-number">8</span> Recursos</h2>
+<ul>
+<li>Descarga de VS Code: <a href="https://code.visualstudio.com/">code.visualstudio.com</a></li>
+<li>Descarga del SDK de .NET: <a href="https://dotnet.microsoft.com/download">dotnet.microsoft.com/download</a></li>
+<li>Descarga de Visual Studio Community: <a href="https://visualstudio.microsoft.com/es/vs/community/">visualstudio.microsoft.com</a></li>
+<li>Descarga de Node.js: <a href="https://nodejs.org/">nodejs.org</a></li>
+<li>Descarga de Python: <a href="https://www.python.org/downloads/">python.org/downloads</a></li>
+<li>Códigos de estado HTTP: <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Status">developer.mozilla.org/es/docs/Web/HTTP/Status</a></li>
+<li>Panel Network de las herramientas de desarrollo: <a href="https://developer.chrome.com/docs/devtools/network">developer.chrome.com/docs/devtools/network</a></li>
+<li>Dean, J. (2019). <em>Web Programming with HTML5, CSS, and JavaScript.</em> Capítulo 1.</li>
+</ul>
+<div class="pie-doc">
+<p>Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>
+<p><strong>Transparencia.</strong> La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oscarleosanchez\.github\.io\/sitio-iue-2026-02\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Oscar Leonel Sánchez Conde</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Institución Universitaria de Envigado. Facultad de Ingenierías</p>
+</div>
+    <div class="nav-footer-right">
+<p>Semestre 2026-02</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
