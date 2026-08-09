@@ -29,7 +29,7 @@ calendario completo para que planees tu trabajo.
 ::: {.calendario}
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 01 | Socialización. Entornos de desarrollo: VS Code y Visual Studio 2026 Community | Entorno configurado y página estática ejecutándose localmente | - |
+| **[01](semana-01/index.qmd)** | Socialización. Entornos de desarrollo: VS Code y Visual Studio 2026 Community | Entorno configurado y página estática ejecutándose localmente | - |
 | 02 | Manejo de versiones: Git y GitHub | Repositorio del proyecto con `.gitignore`, README e historial ordenado | **10%** |
 | 03 | Introducción al Vibe Coding e ingeniería de prompts | Bitácora de prompts del proyecto: aceptado, corregido y descartado | - |
 | 04 | Uso responsable de herramientas de IA | Propuesta de interfaz del proyecto generada con IA y documentada | - |

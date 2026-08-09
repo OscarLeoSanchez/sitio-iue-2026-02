@@ -39,6 +39,10 @@ website:
       contents:
         - text: "Presentación del curso"
           href: web/index.qmd
+        - section: "Unidad 1. Entornos, versionado e IA"
+          contents:
+            - text: "Semana 1. Entornos de desarrollo"
+              href: web/semana-01/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

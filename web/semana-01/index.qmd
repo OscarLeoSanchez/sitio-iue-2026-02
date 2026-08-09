@@ -1,0 +1,325 @@
+---
+title: "Semana 1. Entornos de desarrollo y el modelo de la web"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                       |
+|------------|---------------------------------------|
+| Asignatura | Programación Web (IF2003)             |
+| Grupo      | 603 de Ingeniería Informática         |
+| Unidad     | Unidad 1. Entornos, versionado e IA   |
+:::
+
+## Lo que vas a lograr
+
+Al terminar esta guía tu computador queda con las herramientas del semestre instaladas, y sabes
+servir una página desde tu propia máquina. En la Semana 2 pones ese trabajo bajo control de
+versiones con Git.
+
+Objetivos concretos:
+
+1. Instalar VS Code, el SDK de .NET, Visual Studio 2026 Community, Node.js y Python.
+2. Verificar cada instalación desde la terminal.
+3. Entender qué pasa entre el navegador y el servidor cuando pides una página.
+4. Servir tu primera página estática desde `localhost` y ver la petición en las herramientas de
+   desarrollo.
+
+::: {.callout-note}
+## Antes de instalar nada
+
+Reserva **20 GB libres en disco** y una conexión estable. Visual Studio 2026 con la carga de
+trabajo de ASP.NET pasa de 8 GB por sí solo. En la sala de cómputo usa cable de red si lo tienes
+disponible.
+:::
+
+### Versiones de referencia
+
+Esta guía se probó con estas versiones. Instala la misma línea o una superior.
+
+| Herramienta | Versión probada |
+|---|---|
+| Visual Studio Code | 1.132 |
+| SDK de .NET | 10.0.103 |
+| Visual Studio 2026 Community | 18.3 |
+| Node.js | 22.17.0 (LTS) |
+| npm | 11.4.2 |
+| Python | 3.13.4 |
+| Git | 2.50 |
+
+## Instalación paso a paso
+
+### [1]{.paso} Visual Studio Code
+
+Es el editor que vas a usar todo el semestre. Descarga desde
+[code.visualstudio.com](https://code.visualstudio.com/).
+
+En Windows, durante la instalación marca **Add to PATH**. Eso habilita el comando `code` en la
+terminal.
+
+En macOS, descomprime el `.zip` y arrastra la aplicación a **Aplicaciones**. Para habilitar el
+comando, abre VS Code, presiona `Cmd+Shift+P`, escribe `shell command` y elige **Install 'code'
+command in PATH**.
+
+Instala la extensión **C# Dev Kit**, publicada por Microsoft:
+
+```bash
+code --install-extension ms-dotnettools.csdevkit
+```
+
+### [2]{.paso} SDK de .NET
+
+Es el motor que compila y ejecuta el backend del curso. Descarga la versión **10 LTS** desde
+[dotnet.microsoft.com/download](https://dotnet.microsoft.com/download).
+
+Instala el **SDK**, no el Runtime. El Runtime solo ejecuta aplicaciones ya compiladas; el SDK
+además las construye, que es lo que vas a hacer.
+
+### [3]{.paso} Visual Studio 2026 Community
+
+Descarga desde [visualstudio.microsoft.com](https://visualstudio.microsoft.com/es/vs/community/).
+
+En el instalador, marca la carga de trabajo **Desarrollo web y ASP.NET**. Con esa basta para el
+curso. No marques las otras: cada una suma varios gigabytes que no vas a usar.
+
+::: {.callout-important}
+## Visual Studio 2026 es solo para Windows
+
+Microsoft retiró Visual Studio para Mac en agosto de 2024, así que no existe una versión para
+macOS ni para Linux. Si trabajas en alguno de los dos, **omite este paso**: con VS Code, el SDK
+de .NET y la extensión C# Dev Kit haces todo el curso completo. Desde la Unidad 3 trabajamos con
+los comandos de `dotnet`, que son idénticos en los tres sistemas.
+:::
+
+### [4]{.paso} Node.js
+
+Descarga la versión **LTS** desde [nodejs.org](https://nodejs.org/). Acepta las opciones por
+omisión. El instalador trae `npm` incluido, así que no lo instales aparte.
+
+Lo vas a necesitar desde la Unidad 2, cuando entren Tailwind y las herramientas del frontend.
+
+### [5]{.paso} Python
+
+Descarga desde [python.org/downloads](https://www.python.org/downloads/).
+
+En Windows, **marca la casilla `Add python.exe to PATH`** en la primera pantalla del instalador.
+Es fácil pasarla por alto y sin ella el comando `python` no funciona en la terminal.
+
+En macOS y Linux el sistema ya trae Python. Comprueba con `python3 --version` antes de instalar
+nada.
+
+En este curso no programas en Python. Se usa como herramienta de apoyo, empezando por el servidor
+local de esta misma guía.
+
+### [6]{.paso} Git
+
+Descarga desde [git-scm.com/downloads](https://git-scm.com/downloads) y acepta las opciones por
+omisión.
+
+Esta semana solo lo instalas. El flujo de trabajo con Git y GitHub es el tema completo de la
+Semana 2.
+
+## Verificación
+
+Abre una terminal **nueva**, porque las que ya estaban abiertas no ven los cambios en el `PATH`.
+Ejecuta:
+
+```bash
+dotnet --version
+node --version
+npm --version
+python --version
+git --version
+```
+
+Debes obtener una respuesta por cada comando, parecida a esta:
+
+```text
+> dotnet --version
+10.0.103
+
+> node --version
+v22.17.0
+
+> npm --version
+11.4.2
+
+> python --version
+Python 3.13.4
+
+> git --version
+git version 2.50.0.windows.2
+```
+
+Los números pueden ser mayores que los de arriba y no pasa nada. Lo que importa es que ningún
+comando responda con un error.
+
+## Cómo funciona la web
+
+Cuando escribes una dirección en el navegador, pasa esto:
+
+1. El **cliente** (tu navegador) arma una petición HTTP y la envía.
+2. El **servidor** la recibe, decide qué responder y devuelve una respuesta HTTP.
+3. El navegador toma esa respuesta y la dibuja en pantalla.
+
+Nada más. Todo el curso es aprender a controlar los dos lados de ese intercambio: primero el
+cliente (Unidad 2) y después el servidor (Unidad 3).
+
+Una petición HTTP lleva un **método**, que declara la intención:
+
+| Método | Para qué |
+|---|---|
+| `GET` | Pedir un recurso. Es lo que hace el navegador al cargar una página |
+| `POST` | Enviar datos al servidor, por ejemplo un formulario |
+| `PUT` | Reemplazar un recurso que ya existe |
+| `DELETE` | Borrar un recurso |
+
+Y la respuesta trae un **código de estado**, que dice cómo salió:
+
+| Código | Significado | Cuándo lo vas a ver |
+|---|---|---|
+| `200` | Todo bien | La página cargó |
+| `301` y `302` | Redirección | La dirección cambió de lugar |
+| `404` | No encontrado | Pediste un archivo que no existe |
+| `500` | Error del servidor | Tu código de backend falló |
+
+Los tres primeros dígitos te ubican rápido: `2xx` funcionó, `3xx` te mandan a otro lado, `4xx` te
+equivocaste tú, `5xx` se equivocó el servidor.
+
+## Tu primera página servida
+
+### Paso 1: crea la página
+
+Crea una carpeta `mi-primera-pagina` y adentro un archivo `index.html` con esto:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi primera pagina</title>
+</head>
+<body>
+  <h1>Programacion Web 2026-02</h1>
+  <p>Mi nombre es <strong>Tu Nombre</strong> y este es mi entorno funcionando.</p>
+</body>
+</html>
+```
+
+Cambia el nombre por el tuyo.
+
+### Paso 2: levanta un servidor
+
+Abre una terminal **dentro de esa carpeta** y ejecuta:
+
+```bash
+python -m http.server 8000
+```
+
+La terminal queda ocupada mostrando las peticiones que llegan. Eso es correcto: el servidor está
+corriendo. Para detenerlo, presiona `Ctrl+C`.
+
+### Paso 3: ábrela desde el navegador
+
+Entra a <http://localhost:8000>.
+
+Ahora mira la terminal donde dejaste el servidor: apareció una línea por cada archivo que el
+navegador pidió. Acabas de ver el modelo cliente-servidor en las dos puntas al mismo tiempo.
+
+### Paso 4: mira la petición por dentro
+
+Con la página abierta, presiona `F12` para abrir las herramientas de desarrollo y entra a la
+pestaña **Network**. Recarga con `Ctrl+R`.
+
+Aparece la lista de peticiones. Haz clic en la primera y revisa:
+
+- El **método**, que debe ser `GET`.
+- El **código de estado**, que debe ser `200`.
+- Los **encabezados** de la respuesta, entre ellos `Content-Type: text/html`.
+
+Ahora escribe en la barra de direcciones <http://localhost:8000/no-existe.html> y observa el
+código `404` en Network. Ese es el mismo `404` de la tabla de arriba, ocurriendo en tu máquina.
+
+## Errores frecuentes
+
+::: {.error-caso}
+[Error 1]{.etiqueta}
+
+### dotnet o python no se reconocen como comando
+
+**Causa.** El instalador no agregó la herramienta al `PATH`, o abriste la terminal antes de
+instalarla.
+
+**Solución.** Cierra **todas** las terminales y abre una nueva. Si el error sigue en Windows,
+vuelve a ejecutar el instalador de Python y marca `Add python.exe to PATH`. Para .NET, reinstala
+el SDK.
+:::
+
+::: {.error-caso}
+[Error 2]{.etiqueta}
+
+### La página se ve, pero nada funciona como debería
+
+**Causa.** Abriste `index.html` con doble clic. Fíjate en la barra de direcciones: dice
+`file:///C:/...` en vez de `http://localhost:8000`. No hay servidor, y el navegador está leyendo
+el archivo del disco.
+
+Así funciona mientras la página sea solo HTML, pero se rompe en cuanto entren peticiones a una
+API, rutas o cualquier cosa de servidor. Y esas llegan en la Unidad 2.
+
+**Solución.** Sirve siempre la carpeta con `python -m http.server 8000` y entra por `localhost`.
+Toma la costumbre desde ahora.
+:::
+
+::: {.error-caso}
+[Error 3]{.etiqueta}
+
+### El puerto 8000 ya está en uso
+
+**Causa.** Dejaste otro servidor corriendo en una terminal que cerraste sin detenerlo.
+
+**Solución.** Usa otro puerto:
+
+```bash
+python -m http.server 8001
+```
+
+Y entra a <http://localhost:8001>. Cualquier número entre 1024 y 65535 sirve.
+:::
+
+## Lista de chequeo de la semana
+
+::: {.checklist}
+**Antes de cerrar la semana, confirma que tienes todo esto**
+
+- [ ] VS Code instalado, con la extensión C# Dev Kit
+- [ ] `dotnet --version` responde con la versión del SDK
+- [ ] Visual Studio 2026 con la carga de trabajo de ASP.NET, si trabajas en Windows
+- [ ] `node --version` y `npm --version` responden
+- [ ] `python --version` responde
+- [ ] `git --version` responde
+- [ ] Tu `index.html` se ve en `http://localhost:8000` con tu nombre
+- [ ] Viste el `200` y el `404` en la pestaña Network
+:::
+
+## Recursos
+
+- Descarga de VS Code: [code.visualstudio.com](https://code.visualstudio.com/)
+- Descarga del SDK de .NET: [dotnet.microsoft.com/download](https://dotnet.microsoft.com/download)
+- Descarga de Visual Studio Community: [visualstudio.microsoft.com](https://visualstudio.microsoft.com/es/vs/community/)
+- Descarga de Node.js: [nodejs.org](https://nodejs.org/)
+- Descarga de Python: [python.org/downloads](https://www.python.org/downloads/)
+- Códigos de estado HTTP: [developer.mozilla.org/es/docs/Web/HTTP/Status](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
+- Panel Network de las herramientas de desarrollo: [developer.chrome.com/docs/devtools/network](https://developer.chrome.com/docs/devtools/network)
+- Dean, J. (2019). *Web Programming with HTML5, CSS, and JavaScript.* Capítulo 1.
+
+::: {.pie-doc}
+Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.
+:::
