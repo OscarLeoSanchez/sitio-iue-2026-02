@@ -1,0 +1,65 @@
+---
+title: "Material de clase · 2026-02"
+subtitle: "Institución Universitaria de Envigado · Facultad de Ingenierías"
+toc: false
+number-sections: false
+---
+
+Aquí se publican las guías de las dos asignaturas que oriento este semestre. Cada semana tiene su
+propia guía, con el paso a paso de la sesión, las capturas reales de lo que debe verse en pantalla
+y los errores frecuentes con su solución.
+
+::: {.cursos}
+
+::: {.curso-tarjeta}
+### [Programación Móvil](movil/index.qmd)
+
+**IF2004** · Grupos 601 y 602
+
+Desarrollo de aplicaciones móviles con Flutter y Dart: interfaz, navegación, consumo de APIs,
+persistencia local, Firebase y arquitectura por capas.
+
+[Ver el curso](movil/index.qmd){.btn-curso}
+:::
+
+::: {.curso-tarjeta}
+### [Programación Web](web/index.qmd)
+
+**IF2003** · Grupo 603
+
+Desarrollo de aplicaciones web: HTML, CSS y JavaScript, ASP.NET Core con Razor y MVC, Entity
+Framework Core y publicación en Azure.
+
+[Ver el curso](web/index.qmd){.btn-curso}
+:::
+
+:::
+
+## Cómo usar este sitio
+
+La guía de cada semana se publica **antes de la sesión**. Léela antes de clase: la sesión avanza
+sobre lo que ya leíste, no repitiendo la lectura en voz alta.
+
+Todas las guías se leen desde el navegador, en el computador o en el teléfono. No hace falta
+descargar nada ni iniciar sesión.
+
+::: {.callout-tip}
+## Guarda este enlace, no los archivos
+
+La dirección de este sitio no cambia en todo el semestre y siempre muestra la versión más
+reciente. Si descargas un archivo y la guía se corrige después, te quedas con la versión vieja.
+:::
+
+## Sobre el material
+
+Las guías están escritas para quien no ha usado antes la tecnología del curso. Cada procedimiento
+se probó en una máquina real antes de publicarse, y las capturas de terminal son salidas
+auténticas, no montajes.
+
+Si encuentras un error, un enlace roto o un paso que no funciona en tu equipo, dímelo en clase o
+por Teams. Se corrige y queda arreglado para todos.
+
+::: {.pie-doc}
+Oscar Leonel Sánchez Conde · Institución Universitaria de Envigado · Facultad de Ingenierías ·
+Semestre 2026-02
+:::
