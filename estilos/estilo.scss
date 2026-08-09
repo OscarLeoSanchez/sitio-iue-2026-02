@@ -346,34 +346,38 @@ nav#TOC a.nav-link.active {
    tiene efecto dentro del proyecto de sitio.
    ========================================================================== */
 
-/* Barra superior */
-.navbar {
-  border-bottom: 3px solid $teal-500;
-
-  .navbar-brand {
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .navbar-nav .nav-link {
-    font-weight: 500;
-    opacity: 0.86;
-
-    &:hover,
-    &.active {
-      opacity: 1;
-    }
-  }
+/* Centrado en pantallas anchas.
+   La grilla de Quarto tiene un ancho maximo propio (~1450px) y se ancla a la
+   izquierda, asi que en un monitor de 1900px quedaban 284px muertos a la
+   derecha contra 158px a la izquierda. Con fit-content el contenedor se ajusta
+   al ancho real de la grilla y margin auto reparte el sobrante a lado y lado.
+   Se usa fit-content en vez de un max-width fijo para que siga centrado si
+   cambian los anchos de la grilla o el tamano de fuente. */
+#quarto-content {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Barra lateral de navegacion del curso */
 #quarto-sidebar {
   border-right: 1px solid $gris-300;
+  background: $gris-050;
+
+  /* Cabecera con el nombre del curso: sin navbar, es el ancla visual */
+  .sidebar-header {
+    background: $azul-900;
+    margin: 0 0 0.9rem;
+    padding: 1.15rem 1rem 1.05rem;
+  }
 
   .sidebar-title {
-    color: $azul-900;
+    color: #fff;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.08rem;
+    line-height: 1.25;
+    margin-bottom: 0;
   }
 
   .sidebar-item-container .sidebar-item-text {
@@ -479,4 +483,46 @@ nav#TOC a.nav-link.active {
 .quarto-title-block + .content table td,
 main table td {
   vertical-align: top;
+}
+
+/* En el telefono, la barra que trae el boton de plegado muestra las migas de
+   pan completas y ocupaba cuatro renglones antes de empezar el contenido.
+   Se deja en un solo renglon con puntos suspensivos. */
+@media (max-width: 991.98px) {
+  #quarto-header .quarto-secondary-nav {
+    .quarto-secondary-nav-title,
+    .breadcrumb {
+      flex-wrap: nowrap;
+      overflow: hidden;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      margin-bottom: 0;
+    }
+
+    .breadcrumb-item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* La ultima miga es la pagina actual: es la que vale la pena leer */
+    .breadcrumb-item:last-child {
+      flex-shrink: 0;
+    }
+  }
+}
+
+/* En pantalla de telefono no cabe la ruta completa: el nombre de la unidad se
+   come el ancho y deja fuera el de la pagina actual, que es el unico dato
+   util. Se ocultan los ancestros y su separador. */
+@media (max-width: 575.98px) {
+  #quarto-header .quarto-secondary-nav {
+    .breadcrumb-item:not(:last-child) {
+      display: none;
+    }
+
+    .breadcrumb-item:last-child::before {
+      display: none;
+    }
+  }
 }
