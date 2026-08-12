@@ -4,297 +4,189 @@
     "href": "web/semana-02/presentacion.html#sin-control-de-versiones",
     "title": "Control de versiones con Git y GitHub",
     "section": "Sin control de versiones",
-    "text": "Sin control de versiones",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Sin control de versiones"
   },
   {
     "objectID": "web/semana-02/presentacion.html#lo-que-se-pierde",
     "href": "web/semana-02/presentacion.html#lo-que-se-pierde",
     "title": "Control de versiones con Git y GitHub",
     "section": "Lo que se pierde",
-    "text": "Lo que se pierde\n\nEl historial vive en tu memoria, y tu memoria dura una semana.\nLa copia buena es la que abriste de último.\nVolver a un estado anterior se convierte en adivinar.\n\n\nY eso trabajando solo.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Lo que se pierde\n\nEl historial vive en tu memoria, y tu memoria dura una semana.\nLa copia buena es la que abriste de último.\nVolver a un estado anterior se convierte en adivinar.\n\n\nY eso trabajando solo."
   },
   {
     "objectID": "web/semana-02/presentacion.html#y-cuando-trabaja-un-equipo",
     "href": "web/semana-02/presentacion.html#y-cuando-trabaja-un-equipo",
     "title": "Control de versiones con Git y GitHub",
     "section": "Y cuando trabaja un equipo",
-    "text": "Y cuando trabaja un equipo",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Y cuando trabaja un equipo"
   },
   {
     "objectID": "web/semana-02/presentacion.html#lo-que-hace-falta",
     "href": "web/semana-02/presentacion.html#lo-que-hace-falta",
     "title": "Control de versiones con Git y GitHub",
     "section": "Lo que hace falta",
-    "text": "Lo que hace falta\n\nVolver a cualquier estado anterior.\nSaber quién cambió qué, y cuándo.\nProbar una idea sin romper lo que ya sirve.\nUnir el trabajo de dos personas sin perder ninguno de los dos.\n\n\nEso hace Git.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Lo que hace falta\n\nVolver a cualquier estado anterior.\nSaber quién cambió qué, y cuándo.\nProbar una idea sin romper lo que ya sirve.\nUnir el trabajo de dos personas sin perder ninguno de los dos.\n\n\nEso hace Git."
   },
   {
     "objectID": "web/semana-02/presentacion.html#dos-cosas-distintas-con-nombre-parecido",
     "href": "web/semana-02/presentacion.html#dos-cosas-distintas-con-nombre-parecido",
     "title": "Control de versiones con Git y GitHub",
     "section": "Dos cosas distintas con nombre parecido",
-    "text": "Dos cosas distintas con nombre parecido",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Dos cosas distintas con nombre parecido"
   },
   {
     "objectID": "web/semana-02/presentacion.html#dónde-vive-tu-trabajo",
     "href": "web/semana-02/presentacion.html#dónde-vive-tu-trabajo",
     "title": "Control de versiones con Git y GitHub",
     "section": "Dónde vive tu trabajo",
-    "text": "Dónde vive tu trabajo",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Dónde vive tu trabajo"
   },
   {
     "objectID": "web/semana-02/presentacion.html#qué-hace-cada-uno",
     "href": "web/semana-02/presentacion.html#qué-hace-cada-uno",
     "title": "Control de versiones con Git y GitHub",
     "section": "Qué hace cada uno",
-    "text": "Qué hace cada uno",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Qué hace cada uno"
   },
   {
     "objectID": "web/semana-02/presentacion.html#nada-se-mueve-solo",
     "href": "web/semana-02/presentacion.html#nada-se-mueve-solo",
     "title": "Control de versiones con Git y GitHub",
     "section": "Nada se mueve solo",
-    "text": "Nada se mueve solo\ngit push    # sube tus commits a GitHub\ngit pull    # baja los del equipo\nTu commit vive en tu disco hasta que lo subas.\nLo que hizo la otra persona del equipo no aparece en tu pantalla hasta que lo bajes.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Nada se mueve solo\ngit push    # sube tus commits a GitHub\ngit pull    # baja los del equipo\nTu commit vive en tu disco hasta que lo subas.\nLo que hizo la otra persona del equipo no aparece en tu pantalla hasta que lo bajes."
   },
   {
     "objectID": "web/semana-02/presentacion.html#qué-guarda-un-commit",
     "href": "web/semana-02/presentacion.html#qué-guarda-un-commit",
     "title": "Control de versiones con Git y GitHub",
     "section": "Qué guarda un commit",
-    "text": "Qué guarda un commit",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Qué guarda un commit"
   },
   {
     "objectID": "web/semana-02/presentacion.html#la-historia-es-una-cadena",
     "href": "web/semana-02/presentacion.html#la-historia-es-una-cadena",
     "title": "Control de versiones con Git y GitHub",
     "section": "La historia es una cadena",
-    "text": "La historia es una cadena",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "La historia es una cadena"
   },
   {
     "objectID": "web/semana-02/presentacion.html#el-nombre-de-cada-commit",
     "href": "web/semana-02/presentacion.html#el-nombre-de-cada-commit",
     "title": "Control de versiones con Git y GitHub",
     "section": "El nombre de cada commit",
-    "text": "El nombre de cada commit\n\ne4c41a6f2d81b9c0a7e35d4188c6f0b2ad19e7c3\n\nGit calcula ese número a partir del contenido. Cambia una coma y cambia entero.\nEn la práctica escribes los primeros siete y Git entiende de cuál hablas.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "El nombre de cada commit\n\ne4c41a6f2d81b9c0a7e35d4188c6f0b2ad19e7c3\n\nGit calcula ese número a partir del contenido. Cambia una coma y cambia entero.\nEn la práctica escribes los primeros siete y Git entiende de cuál hablas."
   },
   {
     "objectID": "web/semana-02/presentacion.html#cómo-se-escribe-un-mensaje",
     "href": "web/semana-02/presentacion.html#cómo-se-escribe-un-mensaje",
     "title": "Control de versiones con Git y GitHub",
     "section": "Cómo se escribe un mensaje",
-    "text": "Cómo se escribe un mensaje",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Cómo se escribe un mensaje"
   },
   {
     "objectID": "web/semana-02/presentacion.html#el-mensaje-lo-lees-dentro-de-un-mes",
     "href": "web/semana-02/presentacion.html#el-mensaje-lo-lees-dentro-de-un-mes",
     "title": "Control de versiones con Git y GitHub",
     "section": "El mensaje lo lees dentro de un mes",
-    "text": "El mensaje lo lees dentro de un mes",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "El mensaje lo lees dentro de un mes"
   },
   {
     "objectID": "web/semana-02/presentacion.html#una-rama-es-un-puntero",
     "href": "web/semana-02/presentacion.html#una-rama-es-un-puntero",
     "title": "Control de versiones con Git y GitHub",
     "section": "Una rama es un puntero",
-    "text": "Una rama es un puntero",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Una rama es un puntero"
   },
   {
     "objectID": "web/semana-02/presentacion.html#trabajar-aparte-y-volver",
     "href": "web/semana-02/presentacion.html#trabajar-aparte-y-volver",
     "title": "Control de versiones con Git y GitHub",
     "section": "Trabajar aparte y volver",
-    "text": "Trabajar aparte y volver\n\ngit switch -c &lt;rama&gt; crea la rama y te para en ella. git merge &lt;rama&gt; trae esos commits a donde estás.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Trabajar aparte y volver\n\ngit switch -c &lt;rama&gt; crea la rama y te para en ella. git merge &lt;rama&gt; trae esos commits a donde estás."
   },
   {
     "objectID": "web/semana-02/presentacion.html#dos-maneras-de-fusionar",
     "href": "web/semana-02/presentacion.html#dos-maneras-de-fusionar",
     "title": "Control de versiones con Git y GitHub",
     "section": "Dos maneras de fusionar",
-    "text": "Dos maneras de fusionar",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Dos maneras de fusionar"
   },
   {
     "objectID": "web/semana-02/presentacion.html#cuando-git-se-detiene",
     "href": "web/semana-02/presentacion.html#cuando-git-se-detiene",
     "title": "Control de versiones con Git y GitHub",
     "section": "Cuando Git se detiene",
-    "text": "Cuando Git se detiene",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Cuando Git se detiene"
   },
   {
     "objectID": "web/semana-02/presentacion.html#así-se-ve-un-conflicto",
     "href": "web/semana-02/presentacion.html#así-se-ve-un-conflicto",
     "title": "Control de versiones con Git y GitHub",
     "section": "Así se ve un conflicto",
-    "text": "Así se ve un conflicto",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Así se ve un conflicto"
   },
   {
     "objectID": "web/semana-02/presentacion.html#resolver-toma-un-minuto",
     "href": "web/semana-02/presentacion.html#resolver-toma-un-minuto",
     "title": "Control de versiones con Git y GitHub",
     "section": "Resolver toma un minuto",
-    "text": "Resolver toma un minuto\n\nAbre el archivo y busca los marcadores.\nDeja el texto que debe quedar.\nBorra las tres líneas de marcadores y commitea.\n\n\ngit merge --abort\nEse comando te devuelve al punto de partida cuando el archivo queda irreconocible.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Resolver toma un minuto\n\nAbre el archivo y busca los marcadores.\nDeja el texto que debe quedar.\nBorra las tres líneas de marcadores y commitea.\n\n\ngit merge --abort\nEse comando te devuelve al punto de partida cuando el archivo queda irreconocible."
   },
   {
     "objectID": "web/semana-02/presentacion.html#el-remoto",
     "href": "web/semana-02/presentacion.html#el-remoto",
     "title": "Control de versiones con Git y GitHub",
     "section": "El remoto",
-    "text": "El remoto",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "El remoto"
   },
   {
     "objectID": "web/semana-02/presentacion.html#qué-es-un-pull-request",
     "href": "web/semana-02/presentacion.html#qué-es-un-pull-request",
     "title": "Control de versiones con Git y GitHub",
     "section": "Qué es un Pull Request",
-    "text": "Qué es un Pull Request\nUna propuesta de cambio. Dice: “tengo esto listo en mi rama, quiero meterlo en main, revísenlo”.\n\nVive en GitHub, no en tu computador. No existe ningún git pull-request.\nMuestra el cambio línea por línea, para que la otra persona lo lea antes de que entre.\nDeja registro de quién propuso, quién revisó y qué se conversó.\nmain no se toca hasta que alguien pulse el botón de fusión.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Qué es un Pull Request\nUna propuesta de cambio. Dice: “tengo esto listo en mi rama, quiero meterlo en main, revísenlo”.\n\nVive en GitHub, no en tu computador. No existe ningún git pull-request.\nMuestra el cambio línea por línea, para que la otra persona lo lea antes de que entre.\nDeja registro de quién propuso, quién revisó y qué se conversó.\nmain no se toca hasta que alguien pulse el botón de fusión."
   },
   {
     "objectID": "web/semana-02/presentacion.html#el-pull-request",
     "href": "web/semana-02/presentacion.html#el-pull-request",
     "title": "Control de versiones con Git y GitHub",
     "section": "El Pull Request",
-    "text": "El Pull Request",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "El Pull Request"
   },
   {
     "objectID": "web/semana-02/presentacion.html#el-ciclo-completo",
     "href": "web/semana-02/presentacion.html#el-ciclo-completo",
     "title": "Control de versiones con Git y GitHub",
     "section": "El ciclo completo",
-    "text": "El ciclo completo\n\ngit push -u origin &lt;rama&gt; publica la rama por primera vez. git pull deja tu main al día después de la fusión.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "El ciclo completo\n\ngit push -u origin &lt;rama&gt; publica la rama por primera vez. git pull deja tu main al día después de la fusión."
   },
   {
     "objectID": "web/semana-02/presentacion.html#lo-que-no-se-versiona",
     "href": "web/semana-02/presentacion.html#lo-que-no-se-versiona",
     "title": "Control de versiones con Git y GitHub",
     "section": "Lo que no se versiona",
-    "text": "Lo que no se versiona",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Lo que no se versiona"
   },
   {
     "objectID": "web/semana-02/presentacion.html#una-clave-subida-ya-está-quemada",
     "href": "web/semana-02/presentacion.html#una-clave-subida-ya-está-quemada",
     "title": "Control de versiones con Git y GitHub",
     "section": "Una clave subida ya está quemada",
-    "text": "Una clave subida ya está quemada\n\nBorrarla un minuto después no sirve. El historial la conserva, y cualquiera con el enlace puede leerla.\n\nPor eso appsettings.Development.json entra al .gitignore antes del primer commit.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Una clave subida ya está quemada\n\nBorrarla un minuto después no sirve. El historial la conserva, y cualquiera con el enlace puede leerla.\n\nPor eso appsettings.Development.json entra al .gitignore antes del primer commit."
   },
   {
     "objectID": "web/semana-02/presentacion.html#tres-reglas",
     "href": "web/semana-02/presentacion.html#tres-reglas",
     "title": "Control de versiones con Git y GitHub",
     "section": "Tres reglas",
-    "text": "Tres reglas\n\nmain siempre funciona. Lo que todavía no sirve vive en una rama.\n\n\nUna rama por cada cosa nueva. Se abre, se revisa, se fusiona y se borra.\n\n\nEl mensaje explica el cambio, no el archivo que tocaste.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Tres reglas\n\nmain siempre funciona. Lo que todavía no sirve vive en una rama.\n\n\nUna rama por cada cosa nueva. Se abre, se revisa, se fusiona y se borra.\n\n\nEl mensaje explica el cambio, no el archivo que tocaste."
   },
   {
     "objectID": "web/semana-02/presentacion.html#siguientes-pasos",
     "href": "web/semana-02/presentacion.html#siguientes-pasos",
     "title": "Control de versiones con Git y GitHub",
     "section": "Siguientes pasos",
-    "text": "Siguientes pasos\nCrear un proyecto y ejecutar el flujo completo.",
-    "crumbs": [
-      "Unidad 1. Entornos, versionado e IA",
-      "Semana 2. Diapositivas"
-    ]
+    "text": "Siguientes pasos\nCrear un proyecto y ejecutar el flujo completo."
   },
   {
     "objectID": "web/semana-01/index.html",
@@ -578,7 +470,7 @@
     "href": "web/semana-02/index.html#lo-que-vas-a-lograr",
     "title": "Semana 2. Git y GitHub: tu proyecto bajo control de versiones",
     "section": "1 Lo que vas a lograr",
-    "text": "1 Lo que vas a lograr\nGit es la herramienta con la que vas a entregar todo lo que hagas de aquí en adelante, y también la que usa cualquier equipo de desarrollo. Esta semana la aprendes completa: desde el primer commit hasta el Pull Request revisado por otra persona.\nEn clase practicas cada comando en un repositorio de prueba tuyo. Después, en equipos de dos, entregas la actividad de seguimiento con el flujo completo aplicado.\nAl terminar la guía sabes:\n\nExplicar qué hace Git con tus archivos y en qué se diferencia de GitHub.\nCrear un repositorio con .gitignore y README, y llevar un historial de commits legible.\nPublicar el repositorio en GitHub y sincronizarlo.\nTrabajar en una rama y fusionarla mediante un Pull Request.\nResolver un conflicto de fusión sin romper el archivo.\nDeshacer un cambio con restore y revertir un commit ya publicado con revert.\n\n\n\n\n\n\n\nNotaAntes de empezar\n\n\n\nNecesitas dos cosas de la Semana 1: que git --version responda en la terminal y la carpeta mi-primera-pagina con tu index.html. Esa página es el material con el que vas a practicar.\nNecesitas además una cuenta en github.com. Créala antes de la sesión: la verificación del correo tarda unos minutos.",
+    "text": "1 Lo que vas a lograr\nGit es la herramienta con la que vas a entregar todo lo que hagas de aquí en adelante, y también la que usa cualquier equipo de desarrollo. Esta semana la aprendes completa: desde el primer commit hasta el Pull Request revisado por otra persona.\nEn clase practicas cada comando en un repositorio de prueba tuyo. Después, en equipos de dos, entregas la actividad de seguimiento con el flujo completo aplicado.\nAl terminar la guía sabes:\n\nExplicar qué hace Git con tus archivos y en qué se diferencia de GitHub.\nCrear un repositorio con .gitignore y README, y llevar un historial de commits legible.\nPublicar el repositorio en GitHub y sincronizarlo.\nTrabajar en una rama y fusionarla mediante un Pull Request.\nResolver un conflicto de fusión sin romper el archivo.\nDeshacer un cambio con restore y revertir un commit ya publicado con revert.\n\n\n\n\n\n\n\nNotaAntes de empezar\n\n\n\nNecesitas que git --version responda en la terminal. Lo instalaste en la Semana 1.\nNecesitas además una cuenta en github.com. Créala antes de la sesión: la verificación del correo tarda unos minutos.",
     "crumbs": [
       "Unidad 1. Entornos, versionado e IA",
       "Semana 2. Git y GitHub"
@@ -600,7 +492,7 @@
     "href": "web/semana-02/index.html#laboratorio",
     "title": "Semana 2. Git y GitHub: tu proyecto bajo control de versiones",
     "section": "3 Laboratorio",
-    "text": "3 Laboratorio\nSigue los pasos en orden. Cada uno termina con una verificación: si no obtienes esa salida, no avances.\n\n1 Configura tu identidad\nGit firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:\ngit config --global user.name \"Tu Nombre Completo\"\ngit config --global user.email \"tu.correo@correo.iue.edu.co\"\ngit config --global init.defaultBranch main\nLa tercera línea hace que los repositorios nuevos usen main como rama principal en vez del antiguo master.\nVerifica:\ngit config --global --list\n\n\n2 Crea tu repositorio de práctica\nRenombra tu carpeta mi-primera-pagina a taller-git, abre una terminal adentro y ejecuta:\ngit init\nAntes de continuar, crea una carpeta bin con un archivo cualquiera adentro. La vas a usar para comprobar que el .gitignore funciona:\nmkdir bin\necho \"archivo generado\" &gt; bin/salida.txt\nAhora mira el estado:\ngit status\nOn branch main\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        bin/\n        index.html\n\nnothing added to commit but untracked files present (use \"git add\" to track)\nGit ya está vigilando la carpeta, pero todavía no rastrea ningún archivo. Fíjate en que bin/ aparece en la lista: eso es lo que vamos a evitar.\n\n\n3 Escribe el .gitignore y el README\nCrea en la raíz un archivo llamado exactamente .gitignore, con punto al inicio y sin extensión:\n# Resultados de compilar .NET\nbin/\nobj/\n\n# Dependencias de Node\nnode_modules/\n\n# Configuracion local del editor\n.vs/\n.vscode/\n*.user\n\n# Configuracion con datos sensibles\nappsettings.Development.json\nCrea también README.md. Es la portada de tu repositorio y lo primero que ve quien entra:\n# Proyecto web 2026-02\n\nBreve descripcion del proyecto en tres a cinco lineas.\n\n## Problema que resuelve\n\nQue necesidad atiende y para quien.\n\n## Tecnologias\n\nHTML5, CSS3, JavaScript ES6, ASP.NET Core MVC, SQL Server con Entity Framework Core.\n\n## Como ejecutarlo en local\n\n```bash\npython -m http.server 8000\n```\n\nAbrir http://localhost:8000\n\n## Autor\n\nTu Nombre. Programacion Web (IF2003), grupo 603. IUE, 2026-02.\nVuelve a mirar el estado, esta vez en formato corto:\ngit status --short\n?? .gitignore\n?? README.md\n?? index.html\nbin/ desapareció de la lista. El .gitignore ya está trabajando.\n\n\n4 Tus primeros commits\nAgrega todo al área de preparación y haz el primer commit:\ngit add .\ngit commit -m \"chore: estructura inicial del proyecto\"\n[main (root-commit) 4fd9bfc] chore: estructura inicial del proyecto\n 3 files changed, 11 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 README.md\n create mode 100644 index.html\nTres archivos, y bin/salida.txt no está entre ellos.\nAhora edita algo del index.html, por ejemplo agrega un párrafo, y antes de guardarlo en la historia mira exactamente qué cambió:\ngit diff\ndiff --git a/index.html b/index.html\nindex bec81e6..c4d1379 100644\n--- a/index.html\n+++ b/index.html\n@@ -3,3 +3,4 @@\n &lt;head&gt;&lt;meta charset=\"UTF-8\"&gt;&lt;title&gt;Proyecto web&lt;/title&gt;&lt;/head&gt;\n &lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web IF2003&lt;/h1&gt;&lt;/body&gt;\n &lt;/html&gt;\n+&lt;p&gt;Autor: Tu Nombre&lt;/p&gt;\nLas líneas con + son las que agregaste. Las que tuvieran - serían las que quitaste.\nGuárdalo. La bandera -a prepara y commitea de un solo golpe los archivos que Git ya rastrea:\ngit commit -am \"feat: agrega la linea de autoria en la portada\"\nRepite el ciclo un par de veces con cambios reales, y revisa la historia:\ngit log --oneline\n\n\n5 Publica en GitHub\nEn github.com, botón New repository:\n\nRepository name: taller-git\nVisibility: Public\nNo marques ninguna de las casillas de inicialización. Tu repositorio ya tiene README y .gitignore, y si GitHub crea los suyos vas a chocar con ellos en el primer push.\n\nGitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:\ngit remote add origin https://github.com/TU-USUARIO/taller-git.git\ngit push -u origin main\norigin es el nombre convencional del remoto principal. La bandera -u deja la conexión recordada, así que de aquí en adelante te basta con git push.\n\n\n\n\n\n\nImportanteLa contraseña de GitHub no sirve en la terminal\n\n\n\nGitHub dejó de aceptar contraseñas para operaciones de Git en 2021. En Windows, el primer push abre una ventana del navegador para que inicies sesión y el Credential Manager guarda la credencial. Si trabajas en macOS o Linux y te pide contraseña, genera un token de acceso personal en Settings, Developer settings, Personal access tokens, con el permiso repo, y usa ese token donde te piden la contraseña.\n\n\nRecarga la página del repositorio en el navegador. Tu código está ahí, y el README se ve renderizado en la portada.\n\n\n6 Trabaja en una rama y abre un Pull Request\nNo vas a volver a commitear directo sobre main. El flujo, de aquí en adelante, es este.\nCrea la rama y muévete a ella en un solo comando:\ngit switch -c feature/encabezado\nHaz un cambio real en index.html, por ejemplo cambia el título de la portada, y guárdalo:\ngit commit -am \"feat: cambia el titulo de la portada\"\n[feature/encabezado a3d25af] feat: cambia el titulo de la portada\n 1 file changed, 1 insertion(+), 1 deletion(-)\nPublica la rama:\ngit push -u origin feature/encabezado\nEntra a GitHub. Aparece un aviso amarillo con el botón Compare & pull request. Pulsa ahí y llena el formulario:\n\nTítulo: el mismo mensaje del commit, o uno que resuma la rama completa.\nDescripción: dos líneas mínimo. Qué cambia y por qué. Esto es lo que lee quien revisa.\n\nCrea el Pull Request, revisa la pestaña Files changed para ver el diff en el navegador, y fusiona con Merge pull request. GitHub te ofrece borrar la rama después: acepta.\n\n\n\n\n\n\nNotaAquí fusionas tú, en el entregable no\n\n\n\nEstás practicando solo en tu repositorio, así que abres y fusionas tu propio Pull Request. En el repositorio del equipo la regla cambia: cada quien abre el suyo y lo fusiona la otra persona, después de revisarlo y comentarlo.\n\n\nDe vuelta en tu máquina, tráete el resultado y limpia la rama local:\ngit switch main\ngit pull\ngit branch -d feature/encabezado\n\n\n7 Provoca un conflicto y resuélvelo\nUn conflicto se resuelve mejor la primera vez si lo provocas tú, con calma, y no cuando te toma por sorpresa a la medianoche antes de una entrega.\nCrea una rama y cambia el título de la portada:\ngit switch -c feature/titulo-alterno\nDeja la línea así:\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web&lt;/h1&gt;&lt;/body&gt;\ngit commit -am \"feat: cambia el titulo de la portada\"\nVuelve a main y cambia la misma línea por algo distinto:\ngit switch main\n&lt;body&gt;&lt;h1&gt;Proyecto integrador IF2003&lt;/h1&gt;&lt;/body&gt;\ngit commit -am \"feat: ajusta el titulo con el codigo del curso\"\nAhora fusiona:\ngit merge feature/titulo-alterno\nAuto-merging index.html\nCONFLICT (content): Merge conflict in index.html\nAutomatic merge failed; fix conflicts and then commit the result.\nAhí está. Mira el estado:\ngit status\nOn branch main\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nUnmerged paths:\n  (use \"git add &lt;file&gt;...\" to mark resolution)\n        both modified:   index.html\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nAbre index.html. Git escribió los marcadores dentro del archivo:\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n&lt;body&gt;&lt;h1&gt;Proyecto integrador IF2003&lt;/h1&gt;&lt;/body&gt;\n=======\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web&lt;/h1&gt;&lt;/body&gt;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/titulo-alterno\nSe lee así:\n\n\nEl archivo resuelto no puede conservar ninguna de las tres líneas rojas.\n\n\nEntre &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD y ======= está tu versión, la de la rama donde estás parado.\nEntre ======= y &gt;&gt;&gt;&gt;&gt;&gt;&gt; está la versión de la rama que estás trayendo.\n\nResolver es dejar el archivo como debe quedar y borrar las tres líneas de marcadores. Puedes quedarte con una versión, con la otra o escribir una tercera:\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web IF2003&lt;/h1&gt;&lt;/body&gt;\nMarca el archivo como resuelto y cierra la fusión:\ngit add index.html\ngit commit -m \"merge: resuelve el conflicto del titulo de la portada\"\nMira la historia dibujada:\ngit log --oneline --graph --all\n*   e4c41a6 merge: resuelve el conflicto del titulo de la portada\n|\\\n| * a3d25af feat: cambia el titulo de la portada\n* | fd77b32 feat: ajusta el titulo con el codigo del curso\n|/\n* 4fd9bfc chore: estructura inicial del proyecto\nLas dos ramas se separan y se vuelven a juntar. Ese commit de fusión con dos padres es la evidencia de que resolviste un conflicto real.\n\n\n\n\n\n\nTipSi te pierdes en mitad de una fusión\n\n\n\ngit merge --abort deshace la fusión completa y te devuelve al estado anterior, sin daño. Úsalo sin culpa cuando el archivo quede irreconocible, y vuelve a empezar.\n\n\n\n\n8 Deshacer sin miedo\nTres situaciones distintas, tres comandos distintos.\nEditaste un archivo y quieres botar el cambio. Todavía no hiciste add:\ngit restore index.html\nYa hiciste add y quieres sacarlo del área de preparación, sin perder la edición:\ngit restore --staged index.html\nEl commit ya está hecho y publicado. No lo borres: crea un commit que deshaga sus cambios. Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:\ngit revert &lt;hash-del-commit&gt;\n\n\n9 Etiqueta la versión de la semana\nUna etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la semana:\ngit tag v0.1.0\ngit push origin v0.1.0\nVerifica:\ngit tag\nv0.1.0\nEn GitHub la etiqueta aparece en la sección Tags de la portada del repositorio.",
+    "text": "3 Laboratorio\nSigue los pasos en orden. Cada uno termina con una verificación: si no obtienes esa salida, no avances.\n\n1 Configura tu identidad\nGit firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:\ngit config --global user.name \"Tu Nombre Completo\"\ngit config --global user.email \"tu.correo@correo.iue.edu.co\"\ngit config --global init.defaultBranch main\nLa tercera línea hace que los repositorios nuevos usen main como rama principal en vez del antiguo master.\nVerifica:\ngit config --global --list\n\n\n2 Crea tu repositorio de práctica\nCrea una carpeta llamada taller-git, abre una terminal adentro y ejecuta:\ngit init\nCrea adentro un index.html con lo mínimo, que es lo que vas a versionar durante el laboratorio:\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"es\"&gt;\n&lt;head&gt;\n  &lt;meta charset=\"UTF-8\"&gt;\n  &lt;title&gt;Taller de Git&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;Taller de Git&lt;/h1&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nAntes de continuar, crea una carpeta bin con un archivo cualquiera adentro. La vas a usar para comprobar que el .gitignore funciona:\nmkdir bin\necho \"archivo generado\" &gt; bin/salida.txt\nAhora mira el estado:\ngit status\nOn branch main\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n        bin/\n        index.html\n\nnothing added to commit but untracked files present (use \"git add\" to track)\nGit ya está vigilando la carpeta, pero todavía no rastrea ningún archivo. Fíjate en que bin/ aparece en la lista: eso es lo que vamos a evitar.\n\n\n3 Escribe el .gitignore y el README\nCrea en la raíz un archivo llamado exactamente .gitignore, con punto al inicio y sin extensión:\n# Resultados de compilar .NET\nbin/\nobj/\n\n# Dependencias de Node\nnode_modules/\n\n# Configuracion local del editor\n.vs/\n.vscode/\n*.user\n\n# Configuracion con datos sensibles\nappsettings.Development.json\nCrea también README.md. Es la portada de tu repositorio y lo primero que ve quien entra:\n# Proyecto web 2026-02\n\nBreve descripcion del proyecto en tres a cinco lineas.\n\n## Problema que resuelve\n\nQue necesidad atiende y para quien.\n\n## Tecnologias\n\nHTML5, CSS3, JavaScript ES6, ASP.NET Core MVC, SQL Server con Entity Framework Core.\n\n## Como ejecutarlo en local\n\n```bash\npython -m http.server 8000\n```\n\nAbrir http://localhost:8000\n\n## Autor\n\nTu Nombre. Programacion Web (IF2003), grupo 603. IUE, 2026-02.\nVuelve a mirar el estado, esta vez en formato corto:\ngit status --short\n?? .gitignore\n?? README.md\n?? index.html\nbin/ desapareció de la lista. El .gitignore ya está trabajando.\n\n\n4 Tus primeros commits\nAgrega todo al área de preparación y haz el primer commit:\ngit add .\ngit commit -m \"chore: estructura inicial del proyecto\"\n[main (root-commit) 4fd9bfc] chore: estructura inicial del proyecto\n 3 files changed, 11 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 README.md\n create mode 100644 index.html\nTres archivos, y bin/salida.txt no está entre ellos.\nAhora edita algo del index.html, por ejemplo agrega un párrafo, y antes de guardarlo en la historia mira exactamente qué cambió:\ngit diff\ndiff --git a/index.html b/index.html\nindex bec81e6..c4d1379 100644\n--- a/index.html\n+++ b/index.html\n@@ -3,3 +3,4 @@\n &lt;head&gt;&lt;meta charset=\"UTF-8\"&gt;&lt;title&gt;Proyecto web&lt;/title&gt;&lt;/head&gt;\n &lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web IF2003&lt;/h1&gt;&lt;/body&gt;\n &lt;/html&gt;\n+&lt;p&gt;Autor: Tu Nombre&lt;/p&gt;\nLas líneas con + son las que agregaste. Las que tuvieran - serían las que quitaste.\nGuárdalo. La bandera -a prepara y commitea de un solo golpe los archivos que Git ya rastrea:\ngit commit -am \"feat: agrega la linea de autoria en la portada\"\nRepite el ciclo un par de veces con cambios reales, y revisa la historia:\ngit log --oneline\n\n\n5 Publica en GitHub\nEn github.com, botón New repository:\n\nRepository name: taller-git\nVisibility: Public\nNo marques ninguna de las casillas de inicialización. Tu repositorio ya tiene README y .gitignore, y si GitHub crea los suyos vas a chocar con ellos en el primer push.\n\nGitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:\ngit remote add origin https://github.com/TU-USUARIO/taller-git.git\ngit push -u origin main\norigin es el nombre convencional del remoto principal. La bandera -u deja la conexión recordada, así que de aquí en adelante te basta con git push.\n\n\n\n\n\n\nImportanteLa contraseña de GitHub no sirve en la terminal\n\n\n\nGitHub dejó de aceptar contraseñas para operaciones de Git en 2021. En Windows, el primer push abre una ventana del navegador para que inicies sesión y el Credential Manager guarda la credencial. Si trabajas en macOS o Linux y te pide contraseña, genera un token de acceso personal en Settings, Developer settings, Personal access tokens, con el permiso repo, y usa ese token donde te piden la contraseña.\n\n\nRecarga la página del repositorio en el navegador. Tu código está ahí, y el README se ve renderizado en la portada.\n\n\n6 Trabaja en una rama y abre un Pull Request\nNo vas a volver a commitear directo sobre main. El flujo, de aquí en adelante, es este.\nCrea la rama y muévete a ella en un solo comando:\ngit switch -c feature/encabezado\nHaz un cambio real en index.html, por ejemplo cambia el título de la portada, y guárdalo:\ngit commit -am \"feat: cambia el titulo de la portada\"\n[feature/encabezado a3d25af] feat: cambia el titulo de la portada\n 1 file changed, 1 insertion(+), 1 deletion(-)\nPublica la rama:\ngit push -u origin feature/encabezado\nEntra a GitHub. Aparece un aviso amarillo con el botón Compare & pull request. Pulsa ahí y llena el formulario:\n\nTítulo: el mismo mensaje del commit, o uno que resuma la rama completa.\nDescripción: dos líneas mínimo. Qué cambia y por qué. Esto es lo que lee quien revisa.\n\nCrea el Pull Request, revisa la pestaña Files changed para ver el diff en el navegador, y fusiona con Merge pull request. GitHub te ofrece borrar la rama después: acepta.\n\n\n\n\n\n\nNotaAquí fusionas tú, en el entregable no\n\n\n\nEstás practicando solo en tu repositorio, así que abres y fusionas tu propio Pull Request. En el repositorio del equipo la regla cambia: cada quien abre el suyo y lo fusiona la otra persona, después de revisarlo y comentarlo.\n\n\nDe vuelta en tu máquina, tráete el resultado y limpia la rama local:\ngit switch main\ngit pull\ngit branch -d feature/encabezado\n\n\n7 Provoca un conflicto y resuélvelo\nUn conflicto se resuelve mejor la primera vez si lo provocas tú, con calma, y no cuando te toma por sorpresa a la medianoche antes de una entrega.\nCrea una rama y cambia el título de la portada:\ngit switch -c feature/titulo-alterno\nDeja la línea así:\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web&lt;/h1&gt;&lt;/body&gt;\ngit commit -am \"feat: cambia el titulo de la portada\"\nVuelve a main y cambia la misma línea por algo distinto:\ngit switch main\n&lt;body&gt;&lt;h1&gt;Proyecto integrador IF2003&lt;/h1&gt;&lt;/body&gt;\ngit commit -am \"feat: ajusta el titulo con el codigo del curso\"\nAhora fusiona:\ngit merge feature/titulo-alterno\nAuto-merging index.html\nCONFLICT (content): Merge conflict in index.html\nAutomatic merge failed; fix conflicts and then commit the result.\nAhí está. Mira el estado:\ngit status\nOn branch main\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nUnmerged paths:\n  (use \"git add &lt;file&gt;...\" to mark resolution)\n        both modified:   index.html\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\nAbre index.html. Git escribió los marcadores dentro del archivo:\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\n&lt;body&gt;&lt;h1&gt;Proyecto integrador IF2003&lt;/h1&gt;&lt;/body&gt;\n=======\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web&lt;/h1&gt;&lt;/body&gt;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/titulo-alterno\nSe lee así:\n\n\nEl archivo resuelto no puede conservar ninguna de las tres líneas rojas.\n\n\nEntre &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD y ======= está tu versión, la de la rama donde estás parado.\nEntre ======= y &gt;&gt;&gt;&gt;&gt;&gt;&gt; está la versión de la rama que estás trayendo.\n\nResolver es dejar el archivo como debe quedar y borrar las tres líneas de marcadores. Puedes quedarte con una versión, con la otra o escribir una tercera:\n&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web IF2003&lt;/h1&gt;&lt;/body&gt;\nMarca el archivo como resuelto y cierra la fusión:\ngit add index.html\ngit commit -m \"merge: resuelve el conflicto del titulo de la portada\"\nMira la historia dibujada:\ngit log --oneline --graph --all\n*   e4c41a6 merge: resuelve el conflicto del titulo de la portada\n|\\\n| * a3d25af feat: cambia el titulo de la portada\n* | fd77b32 feat: ajusta el titulo con el codigo del curso\n|/\n* 4fd9bfc chore: estructura inicial del proyecto\nLas dos ramas se separan y se vuelven a juntar. Ese commit de fusión con dos padres es la evidencia de que resolviste un conflicto real.\n\n\n\n\n\n\nTipSi te pierdes en mitad de una fusión\n\n\n\ngit merge --abort deshace la fusión completa y te devuelve al estado anterior, sin daño. Úsalo sin culpa cuando el archivo quede irreconocible, y vuelve a empezar.\n\n\n\n\n8 Deshacer sin miedo\nTres situaciones distintas, tres comandos distintos.\nEditaste un archivo y quieres botar el cambio. Todavía no hiciste add:\ngit restore index.html\nYa hiciste add y quieres sacarlo del área de preparación, sin perder la edición:\ngit restore --staged index.html\nEl commit ya está hecho y publicado. No lo borres: crea un commit que deshaga sus cambios. Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:\ngit revert &lt;hash-del-commit&gt;\n\n\n9 Etiqueta la versión de la semana\nUna etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la semana:\ngit tag v0.1.0\ngit push origin v0.1.0\nVerifica:\ngit tag\nv0.1.0\nEn GitHub la etiqueta aparece en la sección Tags de la portada del repositorio.",
     "crumbs": [
       "Unidad 1. Entornos, versionado e IA",
       "Semana 2. Git y GitHub"

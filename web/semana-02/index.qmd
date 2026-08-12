@@ -17,9 +17,7 @@ date-format: "D [de] MMMM [de] YYYY"
 ::: {.acceso}
 Diapositivas de la sesión
 
-Para repasar la parte teórica.
-
-[Abrir las diapositivas](presentacion.qmd){.btn-doc}
+[Abrir las diapositivas](presentacion.qmd){.btn-doc target="_blank"}
 :::
 
 ## Lo que vas a lograr
@@ -43,8 +41,7 @@ Al terminar la guía sabes:
 ::: {.callout-note}
 ## Antes de empezar
 
-Necesitas dos cosas de la Semana 1: que `git --version` responda en la terminal y la carpeta
-`mi-primera-pagina` con tu `index.html`. Esa página es el material con el que vas a practicar.
+Necesitas que `git --version` responda en la terminal. Lo instalaste en la Semana 1.
 
 Necesitas además una cuenta en [github.com](https://github.com/). Créala antes de la sesión: la
 verificación del correo tarda unos minutos.
@@ -485,10 +482,25 @@ git config --global --list
 
 ### [2]{.paso} Crea tu repositorio de práctica
 
-Renombra tu carpeta `mi-primera-pagina` a `taller-git`, abre una terminal adentro y ejecuta:
+Crea una carpeta llamada `taller-git`, abre una terminal adentro y ejecuta:
 
 ```bash
 git init
+```
+
+Crea adentro un `index.html` con lo mínimo, que es lo que vas a versionar durante el laboratorio:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Taller de Git</title>
+</head>
+<body>
+  <h1>Taller de Git</h1>
+</body>
+</html>
 ```
 
 Antes de continuar, crea una carpeta `bin` con un archivo cualquiera adentro. La vas a usar para
