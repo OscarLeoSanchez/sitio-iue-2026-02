@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="350" viewBox="0 0 900 350" role="img" aria-label="Dos ramas cambian la misma linea del mismo archivo de forma distinta, y Git no puede escoger cual de las dos vale" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="qc-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#5b6876"/>
+    </marker>
+    <filter id="qc-sombra" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <text x="450" y="18" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#5b6876">la línea original</text>
+  <g filter="url(#qc-sombra)">
+    <rect x="310" y="28" width="280" height="52" rx="10" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+    <rect x="40" y="150" width="340" height="72" rx="10" fill="#ffffff" stroke="#2f7bb8" stroke-width="2"/>
+    <rect x="520" y="150" width="340" height="72" rx="10" fill="#ffffff" stroke="#0e8f8f" stroke-width="2"/>
+  </g>
+  <text x="450" y="60" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="14" fill="#16202b">&lt;h1&gt;Mi negocio&lt;/h1&gt;</text>
+  <rect x="52" y="132" width="118" height="24" rx="12" fill="#eaf2fb"/>
+  <text x="111" y="149" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#17456f">rama de Ana</text>
+  <rect x="532" y="132" width="122" height="24" rx="12" fill="#e8f6f3"/>
+  <text x="593" y="149" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0e8f8f">rama de Beto</text>
+  <text x="210" y="193" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#16202b">&lt;h1&gt;Panadería La Espiga&lt;/h1&gt;</text>
+  <text x="690" y="193" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#16202b">&lt;h1&gt;La Espiga, pan artesanal&lt;/h1&gt;</text>
+  <g fill="none" stroke="#5b6876" stroke-width="2" marker-end="url(#qc-punta)">
+    <path d="M 340,84 C 270,106 224,118 212,144"/>
+    <path d="M 560,84 C 630,106 676,118 688,144"/>
+    <path d="M 212,226 C 214,254 246,266 282,278"/>
+    <path d="M 688,226 C 686,254 654,266 618,278"/>
+  </g>
+  <rect x="290" y="266" width="320" height="66" rx="10" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.8"/>
+  <text x="450" y="294" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="700" fill="#a32d22">Git no puede escoger por ti</text>
+  <text x="450" y="316" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#a32d22">las dos versiones son válidas</text>
+</svg>

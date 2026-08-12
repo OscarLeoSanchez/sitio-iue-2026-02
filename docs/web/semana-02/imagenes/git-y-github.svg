@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="320" viewBox="0 0 900 320" role="img" aria-label="Git es un programa en tu computador y GitHub es un servicio en internet; se comunican con push y pull" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="gh-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#17456f"/>
+    </marker>
+    <filter id="gh-sombra" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <g filter="url(#gh-sombra)">
+    <rect x="40" y="50" width="330" height="220" rx="12" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+    <rect x="530" y="50" width="330" height="220" rx="12" fill="#ffffff" stroke="#a8d5d2" stroke-width="1.8"/>
+  </g>
+  <rect x="62" y="78" width="58" height="38" rx="4" fill="#eaf2fb" stroke="#17456f" stroke-width="2"/>
+  <path d="M54,118 h74 l8,10 h-90 z" fill="#17456f"/>
+  <text x="140" y="108" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="26" font-weight="700" fill="#0f2540">Git</text>
+  <path d="M556,102 a19,19 0 0 1 35,-9 a21,21 0 0 1 38,11 a15,15 0 0 1 -3,26 h-63 a15,15 0 0 1 -7,-28 z" fill="#e8f6f3" stroke="#0e8f8f" stroke-width="2"/>
+  <text x="646" y="108" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="26" font-weight="700" fill="#0f2540">GitHub</text>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14.5" fill="#5b6876">
+    <text x="70" y="166">Un programa en tu computador</text>
+    <text x="70" y="196">Guarda la historia completa</text>
+    <text x="70" y="226">Funciona sin internet</text>
+    <text x="560" y="158">Un servicio en internet</text>
+    <text x="560" y="186">Guarda una copia del repositorio</text>
+    <text x="560" y="214">Agrega Pull Requests y permisos</text>
+    <text x="560" y="242">Necesitas una cuenta</text>
+  </g>
+  <g fill="none" stroke="#17456f" stroke-width="2" marker-end="url(#gh-punta)">
+    <path d="M 388,132 L 512,132"/>
+    <path d="M 512,196 L 388,196"/>
+  </g>
+  <rect x="410" y="98" width="80" height="24" rx="12" fill="#17456f"/>
+  <text x="450" y="115" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#ffffff">git push</text>
+  <rect x="410" y="208" width="80" height="24" rx="12" fill="#17456f"/>
+  <text x="450" y="225" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#ffffff">git pull</text>
+</svg>

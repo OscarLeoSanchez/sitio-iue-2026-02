@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="380" viewBox="0 0 900 380" role="img" aria-label="Un Pull Request propone pasar una rama a main: muestra los commits, los archivos cambiados, el comentario de quien revisa y el boton de fusion" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="pr-sombra" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f2540" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <g filter="url(#pr-sombra)">
+    <rect x="140" y="24" width="620" height="330" rx="14" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+  </g>
+  <path d="M140,38 a14,14 0 0 1 14,-14 h592 a14,14 0 0 1 14,14 v44 h-620 z" fill="#f6f8fa"/>
+  <line x1="140" y1="82" x2="760" y2="82" stroke="#cfd8e3" stroke-width="1.5"/>
+  <text x="170" y="58" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="18" font-weight="700" fill="#0f2540">Agrega la página de contacto</text>
+  <rect x="640" y="38" width="90" height="28" rx="14" fill="#2e7d5b"/>
+  <text x="685" y="57" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Open</text>
+  <rect x="170" y="106" width="152" height="28" rx="6" fill="#eaf2fb"/>
+  <text x="246" y="125" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#17456f">feature/contacto</text>
+  <path d="M338,112 L354,120 L338,128 z" fill="#5b6876"/>
+  <rect x="370" y="106" width="76" height="28" rx="6" fill="#eaf2fb"/>
+  <text x="408" y="125" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#17456f">main</text>
+  <text x="470" y="125" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#5b6876">2 commits, 3 archivos cambiados</text>
+  <rect x="170" y="152" width="560" height="56" rx="8" fill="#f6f8fa"/>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" fill="#5b6876">
+    <text x="188" y="176">Agrega contacto.html con dirección, teléfono y horario.</text>
+    <text x="188" y="196">El menú de index.html ahora enlaza a las tres páginas.</text>
+  </g>
+  <circle cx="192" cy="250" r="17" fill="#17456f"/>
+  <text x="192" y="256" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">B</text>
+  <rect x="222" y="224" width="508" height="54" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" fill="#16202b">
+    <text x="240" y="248">Beto: el horario quedaría mejor en una tabla, pero sirve</text>
+    <text x="240" y="268">así por ahora. Lo fusiono.</text>
+  </g>
+  <rect x="170" y="300" width="234" height="40" rx="8" fill="#2e7d5b"/>
+  <text x="287" y="326" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Merge pull request</text>
+  <text x="424" y="326" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#a32d22">lo pulsa quien revisa, no quien lo abrió</text>
+</svg>

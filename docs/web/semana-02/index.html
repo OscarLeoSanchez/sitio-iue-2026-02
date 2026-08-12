@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Leonel Sánchez Conde">
+
+<title>Semana 2. Git y GitHub: tu proyecto bajo control de versiones – Clases IUE 2026-02</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../estilos/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8713356167177fd77be9341a95314561.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-73cf1af775c892f0a186063dd00fed03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Unidad 1. Entornos, versionado e IA</a></li><li class="breadcrumb-item"><a href="../../web/semana-02/index.html">Semana 2. Git y GitHub</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Clases IUE 2026-02</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 1. Entornos, versionado e IA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 1. Entornos de desarrollo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-02/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Semana 2. Git y GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-02/presentacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 2. Diapositivas</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta guía</h2>
+   
+  <ul>
+  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</a></li>
+  <li><a href="#parte-teórica" id="toc-parte-teórica" class="nav-link" data-scroll-target="#parte-teórica"><span class="header-section-number">2</span> Parte teórica</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-existe-el-control-de-versiones" id="toc-por-qué-existe-el-control-de-versiones" class="nav-link" data-scroll-target="#por-qué-existe-el-control-de-versiones">Por qué existe el control de versiones</a></li>
+  <li><a href="#git-y-github" id="toc-git-y-github" class="nav-link" data-scroll-target="#git-y-github">Git y GitHub</a></li>
+  <li><a href="#el-modelo-de-git-cuatro-lugares" id="toc-el-modelo-de-git-cuatro-lugares" class="nav-link" data-scroll-target="#el-modelo-de-git-cuatro-lugares">El modelo de Git: cuatro lugares</a></li>
+  <li><a href="#qué-es-exactamente-un-commit" id="toc-qué-es-exactamente-un-commit" class="nav-link" data-scroll-target="#qué-es-exactamente-un-commit">Qué es exactamente un commit</a></li>
+  <li><a href="#los-mensajes-de-commit" id="toc-los-mensajes-de-commit" class="nav-link" data-scroll-target="#los-mensajes-de-commit">Los mensajes de commit</a></li>
+  <li><a href="#ramas" id="toc-ramas" class="nav-link" data-scroll-target="#ramas">Ramas</a></li>
+  <li><a href="#fusionar" id="toc-fusionar" class="nav-link" data-scroll-target="#fusionar">Fusionar</a></li>
+  <li><a href="#conflictos" id="toc-conflictos" class="nav-link" data-scroll-target="#conflictos">Conflictos</a></li>
+  <li><a href="#el-repositorio-remoto" id="toc-el-repositorio-remoto" class="nav-link" data-scroll-target="#el-repositorio-remoto">El repositorio remoto</a></li>
+  <li><a href="#el-pull-request" id="toc-el-pull-request" class="nav-link" data-scroll-target="#el-pull-request">El Pull Request</a></li>
+  <li><a href="#el-flujo-de-trabajo-del-curso" id="toc-el-flujo-de-trabajo-del-curso" class="nav-link" data-scroll-target="#el-flujo-de-trabajo-del-curso">El flujo de trabajo del curso</a></li>
+  <li><a href="#lo-que-no-se-versiona" id="toc-lo-que-no-se-versiona" class="nav-link" data-scroll-target="#lo-que-no-se-versiona">Lo que no se versiona</a></li>
+  <li><a href="#tres-reglas-para-todo-el-semestre" id="toc-tres-reglas-para-todo-el-semestre" class="nav-link" data-scroll-target="#tres-reglas-para-todo-el-semestre">Tres reglas para todo el semestre</a></li>
+  </ul></li>
+  <li><a href="#laboratorio" id="toc-laboratorio" class="nav-link" data-scroll-target="#laboratorio"><span class="header-section-number">3</span> Laboratorio</a>
+  <ul class="collapse">
+  <li><a href="#configura-tu-identidad" id="toc-configura-tu-identidad" class="nav-link" data-scroll-target="#configura-tu-identidad"><span class="paso">1</span> Configura tu identidad</a></li>
+  <li><a href="#crea-tu-repositorio-de-práctica" id="toc-crea-tu-repositorio-de-práctica" class="nav-link" data-scroll-target="#crea-tu-repositorio-de-práctica"><span class="paso">2</span> Crea tu repositorio de práctica</a></li>
+  <li><a href="#escribe-el-.gitignore-y-el-readme" id="toc-escribe-el-.gitignore-y-el-readme" class="nav-link" data-scroll-target="#escribe-el-.gitignore-y-el-readme"><span class="paso">3</span> Escribe el <code>.gitignore</code> y el README</a></li>
+  <li><a href="#tus-primeros-commits" id="toc-tus-primeros-commits" class="nav-link" data-scroll-target="#tus-primeros-commits"><span class="paso">4</span> Tus primeros commits</a></li>
+  <li><a href="#publica-en-github" id="toc-publica-en-github" class="nav-link" data-scroll-target="#publica-en-github"><span class="paso">5</span> Publica en GitHub</a></li>
+  <li><a href="#trabaja-en-una-rama-y-abre-un-pull-request" id="toc-trabaja-en-una-rama-y-abre-un-pull-request" class="nav-link" data-scroll-target="#trabaja-en-una-rama-y-abre-un-pull-request"><span class="paso">6</span> Trabaja en una rama y abre un Pull Request</a></li>
+  <li><a href="#provoca-un-conflicto-y-resuélvelo" id="toc-provoca-un-conflicto-y-resuélvelo" class="nav-link" data-scroll-target="#provoca-un-conflicto-y-resuélvelo"><span class="paso">7</span> Provoca un conflicto y resuélvelo</a></li>
+  <li><a href="#deshacer-sin-miedo" id="toc-deshacer-sin-miedo" class="nav-link" data-scroll-target="#deshacer-sin-miedo"><span class="paso">8</span> Deshacer sin miedo</a></li>
+  <li><a href="#etiqueta-la-versión-de-la-semana" id="toc-etiqueta-la-versión-de-la-semana" class="nav-link" data-scroll-target="#etiqueta-la-versión-de-la-semana"><span class="paso">9</span> Etiqueta la versión de la semana</a></li>
+  </ul></li>
+  <li><a href="#los-comandos-uno-por-uno" id="toc-los-comandos-uno-por-uno" class="nav-link" data-scroll-target="#los-comandos-uno-por-uno"><span class="header-section-number">4</span> Los comandos, uno por uno</a>
+  <ul class="collapse">
+  <li><a href="#cómo-se-lee-un-comando-de-git" id="toc-cómo-se-lee-un-comando-de-git" class="nav-link" data-scroll-target="#cómo-se-lee-un-comando-de-git">Cómo se lee un comando de Git</a></li>
+  <li><a href="#configuración" id="toc-configuración" class="nav-link" data-scroll-target="#configuración">Configuración</a></li>
+  <li><a href="#crear-y-mirar" id="toc-crear-y-mirar" class="nav-link" data-scroll-target="#crear-y-mirar">Crear y mirar</a></li>
+  <li><a href="#guardar-cambios" id="toc-guardar-cambios" class="nav-link" data-scroll-target="#guardar-cambios">Guardar cambios</a></li>
+  <li><a href="#ramas-1" id="toc-ramas-1" class="nav-link" data-scroll-target="#ramas-1">Ramas</a></li>
+  <li><a href="#trabajar-con-github" id="toc-trabajar-con-github" class="nav-link" data-scroll-target="#trabajar-con-github">Trabajar con GitHub</a></li>
+  <li><a href="#deshacer" id="toc-deshacer" class="nav-link" data-scroll-target="#deshacer">Deshacer</a></li>
+  <li><a href="#etiquetas" id="toc-etiquetas" class="nav-link" data-scroll-target="#etiquetas">Etiquetas</a></li>
+  <li><a href="#tabla-de-repaso" id="toc-tabla-de-repaso" class="nav-link" data-scroll-target="#tabla-de-repaso">Tabla de repaso</a></li>
+  </ul></li>
+  <li><a href="#tu-entregable-de-la-semana" id="toc-tu-entregable-de-la-semana" class="nav-link" data-scroll-target="#tu-entregable-de-la-semana"><span class="header-section-number">5</span> Tu entregable de la semana</a>
+  <ul class="collapse">
+  <li><a href="#el-proyecto" id="toc-el-proyecto" class="nav-link" data-scroll-target="#el-proyecto">El proyecto</a></li>
+  <li><a href="#cómo-se-reparte-el-trabajo" id="toc-cómo-se-reparte-el-trabajo" class="nav-link" data-scroll-target="#cómo-se-reparte-el-trabajo">Cómo se reparte el trabajo</a></li>
+  <li><a href="#lo-que-debe-contener-el-repositorio" id="toc-lo-que-debe-contener-el-repositorio" class="nav-link" data-scroll-target="#lo-que-debe-contener-el-repositorio">Lo que debe contener el repositorio</a></li>
+  <li><a href="#cómo-se-reparten-los-puntos" id="toc-cómo-se-reparten-los-puntos" class="nav-link" data-scroll-target="#cómo-se-reparten-los-puntos">Cómo se reparten los puntos</a></li>
+  </ul></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">6</span> Errores frecuentes</a></li>
+  <li><a href="#lista-de-chequeo-de-la-semana" id="toc-lista-de-chequeo-de-la-semana" class="nav-link" data-scroll-target="#lista-de-chequeo-de-la-semana"><span class="header-section-number">7</span> Lista de chequeo de la semana</a></li>
+  <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">8</span> Recursos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-01/index.html">Unidad 1. Entornos, versionado e IA</a></li><li class="breadcrumb-item"><a href="../../web/semana-02/index.html">Semana 2. Git y GitHub</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Semana 2. Git y GitHub: tu proyecto bajo control de versiones</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oscar Leonel Sánchez Conde </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">11 de agosto de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ficha">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Asignatura</td>
+<td>Programación Web (IF2003)</td>
+</tr>
+<tr class="even">
+<td>Grupo</td>
+<td>603 de Ingeniería Informática</td>
+</tr>
+<tr class="odd">
+<td>Unidad</td>
+<td>Unidad 1. Entornos, versionado e IA</td>
+</tr>
+<tr class="even">
+<td>Evaluación</td>
+<td>10% del curso</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="acceso">
+<p>Diapositivas de la sesión</p>
+<p>Los mismos diagramas de esta guía, en formato de presentación.</p>
+<p><a href="../../web/semana-02/presentacion.html" class="btn-doc">Abrir las diapositivas</a></p>
+</div>
+<section id="lo-que-vas-a-lograr" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
+<p>Esta semana nace el repositorio del proyecto que vas a construir con tu equipo durante todo el semestre. Todo lo que entreguen de aquí a la Semana 17 va a vivir ahí, así que vale la pena montarlo bien desde el primer día.</p>
+<p>En clase practicas cada comando en un repositorio de prueba tuyo. El entregable evaluado lo construye después el equipo, en el repositorio compartido.</p>
+<p>Al terminar la guía sabes:</p>
+<ol type="1">
+<li>Explicar qué hace Git con tus archivos y en qué se diferencia de GitHub.</li>
+<li>Crear un repositorio con <code>.gitignore</code> y README, y llevar un historial de commits legible.</li>
+<li>Publicar el repositorio en GitHub y sincronizarlo.</li>
+<li>Trabajar en una rama y fusionarla mediante un Pull Request.</li>
+<li>Resolver un conflicto de fusión sin romper el archivo.</li>
+<li>Deshacer un cambio con <code>restore</code> y revertir un commit ya publicado con <code>revert</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Antes de empezar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Necesitas dos cosas de la Semana 1: que <code>git --version</code> responda en la terminal y la carpeta <code>mi-primera-pagina</code> con tu <code>index.html</code>. Esa página es el material con el que vas a practicar.</p>
+<p>Necesitas además una cuenta en <a href="https://github.com/">github.com</a>. Créala antes de la sesión: la verificación del correo tarda unos minutos.</p>
+</div>
+</div>
+</section>
+<section id="parte-teórica" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="parte-teórica"><span class="header-section-number">2</span> Parte teórica</h2>
+<p>Esta parte va proyectada en clase. Aquí está la versión completa: lo mismo que ves en las diapositivas, explicado con el detalle que no cabe en una pantalla.</p>
+<section id="por-qué-existe-el-control-de-versiones" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-existe-el-control-de-versiones">Por qué existe el control de versiones</h3>
+<p>Sin control de versiones, el respaldo de un proyecto termina siendo una fila de carpetas.</p>
+<div class="diagrama">
+<p><img src="imagenes/problema-carpetas.svg" class="img-fluid" alt="Cinco carpetas con nombres parecidos y tres preguntas que ninguna responde"></p>
+<p>Todos hemos tenido este disco duro.</p>
+</div>
+<p>El desorden es lo de menos. El problema de verdad son tres preguntas que esas carpetas no pueden responder:</p>
+<ul>
+<li><strong>¿Cuál es la buena?</strong> La fecha de modificación miente: basta abrir un archivo para cambiarla.</li>
+<li><strong>¿Qué cambió entre una y otra?</strong> Para saberlo habría que comparar archivo por archivo, a mano.</li>
+<li><strong>¿Quién tocó esto y por qué?</strong> No hay registro. El motivo del cambio vive en la memoria de quien lo hizo, y esa memoria dura una semana.</li>
+</ul>
+<p>Y eso trabajando solo. Cuando entra un equipo, aparece un problema peor.</p>
+<div class="diagrama">
+<p><img src="imagenes/problema-equipo.svg" class="img-fluid" alt="Tres integrantes de un equipo editan el mismo archivo y el ultimo que guarda borra el trabajo de los demas"></p>
+<p>Con una carpeta compartida, el trabajo de dos se pierde sin que nadie se entere.</p>
+</div>
+<p>Tres personas editan <code>index.html</code> al mismo tiempo. Cada una guarda su versión en la carpeta compartida y la última sobreescribe a las anteriores. Nadie recibe un aviso. El trabajo perdido se descubre días después, cuando alguien pregunta dónde quedó el menú.</p>
+<p>Lo que hace falta es un sistema que sepa:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Necesidad</th>
+<th>Qué significa en la práctica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Volver atrás</td>
+<td>Recuperar el proyecto tal como estaba hace tres días, sin adivinar</td>
+</tr>
+<tr class="even">
+<td>Saber quién y cuándo</td>
+<td>Cada cambio con nombre, fecha y motivo</td>
+</tr>
+<tr class="odd">
+<td>Trabajar en paralelo</td>
+<td>Probar una idea sin romper lo que ya funciona</td>
+</tr>
+<tr class="even">
+<td>Unir sin perder</td>
+<td>Combinar el trabajo de varias personas y que nada se sobreescriba en silencio</td>
+</tr>
+</tbody>
+</table>
+<p>Eso es exactamente lo que hace Git.</p>
+</section>
+<section id="git-y-github" class="level3">
+<h3 class="anchored" data-anchor-id="git-y-github">Git y GitHub</h3>
+<p>Son dos cosas distintas con nombre parecido, y confundirlas causa la mitad de los enredos del primer mes.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-y-github.svg" class="img-fluid" alt="Git es un programa en tu computador y GitHub es un servicio en internet, conectados por push y pull"></p>
+<p>Git vive en tu máquina. GitHub vive en internet.</p>
+</div>
+<p><strong>Git</strong> es un programa que instalaste en tu computador. Lleva la historia del proyecto en una carpeta oculta llamada <code>.git</code> que vive dentro de tu propio proyecto. Funciona sin conexión: puedes commitear todo un fin de semana en un bus sin internet y no perder nada.</p>
+<p><strong>GitHub</strong> es un servicio en la nube que aloja copias de repositorios de Git. Encima de eso agrega lo que Git no trae: una interfaz web, permisos, incidencias y Pull Requests. Existen alternativas con las mismas funciones, como GitLab o Bitbucket.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Git</th>
+<th>GitHub</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qué es</td>
+<td>Un programa</td>
+<td>Un servicio en internet</td>
+</tr>
+<tr class="even">
+<td>Dónde corre</td>
+<td>En tu computador</td>
+<td>En los servidores de una empresa</td>
+</tr>
+<tr class="odd">
+<td>Necesita internet</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+<tr class="even">
+<td>Quién lo hizo</td>
+<td>Linus Torvalds, 2005</td>
+<td>Una empresa, hoy de Microsoft</td>
+</tr>
+<tr class="odd">
+<td>Se puede usar sin el otro</td>
+<td>Sí</td>
+<td>No, GitHub necesita Git</td>
+</tr>
+</tbody>
+</table>
+<p>Si GitHub desapareciera mañana, tu repositorio local seguiría completo, con toda su historia. Eso es lo que significa que Git sea <strong>distribuido</strong>: cada copia es un repositorio entero, no un fragmento.</p>
+</section>
+<section id="el-modelo-de-git-cuatro-lugares" class="level3">
+<h3 class="anchored" data-anchor-id="el-modelo-de-git-cuatro-lugares">El modelo de Git: cuatro lugares</h3>
+<p>Casi todos los errores con Git vienen de no tener claro este esquema. Tus archivos pasan por cuatro lugares, y cada comando que vas a aprender lo que hace es moverlos de uno al siguiente.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-cuatro-areas.svg" class="img-fluid" alt="Diagrama de las cuatro areas de Git: directorio de trabajo, area de preparacion, repositorio local y repositorio remoto, con los comandos que mueven el contenido entre ellas"></p>
+<p>Las flechas azules avanzan y guardan. Las grises punteadas devuelven el contenido hacia atrás.</p>
+</div>
+<p>Léelo así: editas archivos en el directorio de trabajo, escoges cuáles quieres guardar con <code>git add</code>, los conviertes en una fotografía con <code>git commit</code> y la envías a GitHub con <code>git push</code>. Los tres comandos grises hacen el camino inverso.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lugar</th>
+<th>Qué es</th>
+<th>Cómo se llega</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Directorio de trabajo</td>
+<td>La carpeta que ves en el explorador y editas en VS Code</td>
+<td>Editar archivos</td>
+</tr>
+<tr class="even">
+<td>Área de preparación</td>
+<td>La lista de cambios que quieres guardar en la próxima foto</td>
+<td><code>git add</code></td>
+</tr>
+<tr class="odd">
+<td>Repositorio local</td>
+<td>La historia completa, guardada en la carpeta oculta <code>.git</code></td>
+<td><code>git commit</code></td>
+</tr>
+<tr class="even">
+<td>Repositorio remoto</td>
+<td>La copia en GitHub</td>
+<td><code>git push</code></td>
+</tr>
+</tbody>
+</table>
+<p>Vale la pena detenerse en cada uno.</p>
+<p><strong>El directorio de trabajo</strong> es lo único que ves. Son tus archivos tal como están ahora mismo en el disco. Git los observa pero no los controla: puedes editarlos, borrarlos y renombrarlos con total libertad.</p>
+<p><strong>El área de preparación</strong> es la lista de lo que va a entrar en el próximo commit. Existe para que puedas guardar la mitad de tu trabajo y dejar la otra mitad para después. Si tocaste cinco archivos pero solo tres pertenecen al mismo cambio, preparas esos tres y commiteas; los otros dos quedan esperando.</p>
+<p><strong>El repositorio local</strong> es la carpeta oculta <code>.git</code>. Ahí está la historia completa: todos los commits, todas las ramas, todas las etiquetas. Si borras esa carpeta, tus archivos siguen ahí pero la historia desaparece.</p>
+<p><strong>El repositorio remoto</strong> es la copia que vive en GitHub. Se sincroniza a mano, nunca sola.</p>
+<section id="los-cinco-comandos-que-mueven-el-contenido" class="level4">
+<h4 class="anchored" data-anchor-id="los-cinco-comandos-que-mueven-el-contenido">Los cinco comandos que mueven el contenido</h4>
+<div class="diagrama">
+<p><img src="imagenes/comandos-areas.svg" class="img-fluid" alt="Los cinco comandos que mueven el trabajo entre las areas de Git y para que sirve cada uno"></p>
+<p>Cuatro avanzan. El último devuelve.</p>
+</div>
+<p>La pregunta que resuelve este esquema es la que más se repite en clase: por qué mi compañero no ve mi cambio. Casi siempre porque el cambio está en el directorio de trabajo, o en el área de preparación, o en un commit local, y en ninguno de esos tres casos ha salido de la máquina. <strong>Nada sale de tu computador hasta que hagas <code>push</code>, y nada entra hasta que hagas <code>pull</code>.</strong></p>
+</section>
+</section>
+<section id="qué-es-exactamente-un-commit" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-exactamente-un-commit">Qué es exactamente un commit</h3>
+<p>Un <strong>commit</strong> es una fotografía del proyecto completo en un instante. No guarda la diferencia con el commit anterior: guarda el estado entero, y Git se encarga por dentro de no repetir lo que no cambió.</p>
+<div class="diagrama">
+<p><img src="imagenes/anatomia-commit.svg" class="img-fluid" alt="Un commit guarda autor, fecha, mensaje, el enlace al commit padre y una copia completa del proyecto"></p>
+<p>Cinco datos, y uno de ellos es el que arma la historia.</p>
+</div>
+<p>Cada commit lleva cinco cosas pegadas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dato</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Autor</strong></td>
+<td>Nombre y correo de quien lo hizo. Sale de tu <code>git config</code></td>
+</tr>
+<tr class="even">
+<td><strong>Fecha</strong></td>
+<td>Momento exacto en que se creó</td>
+</tr>
+<tr class="odd">
+<td><strong>Mensaje</strong></td>
+<td>La explicación del cambio, escrita por ti</td>
+</tr>
+<tr class="even">
+<td><strong>Padre</strong></td>
+<td>El hash del commit anterior. Es el enlace que arma la cadena</td>
+</tr>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>El estado completo del proyecto en ese instante</td>
+</tr>
+</tbody>
+</table>
+<p>El <strong>padre</strong> es el dato que convierte una pila de fotos sueltas en una historia.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-cadena-commits.svg" class="img-fluid" alt="Cadena de cuatro commits en orden, del mas antiguo al mas reciente, con las etiquetas main y HEAD sobre el ultimo"></p>
+<p>Cada commit guarda el enlace al anterior, y por eso la cadena se puede recorrer entera desde el último.</p>
+</div>
+<section id="el-hash" class="level4">
+<h4 class="anchored" data-anchor-id="el-hash">El hash</h4>
+<p>Cada commit se identifica con un <strong>hash</strong>: un número de 40 caracteres en hexadecimal que Git calcula a partir del contenido del commit.</p>
+<pre class="text"><code>e4c41a6f2d81b9c0a7e35d4188c6f0b2ad19e7c3</code></pre>
+<p>Como sale del contenido, cambiar una sola coma produce un hash completamente distinto. Eso es lo que hace que la historia sea verificable: si alguien alterara un commit viejo, todos los hashes posteriores dejarían de cuadrar.</p>
+<p>En la práctica escribes los primeros siete caracteres y Git entiende de cuál hablas. En un repositorio de curso no hay dos commits que empiecen igual.</p>
+</section>
+<section id="main-y-head" class="level4">
+<h4 class="anchored" data-anchor-id="main-y-head"><code>main</code> y <code>HEAD</code></h4>
+<p><code>main</code> es una etiqueta que apunta al último commit de la rama principal. <code>HEAD</code> es el nombre que Git le da a “dónde estás parado ahora”, y casi siempre apunta a la rama en la que trabajas.</p>
+<p>Cuando haces un commit nuevo, los dos avanzan juntos al commit recién creado.</p>
+</section>
+</section>
+<section id="los-mensajes-de-commit" class="level3">
+<h3 class="anchored" data-anchor-id="los-mensajes-de-commit">Los mensajes de commit</h3>
+<p>El mensaje es lo único que va a quedar para explicar por qué existe ese cambio. Lo vas a leer tú mismo dentro de un mes, cuando ya no recuerdes nada.</p>
+<div class="diagrama">
+<p><img src="imagenes/prefijos-commit.svg" class="img-fluid" alt="Anatomia de un mensaje de commit: el prefijo de tipo, dos puntos y la descripcion, con el significado de feat, fix, docs, style y chore"></p>
+<p>Un tipo, dos puntos y qué hiciste, en presente.</p>
+</div>
+<p>En este curso usamos la convención de <strong>Conventional Commits</strong>, que es la más extendida en la industria. El mensaje empieza con un prefijo que clasifica el cambio:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prefijo</th>
+<th>Cuándo se usa</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>feat:</code></td>
+<td>Algo nuevo que antes no existía</td>
+<td><code>feat: agrega la pagina de contacto</code></td>
+</tr>
+<tr class="even">
+<td><code>fix:</code></td>
+<td>Arreglaste algo que estaba mal</td>
+<td><code>fix: corrige el enlace roto del menu</code></td>
+</tr>
+<tr class="odd">
+<td><code>docs:</code></td>
+<td>Documentación, README, comentarios</td>
+<td><code>docs: completa el modo de ejecucion</code></td>
+</tr>
+<tr class="even">
+<td><code>style:</code></td>
+<td>Formato o acomodo, sin cambiar comportamiento</td>
+<td><code>style: ordena las reglas del CSS</code></td>
+</tr>
+<tr class="odd">
+<td><code>chore:</code></td>
+<td>Mantenimiento: configuración, dependencias</td>
+<td><code>chore: agrega el gitignore</code></td>
+</tr>
+</tbody>
+</table>
+<p>Después del prefijo va un verbo <strong>en presente</strong> y el objeto del cambio. Se escribe como si completaras la frase “este commit…”: este commit <em>agrega la página de contacto</em>.</p>
+<div class="diagrama">
+<p><img src="imagenes/mensajes-commit.svg" class="img-fluid" alt="Comparacion entre mensajes de commit vagos y mensajes que describen el cambio con un prefijo de tipo"></p>
+<p>La diferencia se nota cuando buscas en qué commit se rompió algo.</p>
+</div>
+<p>Dos reglas más que valen la pena:</p>
+<ul>
+<li><strong>Un commit, un cambio.</strong> Si el mensaje necesita un “y” para describir lo que hiciste, son dos commits.</li>
+<li><strong>Describe el cambio, no el archivo.</strong> <code>fix: corrige el enlace del menu</code> sirve; <code>actualiza index.html</code> no dice nada, porque el archivo ya aparece en el diff.</li>
+</ul>
+</section>
+<section id="ramas" class="level3">
+<h3 class="anchored" data-anchor-id="ramas">Ramas</h3>
+<p>Una <strong>rama</strong> es un puntero móvil a un commit. Cuando haces un commit nuevo, el puntero de la rama en la que estás avanza al commit nuevo. Eso es todo.</p>
+<div class="diagrama">
+<p><img src="imagenes/rama-puntero.svg" class="img-fluid" alt="La etiqueta main se mueve al commit nuevo sin copiar archivos"></p>
+<p>Commitear mueve la etiqueta. Los commits anteriores no se tocan.</p>
+</div>
+<p>Por eso crear una rama en Git es instantáneo, incluso en proyectos enormes: no copia archivos, solo escribe un nombre que apunta a un hash de 40 caracteres.</p>
+<p>La rama principal se llama <code>main</code>. La regla del curso es simple: <strong><code>main</code> siempre debe funcionar</strong>. Cada cosa nueva que quieras probar se hace en una rama aparte, con nombre <code>feature/algo</code>, y vuelve a <code>main</code> solo cuando esté lista.</p>
+<p>Los nombres de rama del curso siguen este patrón:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Nombre</th>
+<th>Para qué</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>main</code></td>
+<td>La versión que siempre funciona</td>
+</tr>
+<tr class="even">
+<td><code>feature/contacto</code></td>
+<td>Una funcionalidad nueva</td>
+</tr>
+<tr class="odd">
+<td><code>fix/enlace-menu</code></td>
+<td>La corrección de un error concreto</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fusionar" class="level3">
+<h3 class="anchored" data-anchor-id="fusionar">Fusionar</h3>
+<p><strong>Fusionar</strong> es traer los commits de una rama a otra. El comando es <code>git merge &lt;rama&gt;</code> y lo importante es dónde estás parado: la rama en la que ejecutas el comando es la que <strong>recibe</strong> los commits.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-rama-fusion.svg" class="img-fluid" alt="Diagrama de una rama que sale de main, avanza dos commits y vuelve a main en un commit de fusion"></p>
+<p>El commit de fusión es el único que tiene dos padres. Por eso es la prueba de que hubo una rama.</p>
+</div>
+<p>Git resuelve la fusión de dos maneras distintas, según lo que haya pasado mientras trabajabas.</p>
+<div class="diagrama">
+<p><img src="imagenes/fusion-dos-formas.svg" class="img-fluid" alt="Avance rapido cuando main no se movio, y commit de fusion cuando las dos ramas avanzaron"></p>
+<p>Cuál de las dos ocurre no lo decides tú: depende de si la otra rama avanzó.</p>
+</div>
+<p><strong>Avance rápido.</strong> Si <code>main</code> no recibió ningún commit mientras trabajabas en tu rama, Git no tiene nada que combinar: mueve la etiqueta <code>main</code> hacia adelante y ya. No se crea ningún commit nuevo y el historial queda en línea recta.</p>
+<p><strong>Commit de fusión.</strong> Si las dos ramas avanzaron, Git tiene que combinar dos historias. Crea un commit especial con <strong>dos padres</strong>, uno por cada rama. Ese es el commit que aparece con la bifurcación en <code>git log --graph</code>, y el que el docente busca para comprobar que hubo una rama de verdad.</p>
+</section>
+<section id="conflictos" class="level3">
+<h3 class="anchored" data-anchor-id="conflictos">Conflictos</h3>
+<p>Git combina solo mientras las dos ramas hayan tocado archivos distintos, o líneas distintas del mismo archivo. Es más listo de lo que parece: dos personas pueden editar el mismo archivo sin problema, siempre que no se crucen en la misma línea.</p>
+<div class="diagrama">
+<p><img src="imagenes/por-que-conflicto.svg" class="img-fluid" alt="Dos ramas cambian la misma linea de forma distinta y Git no puede escoger"></p>
+<p>Dos respuestas válidas para la misma línea. Nadie salvo un humano puede escoger.</p>
+</div>
+<p>Cuando dos ramas modifican <strong>la misma línea</strong>, Git se detiene y declara un conflicto. No es un error tuyo ni una falla de Git: es Git diciendo que la decisión es humana y que no piensa inventarse una respuesta.</p>
+<p>Al detenerse, Git deja el archivo con unos marcadores que separan las dos versiones. Cómo se leen y cómo se resuelven está en el <a href="#provoca-un-conflicto-y-resuélvelo">paso 7</a> del laboratorio, donde vas a provocar uno a propósito.</p>
+</section>
+<section id="el-repositorio-remoto" class="level3">
+<h3 class="anchored" data-anchor-id="el-repositorio-remoto">El repositorio remoto</h3>
+<p>Hasta aquí todo ocurre en tu computador. El remoto es la copia que vive en GitHub y que el equipo usa como punto de encuentro.</p>
+<div class="diagrama">
+<p><img src="imagenes/remoto-copias.svg" class="img-fluid" alt="GitHub guarda la copia de referencia y cada integrante tiene la historia completa en su computador"></p>
+<p>Tres copias completas. Ninguna es más real que las otras.</p>
+</div>
+<p><code>origin</code> es el nombre convencional que se le da al remoto principal. No tiene nada de mágico: es una etiqueta que apunta a una dirección, y podrías llamarla de otra forma.</p>
+<p>Lo que hay que entender es que <strong>cada integrante tiene la historia entera</strong>, no un pedazo. Puedes mirar el log completo, crear ramas y commitear sin conexión. El remoto solo hace falta para compartir.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>Qué mueve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git clone &lt;url&gt;</code></td>
+<td>Trae el repositorio completo la primera vez</td>
+</tr>
+<tr class="even">
+<td><code>git push</code></td>
+<td>Sube tus commits al remoto</td>
+</tr>
+<tr class="odd">
+<td><code>git pull</code></td>
+<td>Baja los commits del remoto y los integra</td>
+</tr>
+<tr class="even">
+<td><code>git fetch</code></td>
+<td>Baja la información del remoto sin tocar tus archivos</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="el-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="el-pull-request">El Pull Request</h3>
+<p>Un Pull Request es una <strong>propuesta de cambio</strong>. Dice: “tengo esto listo en mi rama, quiero meterlo en <code>main</code>, revísenlo”.</p>
+<div class="diagrama">
+<p><img src="imagenes/pull-request.svg" class="img-fluid" alt="Un Pull Request muestra la rama, los commits, los archivos cambiados, el comentario de quien revisa y el boton de fusion"></p>
+<p>La conversación queda pegada al cambio, no perdida en un chat.</p>
+</div>
+<p>Cuatro cosas que conviene tener claras:</p>
+<ul>
+<li><strong>Vive en GitHub, no en Git.</strong> No existe ningún comando <code>git pull-request</code>. El Pull Request es una función del servicio, no del programa.</li>
+<li><strong>Muestra el cambio línea por línea.</strong> La pestaña <code>Files changed</code> trae el diff completo, para que quien revisa lea lo que va a entrar antes de que entre.</li>
+<li><strong>Deja registro.</strong> Queda escrito quién propuso, quién revisó, qué se comentó y cuándo se fusionó. Dentro de tres meses eso explica por qué el código es como es.</li>
+<li><strong><code>main</code> no se toca hasta la fusión.</strong> Mientras el Pull Request esté abierto, la rama principal sigue igual.</li>
+</ul>
+<p>La regla del curso: <strong>nadie fusiona su propio Pull Request.</strong> Lo abre uno y lo fusiona otro integrante del equipo, después de leerlo y comentarlo.</p>
+</section>
+<section id="el-flujo-de-trabajo-del-curso" class="level3">
+<h3 class="anchored" data-anchor-id="el-flujo-de-trabajo-del-curso">El flujo de trabajo del curso</h3>
+<p>Este es el ciclo que vas a repetir todo el semestre, y el que se evalúa esta semana. Cada funcionalidad nueva nace en una rama, se publica, la revisa la otra persona del equipo y solo entonces entra a <code>main</code>.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-flujo-pull-request.svg" class="img-fluid" alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, el equipo revisa y fusiona; despues bajas el resultado con git pull"></p>
+<p>Los pasos 1, 2, 3 y 6 son comandos en tu terminal. Los pasos 4 y 5 ocurren en el navegador.</p>
+</div>
+<p>Los seis pasos, en palabras:</p>
+<ol type="1">
+<li><strong>Creas la rama.</strong> <code>main</code> queda intacta mientras experimentas.</li>
+<li><strong>Trabajas y commiteas.</strong> Cuantas veces necesites, siempre en tu rama.</li>
+<li><strong>Publicas la rama.</strong> Ahí el resto del equipo ya puede verla, pero <code>main</code> sigue sin tocarse.</li>
+<li><strong>Abres el Pull Request.</strong> Es una propuesta: “quiero meter esto en <code>main</code>, revísalo”.</li>
+<li><strong>La otra persona revisa y fusiona.</strong> Lee el cambio, comenta y pulsa el botón de fusión.</li>
+<li><strong>Bajas el resultado.</strong> Tu <code>main</code> local se pone al día con la de GitHub.</li>
+</ol>
+</section>
+<section id="lo-que-no-se-versiona" class="level3">
+<h3 class="anchored" data-anchor-id="lo-que-no-se-versiona">Lo que no se versiona</h3>
+<p>No todo lo que está en la carpeta del proyecto debe entrar al repositorio. El <code>.gitignore</code> es la lista de lo que Git debe ignorar.</p>
+<div class="diagrama">
+<p><img src="imagenes/gitignore-filtro.svg" class="img-fluid" alt="El gitignore deja pasar las paginas y el README, y retiene node_modules, bin y los archivos con claves"></p>
+<p>Lo que se puede regenerar, y lo que no debe salir de tu máquina, se quedan afuera.</p>
+</div>
+<p><strong>No se versiona lo que se puede regenerar.</strong> Las dependencias (<code>node_modules/</code>), los resultados de compilar (<code>bin/</code>, <code>obj/</code>) y los archivos de configuración de tu editor no van al repositorio. Ocupan cientos de megabytes, cambian en cada compilación y cualquiera puede recrearlos con un comando. Un <code>node_modules/</code> subido a GitHub son decenas de miles de archivos que nadie va a leer y que hacen lento cada <code>clone</code>.</p>
+<p><strong>Nunca se suben secretos.</strong> Contraseñas, tokens de acceso ni cadenas de conexión a bases de datos.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Una clave subida ya está quemada
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Borrarla un minuto después no sirve de nada: el commit que la contenía sigue en el historial y cualquiera puede recuperarla. En un repositorio público, los robots que rastrean GitHub la encuentran en cuestión de minutos.</p>
+<p>Por eso <code>appsettings.Development.json</code> entra al <code>.gitignore</code> <strong>antes</strong> del primer commit, y no después. Si te pasa, avísame: sacar un secreto del historial no es tan simple como borrar el archivo.</p>
+</div>
+</div>
+</section>
+<section id="tres-reglas-para-todo-el-semestre" class="level3">
+<h3 class="anchored" data-anchor-id="tres-reglas-para-todo-el-semestre">Tres reglas para todo el semestre</h3>
+<div class="checklist">
+<p><strong>Lo que hay que recordar de esta parte</strong></p>
+<ol type="1">
+<li><strong><code>main</code> siempre funciona.</strong> Lo que todavía no sirve vive en una rama.</li>
+<li><strong>Una rama por cada cosa nueva.</strong> Se abre, se revisa, se fusiona y se borra.</li>
+<li><strong>El mensaje explica el cambio</strong>, no el archivo que tocaste.</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="laboratorio" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="laboratorio"><span class="header-section-number">3</span> Laboratorio</h2>
+<p>Sigue los pasos en orden. Cada uno termina con una verificación: si no obtienes esa salida, no avances.</p>
+<section id="configura-tu-identidad" class="level3">
+<h3 class="anchored" data-anchor-id="configura-tu-identidad"><span class="paso">1</span> Configura tu identidad</h3>
+<p>Git firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre Completo"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu.correo@correo.iue.edu.co"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La tercera línea hace que los repositorios nuevos usen <code>main</code> como rama principal en vez del antiguo <code>master</code>.</p>
+<p>Verifica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="crea-tu-repositorio-de-práctica" class="level3">
+<h3 class="anchored" data-anchor-id="crea-tu-repositorio-de-práctica"><span class="paso">2</span> Crea tu repositorio de práctica</h3>
+<p>Renombra tu carpeta <code>mi-primera-pagina</code> a <code>taller-git</code>, abre una terminal adentro y ejecuta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Antes de continuar, crea una carpeta <code>bin</code> con un archivo cualquiera adentro. La vas a usar para comprobar que el <code>.gitignore</code> funciona:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> bin</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"archivo generado"</span> <span class="op">&gt;</span> bin/salida.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ahora mira el estado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        bin/
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)</code></pre>
+<p>Git ya está vigilando la carpeta, pero todavía no rastrea ningún archivo. Fíjate en que <code>bin/</code> aparece en la lista: eso es lo que vamos a evitar.</p>
+</section>
+<section id="escribe-el-.gitignore-y-el-readme" class="level3">
+<h3 class="anchored" data-anchor-id="escribe-el-.gitignore-y-el-readme"><span class="paso">3</span> Escribe el <code>.gitignore</code> y el README</h3>
+<p>Crea en la raíz un archivo llamado exactamente <code>.gitignore</code>, con punto al inicio y sin extensión:</p>
+<pre class="text"><code># Resultados de compilar .NET
+bin/
+obj/
+
+# Dependencias de Node
+node_modules/
+
+# Configuracion local del editor
+.vs/
+.vscode/
+*.user
+
+# Configuracion con datos sensibles
+appsettings.Development.json</code></pre>
+<p>Crea también <code>README.md</code>. Es la portada de tu repositorio y lo primero que ve quien entra:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Proyecto web 2026-02</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Breve descripcion del proyecto en tres a cinco lineas.</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema que resuelve</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Que necesidad atiende y para quien.</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tecnologias</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>HTML5, CSS3, JavaScript ES6, ASP.NET Core MVC, SQL Server con Entity Framework Core.</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Como ejecutarlo en local</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> http.server 8000</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>Abrir http://localhost:8000</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Autor</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>Tu Nombre. Programacion Web (IF2003), grupo 603. IUE, 2026-02.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vuelve a mirar el estado, esta vez en formato corto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="at">--short</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>?? .gitignore
+?? README.md
+?? index.html</code></pre>
+<p><code>bin/</code> desapareció de la lista. El <code>.gitignore</code> ya está trabajando.</p>
+</section>
+<section id="tus-primeros-commits" class="level3">
+<h3 class="anchored" data-anchor-id="tus-primeros-commits"><span class="paso">4</span> Tus primeros commits</h3>
+<p>Agrega todo al área de preparación y haz el primer commit:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: estructura inicial del proyecto"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>[main (root-commit) 4fd9bfc] chore: estructura inicial del proyecto
+ 3 files changed, 11 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 index.html</code></pre>
+<p>Tres archivos, y <code>bin/salida.txt</code> no está entre ellos.</p>
+<p>Ahora edita algo del <code>index.html</code>, por ejemplo agrega un párrafo, y antes de guardarlo en la historia mira exactamente qué cambió:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>diff --git a/index.html b/index.html
+index bec81e6..c4d1379 100644
+--- a/index.html
++++ b/index.html
+@@ -3,3 +3,4 @@
+ &lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;Proyecto web&lt;/title&gt;&lt;/head&gt;
+ &lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web IF2003&lt;/h1&gt;&lt;/body&gt;
+ &lt;/html&gt;
++&lt;p&gt;Autor: Tu Nombre&lt;/p&gt;</code></pre>
+<p>Las líneas con <code>+</code> son las que agregaste. Las que tuvieran <code>-</code> serían las que quitaste.</p>
+<p>Guárdalo. La bandera <code>-a</code> prepara y commitea de un solo golpe los archivos que Git ya rastrea:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: agrega la linea de autoria en la portada"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Repite el ciclo un par de veces con cambios reales, y revisa la historia:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="publica-en-github" class="level3">
+<h3 class="anchored" data-anchor-id="publica-en-github"><span class="paso">5</span> Publica en GitHub</h3>
+<p>En <a href="https://github.com/">github.com</a>, botón <strong>New repository</strong>:</p>
+<ul>
+<li><strong>Repository name:</strong> <code>taller-git</code></li>
+<li><strong>Visibility:</strong> Public</li>
+<li><strong>No marques</strong> ninguna de las casillas de inicialización. Tu repositorio ya tiene README y <code>.gitignore</code>, y si GitHub crea los suyos vas a chocar con ellos en el primer <code>push</code>.</li>
+</ul>
+<p>GitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>origin</code> es el nombre convencional del remoto principal. La bandera <code>-u</code> deja la conexión recordada, así que de aquí en adelante te basta con <code>git push</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>La contraseña de GitHub no sirve en la terminal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>GitHub dejó de aceptar contraseñas para operaciones de Git en 2021. En Windows, el primer <code>push</code> abre una ventana del navegador para que inicies sesión y el Credential Manager guarda la credencial. Si trabajas en macOS o Linux y te pide contraseña, genera un <strong>token de acceso personal</strong> en <code>Settings</code>, <code>Developer settings</code>, <code>Personal access tokens</code>, con el permiso <code>repo</code>, y usa ese token donde te piden la contraseña.</p>
+</div>
+</div>
+<p>Recarga la página del repositorio en el navegador. Tu código está ahí, y el README se ve renderizado en la portada.</p>
+</section>
+<section id="trabaja-en-una-rama-y-abre-un-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="trabaja-en-una-rama-y-abre-un-pull-request"><span class="paso">6</span> Trabaja en una rama y abre un Pull Request</h3>
+<p>No vas a volver a commitear directo sobre <code>main</code>. El flujo, de aquí en adelante, es este.</p>
+<p>Crea la rama y muévete a ella en un solo comando:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/encabezado</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Haz un cambio real en <code>index.html</code>, por ejemplo cambia el título de la portada, y guárdalo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: cambia el titulo de la portada"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>[feature/encabezado a3d25af] feat: cambia el titulo de la portada
+ 1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
+<p>Publica la rama:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/encabezado</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Entra a GitHub. Aparece un aviso amarillo con el botón <strong>Compare &amp; pull request</strong>. Pulsa ahí y llena el formulario:</p>
+<ul>
+<li><strong>Título:</strong> el mismo mensaje del commit, o uno que resuma la rama completa.</li>
+<li><strong>Descripción:</strong> dos líneas mínimo. Qué cambia y por qué. Esto es lo que lee quien revisa.</li>
+</ul>
+<p>Crea el Pull Request, revisa la pestaña <strong>Files changed</strong> para ver el diff en el navegador, y fusiona con <strong>Merge pull request</strong>. GitHub te ofrece borrar la rama después: acepta.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aquí fusionas tú, en el entregable no
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estás practicando solo en tu repositorio, así que abres y fusionas tu propio Pull Request. En el repositorio del equipo la regla cambia: cada quien abre el suyo y <strong>lo fusiona la otra persona</strong>, después de revisarlo y comentarlo.</p>
+</div>
+</div>
+<p>De vuelta en tu máquina, tráete el resultado y limpia la rama local:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/encabezado</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="provoca-un-conflicto-y-resuélvelo" class="level3">
+<h3 class="anchored" data-anchor-id="provoca-un-conflicto-y-resuélvelo"><span class="paso">7</span> Provoca un conflicto y resuélvelo</h3>
+<p>Un conflicto se resuelve mejor la primera vez si lo provocas tú, con calma, y no cuando te toma por sorpresa a la medianoche antes de una entrega.</p>
+<p>Crea una rama y cambia el título de la portada:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/titulo-alterno</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Deja la línea así:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Portafolio de Programacion Web<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: cambia el titulo de la portada"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vuelve a <code>main</code> y cambia <strong>la misma línea</strong> por algo distinto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Proyecto integrador IF2003<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: ajusta el titulo con el codigo del curso"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ahora fusiona:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/titulo-alterno</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+<p>Ahí está. Mira el estado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add &lt;file&gt;..." to mark resolution)
+        both modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+<p>Abre <code>index.html</code>. Git escribió los marcadores dentro del archivo:</p>
+<pre class="text"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+&lt;body&gt;&lt;h1&gt;Proyecto integrador IF2003&lt;/h1&gt;&lt;/body&gt;
+=======
+&lt;body&gt;&lt;h1&gt;Portafolio de Programacion Web&lt;/h1&gt;&lt;/body&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/titulo-alterno</code></pre>
+<p>Se lee así:</p>
+<div class="diagrama">
+<p><img src="imagenes/git-marcadores-conflicto.svg" class="img-fluid" alt="Anatomia de un conflicto: entre el marcador de inicio y el separador esta tu version, entre el separador y el marcador de cierre esta la version que traes, y las tres lineas de marcadores se borran al resolver"></p>
+<p>El archivo resuelto no puede conservar ninguna de las tres líneas rojas.</p>
+</div>
+<ul>
+<li>Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> y <code>=======</code> está tu versión, la de la rama donde estás parado.</li>
+<li>Entre <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> está la versión de la rama que estás trayendo.</li>
+</ul>
+<p>Resolver es dejar el archivo como debe quedar y <strong>borrar las tres líneas de marcadores</strong>. Puedes quedarte con una versión, con la otra o escribir una tercera:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Portafolio de Programacion Web IF2003<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Marca el archivo como resuelto y cierra la fusión:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.html</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"merge: resuelve el conflicto del titulo de la portada"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mira la historia dibujada:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>*   e4c41a6 merge: resuelve el conflicto del titulo de la portada
+|\
+| * a3d25af feat: cambia el titulo de la portada
+* | fd77b32 feat: ajusta el titulo con el codigo del curso
+|/
+* 4fd9bfc chore: estructura inicial del proyecto</code></pre>
+<p>Las dos ramas se separan y se vuelven a juntar. Ese commit de fusión con dos padres es la evidencia de que resolviste un conflicto real.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Si te pierdes en mitad de una fusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>git merge --abort</code> deshace la fusión completa y te devuelve al estado anterior, sin daño. Úsalo sin culpa cuando el archivo quede irreconocible, y vuelve a empezar.</p>
+</div>
+</div>
+</section>
+<section id="deshacer-sin-miedo" class="level3">
+<h3 class="anchored" data-anchor-id="deshacer-sin-miedo"><span class="paso">8</span> Deshacer sin miedo</h3>
+<p>Tres situaciones distintas, tres comandos distintos.</p>
+<p><strong>Editaste un archivo y quieres botar el cambio.</strong> Todavía no hiciste <code>add</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore index.html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ya hiciste <code>add</code> y quieres sacarlo del área de preparación</strong>, sin perder la edición:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> index.html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>El commit ya está hecho y publicado.</strong> No lo borres: crea un commit que deshaga sus cambios. Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="op">&lt;</span>hash-del-commit<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="etiqueta-la-versión-de-la-semana" class="level3">
+<h3 class="anchored" data-anchor-id="etiqueta-la-versión-de-la-semana"><span class="paso">9</span> Etiqueta la versión de la semana</h3>
+<p>Una etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la semana:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verifica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>v0.1.0</code></pre>
+<p>En GitHub la etiqueta aparece en la sección <strong>Tags</strong> de la portada del repositorio.</p>
+</section>
+</section>
+<section id="los-comandos-uno-por-uno" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="los-comandos-uno-por-uno"><span class="header-section-number">4</span> Los comandos, uno por uno</h2>
+<p>Esta sección es de consulta. No la leas de corrido: vuelve a ella cuando no recuerdes qué hace un comando o qué significa una bandera.</p>
+<section id="cómo-se-lee-un-comando-de-git" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-se-lee-un-comando-de-git">Cómo se lee un comando de Git</h3>
+<p>Todos tienen la misma forma.</p>
+<div class="diagrama">
+<p><img src="imagenes/git-anatomia-comando.svg" class="img-fluid" alt="Anatomia del comando git commit -m mensaje, dividido en programa, subcomando, bandera y argumento"></p>
+<p>La misma estructura sirve para leer cualquier comando de Git que encuentres en internet.</p>
+</div>
+<ul>
+<li><strong>El programa</strong> es siempre <code>git</code>.</li>
+<li><strong>La acción</strong> es el subcomando: <code>commit</code>, <code>add</code>, <code>push</code>. Es lo que quieres hacer.</li>
+<li><strong>Las banderas</strong> modifican la acción. Empiezan con un guion si son la versión corta (<code>-m</code>) o con dos si son la versión larga (<code>--message</code>). Las dos formas hacen lo mismo.</li>
+<li><strong>Los argumentos</strong> son los valores que recibe: un mensaje, un nombre de archivo, una rama.</li>
+</ul>
+<p>Cuando en esta guía veas algo entre <code>&lt;</code> y <code>&gt;</code>, como <code>&lt;archivo&gt;</code>, significa que ahí va un valor tuyo. Los símbolos no se escriben.</p>
+</section>
+<section id="configuración" class="level3">
+<h3 class="anchored" data-anchor-id="configuración">Configuración</h3>
+<section id="git-config" class="level4">
+<h4 class="anchored" data-anchor-id="git-config"><code>git config</code></h4>
+<p>Lee y escribe la configuración de Git. Con <code>--global</code> la escribe para tu usuario en toda la máquina; sin <code>--global</code>, solo para el repositorio actual.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre"</span>      <span class="co"># firma tus commits</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu@correo.com"</span> <span class="co"># correo asociado</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main    <span class="co"># rama inicial de repos nuevos</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span>                     <span class="co"># muestra toda la configuracion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El nombre y el correo quedan grabados dentro de <strong>cada</strong> commit que hagas. Si los cambias después, los commits viejos conservan los datos viejos. Configúralos antes del primer commit.</p>
+</section>
+</section>
+<section id="crear-y-mirar" class="level3">
+<h3 class="anchored" data-anchor-id="crear-y-mirar">Crear y mirar</h3>
+<section id="git-init" class="level4">
+<h4 class="anchored" data-anchor-id="git-init"><code>git init</code></h4>
+<p>Convierte la carpeta actual en un repositorio, creando la carpeta oculta <code>.git</code>. Se ejecuta una sola vez por proyecto.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No crea archivos tuyos ni sube nada a ningún lado. Solo empieza a llevar la historia. Si borras <code>.git</code>, pierdes el historial completo y la carpeta vuelve a ser una carpeta normal.</p>
+</section>
+<section id="git-status" class="level4">
+<h4 class="anchored" data-anchor-id="git-status"><code>git status</code></h4>
+<p>El comando que más vas a usar. Responde tres preguntas: en qué rama estás, qué archivos cambiaron y en qué área está cada uno.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status          <span class="co"># version completa, con sugerencias de que hacer</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="at">--short</span>  <span class="co"># version compacta, una linea por archivo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En la versión corta, la primera columna es el área de preparación y la segunda el directorio de trabajo:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Símbolo</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>??</code></td>
+<td>Archivo sin rastrear: Git no lo conoce</td>
+</tr>
+<tr class="even">
+<td><code>A</code></td>
+<td>Archivo nuevo, ya preparado</td>
+</tr>
+<tr class="odd">
+<td><code>M</code></td>
+<td>Modificado, sin preparar</td>
+</tr>
+<tr class="even">
+<td><code>M</code></td>
+<td>Modificado y preparado</td>
+</tr>
+<tr class="odd">
+<td><code>MM</code></td>
+<td>Preparado, y vuelto a modificar después</td>
+</tr>
+<tr class="even">
+<td><code>D</code></td>
+<td>Borrado y preparado</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando algo te salga raro, ejecuta <code>git status</code> antes de hacer cualquier otra cosa.</p>
+</section>
+<section id="git-log" class="level4">
+<h4 class="anchored" data-anchor-id="git-log"><code>git log</code></h4>
+<p>Muestra la historia, del commit más reciente al más antiguo.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log                            <span class="co"># completo: hash, autor, fecha y mensaje</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span>                  <span class="co"># una linea por commit</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span>    <span class="co"># dibuja las ramas y las fusiones</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--merges</span> <span class="at">--oneline</span>         <span class="co"># solo los commits de fusion</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-3</span>                         <span class="co"># solo los tres ultimos</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--author</span><span class="op">=</span><span class="st">"Nombre"</span>          <span class="co"># solo los commits de una persona</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>git log</code> abre un paginador cuando la salida es larga: te mueves con las flechas del teclado y sales con la tecla <code>q</code>. Es la causa número uno de “se me quedó pegada la terminal”.</p>
+</section>
+</section>
+<section id="guardar-cambios" class="level3">
+<h3 class="anchored" data-anchor-id="guardar-cambios">Guardar cambios</h3>
+<section id="git-add" class="level4">
+<h4 class="anchored" data-anchor-id="git-add"><code>git add</code></h4>
+<p>Mueve cambios del directorio de trabajo al área de preparación. No guarda nada en la historia todavía: solo arma la lista de lo que va a entrar en el próximo commit.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.html        <span class="co"># un archivo</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add css/              <span class="co"># todo lo de una carpeta</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .                 <span class="co"># todo lo que cambio, respetando el .gitignore</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Preparar archivo por archivo en vez de <code>git add .</code> es lo que te permite partir un trabajo grande en varios commits pequeños con sentido propio.</p>
+</section>
+<section id="git-commit" class="level4">
+<h4 class="anchored" data-anchor-id="git-commit"><code>git commit</code></h4>
+<p>Toma lo que está en el área de preparación y lo guarda como un commit en la historia local.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: agrega la seccion de contacto"</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"fix: corrige el enlace del menu"</span>   <span class="co"># prepara y guarda de un golpe</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>-m</code> recibe el mensaje. Sin esa bandera, Git abre un editor de texto en la terminal, y salir de ahí sin saber cómo es incómodo. Úsala siempre.</li>
+<li><code>-a</code> prepara automáticamente los archivos que Git <strong>ya rastrea</strong>. No incluye archivos nuevos, así que después de crear un archivo necesitas <code>git add</code> de todas formas.</li>
+</ul>
+<p>El commit vive solo en tu máquina hasta que hagas <code>push</code>.</p>
+</section>
+<section id="git-diff" class="level4">
+<h4 class="anchored" data-anchor-id="git-diff"><code>git diff</code></h4>
+<p>Muestra las diferencias línea por línea. Las líneas con <code>+</code> son las que agregaste, las que tienen <code>-</code> las que quitaste.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff              <span class="co"># lo modificado que aun no preparaste</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--staged</span>     <span class="co"># lo que ya esta preparado, listo para el commit</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff main         <span class="co"># tu rama actual comparada con main</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vale la pena mirarlo siempre antes de commitear: es la última oportunidad de darte cuenta de que ibas a guardar una línea de depuración.</p>
+</section>
+</section>
+<section id="ramas-1" class="level3">
+<h3 class="anchored" data-anchor-id="ramas-1">Ramas</h3>
+<section id="git-switch" class="level4">
+<h4 class="anchored" data-anchor-id="git-switch"><code>git switch</code></h4>
+<p>Se mueve entre ramas, y con <code>-c</code> crea la rama y se mueve en un solo paso.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/menu   <span class="co"># crea la rama y se para en ella</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main              <span class="co"># vuelve a main</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-</span>                 <span class="co"># vuelve a la rama anterior</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En guías viejas vas a ver <code>git checkout</code> para lo mismo. Funciona, pero <code>checkout</code> hace además otras tres cosas distintas y por eso se separó en <code>switch</code> y <code>restore</code>. Usa los nuevos.</p>
+</section>
+<section id="git-branch" class="level4">
+<h4 class="anchored" data-anchor-id="git-branch"><code>git branch</code></h4>
+<p>Administra las ramas sin cambiarse a ellas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch              <span class="co"># lista las ramas locales, con un asterisco en la actual</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-a</span>           <span class="co"># incluye las que existen en el remoto</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/menu   <span class="co"># borra una rama ya fusionada</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-D</span> feature/menu   <span class="co"># la borra aunque no este fusionada</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>-d</code> en minúscula te protege: se niega a borrar una rama cuyo trabajo no esté en ninguna otra parte. <code>-D</code> no pregunta. Piensa dos veces antes de usarla.</p>
+</section>
+<section id="git-merge" class="level4">
+<h4 class="anchored" data-anchor-id="git-merge"><code>git merge</code></h4>
+<p>Trae los commits de otra rama a la rama en la que estás parado. Importa mucho dónde estás: si quieres pasar <code>feature/menu</code> a <code>main</code>, primero te mueves a <code>main</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/menu</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span>         <span class="co"># cancela una fusion que quedo en conflicto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si las dos ramas no tocaron las mismas líneas, la fusión es automática. Si sí, Git escribe los marcadores en el archivo y espera que resuelvas.</p>
+</section>
+</section>
+<section id="trabajar-con-github" class="level3">
+<h3 class="anchored" data-anchor-id="trabajar-con-github">Trabajar con GitHub</h3>
+<section id="git-remote" class="level4">
+<h4 class="anchored" data-anchor-id="git-remote"><code>git remote</code></h4>
+<p>Administra las direcciones de los repositorios remotos. <code>origin</code> es el nombre convencional del principal, y no tiene nada de mágico: es solo una etiqueta.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span>                                        <span class="co"># lista los remotos configurados</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/u/repo.git  <span class="co"># conecta con GitHub</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote remove origin                             <span class="co"># desconecta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="git-clone" class="level4">
+<h4 class="anchored" data-anchor-id="git-clone"><code>git clone</code></h4>
+<p>Descarga un repositorio completo desde GitHub, con toda su historia, y deja el remoto ya configurado. Es lo que usa la otra persona del equipo para bajar el repositorio la primera vez.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/usuario/proyecto.git</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se ejecuta <strong>una sola vez</strong>. Después de eso, para actualizar se usa <code>git pull</code>, no otro <code>clone</code>.</p>
+</section>
+<section id="git-push" class="level4">
+<h4 class="anchored" data-anchor-id="git-push"><code>git push</code></h4>
+<p>Sube tus commits locales al remoto.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push                              <span class="co"># sube la rama actual, si ya tiene remoto asignado</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main               <span class="co"># la primera vez: sube y recuerda la conexion</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/menu       <span class="co"># publica una rama nueva</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0                <span class="co"># sube una etiqueta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La bandera <code>-u</code> (de <em>upstream</em>) enlaza tu rama local con la del remoto. Solo hace falta la primera vez que publicas esa rama.</p>
+</section>
+<section id="git-pull" class="level4">
+<h4 class="anchored" data-anchor-id="git-pull"><code>git pull</code></h4>
+<p>Baja lo que hay en el remoto y lo fusiona con tu rama actual. Es <code>fetch</code> más <code>merge</code> en un solo comando.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hazlo <strong>antes</strong> de empezar a trabajar cada día, y siempre después de que fusionen un Pull Request. Trabajar sobre una <code>main</code> desactualizada es la forma más común de fabricarse un conflicto innecesario.</p>
+</section>
+<section id="git-fetch" class="level4">
+<h4 class="anchored" data-anchor-id="git-fetch"><code>git fetch</code></h4>
+<p>Baja la información del remoto pero <strong>no</strong> toca tus archivos. Sirve para mirar qué cambió antes de integrarlo.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> main..origin/main   <span class="co"># que trae el remoto que tu no tienes</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="deshacer" class="level3">
+<h3 class="anchored" data-anchor-id="deshacer">Deshacer</h3>
+<section id="git-restore" class="level4">
+<h4 class="anchored" data-anchor-id="git-restore"><code>git restore</code></h4>
+<p>Descarta cambios que todavía no están en un commit. Es el comando que se lleva trabajo por delante, así que lee bien cuál de las dos formas necesitas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore index.html            <span class="co"># bota lo que editaste y no habias preparado</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> index.html   <span class="co"># saca del area de preparacion, conserva la edicion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El primero <strong>no tiene deshacer</strong>: lo que botes ahí no está en ninguna parte y no se recupera.</p>
+</section>
+<section id="git-revert" class="level4">
+<h4 class="anchored" data-anchor-id="git-revert"><code>git revert</code></h4>
+<p>Crea un commit nuevo que deshace los cambios de otro commit. Es la forma correcta de corregir algo que ya publicaste, porque no reescribe la historia y no rompe la copia de nadie.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert 4fd9bfc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Existe también <code>git reset</code>, que sí borra commits. No lo uses este semestre sin preguntarme: es la manera más rápida de perder trabajo.</p>
+</section>
+</section>
+<section id="etiquetas" class="level3">
+<h3 class="anchored" data-anchor-id="etiquetas">Etiquetas</h3>
+<section id="git-tag" class="level4">
+<h4 class="anchored" data-anchor-id="git-tag"><code>git tag</code></h4>
+<p>Le pone un nombre estable a un commit. Se usa para marcar entregas y versiones.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag                    <span class="co"># lista las etiquetas</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0             <span class="co"># etiqueta el commit actual</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0     <span class="co"># la publica en GitHub</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show v0.1.0            <span class="co"># muestra a que commit apunta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Las etiquetas <strong>no</strong> viajan con un <code>git push</code> normal. Hay que subirlas aparte.</p>
+</section>
+</section>
+<section id="tabla-de-repaso" class="level3">
+<h3 class="anchored" data-anchor-id="tabla-de-repaso">Tabla de repaso</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git config --global user.name "..."</code></td>
+<td>Configura con qué nombre firmas</td>
+</tr>
+<tr class="even">
+<td><code>git init</code></td>
+<td>Crea un repositorio en la carpeta actual</td>
+</tr>
+<tr class="odd">
+<td><code>git status</code></td>
+<td>Dice en qué estado está cada archivo</td>
+</tr>
+<tr class="even">
+<td><code>git add &lt;archivo&gt;</code></td>
+<td>Prepara un archivo para el próximo commit</td>
+</tr>
+<tr class="odd">
+<td><code>git commit -m "mensaje"</code></td>
+<td>Guarda la fotografía en la historia</td>
+</tr>
+<tr class="even">
+<td><code>git commit -am "mensaje"</code></td>
+<td>Prepara y guarda de un golpe, solo archivos ya rastreados</td>
+</tr>
+<tr class="odd">
+<td><code>git diff</code></td>
+<td>Muestra lo que cambiaste y aún no preparaste</td>
+</tr>
+<tr class="even">
+<td><code>git log --oneline --graph --all</code></td>
+<td>Dibuja la historia completa</td>
+</tr>
+<tr class="odd">
+<td><code>git switch -c &lt;rama&gt;</code></td>
+<td>Crea una rama y se mueve a ella</td>
+</tr>
+<tr class="even">
+<td><code>git switch &lt;rama&gt;</code></td>
+<td>Se mueve a una rama existente</td>
+</tr>
+<tr class="odd">
+<td><code>git branch -d &lt;rama&gt;</code></td>
+<td>Borra una rama ya fusionada</td>
+</tr>
+<tr class="even">
+<td><code>git merge &lt;rama&gt;</code></td>
+<td>Trae los commits de otra rama a la actual</td>
+</tr>
+<tr class="odd">
+<td><code>git merge --abort</code></td>
+<td>Cancela una fusión en conflicto</td>
+</tr>
+<tr class="even">
+<td><code>git remote add origin &lt;url&gt;</code></td>
+<td>Conecta el repositorio local con GitHub</td>
+</tr>
+<tr class="odd">
+<td><code>git clone &lt;url&gt;</code></td>
+<td>Descarga un repositorio completo</td>
+</tr>
+<tr class="even">
+<td><code>git push -u origin &lt;rama&gt;</code></td>
+<td>Publica una rama por primera vez</td>
+</tr>
+<tr class="odd">
+<td><code>git pull</code></td>
+<td>Baja e integra los commits del remoto</td>
+</tr>
+<tr class="even">
+<td><code>git restore &lt;archivo&gt;</code></td>
+<td>Descarta los cambios sin preparar</td>
+</tr>
+<tr class="odd">
+<td><code>git revert &lt;hash&gt;</code></td>
+<td>Crea un commit que deshace otro commit</td>
+</tr>
+<tr class="even">
+<td><code>git tag &lt;nombre&gt;</code></td>
+<td>Etiqueta el commit actual</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="tu-entregable-de-la-semana" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="tu-entregable-de-la-semana"><span class="header-section-number">5</span> Tu entregable de la semana</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Actividad evaluativa: 10% del curso, en equipo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Con quién.</strong> Equipos de <strong>dos personas</strong>. Es el equipo con el que vas a trabajar el resto del semestre.</p>
+<p><strong>Qué entregan.</strong> Un repositorio público en GitHub con el arranque del proyecto del semestre, donde los dos aparecen commiteando, abriendo Pull Requests y revisando el del otro.</p>
+<p><strong>Cómo entregan.</strong> Cada integrante publica el mismo comentario en la tarea de Teams:</p>
+<pre class="text"><code>Equipo: &lt;Apellido1&gt; y &lt;Apellido2&gt;
+Repositorio: https://github.com/&lt;usuario&gt;/proyecto-web-&lt;apellido1&gt;-&lt;apellido2&gt;
+Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
+<p><strong>Cuándo.</strong> Antes del inicio de la sesión de la Semana 3.</p>
+</div>
+</div>
+<section id="el-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="el-proyecto">El proyecto</h3>
+<p>El repositorio no está vacío: arranca el proyecto que van a construir todo el semestre. Es el <strong>sitio web de un negocio o emprendimiento local</strong>, real o inventado por ustedes: una panadería, un taller de motos, una veterinaria, una tienda de plantas. Escojan algo concreto y pequeño, con productos o servicios que se puedan listar.</p>
+<p>Ese mismo proyecto crece cada unidad: en la Unidad 2 se le pone HTML y CSS de verdad, en la Unidad 3 pasa a ASP.NET Core con base de datos, y en la Unidad 4 termina publicado en Azure. Vale la pena escoger un tema que no les aburra en octubre.</p>
+<p>Esta semana el contenido es lo de menos. Tres páginas HTML simples bastan:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Archivo</th>
+<th>Contenido mínimo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>index.html</code></td>
+<td>Nombre del negocio, una frase de presentación y un menú con enlaces a las otras dos páginas</td>
+</tr>
+<tr class="even">
+<td><code>servicios.html</code></td>
+<td>Una lista de tres a cinco productos o servicios</td>
+</tr>
+<tr class="odd">
+<td><code>contacto.html</code></td>
+<td>Dirección, teléfono y horario, inventados si el negocio lo es</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lo que se evalúa es el proceso de Git, no el diseño.</strong> Una página sin estilos con un historial impecable saca más nota que un sitio bonito con un solo commit.</p>
+</section>
+<section id="cómo-se-reparte-el-trabajo" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-se-reparte-el-trabajo">Cómo se reparte el trabajo</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>La regla que ordena todo el entregable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nadie fusiona su propio Pull Request. Cada quien abre el suyo y <strong>la otra persona lo revisa, comenta y fusiona</strong>. Así los dos pasan por los dos lados del flujo.</p>
+</div>
+</div>
+<p>El montaje, paso a paso:</p>
+<ol type="1">
+<li><strong>Uno de los dos crea el repositorio</strong> en GitHub, público, con el nombre <code>proyecto-web-&lt;apellido1&gt;-&lt;apellido2&gt;</code>, y sube <code>main</code> con el <code>README.md</code> y el <code>.gitignore</code>.</li>
+<li><strong>Invita a la otra persona como colaborador</strong>, en <code>Settings</code>, <code>Collaborators</code>, <code>Add people</code>. La invitación llega por correo y hay que aceptarla.</li>
+<li><strong>La otra persona clona</strong> el repositorio con <code>git clone</code>.</li>
+<li><strong>Cada quien trabaja en su propia rama</strong>, con su propio <code>user.name</code> y <code>user.email</code> configurados. Repártanse las páginas: por ejemplo, uno hace <code>feature/servicios</code> y el otro <code>feature/contacto</code>.</li>
+<li><strong>Cada quien publica su rama y abre su Pull Request</strong>, con una descripción de dos líneas o más.</li>
+<li><strong>Cada quien revisa y fusiona el Pull Request del otro</strong>, dejando al menos un comentario en la pestaña <strong>Files changed</strong>. Un “listo” no cuenta como revisión: di algo sobre el cambio.</li>
+<li><strong>Provocan un conflicto a propósito y lo resuelven juntos.</strong> Los dos editan la misma línea del menú de navegación de <code>index.html</code>, cada uno en su rama. La segunda fusión choca. Documenten cómo salieron de ahí.</li>
+<li><strong>Etiquetan <code>v0.1.0</code></strong> sobre el último commit y la publican.</li>
+</ol>
+</section>
+<section id="lo-que-debe-contener-el-repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="lo-que-debe-contener-el-repositorio">Lo que debe contener el repositorio</h3>
+<ol type="1">
+<li><strong>Las tres páginas HTML</strong> con el contenido mínimo de la tabla de arriba.</li>
+<li><strong><code>README.md</code></strong> con: nombre del negocio, descripción de tres a cinco líneas, a quién le sirve, tecnologías previstas para el semestre, cómo ejecutarlo en local y <strong>los dos integrantes</strong> con su usuario de GitHub.</li>
+<li><strong><code>.gitignore</code> efectivo</strong> con las seis rutas mínimas del paso 3, y la prueba de que funciona: existe <code>bin/</code> en la carpeta local de alguno de los dos y no aparece en GitHub.</li>
+<li><strong>Mínimo ocho commits</strong>, con al menos <strong>cuatro por integrante</strong>, hechos en momentos distintos y todos con prefijo de tipo.</li>
+<li><strong>Dos ramas <code>feature/&lt;algo&gt;</code> fusionadas mediante Pull Request</strong>, una por persona, cada una revisada y fusionada por la otra. Las ramas se borran después de fusionar.</li>
+<li><strong>Un conflicto resuelto</strong>, documentado en <code>docs/bitacora-git.md</code>.</li>
+<li><strong>La etiqueta <code>v0.1.0</code></strong> publicada en el remoto.</li>
+</ol>
+<p>El archivo <code>docs/bitacora-git.md</code> lleva dos cosas. Primero, el reparto del trabajo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Integrante <span class="pp">|</span> Usuario de GitHub <span class="pp">|</span> Qué hizo <span class="pp">|</span> Commits <span class="pp">|</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 1 <span class="pp">|</span> @usuario1 <span class="pp">|</span> Pagina de servicios y README <span class="pp">|</span> 4fd9bfc, a3d25af, ... <span class="pp">|</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 2 <span class="pp">|</span> @usuario2 <span class="pp">|</span> Pagina de contacto y .gitignore <span class="pp">|</span> fd77b32, e4c41a6, ... <span class="pp">|</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y segundo, el registro del conflicto, con cuatro datos: archivo y línea en conflicto, qué decía cada versión, con qué criterio escogieron el resultado, y el hash del commit de fusión.</p>
+</section>
+<section id="cómo-se-reparten-los-puntos" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-se-reparten-los-puntos">Cómo se reparten los puntos</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th style="text-align: center;">Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Repositorio, páginas y README</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="even">
+<td><code>.gitignore</code> efectivo</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td>Historial y reparto real del trabajo entre los dos</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr class="even">
+<td>Ramas, Pull Requests y revisión cruzada</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr class="odd">
+<td>Conflicto resuelto y documentado</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="even">
+<td>Etiqueta <code>v0.1.0</code> y entrega completa</td>
+<td style="text-align: center;">10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La nota es del equipo, con un ajuste individual.</strong> Si <code>git shortlog -sn</code> muestra que una de las dos personas hizo el 90% de los commits, o si alguien no abrió ni revisó ningún Pull Request, esa persona pierde hasta la mitad de la nota aunque el repositorio esté perfecto. Git registra autor, fecha y hash de cada commit: el reparto del trabajo no es declarativo, se ve en el historial.</p>
+<p>Cuatro advertencias más que valen puntos:</p>
+<ul>
+<li>Un solo commit gigante con todo el trabajo saca cero en el criterio de historial, aunque el contenido esté perfecto.</li>
+<li>Commits de los dos hechos desde el mismo computador con la misma configuración de Git aparecen con el mismo autor. Cada quien commitea desde su propia máquina y con su propio correo.</li>
+<li>Un repositorio privado no se puede calificar.</li>
+<li>Copiar el repositorio de otro equipo se detecta comparando historiales y se trata como fraude académico.</li>
+</ul>
+</section>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">6</span> Errores frecuentes</h2>
+<div class="error-caso">
+<p><span class="etiqueta">Error 1</span></p>
+<section id="fatal-not-a-git-repository" class="level3">
+<h3 class="anchored" data-anchor-id="fatal-not-a-git-repository">fatal: not a git repository</h3>
+<pre class="text"><code>fatal: not a git repository (or any of the parent directories): .git</code></pre>
+<p><strong>Causa.</strong> La terminal no está dentro de la carpeta del proyecto, o nunca ejecutaste <code>git init</code> ahí.</p>
+<p><strong>Solución.</strong> Comprueba dónde estás con <code>pwd</code> en macOS y Linux, o <code>cd</code> sin argumentos en Windows. Muévete a la carpeta del proyecto y vuelve a intentar. En VS Code, abre la carpeta con <strong>File</strong>, <strong>Open Folder</strong> y usa la terminal integrada: siempre arranca en la carpeta correcta.</p>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 2</span></p>
+<section id="fatal-no-configured-push-destination" class="level3">
+<h3 class="anchored" data-anchor-id="fatal-no-configured-push-destination">fatal: No configured push destination</h3>
+<pre class="text"><code>fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add &lt;name&gt; &lt;url&gt;
+
+and then push using the remote name
+
+    git push &lt;name&gt;</code></pre>
+<p><strong>Causa.</strong> El repositorio local no sabe a dónde subir. Falta el remoto.</p>
+<p><strong>Solución.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para revisar qué remotos tienes configurados: <code>git remote -v</code>.</p>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 3</span></p>
+<section id="el-archivo-sigue-subiéndose-pese-al-.gitignore" class="level3">
+<h3 class="anchored" data-anchor-id="el-archivo-sigue-subiéndose-pese-al-.gitignore">El archivo sigue subiéndose pese al .gitignore</h3>
+<p><strong>Causa.</strong> El <code>.gitignore</code> solo funciona sobre archivos que Git <strong>todavía no rastrea</strong>. Si ya commiteaste <code>bin/salida.txt</code>, agregarlo al <code>.gitignore</code> después no lo saca del repositorio.</p>
+<p>Si intentas agregar un archivo ya ignorado, Git te avisa:</p>
+<pre class="text"><code>The following paths are ignored by one of your .gitignore files:
+bin
+hint: Use -f if you really want to add them.</code></pre>
+<p><strong>Solución.</strong> Sácalo del rastreo sin borrarlo de tu disco, y commitea ese cambio:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="at">-r</span> bin</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: deja de rastrear la carpeta bin"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 4</span></p>
+<section id="quedaron-marcadores-de-conflicto-en-el-archivo" class="level3">
+<h3 class="anchored" data-anchor-id="quedaron-marcadores-de-conflicto-en-el-archivo">Quedaron marcadores de conflicto en el archivo</h3>
+<p><strong>Causa.</strong> Resolviste el conflicto eligiendo el texto correcto pero olvidaste borrar las líneas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. El navegador las va a mostrar como texto y el código deja de funcionar.</p>
+<p><strong>Solución.</strong> Búscalas en todo el proyecto antes de commitear:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si no responde nada, está limpio.</p>
+</section>
+</div>
+<div class="error-caso">
+<p><span class="etiqueta">Error 5</span></p>
+<section id="warning-lf-will-be-replaced-by-crlf" class="level3">
+<h3 class="anchored" data-anchor-id="warning-lf-will-be-replaced-by-crlf">warning: LF will be replaced by CRLF</h3>
+<pre class="text"><code>warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it</code></pre>
+<p><strong>Causa.</strong> Windows termina las líneas con dos caracteres y el resto del mundo con uno. Git está avisando que va a hacer la conversión.</p>
+<p><strong>Solución.</strong> Ninguna. Es una advertencia, no un error, y el commit se hizo igual. Aparece solo en Windows y puedes ignorarla todo el semestre.</p>
+</section>
+</div>
+</section>
+<section id="lista-de-chequeo-de-la-semana" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="lista-de-chequeo-de-la-semana"><span class="header-section-number">7</span> Lista de chequeo de la semana</h2>
+<div class="checklist">
+<p><strong>Antes de entregar, revisen los dos que tienen todo esto</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>git config --global --list</code> muestra el nombre y el correo de cada quien, distintos</label></li>
+<li><label><input type="checkbox">El repositorio del equipo es público y las dos personas aparecen como colaboradoras</label></li>
+<li><label><input type="checkbox">Están <code>index.html</code>, <code>servicios.html</code> y <code>contacto.html</code>, y el menú lleva a las tres</label></li>
+<li><label><input type="checkbox">El README se ve renderizado en la portada y nombra a los dos integrantes</label></li>
+<li><label><input type="checkbox">Existe <code>bin/</code> en la carpeta local y no aparece en GitHub</label></li>
+<li><label><input type="checkbox"><code>git rev-list --count HEAD</code> responde 8 o más</label></li>
+<li><label><input type="checkbox"><code>git shortlog -sn</code> muestra a los dos, con cuatro commits o más cada uno</label></li>
+<li><label><input type="checkbox">Todos los mensajes de <code>git log --oneline</code> empiezan con un prefijo de tipo</label></li>
+<li><label><input type="checkbox">La pestaña Pull requests muestra dos fusionados, uno abierto por cada persona</label></li>
+<li><label><input type="checkbox">Cada Pull Request tiene descripción y un comentario de la otra persona</label></li>
+<li><label><input type="checkbox"><code>git log --oneline --graph</code> muestra el commit de fusión con dos padres</label></li>
+<li><label><input type="checkbox"><code>git grep -n "&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</code> no responde nada</label></li>
+<li><label><input type="checkbox"><code>docs/bitacora-git.md</code> trae la tabla de reparto y el conflicto con los cuatro datos</label></li>
+<li><label><input type="checkbox">La etiqueta <code>v0.1.0</code> aparece en la sección Tags de GitHub</label></li>
+<li><label><input type="checkbox">Los dos publicaron el enlace y el hash en la tarea de Teams</label></li>
+</ul>
+</div>
+</section>
+<section id="recursos" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="recursos"><span class="header-section-number">8</span> Recursos</h2>
+<ul>
+<li>Documentación oficial de Git: <a href="https://git-scm.com/doc">git-scm.com/doc</a></li>
+<li>Chacon, S. y Straub, B. <em>Pro Git</em>, en español y gratuito: <a href="https://git-scm.com/book/es/v2">git-scm.com/book/es/v2</a>. Capítulos 1, 2 y 3.</li>
+<li>Guía de inicio de GitHub: <a href="https://docs.github.com/es/get-started">docs.github.com/es/get-started</a></li>
+<li>Sobre Pull Requests: <a href="https://docs.github.com/es/pull-requests">docs.github.com/es/pull-requests</a></li>
+<li>Invitar colaboradores a un repositorio: <a href="https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings">docs.github.com/es/account-and-profile</a></li>
+<li>Plantillas de <code>.gitignore</code> por tecnología: <a href="https://www.toptal.com/developers/gitignore">gitignore.io</a></li>
+<li>Convención de mensajes de commit: <a href="https://www.conventionalcommits.org/es/v1.0.0/">conventionalcommits.org/es</a></li>
+<li>Diapositivas de la sesión: <a href="../../web/semana-02/presentacion.html">presentación de la Semana 2</a></li>
+</ul>
+<div class="pie-doc">
+<p>Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>
+<p><strong>Transparencia.</strong> La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado. Las salidas de terminal son capturas reales tomadas durante la preparación del material.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oscarleosanchez\.github\.io\/sitio-iue-2026-02\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Oscar Leonel Sánchez Conde</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Institución Universitaria de Envigado. Facultad de Ingenierías</p>
+</div>
+    <div class="nav-footer-right">
+<p>Semestre 2026-02</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

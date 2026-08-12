@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760" height="150" viewBox="0 0 760 150" role="img" aria-label="Anatomia del comando git commit -m mensaje, dividido en programa, subcomando, bandera y argumento" xmlns="http://www.w3.org/2000/svg">
+  <rect x="150" y="26" width="460" height="48" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="24">
+    <text x="189" y="59" fill="#5b6876">git</text>
+    <text x="242" y="59" fill="#17456f" font-weight="700">commit</text>
+    <text x="334" y="59" fill="#0e8f8f">-m</text>
+    <text x="374" y="59" fill="#9b2c5e">"primer commit"</text>
+  </g>
+  <g stroke-width="2.5" fill="none">
+    <path d="M 189,86 L 229,86" stroke="#5b6876"/>
+    <path d="M 242,86 L 321,86" stroke="#17456f"/>
+    <path d="M 334,86 L 361,86" stroke="#0e8f8f"/>
+    <path d="M 374,86 L 572,86" stroke="#9b2c5e"/>
+  </g>
+  <g stroke-width="1.2" fill="none" stroke-dasharray="3 3">
+    <path d="M 209,88 L 209,100" stroke="#5b6876"/>
+    <path d="M 281,88 L 281,100" stroke="#17456f"/>
+    <path d="M 347,88 L 347,100" stroke="#0e8f8f"/>
+    <path d="M 473,88 L 473,100" stroke="#9b2c5e"/>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="11.5" text-anchor="middle" font-weight="600">
+    <text x="209" y="115" fill="#5b6876">el programa</text>
+    <text x="281" y="115" fill="#17456f">la acción</text>
+    <text x="347" y="115" fill="#0e8f8f">una bandera</text>
+    <text x="473" y="115" fill="#9b2c5e">el argumento</text>
+  </g>
+</svg>
