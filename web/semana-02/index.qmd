@@ -17,19 +17,19 @@ date-format: "D [de] MMMM [de] YYYY"
 ::: {.acceso}
 Diapositivas de la sesión
 
-Los mismos diagramas de esta guía, en formato de presentación.
+Para repasar la parte teórica.
 
 [Abrir las diapositivas](presentacion.qmd){.btn-doc}
 :::
 
 ## Lo que vas a lograr
 
-Esta semana nace el repositorio del proyecto que vas a construir con tu equipo durante todo el
-semestre. Todo lo que entreguen de aquí a la Semana 17 va a vivir ahí, así que vale la pena
-montarlo bien desde el primer día.
+Git es la herramienta con la que vas a entregar todo lo que hagas de aquí en adelante, y también
+la que usa cualquier equipo de desarrollo. Esta semana la aprendes completa: desde el primer
+commit hasta el Pull Request revisado por otra persona.
 
-En clase practicas cada comando en un repositorio de prueba tuyo. El entregable evaluado lo
-construye después el equipo, en el repositorio compartido.
+En clase practicas cada comando en un repositorio de prueba tuyo. Después, en equipos de dos,
+entregas la actividad de seguimiento con el flujo completo aplicado.
 
 Al terminar la guía sabes:
 
@@ -398,7 +398,7 @@ integrante del equipo, después de leerlo y comentarlo.
 
 ### El flujo de trabajo del curso
 
-Este es el ciclo que vas a repetir todo el semestre, y el que se evalúa esta semana. Cada
+Este es el ciclo que vas a repetir en cada entrega del curso, y el que se evalúa esta semana. Cada
 funcionalidad nueva nace en una rama, se publica, la revisa la otra persona del equipo y solo
 entonces entra a `main`.
 
@@ -449,7 +449,7 @@ después. Si te pasa, avísame: sacar un secreto del historial no es tan simple 
 archivo.
 :::
 
-### Tres reglas para todo el semestre
+### Tres reglas que no se negocian
 
 ::: {.checklist}
 **Lo que hay que recordar de esta parte**
@@ -1206,43 +1206,44 @@ Las etiquetas **no** viajan con un `git push` normal. Hay que subirlas aparte.
 ## Tu entregable de la semana
 
 ::: {.callout-important}
-## Actividad evaluativa: 10% del curso, en equipo
+## Seguimiento 01: 10% del curso, en equipos de dos
 
-**Con quién.** Equipos de **dos personas**. Es el equipo con el que vas a trabajar el resto del
-semestre.
+**Con quién.** Equipos de **dos personas**.
 
-**Qué entregan.** Un repositorio público en GitHub con el arranque del proyecto del semestre,
+**Qué entregan.** Un **repositorio público en GitHub** llamado `actividad-seg-01-NUMERO-GRUPO`,
 donde los dos aparecen commiteando, abriendo Pull Requests y revisando el del otro.
 
-**Cómo entregan.** Cada integrante publica el mismo comentario en la tarea de Teams:
+**Cómo entregan.** Registran el enlace del repositorio en el archivo de Excel del canal de
+actividades, con **una fila por integrante**:
 
-```text
-Equipo: <Apellido1> y <Apellido2>
-Repositorio: https://github.com/<usuario>/proyecto-web-<apellido1>-<apellido2>
-Commit de v0.1.0: <hash corto>
-```
+| Nombre | Apellido | Correo | No. Equipo | Seguimiento-01 |
+|---|---|---|---|---|
+| Ana | Gómez | ana.gomez@correo.iue.edu.co | 7 | https://github.com/anagomez/actividad-seg-01-07 |
+| Beto | Ramírez | beto.ramirez@correo.iue.edu.co | 7 | https://github.com/anagomez/actividad-seg-01-07 |
+
+[Abrir el archivo de Excel](https://correoiueedu.sharepoint.com/:x:/s/20262-IF2003-PROGRAMACINWEB-G603/IQCcGcg4RvRaSaVWhsJUuRZVAbStcrmuuWRagL3Olx1rs1s?e=TmLEav){.btn-doc}
 
 **Cuándo.** Antes del inicio de la sesión de la Semana 3.
 :::
 
-### El proyecto
+### El nombre del repositorio
 
-El repositorio no está vacío: arranca el proyecto que van a construir todo el semestre. Es el
-**sitio web de un negocio o emprendimiento local**, real o inventado por ustedes: una panadería,
-un taller de motos, una veterinaria, una tienda de plantas. Escojan algo concreto y pequeño, con
-productos o servicios que se puedan listar.
+`actividad-seg-01-NUMERO-GRUPO`, donde `NUMERO-GRUPO` es el número de equipo que registran en el
+Excel, con dos dígitos. El equipo 7 usa `actividad-seg-01-07`.
 
-Ese mismo proyecto crece cada unidad: en la Unidad 2 se le pone HTML y CSS de verdad, en la
-Unidad 3 pasa a ASP.NET Core con base de datos, y en la Unidad 4 termina publicado en Azure. Vale
-la pena escoger un tema que no les aburra en octubre.
+Los dos integrantes reportan **el mismo enlace**. El repositorio se crea una sola vez, en la
+cuenta de uno de los dos, y el otro entra como colaborador.
 
-Esta semana el contenido es lo de menos. Tres páginas HTML simples bastan:
+### Qué contiene el repositorio
+
+Un sitio muy simple de tres páginas HTML sobre el tema que ustedes escojan. El contenido es lo de
+menos: sirve una cafetería, un club de videojuegos o una lista de recetas.
 
 | Archivo | Contenido mínimo |
 |---|---|
-| `index.html` | Nombre del negocio, una frase de presentación y un menú con enlaces a las otras dos páginas |
-| `servicios.html` | Una lista de tres a cinco productos o servicios |
-| `contacto.html` | Dirección, teléfono y horario, inventados si el negocio lo es |
+| `index.html` | Título, una frase de presentación y un menú con enlaces a las otras dos páginas |
+| `servicios.html` | Una lista de tres a cinco elementos |
+| `contacto.html` | Datos de contacto, inventados |
 
 **Lo que se evalúa es el proceso de Git, no el diseño.** Una página sin estilos con un historial
 impecable saca más nota que un sitio bonito con un solo commit.
@@ -1259,7 +1260,7 @@ comenta y fusiona**. Así los dos pasan por los dos lados del flujo.
 El montaje, paso a paso:
 
 1. **Uno de los dos crea el repositorio** en GitHub, público, con el nombre
-   `proyecto-web-<apellido1>-<apellido2>`, y sube `main` con el `README.md` y el `.gitignore`.
+   `actividad-seg-01-NUMERO-GRUPO`, y sube `main` con el `README.md` y el `.gitignore`.
 2. **Invita a la otra persona como colaborador**, en `Settings`, `Collaborators`,
    `Add people`. La invitación llega por correo y hay que aceptarla.
 3. **La otra persona clona** el repositorio con `git clone`.
@@ -1277,16 +1278,16 @@ El montaje, paso a paso:
 ### Lo que debe contener el repositorio
 
 1. **Las tres páginas HTML** con el contenido mínimo de la tabla de arriba.
-2. **`README.md`** con: nombre del negocio, descripción de tres a cinco líneas, a quién le sirve,
-   tecnologías previstas para el semestre, cómo ejecutarlo en local y **los dos integrantes** con
-   su usuario de GitHub.
+2. **`README.md`** con el título de la actividad, una descripción de dos o tres líneas de qué
+   contiene el repositorio y **los nombres completos de los dos integrantes**, con su usuario de
+   GitHub y su número de equipo.
 3. **`.gitignore` efectivo** con las seis rutas mínimas del paso 3, y la prueba de que funciona:
    existe `bin/` en la carpeta local de alguno de los dos y no aparece en GitHub.
 4. **Mínimo ocho commits**, con al menos **cuatro por integrante**, hechos en momentos distintos y
    todos con prefijo de tipo.
 5. **Dos ramas `feature/<algo>` fusionadas mediante Pull Request**, una por persona, cada una
    revisada y fusionada por la otra. Las ramas se borran después de fusionar.
-6. **Un conflicto resuelto**, documentado en `docs/bitacora-git.md`.
+6. **`docs/bitacora-git.md`** con el reparto del trabajo y el registro del conflicto resuelto.
 7. **La etiqueta `v0.1.0`** publicada en el remoto.
 
 El archivo `docs/bitacora-git.md` lleva dos cosas. Primero, el reparto del trabajo:
@@ -1305,12 +1306,12 @@ cada versión, con qué criterio escogieron el resultado, y el hash del commit d
 
 | Criterio | Peso |
 |---|:---:|
-| Repositorio, páginas y README | 15 |
+| Repositorio con el nombre pedido, páginas y README con los integrantes | 15 |
 | `.gitignore` efectivo | 10 |
 | Historial y reparto real del trabajo entre los dos | 25 |
 | Ramas, Pull Requests y revisión cruzada | 25 |
 | Conflicto resuelto y documentado | 15 |
-| Etiqueta `v0.1.0` y entrega completa | 10 |
+| Etiqueta `v0.1.0` y registro en el Excel | 10 |
 
 **La nota es del equipo, con un ajuste individual.** Si `git shortlog -sn` muestra que una de las
 dos personas hizo el 90% de los commits, o si alguien no abrió ni revisó ningún Pull Request, esa
@@ -1438,7 +1439,8 @@ Windows y puedes ignorarla todo el semestre.
 **Antes de entregar, revisen los dos que tienen todo esto**
 
 - [ ] `git config --global --list` muestra el nombre y el correo de cada quien, distintos
-- [ ] El repositorio del equipo es público y las dos personas aparecen como colaboradoras
+- [ ] El repositorio se llama `actividad-seg-01-NUMERO-GRUPO`, es público y las dos personas
+      aparecen como colaboradoras
 - [ ] Están `index.html`, `servicios.html` y `contacto.html`, y el menú lleva a las tres
 - [ ] El README se ve renderizado en la portada y nombra a los dos integrantes
 - [ ] Existe `bin/` en la carpeta local y no aparece en GitHub
@@ -1451,7 +1453,7 @@ Windows y puedes ignorarla todo el semestre.
 - [ ] `git grep -n "<<<<<<<"` no responde nada
 - [ ] `docs/bitacora-git.md` trae la tabla de reparto y el conflicto con los cuatro datos
 - [ ] La etiqueta `v0.1.0` aparece en la sección Tags de GitHub
-- [ ] Los dos publicaron el enlace y el hash en la tarea de Teams
+- [ ] Los dos registraron su fila en el Excel del canal de actividades, con el mismo enlace
 :::
 
 ## Recursos

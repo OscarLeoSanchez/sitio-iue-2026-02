@@ -205,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#el-pull-request" id="toc-el-pull-request" class="nav-link" data-scroll-target="#el-pull-request">El Pull Request</a></li>
   <li><a href="#el-flujo-de-trabajo-del-curso" id="toc-el-flujo-de-trabajo-del-curso" class="nav-link" data-scroll-target="#el-flujo-de-trabajo-del-curso">El flujo de trabajo del curso</a></li>
   <li><a href="#lo-que-no-se-versiona" id="toc-lo-que-no-se-versiona" class="nav-link" data-scroll-target="#lo-que-no-se-versiona">Lo que no se versiona</a></li>
-  <li><a href="#tres-reglas-para-todo-el-semestre" id="toc-tres-reglas-para-todo-el-semestre" class="nav-link" data-scroll-target="#tres-reglas-para-todo-el-semestre">Tres reglas para todo el semestre</a></li>
+  <li><a href="#tres-reglas-que-no-se-negocian" id="toc-tres-reglas-que-no-se-negocian" class="nav-link" data-scroll-target="#tres-reglas-que-no-se-negocian">Tres reglas que no se negocian</a></li>
   </ul></li>
   <li><a href="#laboratorio" id="toc-laboratorio" class="nav-link" data-scroll-target="#laboratorio"><span class="header-section-number">3</span> Laboratorio</a>
   <ul class="collapse">
@@ -233,7 +233,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#tu-entregable-de-la-semana" id="toc-tu-entregable-de-la-semana" class="nav-link" data-scroll-target="#tu-entregable-de-la-semana"><span class="header-section-number">5</span> Tu entregable de la semana</a>
   <ul class="collapse">
-  <li><a href="#el-proyecto" id="toc-el-proyecto" class="nav-link" data-scroll-target="#el-proyecto">El proyecto</a></li>
+  <li><a href="#el-nombre-del-repositorio" id="toc-el-nombre-del-repositorio" class="nav-link" data-scroll-target="#el-nombre-del-repositorio">El nombre del repositorio</a></li>
+  <li><a href="#qué-contiene-el-repositorio" id="toc-qué-contiene-el-repositorio" class="nav-link" data-scroll-target="#qué-contiene-el-repositorio">Qué contiene el repositorio</a></li>
   <li><a href="#cómo-se-reparte-el-trabajo" id="toc-cómo-se-reparte-el-trabajo" class="nav-link" data-scroll-target="#cómo-se-reparte-el-trabajo">Cómo se reparte el trabajo</a></li>
   <li><a href="#lo-que-debe-contener-el-repositorio" id="toc-lo-que-debe-contener-el-repositorio" class="nav-link" data-scroll-target="#lo-que-debe-contener-el-repositorio">Lo que debe contener el repositorio</a></li>
   <li><a href="#cómo-se-reparten-los-puntos" id="toc-cómo-se-reparten-los-puntos" class="nav-link" data-scroll-target="#cómo-se-reparten-los-puntos">Cómo se reparten los puntos</a></li>
@@ -302,13 +303,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="acceso">
 <p>Diapositivas de la sesión</p>
-<p>Los mismos diagramas de esta guía, en formato de presentación.</p>
+<p>Para repasar la parte teórica.</p>
 <p><a href="../../web/semana-02/presentacion.html" class="btn-doc">Abrir las diapositivas</a></p>
 </div>
 <section id="lo-que-vas-a-lograr" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
-<p>Esta semana nace el repositorio del proyecto que vas a construir con tu equipo durante todo el semestre. Todo lo que entreguen de aquí a la Semana 17 va a vivir ahí, así que vale la pena montarlo bien desde el primer día.</p>
-<p>En clase practicas cada comando en un repositorio de prueba tuyo. El entregable evaluado lo construye después el equipo, en el repositorio compartido.</p>
+<p>Git es la herramienta con la que vas a entregar todo lo que hagas de aquí en adelante, y también la que usa cualquier equipo de desarrollo. Esta semana la aprendes completa: desde el primer commit hasta el Pull Request revisado por otra persona.</p>
+<p>En clase practicas cada comando en un repositorio de prueba tuyo. Después, en equipos de dos, entregas la actividad de seguimiento con el flujo completo aplicado.</p>
 <p>Al terminar la guía sabes:</p>
 <ol type="1">
 <li>Explicar qué hace Git con tus archivos y en qué se diferencia de GitHub.</li>
@@ -725,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="el-flujo-de-trabajo-del-curso" class="level3">
 <h3 class="anchored" data-anchor-id="el-flujo-de-trabajo-del-curso">El flujo de trabajo del curso</h3>
-<p>Este es el ciclo que vas a repetir todo el semestre, y el que se evalúa esta semana. Cada funcionalidad nueva nace en una rama, se publica, la revisa la otra persona del equipo y solo entonces entra a <code>main</code>.</p>
+<p>Este es el ciclo que vas a repetir en cada entrega del curso, y el que se evalúa esta semana. Cada funcionalidad nueva nace en una rama, se publica, la revisa la otra persona del equipo y solo entonces entra a <code>main</code>.</p>
 <div class="diagrama">
 <p><img src="imagenes/git-flujo-pull-request.svg" class="img-fluid" alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, el equipo revisa y fusiona; despues bajas el resultado con git pull"></p>
 <p>Los pasos 1, 2, 3 y 6 son comandos en tu terminal. Los pasos 4 y 5 ocurren en el navegador.</p>
@@ -764,8 +765,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="tres-reglas-para-todo-el-semestre" class="level3">
-<h3 class="anchored" data-anchor-id="tres-reglas-para-todo-el-semestre">Tres reglas para todo el semestre</h3>
+<section id="tres-reglas-que-no-se-negocian" class="level3">
+<h3 class="anchored" data-anchor-id="tres-reglas-que-no-se-negocian">Tres reglas que no se negocian</h3>
 <div class="checklist">
 <p><strong>Lo que hay que recordar de esta parte</strong></p>
 <ol type="1">
@@ -1362,24 +1363,59 @@ no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Importante</span>Actividad evaluativa: 10% del curso, en equipo
+<span class="screen-reader-only">Importante</span>Seguimiento 01: 10% del curso, en equipos de dos
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Con quién.</strong> Equipos de <strong>dos personas</strong>. Es el equipo con el que vas a trabajar el resto del semestre.</p>
-<p><strong>Qué entregan.</strong> Un repositorio público en GitHub con el arranque del proyecto del semestre, donde los dos aparecen commiteando, abriendo Pull Requests y revisando el del otro.</p>
-<p><strong>Cómo entregan.</strong> Cada integrante publica el mismo comentario en la tarea de Teams:</p>
-<pre class="text"><code>Equipo: &lt;Apellido1&gt; y &lt;Apellido2&gt;
-Repositorio: https://github.com/&lt;usuario&gt;/proyecto-web-&lt;apellido1&gt;-&lt;apellido2&gt;
-Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
+<p><strong>Con quién.</strong> Equipos de <strong>dos personas</strong>.</p>
+<p><strong>Qué entregan.</strong> Un <strong>repositorio público en GitHub</strong> llamado <code>actividad-seg-01-NUMERO-GRUPO</code>, donde los dos aparecen commiteando, abriendo Pull Requests y revisando el del otro.</p>
+<p><strong>Cómo entregan.</strong> Registran el enlace del repositorio en el archivo de Excel del canal de actividades, con <strong>una fila por integrante</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nombre</th>
+<th>Apellido</th>
+<th>Correo</th>
+<th>No.&nbsp;Equipo</th>
+<th>Seguimiento-01</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ana</td>
+<td>Gómez</td>
+<td>ana.gomez@correo.iue.edu.co</td>
+<td>7</td>
+<td>https://github.com/anagomez/actividad-seg-01-07</td>
+</tr>
+<tr class="even">
+<td>Beto</td>
+<td>Ramírez</td>
+<td>beto.ramirez@correo.iue.edu.co</td>
+<td>7</td>
+<td>https://github.com/anagomez/actividad-seg-01-07</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://correoiueedu.sharepoint.com/:x:/s/20262-IF2003-PROGRAMACINWEB-G603/IQCcGcg4RvRaSaVWhsJUuRZVAbStcrmuuWRagL3Olx1rs1s?e=TmLEav" class="btn-doc">Abrir el archivo de Excel</a></p>
 <p><strong>Cuándo.</strong> Antes del inicio de la sesión de la Semana 3.</p>
 </div>
 </div>
-<section id="el-proyecto" class="level3">
-<h3 class="anchored" data-anchor-id="el-proyecto">El proyecto</h3>
-<p>El repositorio no está vacío: arranca el proyecto que van a construir todo el semestre. Es el <strong>sitio web de un negocio o emprendimiento local</strong>, real o inventado por ustedes: una panadería, un taller de motos, una veterinaria, una tienda de plantas. Escojan algo concreto y pequeño, con productos o servicios que se puedan listar.</p>
-<p>Ese mismo proyecto crece cada unidad: en la Unidad 2 se le pone HTML y CSS de verdad, en la Unidad 3 pasa a ASP.NET Core con base de datos, y en la Unidad 4 termina publicado en Azure. Vale la pena escoger un tema que no les aburra en octubre.</p>
-<p>Esta semana el contenido es lo de menos. Tres páginas HTML simples bastan:</p>
+<section id="el-nombre-del-repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="el-nombre-del-repositorio">El nombre del repositorio</h3>
+<p><code>actividad-seg-01-NUMERO-GRUPO</code>, donde <code>NUMERO-GRUPO</code> es el número de equipo que registran en el Excel, con dos dígitos. El equipo 7 usa <code>actividad-seg-01-07</code>.</p>
+<p>Los dos integrantes reportan <strong>el mismo enlace</strong>. El repositorio se crea una sola vez, en la cuenta de uno de los dos, y el otro entra como colaborador.</p>
+</section>
+<section id="qué-contiene-el-repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="qué-contiene-el-repositorio">Qué contiene el repositorio</h3>
+<p>Un sitio muy simple de tres páginas HTML sobre el tema que ustedes escojan. El contenido es lo de menos: sirve una cafetería, un club de videojuegos o una lista de recetas.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1394,15 +1430,15 @@ Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
 <tbody>
 <tr class="odd">
 <td><code>index.html</code></td>
-<td>Nombre del negocio, una frase de presentación y un menú con enlaces a las otras dos páginas</td>
+<td>Título, una frase de presentación y un menú con enlaces a las otras dos páginas</td>
 </tr>
 <tr class="even">
 <td><code>servicios.html</code></td>
-<td>Una lista de tres a cinco productos o servicios</td>
+<td>Una lista de tres a cinco elementos</td>
 </tr>
 <tr class="odd">
 <td><code>contacto.html</code></td>
-<td>Dirección, teléfono y horario, inventados si el negocio lo es</td>
+<td>Datos de contacto, inventados</td>
 </tr>
 </tbody>
 </table>
@@ -1425,7 +1461,7 @@ Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
 </div>
 <p>El montaje, paso a paso:</p>
 <ol type="1">
-<li><strong>Uno de los dos crea el repositorio</strong> en GitHub, público, con el nombre <code>proyecto-web-&lt;apellido1&gt;-&lt;apellido2&gt;</code>, y sube <code>main</code> con el <code>README.md</code> y el <code>.gitignore</code>.</li>
+<li><strong>Uno de los dos crea el repositorio</strong> en GitHub, público, con el nombre <code>actividad-seg-01-NUMERO-GRUPO</code>, y sube <code>main</code> con el <code>README.md</code> y el <code>.gitignore</code>.</li>
 <li><strong>Invita a la otra persona como colaborador</strong>, en <code>Settings</code>, <code>Collaborators</code>, <code>Add people</code>. La invitación llega por correo y hay que aceptarla.</li>
 <li><strong>La otra persona clona</strong> el repositorio con <code>git clone</code>.</li>
 <li><strong>Cada quien trabaja en su propia rama</strong>, con su propio <code>user.name</code> y <code>user.email</code> configurados. Repártanse las páginas: por ejemplo, uno hace <code>feature/servicios</code> y el otro <code>feature/contacto</code>.</li>
@@ -1439,23 +1475,27 @@ Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
 <h3 class="anchored" data-anchor-id="lo-que-debe-contener-el-repositorio">Lo que debe contener el repositorio</h3>
 <ol type="1">
 <li><strong>Las tres páginas HTML</strong> con el contenido mínimo de la tabla de arriba.</li>
-<li><strong><code>README.md</code></strong> con: nombre del negocio, descripción de tres a cinco líneas, a quién le sirve, tecnologías previstas para el semestre, cómo ejecutarlo en local y <strong>los dos integrantes</strong> con su usuario de GitHub.</li>
+<li><strong><code>README.md</code></strong> con el título de la actividad, una descripción de dos o tres líneas de qué contiene el repositorio y <strong>los nombres completos de los dos integrantes</strong>, con su usuario de GitHub y su número de equipo.</li>
 <li><strong><code>.gitignore</code> efectivo</strong> con las seis rutas mínimas del paso 3, y la prueba de que funciona: existe <code>bin/</code> en la carpeta local de alguno de los dos y no aparece en GitHub.</li>
 <li><strong>Mínimo ocho commits</strong>, con al menos <strong>cuatro por integrante</strong>, hechos en momentos distintos y todos con prefijo de tipo.</li>
 <li><strong>Dos ramas <code>feature/&lt;algo&gt;</code> fusionadas mediante Pull Request</strong>, una por persona, cada una revisada y fusionada por la otra. Las ramas se borran después de fusionar.</li>
-<li><strong>Un conflicto resuelto</strong>, documentado en <code>docs/bitacora-git.md</code>.</li>
+<li><strong><code>docs/bitacora-git.md</code></strong> con el reparto del trabajo y el registro del conflicto resuelto.</li>
 <li><strong>La etiqueta <code>v0.1.0</code></strong> publicada en el remoto.</li>
 </ol>
 <p>El archivo <code>docs/bitacora-git.md</code> lleva dos cosas. Primero, el reparto del trabajo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Integrante <span class="pp">|</span> Usuario de GitHub <span class="pp">|</span> Qué hizo <span class="pp">|</span> Commits <span class="pp">|</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 1 <span class="pp">|</span> @usuario1 <span class="pp">|</span> Pagina de servicios y README <span class="pp">|</span> 4fd9bfc, a3d25af, ... <span class="pp">|</span></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 2 <span class="pp">|</span> @usuario2 <span class="pp">|</span> Pagina de contacto y .gitignore <span class="pp">|</span> fd77b32, e4c41a6, ... <span class="pp">|</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Integrante <span class="pp">|</span> Usuario de GitHub <span class="pp">|</span> Qué hizo <span class="pp">|</span> Commits <span class="pp">|</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 1 <span class="pp">|</span> @usuario1 <span class="pp">|</span> Pagina de servicios y README <span class="pp">|</span> 4fd9bfc, a3d25af, ... <span class="pp">|</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Nombre 2 <span class="pp">|</span> @usuario2 <span class="pp">|</span> Pagina de contacto y .gitignore <span class="pp">|</span> fd77b32, e4c41a6, ... <span class="pp">|</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Y segundo, el registro del conflicto, con cuatro datos: archivo y línea en conflicto, qué decía cada versión, con qué criterio escogieron el resultado, y el hash del commit de fusión.</p>
 </section>
 <section id="cómo-se-reparten-los-puntos" class="level3">
 <h3 class="anchored" data-anchor-id="cómo-se-reparten-los-puntos">Cómo se reparten los puntos</h3>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Criterio</th>
@@ -1464,7 +1504,7 @@ Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Repositorio, páginas y README</td>
+<td>Repositorio con el nombre pedido, páginas y README con los integrantes</td>
 <td style="text-align: center;">15</td>
 </tr>
 <tr class="even">
@@ -1484,7 +1524,7 @@ Commit de v0.1.0: &lt;hash corto&gt;</code></pre>
 <td style="text-align: center;">15</td>
 </tr>
 <tr class="even">
-<td>Etiqueta <code>v0.1.0</code> y entrega completa</td>
+<td>Etiqueta <code>v0.1.0</code> y registro en el Excel</td>
 <td style="text-align: center;">10</td>
 </tr>
 </tbody>
@@ -1524,8 +1564,8 @@ and then push using the remote name
     git push &lt;name&gt;</code></pre>
 <p><strong>Causa.</strong> El repositorio local no sabe a dónde subir. Falta el remoto.</p>
 <p><strong>Solución.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para revisar qué remotos tienes configurados: <code>git remote -v</code>.</p>
 </section>
 </div>
@@ -1539,8 +1579,8 @@ and then push using the remote name
 bin
 hint: Use -f if you really want to add them.</code></pre>
 <p><strong>Solución.</strong> Sácalo del rastreo sin borrarlo de tu disco, y commitea ese cambio:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="at">-r</span> bin</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: deja de rastrear la carpeta bin"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="at">-r</span> bin</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: deja de rastrear la carpeta bin"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </div>
 <div class="error-caso">
@@ -1549,7 +1589,7 @@ hint: Use -f if you really want to add them.</code></pre>
 <h3 class="anchored" data-anchor-id="quedaron-marcadores-de-conflicto-en-el-archivo">Quedaron marcadores de conflicto en el archivo</h3>
 <p><strong>Causa.</strong> Resolviste el conflicto eligiendo el texto correcto pero olvidaste borrar las líneas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. El navegador las va a mostrar como texto y el código deja de funcionar.</p>
 <p><strong>Solución.</strong> Búscalas en todo el proyecto antes de commitear:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si no responde nada, está limpio.</p>
 </section>
 </div>
@@ -1569,7 +1609,7 @@ hint: Use -f if you really want to add them.</code></pre>
 <p><strong>Antes de entregar, revisen los dos que tienen todo esto</strong></p>
 <ul class="task-list">
 <li><label><input type="checkbox"><code>git config --global --list</code> muestra el nombre y el correo de cada quien, distintos</label></li>
-<li><label><input type="checkbox">El repositorio del equipo es público y las dos personas aparecen como colaboradoras</label></li>
+<li><label><input type="checkbox">El repositorio se llama <code>actividad-seg-01-NUMERO-GRUPO</code>, es público y las dos personas aparecen como colaboradoras</label></li>
 <li><label><input type="checkbox">Están <code>index.html</code>, <code>servicios.html</code> y <code>contacto.html</code>, y el menú lleva a las tres</label></li>
 <li><label><input type="checkbox">El README se ve renderizado en la portada y nombra a los dos integrantes</label></li>
 <li><label><input type="checkbox">Existe <code>bin/</code> en la carpeta local y no aparece en GitHub</label></li>
@@ -1582,7 +1622,7 @@ hint: Use -f if you really want to add them.</code></pre>
 <li><label><input type="checkbox"><code>git grep -n "&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</code> no responde nada</label></li>
 <li><label><input type="checkbox"><code>docs/bitacora-git.md</code> trae la tabla de reparto y el conflicto con los cuatro datos</label></li>
 <li><label><input type="checkbox">La etiqueta <code>v0.1.0</code> aparece en la sección Tags de GitHub</label></li>
-<li><label><input type="checkbox">Los dos publicaron el enlace y el hash en la tarea de Teams</label></li>
+<li><label><input type="checkbox">Los dos registraron su fila en el Excel del canal de actividades, con el mismo enlace</label></li>
 </ul>
 </div>
 </section>
