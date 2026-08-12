@@ -1,0 +1,1480 @@
+---
+title: "Semana 2. Git y GitHub: tu proyecto bajo control de versiones"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                       |
+|------------|---------------------------------------|
+| Asignatura | Programación Web (IF2003)             |
+| Grupo      | 603 de Ingeniería Informática         |
+| Unidad     | Unidad 1. Entornos, versionado e IA   |
+| Evaluación | 10% del curso                         |
+:::
+
+::: {.acceso}
+Diapositivas de la sesión
+
+Los mismos diagramas de esta guía, en formato de presentación.
+
+[Abrir las diapositivas](presentacion.qmd){.btn-doc}
+:::
+
+## Lo que vas a lograr
+
+Esta semana nace el repositorio del proyecto que vas a construir con tu equipo durante todo el
+semestre. Todo lo que entreguen de aquí a la Semana 17 va a vivir ahí, así que vale la pena
+montarlo bien desde el primer día.
+
+En clase practicas cada comando en un repositorio de prueba tuyo. El entregable evaluado lo
+construye después el equipo, en el repositorio compartido.
+
+Al terminar la guía sabes:
+
+1. Explicar qué hace Git con tus archivos y en qué se diferencia de GitHub.
+2. Crear un repositorio con `.gitignore` y README, y llevar un historial de commits legible.
+3. Publicar el repositorio en GitHub y sincronizarlo.
+4. Trabajar en una rama y fusionarla mediante un Pull Request.
+5. Resolver un conflicto de fusión sin romper el archivo.
+6. Deshacer un cambio con `restore` y revertir un commit ya publicado con `revert`.
+
+::: {.callout-note}
+## Antes de empezar
+
+Necesitas dos cosas de la Semana 1: que `git --version` responda en la terminal y la carpeta
+`mi-primera-pagina` con tu `index.html`. Esa página es el material con el que vas a practicar.
+
+Necesitas además una cuenta en [github.com](https://github.com/). Créala antes de la sesión: la
+verificación del correo tarda unos minutos.
+:::
+
+## Parte teórica
+
+Esta parte va proyectada en clase. Aquí está la versión completa: lo mismo que ves en las
+diapositivas, explicado con el detalle que no cabe en una pantalla.
+
+### Por qué existe el control de versiones
+
+Sin control de versiones, el respaldo de un proyecto termina siendo una fila de carpetas.
+
+::: {.diagrama}
+![](imagenes/problema-carpetas.svg){fig-alt="Cinco carpetas con nombres parecidos y tres preguntas que ninguna responde"}
+
+Todos hemos tenido este disco duro.
+:::
+
+El desorden es lo de menos. El problema de verdad son tres preguntas que esas carpetas no pueden
+responder:
+
+- **¿Cuál es la buena?** La fecha de modificación miente: basta abrir un archivo para cambiarla.
+- **¿Qué cambió entre una y otra?** Para saberlo habría que comparar archivo por archivo, a mano.
+- **¿Quién tocó esto y por qué?** No hay registro. El motivo del cambio vive en la memoria de
+  quien lo hizo, y esa memoria dura una semana.
+
+Y eso trabajando solo. Cuando entra un equipo, aparece un problema peor.
+
+::: {.diagrama}
+![](imagenes/problema-equipo.svg){fig-alt="Tres integrantes de un equipo editan el mismo archivo y el ultimo que guarda borra el trabajo de los demas"}
+
+Con una carpeta compartida, el trabajo de dos se pierde sin que nadie se entere.
+:::
+
+Tres personas editan `index.html` al mismo tiempo. Cada una guarda su versión en la carpeta
+compartida y la última sobreescribe a las anteriores. Nadie recibe un aviso. El trabajo perdido se
+descubre días después, cuando alguien pregunta dónde quedó el menú.
+
+Lo que hace falta es un sistema que sepa:
+
+| Necesidad | Qué significa en la práctica |
+|---|---|
+| Volver atrás | Recuperar el proyecto tal como estaba hace tres días, sin adivinar |
+| Saber quién y cuándo | Cada cambio con nombre, fecha y motivo |
+| Trabajar en paralelo | Probar una idea sin romper lo que ya funciona |
+| Unir sin perder | Combinar el trabajo de varias personas y que nada se sobreescriba en silencio |
+
+Eso es exactamente lo que hace Git.
+
+### Git y GitHub
+
+Son dos cosas distintas con nombre parecido, y confundirlas causa la mitad de los enredos del
+primer mes.
+
+::: {.diagrama}
+![](imagenes/git-y-github.svg){fig-alt="Git es un programa en tu computador y GitHub es un servicio en internet, conectados por push y pull"}
+
+Git vive en tu máquina. GitHub vive en internet.
+:::
+
+**Git** es un programa que instalaste en tu computador. Lleva la historia del proyecto en una
+carpeta oculta llamada `.git` que vive dentro de tu propio proyecto. Funciona sin conexión: puedes
+commitear todo un fin de semana en un bus sin internet y no perder nada.
+
+**GitHub** es un servicio en la nube que aloja copias de repositorios de Git. Encima de eso agrega
+lo que Git no trae: una interfaz web, permisos, incidencias y Pull Requests. Existen alternativas
+con las mismas funciones, como GitLab o Bitbucket.
+
+| | Git | GitHub |
+|---|---|---|
+| Qué es | Un programa | Un servicio en internet |
+| Dónde corre | En tu computador | En los servidores de una empresa |
+| Necesita internet | No | Sí |
+| Quién lo hizo | Linus Torvalds, 2005 | Una empresa, hoy de Microsoft |
+| Se puede usar sin el otro | Sí | No, GitHub necesita Git |
+
+Si GitHub desapareciera mañana, tu repositorio local seguiría completo, con toda su historia. Eso
+es lo que significa que Git sea **distribuido**: cada copia es un repositorio entero, no un
+fragmento.
+
+### El modelo de Git: cuatro lugares
+
+Casi todos los errores con Git vienen de no tener claro este esquema. Tus archivos pasan por
+cuatro lugares, y cada comando que vas a aprender lo que hace es moverlos de uno al siguiente.
+
+::: {.diagrama}
+![](imagenes/git-cuatro-areas.svg){fig-alt="Diagrama de las cuatro areas de Git: directorio de trabajo, area de preparacion, repositorio local y repositorio remoto, con los comandos que mueven el contenido entre ellas"}
+
+Las flechas azules avanzan y guardan. Las grises punteadas devuelven el contenido hacia atrás.
+:::
+
+Léelo así: editas archivos en el directorio de trabajo, escoges cuáles quieres guardar con
+`git add`, los conviertes en una fotografía con `git commit` y la envías a GitHub con `git push`.
+Los tres comandos grises hacen el camino inverso.
+
+| Lugar | Qué es | Cómo se llega |
+|---|---|---|
+| Directorio de trabajo | La carpeta que ves en el explorador y editas en VS Code | Editar archivos |
+| Área de preparación | La lista de cambios que quieres guardar en la próxima foto | `git add` |
+| Repositorio local | La historia completa, guardada en la carpeta oculta `.git` | `git commit` |
+| Repositorio remoto | La copia en GitHub | `git push` |
+
+Vale la pena detenerse en cada uno.
+
+**El directorio de trabajo** es lo único que ves. Son tus archivos tal como están ahora mismo en
+el disco. Git los observa pero no los controla: puedes editarlos, borrarlos y renombrarlos con
+total libertad.
+
+**El área de preparación** es la lista de lo que va a entrar en el próximo commit. Existe para que
+puedas guardar la mitad de tu trabajo y dejar la otra mitad para después. Si tocaste cinco
+archivos pero solo tres pertenecen al mismo cambio, preparas esos tres y commiteas; los otros dos
+quedan esperando.
+
+**El repositorio local** es la carpeta oculta `.git`. Ahí está la historia completa: todos los
+commits, todas las ramas, todas las etiquetas. Si borras esa carpeta, tus archivos siguen ahí pero
+la historia desaparece.
+
+**El repositorio remoto** es la copia que vive en GitHub. Se sincroniza a mano, nunca sola.
+
+#### Los cinco comandos que mueven el contenido
+
+::: {.diagrama}
+![](imagenes/comandos-areas.svg){fig-alt="Los cinco comandos que mueven el trabajo entre las areas de Git y para que sirve cada uno"}
+
+Cuatro avanzan. El último devuelve.
+:::
+
+La pregunta que resuelve este esquema es la que más se repite en clase: por qué mi compañero no
+ve mi cambio. Casi siempre porque el cambio está en el directorio de trabajo, o en el área de
+preparación, o en un commit local, y en ninguno de esos tres casos ha salido de la máquina.
+**Nada sale de tu computador hasta que hagas `push`, y nada entra hasta que hagas `pull`.**
+
+### Qué es exactamente un commit
+
+Un **commit** es una fotografía del proyecto completo en un instante. No guarda la diferencia con
+el commit anterior: guarda el estado entero, y Git se encarga por dentro de no repetir lo que no
+cambió.
+
+::: {.diagrama}
+![](imagenes/anatomia-commit.svg){fig-alt="Un commit guarda autor, fecha, mensaje, el enlace al commit padre y una copia completa del proyecto"}
+
+Cinco datos, y uno de ellos es el que arma la historia.
+:::
+
+Cada commit lleva cinco cosas pegadas:
+
+| Dato | Para qué sirve |
+|---|---|
+| **Autor** | Nombre y correo de quien lo hizo. Sale de tu `git config` |
+| **Fecha** | Momento exacto en que se creó |
+| **Mensaje** | La explicación del cambio, escrita por ti |
+| **Padre** | El hash del commit anterior. Es el enlace que arma la cadena |
+| **Contenido** | El estado completo del proyecto en ese instante |
+
+El **padre** es el dato que convierte una pila de fotos sueltas en una historia.
+
+::: {.diagrama}
+![](imagenes/git-cadena-commits.svg){fig-alt="Cadena de cuatro commits en orden, del mas antiguo al mas reciente, con las etiquetas main y HEAD sobre el ultimo"}
+
+Cada commit guarda el enlace al anterior, y por eso la cadena se puede recorrer entera desde el
+último.
+:::
+
+#### El hash
+
+Cada commit se identifica con un **hash**: un número de 40 caracteres en hexadecimal que Git
+calcula a partir del contenido del commit.
+
+```text
+e4c41a6f2d81b9c0a7e35d4188c6f0b2ad19e7c3
+```
+
+Como sale del contenido, cambiar una sola coma produce un hash completamente distinto. Eso es lo
+que hace que la historia sea verificable: si alguien alterara un commit viejo, todos los hashes
+posteriores dejarían de cuadrar.
+
+En la práctica escribes los primeros siete caracteres y Git entiende de cuál hablas. En un
+repositorio de curso no hay dos commits que empiecen igual.
+
+#### `main` y `HEAD`
+
+`main` es una etiqueta que apunta al último commit de la rama principal. `HEAD` es el nombre que
+Git le da a "dónde estás parado ahora", y casi siempre apunta a la rama en la que trabajas.
+
+Cuando haces un commit nuevo, los dos avanzan juntos al commit recién creado.
+
+### Los mensajes de commit
+
+El mensaje es lo único que va a quedar para explicar por qué existe ese cambio. Lo vas a leer tú
+mismo dentro de un mes, cuando ya no recuerdes nada.
+
+::: {.diagrama}
+![](imagenes/prefijos-commit.svg){fig-alt="Anatomia de un mensaje de commit: el prefijo de tipo, dos puntos y la descripcion, con el significado de feat, fix, docs, style y chore"}
+
+Un tipo, dos puntos y qué hiciste, en presente.
+:::
+
+En este curso usamos la convención de **Conventional Commits**, que es la más extendida en la
+industria. El mensaje empieza con un prefijo que clasifica el cambio:
+
+| Prefijo | Cuándo se usa | Ejemplo |
+|---|---|---|
+| `feat:` | Algo nuevo que antes no existía | `feat: agrega la pagina de contacto` |
+| `fix:` | Arreglaste algo que estaba mal | `fix: corrige el enlace roto del menu` |
+| `docs:` | Documentación, README, comentarios | `docs: completa el modo de ejecucion` |
+| `style:` | Formato o acomodo, sin cambiar comportamiento | `style: ordena las reglas del CSS` |
+| `chore:` | Mantenimiento: configuración, dependencias | `chore: agrega el gitignore` |
+
+Después del prefijo va un verbo **en presente** y el objeto del cambio. Se escribe como si
+completaras la frase "este commit...": este commit *agrega la página de contacto*.
+
+::: {.diagrama}
+![](imagenes/mensajes-commit.svg){fig-alt="Comparacion entre mensajes de commit vagos y mensajes que describen el cambio con un prefijo de tipo"}
+
+La diferencia se nota cuando buscas en qué commit se rompió algo.
+:::
+
+Dos reglas más que valen la pena:
+
+- **Un commit, un cambio.** Si el mensaje necesita un "y" para describir lo que hiciste, son dos
+  commits.
+- **Describe el cambio, no el archivo.** `fix: corrige el enlace del menu` sirve;
+  `actualiza index.html` no dice nada, porque el archivo ya aparece en el diff.
+
+### Ramas
+
+Una **rama** es un puntero móvil a un commit. Cuando haces un commit nuevo, el puntero de la rama
+en la que estás avanza al commit nuevo. Eso es todo.
+
+::: {.diagrama}
+![](imagenes/rama-puntero.svg){fig-alt="La etiqueta main se mueve al commit nuevo sin copiar archivos"}
+
+Commitear mueve la etiqueta. Los commits anteriores no se tocan.
+:::
+
+Por eso crear una rama en Git es instantáneo, incluso en proyectos enormes: no copia archivos,
+solo escribe un nombre que apunta a un hash de 40 caracteres.
+
+La rama principal se llama `main`. La regla del curso es simple: **`main` siempre debe funcionar**.
+Cada cosa nueva que quieras probar se hace en una rama aparte, con nombre `feature/algo`, y vuelve
+a `main` solo cuando esté lista.
+
+Los nombres de rama del curso siguen este patrón:
+
+| Nombre | Para qué |
+|---|---|
+| `main` | La versión que siempre funciona |
+| `feature/contacto` | Una funcionalidad nueva |
+| `fix/enlace-menu` | La corrección de un error concreto |
+
+### Fusionar
+
+**Fusionar** es traer los commits de una rama a otra. El comando es `git merge <rama>` y lo
+importante es dónde estás parado: la rama en la que ejecutas el comando es la que **recibe** los
+commits.
+
+::: {.diagrama}
+![](imagenes/git-rama-fusion.svg){fig-alt="Diagrama de una rama que sale de main, avanza dos commits y vuelve a main en un commit de fusion"}
+
+El commit de fusión es el único que tiene dos padres. Por eso es la prueba de que hubo una rama.
+:::
+
+Git resuelve la fusión de dos maneras distintas, según lo que haya pasado mientras trabajabas.
+
+::: {.diagrama}
+![](imagenes/fusion-dos-formas.svg){fig-alt="Avance rapido cuando main no se movio, y commit de fusion cuando las dos ramas avanzaron"}
+
+Cuál de las dos ocurre no lo decides tú: depende de si la otra rama avanzó.
+:::
+
+**Avance rápido.** Si `main` no recibió ningún commit mientras trabajabas en tu rama, Git no tiene
+nada que combinar: mueve la etiqueta `main` hacia adelante y ya. No se crea ningún commit nuevo y
+el historial queda en línea recta.
+
+**Commit de fusión.** Si las dos ramas avanzaron, Git tiene que combinar dos historias. Crea un
+commit especial con **dos padres**, uno por cada rama. Ese es el commit que aparece con la
+bifurcación en `git log --graph`, y el que el docente busca para comprobar que hubo una rama de
+verdad.
+
+### Conflictos
+
+Git combina solo mientras las dos ramas hayan tocado archivos distintos, o líneas distintas del
+mismo archivo. Es más listo de lo que parece: dos personas pueden editar el mismo archivo sin
+problema, siempre que no se crucen en la misma línea.
+
+::: {.diagrama}
+![](imagenes/por-que-conflicto.svg){fig-alt="Dos ramas cambian la misma linea de forma distinta y Git no puede escoger"}
+
+Dos respuestas válidas para la misma línea. Nadie salvo un humano puede escoger.
+:::
+
+Cuando dos ramas modifican **la misma línea**, Git se detiene y declara un conflicto. No es un
+error tuyo ni una falla de Git: es Git diciendo que la decisión es humana y que no piensa
+inventarse una respuesta.
+
+Al detenerse, Git deja el archivo con unos marcadores que separan las dos versiones. Cómo se leen
+y cómo se resuelven está en el [paso 7](#provoca-un-conflicto-y-resuélvelo) del laboratorio, donde
+vas a provocar uno a propósito.
+
+### El repositorio remoto
+
+Hasta aquí todo ocurre en tu computador. El remoto es la copia que vive en GitHub y que el equipo
+usa como punto de encuentro.
+
+::: {.diagrama}
+![](imagenes/remoto-copias.svg){fig-alt="GitHub guarda la copia de referencia y cada integrante tiene la historia completa en su computador"}
+
+Tres copias completas. Ninguna es más real que las otras.
+:::
+
+`origin` es el nombre convencional que se le da al remoto principal. No tiene nada de mágico: es
+una etiqueta que apunta a una dirección, y podrías llamarla de otra forma.
+
+Lo que hay que entender es que **cada integrante tiene la historia entera**, no un pedazo. Puedes
+mirar el log completo, crear ramas y commitear sin conexión. El remoto solo hace falta para
+compartir.
+
+| Comando | Qué mueve |
+|---|---|
+| `git clone <url>` | Trae el repositorio completo la primera vez |
+| `git push` | Sube tus commits al remoto |
+| `git pull` | Baja los commits del remoto y los integra |
+| `git fetch` | Baja la información del remoto sin tocar tus archivos |
+
+### El Pull Request
+
+Un Pull Request es una **propuesta de cambio**. Dice: "tengo esto listo en mi rama, quiero meterlo
+en `main`, revísenlo".
+
+::: {.diagrama}
+![](imagenes/pull-request.svg){fig-alt="Un Pull Request muestra la rama, los commits, los archivos cambiados, el comentario de quien revisa y el boton de fusion"}
+
+La conversación queda pegada al cambio, no perdida en un chat.
+:::
+
+Cuatro cosas que conviene tener claras:
+
+- **Vive en GitHub, no en Git.** No existe ningún comando `git pull-request`. El Pull Request es
+  una función del servicio, no del programa.
+- **Muestra el cambio línea por línea.** La pestaña `Files changed` trae el diff completo, para
+  que quien revisa lea lo que va a entrar antes de que entre.
+- **Deja registro.** Queda escrito quién propuso, quién revisó, qué se comentó y cuándo se
+  fusionó. Dentro de tres meses eso explica por qué el código es como es.
+- **`main` no se toca hasta la fusión.** Mientras el Pull Request esté abierto, la rama principal
+  sigue igual.
+
+La regla del curso: **nadie fusiona su propio Pull Request.** Lo abre uno y lo fusiona otro
+integrante del equipo, después de leerlo y comentarlo.
+
+### El flujo de trabajo del curso
+
+Este es el ciclo que vas a repetir todo el semestre, y el que se evalúa esta semana. Cada
+funcionalidad nueva nace en una rama, se publica, la revisa la otra persona del equipo y solo
+entonces entra a `main`.
+
+::: {.diagrama}
+![](imagenes/git-flujo-pull-request.svg){fig-alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, el equipo revisa y fusiona; despues bajas el resultado con git pull"}
+
+Los pasos 1, 2, 3 y 6 son comandos en tu terminal. Los pasos 4 y 5 ocurren en el navegador.
+:::
+
+Los seis pasos, en palabras:
+
+1. **Creas la rama.** `main` queda intacta mientras experimentas.
+2. **Trabajas y commiteas.** Cuantas veces necesites, siempre en tu rama.
+3. **Publicas la rama.** Ahí el resto del equipo ya puede verla, pero `main` sigue sin tocarse.
+4. **Abres el Pull Request.** Es una propuesta: "quiero meter esto en `main`, revísalo".
+5. **La otra persona revisa y fusiona.** Lee el cambio, comenta y pulsa el botón de fusión.
+6. **Bajas el resultado.** Tu `main` local se pone al día con la de GitHub.
+
+### Lo que no se versiona
+
+No todo lo que está en la carpeta del proyecto debe entrar al repositorio. El `.gitignore` es la
+lista de lo que Git debe ignorar.
+
+::: {.diagrama}
+![](imagenes/gitignore-filtro.svg){fig-alt="El gitignore deja pasar las paginas y el README, y retiene node_modules, bin y los archivos con claves"}
+
+Lo que se puede regenerar, y lo que no debe salir de tu máquina, se quedan afuera.
+:::
+
+**No se versiona lo que se puede regenerar.** Las dependencias (`node_modules/`), los resultados
+de compilar (`bin/`, `obj/`) y los archivos de configuración de tu editor no van al repositorio.
+Ocupan cientos de megabytes, cambian en cada compilación y cualquiera puede recrearlos con un
+comando. Un `node_modules/` subido a GitHub son decenas de miles de archivos que nadie va a leer y
+que hacen lento cada `clone`.
+
+**Nunca se suben secretos.** Contraseñas, tokens de acceso ni cadenas de conexión a bases de
+datos.
+
+::: {.callout-important}
+## Una clave subida ya está quemada
+
+Borrarla un minuto después no sirve de nada: el commit que la contenía sigue en el historial y
+cualquiera puede recuperarla. En un repositorio público, los robots que rastrean GitHub la
+encuentran en cuestión de minutos.
+
+Por eso `appsettings.Development.json` entra al `.gitignore` **antes** del primer commit, y no
+después. Si te pasa, avísame: sacar un secreto del historial no es tan simple como borrar el
+archivo.
+:::
+
+### Tres reglas para todo el semestre
+
+::: {.checklist}
+**Lo que hay que recordar de esta parte**
+
+1. **`main` siempre funciona.** Lo que todavía no sirve vive en una rama.
+2. **Una rama por cada cosa nueva.** Se abre, se revisa, se fusiona y se borra.
+3. **El mensaje explica el cambio**, no el archivo que tocaste.
+:::
+
+## Laboratorio
+
+Sigue los pasos en orden. Cada uno termina con una verificación: si no obtienes esa salida, no
+avances.
+
+### [1]{.paso} Configura tu identidad
+
+Git firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:
+
+```bash
+git config --global user.name "Tu Nombre Completo"
+git config --global user.email "tu.correo@correo.iue.edu.co"
+git config --global init.defaultBranch main
+```
+
+La tercera línea hace que los repositorios nuevos usen `main` como rama principal en vez del
+antiguo `master`.
+
+Verifica:
+
+```bash
+git config --global --list
+```
+
+### [2]{.paso} Crea tu repositorio de práctica
+
+Renombra tu carpeta `mi-primera-pagina` a `taller-git`, abre una terminal adentro y ejecuta:
+
+```bash
+git init
+```
+
+Antes de continuar, crea una carpeta `bin` con un archivo cualquiera adentro. La vas a usar para
+comprobar que el `.gitignore` funciona:
+
+```bash
+mkdir bin
+echo "archivo generado" > bin/salida.txt
+```
+
+Ahora mira el estado:
+
+```bash
+git status
+```
+
+```text
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        bin/
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+Git ya está vigilando la carpeta, pero todavía no rastrea ningún archivo. Fíjate en que `bin/`
+aparece en la lista: eso es lo que vamos a evitar.
+
+### [3]{.paso} Escribe el `.gitignore` y el README
+
+Crea en la raíz un archivo llamado exactamente `.gitignore`, con punto al inicio y sin extensión:
+
+```text
+# Resultados de compilar .NET
+bin/
+obj/
+
+# Dependencias de Node
+node_modules/
+
+# Configuracion local del editor
+.vs/
+.vscode/
+*.user
+
+# Configuracion con datos sensibles
+appsettings.Development.json
+```
+
+Crea también `README.md`. Es la portada de tu repositorio y lo primero que ve quien entra:
+
+````markdown
+# Proyecto web 2026-02
+
+Breve descripcion del proyecto en tres a cinco lineas.
+
+## Problema que resuelve
+
+Que necesidad atiende y para quien.
+
+## Tecnologias
+
+HTML5, CSS3, JavaScript ES6, ASP.NET Core MVC, SQL Server con Entity Framework Core.
+
+## Como ejecutarlo en local
+
+```bash
+python -m http.server 8000
+```
+
+Abrir http://localhost:8000
+
+## Autor
+
+Tu Nombre. Programacion Web (IF2003), grupo 603. IUE, 2026-02.
+````
+
+Vuelve a mirar el estado, esta vez en formato corto:
+
+```bash
+git status --short
+```
+
+```text
+?? .gitignore
+?? README.md
+?? index.html
+```
+
+`bin/` desapareció de la lista. El `.gitignore` ya está trabajando.
+
+### [4]{.paso} Tus primeros commits
+
+Agrega todo al área de preparación y haz el primer commit:
+
+```bash
+git add .
+git commit -m "chore: estructura inicial del proyecto"
+```
+
+```text
+[main (root-commit) 4fd9bfc] chore: estructura inicial del proyecto
+ 3 files changed, 11 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 index.html
+```
+
+Tres archivos, y `bin/salida.txt` no está entre ellos.
+
+Ahora edita algo del `index.html`, por ejemplo agrega un párrafo, y antes de guardarlo en la
+historia mira exactamente qué cambió:
+
+```bash
+git diff
+```
+
+```text
+diff --git a/index.html b/index.html
+index bec81e6..c4d1379 100644
+--- a/index.html
++++ b/index.html
+@@ -3,3 +3,4 @@
+ <head><meta charset="UTF-8"><title>Proyecto web</title></head>
+ <body><h1>Portafolio de Programacion Web IF2003</h1></body>
+ </html>
++<p>Autor: Tu Nombre</p>
+```
+
+Las líneas con `+` son las que agregaste. Las que tuvieran `-` serían las que quitaste.
+
+Guárdalo. La bandera `-a` prepara y commitea de un solo golpe los archivos que Git ya rastrea:
+
+```bash
+git commit -am "feat: agrega la linea de autoria en la portada"
+```
+
+Repite el ciclo un par de veces con cambios reales, y revisa la historia:
+
+```bash
+git log --oneline
+```
+
+### [5]{.paso} Publica en GitHub
+
+En [github.com](https://github.com/), botón **New repository**:
+
+- **Repository name:** `taller-git`
+- **Visibility:** Public
+- **No marques** ninguna de las casillas de inicialización. Tu repositorio ya tiene README y
+  `.gitignore`, y si GitHub crea los suyos vas a chocar con ellos en el primer `push`.
+
+GitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/taller-git.git
+git push -u origin main
+```
+
+`origin` es el nombre convencional del remoto principal. La bandera `-u` deja la conexión
+recordada, así que de aquí en adelante te basta con `git push`.
+
+::: {.callout-important}
+## La contraseña de GitHub no sirve en la terminal
+
+GitHub dejó de aceptar contraseñas para operaciones de Git en 2021. En Windows, el primer `push`
+abre una ventana del navegador para que inicies sesión y el Credential Manager guarda la
+credencial. Si trabajas en macOS o Linux y te pide contraseña, genera un **token de acceso
+personal** en `Settings`, `Developer settings`, `Personal access tokens`, con el permiso `repo`, y
+usa ese token donde te piden la contraseña.
+:::
+
+Recarga la página del repositorio en el navegador. Tu código está ahí, y el README se ve
+renderizado en la portada.
+
+### [6]{.paso} Trabaja en una rama y abre un Pull Request
+
+No vas a volver a commitear directo sobre `main`. El flujo, de aquí en adelante, es este.
+
+Crea la rama y muévete a ella en un solo comando:
+
+```bash
+git switch -c feature/encabezado
+```
+
+Haz un cambio real en `index.html`, por ejemplo cambia el título de la portada, y guárdalo:
+
+```bash
+git commit -am "feat: cambia el titulo de la portada"
+```
+
+```text
+[feature/encabezado a3d25af] feat: cambia el titulo de la portada
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+Publica la rama:
+
+```bash
+git push -u origin feature/encabezado
+```
+
+Entra a GitHub. Aparece un aviso amarillo con el botón **Compare & pull request**. Pulsa ahí y
+llena el formulario:
+
+- **Título:** el mismo mensaje del commit, o uno que resuma la rama completa.
+- **Descripción:** dos líneas mínimo. Qué cambia y por qué. Esto es lo que lee quien revisa.
+
+Crea el Pull Request, revisa la pestaña **Files changed** para ver el diff en el navegador, y
+fusiona con **Merge pull request**. GitHub te ofrece borrar la rama después: acepta.
+
+::: {.callout-note}
+## Aquí fusionas tú, en el entregable no
+
+Estás practicando solo en tu repositorio, así que abres y fusionas tu propio Pull Request. En el
+repositorio del equipo la regla cambia: cada quien abre el suyo y **lo fusiona la otra persona**,
+después de revisarlo y comentarlo.
+:::
+
+De vuelta en tu máquina, tráete el resultado y limpia la rama local:
+
+```bash
+git switch main
+git pull
+git branch -d feature/encabezado
+```
+
+### [7]{.paso} Provoca un conflicto y resuélvelo
+
+Un conflicto se resuelve mejor la primera vez si lo provocas tú, con calma, y no cuando te toma
+por sorpresa a la medianoche antes de una entrega.
+
+Crea una rama y cambia el título de la portada:
+
+```bash
+git switch -c feature/titulo-alterno
+```
+
+Deja la línea así:
+
+```html
+<body><h1>Portafolio de Programacion Web</h1></body>
+```
+
+```bash
+git commit -am "feat: cambia el titulo de la portada"
+```
+
+Vuelve a `main` y cambia **la misma línea** por algo distinto:
+
+```bash
+git switch main
+```
+
+```html
+<body><h1>Proyecto integrador IF2003</h1></body>
+```
+
+```bash
+git commit -am "feat: ajusta el titulo con el codigo del curso"
+```
+
+Ahora fusiona:
+
+```bash
+git merge feature/titulo-alterno
+```
+
+```text
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Ahí está. Mira el estado:
+
+```bash
+git status
+```
+
+```text
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Abre `index.html`. Git escribió los marcadores dentro del archivo:
+
+```text
+<<<<<<< HEAD
+<body><h1>Proyecto integrador IF2003</h1></body>
+=======
+<body><h1>Portafolio de Programacion Web</h1></body>
+>>>>>>> feature/titulo-alterno
+```
+
+Se lee así:
+
+::: {.diagrama}
+![](imagenes/git-marcadores-conflicto.svg){fig-alt="Anatomia de un conflicto: entre el marcador de inicio y el separador esta tu version, entre el separador y el marcador de cierre esta la version que traes, y las tres lineas de marcadores se borran al resolver"}
+
+El archivo resuelto no puede conservar ninguna de las tres líneas rojas.
+:::
+
+- Entre `<<<<<<< HEAD` y `=======` está tu versión, la de la rama donde estás parado.
+- Entre `=======` y `>>>>>>>` está la versión de la rama que estás trayendo.
+
+Resolver es dejar el archivo como debe quedar y **borrar las tres líneas de marcadores**. Puedes
+quedarte con una versión, con la otra o escribir una tercera:
+
+```html
+<body><h1>Portafolio de Programacion Web IF2003</h1></body>
+```
+
+Marca el archivo como resuelto y cierra la fusión:
+
+```bash
+git add index.html
+git commit -m "merge: resuelve el conflicto del titulo de la portada"
+```
+
+Mira la historia dibujada:
+
+```bash
+git log --oneline --graph --all
+```
+
+```text
+*   e4c41a6 merge: resuelve el conflicto del titulo de la portada
+|\
+| * a3d25af feat: cambia el titulo de la portada
+* | fd77b32 feat: ajusta el titulo con el codigo del curso
+|/
+* 4fd9bfc chore: estructura inicial del proyecto
+```
+
+Las dos ramas se separan y se vuelven a juntar. Ese commit de fusión con dos padres es la
+evidencia de que resolviste un conflicto real.
+
+::: {.callout-tip}
+## Si te pierdes en mitad de una fusión
+
+`git merge --abort` deshace la fusión completa y te devuelve al estado anterior, sin daño. Úsalo
+sin culpa cuando el archivo quede irreconocible, y vuelve a empezar.
+:::
+
+### [8]{.paso} Deshacer sin miedo
+
+Tres situaciones distintas, tres comandos distintos.
+
+**Editaste un archivo y quieres botar el cambio.** Todavía no hiciste `add`:
+
+```bash
+git restore index.html
+```
+
+**Ya hiciste `add` y quieres sacarlo del área de preparación**, sin perder la edición:
+
+```bash
+git restore --staged index.html
+```
+
+**El commit ya está hecho y publicado.** No lo borres: crea un commit que deshaga sus cambios.
+Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:
+
+```bash
+git revert <hash-del-commit>
+```
+
+### [9]{.paso} Etiqueta la versión de la semana
+
+Una etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la semana:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+Verifica:
+
+```bash
+git tag
+```
+
+```text
+v0.1.0
+```
+
+En GitHub la etiqueta aparece en la sección **Tags** de la portada del repositorio.
+
+
+
+## Los comandos, uno por uno
+
+Esta sección es de consulta. No la leas de corrido: vuelve a ella cuando no recuerdes qué hace un
+comando o qué significa una bandera.
+
+### Cómo se lee un comando de Git
+
+Todos tienen la misma forma.
+
+::: {.diagrama}
+![](imagenes/git-anatomia-comando.svg){fig-alt="Anatomia del comando git commit -m mensaje, dividido en programa, subcomando, bandera y argumento"}
+
+La misma estructura sirve para leer cualquier comando de Git que encuentres en internet.
+:::
+
+- **El programa** es siempre `git`.
+- **La acción** es el subcomando: `commit`, `add`, `push`. Es lo que quieres hacer.
+- **Las banderas** modifican la acción. Empiezan con un guion si son la versión corta (`-m`) o
+  con dos si son la versión larga (`--message`). Las dos formas hacen lo mismo.
+- **Los argumentos** son los valores que recibe: un mensaje, un nombre de archivo, una rama.
+
+Cuando en esta guía veas algo entre `<` y `>`, como `<archivo>`, significa que ahí va un valor
+tuyo. Los símbolos no se escriben.
+
+### Configuración
+
+#### `git config`
+
+Lee y escribe la configuración de Git. Con `--global` la escribe para tu usuario en toda la
+máquina; sin `--global`, solo para el repositorio actual.
+
+```bash
+git config --global user.name "Tu Nombre"      # firma tus commits
+git config --global user.email "tu@correo.com" # correo asociado
+git config --global init.defaultBranch main    # rama inicial de repos nuevos
+git config --global --list                     # muestra toda la configuracion
+```
+
+El nombre y el correo quedan grabados dentro de **cada** commit que hagas. Si los cambias después,
+los commits viejos conservan los datos viejos. Configúralos antes del primer commit.
+
+### Crear y mirar
+
+#### `git init`
+
+Convierte la carpeta actual en un repositorio, creando la carpeta oculta `.git`. Se ejecuta una
+sola vez por proyecto.
+
+```bash
+git init
+```
+
+No crea archivos tuyos ni sube nada a ningún lado. Solo empieza a llevar la historia. Si borras
+`.git`, pierdes el historial completo y la carpeta vuelve a ser una carpeta normal.
+
+#### `git status`
+
+El comando que más vas a usar. Responde tres preguntas: en qué rama estás, qué archivos cambiaron
+y en qué área está cada uno.
+
+```bash
+git status          # version completa, con sugerencias de que hacer
+git status --short  # version compacta, una linea por archivo
+```
+
+En la versión corta, la primera columna es el área de preparación y la segunda el directorio de
+trabajo:
+
+| Símbolo | Significa |
+|---|---|
+| `??` | Archivo sin rastrear: Git no lo conoce |
+| `A ` | Archivo nuevo, ya preparado |
+| ` M` | Modificado, sin preparar |
+| `M ` | Modificado y preparado |
+| `MM` | Preparado, y vuelto a modificar después |
+| `D ` | Borrado y preparado |
+
+Cuando algo te salga raro, ejecuta `git status` antes de hacer cualquier otra cosa.
+
+#### `git log`
+
+Muestra la historia, del commit más reciente al más antiguo.
+
+```bash
+git log                            # completo: hash, autor, fecha y mensaje
+git log --oneline                  # una linea por commit
+git log --oneline --graph --all    # dibuja las ramas y las fusiones
+git log --merges --oneline         # solo los commits de fusion
+git log -3                         # solo los tres ultimos
+git log --author="Nombre"          # solo los commits de una persona
+```
+
+`git log` abre un paginador cuando la salida es larga: te mueves con las flechas del teclado y
+sales con la tecla `q`. Es la causa número uno de "se me quedó pegada la terminal".
+
+### Guardar cambios
+
+#### `git add`
+
+Mueve cambios del directorio de trabajo al área de preparación. No guarda nada en la historia
+todavía: solo arma la lista de lo que va a entrar en el próximo commit.
+
+```bash
+git add index.html        # un archivo
+git add css/              # todo lo de una carpeta
+git add .                 # todo lo que cambio, respetando el .gitignore
+```
+
+Preparar archivo por archivo en vez de `git add .` es lo que te permite partir un trabajo grande
+en varios commits pequeños con sentido propio.
+
+#### `git commit`
+
+Toma lo que está en el área de preparación y lo guarda como un commit en la historia local.
+
+```bash
+git commit -m "feat: agrega la seccion de contacto"
+git commit -am "fix: corrige el enlace del menu"   # prepara y guarda de un golpe
+```
+
+- `-m` recibe el mensaje. Sin esa bandera, Git abre un editor de texto en la terminal, y salir de
+  ahí sin saber cómo es incómodo. Úsala siempre.
+- `-a` prepara automáticamente los archivos que Git **ya rastrea**. No incluye archivos nuevos,
+  así que después de crear un archivo necesitas `git add` de todas formas.
+
+El commit vive solo en tu máquina hasta que hagas `push`.
+
+#### `git diff`
+
+Muestra las diferencias línea por línea. Las líneas con `+` son las que agregaste, las que tienen
+`-` las que quitaste.
+
+```bash
+git diff              # lo modificado que aun no preparaste
+git diff --staged     # lo que ya esta preparado, listo para el commit
+git diff main         # tu rama actual comparada con main
+```
+
+Vale la pena mirarlo siempre antes de commitear: es la última oportunidad de darte cuenta de que
+ibas a guardar una línea de depuración.
+
+### Ramas
+
+#### `git switch`
+
+Se mueve entre ramas, y con `-c` crea la rama y se mueve en un solo paso.
+
+```bash
+git switch -c feature/menu   # crea la rama y se para en ella
+git switch main              # vuelve a main
+git switch -                 # vuelve a la rama anterior
+```
+
+En guías viejas vas a ver `git checkout` para lo mismo. Funciona, pero `checkout` hace además
+otras tres cosas distintas y por eso se separó en `switch` y `restore`. Usa los nuevos.
+
+#### `git branch`
+
+Administra las ramas sin cambiarse a ellas.
+
+```bash
+git branch              # lista las ramas locales, con un asterisco en la actual
+git branch -a           # incluye las que existen en el remoto
+git branch -d feature/menu   # borra una rama ya fusionada
+git branch -D feature/menu   # la borra aunque no este fusionada
+```
+
+`-d` en minúscula te protege: se niega a borrar una rama cuyo trabajo no esté en ninguna otra
+parte. `-D` no pregunta. Piensa dos veces antes de usarla.
+
+#### `git merge`
+
+Trae los commits de otra rama a la rama en la que estás parado. Importa mucho dónde estás: si
+quieres pasar `feature/menu` a `main`, primero te mueves a `main`.
+
+```bash
+git switch main
+git merge feature/menu
+git merge --abort         # cancela una fusion que quedo en conflicto
+```
+
+Si las dos ramas no tocaron las mismas líneas, la fusión es automática. Si sí, Git escribe los
+marcadores en el archivo y espera que resuelvas.
+
+### Trabajar con GitHub
+
+#### `git remote`
+
+Administra las direcciones de los repositorios remotos. `origin` es el nombre convencional del
+principal, y no tiene nada de mágico: es solo una etiqueta.
+
+```bash
+git remote -v                                        # lista los remotos configurados
+git remote add origin https://github.com/u/repo.git  # conecta con GitHub
+git remote remove origin                             # desconecta
+```
+
+#### `git clone`
+
+Descarga un repositorio completo desde GitHub, con toda su historia, y deja el remoto ya
+configurado. Es lo que usa la otra persona del equipo para bajar el repositorio la primera vez.
+
+```bash
+git clone https://github.com/usuario/proyecto.git
+```
+
+Se ejecuta **una sola vez**. Después de eso, para actualizar se usa `git pull`, no otro `clone`.
+
+#### `git push`
+
+Sube tus commits locales al remoto.
+
+```bash
+git push                              # sube la rama actual, si ya tiene remoto asignado
+git push -u origin main               # la primera vez: sube y recuerda la conexion
+git push -u origin feature/menu       # publica una rama nueva
+git push origin v0.1.0                # sube una etiqueta
+```
+
+La bandera `-u` (de *upstream*) enlaza tu rama local con la del remoto. Solo hace falta la primera
+vez que publicas esa rama.
+
+#### `git pull`
+
+Baja lo que hay en el remoto y lo fusiona con tu rama actual. Es `fetch` más `merge` en un solo
+comando.
+
+```bash
+git pull
+```
+
+Hazlo **antes** de empezar a trabajar cada día, y siempre después de que fusionen un Pull Request.
+Trabajar sobre una `main` desactualizada es la forma más común de fabricarse un conflicto
+innecesario.
+
+#### `git fetch`
+
+Baja la información del remoto pero **no** toca tus archivos. Sirve para mirar qué cambió antes de
+integrarlo.
+
+```bash
+git fetch
+git log --oneline main..origin/main   # que trae el remoto que tu no tienes
+```
+
+### Deshacer
+
+#### `git restore`
+
+Descarta cambios que todavía no están en un commit. Es el comando que se lleva trabajo por
+delante, así que lee bien cuál de las dos formas necesitas.
+
+```bash
+git restore index.html            # bota lo que editaste y no habias preparado
+git restore --staged index.html   # saca del area de preparacion, conserva la edicion
+```
+
+El primero **no tiene deshacer**: lo que botes ahí no está en ninguna parte y no se recupera.
+
+#### `git revert`
+
+Crea un commit nuevo que deshace los cambios de otro commit. Es la forma correcta de corregir algo
+que ya publicaste, porque no reescribe la historia y no rompe la copia de nadie.
+
+```bash
+git revert 4fd9bfc
+```
+
+Existe también `git reset`, que sí borra commits. No lo uses este semestre sin preguntarme: es la
+manera más rápida de perder trabajo.
+
+### Etiquetas
+
+#### `git tag`
+
+Le pone un nombre estable a un commit. Se usa para marcar entregas y versiones.
+
+```bash
+git tag                    # lista las etiquetas
+git tag v0.1.0             # etiqueta el commit actual
+git push origin v0.1.0     # la publica en GitHub
+git show v0.1.0            # muestra a que commit apunta
+```
+
+Las etiquetas **no** viajan con un `git push` normal. Hay que subirlas aparte.
+
+### Tabla de repaso
+
+| Comando | Qué hace |
+|---|---|
+| `git config --global user.name "..."` | Configura con qué nombre firmas |
+| `git init` | Crea un repositorio en la carpeta actual |
+| `git status` | Dice en qué estado está cada archivo |
+| `git add <archivo>` | Prepara un archivo para el próximo commit |
+| `git commit -m "mensaje"` | Guarda la fotografía en la historia |
+| `git commit -am "mensaje"` | Prepara y guarda de un golpe, solo archivos ya rastreados |
+| `git diff` | Muestra lo que cambiaste y aún no preparaste |
+| `git log --oneline --graph --all` | Dibuja la historia completa |
+| `git switch -c <rama>` | Crea una rama y se mueve a ella |
+| `git switch <rama>` | Se mueve a una rama existente |
+| `git branch -d <rama>` | Borra una rama ya fusionada |
+| `git merge <rama>` | Trae los commits de otra rama a la actual |
+| `git merge --abort` | Cancela una fusión en conflicto |
+| `git remote add origin <url>` | Conecta el repositorio local con GitHub |
+| `git clone <url>` | Descarga un repositorio completo |
+| `git push -u origin <rama>` | Publica una rama por primera vez |
+| `git pull` | Baja e integra los commits del remoto |
+| `git restore <archivo>` | Descarta los cambios sin preparar |
+| `git revert <hash>` | Crea un commit que deshace otro commit |
+| `git tag <nombre>` | Etiqueta el commit actual |
+
+## Tu entregable de la semana
+
+::: {.callout-important}
+## Actividad evaluativa: 10% del curso, en equipo
+
+**Con quién.** Equipos de **dos personas**. Es el equipo con el que vas a trabajar el resto del
+semestre.
+
+**Qué entregan.** Un repositorio público en GitHub con el arranque del proyecto del semestre,
+donde los dos aparecen commiteando, abriendo Pull Requests y revisando el del otro.
+
+**Cómo entregan.** Cada integrante publica el mismo comentario en la tarea de Teams:
+
+```text
+Equipo: <Apellido1> y <Apellido2>
+Repositorio: https://github.com/<usuario>/proyecto-web-<apellido1>-<apellido2>
+Commit de v0.1.0: <hash corto>
+```
+
+**Cuándo.** Antes del inicio de la sesión de la Semana 3.
+:::
+
+### El proyecto
+
+El repositorio no está vacío: arranca el proyecto que van a construir todo el semestre. Es el
+**sitio web de un negocio o emprendimiento local**, real o inventado por ustedes: una panadería,
+un taller de motos, una veterinaria, una tienda de plantas. Escojan algo concreto y pequeño, con
+productos o servicios que se puedan listar.
+
+Ese mismo proyecto crece cada unidad: en la Unidad 2 se le pone HTML y CSS de verdad, en la
+Unidad 3 pasa a ASP.NET Core con base de datos, y en la Unidad 4 termina publicado en Azure. Vale
+la pena escoger un tema que no les aburra en octubre.
+
+Esta semana el contenido es lo de menos. Tres páginas HTML simples bastan:
+
+| Archivo | Contenido mínimo |
+|---|---|
+| `index.html` | Nombre del negocio, una frase de presentación y un menú con enlaces a las otras dos páginas |
+| `servicios.html` | Una lista de tres a cinco productos o servicios |
+| `contacto.html` | Dirección, teléfono y horario, inventados si el negocio lo es |
+
+**Lo que se evalúa es el proceso de Git, no el diseño.** Una página sin estilos con un historial
+impecable saca más nota que un sitio bonito con un solo commit.
+
+### Cómo se reparte el trabajo
+
+::: {.callout-note}
+## La regla que ordena todo el entregable
+
+Nadie fusiona su propio Pull Request. Cada quien abre el suyo y **la otra persona lo revisa,
+comenta y fusiona**. Así los dos pasan por los dos lados del flujo.
+:::
+
+El montaje, paso a paso:
+
+1. **Uno de los dos crea el repositorio** en GitHub, público, con el nombre
+   `proyecto-web-<apellido1>-<apellido2>`, y sube `main` con el `README.md` y el `.gitignore`.
+2. **Invita a la otra persona como colaborador**, en `Settings`, `Collaborators`,
+   `Add people`. La invitación llega por correo y hay que aceptarla.
+3. **La otra persona clona** el repositorio con `git clone`.
+4. **Cada quien trabaja en su propia rama**, con su propio `user.name` y `user.email`
+   configurados. Repártanse las páginas: por ejemplo, uno hace `feature/servicios` y el otro
+   `feature/contacto`.
+5. **Cada quien publica su rama y abre su Pull Request**, con una descripción de dos líneas o más.
+6. **Cada quien revisa y fusiona el Pull Request del otro**, dejando al menos un comentario en la
+   pestaña **Files changed**. Un "listo" no cuenta como revisión: di algo sobre el cambio.
+7. **Provocan un conflicto a propósito y lo resuelven juntos.** Los dos editan la misma línea del
+   menú de navegación de `index.html`, cada uno en su rama. La segunda fusión choca. Documenten
+   cómo salieron de ahí.
+8. **Etiquetan `v0.1.0`** sobre el último commit y la publican.
+
+### Lo que debe contener el repositorio
+
+1. **Las tres páginas HTML** con el contenido mínimo de la tabla de arriba.
+2. **`README.md`** con: nombre del negocio, descripción de tres a cinco líneas, a quién le sirve,
+   tecnologías previstas para el semestre, cómo ejecutarlo en local y **los dos integrantes** con
+   su usuario de GitHub.
+3. **`.gitignore` efectivo** con las seis rutas mínimas del paso 3, y la prueba de que funciona:
+   existe `bin/` en la carpeta local de alguno de los dos y no aparece en GitHub.
+4. **Mínimo ocho commits**, con al menos **cuatro por integrante**, hechos en momentos distintos y
+   todos con prefijo de tipo.
+5. **Dos ramas `feature/<algo>` fusionadas mediante Pull Request**, una por persona, cada una
+   revisada y fusionada por la otra. Las ramas se borran después de fusionar.
+6. **Un conflicto resuelto**, documentado en `docs/bitacora-git.md`.
+7. **La etiqueta `v0.1.0`** publicada en el remoto.
+
+El archivo `docs/bitacora-git.md` lleva dos cosas. Primero, el reparto del trabajo:
+
+```markdown
+| Integrante | Usuario de GitHub | Qué hizo | Commits |
+|---|---|---|---|
+| Nombre 1 | @usuario1 | Pagina de servicios y README | 4fd9bfc, a3d25af, ... |
+| Nombre 2 | @usuario2 | Pagina de contacto y .gitignore | fd77b32, e4c41a6, ... |
+```
+
+Y segundo, el registro del conflicto, con cuatro datos: archivo y línea en conflicto, qué decía
+cada versión, con qué criterio escogieron el resultado, y el hash del commit de fusión.
+
+### Cómo se reparten los puntos
+
+| Criterio | Peso |
+|---|:---:|
+| Repositorio, páginas y README | 15 |
+| `.gitignore` efectivo | 10 |
+| Historial y reparto real del trabajo entre los dos | 25 |
+| Ramas, Pull Requests y revisión cruzada | 25 |
+| Conflicto resuelto y documentado | 15 |
+| Etiqueta `v0.1.0` y entrega completa | 10 |
+
+**La nota es del equipo, con un ajuste individual.** Si `git shortlog -sn` muestra que una de las
+dos personas hizo el 90% de los commits, o si alguien no abrió ni revisó ningún Pull Request, esa
+persona pierde hasta la mitad de la nota aunque el repositorio esté perfecto. Git registra autor,
+fecha y hash de cada commit: el reparto del trabajo no es declarativo, se ve en el historial.
+
+Cuatro advertencias más que valen puntos:
+
+- Un solo commit gigante con todo el trabajo saca cero en el criterio de historial, aunque el
+  contenido esté perfecto.
+- Commits de los dos hechos desde el mismo computador con la misma configuración de Git aparecen
+  con el mismo autor. Cada quien commitea desde su propia máquina y con su propio correo.
+- Un repositorio privado no se puede calificar.
+- Copiar el repositorio de otro equipo se detecta comparando historiales y se trata como fraude
+  académico.
+
+## Errores frecuentes
+
+::: {.error-caso}
+[Error 1]{.etiqueta}
+
+### fatal: not a git repository
+
+```text
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+**Causa.** La terminal no está dentro de la carpeta del proyecto, o nunca ejecutaste `git init`
+ahí.
+
+**Solución.** Comprueba dónde estás con `pwd` en macOS y Linux, o `cd` sin argumentos en Windows.
+Muévete a la carpeta del proyecto y vuelve a intentar. En VS Code, abre la carpeta con **File**,
+**Open Folder** y usa la terminal integrada: siempre arranca en la carpeta correcta.
+:::
+
+::: {.error-caso}
+[Error 2]{.etiqueta}
+
+### fatal: No configured push destination
+
+```text
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+```
+
+**Causa.** El repositorio local no sabe a dónde subir. Falta el remoto.
+
+**Solución.**
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/taller-git.git
+git push -u origin main
+```
+
+Para revisar qué remotos tienes configurados: `git remote -v`.
+:::
+
+::: {.error-caso}
+[Error 3]{.etiqueta}
+
+### El archivo sigue subiéndose pese al .gitignore
+
+**Causa.** El `.gitignore` solo funciona sobre archivos que Git **todavía no rastrea**. Si ya
+commiteaste `bin/salida.txt`, agregarlo al `.gitignore` después no lo saca del repositorio.
+
+Si intentas agregar un archivo ya ignorado, Git te avisa:
+
+```text
+The following paths are ignored by one of your .gitignore files:
+bin
+hint: Use -f if you really want to add them.
+```
+
+**Solución.** Sácalo del rastreo sin borrarlo de tu disco, y commitea ese cambio:
+
+```bash
+git rm --cached -r bin
+git commit -m "chore: deja de rastrear la carpeta bin"
+```
+:::
+
+::: {.error-caso}
+[Error 4]{.etiqueta}
+
+### Quedaron marcadores de conflicto en el archivo
+
+**Causa.** Resolviste el conflicto eligiendo el texto correcto pero olvidaste borrar las líneas
+`<<<<<<<`, `=======` y `>>>>>>>`. El navegador las va a mostrar como texto y el código deja de
+funcionar.
+
+**Solución.** Búscalas en todo el proyecto antes de commitear:
+
+```bash
+git grep -n "<<<<<<<"
+```
+
+Si no responde nada, está limpio.
+:::
+
+::: {.error-caso}
+[Error 5]{.etiqueta}
+
+### warning: LF will be replaced by CRLF
+
+```text
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+```
+
+**Causa.** Windows termina las líneas con dos caracteres y el resto del mundo con uno. Git está
+avisando que va a hacer la conversión.
+
+**Solución.** Ninguna. Es una advertencia, no un error, y el commit se hizo igual. Aparece solo en
+Windows y puedes ignorarla todo el semestre.
+:::
+
+## Lista de chequeo de la semana
+
+::: {.checklist}
+**Antes de entregar, revisen los dos que tienen todo esto**
+
+- [ ] `git config --global --list` muestra el nombre y el correo de cada quien, distintos
+- [ ] El repositorio del equipo es público y las dos personas aparecen como colaboradoras
+- [ ] Están `index.html`, `servicios.html` y `contacto.html`, y el menú lleva a las tres
+- [ ] El README se ve renderizado en la portada y nombra a los dos integrantes
+- [ ] Existe `bin/` en la carpeta local y no aparece en GitHub
+- [ ] `git rev-list --count HEAD` responde 8 o más
+- [ ] `git shortlog -sn` muestra a los dos, con cuatro commits o más cada uno
+- [ ] Todos los mensajes de `git log --oneline` empiezan con un prefijo de tipo
+- [ ] La pestaña Pull requests muestra dos fusionados, uno abierto por cada persona
+- [ ] Cada Pull Request tiene descripción y un comentario de la otra persona
+- [ ] `git log --oneline --graph` muestra el commit de fusión con dos padres
+- [ ] `git grep -n "<<<<<<<"` no responde nada
+- [ ] `docs/bitacora-git.md` trae la tabla de reparto y el conflicto con los cuatro datos
+- [ ] La etiqueta `v0.1.0` aparece en la sección Tags de GitHub
+- [ ] Los dos publicaron el enlace y el hash en la tarea de Teams
+:::
+
+## Recursos
+
+- Documentación oficial de Git: [git-scm.com/doc](https://git-scm.com/doc)
+- Chacon, S. y Straub, B. *Pro Git*, en español y gratuito:
+  [git-scm.com/book/es/v2](https://git-scm.com/book/es/v2). Capítulos 1, 2 y 3.
+- Guía de inicio de GitHub:
+  [docs.github.com/es/get-started](https://docs.github.com/es/get-started)
+- Sobre Pull Requests:
+  [docs.github.com/es/pull-requests](https://docs.github.com/es/pull-requests)
+- Invitar colaboradores a un repositorio:
+  [docs.github.com/es/account-and-profile](https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings)
+- Plantillas de `.gitignore` por tecnología: [gitignore.io](https://www.toptal.com/developers/gitignore)
+- Convención de mensajes de commit:
+  [conventionalcommits.org/es](https://www.conventionalcommits.org/es/v1.0.0/)
+- Diapositivas de la sesión: [presentación de la Semana 2](presentacion.qmd)
+
+::: {.pie-doc}
+Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado. Las
+salidas de terminal son capturas reales tomadas durante la preparación del material.
+:::

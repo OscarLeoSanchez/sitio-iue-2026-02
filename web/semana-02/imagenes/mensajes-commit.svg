@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="300" viewBox="0 0 900 300" role="img" aria-label="Comparacion de mensajes de commit: los vagos como cambios o asdf frente a los que describen el cambio con un prefijo de tipo" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="30" width="330" height="240" rx="12" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.8"/>
+  <text x="76" y="70" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="19" font-weight="700" fill="#a32d22">Así no</text>
+  <g stroke="#c0392b" stroke-width="2.2" fill="none">
+    <path d="M78,110 l12,12 M90,110 l-12,12"/>
+    <path d="M78,148 l12,12 M90,148 l-12,12"/>
+    <path d="M78,186 l12,12 M90,186 l-12,12"/>
+    <path d="M78,224 l12,12 M90,224 l-12,12"/>
+  </g>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="14" fill="#5b6876">
+    <text x="110" y="121">cambios</text>
+    <text x="110" y="159">arreglos</text>
+    <text x="110" y="197">asdf</text>
+    <text x="110" y="235">update final ahora si</text>
+  </g>
+  <rect x="450" y="30" width="400" height="240" rx="12" fill="#f2faf6" stroke="#a9d6bd" stroke-width="1.8"/>
+  <text x="476" y="70" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="19" font-weight="700" fill="#2e7d5b">Así sí</text>
+  <g stroke="#2e7d5b" stroke-width="2.4" fill="none" stroke-linecap="round">
+    <path d="M478,116 l7,7 l13,-14"/>
+    <path d="M478,154 l7,7 l13,-14"/>
+    <path d="M478,192 l7,7 l13,-14"/>
+    <path d="M478,230 l7,7 l13,-14"/>
+  </g>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13.5" fill="#16202b">
+    <text x="512" y="121">feat: agrega la página de contacto</text>
+    <text x="512" y="159">fix: corrige el enlace del menú</text>
+    <text x="512" y="197">docs: completa el README</text>
+    <text x="512" y="235">chore: agrega el gitignore</text>
+  </g>
+</svg>

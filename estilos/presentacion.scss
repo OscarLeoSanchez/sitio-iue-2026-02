@@ -1,0 +1,201 @@
+/*-- scss:defaults --*/
+
+// Tema claro para las diapositivas. Comparte la paleta de estilo.scss para que
+// los diagramas SVG se vean como parte de la misma familia.
+
+$font-family-sans-serif: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+$font-family-monospace: "Cascadia Mono", "Consolas", "SFMono-Regular", monospace;
+
+$azul-900: #0f2540;
+$azul-700: #17456f;
+$azul-500: #2f7bb8;
+$teal-500: #0e8f8f;
+$gris-050: #f6f8fa;
+$gris-100: #eef2f6;
+$gris-300: #cfd8e3;
+$gris-600: #5b6876;
+$gris-900: #16202b;
+$rojo-700: #a32d22;
+$verde-700: #2e7d5b;
+
+$body-bg: #fcfdfe;
+$body-color: $gris-900;
+$link-color: $azul-700;
+$code-color: #9b2c5e;
+
+$presentation-font-size-root: 32px;
+$presentation-heading-color: $azul-900;
+$presentation-heading-font-weight: 700;
+$presentation-h2-font-size: 1.35em;
+$presentation-h3-font-size: 1.05em;
+$code-block-font-size: 0.72em;
+
+/*-- scss:rules --*/
+
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal h1,
+.reveal h2 {
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.reveal h2 {
+  margin-bottom: 0.55em;
+  padding-bottom: 0.18em;
+  border-bottom: 3px solid $gris-100;
+}
+
+.reveal p,
+.reveal li {
+  line-height: 1.5;
+}
+
+.reveal ul {
+  margin-left: 0.6em;
+}
+
+.reveal li {
+  margin-bottom: 0.35em;
+}
+
+.reveal li::marker {
+  color: $azul-500;
+}
+
+.reveal strong {
+  color: $azul-900;
+}
+
+/* Diagramas. Llevan dimensiones propias, asi que basta con acotar el alto para
+   que ninguno se salga de la diapositiva. */
+.reveal .slides img {
+  display: block;
+  margin: 0.3em auto 0;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+}
+
+/* Diapositiva de solo diagrama: el dibujo puede ocupar mas alto */
+.reveal .solo-diagrama img {
+  max-height: 76vh;
+}
+
+/* Codigo */
+.reveal code {
+  color: $code-color;
+  background: $gris-100;
+  padding: 0.08em 0.3em;
+  border-radius: 4px;
+}
+
+.reveal pre {
+  box-shadow: none;
+  border: 1px solid $gris-300;
+  border-radius: 8px;
+  background: $gris-050;
+  width: 100%;
+}
+
+.reveal pre code {
+  background: transparent;
+  color: $gris-900;
+  padding: 0.7em 0.9em;
+  max-height: none;
+}
+
+/* Portada */
+.reveal .title-slide h1.title {
+  font-size: 2.1em;
+  color: $azul-900;
+  margin-bottom: 0.25em;
+}
+
+.reveal .title-slide p.subtitle {
+  font-size: 0.95em;
+  color: $gris-600;
+  font-weight: 400;
+  border-top: 3px solid $teal-500;
+  padding-top: 0.5em;
+  display: inline-block;
+}
+
+/* Hash de commit: los siete primeros caracteres resaltados */
+.reveal .hash {
+  font-family: $font-family-monospace;
+  font-size: 1.15em;
+  color: $gris-300;
+  background: $gris-050;
+  border: 1px solid $gris-300;
+  border-radius: 8px;
+  padding: 0.5em 0.7em;
+  margin-bottom: 0.8em;
+  word-break: break-all;
+}
+
+.reveal .hash-corto {
+  color: $code-color;
+  font-weight: 700;
+}
+
+/* Frase grande, para las diapositivas que llevan una sola idea */
+.reveal .grande {
+  font-size: 1.35em;
+  font-weight: 650;
+  color: $azul-900;
+  line-height: 1.3;
+}
+
+/* Pregunta suelta, en rojo tenue */
+.reveal .pregunta {
+  color: $rojo-700;
+  font-weight: 650;
+}
+
+/* Aviso */
+.reveal .aviso {
+  background: #fdf3f2;
+  border-left: 6px solid #c0392b;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  color: $rojo-700;
+}
+
+/* Regla numerada del cierre */
+.reveal .regla {
+  background: $gris-050;
+  border: 1px solid $gris-300;
+  border-left: 6px solid $teal-500;
+  border-radius: 8px;
+  padding: 0.55em 0.9em;
+  margin-bottom: 0.5em;
+}
+
+/* Dos columnas con aire */
+.reveal .columns {
+  gap: 1.4em;
+}
+
+/* Pie del cierre, discreto */
+.reveal .nota-final {
+  font-size: 0.5em;
+  color: $gris-600;
+  margin-top: 2em;
+  border-top: 1px solid $gris-300;
+  padding-top: 0.6em;
+}
+
+/* Barra de progreso en el azul de la familia */
+.reveal .progress {
+  color: $azul-500;
+  height: 4px;
+}
+
+.reveal .controls {
+  color: $gris-300;
+}

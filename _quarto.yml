@@ -43,6 +43,10 @@ website:
           contents:
             - text: "Semana 1. Entornos de desarrollo"
               href: web/semana-01/index.qmd
+            - text: "Semana 2. Git y GitHub"
+              href: web/semana-02/index.qmd
+            - text: "Semana 2. Diapositivas"
+              href: web/semana-02/presentacion.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

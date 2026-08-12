@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="Anatomia de un mensaje de commit: un prefijo de tipo, dos puntos y la descripcion del cambio, con el significado de feat, fix, docs, style y chore" xmlns="http://www.w3.org/2000/svg">
+  <rect x="150" y="26" width="600" height="52" rx="10" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="21">
+    <text x="176" y="60" fill="#0e8f8f" font-weight="700">feat</text>
+    <text x="228" y="60" fill="#5b6876">:</text>
+    <text x="252" y="60" fill="#16202b">agrega la página de contacto</text>
+  </g>
+  <g stroke-width="2.5" fill="none">
+    <path d="M176,88 L228,88" stroke="#0e8f8f"/>
+    <path d="M252,88 L602,88" stroke="#17456f"/>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
+    <text x="202" y="108" fill="#0e8f8f">el tipo</text>
+    <text x="427" y="108" fill="#17456f">qué hiciste, en presente</text>
+  </g>
+  <rect x="60" y="132" width="780" height="200" rx="12" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.5"/>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="16" font-weight="700" fill="#0e8f8f">
+    <text x="92" y="172">feat:</text>
+    <text x="92" y="204">fix:</text>
+    <text x="92" y="236">docs:</text>
+    <text x="92" y="268">style:</text>
+    <text x="92" y="300">chore:</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" fill="#16202b">
+    <text x="200" y="172">algo nuevo que antes no existía</text>
+    <text x="200" y="204">arreglaste algo que estaba mal</text>
+    <text x="200" y="236">documentación, README, comentarios</text>
+    <text x="200" y="268">formato o acomodo, sin cambiar el comportamiento</text>
+    <text x="200" y="300">mantenimiento: configuración, dependencias, gitignore</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#5b6876" text-anchor="end">
+    <text x="820" y="172">una página nueva</text>
+    <text x="820" y="204">un enlace roto</text>
+    <text x="820" y="236">el README</text>
+    <text x="820" y="268">ordenar el CSS</text>
+    <text x="820" y="300">agregar el .gitignore</text>
+  </g>
+</svg>

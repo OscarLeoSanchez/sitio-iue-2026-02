@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="330" viewBox="0 0 900 330" role="img" aria-label="El gitignore filtra: las paginas y el README van al repositorio, mientras node_modules, bin y los archivos con claves se quedan en tu maquina" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="gf-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#5b6876"/>
+    </marker>
+    <marker id="gf-punta-verde" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#2e7d5b"/>
+    </marker>
+  </defs>
+  <text x="150" y="30" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" letter-spacing="1.2" fill="#5b6876">EN TU CARPETA</text>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13">
+    <rect x="30" y="46" width="240" height="34" rx="6" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="68" fill="#16202b">index.html</text>
+    <rect x="30" y="88" width="240" height="34" rx="6" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="110" fill="#16202b">styles.css</text>
+    <rect x="30" y="130" width="240" height="34" rx="6" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="152" fill="#16202b">README.md</text>
+    <rect x="30" y="172" width="240" height="34" rx="6" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="194" fill="#5b6876">node_modules/</text>
+    <rect x="30" y="214" width="240" height="34" rx="6" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="236" fill="#5b6876">bin/</text>
+    <rect x="30" y="256" width="240" height="34" rx="6" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.5"/>
+    <text x="48" y="278" fill="#5b6876">appsettings.json</text>
+  </g>
+  <rect x="352" y="46" width="88" height="244" rx="12" fill="#e8f6f3" stroke="#0e8f8f" stroke-width="2"/>
+  <text transform="rotate(-90 396 168)" x="396" y="168" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="17" font-weight="700" fill="#0e8f8f">.gitignore</text>
+  <line x1="284" y1="168" x2="344" y2="168" stroke="#5b6876" stroke-width="2.5" marker-end="url(#gf-punta)"/>
+  <line x1="448" y1="108" x2="506" y2="108" stroke="#2e7d5b" stroke-width="2.5" marker-end="url(#gf-punta-verde)"/>
+  <line x1="448" y1="238" x2="506" y2="238" stroke="#5b6876" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#gf-punta)"/>
+  <rect x="514" y="46" width="356" height="126" rx="10" fill="#f2faf6" stroke="#a9d6bd" stroke-width="1.8"/>
+  <text x="536" y="74" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#2e7d5b">Va al repositorio</text>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#16202b">
+    <text x="536" y="104">index.html</text>
+    <text x="536" y="128">styles.css</text>
+    <text x="536" y="152">README.md</text>
+  </g>
+  <rect x="514" y="186" width="356" height="104" rx="10" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.8"/>
+  <text x="536" y="214" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#5b6876">Se queda en tu máquina</text>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#5b6876">
+    <text x="536" y="244">node_modules/   bin/</text>
+    <text x="536" y="270">claves y contraseñas</text>
+  </g>
+</svg>

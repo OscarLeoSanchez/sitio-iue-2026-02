@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="300" viewBox="0 0 900 300" role="img" aria-label="Cinco carpetas con nombres parecidos: proyecto, proyecto-v2, proyecto-final, proyecto-final2 y proyecto-final-ESTE, con tres preguntas que ninguna responde" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="pc-sombra" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <g filter="url(#pc-sombra)">
+    <g transform="translate(30,0)"><path d="M8,34 a10,10 0 0 1 10,-10 h38 l16,16 h60 a10,10 0 0 1 10,10 v58 a10,10 0 0 1 -10,10 h-114 a10,10 0 0 1 -10,-10 z" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/></g>
+    <g transform="translate(200,0)"><path d="M8,34 a10,10 0 0 1 10,-10 h38 l16,16 h60 a10,10 0 0 1 10,10 v58 a10,10 0 0 1 -10,10 h-114 a10,10 0 0 1 -10,-10 z" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/></g>
+    <g transform="translate(370,0)"><path d="M8,34 a10,10 0 0 1 10,-10 h38 l16,16 h60 a10,10 0 0 1 10,10 v58 a10,10 0 0 1 -10,10 h-114 a10,10 0 0 1 -10,-10 z" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/></g>
+    <g transform="translate(540,0)"><path d="M8,34 a10,10 0 0 1 10,-10 h38 l16,16 h60 a10,10 0 0 1 10,10 v58 a10,10 0 0 1 -10,10 h-114 a10,10 0 0 1 -10,-10 z" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/></g>
+    <g transform="translate(710,0)"><path d="M8,34 a10,10 0 0 1 10,-10 h38 l16,16 h60 a10,10 0 0 1 10,10 v58 a10,10 0 0 1 -10,10 h-114 a10,10 0 0 1 -10,-10 z" fill="#fdf3f2" stroke="#c0392b" stroke-width="2"/></g>
+  </g>
+  <text x="785" y="92" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="40" font-weight="700" fill="#c0392b" opacity="0.35">?</text>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" text-anchor="middle" fill="#16202b">
+    <text x="105" y="142">proyecto</text>
+    <text x="275" y="142">proyecto-v2</text>
+    <text x="445" y="142">proyecto-final</text>
+    <text x="615" y="142">proyecto-final2</text>
+    <text x="785" y="142" fill="#a32d22">proyecto-final-ESTE</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#5b6876">
+    <text x="105" y="162">12 de mayo</text>
+    <text x="275" y="162">3 de junio</text>
+    <text x="445" y="162">28 de junio</text>
+    <text x="615" y="162">28 de junio</text>
+    <text x="785" y="162">1 de julio</text>
+  </g>
+  <g>
+    <rect x="119" y="200" width="174" height="42" rx="21" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.5"/>
+    <text x="206" y="227" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" fill="#a32d22">¿Cuál es la buena?</text>
+    <rect x="323" y="200" width="262" height="42" rx="21" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.5"/>
+    <text x="454" y="227" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" fill="#a32d22">¿Qué cambió entre v2 y final?</text>
+    <rect x="615" y="200" width="166" height="42" rx="21" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.5"/>
+    <text x="698" y="227" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" fill="#a32d22">¿Quién tocó esto?</text>
+  </g>
+</svg>

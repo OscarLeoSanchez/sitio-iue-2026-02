@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="GitHub guarda la copia de referencia y cada integrante tiene la historia completa en su computador, sincronizando con push y pull" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="rc-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#17456f"/>
+    </marker>
+    <filter id="rc-sombra" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <g filter="url(#rc-sombra)">
+    <rect x="320" y="24" width="260" height="106" rx="12" fill="#ecf6f5" stroke="#0e8f8f" stroke-width="2"/>
+    <rect x="40" y="234" width="270" height="102" rx="12" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+    <rect x="590" y="234" width="270" height="102" rx="12" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.8"/>
+  </g>
+  <text x="450" y="62" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="21" font-weight="700" fill="#0e8f8f">GitHub</text>
+  <text x="450" y="88" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="14" fill="#17456f">origin</text>
+  <text x="450" y="112" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" fill="#5b6876">la copia de referencia</text>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <text x="66" y="270" font-size="18" font-weight="700" fill="#0f2540">Ana</text>
+    <text x="66" y="296" font-size="13.5" fill="#5b6876">la historia completa</text>
+    <text x="66" y="318" font-size="13.5" fill="#5b6876">en su computador</text>
+    <text x="616" y="270" font-size="18" font-weight="700" fill="#0f2540">Beto</text>
+    <text x="616" y="296" font-size="13.5" fill="#5b6876">la historia completa</text>
+    <text x="616" y="318" font-size="13.5" fill="#5b6876">en su computador</text>
+  </g>
+  <g fill="none" stroke="#17456f" stroke-width="2.2" marker-start="url(#rc-punta)" marker-end="url(#rc-punta)">
+    <path d="M 190,228 L 330,136"/>
+    <path d="M 710,228 L 570,136"/>
+  </g>
+  <rect x="200" y="168" width="120" height="26" rx="13" fill="#ffffff" stroke="#17456f" stroke-width="1.5"/>
+  <text x="260" y="186" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#17456f">push y pull</text>
+  <rect x="580" y="168" width="120" height="26" rx="13" fill="#ffffff" stroke="#17456f" stroke-width="1.5"/>
+  <text x="640" y="186" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#17456f">push y pull</text>
+  <text x="450" y="352" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" fill="#5b6876">Cada quien tiene la historia entera. Nadie depende de estar conectado para trabajar.</text>
+</svg>
