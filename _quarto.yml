@@ -32,6 +32,8 @@ website:
           contents:
             - text: "Semana 1. Instalación del entorno"
               href: movil/semana-01/index.qmd
+            - text: "Semana 2. Flutter y Dart"
+              href: movil/semana-02/index.qmd
     - id: web
       style: docked
       background: light
