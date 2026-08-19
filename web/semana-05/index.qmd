@@ -14,6 +14,12 @@ date-format: "D [de] MMMM [de] YYYY"
 | Evaluación | 10% del curso                        |
 :::
 
+::: {.acceso}
+Diapositivas de la sesión
+
+[Abrir las diapositivas](presentacion.qmd){.btn-doc target="_blank"}
+:::
+
 ## Lo que vas a lograr
 
 Hasta ahora tu proyecto tiene control de versiones, pero ninguna página real. Esta semana la
@@ -86,7 +92,7 @@ Todo documento HTML válido tiene la misma forma mínima:
 ```
 
 ::: {.diagrama}
-![](imagenes/anatomia-html.svg){fig-alt="Anatomia de un documento HTML: DOCTYPE, la etiqueta html con su atributo lang, el head con los metadatos que no se ven, y el body con el contenido visible"}
+![](imagenes/anatomia-html.svg){fig-alt="Anatomía de un documento HTML: DOCTYPE, la etiqueta html con su atributo lang, el head con los metadatos que no se ven, y el body con el contenido visible"}
 
 Todo lo que va dentro de `head` es información sobre la página. Todo lo que va dentro de `body` es
 lo que ve la persona que la visita.
@@ -237,7 +243,7 @@ HTML5 agregó etiquetas que describen el papel de cada sección de la página, s
 por defecto:
 
 ::: {.diagrama}
-![](imagenes/layout-semantico.svg){fig-alt="Layout de una pagina con los elementos semanticos de HTML5: header arriba, nav dentro del header, main con section y article adentro, aside al lado, y footer al final"}
+![](imagenes/layout-semantico.svg){fig-alt="Layout de una página con los elementos semánticos de HTML5: header arriba, nav dentro del header, main con section y article adentro, aside al lado, y footer al final"}
 
 La misma distribución que antes se armaba solo con `div` con nombres de clase.
 :::
@@ -570,7 +576,7 @@ gana. Ese mecanismo es la **cascada**, y se resuelve con la **especificidad**: c
 selector pesa distinto.
 
 ::: {.diagrama}
-![](imagenes/cascada-especificidad.svg){fig-alt="Orden de especificidad en CSS de menor a mayor: elemento, clase o atributo o pseudo-clase, id, y estilo en linea, con important por encima de todo"}
+![](imagenes/cascada-especificidad.svg){fig-alt="Orden de especificidad en CSS de menor a mayor: elemento, clase o atributo o pseudo-clase, id, y estilo en línea, con important por encima de todo"}
 
 A igual especificidad, gana la regla que aparece más abajo en el archivo.
 :::
@@ -788,7 +794,7 @@ propiedades controlan su distribución: `justify-content` en el eje principal, `
 eje cruzado.
 
 ::: {.diagrama}
-![](imagenes/flex-propiedades.svg){fig-alt="Comparacion visual de los valores mas usados de justify-content (flex-start, center, space-between) y align-items (flex-start, center, stretch)"}
+![](imagenes/flex-propiedades.svg){fig-alt="Comparación visual de los valores más usados de justify-content (flex-start, center, space-between) y align-items (flex-start, center, stretch)"}
 :::
 
 ```css
@@ -843,7 +849,7 @@ para el esqueleto general de una página (encabezado, barra lateral, contenido, 
 cuadrícula de tarjetas.
 
 ::: {.diagrama}
-![](imagenes/grid-filas-columnas.svg){fig-alt="CSS Grid con tres columnas y dos filas, y grid-template-areas nombrando header, sidebar, main y footer sobre esa misma reticula"}
+![](imagenes/grid-filas-columnas.svg){fig-alt="CSS Grid con tres columnas y dos filas, y grid-template-areas nombrando header, sidebar, main y footer sobre esa misma retícula"}
 
 Cada área con nombre ocupa las celdas que le asignes, sin importar cuántas filas o columnas abarque.
 :::
@@ -888,7 +894,7 @@ varias celdas de una vez. La disposición completa de la página queda legible c
 bloque, sin tener que calcular filas y columnas por separado.
 
 ::: {.diagrama}
-![](imagenes/grid-vs-flexbox.svg){fig-alt="Grid o Flexbox: Flexbox para una fila o columna, como un menu o una barra de botones, y Grid para dos dimensiones a la vez, como el esqueleto de una pagina o una cuadricula de tarjetas"}
+![](imagenes/grid-vs-flexbox.svg){fig-alt="Grid o Flexbox: Flexbox para una fila o columna, como un menú o una barra de botones, y Grid para dos dimensiones a la vez, como el esqueleto de una página o una cuadrícula de tarjetas"}
 :::
 
 **Grid o Flexbox.** La pregunta que decide cuál usar es si el problema tiene una dimensión o dos.
@@ -934,7 +940,7 @@ para que pase a una sola columna en pantallas angostas.
 ### Diseño responsivo
 
 ::: {.diagrama}
-![](imagenes/mobile-first-breakpoints.svg){fig-alt="Estrategia mobile-first: el CSS base esta pensado para telefono, y cada media query con min-width agrega complejidad para pantallas mas anchas, de telefono a tablet y de tablet a escritorio"}
+![](imagenes/mobile-first-breakpoints.svg){fig-alt="Estrategia mobile-first: el CSS base está pensado para teléfono, y cada media query con min-width agrega complejidad para pantallas más anchas, de teléfono a tablet y de tablet a escritorio"}
 
 El CSS sin ninguna media query es el que rige en el teléfono. Cada `@media` agrega, nunca resta.
 :::
@@ -1087,7 +1093,7 @@ visión. Las **WCAG** (Web Content Accessibility Guidelines), publicadas por el 
 estándar de referencia, organizado en cuatro principios que se recuerdan con la sigla POUR.
 
 ::: {.diagrama}
-![](imagenes/pour.svg){fig-alt="Los cuatro principios de accesibilidad WCAG: perceptible, operable, comprensible y robusto, cada uno con un ejemplo concreto de tecnica"}
+![](imagenes/pour.svg){fig-alt="Los cuatro principios de accesibilidad WCAG: perceptible, operable, comprensible y robusto, cada uno con un ejemplo concreto de técnica"}
 :::
 
 | Principio | Qué exige | Ejemplo concreto |
@@ -1377,6 +1383,7 @@ continuar.
 - Pautas de Accesibilidad WCAG 2.2, W3C: [w3.org/TR/WCAG22](https://www.w3.org/TR/WCAG22/)
 - Diseño responsivo, web.dev: [web.dev/learn/design](https://web.dev/learn/design)
 - Soporte de navegadores por funcionalidad, Can I Use: [caniuse.com](https://caniuse.com/)
+- Diapositivas de la sesión: [presentación de la Semana 5](presentacion.qmd)
 
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.

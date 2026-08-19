@@ -299,6 +299,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
+<div class="acceso">
+<p>Diapositivas de la sesión</p>
+<p><a href="../../web/semana-05/presentacion.html" class="btn-doc" target="_blank">Abrir las diapositivas</a></p>
+</div>
 <section id="lo-que-vas-a-lograr" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
 <p>Hasta ahora tu proyecto tiene control de versiones, pero ninguna página real. Esta semana la construyes: la portada de tu proyecto, con una estructura que un lector de pantalla puede navegar, que se acomoda igual de bien en un teléfono que en un monitor, y que no se cae si le cambias el contenido.</p>
@@ -350,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="diagrama">
-<p><img src="imagenes/anatomia-html.svg" class="img-fluid" alt="Anatomia de un documento HTML: DOCTYPE, la etiqueta html con su atributo lang, el head con los metadatos que no se ven, y el body con el contenido visible"></p>
+<p><img src="imagenes/anatomia-html.svg" class="img-fluid" alt="Anatomía de un documento HTML: DOCTYPE, la etiqueta html con su atributo lang, el head con los metadatos que no se ven, y el body con el contenido visible"></p>
 <p>Todo lo que va dentro de <code>head</code> es información sobre la página. Todo lo que va dentro de <code>body</code> es lo que ve la persona que la visita.</p>
 </div>
 <p>Línea por línea:</p>
@@ -489,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Antes de HTML5, toda página se armaba con <code>&lt;div&gt;</code> anidados, distinguidos solo por atributos <code>id</code> o <code>class</code> con nombres como <code>id="header"</code> o <code>class="nav"</code>. El navegador no tenía forma de saber que ese <code>div</code> era el encabezado del sitio: para él, era un contenedor genérico igual a cualquier otro.</p>
 <p>HTML5 agregó etiquetas que describen el papel de cada sección de la página, sin cambiar cómo se ve por defecto:</p>
 <div class="diagrama">
-<p><img src="imagenes/layout-semantico.svg" class="img-fluid" alt="Layout de una pagina con los elementos semanticos de HTML5: header arriba, nav dentro del header, main con section y article adentro, aside al lado, y footer al final"></p>
+<p><img src="imagenes/layout-semantico.svg" class="img-fluid" alt="Layout de una página con los elementos semánticos de HTML5: header arriba, nav dentro del header, main con section y article adentro, aside al lado, y footer al final"></p>
 <p>La misma distribución que antes se armaba solo con <code>div</code> con nombres de clase.</p>
 </div>
 <table class="caption-top table">
@@ -782,7 +786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="cascada-especificidad-y-herencia">Cascada, especificidad y herencia</h3>
 <p>Cuando dos reglas le apuntan al mismo elemento con la misma propiedad, CSS necesita decidir cuál gana. Ese mecanismo es la <strong>cascada</strong>, y se resuelve con la <strong>especificidad</strong>: cada tipo de selector pesa distinto.</p>
 <div class="diagrama">
-<p><img src="imagenes/cascada-especificidad.svg" class="img-fluid" alt="Orden de especificidad en CSS de menor a mayor: elemento, clase o atributo o pseudo-clase, id, y estilo en linea, con important por encima de todo"></p>
+<p><img src="imagenes/cascada-especificidad.svg" class="img-fluid" alt="Orden de especificidad en CSS de menor a mayor: elemento, clase o atributo o pseudo-clase, id, y estilo en línea, con important por encima de todo"></p>
 <p>A igual especificidad, gana la regla que aparece más abajo en el archivo.</p>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p { <span class="kw">color</span><span class="ch">:</span> <span class="cn">black</span><span class="op">;</span> }              <span class="co">/* especificidad baja */</span></span>
@@ -969,7 +973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Con <code>display: flex</code> en el contenedor, sus hijos directos se vuelven <strong>elementos flex</strong> y dos propiedades controlan su distribución: <code>justify-content</code> en el eje principal, <code>align-items</code> en el eje cruzado.</p>
 <div class="diagrama">
-<p><img src="imagenes/flex-propiedades.svg" class="img-fluid" alt="Comparacion visual de los valores mas usados de justify-content (flex-start, center, space-between) y align-items (flex-start, center, stretch)"></p>
+<p><img src="imagenes/flex-propiedades.svg" class="img-fluid" alt="Comparación visual de los valores más usados de justify-content (flex-start, center, space-between) y align-items (flex-start, center, stretch)"></p>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.contenedor</span> {</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">flex</span><span class="op">;</span></span>
@@ -1005,7 +1009,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="css-grid">CSS Grid</h3>
 <p>Grid distribuye elementos en <strong>dos dimensiones a la vez</strong>: filas y columnas. Es el modelo correcto para el esqueleto general de una página (encabezado, barra lateral, contenido, pie) o para una cuadrícula de tarjetas.</p>
 <div class="diagrama">
-<p><img src="imagenes/grid-filas-columnas.svg" class="img-fluid" alt="CSS Grid con tres columnas y dos filas, y grid-template-areas nombrando header, sidebar, main y footer sobre esa misma reticula"></p>
+<p><img src="imagenes/grid-filas-columnas.svg" class="img-fluid" alt="CSS Grid con tres columnas y dos filas, y grid-template-areas nombrando header, sidebar, main y footer sobre esa misma retícula"></p>
 <p>Cada área con nombre ocupa las celdas que le asignes, sin importar cuántas filas o columnas abarque.</p>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.contenedor</span> {</span>
@@ -1033,7 +1037,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>footer  { <span class="kw">grid-area</span><span class="ch">:</span> <span class="dv">pie</span><span class="op">;</span> }</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Cada fila del <code>grid-template-areas</code> es una fila de la cuadrícula, y cada palabra dentro de las comillas es una columna: repetir el mismo nombre en celdas contiguas hace que esa área ocupe varias celdas de una vez. La disposición completa de la página queda legible con solo mirar ese bloque, sin tener que calcular filas y columnas por separado.</p>
 <div class="diagrama">
-<p><img src="imagenes/grid-vs-flexbox.svg" class="img-fluid" alt="Grid o Flexbox: Flexbox para una fila o columna, como un menu o una barra de botones, y Grid para dos dimensiones a la vez, como el esqueleto de una pagina o una cuadricula de tarjetas"></p>
+<p><img src="imagenes/grid-vs-flexbox.svg" class="img-fluid" alt="Grid o Flexbox: Flexbox para una fila o columna, como un menú o una barra de botones, y Grid para dos dimensiones a la vez, como el esqueleto de una página o una cuadrícula de tarjetas"></p>
 </div>
 <p><strong>Grid o Flexbox.</strong> La pregunta que decide cuál usar es si el problema tiene una dimensión o dos. Un menú, una barra de botones, una fila de iconos: eso es una sola dirección, Flexbox. El esqueleto general de la página, o una cuadrícula de tarjetas donde filas y columnas deben alinearse entre sí: eso son dos dimensiones a la vez, Grid. En la práctica vas a usar los dos juntos en la misma página: Grid para el esqueleto general, y Flexbox adentro de cada bloque para acomodar sus elementos internos.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1079,7 +1083,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="diseño-responsivo" class="level3">
 <h3 class="anchored" data-anchor-id="diseño-responsivo">Diseño responsivo</h3>
 <div class="diagrama">
-<p><img src="imagenes/mobile-first-breakpoints.svg" class="img-fluid" alt="Estrategia mobile-first: el CSS base esta pensado para telefono, y cada media query con min-width agrega complejidad para pantallas mas anchas, de telefono a tablet y de tablet a escritorio"></p>
+<p><img src="imagenes/mobile-first-breakpoints.svg" class="img-fluid" alt="Estrategia mobile-first: el CSS base está pensado para teléfono, y cada media query con min-width agrega complejidad para pantallas más anchas, de teléfono a tablet y de tablet a escritorio"></p>
 <p>El CSS sin ninguna media query es el que rige en el teléfono. Cada <code>@media</code> agrega, nunca resta.</p>
 </div>
 <p><strong>Mobile-first</strong> es la estrategia de escribir primero el CSS pensado para la pantalla más angosta, y luego usar media queries para <strong>agregar</strong> complejidad a medida que hay más espacio disponible. Es al revés de cómo parece natural (diseñar para escritorio y luego “achicar” para el teléfono), pero tiene una razón concreta: es más simple agregar una columna extra cuando hay espacio de sobra que quitar elementos cuando el espacio se agota, y la mayoría del tráfico de un sitio nuevo entra desde un teléfono.</p>
@@ -1190,7 +1194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4" class="anchored" data-anchor-id="parte-3.-accesibilidad-web"><span class="header-section-number">4</span> Parte 3. Accesibilidad web</h2>
 <p>Una página accesible es una página que funciona para la mayor cantidad posible de personas, incluyendo quien navega con un lector de pantalla, quien no puede usar el mouse, o quien tiene baja visión. Las <strong>WCAG</strong> (Web Content Accessibility Guidelines), publicadas por el W3C, son el estándar de referencia, organizado en cuatro principios que se recuerdan con la sigla POUR.</p>
 <div class="diagrama">
-<p><img src="imagenes/pour.svg" class="img-fluid" alt="Los cuatro principios de accesibilidad WCAG: perceptible, operable, comprensible y robusto, cada uno con un ejemplo concreto de tecnica"></p>
+<p><img src="imagenes/pour.svg" class="img-fluid" alt="Los cuatro principios de accesibilidad WCAG: perceptible, operable, comprensible y robusto, cada uno con un ejemplo concreto de técnica"></p>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -1463,6 +1467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Pautas de Accesibilidad WCAG 2.2, W3C: <a href="https://www.w3.org/TR/WCAG22/">w3.org/TR/WCAG22</a></li>
 <li>Diseño responsivo, web.dev: <a href="https://web.dev/learn/design">web.dev/learn/design</a></li>
 <li>Soporte de navegadores por funcionalidad, Can I Use: <a href="https://caniuse.com/">caniuse.com</a></li>
+<li>Diapositivas de la sesión: <a href="../../web/semana-05/presentacion.html">presentación de la Semana 5</a></li>
 </ul>
 <div class="pie-doc">
 <p>Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>

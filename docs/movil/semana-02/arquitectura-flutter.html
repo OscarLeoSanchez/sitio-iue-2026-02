@@ -8,7 +8,7 @@
 
 <meta name="author" content="Oscar Leonel Sánchez Conde">
 
-<title>Arquitectura de Flutter: como se estructura un programa multiplataforma – Clases IUE 2026-02</title>
+<title>Arquitectura de Flutter: cómo se estructura un programa multiplataforma – Clases IUE 2026-02</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -190,19 +190,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta guía</h2>
    
   <ul>
-  <li><a href="#que-problema-resuelve-flutter" id="toc-que-problema-resuelve-flutter" class="nav-link active" data-scroll-target="#que-problema-resuelve-flutter"><span class="header-section-number">1</span> Que problema resuelve Flutter</a></li>
+  <li><a href="#qué-problema-resuelve-flutter" id="toc-qué-problema-resuelve-flutter" class="nav-link active" data-scroll-target="#qué-problema-resuelve-flutter"><span class="header-section-number">1</span> Qué problema resuelve Flutter</a></li>
   <li><a href="#arquitectura-en-capas-framework-engine-y-embedder" id="toc-arquitectura-en-capas-framework-engine-y-embedder" class="nav-link" data-scroll-target="#arquitectura-en-capas-framework-engine-y-embedder"><span class="header-section-number">2</span> Arquitectura en capas: framework, engine y embedder</a>
   <ul class="collapse">
   <li><a href="#el-framework-escrito-en-dart" id="toc-el-framework-escrito-en-dart" class="nav-link" data-scroll-target="#el-framework-escrito-en-dart">El framework, escrito en Dart</a></li>
   <li><a href="#el-engine-escrito-en-c" id="toc-el-engine-escrito-en-c" class="nav-link" data-scroll-target="#el-engine-escrito-en-c">El engine, escrito en C++</a></li>
-  <li><a href="#el-embedder-especifico-de-cada-plataforma" id="toc-el-embedder-especifico-de-cada-plataforma" class="nav-link" data-scroll-target="#el-embedder-especifico-de-cada-plataforma">El embedder, especifico de cada plataforma</a></li>
-  <li><a href="#por-que-flutter-dibuja-sus-propios-pixeles" id="toc-por-que-flutter-dibuja-sus-propios-pixeles" class="nav-link" data-scroll-target="#por-que-flutter-dibuja-sus-propios-pixeles">Por que Flutter dibuja sus propios pixeles</a></li>
+  <li><a href="#el-embedder-específico-de-cada-plataforma" id="toc-el-embedder-específico-de-cada-plataforma" class="nav-link" data-scroll-target="#el-embedder-específico-de-cada-plataforma">El embedder, específico de cada plataforma</a></li>
+  <li><a href="#por-qué-flutter-dibuja-sus-propios-píxeles" id="toc-por-qué-flutter-dibuja-sus-propios-píxeles" class="nav-link" data-scroll-target="#por-qué-flutter-dibuja-sus-propios-píxeles">Por qué Flutter dibuja sus propios píxeles</a></li>
   </ul></li>
-  <li><a href="#los-tres-arboles-widgets-elements-y-render-objects" id="toc-los-tres-arboles-widgets-elements-y-render-objects" class="nav-link" data-scroll-target="#los-tres-arboles-widgets-elements-y-render-objects"><span class="header-section-number">3</span> Los tres arboles: widgets, elements y render objects</a>
+  <li><a href="#los-tres-árboles-widgets-elements-y-render-objects" id="toc-los-tres-árboles-widgets-elements-y-render-objects" class="nav-link" data-scroll-target="#los-tres-árboles-widgets-elements-y-render-objects"><span class="header-section-number">3</span> Los tres árboles: widgets, elements y render objects</a>
   <ul class="collapse">
-  <li><a href="#por-que-no-basta-un-solo-arbol" id="toc-por-que-no-basta-un-solo-arbol" class="nav-link" data-scroll-target="#por-que-no-basta-un-solo-arbol">Por que no basta un solo arbol</a></li>
+  <li><a href="#por-qué-no-basta-un-solo-árbol" id="toc-por-qué-no-basta-un-solo-árbol" class="nav-link" data-scroll-target="#por-qué-no-basta-un-solo-árbol">Por qué no basta un solo árbol</a></li>
   </ul></li>
-  <li><a href="#todo-es-un-widget-composicion-sobre-herencia" id="toc-todo-es-un-widget-composicion-sobre-herencia" class="nav-link" data-scroll-target="#todo-es-un-widget-composicion-sobre-herencia"><span class="header-section-number">4</span> Todo es un widget: composicion sobre herencia</a>
+  <li><a href="#todo-es-un-widget-composición-sobre-herencia" id="toc-todo-es-un-widget-composición-sobre-herencia" class="nav-link" data-scroll-target="#todo-es-un-widget-composición-sobre-herencia"><span class="header-section-number">4</span> Todo es un widget: composición sobre herencia</a>
   <ul class="collapse">
   <li><a href="#statelesswidget-frente-a-statefulwidget" id="toc-statelesswidget-frente-a-statefulwidget" class="nav-link" data-scroll-target="#statelesswidget-frente-a-statefulwidget">StatelessWidget frente a StatefulWidget</a></li>
   <li><a href="#build-y-buildcontext" id="toc-build-y-buildcontext" class="nav-link" data-scroll-target="#build-y-buildcontext">build() y BuildContext</a></li>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#el-modelo-de-constraints" id="toc-el-modelo-de-constraints" class="nav-link" data-scroll-target="#el-modelo-de-constraints">El modelo de constraints</a></li>
   </ul></li>
-  <li><a href="#compilacion-multiplataforma-jit-en-desarrollo-aot-en-produccion" id="toc-compilacion-multiplataforma-jit-en-desarrollo-aot-en-produccion" class="nav-link" data-scroll-target="#compilacion-multiplataforma-jit-en-desarrollo-aot-en-produccion"><span class="header-section-number">7</span> Compilacion multiplataforma: JIT en desarrollo, AOT en produccion</a></li>
+  <li><a href="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" id="toc-compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="nav-link" data-scroll-target="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">7</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</a></li>
   <li><a href="#de-la-semana-02-a-lo-que-sigue" id="toc-de-la-semana-02-a-lo-que-sigue" class="nav-link" data-scroll-target="#de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">8</span> De la Semana 02 a lo que sigue</a></li>
   <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">9</span> Recursos</a></li>
   </ul>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../movil/semana-01/index.html">Unidad 1. Fundamentos del desarrollo móvil</a></li><li class="breadcrumb-item"><a href="../../movil/semana-02/arquitectura-flutter.html">Complemento: arquitectura de Flutter</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Arquitectura de Flutter: como se estructura un programa multiplataforma</h1>
+<h1 class="title">Arquitectura de Flutter: cómo se estructura un programa multiplataforma</h1>
 </div>
 
 
@@ -252,77 +252,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="que-problema-resuelve-flutter" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="que-problema-resuelve-flutter"><span class="header-section-number">1</span> Que problema resuelve Flutter</h2>
-<p>Antes de esta semana ya creaste un proyecto Flutter, lo corriste en un emulador y le diste estado propio con <code>setState</code>. Funciono, pero probablemente lo hiciste sin preguntarte que pasaba detras de cada linea. Esta guia responde esa pregunta: como esta construido Flutter por dentro, para que dejes de escribir widgets a ciegas y empieces a entender por que se comportan como se comportan.</p>
-<p>El problema que resuelve Flutter es concreto: una empresa que quiere una app en Android, en iOS, tal vez tambien en web y en escritorio, necesita hoy equipos separados por plataforma, cada uno con su propio lenguaje, su propio conjunto de bugs y su propio calendario de entregas. Flutter propone una sola base de codigo en Dart que produce apps nativas para las seis plataformas que soporta.</p>
-<p>Esa promesa suena simple, pero cumplirla no es trivial: si Flutter delegara el dibujo de la interfaz en los controles nativos de cada sistema operativo, arrastraria las inconsistencias entre plataformas que ese mismo objetivo busca evitar. La solucion que eligio el equipo de Flutter fue mas radical: no reutilizar los widgets nativos de ningun sistema operativo, sino traer su propio motor de dibujo y renderizar cada pixel por su cuenta. Entender por que esa decision funciona, y que capas hacen falta para sostenerla, es el objetivo de esta guia. Ninguna parte de lo que sigue es codigo para copiar: es el mapa conceptual que necesitas antes de seguir construyendo pantallas.</p>
+<div class="acceso">
+<p>Diapositivas de esta guía</p>
+<p><a href="../../movil/semana-02/presentacion-arquitectura-flutter.html" class="btn-doc" target="_blank">Abrir las diapositivas</a></p>
+</div>
+<section id="qué-problema-resuelve-flutter" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="qué-problema-resuelve-flutter"><span class="header-section-number">1</span> Qué problema resuelve Flutter</h2>
+<p>Antes de esta semana ya creaste un proyecto Flutter, lo corriste en un emulador y le diste estado propio con <code>setState</code>. Funcionó, pero probablemente lo hiciste sin preguntarte qué pasaba detrás de cada línea. Esta guía responde esa pregunta: cómo está construido Flutter por dentro, para que dejes de escribir widgets a ciegas y empieces a entender por qué se comportan como se comportan.</p>
+<p>El problema que resuelve Flutter es concreto: una empresa que quiere una app en Android, en iOS, tal vez también en web y en escritorio, necesita hoy equipos separados por plataforma, cada uno con su propio lenguaje, su propio conjunto de bugs y su propio calendario de entregas. Flutter propone una sola base de código en Dart que produce apps nativas para las seis plataformas que soporta.</p>
+<p>Esa promesa suena simple, pero cumplirla no es trivial: si Flutter delegara el dibujo de la interfaz en los controles nativos de cada sistema operativo, arrastraría las inconsistencias entre plataformas que ese mismo objetivo busca evitar. La solución que eligió el equipo de Flutter fue más radical: no reutilizar los widgets nativos de ningún sistema operativo, sino traer su propio motor de dibujo y renderizar cada píxel por su cuenta. Entender por qué esa decisión funciona, y qué capas hacen falta para sostenerla, es el objetivo de esta guía. Ninguna parte de lo que sigue es código para copiar: es el mapa conceptual que necesitas antes de seguir construyendo pantallas.</p>
 </section>
 <section id="arquitectura-en-capas-framework-engine-y-embedder" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="arquitectura-en-capas-framework-engine-y-embedder"><span class="header-section-number">2</span> Arquitectura en capas: framework, engine y embedder</h2>
 <p>Flutter se organiza en tres capas apiladas, cada una construida sobre la de abajo. De arriba hacia abajo: el framework, el engine y el embedder.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-capas-arquitectura.svg" class="img-fluid" alt="Tres capas de Flutter apiladas: el framework en Dart arriba, con sus subcapas foundation, rendering, widgets y Material o Cupertino; el engine en C++ en medio, con dart:ui, Impeller o Skia y los canales de plataforma; y el embedder especifico de cada sistema operativo abajo"></p>
-<p>Framework en Dart, engine en C++, embedder especifico de cada plataforma.</p>
+<p><img src="imagenes/flutter-capas-arquitectura.svg" class="img-fluid" alt="Tres capas de Flutter apiladas: el framework en Dart arriba, con sus subcapas foundation, rendering, widgets y Material o Cupertino; el engine en C++ en medio, con dart:ui, Impeller o Skia y los canales de plataforma; y el embedder específico de cada sistema operativo abajo"></p>
+<p>Framework en Dart, engine en C++, embedder específico de cada plataforma.</p>
 </div>
 <section id="el-framework-escrito-en-dart" class="level3">
 <h3 class="anchored" data-anchor-id="el-framework-escrito-en-dart">El framework, escrito en Dart</h3>
-<p>El framework es la capa que tocas todos los dias: es Dart puro, y es donde vive el codigo que escribes en <code>lib/main.dart</code>. Por dentro se organiza en subcapas, cada una construida sobre la anterior:</p>
+<p>El framework es la capa que tocas todos los días: es Dart puro, y es donde vive el código que escribes en <code>lib/main.dart</code>. Por dentro se organiza en subcapas, cada una construida sobre la anterior:</p>
 <ul>
-<li><strong>foundation.</strong> Las clases y servicios base que usa todo lo demas.</li>
-<li><strong>rendering.</strong> El arbol de objetos que calculan tamano, posicion y pintado (<code>RenderObject</code>), con el modelo de constraints que ves mas adelante en esta guia.</li>
+<li><strong>foundation.</strong> Las clases y servicios base que usa todo lo demás.</li>
+<li><strong>rendering.</strong> El árbol de objetos que calculan tamaño, posición y pintado (<code>RenderObject</code>), con el modelo de constraints que ves más adelante en esta guía.</li>
 <li><strong>widgets.</strong> Las descripciones inmutables y reactivas de la interfaz: la capa donde vive casi todo lo que escribes.</li>
-<li><strong>Material y Cupertino.</strong> La capa de diseno visual: los widgets que imitan el estilo de Android (Material Design) o de iOS (Cupertino), construidos encima de todo lo anterior.</li>
+<li><strong>Material y Cupertino.</strong> La capa de diseño visual: los widgets que imitan el estilo de Android (Material Design) o de iOS (Cupertino), construidos encima de todo lo anterior.</li>
 </ul>
-<p>Junto a estas se ubican <code>animation</code>, <code>painting</code> y <code>gestures</code>, tres librerias de la capa fundacional que dan soporte a animaciones, dibujo de bajo nivel y reconocimiento de gestos.</p>
+<p>Junto a estas se ubican <code>animation</code>, <code>painting</code> y <code>gestures</code>, tres librerías de la capa fundacional que dan soporte a animaciones, dibujo de bajo nivel y reconocimiento de gestos.</p>
 </section>
 <section id="el-engine-escrito-en-c" class="level3">
 <h3 class="anchored" data-anchor-id="el-engine-escrito-en-c">El engine, escrito en C++</h3>
-<p>El engine es la capa intermedia, escrita en C++. Expone al framework una interfaz llamada <code>dart:ui</code> y se encarga de todo lo que Dart por si solo no puede hacer: correr el runtime del lenguaje, compilarlo, calcular el layout de texto, ofrecer primitivas graficas, manejar entrada y salida de archivos y de red, y rasterizar cada frame para entregarlo a la GPU. El engine tambien aloja los canales de plataforma (platform channels) y FFI, los mecanismos que usa Flutter para comunicarse con codigo nativo cuando lo necesita, por ejemplo para leer un sensor del telefono.</p>
-<p>El rasterizado lo hace un motor de graficos que vive dentro del engine. Durante varios anos ese motor fue Skia, pero desde Flutter 3.27 Impeller es el motor por defecto en iOS (el unico disponible, sin opcion de volver a Skia) y en Android con API 29 o superior (con Vulkan disponible; si el dispositivo no lo soporta, cae a OpenGL). Desde Flutter 3.47 Impeller tambien es el motor por defecto en macOS, Linux y Windows, aunque en escritorio todavia existe una bandera para volver a Skia, una opcion que la documentacion oficial anuncia que va a desaparecer. La excepcion es Flutter Web: en 2026 sigue usando Skia compilado a WebAssembly, sin fecha confirmada de migracion a Impeller.</p>
+<p>El engine es la capa intermedia, escrita en C++. Expone al framework una interfaz llamada <code>dart:ui</code> y se encarga de todo lo que Dart por sí solo no puede hacer: correr el runtime del lenguaje, compilarlo, calcular el layout de texto, ofrecer primitivas gráficas, manejar entrada y salida de archivos y de red, y rasterizar cada frame para entregarlo a la GPU. El engine también aloja los canales de plataforma (platform channels) y FFI, los mecanismos que usa Flutter para comunicarse con código nativo cuando lo necesita, por ejemplo para leer un sensor del teléfono.</p>
+<p>El rasterizado lo hace un motor de gráficos que vive dentro del engine. Durante varios años ese motor fue Skia, pero desde Flutter 3.27 Impeller es el motor por defecto en iOS (el único disponible, sin opción de volver a Skia) y en Android con API 29 o superior (con Vulkan disponible; si el dispositivo no lo soporta, cae a OpenGL). Desde Flutter 3.47 Impeller también es el motor por defecto en macOS, Linux y Windows, aunque en escritorio todavía existe una bandera para volver a Skia, una opción que la documentación oficial anuncia que va a desaparecer. La excepción es Flutter Web: en 2026 sigue usando Skia compilado a WebAssembly, sin fecha confirmada de migración a Impeller.</p>
 </section>
-<section id="el-embedder-especifico-de-cada-plataforma" class="level3">
-<h3 class="anchored" data-anchor-id="el-embedder-especifico-de-cada-plataforma">El embedder, especifico de cada plataforma</h3>
-<p>El embedder es la capa mas baja, y es la unica que cambia por completo segun el sistema operativo. En Android esta escrito en Java o Kotlin mas C++; en iOS y macOS, en Swift u Objective-C; en Windows y Linux, en C++; en la web, se compila a JavaScript o WebAssembly. Su trabajo es alojar el engine dentro del ciclo de vida nativo de cada plataforma: gestionar la ventana o la actividad, recibir la entrada del usuario (toques, teclado, mouse), conectarse al bucle de eventos del sistema operativo y entregarle a la GPU la superficie donde Flutter va a dibujar.</p>
+<section id="el-embedder-específico-de-cada-plataforma" class="level3">
+<h3 class="anchored" data-anchor-id="el-embedder-específico-de-cada-plataforma">El embedder, específico de cada plataforma</h3>
+<p>El embedder es la capa más baja, y es la única que cambia por completo según el sistema operativo. En Android está escrito en Java o Kotlin más C++; en iOS y macOS, en Swift u Objective-C; en Windows y Linux, en C++; en la web, se compila a JavaScript o WebAssembly. Su trabajo es alojar el engine dentro del ciclo de vida nativo de cada plataforma: gestionar la ventana o la actividad, recibir la entrada del usuario (toques, teclado, mouse), conectarse al bucle de eventos del sistema operativo y entregarle a la GPU la superficie donde Flutter va a dibujar.</p>
 </section>
-<section id="por-que-flutter-dibuja-sus-propios-pixeles" class="level3">
-<h3 class="anchored" data-anchor-id="por-que-flutter-dibuja-sus-propios-pixeles">Por que Flutter dibuja sus propios pixeles</h3>
-<p>La alternativa mas obvia a esta arquitectura seria que Flutter tradujera cada widget a un control nativo del sistema operativo: un boton de Flutter se convertiria en un <code>UIButton</code> en iOS o en un <code>Button</code> de Android. Esa es, de hecho, la estrategia de otros frameworks multiplataforma. Flutter la descarta y en su lugar dibuja cada pixel por su cuenta, con su propio motor grafico, y la documentacion oficial explica esta decision con tres argumentos:</p>
+<section id="por-qué-flutter-dibuja-sus-propios-píxeles" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-flutter-dibuja-sus-propios-píxeles">Por qué Flutter dibuja sus propios píxeles</h3>
+<p>La alternativa más obvia a esta arquitectura sería que Flutter tradujera cada widget a un control nativo del sistema operativo: un botón de Flutter se convertiría en un <code>UIButton</code> en iOS o en un <code>Button</code> de Android. Esa es, de hecho, la estrategia de otros frameworks multiplataforma. Flutter la descarta y en su lugar dibuja cada píxel por su cuenta, con su propio motor gráfico, y la documentación oficial explica esta decisión con tres argumentos:</p>
 <ul>
-<li><strong>Consistencia.</strong> El mismo pixel se ve igual en todas las plataformas y en todas las versiones de sistema operativo, porque no depende de como cada fabricante implemente sus controles nativos.</li>
-<li><strong>Rendimiento.</strong> No hay una capa de traduccion entre el widget de Flutter y un control nativo: el codigo Dart compilado corre directo y renderiza directo a la GPU.</li>
+<li><strong>Consistencia.</strong> El mismo píxel se ve igual en todas las plataformas y en todas las versiones de sistema operativo, porque no depende de cómo cada fabricante implemente sus controles nativos.</li>
+<li><strong>Rendimiento.</strong> No hay una capa de traducción entre el widget de Flutter y un control nativo: el código Dart compilado corre directo y renderiza directo a la GPU.</li>
 <li><strong>Extensibilidad.</strong> Cualquier desarrollador puede crear un widget completamente nuevo, con cualquier apariencia, sin las restricciones que impone un kit de controles nativos.</li>
 </ul>
-<p>Esta decision es la raiz de todo lo que viene despues en esta guia: si Flutter dibuja sus propios pixeles, necesita su propio pipeline completo (build, layout, paint, composite y rasterizado, que ves mas adelante) y su propia forma de representar la interfaz antes de convertirla en pixeles: los tres arboles de la siguiente seccion.</p>
+<p>Esta decisión es la raíz de todo lo que viene después en esta guía: si Flutter dibuja sus propios píxeles, necesita su propio pipeline completo (build, layout, paint, composite y rasterizado, que ves más adelante) y su propia forma de representar la interfaz antes de convertirla en píxeles: los tres árboles de la siguiente sección.</p>
 </section>
 </section>
-<section id="los-tres-arboles-widgets-elements-y-render-objects" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="los-tres-arboles-widgets-elements-y-render-objects"><span class="header-section-number">3</span> Los tres arboles: widgets, elements y render objects</h2>
-<p>Cuando escribes una pantalla en Flutter, en apariencia estas describiendo un solo arbol de widgets. Por debajo, Flutter mantiene tres arboles paralelos que colaboran: el arbol de widgets, el arbol de elements y el arbol de render objects.</p>
+<section id="los-tres-árboles-widgets-elements-y-render-objects" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="los-tres-árboles-widgets-elements-y-render-objects"><span class="header-section-number">3</span> Los tres árboles: widgets, elements y render objects</h2>
+<p>Cuando escribes una pantalla en Flutter, en apariencia estás describiendo un solo árbol de widgets. Por debajo, Flutter mantiene tres árboles paralelos que colaboran: el árbol de widgets, el árbol de elements y el árbol de render objects.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-tres-arboles.svg" class="img-fluid" alt="Tres arboles paralelos de Flutter: el arbol de widgets, inmutable y recreado en cada build; el arbol de elements, mutable y persistente entre frames, que guarda el estado; y el arbol de render objects, mas pequeno, que calcula tamano posicion y pintado"></p>
+<p><img src="imagenes/flutter-tres-arboles.svg" class="img-fluid" alt="Tres árboles paralelos de Flutter: el árbol de widgets, inmutable y recreado en cada build; el árbol de elements, mutable y persistente entre frames, que guarda el estado; y el árbol de render objects, más pequeño, que calcula tamaño posición y pintado"></p>
 <p>El widget describe, el element persiste y guarda el estado, el render object calcula y pinta.</p>
 </div>
-<p>Un <strong>widget</strong> es una descripcion inmutable de configuracion. “Inmutable” quiere decir que, una vez creado, no cambia: si algo en la interfaz necesita verse distinto, Flutter no modifica el widget existente, crea uno nuevo. Esto pasa constantemente, cada vez que se ejecuta <code>build()</code>, y por eso los widgets estan disenados para ser baratos de crear y de destruir. La consecuencia directa de la inmutabilidad es que un widget no puede recordar nada por si mismo: no guarda su posicion en la jerarquia ni conserva ningun dato de un frame al siguiente.</p>
-<p>Ahi entra el <strong>element</strong>. Un element es una instancia mutable que persiste entre frames, y funciona como puente entre la configuracion (el widget) y la implementacion visual (el render object). Cada element retiene la estructura logica del arbol, y si el widget correspondiente tiene estado, es el element el que guarda el objeto <code>State</code> asociado. El <code>BuildContext</code> que recibe cada <code>build()</code> es, en realidad, una referencia a ese element: por eso te sirve para ubicar donde esta un widget dentro del arbol y para acceder a recursos que proveen los widgets ancestros.</p>
-<p>El <strong>render object</strong> es el que hace el trabajo pesado: calcula tamano, posicion y pintado en coordenadas visuales absolutas. No todo widget genera un render object, solo los que heredan de <code>RenderObjectWidget</code>; muchos widgets son puramente de composicion y no tienen contraparte directa en este arbol. Por eso el arbol de render objects es mas pequeno que el arbol de elements, no una copia exacta de el.</p>
-<section id="por-que-no-basta-un-solo-arbol" class="level3">
-<h3 class="anchored" data-anchor-id="por-que-no-basta-un-solo-arbol">Por que no basta un solo arbol</h3>
-<p>Se podria pensar que tres arboles son una complicacion innecesaria: por que no colapsar todo en una sola estructura. La documentacion oficial de Flutter da tres razones para no hacerlo.</p>
-<p>Primero, rendimiento: cuando algo cambia en el layout, Flutter solo necesita recorrer el arbol de render objects, que es mas pequeno gracias a la composicion. Segundo, separacion de responsabilidades: el protocolo de los widgets y el protocolo de los render objects se especializan cada uno en su tarea, lo que reduce la superficie de la API y el riesgo de errores. Tercero, seguridad de tipos: el arbol de render puede garantizar en tiempo de ejecucion que sus hijos usan el sistema de coordenadas correcto, mientras que los widgets de composicion pueden ser agnosticos a ese detalle.</p>
-<p>Hay ademas un motivo practico: los widgets manejan coordenadas logicas (dependientes de si el idioma se lee de izquierda a derecha o al reves), mientras que los render objects trabajan siempre en coordenadas visuales absolutas, izquierda y derecha fijas. Esa conversion ocurre una sola vez, justo en el traspaso del arbol de widgets al arbol de render, y no se repite en cada layout o cada pintado, que ocurren con mucha mas frecuencia que un build completo.</p>
-<p>Cuando el estado cambia, por ejemplo con <code>setState</code>, Flutter no recorre todo el arbol comparando cada nodo contra su version anterior. Marca como sucio (dirty) el element correspondiente, y en la siguiente fase de build recorre solo los elements sucios, saltandose los que no cambiaron. La reconciliacion tampoco es un diffing completo del arbol: para cada lista de hijos, Flutter compara tipo en tiempo de ejecucion y <code>key</code> con un algoritmo lineal. Si el widget nuevo es identico por referencia al anterior, el recorrido se corta ahi mismo. Si tipo y key coinciden, el element existente se actualiza con la nueva configuracion y conserva su <code>State</code> y su render object, sin recrearlos. Si no coinciden, el element viejo se descarta y se crea uno nuevo. Este mecanismo es el que permite que un widget padre construya una instancia nueva de un widget hijo en cada build sin que ese hijo pierda su estado interno: Flutter encuentra y reutiliza el <code>State</code> correcto por su cuenta.</p>
+<p>Un <strong>widget</strong> es una descripción inmutable de configuración. “Inmutable” quiere decir que, una vez creado, no cambia: si algo en la interfaz necesita verse distinto, Flutter no modifica el widget existente, crea uno nuevo. Esto pasa constantemente, cada vez que se ejecuta <code>build()</code>, y por eso los widgets están diseñados para ser baratos de crear y de destruir. La consecuencia directa de la inmutabilidad es que un widget no puede recordar nada por sí mismo: no guarda su posición en la jerarquía ni conserva ningún dato de un frame al siguiente.</p>
+<p>Ahí entra el <strong>element</strong>. Un element es una instancia mutable que persiste entre frames, y funciona como puente entre la configuración (el widget) y la implementación visual (el render object). Cada element retiene la estructura lógica del árbol, y si el widget correspondiente tiene estado, es el element el que guarda el objeto <code>State</code> asociado. El <code>BuildContext</code> que recibe cada <code>build()</code> es, en realidad, una referencia a ese element: por eso te sirve para ubicar dónde está un widget dentro del árbol y para acceder a recursos que proveen los widgets ancestros.</p>
+<p>El <strong>render object</strong> es el que hace el trabajo pesado: calcula tamaño, posición y pintado en coordenadas visuales absolutas. No todo widget genera un render object, solo los que heredan de <code>RenderObjectWidget</code>; muchos widgets son puramente de composición y no tienen contraparte directa en este árbol. Por eso el árbol de render objects es más pequeño que el árbol de elements, no una copia exacta de él.</p>
+<section id="por-qué-no-basta-un-solo-árbol" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-no-basta-un-solo-árbol">Por qué no basta un solo árbol</h3>
+<p>Se podría pensar que tres árboles son una complicación innecesaria: por qué no colapsar todo en una sola estructura. La documentación oficial de Flutter da tres razones para no hacerlo.</p>
+<p>Primero, rendimiento: cuando algo cambia en el layout, Flutter solo necesita recorrer el árbol de render objects, que es más pequeño gracias a la composición. Segundo, separación de responsabilidades: el protocolo de los widgets y el protocolo de los render objects se especializan cada uno en su tarea, lo que reduce la superficie de la API y el riesgo de errores. Tercero, seguridad de tipos: el árbol de render puede garantizar en tiempo de ejecución que sus hijos usan el sistema de coordenadas correcto, mientras que los widgets de composición pueden ser agnósticos a ese detalle.</p>
+<p>Hay además un motivo práctico: los widgets manejan coordenadas lógicas (dependientes de si el idioma se lee de izquierda a derecha o al revés), mientras que los render objects trabajan siempre en coordenadas visuales absolutas, izquierda y derecha fijas. Esa conversión ocurre una sola vez, justo en el traspaso del árbol de widgets al árbol de render, y no se repite en cada layout o cada pintado, que ocurren con mucha más frecuencia que un build completo.</p>
+<p>Cuando el estado cambia, por ejemplo con <code>setState</code>, Flutter no recorre todo el árbol comparando cada nodo contra su versión anterior. Marca como sucio (dirty) el element correspondiente, y en la siguiente fase de build recorre solo los elements sucios, saltándose los que no cambiaron. La reconciliación tampoco es un diffing completo del árbol: para cada lista de hijos, Flutter compara tipo en tiempo de ejecución y <code>key</code> con un algoritmo lineal. Si el widget nuevo es idéntico por referencia al anterior, el recorrido se corta ahí mismo. Si tipo y key coinciden, el element existente se actualiza con la nueva configuración y conserva su <code>State</code> y su render object, sin recrearlos. Si no coinciden, el element viejo se descarta y se crea uno nuevo. Este mecanismo es el que permite que un widget padre construya una instancia nueva de un widget hijo en cada build sin que ese hijo pierda su estado interno: Flutter encuentra y reutiliza el <code>State</code> correcto por su cuenta.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Reto 1. Por que el estado sobrevive
+<span class="screen-reader-only">Tip</span>Reto 1. Por qué el estado sobrevive
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Un widget se reconstruye por completo en cada <code>build()</code>: la instancia anterior desaparece y se crea una nueva. Aun asi, si ese widget tiene estado (por ejemplo, un contador con <code>setState</code>), ese estado no se pierde entre reconstrucciones. Con lo que acabas de leer sobre los tres arboles, explica por que el estado sobrevive aunque el widget se destruya y se vuelva a crear en cada build. No escribas codigo: responde con el mecanismo, en un parrafo.</p>
+<p>Un widget se reconstruye por completo en cada <code>build()</code>: la instancia anterior desaparece y se crea una nueva. Aun así, si ese widget tiene estado (por ejemplo, un contador con <code>setState</code>), ese estado no se pierde entre reconstrucciones. Con lo que acabas de leer sobre los tres árboles, explica por qué el estado sobrevive aunque el widget se destruya y se vuelva a crear en cada build. No escribas código: responde con el mecanismo, en un párrafo.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -331,36 +335,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Solucion del Reto 1
+<span class="screen-reader-only">Nota</span>Solución del Reto 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>El estado no vive en el widget, vive en el element. El widget es solo una descripcion inmutable que se recrea en cada build, pero el element que lo representa persiste entre frames. Cuando Flutter reconstruye el arbol, compara el widget nuevo con el anterior por tipo en tiempo de ejecucion y por <code>key</code>: si coinciden, el element existente se actualiza con la configuracion nueva pero conserva el mismo objeto <code>State</code> que ya tenia, con todos sus valores intactos. El widget muere y renace en cada build; el element, y el <code>State</code> que guarda, sobreviven mientras el tipo y la key sigan coincidiendo.</p>
+<p>El estado no vive en el widget, vive en el element. El widget es solo una descripción inmutable que se recrea en cada build, pero el element que lo representa persiste entre frames. Cuando Flutter reconstruye el árbol, compara el widget nuevo con el anterior por tipo en tiempo de ejecución y por <code>key</code>: si coinciden, el element existente se actualiza con la configuración nueva pero conserva el mismo objeto <code>State</code> que ya tenía, con todos sus valores intactos. El widget muere y renace en cada build; el element, y el <code>State</code> que guarda, sobreviven mientras el tipo y la key sigan coincidiendo.</p>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="todo-es-un-widget-composicion-sobre-herencia" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="todo-es-un-widget-composicion-sobre-herencia"><span class="header-section-number">4</span> Todo es un widget: composicion sobre herencia</h2>
-<p>La filosofia central de Flutter es que todo elemento de interfaz es un widget. No solo lo que ves en pantalla (un texto, un boton, un icono): tambien el espaciado es un widget (<code>Padding</code>), la alineacion es un widget (<code>Center</code>), la animacion es un widget (<code>AnimatedContainer</code>). Esto es una decision de diseno deliberada: en vez de que un boton tenga una propiedad interna para su relleno, envuelves ese boton con un widget <code>Padding</code> que le agrega ese comportamiento desde afuera.</p>
-<p>Esta forma de trabajar se llama composicion, y se opone a la herencia. En un modelo por herencia, para agregarle una capacidad a un componente extenderias su clase y sobrescribirias metodos. En un modelo por composicion, envuelves el componente con otro widget mas especializado, sin tocar el original. Flutter eligio composicion de forma consistente en toda su API: una interfaz compleja no es una clase gigante con muchas propiedades, es un arbol de widgets pequenos, cada uno con una sola responsabilidad, combinados unos dentro de otros.</p>
+<section id="todo-es-un-widget-composición-sobre-herencia" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="todo-es-un-widget-composición-sobre-herencia"><span class="header-section-number">4</span> Todo es un widget: composición sobre herencia</h2>
+<p>La filosofía central de Flutter es que todo elemento de interfaz es un widget. No solo lo que ves en pantalla (un texto, un botón, un icono): también el espaciado es un widget (<code>Padding</code>), la alineación es un widget (<code>Center</code>), la animación es un widget (<code>AnimatedContainer</code>). Esto es una decisión de diseño deliberada: en vez de que un botón tenga una propiedad interna para su relleno, envuelves ese botón con un widget <code>Padding</code> que le agrega ese comportamiento desde afuera.</p>
+<p>Esta forma de trabajar se llama composición, y se opone a la herencia. En un modelo por herencia, para agregarle una capacidad a un componente extenderías su clase y sobrescribirías métodos. En un modelo por composición, envuelves el componente con otro widget más especializado, sin tocar el original. Flutter eligió composición de forma consistente en toda su API: una interfaz compleja no es una clase gigante con muchas propiedades, es un árbol de widgets pequeños, cada uno con una sola responsabilidad, combinados unos dentro de otros.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-widget-tree-ejemplo.svg" class="img-fluid" alt="Ejemplo de composicion en Flutter: un boton con relleno y centrado se arma envolviendo el boton original con un widget Padding y ese resultado con un widget Center, en vez de agregar propiedades al boton"></p>
+<p><img src="imagenes/flutter-widget-tree-ejemplo.svg" class="img-fluid" alt="Ejemplo de composición en Flutter: un botón con relleno y centrado se arma envolviendo el botón original con un widget Padding y ese resultado con un widget Center, en vez de agregar propiedades al botón"></p>
 <p>Cada widget agrega una sola capacidad, envolviendo al anterior.</p>
 </div>
 <section id="statelesswidget-frente-a-statefulwidget" class="level3">
 <h3 class="anchored" data-anchor-id="statelesswidget-frente-a-statefulwidget">StatelessWidget frente a StatefulWidget</h3>
-<p>Dentro de esta filosofia, todo widget cae en una de dos categorias.</p>
-<p>Un <code>StatelessWidget</code> nunca cambia una vez construido. Su apariencia depende solo de los parametros que recibio al crearse: si esos parametros no cambian, el widget se ve siempre igual. <code>Icon</code>, <code>IconButton</code> y <code>Text</code> son ejemplos oficiales.</p>
-<p>Un <code>StatefulWidget</code> es dinamico: puede cambiar su apariencia en respuesta a una interaccion del usuario o a la llegada de nuevos datos. <code>Checkbox</code>, <code>Radio</code>, <code>Slider</code>, <code>InkWell</code>, <code>Form</code> y <code>TextField</code> son ejemplos oficiales. La clave de su dinamismo es que el estado mutable no vive en el widget mismo (que sigue siendo inmutable, como todos), sino en un objeto <code>State</code> separado, asociado al element como viste en la seccion anterior. Esa separacion es la que permite que el widget siga siendo una descripcion liviana mientras el estado persiste aparte.</p>
+<p>Dentro de esta filosofía, todo widget cae en una de dos categorías.</p>
+<p>Un <code>StatelessWidget</code> nunca cambia una vez construido. Su apariencia depende solo de los parámetros que recibió al crearse: si esos parámetros no cambian, el widget se ve siempre igual. <code>Icon</code>, <code>IconButton</code> y <code>Text</code> son ejemplos oficiales.</p>
+<p>Un <code>StatefulWidget</code> es dinámico: puede cambiar su apariencia en respuesta a una interacción del usuario o a la llegada de nuevos datos. <code>Checkbox</code>, <code>Radio</code>, <code>Slider</code>, <code>InkWell</code>, <code>Form</code> y <code>TextField</code> son ejemplos oficiales. La clave de su dinamismo es que el estado mutable no vive en el widget mismo (que sigue siendo inmutable, como todos), sino en un objeto <code>State</code> separado, asociado al element como viste en la sección anterior. Esa separación es la que permite que el widget siga siendo una descripción liviana mientras el estado persiste aparte.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-stateless-vs-stateful.svg" class="img-fluid" alt="Comparacion entre StatelessWidget, que no guarda estado y se ve siempre igual mientras no cambien sus parametros, y StatefulWidget, cuyo estado mutable vive aparte en un objeto State asociado al element"></p>
+<p><img src="imagenes/flutter-stateless-vs-stateful.svg" class="img-fluid" alt="Comparación entre StatelessWidget, que no guarda estado y se ve siempre igual mientras no cambien sus parámetros, y StatefulWidget, cuyo estado mutable vive aparte en un objeto State asociado al element"></p>
 <p>El StatelessWidget no guarda nada; el StatefulWidget delega su estado a un objeto State aparte.</p>
 </div>
-<p>La forma general de un <code>StatelessWidget</code> es minima:</p>
+<p>La forma general de un <code>StatelessWidget</code> es mínima:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode dart code-with-copy"><code class="sourceCode dart"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Saludo <span class="kw">extends</span> StatelessWidget <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> Saludo(<span class="op">{</span><span class="kw">super</span><span class="op">.</span>key<span class="op">}</span>);</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -369,49 +373,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> <span class="at">const</span> Text(<span class="st">"Hola"</span>);</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>No hay mas que eso: una clase, un constructor y un metodo <code>build()</code>.</p>
+<p>No hay más que eso: una clase, un constructor y un método <code>build()</code>.</p>
 </section>
 <section id="build-y-buildcontext" class="level3">
 <h3 class="anchored" data-anchor-id="build-y-buildcontext">build() y BuildContext</h3>
-<p>Todo widget, sea Stateless o Stateful, implementa un metodo <code>build()</code> que describe la parte de la interfaz que le corresponde, devolviendo un arbol de widgets mas basicos. En un <code>StatelessWidget</code>, <code>build()</code> vive en la propia clase del widget. En un <code>StatefulWidget</code>, <code>build()</code> vive dentro del objeto <code>State</code>, no en la clase del widget: por eso <code>_MyHomePageState</code>, que ya viste en la Semana 02, tiene su propio <code>build()</code> separado de <code>MyHomePage</code>.</p>
-<p><code>build()</code> recibe un <code>BuildContext</code> como parametro. Ya viste en la seccion anterior que el <code>BuildContext</code> es, en el fondo, una referencia al element: le dice al widget donde esta ubicado dentro del arbol, y por eso le permite acceder a informacion o recursos que proveen sus ancestros (un <code>Theme</code>, un <code>Navigator</code>, un <code>MediaQuery</code>) sin que esos ancestros necesiten conocer a sus descendientes. Es una via de comunicacion de arriba hacia abajo, no al reves.</p>
+<p>Todo widget, sea Stateless o Stateful, implementa un método <code>build()</code> que describe la parte de la interfaz que le corresponde, devolviendo un árbol de widgets más básicos. En un <code>StatelessWidget</code>, <code>build()</code> vive en la propia clase del widget. En un <code>StatefulWidget</code>, <code>build()</code> vive dentro del objeto <code>State</code>, no en la clase del widget: por eso <code>_MyHomePageState</code>, que ya viste en la Semana 02, tiene su propio <code>build()</code> separado de <code>MyHomePage</code>.</p>
+<p><code>build()</code> recibe un <code>BuildContext</code> como parámetro. Ya viste en la sección anterior que el <code>BuildContext</code> es, en el fondo, una referencia al element: le dice al widget dónde está ubicado dentro del árbol, y por eso le permite acceder a información o recursos que proveen sus ancestros (un <code>Theme</code>, un <code>Navigator</code>, un <code>MediaQuery</code>) sin que esos ancestros necesiten conocer a sus descendientes. Es una vía de comunicación de arriba hacia abajo, no al revés.</p>
 </section>
 </section>
 <section id="ciclo-de-vida-de-un-statefulwidget" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="ciclo-de-vida-de-un-statefulwidget"><span class="header-section-number">5</span> Ciclo de vida de un StatefulWidget</h2>
-<p>Ya viste como separar estado (<code>State</code>) de configuracion (<code>Widget</code>) resuelve el problema de que un widget inmutable no puede cambiar por si mismo. Falta ver cuando ocurre cada paso de ese ciclo.</p>
+<p>Ya viste cómo separar estado (<code>State</code>) de configuración (<code>Widget</code>) resuelve el problema de que un widget inmutable no puede cambiar por sí mismo. Falta ver cuándo ocurre cada paso de ese ciclo.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-ciclo-vida-stateful.svg" class="img-fluid" alt="Secuencia del ciclo de vida de un StatefulWidget: createState se llama una vez, luego initState una vez, luego build al menos una vez y cada vez que setState lo dispara, y por ultimo dispose una vez al retirar el widget del arbol"></p>
+<p><img src="imagenes/flutter-ciclo-vida-stateful.svg" class="img-fluid" alt="Secuencia del ciclo de vida de un StatefulWidget: createState se llama una vez, luego initState una vez, luego build al menos una vez y cada vez que setState lo dispara, y por último dispose una vez al retirar el widget del árbol"></p>
 <p>createState e initState corren una vez. build se repite con cada setState. dispose cierra el ciclo.</p>
 </div>
 <p>A nivel conceptual, el ciclo de vida de un <code>StatefulWidget</code> sigue esta secuencia:</p>
 <ul>
-<li><strong><code>createState()</code>.</strong> El framework llama a este metodo para crear el objeto <code>State</code> asociado al widget. Ocurre una sola vez, cuando el widget entra al arbol por primera vez.</li>
-<li><strong><code>initState()</code>.</strong> Se llama una unica vez, justo despues de crear el <code>State</code>. Es el lugar para inicializar variables o preparar cualquier cosa que el widget necesite antes de mostrarse.</li>
+<li><strong><code>createState()</code>.</strong> El framework llama a este método para crear el objeto <code>State</code> asociado al widget. Ocurre una sola vez, cuando el widget entra al árbol por primera vez.</li>
+<li><strong><code>initState()</code>.</strong> Se llama una única vez, justo después de crear el <code>State</code>. Es el lugar para inicializar variables o preparar cualquier cosa que el widget necesite antes de mostrarse.</li>
 <li><strong><code>build()</code>.</strong> Produce la interfaz visible a partir del estado actual. Se ejecuta al menos una vez al principio, y se vuelve a ejecutar cada vez que el estado cambia.</li>
-<li><strong><code>setState()</code>.</strong> No es parte de la secuencia inicial, es el disparador que la reinicia parcialmente: cuando el codigo de la aplicacion llama <code>setState()</code> (tras un toque del usuario o la llegada de un dato nuevo), le avisa al framework que el estado cambio, y eso provoca que <code>build()</code> se ejecute otra vez con los valores actualizados. Esto puede repetirse cualquier cantidad de veces mientras el widget siga vivo.</li>
-<li><strong><code>dispose()</code>.</strong> Se llama una unica vez, cuando el widget se retira permanentemente del arbol. Es el lugar para liberar recursos, cancelar subscripciones o hacer cualquier limpieza pendiente antes de que el objeto <code>State</code> desaparezca.</li>
+<li><strong><code>setState()</code>.</strong> No es parte de la secuencia inicial, es el disparador que la reinicia parcialmente: cuando el código de la aplicación llama <code>setState()</code> (tras un toque del usuario o la llegada de un dato nuevo), le avisa al framework que el estado cambió, y eso provoca que <code>build()</code> se ejecute otra vez con los valores actualizados. Esto puede repetirse cualquier cantidad de veces mientras el widget siga vivo.</li>
+<li><strong><code>dispose()</code>.</strong> Se llama una única vez, cuando el widget se retira permanentemente del árbol. Es el lugar para liberar recursos, cancelar suscripciones o hacer cualquier limpieza pendiente antes de que el objeto <code>State</code> desaparezca.</li>
 </ul>
-<p>La idea que conecta toda esta secuencia con lo que viste en la Semana 02 es que <code>setState()</code> no cambia la pantalla por si mismo: solo marca el element como sucio, tal como viste en la seccion de los tres arboles. El repintado real ocurre despues, en el pipeline de renderizado que ves a continuacion.</p>
+<p>La idea que conecta toda esta secuencia con lo que viste en la Semana 02 es que <code>setState()</code> no cambia la pantalla por sí mismo: solo marca el element como sucio, tal como viste en la sección de los tres árboles. El repintado real ocurre después, en el pipeline de renderizado que ves a continuación.</p>
 </section>
 <section id="el-pipeline-de-renderizado" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="el-pipeline-de-renderizado"><span class="header-section-number">6</span> El pipeline de renderizado</h2>
-<p>Convertir un arbol de widgets en pixeles en pantalla no es un solo paso, son cinco fases consecutivas: build, layout, paint, composite y rasterizado.</p>
+<p>Convertir un árbol de widgets en píxeles en pantalla no es un solo paso, son cinco fases consecutivas: build, layout, paint, composite y rasterizado.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-pipeline-renderizado.svg" class="img-fluid" alt="Pipeline de renderizado de Flutter en cinco fases consecutivas: build, layout, paint, composite y rasterizado, desde el arbol de widgets hasta los pixeles entregados a la GPU"></p>
+<p><img src="imagenes/flutter-pipeline-renderizado.svg" class="img-fluid" alt="Pipeline de renderizado de Flutter en cinco fases consecutivas: build, layout, paint, composite y rasterizado, desde el árbol de widgets hasta los píxeles entregados a la GPU"></p>
 <p>Cinco fases, una sola pasada por fase cuando es posible.</p>
 </div>
-<p>En <strong>build</strong>, cada widget se traduce a un element persistente, y para los que generan render object (los <code>RenderObjectWidget</code>) se crea o se actualiza el nodo correspondiente en el arbol de render. En <strong>layout</strong>, Flutter recorre el arbol de render y calcula tamano y posicion de cada nodo, con el modelo de constraints que ves en la siguiente seccion. En <strong>paint</strong>, cada render object ya dimensionado dibuja su apariencia (color, texto, bordes) sobre un canvas. En <strong>composite</strong>, lo pintado se organiza en layers y se arma una escena completa. En <strong>rasterizado</strong>, esa escena se convierte en los pixeles concretos que la GPU entrega a la pantalla, con Impeller (o Skia en la web) como motor.</p>
-<p>El principio detras de este diseno es que cada fase tiene una responsabilidad acotada y recorre el arbol una sola vez cuando es posible, en vez de acumular pasadas adicionales. Ese principio es justo el que hace posible el modelo de constraints.</p>
+<p>En <strong>build</strong>, cada widget se traduce a un element persistente, y para los que generan render object (los <code>RenderObjectWidget</code>) se crea o se actualiza el nodo correspondiente en el árbol de render. En <strong>layout</strong>, Flutter recorre el árbol de render y calcula tamaño y posición de cada nodo, con el modelo de constraints que ves en la siguiente sección. En <strong>paint</strong>, cada render object ya dimensionado dibuja su apariencia (color, texto, bordes) sobre un canvas. En <strong>composite</strong>, lo pintado se organiza en layers y se arma una escena completa. En <strong>rasterizado</strong>, esa escena se convierte en los píxeles concretos que la GPU entrega a la pantalla, con Impeller (o Skia en la web) como motor.</p>
+<p>El principio detrás de este diseño es que cada fase tiene una responsabilidad acotada y recorre el árbol una sola vez cuando es posible, en vez de acumular pasadas adicionales. Ese principio es justo el que hace posible el modelo de constraints.</p>
 <section id="el-modelo-de-constraints" class="level3">
 <h3 class="anchored" data-anchor-id="el-modelo-de-constraints">El modelo de constraints</h3>
-<p>El layout en Flutter sigue una regla fija, resumida en una frase: las constraints bajan, los tamanos suben, y el padre decide la posicion.</p>
+<p>El layout en Flutter sigue una regla fija, resumida en una frase: las constraints bajan, los tamaños suben, y el padre decide la posición.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-constraints.svg" class="img-fluid" alt="Modelo de constraints en Flutter: el padre entrega constraints de ancho y alto minimo y maximo hacia abajo, el hijo decide su tamano dentro de esos limites y lo comunica hacia arriba, y el padre decide la posicion final del hijo"></p>
-<p>Las constraints bajan, los tamanos suben, el padre decide la posicion.</p>
+<p><img src="imagenes/flutter-constraints.svg" class="img-fluid" alt="Modelo de constraints en Flutter: el padre entrega constraints de ancho y alto mínimo y máximo hacia abajo, el hijo decide su tamaño dentro de esos límites y lo comunica hacia arriba, y el padre decide la posición final del hijo"></p>
+<p>Las constraints bajan, los tamaños suben, el padre decide la posición.</p>
 </div>
-<p>Una constraint es un conjunto de cuatro numeros: ancho minimo, ancho maximo, alto minimo y alto maximo. El proceso funciona asi: el padre le entrega esas constraints a cada hijo (pueden ser distintas para cada uno); el hijo, respetando esos limites, decide su propio tamano y lo comunica hacia arriba; el padre, ya con los tamanos de todos sus hijos, decide donde posicionar a cada uno. Ningun widget puede tener el tamano que quiera libremente, solo el que le permite su padre, y ningun widget decide por si mismo su propia posicion en pantalla.</p>
-<p>Esta negociacion ocurre en una sola pasada, de arriba hacia abajo y luego de vuelta hacia arriba, sin necesidad de recalcular ni de repetir el recorrido. Por eso el costo del layout crece de forma lineal con el numero de nodos, algo que contrasta con modelos como el de CSS en la web, donde distintos modos de layout (bloque, en linea, flex, grid) pueden requerir varias pasadas y recalculos frente a un mismo cambio de contenido.</p>
+<p>Una constraint es un conjunto de cuatro números: ancho mínimo, ancho máximo, alto mínimo y alto máximo. El proceso funciona así: el padre le entrega esas constraints a cada hijo (pueden ser distintas para cada uno); el hijo, respetando esos límites, decide su propio tamaño y lo comunica hacia arriba; el padre, ya con los tamaños de todos sus hijos, decide dónde posicionar a cada uno. Ningún widget puede tener el tamaño que quiera libremente, solo el que le permite su padre, y ningún widget decide por sí mismo su propia posición en pantalla.</p>
+<p>Esta negociación ocurre en una sola pasada, de arriba hacia abajo y luego de vuelta hacia arriba, sin necesidad de recalcular ni de repetir el recorrido. Por eso el costo del layout crece de forma lineal con el número de nodos, algo que contrasta con modelos como el de CSS en la web, donde distintos modos de layout (bloque, en línea, flex, grid) pueden requerir varias pasadas y recálculos frente a un mismo cambio de contenido.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -422,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Un estudiante envuelve un <code>Container</code> con <code>width: 300</code> dentro de un <code>Row</code>, y el ancho que definio nunca se respeta en pantalla: el <code>Container</code> termina mas angosto de lo que pidio. Con el modelo de constraints que acabas de leer, explica por que puede pasar esto. No es un error de sintaxis ni un bug de Flutter.</p>
+<p>Un estudiante envuelve un <code>Container</code> con <code>width: 300</code> dentro de un <code>Row</code>, y el ancho que definió nunca se respeta en pantalla: el <code>Container</code> termina más angosto de lo que pidió. Con el modelo de constraints que acabas de leer, explica por qué puede pasar esto. No es un error de sintaxis ni un bug de Flutter.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -431,45 +435,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Solucion del Reto 2
+<span class="screen-reader-only">Nota</span>Solución del Reto 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Un widget nunca decide su propio tamano de forma absoluta, solo dentro de lo que le permiten las constraints que recibio de su padre. Si el <code>Row</code> (o algun widget mas arriba en el arbol) le esta pasando al <code>Container</code> una constraint de ancho maximo menor a 300, el <code>Container</code> no puede salirse de ese limite por mas que su propiedad <code>width</code> diga 300: las constraints bajan y mandan. El <code>width: 300</code> es una preferencia que el <code>Container</code> intenta cumplir, pero solo dentro del rango que le impuso su padre. Para confirmar la causa exacta habria que revisar que constraints esta entregando el widget padre, no el <code>Container</code> en si.</p>
+<p>Un widget nunca decide su propio tamaño de forma absoluta, solo dentro de lo que le permiten las constraints que recibió de su padre. Si el <code>Row</code> (o algún widget más arriba en el árbol) le está pasando al <code>Container</code> una constraint de ancho máximo menor a 300, el <code>Container</code> no puede salirse de ese límite por más que su propiedad <code>width</code> diga 300: las constraints bajan y mandan. El <code>width: 300</code> es una preferencia que el <code>Container</code> intenta cumplir, pero solo dentro del rango que le impuso su padre. Para confirmar la causa exacta habría que revisar qué constraints está entregando el widget padre, no el <code>Container</code> en sí.</p>
 </div>
 </div>
 </div>
-<p>Todo lo que has visto hasta aca (arboles paralelos, composicion sobre herencia, ciclo de vida, pipeline de una sola pasada) converge en la misma idea: una interfaz de Flutter nunca es un widget aislado, es una jerarquia de piezas pequenas que se comunican con reglas estrictas y predecibles en cada direccion.</p>
+<p>Todo lo que has visto hasta acá (árboles paralelos, composición sobre herencia, ciclo de vida, pipeline de una sola pasada) converge en la misma idea: una interfaz de Flutter nunca es un widget aislado, es una jerarquía de piezas pequeñas que se comunican con reglas estrictas y predecibles en cada dirección.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-composicion-widgets.svg" class="img-fluid" alt="Vista general de una interfaz de Flutter como jerarquia de piezas pequenas comunicadas con reglas estrictas y predecibles: composicion sobre herencia, ciclo de vida y pipeline de una sola pasada trabajando juntos"></p>
-<p>Una interfaz de Flutter nunca es un widget aislado, es una jerarquia de piezas pequenas.</p>
+<p><img src="imagenes/flutter-composicion-widgets.svg" class="img-fluid" alt="Vista general de una interfaz de Flutter como jerarquía de piezas pequeñas comunicadas con reglas estrictas y predecibles: composición sobre herencia, ciclo de vida y pipeline de una sola pasada trabajando juntos"></p>
+<p>Una interfaz de Flutter nunca es un widget aislado, es una jerarquía de piezas pequeñas.</p>
 </div>
 </section>
 </section>
-<section id="compilacion-multiplataforma-jit-en-desarrollo-aot-en-produccion" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="compilacion-multiplataforma-jit-en-desarrollo-aot-en-produccion"><span class="header-section-number">7</span> Compilacion multiplataforma: JIT en desarrollo, AOT en produccion</h2>
-<p>Todo lo anterior explica como Flutter convierte widgets en pixeles dentro de un dispositivo. Falta la ultima pieza: como el mismo codigo Dart llega a correr, con rendimiento cercano al nativo, en Android, en iOS, en escritorio y en la web.</p>
+<section id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">7</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</h2>
+<p>Todo lo anterior explica cómo Flutter convierte widgets en píxeles dentro de un dispositivo. Falta la última pieza: cómo el mismo código Dart llega a correr, con rendimiento cercano al nativo, en Android, en iOS, en escritorio y en la web.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-compilacion-multiplataforma.svg" class="img-fluid" alt="Compilacion multiplataforma de Flutter: en desarrollo la Dart VM compila con JIT y permite recarga en caliente, en produccion el compilador AOT traduce a codigo nativo ARM o x64 antes de arrancar, y en la web dartdevc sirve para desarrollo mientras dart2js o dart2wasm compilan para produccion"></p>
-<p>JIT con recarga en caliente en desarrollo, AOT nativo en produccion, dart2js o dart2wasm en la web.</p>
+<p><img src="imagenes/flutter-compilacion-multiplataforma.svg" class="img-fluid" alt="Compilación multiplataforma de Flutter: en desarrollo la Dart VM compila con JIT y permite recarga en caliente, en producción el compilador AOT traduce a código nativo ARM o x64 antes de arrancar, y en la web dartdevc sirve para desarrollo mientras dart2js o dart2wasm compilan para producción"></p>
+<p>JIT con recarga en caliente en desarrollo, AOT nativo en producción, dart2js o dart2wasm en la web.</p>
 </div>
-<p>En desarrollo, cuando corres <code>flutter run</code> en modo debug, Dart se compila con un compilador Just In Time (JIT): la Dart VM traduce el codigo en tiempo de ejecucion. Esto permite recompilacion incremental, y esa es la base tecnica de la recarga en caliente que ya usaste en la Semana 02: Flutter inyecta el codigo nuevo en la app que sigue corriendo, sin reiniciarla. El modo debug prioriza velocidad de iteracion sobre rendimiento: no esta optimizado para produccion.</p>
-<p>En produccion, con <code>flutter build</code> o <code>flutter run --release</code>, Flutter cambia a Ahead Of Time (AOT): el compilador traduce el codigo Dart directo a codigo maquina nativo (ARM o x64) antes de que la app arranque, con eliminacion del codigo que no se usa (tree shaking). Ya no hay interprete corriendo en tiempo real, solo instrucciones nativas listas para la CPU, y por eso la recarga en caliente deja de estar disponible en modo release.</p>
-<p>Flutter Web sigue una logica parecida pero con destinos distintos: en desarrollo usa <code>dartdevc</code>, que tambien permite recarga en caliente dentro del navegador; en produccion compila a JavaScript optimizado con <code>dart2js</code>, o de forma alternativa a WebAssembly con <code>dart2wasm</code>. El soporte de Wasm es estable desde Flutter 3.24, pero en 2026 sigue siendo una opcion que hay que pedir de forma explicita con la bandera <code>--wasm</code>, no el destino de compilacion por defecto; ademas, no todos los navegadores lo soportan igual de bien: Chrome lo soporta de forma estable desde su version 119, mientras que Safari en iOS todavia no.</p>
-<p>Este modelo dual (mismo lenguaje, semantica casi identica en todos los modos) es lo que sostiene la promesa con la que abrio esta guia: una sola base de codigo Dart, escrita una vez sobre el framework que ya conoces, corre en las plataformas que Flutter soporta sin reescribirse, con rendimiento cercano al nativo porque en ningun punto del camino hay un interprete de HTML y CSS ajeno a la app, ni un puente que serialice mensajes hacia controles nativos: el codigo Dart compilado dibuja directo, con el motor propio que viste al principio de esta guia.</p>
+<p>En desarrollo, cuando corres <code>flutter run</code> en modo debug, Dart se compila con un compilador Just In Time (JIT): la Dart VM traduce el código en tiempo de ejecución. Esto permite recompilación incremental, y esa es la base técnica de la recarga en caliente que ya usaste en la Semana 02: Flutter inyecta el código nuevo en la app que sigue corriendo, sin reiniciarla. El modo debug prioriza velocidad de iteración sobre rendimiento: no está optimizado para producción.</p>
+<p>En producción, con <code>flutter build</code> o <code>flutter run --release</code>, Flutter cambia a Ahead Of Time (AOT): el compilador traduce el código Dart directo a código máquina nativo (ARM o x64) antes de que la app arranque, con eliminación del código que no se usa (tree shaking). Ya no hay intérprete corriendo en tiempo real, solo instrucciones nativas listas para la CPU, y por eso la recarga en caliente deja de estar disponible en modo release.</p>
+<p>Flutter Web sigue una lógica parecida pero con destinos distintos: en desarrollo usa <code>dartdevc</code>, que también permite recarga en caliente dentro del navegador; en producción compila a JavaScript optimizado con <code>dart2js</code>, o de forma alternativa a WebAssembly con <code>dart2wasm</code>. El soporte de Wasm es estable desde Flutter 3.24, pero en 2026 sigue siendo una opción que hay que pedir de forma explícita con la bandera <code>--wasm</code>, no el destino de compilación por defecto; además, no todos los navegadores lo soportan igual de bien: Chrome lo soporta de forma estable desde su versión 119, mientras que Safari en iOS todavía no.</p>
+<p>Este modelo dual (mismo lenguaje, semántica casi idéntica en todos los modos) es lo que sostiene la promesa con la que abrió esta guía: una sola base de código Dart, escrita una vez sobre el framework que ya conoces, corre en las plataformas que Flutter soporta sin reescribirse, con rendimiento cercano al nativo porque en ningún punto del camino hay un intérprete de HTML y CSS ajeno a la app, ni un puente que serialice mensajes hacia controles nativos: el código Dart compilado dibuja directo, con el motor propio que viste al principio de esta guía.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Reto 3. Por que el hot reload desaparece en produccion
+<span class="screen-reader-only">Tip</span>Reto 3. Por qué el hot reload desaparece en producción
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Un compañero de curso pregunta por que la recarga en caliente funciona perfecto durante el desarrollo, pero no existe en la version final que se instala en un telefono. Con lo que acabas de leer sobre JIT y AOT, explica la razon tecnica, sin usar la palabra “porque si”.</p>
+<p>Un compañero de curso pregunta por qué la recarga en caliente funciona perfecto durante el desarrollo, pero no existe en la versión final que se instala en un teléfono. Con lo que acabas de leer sobre JIT y AOT, explica la razón técnica, sin usar la palabra “porque sí”.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -478,29 +482,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Solucion del Reto 3
+<span class="screen-reader-only">Nota</span>Solución del Reto 3
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>La recarga en caliente depende de que exista un interprete corriendo en el dispositivo mientras la app esta viva: eso es exactamente lo que hace la Dart VM en modo JIT, y es lo que le permite inyectar codigo nuevo sobre la app que ya esta corriendo, sin reiniciarla. En produccion, Flutter compila con AOT: el codigo Dart ya se convirtio en instrucciones nativas antes de que la app arrancara, no hay interprete corriendo, solo binario ejecutandose directo en la CPU. Sin interprete, no hay donde inyectar codigo nuevo en caliente: cualquier cambio necesita una compilacion completa y una nueva instalacion.</p>
+<p>La recarga en caliente depende de que exista un intérprete corriendo en el dispositivo mientras la app está viva: eso es exactamente lo que hace la Dart VM en modo JIT, y es lo que le permite inyectar código nuevo sobre la app que ya está corriendo, sin reiniciarla. En producción, Flutter compila con AOT: el código Dart ya se convirtió en instrucciones nativas antes de que la app arrancara, no hay intérprete corriendo, solo binario ejecutándose directo en la CPU. Sin intérprete, no hay dónde inyectar código nuevo en caliente: cualquier cambio necesita una compilación completa y una nueva instalación.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="de-la-semana-02-a-lo-que-sigue" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">8</span> De la Semana 02 a lo que sigue</h2>
-<p>Todo lo que viste aca ya estaba presente, sin que lo notaras, en el <code>_MyHomePageState</code> que construiste la semana pasada. El <code>StatefulWidget</code> con su <code>State</code> separado, el <code>setState()</code> que marca el element como sucio, el <code>build()</code> que se vuelve a ejecutar y produce un arbol nuevo de widgets: esa app minima con un contador ya recorria, en cada toque de pantalla, el ciclo completo de esta guia, desde el widget hasta el pixel.</p>
-<p>Lo que sigue en el curso construye sobre estos cimientos, no al lado de ellos. Cuando trabajes con Material Design y con la libreria mas amplia de widgets de Flutter, cada <code>Scaffold</code>, cada <code>Column</code>, cada <code>ListView</code> que uses es, otra vez, composicion sobre herencia: piezas pequenas combinadas siguiendo las mismas reglas de constraints y del mismo pipeline que ya conoces. Entender la arquitectura no fue un desvio antes de programar interfaces: es la base que te permite leer cualquier widget nuevo con el que te encuentres el resto del semestre, y saber por que se comporta como se comporta.</p>
+<p>Todo lo que viste acá ya estaba presente, sin que lo notaras, en el <code>_MyHomePageState</code> que construiste la semana pasada. El <code>StatefulWidget</code> con su <code>State</code> separado, el <code>setState()</code> que marca el element como sucio, el <code>build()</code> que se vuelve a ejecutar y produce un árbol nuevo de widgets: esa app mínima con un contador ya recorría, en cada toque de pantalla, el ciclo completo de esta guía, desde el widget hasta el píxel.</p>
+<p>Lo que sigue en el curso construye sobre estos cimientos, no al lado de ellos. Cuando trabajes con Material Design y con la librería más amplia de widgets de Flutter, cada <code>Scaffold</code>, cada <code>Column</code>, cada <code>ListView</code> que uses es, otra vez, composición sobre herencia: piezas pequeñas combinadas siguiendo las mismas reglas de constraints y del mismo pipeline que ya conoces. Entender la arquitectura no fue un desvío antes de programar interfaces: es la base que te permite leer cualquier widget nuevo con el que te encuentres el resto del semestre, y saber por qué se comporta como se comporta.</p>
 </section>
 <section id="recursos" class="level2" data-number="9">
 <h2 data-number="9" class="anchored" data-anchor-id="recursos"><span class="header-section-number">9</span> Recursos</h2>
 <ul>
-<li>Vision arquitectonica oficial de Flutter: <a href="https://docs.flutter.dev/resources/architectural-overview" class="uri">https://docs.flutter.dev/resources/architectural-overview</a></li>
-<li>Inside Flutter, sobre los tres arboles y la reconciliacion: <a href="https://docs.flutter.dev/resources/inside-flutter" class="uri">https://docs.flutter.dev/resources/inside-flutter</a></li>
+<li>Visión arquitectónica oficial de Flutter: <a href="https://docs.flutter.dev/resources/architectural-overview" class="uri">https://docs.flutter.dev/resources/architectural-overview</a></li>
+<li>Inside Flutter, sobre los tres árboles y la reconciliación: <a href="https://docs.flutter.dev/resources/inside-flutter" class="uri">https://docs.flutter.dev/resources/inside-flutter</a></li>
 <li>Modelo de constraints en el layout: <a href="https://docs.flutter.dev/ui/layout/constraints" class="uri">https://docs.flutter.dev/ui/layout/constraints</a></li>
-<li>Modos de compilacion (JIT y AOT): <a href="https://docs.flutter.dev/testing/build-modes" class="uri">https://docs.flutter.dev/testing/build-modes</a></li>
+<li>Modos de compilación (JIT y AOT): <a href="https://docs.flutter.dev/testing/build-modes" class="uri">https://docs.flutter.dev/testing/build-modes</a></li>
 <li>Impeller, el motor de renderizado: <a href="https://docs.flutter.dev/perf/impeller" class="uri">https://docs.flutter.dev/perf/impeller</a></li>
 </ul>
 <div class="pie-doc">
