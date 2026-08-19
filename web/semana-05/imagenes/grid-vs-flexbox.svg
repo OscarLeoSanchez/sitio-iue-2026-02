@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="340" viewBox="0 0 720 340" role="img" aria-label="Grid o Flexbox: Flexbox para una fila o columna, como un menu o una barra de botones, y Grid para dos dimensiones a la vez, como el esqueleto de una pagina o una cuadricula de tarjetas" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="v1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#v1-sombra)">
+      <rect x="30" y="30" width="310" height="280" rx="10" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="185" y="58" font-size="15" font-weight="700" fill="#17456f">Flexbox</text>
+    <text x="185" y="78" font-size="11.5" fill="#5b6876">una dimension a la vez</text>
+
+    <rect x="55" y="100" width="60" height="46" rx="5" fill="#ffffff" stroke="#2f7bb8"/>
+    <rect x="125" y="100" width="60" height="46" rx="5" fill="#ffffff" stroke="#2f7bb8"/>
+    <rect x="195" y="100" width="60" height="46" rx="5" fill="#ffffff" stroke="#2f7bb8"/>
+    <text x="185" y="168" font-size="11" fill="#5b6876">Menu, barra de botones</text>
+
+    <rect x="55" y="200" width="60" height="46" rx="5" fill="#ffffff" stroke="#2f7bb8" opacity="0.9"/>
+    <rect x="55" y="200" width="60" height="46" rx="5" fill="none"/>
+    <text x="185" y="270" font-size="11" fill="#5b6876">Una fila o una columna</text>
+
+    <g filter="url(#v1-sombra)">
+      <rect x="380" y="30" width="310" height="280" rx="10" fill="#f4faf7" stroke="#0e8f8f" stroke-width="1.8"/>
+    </g>
+    <text x="535" y="58" font-size="15" font-weight="700" fill="#0e8f8f">Grid</text>
+    <text x="535" y="78" font-size="11.5" fill="#5b6876">dos dimensiones a la vez</text>
+
+    <rect x="405" y="100" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <rect x="495" y="100" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <rect x="585" y="100" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <rect x="405" y="170" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <rect x="495" y="170" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <rect x="585" y="170" width="80" height="60" rx="5" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="535" y="270" font-size="11" fill="#5b6876">Esqueleto de pagina, cuadricula de tarjetas</text>
+  </g>
+</svg>

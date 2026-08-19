@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700" height="320" viewBox="0 0 700 320" role="img" aria-label="Ejes de Flexbox: el eje principal, horizontal por defecto con flex-direction row, y el eje cruzado, perpendicular al principal" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="f1-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#17456f"/>
+    </marker>
+    <marker id="f1-punta-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#0e8f8f"/>
+    </marker>
+    <filter id="f1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <g filter="url(#f1-sombra)">
+      <rect x="60" y="60" width="580" height="180" rx="10" fill="#f6f8fa" stroke="#cfd8e3" stroke-width="1.5"/>
+    </g>
+    <text x="70" y="45" font-size="12.5" fill="#5b6876" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">.contenedor { display: flex; }</text>
+
+    <g filter="url(#f1-sombra)">
+      <rect x="90" y="105" width="130" height="90" rx="7" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.6"/>
+      <rect x="250" y="105" width="130" height="90" rx="7" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.6"/>
+      <rect x="410" y="105" width="130" height="90" rx="7" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.6"/>
+    </g>
+    <text x="155" y="155" text-anchor="middle" font-size="12" fill="#17456f">item 1</text>
+    <text x="315" y="155" text-anchor="middle" font-size="12" fill="#17456f">item 2</text>
+    <text x="475" y="155" text-anchor="middle" font-size="12" fill="#17456f">item 3</text>
+
+    <line x1="90" y1="270" x2="560" y2="270" stroke="#17456f" stroke-width="2.5" marker-end="url(#f1-punta)"/>
+    <text x="325" y="290" text-anchor="middle" font-size="12.5" font-weight="700" fill="#17456f">eje principal (main axis)</text>
+
+    <line x1="620" y1="255" x2="620" y2="70" stroke="#0e8f8f" stroke-width="2.5" marker-end="url(#f1-punta-teal)"/>
+    <text x="655" y="160" font-size="12.5" font-weight="700" fill="#0e8f8f" transform="rotate(-90 655 160)">eje cruzado (cross axis)</text>
+  </g>
+</svg>

@@ -34,6 +34,8 @@ website:
               href: movil/semana-01/index.qmd
             - text: "Semana 2. Flutter y Dart"
               href: movil/semana-02/index.qmd
+            - text: "Complemento: arquitectura de Flutter"
+              href: movil/semana-02/arquitectura-flutter.qmd
     - id: web
       style: docked
       background: light
@@ -49,6 +51,10 @@ website:
             # boton que esta al inicio de la guia de la semana.
             - text: "Semana 2. Git y GitHub"
               href: web/semana-02/index.qmd
+        - section: "Unidad 2. Frontend"
+          contents:
+            - text: "Semana 5. HTML5 y CSS3"
+              href: web/semana-05/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

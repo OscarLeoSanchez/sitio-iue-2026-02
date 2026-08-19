@@ -40,7 +40,7 @@ calendario completo para que planees tu trabajo.
 ::: {.calendario}
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 05 | HTML5 y CSS3 | Página principal adaptada a móvil y escritorio | **10%** |
+| **[05](semana-05/index.qmd)** | HTML5 y CSS3 | Página principal adaptada a móvil y escritorio | **10%** |
 | 06 | Frameworks CSS: Bootstrap 5 y Tailwind CSS | Sección del proyecto rehecha en cada framework, con sustentación | - |
 | 07 | JavaScript ES6 y manipulación del DOM | Comportamiento dinámico sin recarga de página | - |
 | 08 | Consumo básico de APIs | Frontend integrado con una API pública | **10%** |

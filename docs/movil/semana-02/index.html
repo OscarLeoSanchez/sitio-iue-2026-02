@@ -172,6 +172,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Semana 2. Flutter y Dart</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../movil/semana-02/arquitectura-flutter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complemento: arquitectura de Flutter</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -248,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14 de agosto de 2026</p>
+      <p class="date">18 de agosto de 2026</p>
     </div>
   </div>
   
@@ -1605,6 +1611,10 @@ Your empty application code is in demo_flags\lib\main.dart.</code></pre>
 <p>Un <code>StatelessWidget</code> no guarda nada: una vez construido, se ve siempre igual mientras no cambien sus parámetros de entrada. Un <code>StatefulWidget</code> sí guarda datos propios, en un objeto <code>State</code> aparte, y puede reconstruirse a sí mismo cuando esos datos cambian.</p>
 <div class="diagrama">
 <p><img src="imagenes/anatomia-statefulwidget.svg" class="img-fluid" alt="Ciclo minimo de un StatefulWidget: el usuario toca un boton, el codigo llama a setState, Flutter vuelve a ejecutar build y la pantalla se repinta con el nuevo valor"></p>
+</div>
+<div class="acceso">
+<p>Complemento: arquitectura de Flutter</p>
+<p><a href="../../movil/semana-02/arquitectura-flutter.html" class="btn-doc">Como se estructura un programa Flutter</a></p>
 </div>
 <p>En <code>hola_iue/lib/main.dart</code>, <code>MyApp</code> es un <code>StatelessWidget</code> (nunca cambia) y <code>MyHomePage</code> es un <code>StatefulWidget</code> cuyo estado vive en <code>_MyHomePageState</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode dart code-with-copy"><code class="sourceCode dart"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _MyHomePageState <span class="kw">extends</span> State<span class="op">&lt;</span>MyHomePage<span class="op">&gt;</span> <span class="op">{</span></span>

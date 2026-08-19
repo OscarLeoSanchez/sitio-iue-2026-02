@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="CSS Grid con tres columnas y dos filas, y grid-template-areas nombrando header, sidebar, main y footer sobre esa misma reticula" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="g1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <text x="320" y="24" font-size="12.5" fill="#5b6876" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">display: grid; grid-template-columns: 220px 1fr 1fr;</text>
+
+    <g filter="url(#g1-sombra)">
+      <rect x="40" y="40" width="560" height="60" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="320" y="75" font-size="13" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">header</text>
+
+    <g filter="url(#g1-sombra)">
+      <rect x="40" y="112" width="150" height="220" rx="8" fill="#fdf7ec" stroke="#c9a24a" stroke-width="1.8"/>
+    </g>
+    <text x="115" y="226" font-size="13" font-weight="700" fill="#8a651e" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">sidebar</text>
+
+    <g filter="url(#g1-sombra)">
+      <rect x="202" y="112" width="398" height="220" rx="8" fill="#ffffff" stroke="#0e8f8f" stroke-width="1.8"/>
+    </g>
+    <text x="401" y="226" font-size="13" font-weight="700" fill="#0e8f8f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">main</text>
+
+    <g filter="url(#g1-sombra)">
+      <rect x="40" y="344" width="560" height="50" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="320" y="374" font-size="13" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">footer</text>
+  </g>
+</svg>

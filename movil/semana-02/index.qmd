@@ -1483,6 +1483,12 @@ aparte, y puede reconstruirse a sí mismo cuando esos datos cambian.
 ![](imagenes/anatomia-statefulwidget.svg){fig-alt="Ciclo minimo de un StatefulWidget: el usuario toca un boton, el codigo llama a setState, Flutter vuelve a ejecutar build y la pantalla se repinta con el nuevo valor"}
 :::
 
+::: {.acceso}
+Complemento: arquitectura de Flutter
+
+[Como se estructura un programa Flutter](arquitectura-flutter.qmd){.btn-doc}
+:::
+
 En `hola_iue/lib/main.dart`, `MyApp` es un `StatelessWidget` (nunca cambia) y `MyHomePage` es un
 `StatefulWidget` cuyo estado vive en `_MyHomePageState`:
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="300" viewBox="0 0 720 300" role="img" aria-label="Los cuatro principios de accesibilidad WCAG: perceptible, operable, comprensible y robusto, cada uno con un ejemplo concreto de tecnica" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="w1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#w1-sombra)">
+      <rect x="20" y="40" width="160" height="220" rx="10" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+      <rect x="190" y="40" width="160" height="220" rx="10" fill="#f4faf7" stroke="#0e8f8f" stroke-width="1.8"/>
+      <rect x="360" y="40" width="160" height="220" rx="10" fill="#fdf7ec" stroke="#c9a24a" stroke-width="1.8"/>
+      <rect x="530" y="40" width="170" height="220" rx="10" fill="#fbe9e7" stroke="#c0392b" stroke-width="1.8"/>
+    </g>
+
+    <text x="100" y="70" font-size="14" font-weight="700" fill="#17456f">Perceptible</text>
+    <text x="100" y="100" font-size="10.5" fill="#5b6876">La informacion se</text>
+    <text x="100" y="115" font-size="10.5" fill="#5b6876">percibe de mas</text>
+    <text x="100" y="130" font-size="10.5" fill="#5b6876">de una forma</text>
+    <rect x="35" y="150" width="130" height="90" rx="6" fill="#ffffff" stroke="#cfd8e3"/>
+    <text x="100" y="180" font-size="10" fill="#17456f" font-weight="700">alt en imagenes</text>
+    <text x="100" y="200" font-size="10" fill="#17456f" font-weight="700">contraste de color</text>
+
+    <text x="270" y="70" font-size="14" font-weight="700" fill="#0e8f8f">Operable</text>
+    <text x="270" y="100" font-size="10.5" fill="#5b6876">Se usa sin depender</text>
+    <text x="270" y="115" font-size="10.5" fill="#5b6876">de un solo dispositivo</text>
+    <text x="270" y="130" font-size="10.5" fill="#5b6876">de entrada</text>
+    <rect x="205" y="150" width="130" height="90" rx="6" fill="#ffffff" stroke="#cfd8e3"/>
+    <text x="270" y="180" font-size="10" fill="#0e8f8f" font-weight="700">navegacion con</text>
+    <text x="270" y="196" font-size="10" fill="#0e8f8f" font-weight="700">teclado, foco visible</text>
+
+    <text x="440" y="70" font-size="14" font-weight="700" fill="#8a651e">Comprensible</text>
+    <text x="440" y="100" font-size="10.5" fill="#5b6876">El contenido y su</text>
+    <text x="440" y="115" font-size="10.5" fill="#5b6876">funcionamiento</text>
+    <text x="440" y="130" font-size="10.5" fill="#5b6876">se entienden</text>
+    <rect x="375" y="150" width="130" height="90" rx="6" fill="#ffffff" stroke="#cfd8e3"/>
+    <text x="440" y="180" font-size="10" fill="#8a651e" font-weight="700">idioma declarado,</text>
+    <text x="440" y="196" font-size="10" fill="#8a651e" font-weight="700">label en formularios</text>
+
+    <text x="615" y="70" font-size="14" font-weight="700" fill="#a32d22">Robusto</text>
+    <text x="615" y="100" font-size="10.5" fill="#5b6876">Funciona con distintas</text>
+    <text x="615" y="115" font-size="10.5" fill="#5b6876">tecnologias, incluida</text>
+    <text x="615" y="130" font-size="10.5" fill="#5b6876">la de asistencia</text>
+    <rect x="550" y="150" width="130" height="90" rx="6" fill="#ffffff" stroke="#cfd8e3"/>
+    <text x="615" y="180" font-size="10" fill="#a32d22" font-weight="700">HTML valido</text>
+    <text x="615" y="196" font-size="10" fill="#a32d22" font-weight="700">y semantico</text>
+  </g>
+</svg>

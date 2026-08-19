@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-02/presentacion.html</loc>
-    <lastmod>2026-08-12T01:59:52.990Z</lastmod>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-05/index.html</loc>
+    <lastmod>2026-08-19T02:31:28.763Z</lastmod>
   </url>
   <url>
-    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-01/index.html</loc>
-    <lastmod>2026-08-09T20:19:02.034Z</lastmod>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-02/index.html</loc>
+    <lastmod>2026-08-12T04:11:52.861Z</lastmod>
   </url>
   <url>
-    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-02/index.html</loc>
-    <lastmod>2026-08-15T04:07:54.948Z</lastmod>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/index.html</loc>
+    <lastmod>2026-08-19T02:32:07.650Z</lastmod>
+  </url>
+  <url>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-02/arquitectura-flutter.html</loc>
+    <lastmod>2026-08-19T03:02:47.086Z</lastmod>
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/index.html</loc>
@@ -25,11 +29,15 @@
     <lastmod>2026-08-09T18:21:11.078Z</lastmod>
   </url>
   <url>
-    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/index.html</loc>
-    <lastmod>2026-08-11T23:26:31.845Z</lastmod>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-02/index.html</loc>
+    <lastmod>2026-08-19T03:02:56.178Z</lastmod>
   </url>
   <url>
-    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-02/index.html</loc>
-    <lastmod>2026-08-12T04:11:52.861Z</lastmod>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-01/index.html</loc>
+    <lastmod>2026-08-09T20:19:02.034Z</lastmod>
+  </url>
+  <url>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-02/presentacion.html</loc>
+    <lastmod>2026-08-12T01:59:52.990Z</lastmod>
   </url>
 </urlset>

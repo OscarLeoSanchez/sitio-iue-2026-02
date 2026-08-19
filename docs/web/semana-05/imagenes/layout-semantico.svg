@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="420" viewBox="0 0 720 420" role="img" aria-label="Layout de una pagina con los elementos semanticos de HTML5: header arriba, nav dentro del header, main con section y article adentro, aside al lado, y footer al final" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="l1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <g filter="url(#l1-sombra)">
+      <rect x="20" y="20" width="680" height="70" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="38" y="44" font-size="13" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;header&gt;</text>
+    <rect x="38" y="54" width="200" height="26" rx="6" fill="#ffffff" stroke="#cfd8e3"/>
+    <text x="138" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#0e8f8f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;nav&gt;</text>
+    <text x="330" y="71" font-size="11.5" fill="#5b6876">Logo, titulo y menu principal</text>
+
+    <g filter="url(#l1-sombra)">
+      <rect x="20" y="106" width="470" height="240" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="38" y="130" font-size="13" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;main&gt;</text>
+    <text x="330" y="130" font-size="11.5" fill="#5b6876">Contenido unico y principal</text>
+
+    <rect x="38" y="142" width="434" height="90" rx="6" fill="#f6f8fa" stroke="#cfd8e3"/>
+    <text x="52" y="162" font-size="12" font-weight="700" fill="#5b6876" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;section&gt;</text>
+    <rect x="52" y="172" width="196" height="48" rx="5" fill="#ffffff" stroke="#a8d5d2"/>
+    <text x="150" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#0e8f8f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;article&gt;</text>
+    <rect x="258" y="172" width="196" height="48" rx="5" fill="#ffffff" stroke="#a8d5d2"/>
+    <text x="356" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#0e8f8f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;article&gt;</text>
+
+    <rect x="38" y="242" width="434" height="90" rx="6" fill="#f6f8fa" stroke="#cfd8e3"/>
+    <text x="52" y="262" font-size="12" font-weight="700" fill="#5b6876" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;section&gt;</text>
+    <text x="52" y="284" font-size="11" fill="#5b6876">Un bloque tematico con su propio encabezado</text>
+
+    <g filter="url(#l1-sombra)">
+      <rect x="504" y="106" width="196" height="240" rx="8" fill="#fdf7ec" stroke="#c9a24a" stroke-width="1.8"/>
+    </g>
+    <text x="522" y="130" font-size="13" font-weight="700" fill="#8a651e" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;aside&gt;</text>
+    <text x="522" y="152" font-size="11" fill="#5b6876">Contenido relacionado</text>
+    <text x="522" y="168" font-size="11" fill="#5b6876">pero secundario</text>
+
+    <g filter="url(#l1-sombra)">
+      <rect x="20" y="362" width="680" height="42" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="38" y="387" font-size="13" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">&lt;footer&gt;</text>
+    <text x="330" y="387" font-size="11.5" fill="#5b6876">Derechos, contacto, informacion legal</text>
+  </g>
+</svg>

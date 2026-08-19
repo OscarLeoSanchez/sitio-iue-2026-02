@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="260" viewBox="0 0 720 260" role="img" aria-label="Orden de especificidad en CSS de menor a mayor: elemento, clase o atributo o pseudo-clase, id, y estilo en linea, con important por encima de todo" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="c1-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#17456f"/>
+    </marker>
+    <filter id="c1-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <line x1="50" y1="200" x2="670" y2="200" stroke="#17456f" stroke-width="2.5" marker-end="url(#c1-punta)"/>
+    <text x="360" y="228" font-size="12.5" fill="#5b6876">Especificidad creciente</text>
+
+    <g filter="url(#c1-sombra)">
+      <rect x="30" y="110" width="140" height="60" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+      <rect x="205" y="95" width="150" height="75" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5"/>
+      <rect x="390" y="75" width="120" height="95" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.5"/>
+      <rect x="545" y="55" width="145" height="115" rx="8" fill="#ffffff" stroke="#0e8f8f" stroke-width="1.5"/>
+    </g>
+
+    <text x="100" y="135" font-size="12.5" font-weight="700" fill="#0f2540" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">p</text>
+    <text x="100" y="155" font-size="10.5" fill="#5b6876">Elemento</text>
+
+    <text x="280" y="122" font-size="12" font-weight="700" fill="#0f2540" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">.clase</text>
+    <text x="280" y="140" font-size="10.5" fill="#5b6876">[atributo]</text>
+    <text x="280" y="156" font-size="10.5" fill="#5b6876">:pseudo-clase</text>
+
+    <text x="450" y="105" font-size="12.5" font-weight="700" fill="#17456f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">#id</text>
+    <text x="450" y="128" font-size="10.5" fill="#5b6876">Identificador</text>
+    <text x="450" y="144" font-size="10.5" fill="#5b6876">unico</text>
+
+    <text x="617" y="88" font-size="12" font-weight="700" fill="#0e8f8f" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace">style="..."</text>
+    <text x="617" y="110" font-size="10.5" fill="#5b6876">Estilo en linea,</text>
+    <text x="617" y="126" font-size="10.5" fill="#5b6876">directo en la etiqueta</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <rect x="270" y="18" width="180" height="26" rx="13" fill="#fbe9e7"/>
+    <text x="360" y="35" font-size="11.5" font-weight="700" fill="#a32d22">!important gana a todo</text>
+  </g>
+</svg>
