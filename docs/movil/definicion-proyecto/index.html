@@ -24,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -169,16 +204,21 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</a></li>
   <li><a href="#el-problema" id="toc-el-problema" class="nav-link" data-scroll-target="#el-problema"><span class="header-section-number">2</span> El problema</a></li>
-  <li><a href="#de-un-problema-a-una-solución-el-método" id="toc-de-un-problema-a-una-solución-el-método" class="nav-link" data-scroll-target="#de-un-problema-a-una-solución-el-método"><span class="header-section-number">3</span> De un problema a una solución: el método</a>
+  <li><a href="#stakeholders" id="toc-stakeholders" class="nav-link" data-scroll-target="#stakeholders"><span class="header-section-number">3</span> Stakeholders</a></li>
+  <li><a href="#objetivo-medible-y-métrica-de-éxito" id="toc-objetivo-medible-y-métrica-de-éxito" class="nav-link" data-scroll-target="#objetivo-medible-y-métrica-de-éxito"><span class="header-section-number">4</span> Objetivo medible y métrica de éxito</a></li>
+  <li><a href="#restricciones" id="toc-restricciones" class="nav-link" data-scroll-target="#restricciones"><span class="header-section-number">5</span> Restricciones</a></li>
+  <li><a href="#de-un-problema-a-una-solución-el-método" id="toc-de-un-problema-a-una-solución-el-método" class="nav-link" data-scroll-target="#de-un-problema-a-una-solución-el-método"><span class="header-section-number">6</span> De un problema a una solución: el método</a>
   <ul class="collapse">
-  <li><a href="#paso-1.-entender-el-problema-empatía" id="toc-paso-1.-entender-el-problema-empatía" class="nav-link" data-scroll-target="#paso-1.-entender-el-problema-empatía">Paso 1. Entender el problema (empatía)</a></li>
-  <li><a href="#paso-2.-usuarios-y-necesidades" id="toc-paso-2.-usuarios-y-necesidades" class="nav-link" data-scroll-target="#paso-2.-usuarios-y-necesidades">Paso 2. Usuarios y necesidades</a></li>
-  <li><a href="#paso-3.-historias-de-usuario" id="toc-paso-3.-historias-de-usuario" class="nav-link" data-scroll-target="#paso-3.-historias-de-usuario">Paso 3. Historias de usuario</a></li>
-  <li><a href="#paso-4.-alcance-y-mvp" id="toc-paso-4.-alcance-y-mvp" class="nav-link" data-scroll-target="#paso-4.-alcance-y-mvp">Paso 4. Alcance y MVP</a></li>
-  <li><a href="#paso-5.-bosquejo-de-la-solución" id="toc-paso-5.-bosquejo-de-la-solución" class="nav-link" data-scroll-target="#paso-5.-bosquejo-de-la-solución">Paso 5. Bosquejo de la solución</a></li>
-  <li><a href="#paso-6.-documentarlo" id="toc-paso-6.-documentarlo" class="nav-link" data-scroll-target="#paso-6.-documentarlo">Paso 6. Documentarlo</a></li>
+  <li><a href="#alcance" id="toc-alcance" class="nav-link" data-scroll-target="#alcance">Alcance</a></li>
+  <li><a href="#conceptos-del-dominio-y-reglas-de-negocio" id="toc-conceptos-del-dominio-y-reglas-de-negocio" class="nav-link" data-scroll-target="#conceptos-del-dominio-y-reglas-de-negocio">Conceptos del dominio y reglas de negocio</a></li>
+  <li><a href="#actores" id="toc-actores" class="nav-link" data-scroll-target="#actores">Actores</a></li>
+  <li><a href="#historias-de-usuario" id="toc-historias-de-usuario" class="nav-link" data-scroll-target="#historias-de-usuario">Historias de usuario</a></li>
+  <li><a href="#casos-de-uso" id="toc-casos-de-uso" class="nav-link" data-scroll-target="#casos-de-uso">Casos de uso</a></li>
+  <li><a href="#flujo-de-pantallas" id="toc-flujo-de-pantallas" class="nav-link" data-scroll-target="#flujo-de-pantallas">Flujo de pantallas</a></li>
+  <li><a href="#propuestas-de-diseño-y-mockups" id="toc-propuestas-de-diseño-y-mockups" class="nav-link" data-scroll-target="#propuestas-de-diseño-y-mockups">Propuestas de diseño y mockups</a></li>
   </ul></li>
-  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue"><span class="header-section-number">4</span> Lo que sigue</a></li>
+  <li><a href="#el-documento-final-de-especificaciones" id="toc-el-documento-final-de-especificaciones" class="nav-link" data-scroll-target="#el-documento-final-de-especificaciones"><span class="header-section-number">7</span> El documento final de especificaciones</a></li>
+  <li><a href="#lo-que-sigue" id="toc-lo-que-sigue" class="nav-link" data-scroll-target="#lo-que-sigue"><span class="header-section-number">8</span> Lo que sigue</a></li>
   </ul>
 </nav>
     </div>
@@ -204,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">21 de agosto de 2026</p>
+      <p class="date">22 de agosto de 2026</p>
     </div>
   </div>
   
@@ -236,16 +276,272 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="lo-que-vas-a-lograr" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
-<p>Antes de escribir una sola línea de código, recorres el proceso completo que convierte un problema real en una solución de software. Practicas ese proceso con un ejemplo real: el proyecto que construyo yo mismo durante el semestre para ilustrar cada tema del curso. No es una tarea tuya, es la demostración que acompaña las clases.</p>
-<p>Esta sesión te prepara para un paso posterior: cada equipo de tres personas va a definir su propio proyecto con este mismo método.</p>
+<p>Antes de escribir una sola línea de código, recorres el proceso completo que convierte un problema real en una solución de software. Practicas ese proceso con un ejemplo real: el proyecto de clase, el que construimos entre todos, docente y estudiantes, sesión a sesión, y que sirve para entender cada tema del curso a medida que avanza el semestre.</p>
 </section>
 <section id="el-problema" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="el-problema"><span class="header-section-number">2</span> El problema</h2>
-<p>Un comprador que busca fruta, verdura o productos frescos de productores campesinos cercanos no tiene hoy una forma sencilla de saber qué hay disponible según la temporada, ni de pedirlo con confianza sobre su origen. Termina comprando en una cadena grande, a través de intermediarios, sin saber qué compra ni a quién beneficia su compra.</p>
-<p>“Mercado Campesino Digital” conecta productores agrícolas con compradores sin intermediarios. Durante el curso construyes el lado del comprador: una aplicación móvil que muestra el catálogo de productores cercanos con su disponibilidad de temporada, enriquecido con una API real de clima que indica qué está en cosecha, permite armar un carrito, simular el pago, hacer seguimiento del pedido y recibir notificaciones de disponibilidad y de estado.</p>
+<p>Un problema bien definido describe la situación actual, no la solución. Nombra quién lo sufre, con qué frecuencia o qué tanto le afecta, y qué hace hoy en su lugar, sin mencionar todavía qué aplicación lo resuelve.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>No vale:</strong> “Los compradores necesitan una forma de comprarle a productores campesinos.”</p>
+<p>Esta frase nombra la solución antes de describir el problema. No dice quién exactamente, con qué frecuencia le pasa, ni qué hace hoy en su lugar.</p>
+<p><strong>Sí vale:</strong> “Hoy, un comprador que quiere fruta o verdura fresca de la región tiene dos opciones: ir físicamente al mercado campesino, que solo abre los sábados en la mañana, o comprar en una cadena grande, donde no sabe qué productor cultivó lo que lleva ni si es de temporada. No existe una forma de comparar disponibilidad entre varios productores desde el celular antes de salir de casa.”</p>
+<p>Esta segunda frase describe la situación actual: quién es el comprador, qué opciones tiene hoy y por qué ninguna le alcanza.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Problema propuesto para este proyecto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hoy, un comprador que quiere fruta o verdura fresca de la región tiene solo dos opciones: ir físicamente al mercado campesino, que abre únicamente los sábados en la mañana, o comprar en una cadena grande, donde no sabe qué productor cultivó lo que lleva ni si es de temporada. No existe ninguna forma de comparar la disponibilidad entre varios productores desde el celular antes de salir de casa. Durante el curso construyes el lado del comprador de la solución a este problema.</p>
+</div>
+</div>
 </section>
-<section id="de-un-problema-a-una-solución-el-método" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="de-un-problema-a-una-solución-el-método"><span class="header-section-number">3</span> De un problema a una solución: el método</h2>
+<section id="stakeholders" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="stakeholders"><span class="header-section-number">3</span> Stakeholders</h2>
+<p>Un stakeholder es cualquier persona o grupo interesado en el proyecto o afectado por él, así no toque la aplicación directamente. En Mercado Campesino Digital hay tres:</p>
+<ul>
+<li><strong>El comprador.</strong> Usa la aplicación para encontrar y pedir productos frescos.</li>
+<li><strong>El productor.</strong> No usa la aplicación del comprador, pero su disponibilidad y sus productos son el contenido central de lo que el comprador ve.</li>
+<li><strong>Quien administra el mercado campesino físico.</strong> No usa la aplicación, pero le interesa si la aplicación le resta compradores al mercado presencial o si lo complementa.</li>
+</ul>
+</section>
+<section id="objetivo-medible-y-métrica-de-éxito" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="objetivo-medible-y-métrica-de-éxito"><span class="header-section-number">4</span> Objetivo medible y métrica de éxito</h2>
+<p>Un objetivo medible describe el resultado esperado en términos que se pueden verificar: qué cambia, para quién y en cuánto tiempo. No alcanza con una intención general, tiene que poderse comprobar. Una métrica de éxito es el número concreto que confirma si ese objetivo se cumplió, comparando el estado actual con el estado esperado.</p>
+<p><strong>No vale:</strong> “Que la aplicación sea rápida y fácil de usar.”</p>
+<p>Esta frase no dice para quién, no fija un número ni un plazo. No hay forma de comprobar si se cumplió.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Objetivo propuesto para este proyecto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Que un comprador encuentre productores cercanos con disponibilidad de temporada y arme un pedido completo en menos de 3 minutos, sin salir de la aplicación.</p>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Métrica</th>
+<th>Actual</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tiempo para conseguir el mismo producto</td>
+<td>Un desplazamiento el sábado en la mañana, más el tiempo de comparar precios y disponibilidad en el sitio</td>
+<td>Menos de 3 minutos, cualquier día, desde el celular</td>
+</tr>
+<tr class="even">
+<td>Días disponibles para comprarle al productor</td>
+<td>Solo el sábado en la mañana</td>
+<td>Cualquier día de la semana</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="restricciones" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="restricciones"><span class="header-section-number">5</span> Restricciones</h2>
+<p>Una restricción es una condición fija que limita las decisiones de diseño, no algo negociable. La siguiente lista es un punto de partida.</p>
+<p><strong>Fijas e innegociables:</strong></p>
+<ul>
+<li><strong>Tecnología.</strong> Flutter y Dart, sin otro stack.</li>
+<li><strong>Tiempo.</strong> Las 17 semanas del curso, no más.</li>
+<li><strong>Equipo.</strong> Grupos de trabajo de 3 personas, como se organizan los proyectos de los estudiantes que siguen este mismo método.</li>
+</ul>
+<p><strong>Ya resueltas, a modo de ejemplo:</strong></p>
+<ul>
+<li><strong>Pagos.</strong> Sin pasarela de pago real: el checkout se simula.</li>
+<li><strong>Integración.</strong> Sin integración real con el proyecto del curso de Programación Web.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: propone una restricción más
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Piensa en una restricción que le falte a este proyecto: de datos sensibles, de conectividad, o de dispositivos.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sin conexión a internet, el comprador debe poder ver al menos el último catálogo que consultó, aunque no pueda hacer un pedido nuevo.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="de-un-problema-a-una-solución-el-método" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="de-un-problema-a-una-solución-el-método"><span class="header-section-number">6</span> De un problema a una solución: el método</h2>
+<p>Algunas de las secciones que siguen están completas del todo. Otras traen un punto de partida y un reto para que propongas tu propia continuación, con una solución posible para revisar después de intentarlo.</p>
+<section id="alcance" class="level3">
+<h3 class="anchored" data-anchor-id="alcance">Alcance</h3>
+<p>Definir el alcance significa trazar una línea explícita entre lo que el proyecto construye ahora y lo que queda fuera. Este es el punto de partida.</p>
+<p><strong>Incluye (por ahora):</strong></p>
+<ul>
+<li>Catálogo de productores por temporada.</li>
+<li>Carrito de compra.</li>
+<li>Checkout simulado.</li>
+</ul>
+<p><strong>No incluye (por ahora):</strong></p>
+<ul>
+<li>Pago real.</li>
+<li>Logística de entrega real.</li>
+</ul>
+<p>Para decidir qué entra, pregúntate: ¿esta función resuelve directamente el problema que planteaste? Si el proyecto funciona igual de bien sin ella, va en “no incluye”.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: amplía el alcance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Piensa en una funcionalidad más que podría entrar en el alcance, y una que definitivamente debe quedar fuera, con la razón de cada una.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Incluye: que el comprador califique la calidad del pedido recibido, para ayudar a otros compradores a decidir. No incluye: chat en vivo con el productor, porque agrega complejidad de mensajería en tiempo real que no resuelve el problema central de encontrar y pedir productos de temporada.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="conceptos-del-dominio-y-reglas-de-negocio" class="level3">
+<h3 class="anchored" data-anchor-id="conceptos-del-dominio-y-reglas-de-negocio">Conceptos del dominio y reglas de negocio</h3>
+<p>Los conceptos del dominio son las palabras que describen el negocio, no la aplicación. Nombrarlos con precisión evita ambigüedad más adelante, cuando los conviertes en modelo de datos.</p>
+<ul>
+<li><strong>Comprador.</strong> Persona que busca y pide productos frescos.</li>
+<li><strong>Productor.</strong> Persona que cultiva y ofrece productos de temporada.</li>
+<li><strong>Producto.</strong> Un artículo que un productor ofrece, disponible o no según la temporada.</li>
+<li><strong>Pedido.</strong> Lo que arma un comprador con productos de uno o varios productores.</li>
+</ul>
+<p>Un Comprador hace un Pedido que contiene Productos de uno o varios Productores.</p>
+<p>Una regla de negocio traduce una restricción real del dominio, no una preferencia de diseño, en una condición que el sistema debe cumplir. El formato es fijo: “RN-XX. [condición] + [consecuencia]”. Por ejemplo:</p>
+<p><strong>RN-01.</strong> Un producto solo se puede pedir si el productor lo marcó como disponible esta semana.</p>
+<p><strong>RN-02.</strong> Un comprador no puede confirmar un pedido con el carrito vacío.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: propone una regla de negocio más
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Piensa en otra condición que el sistema deba cumplir en este proyecto, y escríbela con el mismo formato RN-XX.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible, de otro dominio
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En una aplicación de biblioteca: “RN-01. Un usuario no puede reservar más de tres libros al mismo tiempo.” La misma lógica aplica aquí: una regla de negocio limita una acción según una condición real del negocio, sin importar el dominio.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="actores" class="level3">
+<h3 class="anchored" data-anchor-id="actores">Actores</h3>
+<p>Un actor es cualquier persona, rol o sistema externo que interactúa directamente con la aplicación, a diferencia de un stakeholder, que puede tener interés en el proyecto sin usar la aplicación nunca. Para identificarlos, revisa cada pantalla o función y pregúntate quién la usa directamente, y si algún sistema externo participa sin ser una persona (una API, un servicio de notificaciones).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: identifica todos los actores
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ya conoces al protagonista del problema, pero un sistema casi siempre tiene más actores de los obvios. Identifica quién es el usuario principal, quién más interactúa con la aplicación (aunque sea ocasional), y qué sistemas externos participan (por ejemplo, una API de clima).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Actor principal: el comprador. Actor secundario: el productor no usa esta aplicación directamente, pero su disponibilidad alimenta el catálogo que el comprador consulta. Sistema externo: una API de clima que informa qué está en temporada.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="historias-de-usuario" class="level3">
+<h3 class="anchored" data-anchor-id="historias-de-usuario">Historias de usuario</h3>
+<p>Una historia de usuario resume una necesidad en una frase con formato fijo: “Como [usuario], quiero [acción], para [beneficio]”. Ese formato obliga a conectar cada función con quien la usa y con el valor que le entrega, antes de pensar en cómo se construye. Una buena historia se enfoca en el valor para quien la usa, no en cómo se construye. “Como comprador, quiero ver el catálogo” es mejor que “Como comprador, quiero que la pantalla de inicio cargue una lista”, porque la segunda ya asume una solución técnica.</p>
+<ul>
+<li>Como comprador, quiero ver el catálogo de productores cercanos con su disponibilidad de temporada, para decidir qué comprar y a quién.</li>
+<li>Como comprador, quiero armar un carrito con productos de varios productores, para hacer un solo pedido en vez de repetir el proceso varias veces.</li>
+<li>Como comprador, quiero recibir una notificación cuando un producto que me interesa entre en temporada, para comprarlo apenas esté disponible.</li>
+</ul>
+<p>Ejemplo de otro dominio (una app de biblioteca): Como usuario de la biblioteca, quiero buscar libros por título, para encontrar rápido lo que necesito sin recorrer los estantes.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -256,48 +552,172 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Algunas partes de este ejemplo se completan en vivo, contigo y tus compañeros, durante la clase: historias de usuario adicionales, detalles de qué queda fuera de alcance. No todo está cerrado de antemano.</p>
+<p>Estas tres son un punto de partida. Se pueden escribir más historias con este mismo formato, sobre todo las que salen de actores adicionales.</p>
 </div>
 </div>
-<section id="paso-1.-entender-el-problema-empatía" class="level3">
-<h3 class="anchored" data-anchor-id="paso-1.-entender-el-problema-empatía">Paso 1. Entender el problema (empatía)</h3>
-<p>Antes de pensar en pantallas o funciones, identificas quién sufre el problema, qué le pasa hoy y por qué las alternativas actuales no le alcanzan. Sin esta base, terminas construyendo una solución que nadie necesita.</p>
-<p>En el mercado campesino, el comprador de productos frescos hoy elige entre dos opciones pobres: la cadena grande, con precios más altos y sin trazabilidad sobre el origen, o el mercado campesino físico, limitado a un horario y un lugar fijos. Ninguna opción le muestra qué está en temporada ni le conecta directamente con quien produce.</p>
 </section>
-<section id="paso-2.-usuarios-y-necesidades" class="level3">
-<h3 class="anchored" data-anchor-id="paso-2.-usuarios-y-necesidades">Paso 2. Usuarios y necesidades</h3>
-<p>Nombras el actor principal de la solución y describes, en frases simples, qué necesita. Un proyecto con demasiados usuarios distintos desde el inicio se vuelve difícil de acotar.</p>
-<p>El actor principal es el comprador urbano que quiere productos frescos y de temporada. Necesita saber qué hay disponible cerca de él, confiar en el origen de lo que compra y hacer el pedido sin fricción, desde el teléfono.</p>
-</section>
-<section id="paso-3.-historias-de-usuario" class="level3">
-<h3 class="anchored" data-anchor-id="paso-3.-historias-de-usuario">Paso 3. Historias de usuario</h3>
-<p>Una historia de usuario resume una necesidad en una frase con formato fijo: “Como [usuario], quiero [acción], para [beneficio]”. Ese formato obliga a conectar cada función con quien la usa y con el valor que le entrega, antes de pensar en cómo se construye.</p>
-<p>Para el comprador del mercado campesino:</p>
+<section id="casos-de-uso" class="level3">
+<h3 class="anchored" data-anchor-id="casos-de-uso">Casos de uso</h3>
+<p>Un caso de uso describe, paso a paso, cómo un actor logra un objetivo con el sistema. No hace falta notación UML: alcanza con nombrar el actor, la condición para empezar, los pasos principales y una excepción.</p>
+<p>Para construir uno: elige una historia de usuario, nombra el actor que la protagoniza, define la precondición (qué debe ser cierto antes de empezar), escribe el flujo principal paso a paso en el orden en que ocurre, y piensa en al menos una excepción: qué puede salir distinto al camino esperado, y qué hace el sistema en ese caso.</p>
+<p><strong>Caso de uso: Hacer un pedido a un productor</strong></p>
 <ul>
-<li>Como comprador, quiero ver el catálogo de productores cercanos con su disponibilidad de temporada, para decidir qué comprar y a quién.</li>
-<li>Como comprador, quiero armar un carrito con productos de varios productores y hacer un solo pedido, para no repetir el proceso de compra varias veces.</li>
-<li>Como comprador, quiero recibir una notificación cuando cambie el estado de mi pedido, para saber cuándo va a llegar sin tener que revisar la aplicación.</li>
-<li>Como comprador, quiero recibir una notificación cuando un producto que me interesa entre en temporada, para comprarlo apenas esté disponible.</li>
+<li><strong>Actor.</strong> Comprador.</li>
+<li><strong>Precondición.</strong> El comprador ya tiene abierto el catálogo de un productor.</li>
+<li><strong>Flujo principal.</strong>
+<ol type="1">
+<li>El comprador selecciona uno o más productos disponibles esta semana.</li>
+<li>El comprador agrega los productos al carrito.</li>
+<li>El comprador confirma el pedido en el checkout simulado.</li>
+<li>La aplicación muestra la confirmación del pedido.</li>
+</ol></li>
+<li><strong>Excepción.</strong> Si un producto deja de estar disponible entre que se agrega al carrito y se confirma el pedido, la aplicación lo quita del carrito y avisa al comprador antes de confirmar.</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: completa estos dos casos de uso
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Con el mismo formato (actor, precondición, flujo principal, excepción), desarrolla:</p>
+<ul>
+<li>Consultar el catálogo de un productor.</li>
+<li>Recibir una notificación de disponibilidad.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Consultar el catálogo de un productor</strong></p>
+<ul>
+<li>Actor: Comprador.</li>
+<li>Precondición: el comprador seleccionó un productor de la lista.</li>
+<li>Flujo principal: 1. El comprador abre el perfil del productor. 2. La aplicación muestra los productos disponibles esta semana con su precio. 3. El comprador puede volver a la lista de productores.</li>
+<li>Excepción: si el productor no tiene productos disponibles esta semana, la aplicación muestra un aviso en vez de una lista vacía.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="paso-4.-alcance-y-mvp" class="level3">
-<h3 class="anchored" data-anchor-id="paso-4.-alcance-y-mvp">Paso 4. Alcance y MVP</h3>
-<p>Un MVP, o producto mínimo viable, es la versión más pequeña de la solución que ya le entrega valor real al usuario. Definir el alcance significa trazar una línea explícita entre lo que construyes ahora y lo que queda para después. Esa línea evita que el proyecto crezca sin control.</p>
-<p>Este semestre, el proyecto del comprador incluye catálogo de productores por temporada, carrito de compra, checkout simulado y notificación de estado del pedido. Queda fuera de alcance: pasarela de pago real, logística de entrega real y calificaciones de productores.</p>
+<section id="flujo-de-pantallas" class="level3">
+<h3 class="anchored" data-anchor-id="flujo-de-pantallas">Flujo de pantallas</h3>
+<p>Antes de programar, dibujas en papel el flujo de pantallas: qué pantalla sigue a cuál, sin preocuparte todavía por el diseño visual. Ese boceto cuesta minutos y evita reescribir pantallas completas más adelante. Para armarlo, parte de la pantalla de entrada y sigue el camino que recorre tu historia de usuario más importante: qué ve primero la persona, qué acción principal toma, y a qué pantalla la lleva esa acción. Repite hasta llegar al final natural de esa historia.</p>
+<p>El flujo del comprador arranca en una pantalla de inicio con la lista de productores cercanos, y avanza al detalle de un productor con su catálogo de temporada.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: continúa el flujo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Desde el detalle de un productor, ¿qué pantalla sigue después de agregar un producto al carrito, hasta llegar a la confirmación del pedido?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Detalle de un productor, luego el carrito con los productos seleccionados, luego un checkout simulado que confirma los datos del pedido, y por último una pantalla de confirmación con el estado del pedido.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="paso-5.-bosquejo-de-la-solución" class="level3">
-<h3 class="anchored" data-anchor-id="paso-5.-bosquejo-de-la-solución">Paso 5. Bosquejo de la solución</h3>
-<p>Antes de programar, dibujas en papel el flujo de pantallas: qué pantalla sigue a cuál, sin preocuparte todavía por el diseño visual. Ese bosquejo cuesta minutos y evita reescribir pantallas completas más adelante.</p>
-<p>El flujo del comprador arranca en una pantalla de inicio con la lista de productores cercanos, avanza al detalle de un productor con su catálogo de temporada, de ahí al carrito con los productos seleccionados, sigue a un checkout simulado que confirma el pedido sin pasarela de pago real y termina en una pantalla de seguimiento que muestra el estado del pedido.</p>
+<section id="propuestas-de-diseño-y-mockups" class="level3">
+<h3 class="anchored" data-anchor-id="propuestas-de-diseño-y-mockups">Propuestas de diseño y mockups</h3>
+<p>Un mockup es una representación visual de una pantalla, con maquetación, tipografía y color aproximados, sin ser todavía la aplicación funcional.</p>
+<p>Proponer un diseño significa bocetar, a mano o en un tablero, cómo se vería cada pantalla del flujo: qué información aparece primero, cuál es la acción principal, y qué queda en segundo plano. No hace falta color ni tipografía todavía, solo la disposición de los elementos.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto: describe la pantalla de detalle de un productor
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En palabras, sin dibujar: ¿qué aparece arriba, qué aparece en medio, y qué acción principal tiene esta pantalla?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Una solución posible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Arriba, el nombre y una foto del productor. Debajo, la lista de productos disponibles esta semana, cada uno con su precio y un botón para agregarlo al carrito. Al final de la pantalla, un botón fijo que muestra cuántos productos lleva el comprador en el carrito.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="paso-6.-documentarlo" class="level3">
-<h3 class="anchored" data-anchor-id="paso-6.-documentarlo">Paso 6. Documentarlo</h3>
-<p>Escribir el alcance en un documento, y no solo tenerlo en la cabeza, evita que crezca sin control a mitad de camino. El documento no queda fijo: lo revisas y ajustas a medida que avanza el semestre, con lo que aprendes en cada entrega.</p>
 </section>
+<section id="el-documento-final-de-especificaciones" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="el-documento-final-de-especificaciones"><span class="header-section-number">7</span> El documento final de especificaciones</h2>
+<p>Todo lo que trabajaste en esta guía, incluida tu propia versión de cada reto, se recoge en un documento aparte de especificaciones.</p>
+<p>Ese documento se convierte en la guía de desarrollo del proyecto que construyes semana a semana durante el curso: cada vez que empiezas una funcionalidad nueva, vuelves a él para confirmar qué debe hacer y por qué.</p>
+<p>A continuación la plantilla vacía. Llénala con tu propio trabajo.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Especificaciones del proyecto: Mercado Campesino Digital (lado comprador)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stakeholders</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Actores</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objetivo y metricas de exito</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Restricciones</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alcance</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">### Incluye</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### No incluye</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conceptos del dominio</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reglas de negocio</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Historias de usuario</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Casos de uso</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Flujo de pantallas</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Propuestas de diseno y mockups</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="lo-que-sigue" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="lo-que-sigue"><span class="header-section-number">4</span> Lo que sigue</h2>
-<p>En las próximas semanas, cada equipo de tres personas aplica este mismo método a su propio proyecto: entiende el problema de su usuario, escribe sus historias de usuario y define su alcance y su MVP.</p>
+<section id="lo-que-sigue" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="lo-que-sigue"><span class="header-section-number">8</span> Lo que sigue</h2>
+<p>En las próximas semanas, cada equipo de tres personas aplica este mismo método a su propio proyecto: entiende el problema de su usuario, identifica sus stakeholders y sus actores, escribe sus historias de usuario y sus casos de uso, y define su alcance.</p>
 <div class="pie-doc">
 <p>Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>
 <p><strong>Transparencia.</strong> La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.</p>

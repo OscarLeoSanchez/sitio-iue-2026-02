@@ -16,103 +16,374 @@ date-format: "D [de] MMMM [de] YYYY"
 ## Lo que vas a lograr
 
 Antes de escribir una sola línea de código, recorres el proceso completo que convierte un
-problema real en una solución de software. Practicas ese proceso con un ejemplo real: el
-proyecto que construyo yo mismo durante el semestre para ilustrar cada tema del curso. No es una
-tarea tuya, es la demostración que acompaña las clases.
-
-Esta sesión te prepara para un paso posterior: cada equipo de tres personas va a definir su
-propio proyecto con este mismo método.
+problema real en una solución de software. Practicas ese proceso con un ejemplo real: el proyecto
+de clase, el que construimos entre todos, docente y estudiantes, sesión a sesión, y que sirve
+para entender cada tema del curso a medida que avanza el semestre.
 
 ## El problema
 
-Un comprador que busca fruta, verdura o productos frescos de productores campesinos cercanos no
-tiene hoy una forma sencilla de saber qué hay disponible según la temporada, ni de pedirlo con
-confianza sobre su origen. Termina comprando en una cadena grande, a través de intermediarios,
-sin saber qué compra ni a quién beneficia su compra.
+Un problema bien definido describe la situación actual, no la solución. Nombra quién lo sufre,
+con qué frecuencia o qué tanto le afecta, y qué hace hoy en su lugar, sin mencionar todavía qué
+aplicación lo resuelve.
 
-"Mercado Campesino Digital" conecta productores agrícolas con compradores sin intermediarios.
-Durante el curso construyes el lado del comprador: una aplicación móvil que muestra el catálogo
-de productores cercanos con su disponibilidad de temporada, enriquecido con una API real de
-clima que indica qué está en cosecha, permite armar un carrito, simular el pago, hacer
-seguimiento del pedido y recibir notificaciones de disponibilidad y de estado.
+::: {.callout-important}
+**No vale:** "Los compradores necesitan una forma de comprarle a productores campesinos."
+
+Esta frase nombra la solución antes de describir el problema. No dice quién exactamente, con qué
+frecuencia le pasa, ni qué hace hoy en su lugar.
+
+**Sí vale:** "Hoy, un comprador que quiere fruta o verdura fresca de la región tiene dos
+opciones: ir físicamente al mercado campesino, que solo abre los sábados en la mañana, o comprar
+en una cadena grande, donde no sabe qué productor cultivó lo que lleva ni si es de temporada. No
+existe una forma de comparar disponibilidad entre varios productores desde el celular antes de
+salir de casa."
+
+Esta segunda frase describe la situación actual: quién es el comprador, qué opciones tiene hoy y
+por qué ninguna le alcanza.
+:::
+
+::: {.callout-tip}
+## Problema propuesto para este proyecto
+
+Hoy, un comprador que quiere fruta o verdura fresca de la región tiene solo dos opciones: ir
+físicamente al mercado campesino, que abre únicamente los sábados en la mañana, o comprar en una
+cadena grande, donde no sabe qué productor cultivó lo que lleva ni si es de temporada. No existe
+ninguna forma de comparar la disponibilidad entre varios productores desde el celular antes de
+salir de casa. Durante el curso construyes el lado del comprador de la solución a este problema.
+:::
+
+## Stakeholders
+
+Un stakeholder es cualquier persona o grupo interesado en el proyecto o afectado por él, así no
+toque la aplicación directamente. En Mercado Campesino Digital hay tres:
+
+- **El comprador.** Usa la aplicación para encontrar y pedir productos frescos.
+- **El productor.** No usa la aplicación del comprador, pero su disponibilidad y sus productos
+  son el contenido central de lo que el comprador ve.
+- **Quien administra el mercado campesino físico.** No usa la aplicación, pero le interesa si la
+  aplicación le resta compradores al mercado presencial o si lo complementa.
+
+## Objetivo medible y métrica de éxito
+
+Un objetivo medible describe el resultado esperado en términos que se pueden verificar: qué
+cambia, para quién y en cuánto tiempo. No alcanza con una intención general, tiene que poderse
+comprobar. Una métrica de éxito es el número concreto que confirma si ese objetivo se cumplió,
+comparando el estado actual con el estado esperado.
+
+**No vale:** "Que la aplicación sea rápida y fácil de usar."
+
+Esta frase no dice para quién, no fija un número ni un plazo. No hay forma de comprobar si se
+cumplió.
+
+::: {.callout-tip}
+## Objetivo propuesto para este proyecto
+
+Que un comprador encuentre productores cercanos con disponibilidad de temporada y arme un pedido
+completo en menos de 3 minutos, sin salir de la aplicación.
+:::
+
+| Métrica | Actual | Objetivo |
+|---|---|---|
+| Tiempo para conseguir el mismo producto | Un desplazamiento el sábado en la mañana, más el tiempo de comparar precios y disponibilidad en el sitio | Menos de 3 minutos, cualquier día, desde el celular |
+| Días disponibles para comprarle al productor | Solo el sábado en la mañana | Cualquier día de la semana |
+
+## Restricciones
+
+Una restricción es una condición fija que limita las decisiones de diseño, no algo negociable.
+La siguiente lista es un punto de partida.
+
+**Fijas e innegociables:**
+
+- **Tecnología.** Flutter y Dart, sin otro stack.
+- **Tiempo.** Las 17 semanas del curso, no más.
+- **Equipo.** Grupos de trabajo de 3 personas, como se organizan los proyectos de los
+  estudiantes que siguen este mismo método.
+
+**Ya resueltas, a modo de ejemplo:**
+
+- **Pagos.** Sin pasarela de pago real: el checkout se simula.
+- **Integración.** Sin integración real con el proyecto del curso de Programación Web.
+
+::: {.callout-tip}
+## Reto: propone una restricción más
+
+Piensa en una restricción que le falte a este proyecto: de datos sensibles, de conectividad, o
+de dispositivos.
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible
+
+Sin conexión a internet, el comprador debe poder ver al menos el último catálogo que consultó,
+aunque no pueda hacer un pedido nuevo.
+:::
 
 ## De un problema a una solución: el método
 
-::: {.callout-note}
-Algunas partes de este ejemplo se completan en vivo, contigo y tus compañeros, durante la clase:
-historias de usuario adicionales, detalles de qué queda fuera de alcance. No todo está cerrado
-de antemano.
+Algunas de las secciones que siguen están completas del todo. Otras traen un punto de partida y
+un reto para que propongas tu propia continuación, con una solución posible para revisar después
+de intentarlo.
+
+### Alcance
+
+Definir el alcance significa trazar una línea explícita entre lo que el proyecto construye ahora
+y lo que queda fuera. Este es el punto de partida.
+
+**Incluye (por ahora):**
+
+- Catálogo de productores por temporada.
+- Carrito de compra.
+- Checkout simulado.
+
+**No incluye (por ahora):**
+
+- Pago real.
+- Logística de entrega real.
+
+Para decidir qué entra, pregúntate: ¿esta función resuelve directamente el problema que
+planteaste? Si el proyecto funciona igual de bien sin ella, va en "no incluye".
+
+::: {.callout-tip}
+## Reto: amplía el alcance
+
+Piensa en una funcionalidad más que podría entrar en el alcance, y una que definitivamente debe
+quedar fuera, con la razón de cada una.
 :::
 
-### Paso 1. Entender el problema (empatía)
+::: {.callout-note collapse="true"}
+## Una solución posible
 
-Antes de pensar en pantallas o funciones, identificas quién sufre el problema, qué le pasa hoy y
-por qué las alternativas actuales no le alcanzan. Sin esta base, terminas construyendo una
-solución que nadie necesita.
+Incluye: que el comprador califique la calidad del pedido recibido, para ayudar a otros
+compradores a decidir. No incluye: chat en vivo con el productor, porque agrega complejidad de
+mensajería en tiempo real que no resuelve el problema central de encontrar y pedir productos de
+temporada.
+:::
 
-En el mercado campesino, el comprador de productos frescos hoy elige entre dos opciones pobres:
-la cadena grande, con precios más altos y sin trazabilidad sobre el origen, o el mercado
-campesino físico, limitado a un horario y un lugar fijos. Ninguna opción le muestra qué está en
-temporada ni le conecta directamente con quien produce.
+### Conceptos del dominio y reglas de negocio
 
-### Paso 2. Usuarios y necesidades
+Los conceptos del dominio son las palabras que describen el negocio, no la aplicación. Nombrarlos
+con precisión evita ambigüedad más adelante, cuando los conviertes en modelo de datos.
 
-Nombras el actor principal de la solución y describes, en frases simples, qué necesita. Un
-proyecto con demasiados usuarios distintos desde el inicio se vuelve difícil de acotar.
+- **Comprador.** Persona que busca y pide productos frescos.
+- **Productor.** Persona que cultiva y ofrece productos de temporada.
+- **Producto.** Un artículo que un productor ofrece, disponible o no según la temporada.
+- **Pedido.** Lo que arma un comprador con productos de uno o varios productores.
 
-El actor principal es el comprador urbano que quiere productos frescos y de temporada. Necesita
-saber qué hay disponible cerca de él, confiar en el origen de lo que compra y hacer el pedido sin
-fricción, desde el teléfono.
+Un Comprador hace un Pedido que contiene Productos de uno o varios Productores.
 
-### Paso 3. Historias de usuario
+Una regla de negocio traduce una restricción real del dominio, no una preferencia de diseño, en
+una condición que el sistema debe cumplir. El formato es fijo: "RN-XX. [condición] +
+[consecuencia]". Por ejemplo:
+
+**RN-01.** Un producto solo se puede pedir si el productor lo marcó como disponible esta semana.
+
+**RN-02.** Un comprador no puede confirmar un pedido con el carrito vacío.
+
+::: {.callout-tip}
+## Reto: propone una regla de negocio más
+
+Piensa en otra condición que el sistema deba cumplir en este proyecto, y escríbela con el mismo
+formato RN-XX.
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible, de otro dominio
+
+En una aplicación de biblioteca: "RN-01. Un usuario no puede reservar más de tres libros al mismo
+tiempo." La misma lógica aplica aquí: una regla de negocio limita una acción según una condición
+real del negocio, sin importar el dominio.
+:::
+
+### Actores
+
+Un actor es cualquier persona, rol o sistema externo que interactúa directamente con la
+aplicación, a diferencia de un stakeholder, que puede tener interés en el proyecto sin usar la
+aplicación nunca. Para identificarlos, revisa cada pantalla o función y pregúntate quién la usa
+directamente, y si algún sistema externo participa sin ser una persona (una API, un servicio de
+notificaciones).
+
+::: {.callout-tip}
+## Reto: identifica todos los actores
+
+Ya conoces al protagonista del problema, pero un sistema casi siempre tiene más actores de los
+obvios. Identifica quién es el usuario principal, quién más interactúa con la aplicación (aunque
+sea ocasional), y qué sistemas externos participan (por ejemplo, una API de clima).
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible
+
+Actor principal: el comprador. Actor secundario: el productor no usa esta aplicación
+directamente, pero su disponibilidad alimenta el catálogo que el comprador consulta. Sistema
+externo: una API de clima que informa qué está en temporada.
+:::
+
+### Historias de usuario
 
 Una historia de usuario resume una necesidad en una frase con formato fijo: "Como [usuario],
 quiero [acción], para [beneficio]". Ese formato obliga a conectar cada función con quien la usa y
-con el valor que le entrega, antes de pensar en cómo se construye.
-
-Para el comprador del mercado campesino:
+con el valor que le entrega, antes de pensar en cómo se construye. Una buena historia se enfoca
+en el valor para quien la usa, no en cómo se construye. "Como comprador, quiero ver el catálogo"
+es mejor que "Como comprador, quiero que la pantalla de inicio cargue una lista", porque la
+segunda ya asume una solución técnica.
 
 - Como comprador, quiero ver el catálogo de productores cercanos con su disponibilidad de
   temporada, para decidir qué comprar y a quién.
-- Como comprador, quiero armar un carrito con productos de varios productores y hacer un solo
-  pedido, para no repetir el proceso de compra varias veces.
-- Como comprador, quiero recibir una notificación cuando cambie el estado de mi pedido, para
-  saber cuándo va a llegar sin tener que revisar la aplicación.
+- Como comprador, quiero armar un carrito con productos de varios productores, para hacer un solo
+  pedido en vez de repetir el proceso varias veces.
 - Como comprador, quiero recibir una notificación cuando un producto que me interesa entre en
   temporada, para comprarlo apenas esté disponible.
 
-### Paso 4. Alcance y MVP
+Ejemplo de otro dominio (una app de biblioteca): Como usuario de la biblioteca, quiero buscar
+libros por título, para encontrar rápido lo que necesito sin recorrer los estantes.
 
-Un MVP, o producto mínimo viable, es la versión más pequeña de la solución que ya le entrega
-valor real al usuario. Definir el alcance significa trazar una línea explícita entre lo que
-construyes ahora y lo que queda para después. Esa línea evita que el proyecto crezca sin control.
+::: {.callout-note}
+Estas tres son un punto de partida. Se pueden escribir más historias con este mismo formato,
+sobre todo las que salen de actores adicionales.
+:::
 
-Este semestre, el proyecto del comprador incluye catálogo de productores por temporada, carrito
-de compra, checkout simulado y notificación de estado del pedido. Queda fuera de alcance: pasarela
-de pago real, logística de entrega real y calificaciones de productores.
+### Casos de uso
 
-### Paso 5. Bosquejo de la solución
+Un caso de uso describe, paso a paso, cómo un actor logra un objetivo con el sistema. No hace
+falta notación UML: alcanza con nombrar el actor, la condición para empezar, los pasos
+principales y una excepción.
+
+Para construir uno: elige una historia de usuario, nombra el actor que la protagoniza, define la
+precondición (qué debe ser cierto antes de empezar), escribe el flujo principal paso a paso en el
+orden en que ocurre, y piensa en al menos una excepción: qué puede salir distinto al camino
+esperado, y qué hace el sistema en ese caso.
+
+**Caso de uso: Hacer un pedido a un productor**
+
+- **Actor.** Comprador.
+- **Precondición.** El comprador ya tiene abierto el catálogo de un productor.
+- **Flujo principal.**
+  1. El comprador selecciona uno o más productos disponibles esta semana.
+  2. El comprador agrega los productos al carrito.
+  3. El comprador confirma el pedido en el checkout simulado.
+  4. La aplicación muestra la confirmación del pedido.
+- **Excepción.** Si un producto deja de estar disponible entre que se agrega al carrito y se
+  confirma el pedido, la aplicación lo quita del carrito y avisa al comprador antes de confirmar.
+
+::: {.callout-tip}
+## Reto: completa estos dos casos de uso
+
+Con el mismo formato (actor, precondición, flujo principal, excepción), desarrolla:
+
+- Consultar el catálogo de un productor.
+- Recibir una notificación de disponibilidad.
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible
+
+**Consultar el catálogo de un productor**
+
+- Actor: Comprador.
+- Precondición: el comprador seleccionó un productor de la lista.
+- Flujo principal: 1. El comprador abre el perfil del productor. 2. La aplicación muestra los
+  productos disponibles esta semana con su precio. 3. El comprador puede volver a la lista de
+  productores.
+- Excepción: si el productor no tiene productos disponibles esta semana, la aplicación muestra un
+  aviso en vez de una lista vacía.
+:::
+
+### Flujo de pantallas
 
 Antes de programar, dibujas en papel el flujo de pantallas: qué pantalla sigue a cuál, sin
-preocuparte todavía por el diseño visual. Ese bosquejo cuesta minutos y evita reescribir
-pantallas completas más adelante.
+preocuparte todavía por el diseño visual. Ese boceto cuesta minutos y evita reescribir pantallas
+completas más adelante. Para armarlo, parte de la pantalla de entrada y sigue el camino que
+recorre tu historia de usuario más importante: qué ve primero la persona, qué acción principal
+toma, y a qué pantalla la lleva esa acción. Repite hasta llegar al final natural de esa historia.
 
-El flujo del comprador arranca en una pantalla de inicio con la lista de productores cercanos,
-avanza al detalle de un productor con su catálogo de temporada, de ahí al carrito con los
-productos seleccionados, sigue a un checkout simulado que confirma el pedido sin pasarela de pago
-real y termina en una pantalla de seguimiento que muestra el estado del pedido.
+El flujo del comprador arranca en una pantalla de inicio con la lista de productores cercanos, y
+avanza al detalle de un productor con su catálogo de temporada.
 
-### Paso 6. Documentarlo
+::: {.callout-tip}
+## Reto: continúa el flujo
 
-Escribir el alcance en un documento, y no solo tenerlo en la cabeza, evita que crezca sin
-control a mitad de camino. El documento no queda fijo: lo revisas y ajustas a medida que avanza
-el semestre, con lo que aprendes en cada entrega.
+Desde el detalle de un productor, ¿qué pantalla sigue después de agregar un producto al carrito,
+hasta llegar a la confirmación del pedido?
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible
+
+Detalle de un productor, luego el carrito con los productos seleccionados, luego un checkout
+simulado que confirma los datos del pedido, y por último una pantalla de confirmación con el
+estado del pedido.
+:::
+
+### Propuestas de diseño y mockups
+
+Un mockup es una representación visual de una pantalla, con maquetación, tipografía y color
+aproximados, sin ser todavía la aplicación funcional.
+
+Proponer un diseño significa bocetar, a mano o en un tablero, cómo se vería cada pantalla del
+flujo: qué información aparece primero, cuál es la acción principal, y qué queda en segundo
+plano. No hace falta color ni tipografía todavía, solo la disposición de los elementos.
+
+::: {.callout-tip}
+## Reto: describe la pantalla de detalle de un productor
+
+En palabras, sin dibujar: ¿qué aparece arriba, qué aparece en medio, y qué acción principal tiene
+esta pantalla?
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible
+
+Arriba, el nombre y una foto del productor. Debajo, la lista de productos disponibles esta
+semana, cada uno con su precio y un botón para agregarlo al carrito. Al final de la pantalla, un
+botón fijo que muestra cuántos productos lleva el comprador en el carrito.
+:::
+
+## El documento final de especificaciones
+
+Todo lo que trabajaste en esta guía, incluida tu propia versión de cada reto, se recoge en un
+documento aparte de especificaciones.
+
+Ese documento se convierte en la guía de desarrollo del proyecto que construyes semana a semana
+durante el curso: cada vez que empiezas una funcionalidad nueva, vuelves a él para confirmar qué
+debe hacer y por qué.
+
+A continuación la plantilla vacía. Llénala con tu propio trabajo.
+
+```markdown
+# Especificaciones del proyecto: Mercado Campesino Digital (lado comprador)
+
+## Problema
+
+## Stakeholders
+
+## Actores
+
+## Objetivo y metricas de exito
+
+## Restricciones
+
+## Alcance
+### Incluye
+### No incluye
+
+## Conceptos del dominio
+
+## Reglas de negocio
+
+## Historias de usuario
+
+## Casos de uso
+
+## Flujo de pantallas
+
+## Propuestas de diseno y mockups
+```
 
 ## Lo que sigue
 
 En las próximas semanas, cada equipo de tres personas aplica este mismo método a su propio
-proyecto: entiende el problema de su usuario, escribe sus historias de usuario y define su
-alcance y su MVP.
+proyecto: entiende el problema de su usuario, identifica sus stakeholders y sus actores, escribe
+sus historias de usuario y sus casos de uso, y define su alcance.
 
 ::: {.pie-doc}
 Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
