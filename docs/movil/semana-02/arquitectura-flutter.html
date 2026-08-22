@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Complemento: arquitectura de Flutter</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../movil/semana-03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 3. Git y el arranque de tu proyecto</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -207,14 +213,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#statelesswidget-frente-a-statefulwidget" id="toc-statelesswidget-frente-a-statefulwidget" class="nav-link" data-scroll-target="#statelesswidget-frente-a-statefulwidget">StatelessWidget frente a StatefulWidget</a></li>
   <li><a href="#build-y-buildcontext" id="toc-build-y-buildcontext" class="nav-link" data-scroll-target="#build-y-buildcontext">build() y BuildContext</a></li>
   </ul></li>
-  <li><a href="#ciclo-de-vida-de-un-statefulwidget" id="toc-ciclo-de-vida-de-un-statefulwidget" class="nav-link" data-scroll-target="#ciclo-de-vida-de-un-statefulwidget"><span class="header-section-number">5</span> Ciclo de vida de un StatefulWidget</a></li>
-  <li><a href="#el-pipeline-de-renderizado" id="toc-el-pipeline-de-renderizado" class="nav-link" data-scroll-target="#el-pipeline-de-renderizado"><span class="header-section-number">6</span> El pipeline de renderizado</a>
+  <li><a href="#ciclo-de-vida-de-un-statelesswidget" id="toc-ciclo-de-vida-de-un-statelesswidget" class="nav-link" data-scroll-target="#ciclo-de-vida-de-un-statelesswidget"><span class="header-section-number">5</span> Ciclo de vida de un StatelessWidget</a></li>
+  <li><a href="#ciclo-de-vida-de-un-statefulwidget" id="toc-ciclo-de-vida-de-un-statefulwidget" class="nav-link" data-scroll-target="#ciclo-de-vida-de-un-statefulwidget"><span class="header-section-number">6</span> Ciclo de vida de un StatefulWidget</a></li>
+  <li><a href="#el-pipeline-de-renderizado" id="toc-el-pipeline-de-renderizado" class="nav-link" data-scroll-target="#el-pipeline-de-renderizado"><span class="header-section-number">7</span> El pipeline de renderizado</a>
   <ul class="collapse">
   <li><a href="#el-modelo-de-constraints" id="toc-el-modelo-de-constraints" class="nav-link" data-scroll-target="#el-modelo-de-constraints">El modelo de constraints</a></li>
   </ul></li>
-  <li><a href="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" id="toc-compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="nav-link" data-scroll-target="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">7</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</a></li>
-  <li><a href="#de-la-semana-02-a-lo-que-sigue" id="toc-de-la-semana-02-a-lo-que-sigue" class="nav-link" data-scroll-target="#de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">8</span> De la Semana 02 a lo que sigue</a></li>
-  <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">9</span> Recursos</a></li>
+  <li><a href="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" id="toc-compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="nav-link" data-scroll-target="#compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">8</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</a></li>
+  <li><a href="#de-la-semana-02-a-lo-que-sigue" id="toc-de-la-semana-02-a-lo-que-sigue" class="nav-link" data-scroll-target="#de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">9</span> De la Semana 02 a lo que sigue</a></li>
+  <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">10</span> Recursos</a></li>
   </ul>
 </nav>
     </div>
@@ -240,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de agosto de 2026</p>
+      <p class="date">21 de agosto de 2026</p>
     </div>
   </div>
   
@@ -304,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3" class="anchored" data-anchor-id="los-tres-árboles-widgets-elements-y-render-objects"><span class="header-section-number">3</span> Los tres árboles: widgets, elements y render objects</h2>
 <p>Cuando escribes una pantalla en Flutter, en apariencia estás describiendo un solo árbol de widgets. Por debajo, Flutter mantiene tres árboles paralelos que colaboran: el árbol de widgets, el árbol de elements y el árbol de render objects.</p>
 <div class="diagrama">
-<p><img src="imagenes/flutter-tres-arboles.svg" class="img-fluid" alt="Tres árboles paralelos de Flutter: el árbol de widgets, inmutable y recreado en cada build; el árbol de elements, mutable y persistente entre frames, que guarda el estado; y el árbol de render objects, más pequeño, que calcula tamaño posición y pintado"></p>
+<p><img src="imagenes/flutter-tres-arboles.svg" class="img-fluid" alt="Tres árboles paralelos de Flutter en una cadena Center, Padding, MiWidget e Icon: el árbol de widgets y el de elements tienen los cuatro nodos, porque todo widget genera un element; el árbol de render objects solo tiene tres, porque MiWidget es un StatelessWidget sin render object propio y el de Icon se conecta directo con el de Padding, su ancestro más cercano que sí tiene uno"></p>
 <p>El widget describe, el element persiste y guarda el estado, el render object calcula y pinta.</p>
 </div>
 <p>Un <strong>widget</strong> es una descripción inmutable de configuración. “Inmutable” quiere decir que, una vez creado, no cambia: si algo en la interfaz necesita verse distinto, Flutter no modifica el widget existente, crea uno nuevo. Esto pasa constantemente, cada vez que se ejecuta <code>build()</code>, y por eso los widgets están diseñados para ser baratos de crear y de destruir. La consecuencia directa de la inmutabilidad es que un widget no puede recordar nada por sí mismo: no guarda su posición en la jerarquía ni conserva ningún dato de un frame al siguiente.</p>
@@ -381,9 +388,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>build()</code> recibe un <code>BuildContext</code> como parámetro. Ya viste en la sección anterior que el <code>BuildContext</code> es, en el fondo, una referencia al element: le dice al widget dónde está ubicado dentro del árbol, y por eso le permite acceder a información o recursos que proveen sus ancestros (un <code>Theme</code>, un <code>Navigator</code>, un <code>MediaQuery</code>) sin que esos ancestros necesiten conocer a sus descendientes. Es una vía de comunicación de arriba hacia abajo, no al revés.</p>
 </section>
 </section>
-<section id="ciclo-de-vida-de-un-statefulwidget" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="ciclo-de-vida-de-un-statefulwidget"><span class="header-section-number">5</span> Ciclo de vida de un StatefulWidget</h2>
-<p>Ya viste cómo separar estado (<code>State</code>) de configuración (<code>Widget</code>) resuelve el problema de que un widget inmutable no puede cambiar por sí mismo. Falta ver cuándo ocurre cada paso de ese ciclo.</p>
+<section id="ciclo-de-vida-de-un-statelesswidget" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ciclo-de-vida-de-un-statelesswidget"><span class="header-section-number">5</span> Ciclo de vida de un StatelessWidget</h2>
+<p>Antes de ver el ciclo completo de un <code>StatefulWidget</code>, vale la pena mirar el caso simple. Un <code>StatelessWidget</code> no tiene pasos intermedios porque no existe ningún objeto <code>State</code> que crear, inicializar ni liberar: su ciclo se reduce a dos momentos.</p>
+<div class="diagrama">
+<p><img src="imagenes/flutter-ciclo-vida-stateless.svg" class="img-fluid" alt="Ciclo de vida de un StatelessWidget: el constructor crea la instancia con sus parámetros y build construye el árbol de widgets que se ve en pantalla. No hay initState ni dispose porque no existe un objeto State que inicializar ni liberar. Cuando el padre reconstruye esa parte del árbol, se crea una instancia nueva y el ciclo empieza de nuevo desde el constructor"></p>
+<p>Constructor y build(), nada más. Sin initState ni dispose: no hay State que inicializar ni liberar.</p>
+</div>
+<ul>
+<li><strong>Constructor.</strong> Crea la instancia del widget con los parámetros que recibió. Ocurre cada vez que su padre reconstruye esa parte del árbol: no es un paso que corra “una vez”, como <code>initState()</code> en un <code>StatefulWidget</code>, sino cada vez que hace falta una descripción nueva.</li>
+<li><strong><code>build()</code>.</strong> El framework lo llama para obtener el árbol de widgets que representa. No hay una ejecución inicial separada de las siguientes: cada reconstrucción del padre crea un widget nuevo y llama a su <code>build()</code> de nuevo.</li>
+</ul>
+<p>No hay equivalente a <code>setState()</code> ni a <code>dispose()</code>. Sin un objeto <code>State</code> que guarde nada entre reconstrucciones, no hay un valor que actualizar ni un recurso propio que cancelar o liberar antes de que el widget desaparezca del árbol.</p>
+</section>
+<section id="ciclo-de-vida-de-un-statefulwidget" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="ciclo-de-vida-de-un-statefulwidget"><span class="header-section-number">6</span> Ciclo de vida de un StatefulWidget</h2>
+<p>Ya viste el caso simple. Un <code>StatefulWidget</code> agrega pasos porque, a diferencia del <code>StatelessWidget</code>, sí tiene un objeto <code>State</code> que crear, inicializar y liberar aparte del widget. Falta ver cuándo ocurre cada paso de ese ciclo.</p>
 <div class="diagrama">
 <p><img src="imagenes/flutter-ciclo-vida-stateful.svg" class="img-fluid" alt="Secuencia del ciclo de vida de un StatefulWidget: createState se llama una vez, luego initState una vez, luego build al menos una vez y cada vez que setState lo dispara, y por último dispose una vez al retirar el widget del árbol"></p>
 <p>createState e initState corren una vez. build se repite con cada setState. dispose cierra el ciclo.</p>
@@ -398,8 +418,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>La idea que conecta toda esta secuencia con lo que viste en la Semana 02 es que <code>setState()</code> no cambia la pantalla por sí mismo: solo marca el element como sucio, tal como viste en la sección de los tres árboles. El repintado real ocurre después, en el pipeline de renderizado que ves a continuación.</p>
 </section>
-<section id="el-pipeline-de-renderizado" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="el-pipeline-de-renderizado"><span class="header-section-number">6</span> El pipeline de renderizado</h2>
+<section id="el-pipeline-de-renderizado" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="el-pipeline-de-renderizado"><span class="header-section-number">7</span> El pipeline de renderizado</h2>
 <p>Convertir un árbol de widgets en píxeles en pantalla no es un solo paso, son cinco fases consecutivas: build, layout, paint, composite y rasterizado.</p>
 <div class="diagrama">
 <p><img src="imagenes/flutter-pipeline-renderizado.svg" class="img-fluid" alt="Pipeline de renderizado de Flutter en cinco fases consecutivas: build, layout, paint, composite y rasterizado, desde el árbol de widgets hasta los píxeles entregados a la GPU"></p>
@@ -452,8 +472,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">7</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</h2>
+<section id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="compilación-multiplataforma-jit-en-desarrollo-aot-en-producción"><span class="header-section-number">8</span> Compilación multiplataforma: JIT en desarrollo, AOT en producción</h2>
 <p>Todo lo anterior explica cómo Flutter convierte widgets en píxeles dentro de un dispositivo. Falta la última pieza: cómo el mismo código Dart llega a correr, con rendimiento cercano al nativo, en Android, en iOS, en escritorio y en la web.</p>
 <div class="diagrama">
 <p><img src="imagenes/flutter-compilacion-multiplataforma.svg" class="img-fluid" alt="Compilación multiplataforma de Flutter: en desarrollo la Dart VM compila con JIT y permite recarga en caliente, en producción el compilador AOT traduce a código nativo ARM o x64 antes de arrancar, y en la web dartdevc sirve para desarrollo mientras dart2js o dart2wasm compilan para producción"></p>
@@ -493,13 +513,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="de-la-semana-02-a-lo-que-sigue" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">8</span> De la Semana 02 a lo que sigue</h2>
+<section id="de-la-semana-02-a-lo-que-sigue" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="de-la-semana-02-a-lo-que-sigue"><span class="header-section-number">9</span> De la Semana 02 a lo que sigue</h2>
 <p>Todo lo que viste acá ya estaba presente, sin que lo notaras, en el <code>_MyHomePageState</code> que construiste la semana pasada. El <code>StatefulWidget</code> con su <code>State</code> separado, el <code>setState()</code> que marca el element como sucio, el <code>build()</code> que se vuelve a ejecutar y produce un árbol nuevo de widgets: esa app mínima con un contador ya recorría, en cada toque de pantalla, el ciclo completo de esta guía, desde el widget hasta el píxel.</p>
 <p>Lo que sigue en el curso construye sobre estos cimientos, no al lado de ellos. Cuando trabajes con Material Design y con la librería más amplia de widgets de Flutter, cada <code>Scaffold</code>, cada <code>Column</code>, cada <code>ListView</code> que uses es, otra vez, composición sobre herencia: piezas pequeñas combinadas siguiendo las mismas reglas de constraints y del mismo pipeline que ya conoces. Entender la arquitectura no fue un desvío antes de programar interfaces: es la base que te permite leer cualquier widget nuevo con el que te encuentres el resto del semestre, y saber por qué se comporta como se comporta.</p>
 </section>
-<section id="recursos" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="recursos"><span class="header-section-number">9</span> Recursos</h2>
+<section id="recursos" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="recursos"><span class="header-section-number">10</span> Recursos</h2>
 <ul>
 <li>Visión arquitectónica oficial de Flutter: <a href="https://docs.flutter.dev/resources/architectural-overview" class="uri">https://docs.flutter.dev/resources/architectural-overview</a></li>
 <li>Inside Flutter, sobre los tres árboles y la reconciliación: <a href="https://docs.flutter.dev/resources/inside-flutter" class="uri">https://docs.flutter.dev/resources/inside-flutter</a></li>

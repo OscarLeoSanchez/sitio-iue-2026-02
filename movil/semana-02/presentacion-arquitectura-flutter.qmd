@@ -90,7 +90,7 @@ sistema, y le entrega a la GPU la superficie donde Flutter dibuja.
 
 ## Los tres arboles {.solo-diagrama}
 
-![](imagenes/flutter-tres-arboles.svg){fig-alt="Tres árboles paralelos de Flutter: el árbol de widgets, inmutable y recreado en cada build; el árbol de elements, mutable y persistente entre frames, que guarda el estado; y el árbol de render objects, más pequeño, que calcula tamaño posición y pintado"}
+![](imagenes/flutter-tres-arboles.svg){fig-alt="Tres árboles paralelos de Flutter en una cadena Center, Padding, MiWidget e Icon: el árbol de widgets y el de elements tienen los cuatro nodos, porque todo widget genera un element; el árbol de render objects solo tiene tres, porque MiWidget es un StatelessWidget sin render object propio y el de Icon se conecta directo con el de Padding, su ancestro más cercano que sí tiene uno"}
 
 ## Widget: una descripcion inmutable
 
@@ -158,6 +158,17 @@ En un Stateless, `build()` vive en la clase del widget. En un Stateful, vive en 
 
 `BuildContext` ubica al widget dentro del árbol y le da acceso a lo que proveen sus ancestros: un
 `Theme`, un `Navigator`, un `MediaQuery`.
+
+## Ciclo de vida de un StatelessWidget {.solo-diagrama}
+
+![](imagenes/flutter-ciclo-vida-stateless.svg){fig-alt="Ciclo de vida de un StatelessWidget: el constructor crea la instancia con sus parámetros y build construye el árbol de widgets que se ve en pantalla. No hay initState ni dispose porque no existe un objeto State que inicializar ni liberar. Cuando el padre reconstruye esa parte del árbol, se crea una instancia nueva y el ciclo empieza de nuevo desde el constructor"}
+
+## Constructor y build(), nada más
+
+- **Constructor.** Crea la instancia con sus parámetros. Se repite cada vez que el padre reconstruye.
+- **build().** El framework lo llama para obtener el árbol de widgets. Sin ejecución inicial aparte.
+- Sin `setState()`. Sin `initState()`. Sin `dispose()`: no hay un objeto `State` que inicializar,
+  actualizar ni liberar.
 
 ## Ciclo de vida de un StatefulWidget {.solo-diagrama}
 

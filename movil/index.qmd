@@ -29,7 +29,7 @@ semestre.
 |:---:|---|---|:---:|
 | **[01](semana-01/index.qmd)** | Socialización. Ecosistema móvil e instalación del entorno | Entorno verificado con `flutter doctor` | - |
 | **[02](semana-02/index.qmd)** | Flutter y Dart | Pantalla con estado propio que reacciona a la interacción | - |
-| 03 | Git y primer proyecto | Repositorio con primera versión ejecutable e historial ordenado | **10%** |
+| **[03](semana-03/index.qmd)** | Git y primer proyecto | Repositorio con primera versión ejecutable e historial ordenado | **10%** |
 :::
 
 ### Unidad 2. Interfaz, datos y persistencia

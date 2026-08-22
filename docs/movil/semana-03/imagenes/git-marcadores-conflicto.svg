@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760" height="235" viewBox="0 0 760 235" role="img" aria-label="Anatomia de un conflicto: entre el marcador de inicio y el separador esta tu version, entre el separador y el marcador de cierre esta la version que traes, y las tres lineas de marcadores se borran al resolver" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="d4-sombra" x="-10%" y="-15%" width="125%" height="135%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <rect x="16" y="26" width="470" height="180" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5" filter="url(#d4-sombra)"/>
+  <rect x="24" y="72" width="454" height="28" rx="4" fill="#eaf2fb"/>
+  <rect x="24" y="132" width="454" height="28" rx="4" fill="#e8f6f3"/>
+  <g font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="12">
+    <text x="32" y="60" fill="#9b2c5e">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+    <text x="32" y="90" fill="#16202b">## MVP: inicio de sesion y perfil</text>
+    <text x="32" y="120" fill="#9b2c5e">=======</text>
+    <text x="32" y="150" fill="#16202b">## MVP: inicio de sesion y modo oscuro</text>
+    <text x="32" y="180" fill="#9b2c5e">&gt;&gt;&gt;&gt;&gt;&gt;&gt; segunda-rama</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="9.5" letter-spacing="0.8" text-anchor="end">
+    <text x="470" y="90" fill="#17456f">TU VERSIÓN</text>
+    <text x="470" y="150" fill="#0e8f8f">LA QUE TRAES</text>
+  </g>
+  <g stroke="#c0392b" stroke-width="1.5" fill="none">
+    <path d="M 490,56 L 514,56"/>
+    <path d="M 490,116 L 514,116"/>
+    <path d="M 490,176 L 514,176"/>
+    <path d="M 514,56 L 514,176"/>
+    <path d="M 514,116 L 526,116"/>
+  </g>
+  <rect x="526" y="90" width="222" height="52" rx="8" fill="#fdf3f2" stroke="#e3b7b0" stroke-width="1.5"/>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#a32d22" text-anchor="middle">
+    <text x="637" y="113">Las tres líneas de marcadores</text>
+    <text x="637" y="130">se borran al resolver</text>
+  </g>
+</svg>

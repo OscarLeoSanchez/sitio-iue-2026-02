@@ -113,7 +113,7 @@ widgets. Por debajo, Flutter mantiene tres árboles paralelos que colaboran: el 
 árbol de elements y el árbol de render objects.
 
 ::: {.diagrama}
-![](imagenes/flutter-tres-arboles.svg){fig-alt="Tres árboles paralelos de Flutter: el árbol de widgets, inmutable y recreado en cada build; el árbol de elements, mutable y persistente entre frames, que guarda el estado; y el árbol de render objects, más pequeño, que calcula tamaño posición y pintado"}
+![](imagenes/flutter-tres-arboles.svg){fig-alt="Tres árboles paralelos de Flutter en una cadena Center, Padding, MiWidget e Icon: el árbol de widgets y el de elements tienen los cuatro nodos, porque todo widget genera un element; el árbol de render objects solo tiene tres, porque MiWidget es un StatelessWidget sin render object propio y el de Icon se conecta directo con el de Padding, su ancestro más cercano que sí tiene uno"}
 
 El widget describe, el element persiste y guarda el estado, el render object calcula y pinta.
 :::
@@ -261,10 +261,34 @@ dentro del árbol, y por eso le permite acceder a información o recursos que pr
 (un `Theme`, un `Navigator`, un `MediaQuery`) sin que esos ancestros necesiten conocer a sus
 descendientes. Es una vía de comunicación de arriba hacia abajo, no al revés.
 
+## Ciclo de vida de un StatelessWidget
+
+Antes de ver el ciclo completo de un `StatefulWidget`, vale la pena mirar el caso simple. Un
+`StatelessWidget` no tiene pasos intermedios porque no existe ningún objeto `State` que crear,
+inicializar ni liberar: su ciclo se reduce a dos momentos.
+
+::: {.diagrama}
+![](imagenes/flutter-ciclo-vida-stateless.svg){fig-alt="Ciclo de vida de un StatelessWidget: el constructor crea la instancia con sus parámetros y build construye el árbol de widgets que se ve en pantalla. No hay initState ni dispose porque no existe un objeto State que inicializar ni liberar. Cuando el padre reconstruye esa parte del árbol, se crea una instancia nueva y el ciclo empieza de nuevo desde el constructor"}
+
+Constructor y build(), nada más. Sin initState ni dispose: no hay State que inicializar ni liberar.
+:::
+
+- **Constructor.** Crea la instancia del widget con los parámetros que recibió. Ocurre cada vez
+  que su padre reconstruye esa parte del árbol: no es un paso que corra "una vez", como
+  `initState()` en un `StatefulWidget`, sino cada vez que hace falta una descripción nueva.
+- **`build()`.** El framework lo llama para obtener el árbol de widgets que representa. No hay una
+  ejecución inicial separada de las siguientes: cada reconstrucción del padre crea un widget nuevo
+  y llama a su `build()` de nuevo.
+
+No hay equivalente a `setState()` ni a `dispose()`. Sin un objeto `State` que guarde nada entre
+reconstrucciones, no hay un valor que actualizar ni un recurso propio que cancelar o liberar antes
+de que el widget desaparezca del árbol.
+
 ## Ciclo de vida de un StatefulWidget
 
-Ya viste cómo separar estado (`State`) de configuración (`Widget`) resuelve el problema de que un
-widget inmutable no puede cambiar por sí mismo. Falta ver cuándo ocurre cada paso de ese ciclo.
+Ya viste el caso simple. Un `StatefulWidget` agrega pasos porque, a diferencia del `StatelessWidget`,
+sí tiene un objeto `State` que crear, inicializar y liberar aparte del widget. Falta ver cuándo
+ocurre cada paso de ese ciclo.
 
 ::: {.diagrama}
 ![](imagenes/flutter-ciclo-vida-stateful.svg){fig-alt="Secuencia del ciclo de vida de un StatefulWidget: createState se llama una vez, luego initState una vez, luego build al menos una vez y cada vez que setState lo dispara, y por último dispose una vez al retirar el widget del árbol"}

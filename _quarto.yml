@@ -36,6 +36,10 @@ website:
               href: movil/semana-02/index.qmd
             - text: "Complemento: arquitectura de Flutter"
               href: movil/semana-02/arquitectura-flutter.qmd
+            # Las diapositivas no van en la barra lateral: se abren con el
+            # boton que esta al inicio de la guia de la semana.
+            - text: "Semana 3. Git y el arranque de tu proyecto"
+              href: movil/semana-03/index.qmd
     - id: web
       style: docked
       background: light

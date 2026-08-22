@@ -1,0 +1,1424 @@
+---
+title: "Semana 3. Git y el arranque de tu proyecto"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                       |
+|------------|---------------------------------------|
+| Asignatura | Programación Móvil (IF2004)          |
+| Grupos     | 601 y 602 de Ingeniería Informática  |
+| Unidad     | Unidad 1. Fundamentos del desarrollo móvil |
+| Evaluación | 10% del curso                        |
+:::
+
+::: {.acceso}
+Diapositivas de la sesión
+
+[Abrir las diapositivas](presentacion.qmd){.btn-doc target="_blank"}
+:::
+
+## Lo que vas a lograr
+
+Hasta la semana pasada, `hola_iue` vivía sin historia: si algo se rompía, no había forma de volver
+atrás. Esta semana entra Git, y con él arranca también el proyecto que vas a construir el resto del
+semestre.
+
+En clase practicas el flujo completo de Git en un repositorio de práctica desechable: nada de lo
+que hagas ahí se entrega ni se califica, es solo para que el mecanismo te quede claro sin arriesgar
+tu proyecto real. Después, ya en tu proyecto, defines por escrito qué vas a construir y aplicas el
+mismo flujo de Git sobre código que sí importa.
+
+Al terminar la guía sabes:
+
+1. Explicar qué hace Git con tus archivos y en qué se diferencia de GitHub.
+2. Llevar un historial de commits legible, con mensajes que siguen una convención.
+3. Trabajar en una rama y fusionarla mediante un Pull Request.
+4. Provocar un conflicto de fusión a propósito y resolverlo sin romper el archivo.
+5. Escribir el alcance de tu proyecto del semestre en `docs/alcance.md`.
+6. Poner tu proyecto bajo control de versiones, con historial, ramas y al menos un conflicto real
+   resuelto y documentado.
+
+::: {.callout-note}
+## Antes de empezar
+
+Necesitas que `git --version` responda en la terminal. Lo instalaste en la Semana 1.
+
+Necesitas además una cuenta en [github.com](https://github.com/). Créala antes de la sesión: la
+verificación del correo tarda unos minutos.
+:::
+
+## Parte teórica
+
+Esta parte va proyectada en clase. Aquí está la versión completa: lo mismo que ves en las
+diapositivas, explicado con el detalle que no cabe en una pantalla.
+
+### Por qué existe el control de versiones
+
+Sin control de versiones, el respaldo de un proyecto termina siendo una fila de carpetas.
+
+::: {.diagrama}
+![](imagenes/problema-carpetas.svg){fig-alt="Cinco carpetas con nombres parecidos y tres preguntas que ninguna responde"}
+
+Todos hemos tenido este disco duro.
+:::
+
+El desorden es lo de menos. El problema de verdad son tres preguntas que esas carpetas no pueden
+responder:
+
+- **¿Cuál es la buena?** La fecha de modificación miente: basta abrir un archivo para cambiarla.
+- **¿Qué cambió entre una y otra?** Para saberlo habría que comparar archivo por archivo, a mano.
+- **¿Por qué se hizo ese cambio?** No hay registro. El motivo vive en tu memoria, y esa memoria dura
+  una semana.
+
+Lo que hace falta es un sistema que sepa:
+
+| Necesidad | Qué significa en la práctica |
+|---|---|
+| Volver atrás | Recuperar el proyecto tal como estaba hace tres días, sin adivinar |
+| Saber qué y cuándo | Cada cambio con fecha y motivo |
+| Trabajar en paralelo | Probar una idea sin romper lo que ya funciona |
+| Respaldar sin depender de una carpeta | Que el historial sobreviva aunque se dañe un disco |
+
+Eso es exactamente lo que hace Git.
+
+### Git y GitHub
+
+Son dos cosas distintas con nombre parecido, y confundirlas causa la mitad de los enredos del
+primer mes.
+
+::: {.diagrama}
+![](imagenes/git-y-github.svg){fig-alt="Git es un programa en tu computador y GitHub es un servicio en internet, conectados por push y pull"}
+
+Git vive en tu máquina. GitHub vive en internet.
+:::
+
+**Git** es un programa que instalaste en tu computador. Lleva la historia del proyecto en una
+carpeta oculta llamada `.git` que vive dentro de tu propio proyecto. Funciona sin conexión: puedes
+commitear todo un fin de semana en un bus sin internet y no perder nada.
+
+**GitHub** es un servicio en la nube que aloja copias de repositorios de Git. Encima de eso agrega
+lo que Git no trae: una interfaz web, un respaldo fuera de tu máquina y Pull Requests. Existen
+alternativas con las mismas funciones, como GitLab o Bitbucket.
+
+| | Git | GitHub |
+|---|---|---|
+| Qué es | Un programa | Un servicio en internet |
+| Dónde corre | En tu computador | En los servidores de una empresa |
+| Necesita internet | No | Sí |
+| Quién lo hizo | Linus Torvalds, 2005 | Una empresa, hoy de Microsoft |
+| Se puede usar sin el otro | Sí | No, GitHub necesita Git |
+
+Si GitHub desapareciera mañana, tu repositorio local seguiría completo, con toda su historia. Eso
+es lo que significa que Git sea **distribuido**: cada copia es un repositorio entero, no un
+fragmento.
+
+### El modelo de Git: cuatro lugares
+
+Casi todos los errores con Git vienen de no tener claro este esquema. Tus archivos pasan por
+cuatro lugares, y cada comando que vas a aprender lo que hace es moverlos de uno al siguiente.
+
+::: {.diagrama}
+![](imagenes/git-cuatro-areas.svg){fig-alt="Diagrama de las cuatro areas de Git: directorio de trabajo, area de preparacion, repositorio local y repositorio remoto, con los comandos que mueven el contenido entre ellas"}
+
+Las flechas azules avanzan y guardan. Las grises punteadas devuelven el contenido hacia atrás.
+:::
+
+Léelo así: editas archivos en el directorio de trabajo, escoges cuáles quieres guardar con
+`git add`, los conviertes en una fotografía con `git commit` y la envías a GitHub con `git push`.
+Los tres comandos grises hacen el camino inverso.
+
+| Lugar | Qué es | Cómo se llega |
+|---|---|---|
+| Directorio de trabajo | La carpeta que ves en el explorador y editas en VS Code | Editar archivos |
+| Área de preparación | La lista de cambios que quieres guardar en la próxima foto | `git add` |
+| Repositorio local | La historia completa, guardada en la carpeta oculta `.git` | `git commit` |
+| Repositorio remoto | La copia en GitHub | `git push` |
+
+Vale la pena detenerse en cada uno.
+
+**El directorio de trabajo** es lo único que ves. Son tus archivos tal como están ahora mismo en
+el disco. Git los observa pero no los controla: puedes editarlos, borrarlos y renombrarlos con
+total libertad.
+
+**El área de preparación** es la lista de lo que va a entrar en el próximo commit. Existe para que
+puedas guardar la mitad de tu trabajo y dejar la otra mitad para después. Si tocaste cinco
+archivos pero solo tres pertenecen al mismo cambio, preparas esos tres y commiteas; los otros dos
+quedan esperando.
+
+**El repositorio local** es la carpeta oculta `.git`. Ahí está la historia completa: todos los
+commits, todas las ramas, todas las etiquetas. Si borras esa carpeta, tus archivos siguen ahí pero
+la historia desaparece.
+
+**El repositorio remoto** es la copia que vive en GitHub. Se sincroniza a mano, nunca sola.
+
+#### Los cinco comandos que mueven el contenido
+
+::: {.diagrama}
+![](imagenes/comandos-areas.svg){fig-alt="Los cinco comandos que mueven el trabajo entre las areas de Git y para que sirve cada uno"}
+
+Cuatro avanzan. El último devuelve.
+:::
+
+La pregunta que resuelve este esquema es la que más se repite en clase: por qué GitHub no ve mi
+cambio. Casi siempre porque el cambio está en el directorio de trabajo, o en el área de
+preparación, o en un commit local, y en ninguno de esos tres casos ha salido de tu máquina.
+**Nada sale de tu computador hasta que hagas `push`.**
+
+### Qué es exactamente un commit
+
+Un **commit** es una fotografía del proyecto completo en un instante. No guarda la diferencia con
+el commit anterior: guarda el estado entero, y Git se encarga por dentro de no repetir lo que no
+cambió.
+
+::: {.diagrama}
+![](imagenes/anatomia-commit.svg){fig-alt="Un commit guarda autor, fecha, mensaje, el enlace al commit padre y una copia completa del proyecto"}
+
+Cinco datos, y uno de ellos es el que arma la historia.
+:::
+
+Cada commit lleva cinco cosas pegadas:
+
+| Dato | Para qué sirve |
+|---|---|
+| **Autor** | Nombre y correo de quien lo hizo. Sale de tu `git config` |
+| **Fecha** | Momento exacto en que se creó |
+| **Mensaje** | La explicación del cambio, escrita por ti |
+| **Padre** | El hash del commit anterior. Es el enlace que arma la cadena |
+| **Contenido** | El estado completo del proyecto en ese instante |
+
+El **padre** es el dato que convierte una pila de fotos sueltas en una historia.
+
+::: {.diagrama}
+![](imagenes/git-cadena-commits.svg){fig-alt="Cadena de cuatro commits en orden, del mas antiguo al mas reciente, con las etiquetas main y HEAD sobre el ultimo"}
+
+Cada commit guarda el enlace al anterior, y por eso la cadena se puede recorrer entera desde el
+último.
+:::
+
+#### El hash
+
+Cada commit se identifica con un **hash**: un número de 40 caracteres en hexadecimal que Git
+calcula a partir del contenido del commit.
+
+```text
+e4c41a6f2d81b9c0a7e35d4188c6f0b2ad19e7c3
+```
+
+Como sale del contenido, cambiar una sola coma produce un hash completamente distinto. Eso es lo
+que hace que la historia sea verificable: si alguien alterara un commit viejo, todos los hashes
+posteriores dejarían de cuadrar.
+
+En la práctica escribes los primeros siete caracteres y Git entiende de cuál hablas. En un
+repositorio de curso no hay dos commits que empiecen igual.
+
+#### `main` y `HEAD`
+
+`main` es una etiqueta que apunta al último commit de la rama principal. `HEAD` es el nombre que
+Git le da a "dónde estás parado ahora", y casi siempre apunta a la rama en la que trabajas.
+
+Cuando haces un commit nuevo, los dos avanzan juntos al commit recién creado.
+
+### Los mensajes de commit
+
+El mensaje es lo único que va a quedar para explicar por qué existe ese cambio. Lo vas a leer tú
+mismo dentro de un mes, cuando ya no recuerdes nada.
+
+::: {.diagrama}
+![](imagenes/prefijos-commit.svg){fig-alt="Anatomia de un mensaje de commit: el prefijo de tipo, dos puntos y la descripcion, con el significado de feat, fix, docs, style y chore"}
+
+Un tipo, dos puntos y qué hiciste, en presente.
+:::
+
+En este curso usamos la convención de **Conventional Commits**, que es la más extendida en la
+industria. El mensaje empieza con un prefijo que clasifica el cambio:
+
+| Prefijo | Cuándo se usa | Ejemplo |
+|---|---|---|
+| `feat:` | Algo nuevo que antes no existía | `feat: agrega la pantalla de login` |
+| `fix:` | Arreglaste algo que estaba mal | `fix: corrige el boton que no responde` |
+| `docs:` | Documentación, README, comentarios | `docs: completa el alcance del proyecto` |
+| `style:` | Formato o acomodo, sin cambiar comportamiento | `style: ordena los widgets del build` |
+| `chore:` | Mantenimiento: configuración, dependencias | `chore: agrega shared_preferences` |
+
+Después del prefijo va un verbo **en presente** y el objeto del cambio. Se escribe como si
+completaras la frase "este commit...": este commit *agrega la pantalla de login*.
+
+::: {.diagrama}
+![](imagenes/mensajes-commit.svg){fig-alt="Comparacion entre mensajes de commit vagos y mensajes que describen el cambio con un prefijo de tipo"}
+
+La diferencia se nota cuando buscas en qué commit se rompió algo.
+:::
+
+Dos reglas más que valen la pena:
+
+- **Un commit, un cambio.** Si el mensaje necesita un "y" para describir lo que hiciste, son dos
+  commits.
+- **Describe el cambio, no el archivo.** `fix: corrige el boton que no responde` sirve;
+  `actualiza main.dart` no dice nada, porque el archivo ya aparece en el diff.
+
+### Ramas
+
+Una **rama** es un puntero móvil a un commit. Cuando haces un commit nuevo, el puntero de la rama
+en la que estás avanza al commit nuevo. Eso es todo.
+
+::: {.diagrama}
+![](imagenes/rama-puntero.svg){fig-alt="La etiqueta main se mueve al commit nuevo sin copiar archivos"}
+
+Commitear mueve la etiqueta. Los commits anteriores no se tocan.
+:::
+
+Por eso crear una rama en Git es instantáneo, incluso en proyectos enormes: no copia archivos,
+solo escribe un nombre que apunta a un hash de 40 caracteres.
+
+La rama principal se llama `main`. La regla del curso es simple: **`main` siempre debe compilar y
+correr**. Cada cosa nueva que quieras probar se hace en una rama aparte, con nombre `feature/algo`,
+y vuelve a `main` solo cuando esté lista.
+
+| Nombre | Para qué |
+|---|---|
+| `main` | La versión que siempre funciona |
+| `feature/login` | Una funcionalidad nueva |
+| `fix/boton-guardar` | La corrección de un error concreto |
+
+### Fusionar
+
+**Fusionar** es traer los commits de una rama a otra. El comando es `git merge <rama>` y lo
+importante es dónde estás parado: la rama en la que ejecutas el comando es la que **recibe** los
+commits.
+
+::: {.diagrama}
+![](imagenes/git-rama-fusion.svg){fig-alt="Diagrama de una rama que sale de main, avanza dos commits y vuelve a main en un commit de fusion"}
+
+El commit de fusión es el único que tiene dos padres. Por eso es la prueba de que hubo una rama.
+:::
+
+Git resuelve la fusión de dos maneras distintas, según lo que haya pasado mientras trabajabas.
+
+::: {.diagrama}
+![](imagenes/fusion-dos-formas.svg){fig-alt="Avance rapido cuando main no se movio, y commit de fusion cuando las dos ramas avanzaron"}
+
+Cuál de las dos ocurre no lo decides tú: depende de si `main` avanzó mientras tanto.
+:::
+
+**Avance rápido.** Si `main` no recibió ningún commit mientras trabajabas en tu rama, Git no tiene
+nada que combinar: mueve la etiqueta `main` hacia adelante y ya. No se crea ningún commit nuevo y
+el historial queda en línea recta.
+
+**Commit de fusión.** Si `main` avanzó mientras tanto, Git tiene que combinar dos historias. Crea
+un commit especial con **dos padres**, uno por cada rama. Ese es el commit que aparece con la
+bifurcación en `git log --graph`.
+
+### Conflictos
+
+Git combina solo mientras las dos versiones hayan tocado archivos distintos, o líneas distintas
+del mismo archivo. Es más listo de lo que parece: puedes tener dos ramas tuyas editando el mismo
+archivo sin problema, siempre que no se crucen en la misma línea.
+
+::: {.diagrama}
+![](imagenes/por-que-conflicto.svg){fig-alt="Dos ramas propias cambian la misma linea de forma distinta y Git no puede escoger"}
+
+Dos respuestas válidas para la misma línea. Nadie salvo tú, con criterio humano, puede escoger.
+:::
+
+Cuando dos ramas modifican **la misma línea**, aunque las dos sean tuyas, Git se detiene y declara
+un conflicto. No es un error tuyo ni una falla de Git: es Git diciendo que la decisión es humana y
+que no piensa inventarse una respuesta.
+
+Al detenerse, Git deja el archivo con unos marcadores que separan las dos versiones. Cómo se leen
+y cómo se resuelven está en el laboratorio de esta guía, donde vas a provocar uno a propósito.
+
+### El repositorio remoto
+
+Hasta aquí todo ocurre en tu computador. El remoto es la copia que vive en GitHub y que sirve
+como respaldo y como punto de publicación.
+
+::: {.diagrama}
+![](imagenes/remoto-copias.svg){fig-alt="GitHub guarda la copia de referencia y tu computador tiene la historia completa, sincronizando con push y pull"}
+
+Dos copias completas. Ninguna es más real que la otra.
+:::
+
+`origin` es el nombre convencional que se le da al remoto principal. No tiene nada de mágico: es
+una etiqueta que apunta a una dirección, y podrías llamarla de otra forma.
+
+Lo que hay que entender es que **tu computador tiene la historia entera**, no un pedazo. Puedes
+mirar el log completo, crear ramas y commitear sin conexión. El remoto solo hace falta para
+publicar y respaldar.
+
+| Comando | Qué mueve |
+|---|---|
+| `git clone <url>` | Trae el repositorio completo la primera vez |
+| `git push` | Sube tus commits al remoto |
+| `git pull` | Baja los commits del remoto y los integra |
+| `git fetch` | Baja la información del remoto sin tocar tus archivos |
+
+### El Pull Request
+
+Un Pull Request es una **propuesta de cambio**. Dice: "tengo esto listo en mi rama, quiero meterlo
+en `main`".
+
+::: {.diagrama}
+![](imagenes/pull-request.svg){fig-alt="Un Pull Request muestra la rama, los commits, los archivos cambiados, tu propia revision y el boton de fusion"}
+
+La conversación queda pegada al cambio, no perdida en un chat.
+:::
+
+Cuatro cosas que conviene tener claras:
+
+- **Vive en GitHub, no en Git.** No existe ningún comando `git pull-request`. El Pull Request es
+  una función del servicio, no del programa.
+- **Muestra el cambio línea por línea.** La pestaña `Files changed` trae el diff completo, así que
+  léelo antes de fusionar en vez de confiar de memoria en lo que escribiste.
+- **Deja registro.** Queda escrito qué se propuso, qué se revisó y cuándo se fusionó. Dentro de
+  tres meses eso explica por qué tu código es como es.
+- **`main` no se toca hasta la fusión.** Mientras el Pull Request esté abierto, la rama principal
+  sigue igual.
+
+En un proyecto de equipo, la regla suele ser que otra persona revisa y fusiona tu Pull Request. En
+tu proyecto individual **tú abres el Pull Request y tú lo fusionas**, después de leer el diff
+completo en `Files changed` como si lo revisara otra persona: es la misma disciplina de mirar el
+cambio antes de que entre a `main`, solo que sin nadie más de por medio.
+
+### El flujo de trabajo del curso
+
+Este es el ciclo que vas a repetir en cada entrega del curso. Cada funcionalidad nueva nace en una
+rama, se publica, la revisas tú mismo y solo entonces entra a `main`.
+
+::: {.diagrama}
+![](imagenes/git-flujo-pull-request.svg){fig-alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, lo revisas y lo fusionas; despues bajas el resultado con git pull"}
+
+Los pasos 1, 2, 3 y 6 son comandos en tu terminal. Los pasos 4 y 5 ocurren en el navegador.
+:::
+
+Los seis pasos, en palabras:
+
+1. **Creas la rama.** `main` queda intacta mientras experimentas.
+2. **Trabajas y commiteas.** Cuantas veces necesites, siempre en tu rama.
+3. **Publicas la rama.** Ahí queda respaldada en GitHub, pero `main` sigue sin tocarse.
+4. **Abres el Pull Request.** Es una propuesta: "quiero meter esto en `main`".
+5. **Revisas el diff y fusionas.** Lees `Files changed` con calma y pulsas el botón de fusión.
+6. **Bajas el resultado.** Tu `main` local se pone al día con la de GitHub.
+
+### Lo que no se versiona
+
+No todo lo que está en la carpeta del proyecto debe entrar al repositorio. El `.gitignore` es la
+lista de lo que Git debe ignorar.
+
+::: {.diagrama}
+![](imagenes/gitignore-filtro.svg){fig-alt="El gitignore deja pasar main.dart, pubspec.yaml y el README, y retiene dart_tool, build y los archivos con claves"}
+
+Lo que se puede regenerar, y lo que no debe salir de tu máquina, se quedan afuera.
+:::
+
+**No se versiona lo que se puede regenerar.** `.dart_tool/` y `build/` son resultados de compilar:
+Flutter los vuelve a crear con `flutter pub get` y `flutter run`. Subirlos a GitHub son miles de
+archivos que nadie va a leer y que hacen lento cada `clone`.
+
+**Nunca se suben secretos.** Archivos como `google-services.json` (la configuración de Firebase,
+que vas a usar más adelante en el semestre) llevan claves y no van al repositorio.
+
+Una diferencia importante frente a un proyecto web: `flutter create` **ya genera un `.gitignore`
+apropiado** la primera vez que corres el comando. No lo escribes desde cero, como tendrías que
+hacerlo en un proyecto sin plantilla; tu trabajo es abrirlo y entender qué contiene, no redactarlo.
+El laboratorio de esta guía lo confirma sobre tu propio proyecto.
+
+Las rutas típicas que vas a encontrar en el `.gitignore` que Flutter genera:
+
+| Ruta | Por qué se ignora |
+|---|---|
+| `.dart_tool/` | Caché interna del SDK de Dart, se regenera sola |
+| `build/` | La salida compilada, se regenera con cada build |
+| `.idea/` | Configuración local de Android Studio |
+| `*.iml` | Archivos de proyecto de IntelliJ/Android Studio |
+| `.flutter-plugin-dependencies` | Registro interno de plugins, se regenera solo |
+
+::: {.callout-important}
+## Una clave subida ya está quemada
+
+Borrarla un minuto después no sirve de nada: el commit que la contenía sigue en el historial y
+cualquiera puede recuperarla. En un repositorio público, los robots que rastrean GitHub la
+encuentran en cuestión de minutos.
+
+Por eso `google-services.json` u otro archivo con claves entra al `.gitignore` **antes** del
+primer commit, y no después. Si te pasa, avísame: sacar un secreto del historial no es tan simple
+como borrar el archivo.
+:::
+
+### Tres reglas que no se negocian
+
+::: {.checklist}
+**Lo que hay que recordar de esta parte**
+
+1. **`main` siempre corre.** Lo que todavía no sirve vive en una rama.
+2. **Una rama por cada cosa nueva.** Se abre, se revisa, se fusiona y se borra.
+3. **El mensaje explica el cambio**, no el archivo que tocaste.
+:::
+
+## Definiendo el alcance de tu proyecto
+
+Esta semana no solo arranca Git: también arranca el **proyecto integrador**, el que vas a ir
+construyendo semana a semana hasta la demo final de la Semana 17. Antes de escribir código nuevo,
+decides por escrito qué vas a construir. Sin eso, un proyecto de semestre crece sin control: cada
+semana agregas "una cosa más" y en la Semana 15 tienes diez funcionalidades a medio hacer en vez
+de cinco que funcionan bien.
+
+El documento que fija esto se llama `docs/alcance.md`, vive dentro de tu propio repositorio de
+proyecto y tiene cinco partes obligatorias.
+
+### `docs/alcance.md`: las cinco partes
+
+**Problema que resuelve.** Una o dos frases. Qué necesidad atiende tu app, sin vender la idea, solo
+describirla.
+
+**Usuario objetivo.** Quién la va a usar. No "todo el mundo": entre más concreto el usuario, más
+fácil es decidir qué funcionalidades importan de verdad.
+
+**Funcionalidades mínimas (MVP).** La lista concreta de lo que vas a construir. MVP es *minimum
+viable product*: lo mínimo que hace que tu app sirva para algo, no la versión con todo lo que se
+te ocurra. Piensa en un curso de 17 semanas: cinco o seis funcionalidades bien hechas valen más
+que quince a medias.
+
+**Qué queda fuera de alcance.** Tan importante como la lista anterior. Escribe explícitamente qué
+NO vas a hacer este semestre. Es lo que te permite decir "no" cuando se te ocurra una idea nueva a
+mitad de camino.
+
+**Stack.** Flutter y Dart son fijos para todo el curso. Agrega lo que planeas usar de Git, Firebase
+(Authentication, Firestore, Storage), SQLite, Clean Architecture o IA (en dispositivo o por API),
+según lo que tu proyecto necesite.
+
+Este documento no se escribe una sola vez y se olvida: lo vas a revisar y a veces ajustar mientras
+avanza el semestre, y es el que vas a mirar en la Semana 17 para confirmar que cumpliste lo que te
+propusiste.
+
+### Continuar con `hola_iue` o crear un proyecto nuevo
+
+Tienes dos caminos, y ninguno es mejor que el otro:
+
+- **Continuar con `hola_iue`.** Si tu idea encaja razonablemente en lo que ya generaste con
+  `flutter create` en la Semana 02, sigues desde ahí. Le vas a cambiar casi todo el contenido de
+  todas formas.
+- **Crear un proyecto nuevo.** Si tu idea no tiene nada que ver con lo que trae la plantilla, o
+  prefieres un nombre de paquete distinto, corres `flutter create` otra vez con el nombre que
+  corresponda a tu proyecto.
+
+Es una decisión normal, no una señal de que algo salió mal en la Semana 2. `hola_iue` siempre fue
+un proyecto de práctica; lo que importa esta semana es que el proyecto que sigas usando de aquí en
+adelante tenga un nombre que tenga sentido para tu idea real.
+
+### Un ejemplo completo
+
+Así se ve un `docs/alcance.md` ya lleno, para un proyecto distinto al que usan los diagramas de
+esta guía:
+
+````markdown
+# Alcance del proyecto: EstudioFacil
+
+## Problema que resuelve
+Repasar para un parcial revisando apuntes sueltos en varios archivos es lento, y no hay forma
+rapida de repasar temas cortos en momentos libres, como la fila del bus.
+
+## Usuario objetivo
+Estudiantes de pregrado de la IUE que quieren repasar con tarjetas de pregunta y respuesta desde
+el celular, incluso sin conexion constante a internet.
+
+## Funcionalidades minimas (MVP)
+- Crear, editar y borrar mazos de tarjetas (pregunta y respuesta).
+- Estudiar un mazo: la tarjeta se voltea al tocarla para mostrar la respuesta.
+- Guardar el progreso de estudio en el dispositivo, aunque no haya internet.
+- Iniciar sesion con correo institucional.
+- Sincronizar los mazos en la nube para no perderlos si cambia de celular.
+
+## Que queda fuera de alcance
+- Compartir mazos entre estudiantes o hacerlos publicos.
+- Repeticion espaciada (un algoritmo de repaso tipo Anki).
+- Version web o de escritorio: el proyecto es solo movil.
+- Estadisticas de estudio mas alla de un contador simple de tarjetas repasadas.
+
+## Stack
+Flutter y Dart. Git y GitHub para el control de versiones. SQLite para el progreso local.
+Firebase Authentication y Firestore para el inicio de sesion y la sincronizacion en la nube.
+Arquitectura por capas a partir de la unidad del curso que la introduce.
+````
+
+Nota el nivel de detalle: cada funcionalidad del MVP es una frase concreta y verificable, no una
+palabra suelta como "notificaciones" o "estadisticas". Lo mismo aplica a lo que queda fuera: cada
+punto dice explícitamente qué no vas a construir, no solo "el resto".
+
+::: {.callout-tip}
+## Reto: completa el alcance de una idea ajena
+
+Antes de escribir el tuyo, practica con esta idea ya planteada, distinta a la de arriba: una app
+para que un vivero pequeño lleve el riego de sus plantas. El dueño quiere saber qué planta hay que
+regar hoy y recibir un aviso si se le pasa la fecha.
+
+Escribe tú mismo, en un borrador aparte, las cinco partes de `docs/alcance.md` para esa idea:
+problema, usuario objetivo, MVP (cuatro o cinco funcionalidades), qué queda fuera de alcance y
+stack. No hay una única respuesta correcta: el ejercicio es practicar el nivel de detalle antes de
+hacerlo en serio con tu propia idea.
+:::
+
+::: {.callout-note collapse="true"}
+## Un ejemplo de solución
+
+```markdown
+# Alcance del proyecto: RiegoVivero
+
+## Problema que resuelve
+El dueño de un vivero pequeño pierde plantas porque no lleva un registro de cuando regó cada una
+y se le olvida revisar las que necesitan atención especial.
+
+## Usuario objetivo
+El dueño de un vivero pequeño, con quince a treinta plantas distintas, que usa el celular para
+casi todo su trabajo diario.
+
+## Funcionalidades minimas (MVP)
+- Registrar cada planta con su nombre y cada cuantos dias necesita riego.
+- Marcar una planta como regada hoy.
+- Ver una lista de las plantas que hay que regar hoy, ordenada por urgencia.
+- Recibir una notificacion local si una planta lleva regada mas dias de la cuenta.
+
+## Que queda fuera de alcance
+- Varios usuarios o viveros distintos en la misma cuenta.
+- Recomendaciones automaticas de cuidado por tipo de planta.
+- Control de otras tareas del vivero (fertilizacion, poda, ventas).
+
+## Stack
+Flutter y Dart. Git y GitHub. SQLite para guardar las plantas y su historial de riego. Sin
+Firebase por ahora: el vivero funciona sin conexion la mayor parte del dia.
+```
+
+Fíjate en algo clave: este alcance NO usa Firebase, aunque el ejemplo de la sección anterior sí.
+No hay una lista fija de tecnologías que todo proyecto deba usar. El stack sale de lo que tu
+proyecto necesita, no al revés.
+:::
+
+## Laboratorio
+
+Sigue los pasos en orden en un **repositorio de práctica**, separado de tu proyecto real. Nada de
+lo que hagas aquí se entrega: es para que el mecanismo de Git te quede claro sin arriesgar tu
+proyecto.
+
+### [1]{.paso} Configura tu identidad
+
+Git firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:
+
+```bash
+git config --global user.name "Tu Nombre Completo"
+git config --global user.email "tu.correo@correo.iue.edu.co"
+git config --global init.defaultBranch main
+```
+
+La tercera línea hace que los repositorios nuevos usen `main` como rama principal en vez del
+antiguo `master`.
+
+Verifica:
+
+```bash
+git config --global --list
+```
+
+### [2]{.paso} Crea tu repositorio de práctica
+
+Crea una carpeta llamada `taller-git`, abre una terminal adentro y ejecuta:
+
+```bash
+git init
+```
+
+Crea adentro un archivo `notas.txt` con dos líneas, que es lo que vas a versionar durante el
+laboratorio:
+
+```text
+Taller de Git
+Practica personal de ramas y fusiones.
+```
+
+Mira el estado:
+
+```bash
+git status
+```
+
+```text
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        notas.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+Git ya está vigilando la carpeta, pero todavía no rastrea ningún archivo.
+
+### [3]{.paso} Tu primer commit
+
+```bash
+git add .
+git commit -m "chore: primeras notas del taller"
+```
+
+```text
+[main (root-commit) 4fd9bfc] chore: primeras notas del taller
+ 1 file changed, 2 insertions(+)
+ create mode 100644 notas.txt
+```
+
+Revisa la historia:
+
+```bash
+git log --oneline
+```
+
+### [4]{.paso} Publica en GitHub
+
+En [github.com](https://github.com/), botón **New repository**:
+
+- **Repository name:** `taller-git`
+- **Visibility:** Public
+- **No marques** ninguna casilla de inicialización. Tu repositorio ya tiene un primer commit, y si
+  GitHub crea los suyos vas a chocar con ellos en el primer `push`.
+
+GitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/taller-git.git
+git push -u origin main
+```
+
+`origin` es el nombre convencional del remoto principal. La bandera `-u` deja la conexión
+recordada, así que de aquí en adelante te basta con `git push`.
+
+::: {.callout-important}
+## La contraseña de GitHub no sirve en la terminal
+
+GitHub dejó de aceptar contraseñas para operaciones de Git en 2021. En Windows, el primer `push`
+abre una ventana del navegador para que inicies sesión y el Credential Manager guarda la
+credencial. Si trabajas en macOS o Linux y te pide contraseña, genera un **token de acceso
+personal** en `Settings`, `Developer settings`, `Personal access tokens`, con el permiso `repo`, y
+usa ese token donde te piden la contraseña.
+:::
+
+Recarga la página del repositorio en el navegador. Tu archivo está ahí.
+
+### [5]{.paso} Rama y Pull Request sin conflicto
+
+Crea la rama y muévete a ella en un solo comando:
+
+```bash
+git switch -c feature/segunda-linea
+```
+
+Agrega una línea nueva al final de `notas.txt`, sin tocar las dos que ya existen:
+
+```text
+Taller de Git
+Practica personal de ramas y fusiones.
+Cada commit deja un mensaje claro.
+```
+
+```bash
+git commit -am "feat: agrega una tercera linea a las notas"
+git push -u origin feature/segunda-linea
+```
+
+Entra a GitHub. Aparece un aviso amarillo con el botón **Compare & pull request**. Pulsa ahí,
+completa el título y la descripción, y crea el Pull Request.
+
+Revisa la pestaña **Files changed** para ver el diff en el navegador, y fusiona con
+**Merge pull request**. GitHub te ofrece borrar la rama después: acepta.
+
+De vuelta en tu máquina, tráete el resultado y limpia la rama local:
+
+```bash
+git switch main
+git pull
+git branch -d feature/segunda-linea
+```
+
+### [6]{.paso} Provoca un conflicto con dos ramas propias, y resuélvelo
+
+Ahora vas a provocar un conflicto real, con calma, en vez de que te tome por sorpresa a la
+medianoche antes de una entrega.
+
+Vas a crear **dos ramas propias**, las dos desde el mismo punto de `main`, y las dos van a cambiar
+**la misma línea** de `notas.txt` de forma distinta.
+
+Crea la primera rama y cambia la primera línea del archivo:
+
+```bash
+git switch -c feature/ajusta-titulo
+```
+
+```text
+Taller de Git y GitHub
+Practica personal de ramas y fusiones.
+Cada commit deja un mensaje claro.
+```
+
+```bash
+git commit -am "feat: ajusta el titulo del taller"
+git push -u origin feature/ajusta-titulo
+```
+
+Sin fusionar todavía, vuelve a `main` y crea la segunda rama **desde el mismo punto de partida**,
+cambiando la misma línea de otra forma:
+
+```bash
+git switch main
+git switch -c feature/otro-titulo
+```
+
+```text
+Taller de control de versiones
+Practica personal de ramas y fusiones.
+Cada commit deja un mensaje claro.
+```
+
+```bash
+git commit -am "feat: renombra el taller"
+git push -u origin feature/otro-titulo
+```
+
+En GitHub, abre un Pull Request para cada rama contra `main`: **PR-A** para
+`feature/ajusta-titulo` y **PR-B** para `feature/otro-titulo`. Ninguna de las dos rutas ha tocado
+`main` todavía, así que las dos se muestran listas para fusionar.
+
+Fusiona **PR-A** primero, con **Merge pull request**. Se fusiona limpio: es la primera rama que
+llega a `main`, así que no hay nada con qué chocar.
+
+Ahora entra a **PR-B**. GitHub ya no ofrece el botón de fusión directo: muestra un aviso de que la
+rama tiene conflictos con `main`, porque mientras `feature/otro-titulo` esperaba, `main` cambió
+esa misma línea a través de PR-A.
+
+Resuelve desde tu terminal:
+
+```bash
+git fetch origin
+git switch feature/otro-titulo
+git merge origin/main
+```
+
+```text
+Auto-merging notas.txt
+CONFLICT (content): Merge conflict in notas.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Ahí está. Abre `notas.txt`. Git escribió los marcadores dentro del archivo:
+
+```text
+<<<<<<< HEAD
+Taller de control de versiones
+=======
+Taller de Git y GitHub
+>>>>>>> origin/main
+```
+
+Se lee así:
+
+::: {.diagrama}
+![](imagenes/git-marcadores-conflicto.svg){fig-alt="Anatomia de un conflicto: entre el marcador de inicio y el separador esta tu version, entre el separador y el marcador de cierre esta la version que traes, y las tres lineas de marcadores se borran al resolver"}
+
+El archivo resuelto no puede conservar ninguna de las tres líneas de marcadores.
+:::
+
+- Entre `<<<<<<< HEAD` y `=======` está tu versión, la de la rama donde estás parado
+  (`feature/otro-titulo`).
+- Entre `=======` y `>>>>>>>` está la versión que estás trayendo (`origin/main`, ya con el cambio
+  de PR-A).
+
+Resolver es dejar el archivo como debe quedar y **borrar las tres líneas de marcadores**. Puedes
+quedarte con una versión, con la otra o escribir una tercera:
+
+```text
+Taller de Git y control de versiones
+Practica personal de ramas y fusiones.
+Cada commit deja un mensaje claro.
+```
+
+Marca el archivo como resuelto y cierra la fusión local:
+
+```bash
+git add notas.txt
+git commit -m "merge: resuelve el conflicto del titulo del taller"
+git push
+```
+
+Vuelve a GitHub y abre **PR-B** de nuevo: ya no muestra el aviso de conflicto, y el botón
+**Merge pull request** está disponible. Complétalo.
+
+De vuelta en tu máquina:
+
+```bash
+git switch main
+git pull
+git branch -d feature/ajusta-titulo
+git branch -d feature/otro-titulo
+```
+
+Mira la historia dibujada:
+
+```bash
+git log --oneline --graph --all
+```
+
+Vas a ver cómo las dos ramas nacen del mismo commit y se juntan por separado en `main`, con el
+commit de fusión de PR-B cargando la resolución del conflicto.
+
+::: {.callout-tip}
+## Si te pierdes en mitad de una fusión
+
+`git merge --abort` deshace la fusión completa y te devuelve al estado anterior, sin daño. Úsalo
+sin culpa cuando el archivo quede irreconocible, y vuelve a empezar.
+:::
+
+### [7]{.paso} Deshacer sin miedo
+
+Tres situaciones distintas, tres comandos distintos.
+
+**Editaste un archivo y quieres botar el cambio.** Todavía no hiciste `add`:
+
+```bash
+git restore notas.txt
+```
+
+**Ya hiciste `add` y quieres sacarlo del área de preparación**, sin perder la edición:
+
+```bash
+git restore --staged notas.txt
+```
+
+**El commit ya está hecho y publicado.** No lo borres: crea un commit que deshaga sus cambios.
+Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:
+
+```bash
+git revert <hash-del-commit>
+```
+
+### [8]{.paso} Etiqueta la versión del taller
+
+Una etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la práctica:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+Verifica:
+
+```bash
+git tag
+```
+
+```text
+v0.1.0
+```
+
+En GitHub la etiqueta aparece en la sección **Tags** de la portada del repositorio. Con esto,
+`taller-git` cumplió su función: puedes borrarlo cuando quieras, no lo necesitas más.
+
+## Los comandos, uno por uno
+
+Esta sección es de consulta. No la leas de corrido: vuelve a ella cuando no recuerdes qué hace un
+comando o qué significa una bandera.
+
+### Cómo se lee un comando de Git
+
+Todos tienen la misma forma.
+
+::: {.diagrama}
+![](imagenes/git-anatomia-comando.svg){fig-alt="Anatomia del comando git commit -m mensaje, dividido en programa, subcomando, bandera y argumento"}
+
+La misma estructura sirve para leer cualquier comando de Git que encuentres en internet.
+:::
+
+- **El programa** es siempre `git`.
+- **La acción** es el subcomando: `commit`, `add`, `push`. Es lo que quieres hacer.
+- **Las banderas** modifican la acción. Empiezan con un guion si son la versión corta (`-m`) o
+  con dos si son la versión larga (`--message`). Las dos formas hacen lo mismo.
+- **Los argumentos** son los valores que recibe: un mensaje, un nombre de archivo, una rama.
+
+Cuando en esta guía veas algo entre `<` y `>`, como `<archivo>`, significa que ahí va un valor
+tuyo. Los símbolos no se escriben.
+
+### Configuración
+
+#### `git config`
+
+Lee y escribe la configuración de Git. Con `--global` la escribe para tu usuario en toda la
+máquina; sin `--global`, solo para el repositorio actual.
+
+```bash
+git config --global user.name "Tu Nombre"      # firma tus commits
+git config --global user.email "tu@correo.com" # correo asociado
+git config --global init.defaultBranch main    # rama inicial de repos nuevos
+git config --global --list                     # muestra toda la configuracion
+```
+
+El nombre y el correo quedan grabados dentro de **cada** commit que hagas. Si los cambias después,
+los commits viejos conservan los datos viejos. Configúralos antes del primer commit.
+
+### Crear y mirar
+
+#### `git init`
+
+Convierte la carpeta actual en un repositorio, creando la carpeta oculta `.git`. Se ejecuta una
+sola vez por proyecto.
+
+```bash
+git init
+```
+
+No crea archivos tuyos ni sube nada a ningún lado. Solo empieza a llevar la historia. Si borras
+`.git`, pierdes el historial completo y la carpeta vuelve a ser una carpeta normal.
+
+#### `git status`
+
+El comando que más vas a usar. Responde tres preguntas: en qué rama estás, qué archivos cambiaron
+y en qué área está cada uno.
+
+```bash
+git status          # version completa, con sugerencias de que hacer
+git status --short   # version compacta, una linea por archivo
+```
+
+En la versión corta, la primera columna es el área de preparación y la segunda el directorio de
+trabajo:
+
+| Símbolo | Significa |
+|---|---|
+| `??` | Archivo sin rastrear: Git no lo conoce |
+| `A ` | Archivo nuevo, ya preparado |
+| ` M` | Modificado, sin preparar |
+| `M ` | Modificado y preparado |
+| `MM` | Preparado, y vuelto a modificar después |
+| `D ` | Borrado y preparado |
+
+Cuando algo te salga raro, ejecuta `git status` antes de hacer cualquier otra cosa.
+
+#### `git log`
+
+Muestra la historia, del commit más reciente al más antiguo.
+
+```bash
+git log                            # completo: hash, autor, fecha y mensaje
+git log --oneline                  # una linea por commit
+git log --oneline --graph --all    # dibuja las ramas y las fusiones
+git log --merges --oneline         # solo los commits de fusion
+git log -3                         # solo los tres ultimos
+```
+
+`git log` abre un paginador cuando la salida es larga: te mueves con las flechas del teclado y
+sales con la tecla `q`. Es la causa número uno de "se me quedó pegada la terminal".
+
+### Guardar cambios
+
+#### `git add`
+
+Mueve cambios del directorio de trabajo al área de preparación. No guarda nada en la historia
+todavía: solo arma la lista de lo que va a entrar en el próximo commit.
+
+```bash
+git add main.dart         # un archivo
+git add lib/              # todo lo de una carpeta
+git add .                 # todo lo que cambio, respetando el .gitignore
+```
+
+Preparar archivo por archivo en vez de `git add .` es lo que te permite partir un trabajo grande
+en varios commits pequeños con sentido propio.
+
+#### `git commit`
+
+Toma lo que está en el área de preparación y lo guarda como un commit en la historia local.
+
+```bash
+git commit -m "feat: agrega la pantalla de login"
+git commit -am "fix: corrige el boton que no responde"   # prepara y guarda de un golpe
+```
+
+- `-m` recibe el mensaje. Sin esa bandera, Git abre un editor de texto en la terminal, y salir de
+  ahí sin saber cómo es incómodo. Úsala siempre.
+- `-a` prepara automáticamente los archivos que Git **ya rastrea**. No incluye archivos nuevos,
+  así que después de crear un archivo necesitas `git add` de todas formas.
+
+El commit vive solo en tu máquina hasta que hagas `push`.
+
+#### `git diff`
+
+Muestra las diferencias línea por línea. Las líneas con `+` son las que agregaste, las que tienen
+`-` las que quitaste.
+
+```bash
+git diff              # lo modificado que aun no preparaste
+git diff --staged     # lo que ya esta preparado, listo para el commit
+git diff main         # tu rama actual comparada con main
+```
+
+Vale la pena mirarlo siempre antes de commitear: es la última oportunidad de darte cuenta de que
+ibas a guardar una línea de depuración.
+
+### Ramas
+
+#### `git switch`
+
+Se mueve entre ramas, y con `-c` crea la rama y se mueve en un solo paso.
+
+```bash
+git switch -c feature/login   # crea la rama y se para en ella
+git switch main                # vuelve a main
+git switch -                   # vuelve a la rama anterior
+```
+
+En guías viejas vas a ver `git checkout` para lo mismo. Funciona, pero `checkout` hace además
+otras tres cosas distintas y por eso se separó en `switch` y `restore`. Usa los nuevos.
+
+#### `git branch`
+
+Administra las ramas sin cambiarse a ellas.
+
+```bash
+git branch              # lista las ramas locales, con un asterisco en la actual
+git branch -a           # incluye las que existen en el remoto
+git branch -d feature/login   # borra una rama ya fusionada
+git branch -D feature/login   # la borra aunque no este fusionada
+```
+
+`-d` en minúscula te protege: se niega a borrar una rama cuyo trabajo no esté en ninguna otra
+parte. `-D` no pregunta. Piensa dos veces antes de usarla.
+
+#### `git merge`
+
+Trae los commits de otra rama a la rama en la que estás parado. Importa mucho dónde estás: si
+quieres pasar `feature/login` a `main`, primero te mueves a `main`.
+
+```bash
+git switch main
+git merge feature/login
+git merge --abort         # cancela una fusion que quedo en conflicto
+```
+
+Si las dos ramas no tocaron las mismas líneas, la fusión es automática. Si sí, Git escribe los
+marcadores en el archivo y espera que resuelvas.
+
+### Trabajar con GitHub
+
+#### `git remote`
+
+Administra las direcciones de los repositorios remotos. `origin` es el nombre convencional del
+principal, y no tiene nada de mágico: es solo una etiqueta.
+
+```bash
+git remote -v                                        # lista los remotos configurados
+git remote add origin https://github.com/u/repo.git  # conecta con GitHub
+git remote remove origin                             # desconecta
+```
+
+#### `git clone`
+
+Descarga un repositorio completo desde GitHub, con toda su historia, y deja el remoto ya
+configurado. Es lo que usas si vas a trabajar el mismo proyecto desde otro computador.
+
+```bash
+git clone https://github.com/usuario/proyecto.git
+```
+
+Se ejecuta **una sola vez**. Después de eso, para actualizar se usa `git pull`, no otro `clone`.
+
+#### `git push`
+
+Sube tus commits locales al remoto.
+
+```bash
+git push                              # sube la rama actual, si ya tiene remoto asignado
+git push -u origin main               # la primera vez: sube y recuerda la conexion
+git push -u origin feature/login      # publica una rama nueva
+git push origin v0.1.0                # sube una etiqueta
+```
+
+La bandera `-u` (de *upstream*) enlaza tu rama local con la del remoto. Solo hace falta la primera
+vez que publicas esa rama.
+
+#### `git pull`
+
+Baja lo que hay en el remoto y lo fusiona con tu rama actual. Es `fetch` más `merge` en un solo
+comando.
+
+```bash
+git pull
+```
+
+Hazlo **antes** de empezar a trabajar cada día, y siempre después de fusionar un Pull Request.
+Trabajar sobre una `main` desactualizada es la forma más común de fabricarse un conflicto
+innecesario.
+
+#### `git fetch`
+
+Baja la información del remoto pero **no** toca tus archivos. Sirve para mirar qué cambió antes de
+integrarlo, y es el primer paso para resolver un conflicto detectado en un Pull Request.
+
+```bash
+git fetch
+git log --oneline main..origin/main   # que trae el remoto que tu no tienes
+```
+
+### Deshacer
+
+#### `git restore`
+
+Descarta cambios que todavía no están en un commit. Es el comando que se lleva trabajo por
+delante, así que lee bien cuál de las dos formas necesitas.
+
+```bash
+git restore main.dart            # bota lo que editaste y no habias preparado
+git restore --staged main.dart   # saca del area de preparacion, conserva la edicion
+```
+
+El primero **no tiene deshacer**: lo que botes ahí no está en ninguna parte y no se recupera.
+
+#### `git revert`
+
+Crea un commit nuevo que deshace los cambios de otro commit. Es la forma correcta de corregir algo
+que ya publicaste, porque no reescribe la historia y no rompe la copia de nadie.
+
+```bash
+git revert 4fd9bfc
+```
+
+Existe también `git reset`, que sí borra commits. No lo uses este semestre sin preguntarme: es la
+manera más rápida de perder trabajo.
+
+### Etiquetas
+
+#### `git tag`
+
+Le pone un nombre estable a un commit. Se usa para marcar entregas y versiones.
+
+```bash
+git tag                    # lista las etiquetas
+git tag v0.1.0              # etiqueta el commit actual
+git push origin v0.1.0      # la publica en GitHub
+git show v0.1.0             # muestra a que commit apunta
+```
+
+Las etiquetas **no** viajan con un `git push` normal. Hay que subirlas aparte.
+
+### Tabla de repaso
+
+| Comando | Qué hace |
+|---|---|
+| `git config --global user.name "..."` | Configura con qué nombre firmas |
+| `git init` | Crea un repositorio en la carpeta actual |
+| `git status` | Dice en qué estado está cada archivo |
+| `git add <archivo>` | Prepara un archivo para el próximo commit |
+| `git commit -m "mensaje"` | Guarda la fotografía en la historia |
+| `git commit -am "mensaje"` | Prepara y guarda de un golpe, solo archivos ya rastreados |
+| `git diff` | Muestra lo que cambiaste y aún no preparaste |
+| `git log --oneline --graph --all` | Dibuja la historia completa |
+| `git switch -c <rama>` | Crea una rama y se mueve a ella |
+| `git switch <rama>` | Se mueve a una rama existente |
+| `git branch -d <rama>` | Borra una rama ya fusionada |
+| `git merge <rama>` | Trae los commits de otra rama a la actual |
+| `git merge --abort` | Cancela una fusión en conflicto |
+| `git fetch` | Baja la informacion del remoto sin tocar tus archivos |
+| `git remote add origin <url>` | Conecta el repositorio local con GitHub |
+| `git clone <url>` | Descarga un repositorio completo |
+| `git push -u origin <rama>` | Publica una rama por primera vez |
+| `git pull` | Baja e integra los commits del remoto |
+| `git restore <archivo>` | Descarta los cambios sin preparar |
+| `git revert <hash>` | Crea un commit que deshace otro commit |
+| `git tag <nombre>` | Etiqueta el commit actual |
+
+## Tu entregable de la semana
+
+::: {.callout-important}
+## Repositorio de tu proyecto: 10% del curso, individual
+
+**Qué entregas.** Un **repositorio público en GitHub** con tu proyecto (`hola_iue` o el nuevo que
+hayas creado), que tenga:
+
+- `docs/alcance.md` completo, con las cinco partes de la sección de arriba.
+- Un historial de commits con mensajes con prefijo de tipo.
+- Al menos una rama fusionada mediante Pull Request.
+- Un conflicto de fusión real, provocado por ti mismo con dos ramas propias y resuelto siguiendo
+  el mismo mecanismo del laboratorio, con un registro de cómo lo resolviste.
+- La app corriendo: `flutter run` funciona sin errores sobre el último commit.
+
+**Cómo entregas.** Compartes el enlace del repositorio en el canal de actividades de Teams.
+
+**Cuándo.** Antes del inicio de la sesión de la Semana 4.
+:::
+
+### Cómo se arma, paso a paso
+
+1. **Decide el proyecto.** Continúa con `hola_iue` o crea el nuevo, según lo que definiste en
+   "Continuar con `hola_iue` o crear un proyecto nuevo".
+2. **Inicia el repositorio.** `git init` dentro de la carpeta del proyecto. Abre el `.gitignore`
+   que `flutter create` ya generó y confirma que incluye `.dart_tool/` y `build/`.
+3. **Escribe `docs/alcance.md`.** Usa el ejemplo de la sección anterior como plantilla, con tu
+   propia idea.
+4. **Primeros commits.** Con prefijo de tipo, un cambio por commit: la estructura del proyecto, el
+   alcance, algún ajuste inicial de la pantalla.
+5. **Publica en GitHub.** Repositorio público, `git remote add origin` y `git push -u origin main`.
+6. **Abre y fusiona un Pull Request real.** Una rama con una mejora real de tu proyecto (no hace
+   falta que sea grande), fusionada limpia.
+7. **Provoca y resuelve un conflicto real, y documéntalo.** Misma mecánica del laboratorio: dos
+   ramas propias que editan la misma línea de `docs/alcance.md` o de tu `README.md`. La primera se
+   fusiona limpia; la segunda produce el conflicto que resuelves con `git fetch`, `git merge`,
+   los marcadores, `git add`, `git commit` y `git push`. Deja un registro breve del conflicto (qué
+   línea, qué decía cada versión, qué escogiste) en el mismo archivo o en el mensaje del commit de
+   fusión.
+8. **Verifica que la app sigue corriendo.** `flutter run` sobre el commit final, sin errores.
+
+## Errores frecuentes
+
+::: {.error-caso}
+[Error 1]{.etiqueta}
+
+### fatal: not a git repository
+
+```text
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+**Causa.** La terminal no está dentro de la carpeta del proyecto, o nunca ejecutaste `git init`
+ahí.
+
+**Solución.** Comprueba dónde estás con `pwd` en macOS y Linux, o `cd` sin argumentos en Windows.
+Muévete a la carpeta del proyecto y vuelve a intentar. En VS Code, abre la carpeta con **File**,
+**Open Folder** y usa la terminal integrada: siempre arranca en la carpeta correcta.
+:::
+
+::: {.error-caso}
+[Error 2]{.etiqueta}
+
+### fatal: No configured push destination
+
+```text
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+```
+
+**Causa.** El repositorio local no sabe a dónde subir. Falta el remoto.
+
+**Solución.**
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/tu-proyecto.git
+git push -u origin main
+```
+
+Para revisar qué remotos tienes configurados: `git remote -v`.
+:::
+
+::: {.error-caso}
+[Error 3]{.etiqueta}
+
+### El archivo sigue subiéndose pese al .gitignore
+
+**Causa.** El `.gitignore` solo funciona sobre archivos que Git **todavía no rastrea**. Si ya
+commiteaste algo dentro de `build/` antes de tener el `.gitignore` en su lugar, agregarlo después
+no lo saca del repositorio.
+
+Si intentas agregar un archivo ya ignorado, Git te avisa:
+
+```text
+The following paths are ignored by one of your .gitignore files:
+build
+hint: Use -f if you really want to add them.
+```
+
+**Solución.** Sácalo del rastreo sin borrarlo de tu disco, y commitea ese cambio:
+
+```bash
+git rm --cached -r build
+git commit -m "chore: deja de rastrear la carpeta build"
+```
+:::
+
+::: {.error-caso}
+[Error 4]{.etiqueta}
+
+### Quedaron marcadores de conflicto en el archivo
+
+**Causa.** Resolviste el conflicto eligiendo el texto correcto pero olvidaste borrar las líneas
+`<<<<<<<`, `=======` y `>>>>>>>`. Si es un archivo Dart, el proyecto deja de compilar.
+
+**Solución.** Búscalas en todo el proyecto antes de commitear:
+
+```bash
+git grep -n "<<<<<<<"
+```
+
+Si no responde nada, está limpio.
+:::
+
+::: {.error-caso}
+[Error 5]{.etiqueta}
+
+### warning: LF will be replaced by CRLF
+
+```text
+warning: in the working copy of 'main.dart', LF will be replaced by CRLF the next time Git touches it
+```
+
+**Causa.** Windows termina las líneas con dos caracteres y el resto del mundo con uno. Git está
+avisando que va a hacer la conversión.
+
+**Solución.** Ninguna. Es una advertencia, no un error, y el commit se hizo igual. Aparece solo en
+Windows y puedes ignorarla todo el semestre.
+:::
+
+## Lista de chequeo de la semana
+
+::: {.checklist}
+**Antes de entregar, revisa que tienes todo esto**
+
+- [ ] `git config --global --list` muestra tu nombre y tu correo
+- [ ] `docs/alcance.md` existe y tiene las cinco partes: problema, usuario objetivo, MVP, fuera de
+      alcance y stack
+- [ ] El repositorio de tu proyecto es público en GitHub
+- [ ] `git log --oneline` muestra varios commits, todos con prefijo de tipo
+- [ ] La pestaña Pull requests muestra al menos uno fusionado
+- [ ] `git log --oneline --graph` muestra un commit de fusión con dos padres, del conflicto que
+      resolviste
+- [ ] `git grep -n "<<<<<<<"` no responde nada
+- [ ] El registro del conflicto (qué línea, qué decía cada versión, qué escogiste) está en el
+      repositorio
+- [ ] `flutter run` corre sin errores sobre el último commit
+- [ ] Compartiste el enlace del repositorio en el canal de actividades de Teams
+:::
+
+## Recursos
+
+- Documentación oficial de Git: [git-scm.com/doc](https://git-scm.com/doc)
+- Chacon, S. y Straub, B. *Pro Git*, en español y gratuito:
+  [git-scm.com/book/es/v2](https://git-scm.com/book/es/v2). Capítulos 1, 2 y 3.
+- Guía de inicio de GitHub:
+  [docs.github.com/es/get-started](https://docs.github.com/es/get-started)
+- Sobre Pull Requests:
+  [docs.github.com/es/pull-requests](https://docs.github.com/es/pull-requests)
+- Convención de mensajes de commit:
+  [conventionalcommits.org/es](https://www.conventionalcommits.org/es/v1.0.0/)
+- Sobre el `.gitignore` que genera Flutter:
+  [docs.flutter.dev](https://docs.flutter.dev/)
+- Diapositivas de la sesión: [presentación de la Semana 3](presentacion.qmd)
+
+::: {.pie-doc}
+Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.
+:::

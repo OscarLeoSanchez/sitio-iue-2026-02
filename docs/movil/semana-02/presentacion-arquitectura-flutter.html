@@ -32,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-d29e4fb938c8bdf9a3bc6ce8b7be9ced.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-53928c56aea9ef232035d1fdf345f11e.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -194,7 +194,7 @@
 </section>
 <section id="los-tres-arboles" class="slide level2 solo-diagrama center">
 <h2>Los tres arboles</h2>
-<p><img data-src="imagenes/flutter-tres-arboles.svg" alt="Tres árboles paralelos de Flutter: el árbol de widgets, inmutable y recreado en cada build; el árbol de elements, mutable y persistente entre frames, que guarda el estado; y el árbol de render objects, más pequeño, que calcula tamaño posición y pintado"></p>
+<p><img data-src="imagenes/flutter-tres-arboles.svg" alt="Tres árboles paralelos de Flutter en una cadena Center, Padding, MiWidget e Icon: el árbol de widgets y el de elements tienen los cuatro nodos, porque todo widget genera un element; el árbol de render objects solo tiene tres, porque MiWidget es un StatelessWidget sin render object propio y el de Icon se conecta directo con el de Padding, su ancestro más cercano que sí tiene uno"></p>
 </section>
 <section id="widget-una-descripcion-inmutable" class="slide level2 center">
 <h2>Widget: una descripcion inmutable</h2>
@@ -246,6 +246,18 @@
 <p>Todo widget implementa <code>build()</code>, que devuelve un árbol de widgets más básicos.</p>
 <p>En un Stateless, <code>build()</code> vive en la clase del widget. En un Stateful, vive en su <code>State</code>.</p>
 <p><code>BuildContext</code> ubica al widget dentro del árbol y le da acceso a lo que proveen sus ancestros: un <code>Theme</code>, un <code>Navigator</code>, un <code>MediaQuery</code>.</p>
+</section>
+<section id="ciclo-de-vida-de-un-statelesswidget" class="slide level2 solo-diagrama center">
+<h2>Ciclo de vida de un StatelessWidget</h2>
+<p><img data-src="imagenes/flutter-ciclo-vida-stateless.svg" alt="Ciclo de vida de un StatelessWidget: el constructor crea la instancia con sus parámetros y build construye el árbol de widgets que se ve en pantalla. No hay initState ni dispose porque no existe un objeto State que inicializar ni liberar. Cuando el padre reconstruye esa parte del árbol, se crea una instancia nueva y el ciclo empieza de nuevo desde el constructor"></p>
+</section>
+<section id="constructor-y-build-nada-más" class="slide level2 center">
+<h2>Constructor y build(), nada más</h2>
+<ul>
+<li><strong>Constructor.</strong> Crea la instancia con sus parámetros. Se repite cada vez que el padre reconstruye.</li>
+<li><strong>build().</strong> El framework lo llama para obtener el árbol de widgets. Sin ejecución inicial aparte.</li>
+<li>Sin <code>setState()</code>. Sin <code>initState()</code>. Sin <code>dispose()</code>: no hay un objeto <code>State</code> que inicializar, actualizar ni liberar.</li>
+</ul>
 </section>
 <section id="ciclo-de-vida-de-un-statefulwidget" class="slide level2 solo-diagrama center">
 <h2>Ciclo de vida de un StatefulWidget</h2>

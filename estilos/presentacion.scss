@@ -71,19 +71,27 @@ $code-block-font-size: 0.72em;
 }
 
 /* Diagramas. Llevan dimensiones propias, asi que basta con acotar el alto para
-   que ninguno se salga de la diapositiva. */
+   que ninguno se salga de la diapositiva.
+   Importante: el alto va en px, anclado al lienzo fijo de 720px (width/height
+   de la diapositiva en el YAML), no en vh. Reveal escala todo el lienzo con
+   transform: scale() para ajustarlo a la ventana real, y vh/vw no participan
+   de ese escalado porque se calculan contra el viewport del navegador, no
+   contra el lienzo. Un max-height en vh queda descalibrado en cualquier
+   ventana que no mida exactamente 1280x720 y la imagen se desborda y se
+   recorta contra la diapositiva ya escalada. En px, en cambio, escala junto
+   con el resto del contenido y el tamano se ve igual sin importar la pantalla. */
 .reveal .slides img {
   display: block;
   margin: 0.3em auto 0;
   width: 100%;
   height: auto;
-  max-height: 68vh;
+  max-height: 490px;
   object-fit: contain;
 }
 
 /* Diapositiva de solo diagrama: el dibujo puede ocupar mas alto */
 .reveal .solo-diagrama img {
-  max-height: 76vh;
+  max-height: 547px;
 }
 
 /* Codigo */

@@ -10,7 +10,7 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.37">
 
-  <title>Control de versiones con Git y GitHub</title>
+  <title>Git y el arranque de tu proyecto</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,8 +196,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Control de versiones con Git y GitHub</h1>
-  <p class="subtitle">Fundamentos, flujo de trabajo y colaboración</p>
+  <h1 class="title">Git y el arranque de tu proyecto</h1>
+  <p class="subtitle">Ramas, fusiones y el alcance del semestre</p>
 
 <div class="quarto-title-authors">
 </div>
@@ -215,20 +215,16 @@
 <li>Volver a un estado anterior se convierte en adivinar.</li>
 </ul>
 <div class="fragment">
-<p>Y eso trabajando solo.</p>
+<p>Y esto pasa trabajando completamente solo, sin que nadie más toque el proyecto.</p>
 </div>
-</section>
-<section id="y-cuando-trabaja-un-equipo" class="slide level2 solo-diagrama center">
-<h2>Y cuando trabaja un equipo</h2>
-<p><img data-src="imagenes/problema-equipo.svg" alt="Tres integrantes de un equipo editan el mismo archivo y el ultimo que guarda borra el trabajo de los demas"></p>
 </section>
 <section id="lo-que-hace-falta" class="slide level2 center">
 <h2>Lo que hace falta</h2>
 <ul>
 <li>Volver a cualquier estado anterior.</li>
-<li>Saber quién cambió qué, y cuándo.</li>
+<li>Saber qué cambiaste y cuándo.</li>
 <li>Probar una idea sin romper lo que ya sirve.</li>
-<li>Unir el trabajo de dos personas sin perder ninguno de los dos.</li>
+<li>Comparar dos versiones tuyas sin perder ninguna de las dos.</li>
 </ul>
 <div class="fragment">
 <p><span class="grande">Eso hace Git.</span></p>
@@ -240,18 +236,18 @@
 </section>
 <section id="dónde-vive-tu-trabajo" class="slide level2 solo-diagrama center">
 <h2>Dónde vive tu trabajo</h2>
-<p><img data-src="imagenes/git-cuatro-areas.svg" alt="Las cuatro areas de Git y los comandos que mueven el contenido entre ellas"></p>
+<p><img data-src="imagenes/git-cuatro-areas.svg" alt="Las cuatro áreas de Git y los comandos que mueven el contenido entre ellas"></p>
 </section>
 <section id="qué-hace-cada-uno" class="slide level2 solo-diagrama center">
 <h2>Qué hace cada uno</h2>
-<p><img data-src="imagenes/comandos-areas.svg" alt="Los cinco comandos que mueven el trabajo entre las areas de Git y para que sirve cada uno"></p>
+<p><img data-src="imagenes/comandos-areas.svg" alt="Los cinco comandos que mueven el trabajo entre las áreas de Git y para qué sirve cada uno"></p>
 </section>
 <section id="nada-se-mueve-solo" class="slide level2 center">
 <h2>Nada se mueve solo</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="fu">git</span> push    <span class="co"># sube tus commits a GitHub</span></span>
-<span id="cb1-2"><a></a><span class="fu">git</span> pull    <span class="co"># baja los del equipo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a></a><span class="fu">git</span> pull    <span class="co"># baja lo que subiste desde otro computador</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Tu commit vive en tu disco hasta que lo subas.</p>
-<p>Lo que hizo la otra persona del equipo no aparece en tu pantalla hasta que lo bajes.</p>
+<p>Lo que hiciste en otro computador (el de tu casa, el del laboratorio) no aparece aquí hasta que lo bajes.</p>
 </section>
 <section id="qué-guarda-un-commit" class="slide level2 solo-diagrama center">
 <h2>Qué guarda un commit</h2>
@@ -259,7 +255,7 @@
 </section>
 <section id="la-historia-es-una-cadena" class="slide level2 solo-diagrama center">
 <h2>La historia es una cadena</h2>
-<p><img data-src="imagenes/git-cadena-commits.svg" alt="Cuatro commits en orden, del mas antiguo al mas reciente, con las etiquetas main y HEAD sobre el ultimo"></p>
+<p><img data-src="imagenes/git-cadena-commits.svg" alt="Cuatro commits en orden, del más antiguo al más reciente, con las etiquetas main y HEAD sobre el último"></p>
 </section>
 <section id="el-nombre-de-cada-commit" class="slide level2 center">
 <h2>El nombre de cada commit</h2>
@@ -271,11 +267,11 @@
 </section>
 <section id="cómo-se-escribe-un-mensaje" class="slide level2 solo-diagrama center">
 <h2>Cómo se escribe un mensaje</h2>
-<p><img data-src="imagenes/prefijos-commit.svg" alt="Anatomia de un mensaje de commit: el prefijo de tipo, dos puntos y la descripcion, con el significado de feat, fix, docs, style y chore"></p>
+<p><img data-src="imagenes/prefijos-commit.svg" alt="Anatomía de un mensaje de commit: el prefijo de tipo, dos puntos y la descripción, con el significado de feat, fix, docs, style y chore"></p>
 </section>
 <section id="el-mensaje-lo-lees-dentro-de-un-mes" class="slide level2 solo-diagrama center">
 <h2>El mensaje lo lees dentro de un mes</h2>
-<p><img data-src="imagenes/mensajes-commit.svg" alt="Comparacion entre mensajes de commit vagos y mensajes que describen el cambio con un prefijo de tipo"></p>
+<p><img data-src="imagenes/mensajes-commit.svg" alt="Comparación entre mensajes de commit vagos y mensajes que describen el cambio con un prefijo de tipo"></p>
 </section>
 <section id="una-rama-es-un-puntero" class="slide level2 solo-diagrama center">
 <h2>Una rama es un puntero</h2>
@@ -283,20 +279,20 @@
 </section>
 <section id="trabajar-aparte-y-volver" class="slide level2 center">
 <h2>Trabajar aparte y volver</h2>
-<p><img data-src="imagenes/git-rama-fusion.svg" alt="Una rama sale de main, avanza dos commits y vuelve en un commit de fusion"></p>
+<p><img data-src="imagenes/git-rama-fusion.svg" alt="Una rama sale de main, avanza dos commits y vuelve en un commit de fusión"></p>
 <p><code>git switch -c &lt;rama&gt;</code> crea la rama y te para en ella. <code>git merge &lt;rama&gt;</code> trae esos commits a donde estás.</p>
 </section>
 <section id="dos-maneras-de-fusionar" class="slide level2 solo-diagrama center">
 <h2>Dos maneras de fusionar</h2>
-<p><img data-src="imagenes/fusion-dos-formas.svg" alt="Avance rapido cuando main no se movio, y commit de fusion cuando las dos ramas avanzaron"></p>
+<p><img data-src="imagenes/fusion-dos-formas.svg" alt="Avance rápido cuando main no se movió, y commit de fusión cuando las dos ramas avanzaron"></p>
 </section>
 <section id="cuando-git-se-detiene" class="slide level2 solo-diagrama center">
 <h2>Cuando Git se detiene</h2>
-<p><img data-src="imagenes/por-que-conflicto.svg" alt="Dos ramas cambian la misma linea de forma distinta y Git no puede escoger"></p>
+<p><img data-src="imagenes/por-que-conflicto.svg" alt="Tu primera rama y tu segunda rama cambian la misma línea de forma distinta y Git no puede escoger"></p>
 </section>
 <section id="así-se-ve-un-conflicto" class="slide level2 solo-diagrama center">
 <h2>Así se ve un conflicto</h2>
-<p><img data-src="imagenes/git-marcadores-conflicto.svg" alt="Anatomia de un conflicto: tu version, la version que traes y las tres lineas de marcadores"></p>
+<p><img data-src="imagenes/git-marcadores-conflicto.svg" alt="Anatomía de un conflicto: tu versión actual y la versión que traes de tu otra rama, con las tres líneas de marcadores"></p>
 </section>
 <section id="resolver-toma-un-minuto" class="slide level2 center">
 <h2>Resolver toma un minuto</h2>
@@ -312,37 +308,37 @@
 </section>
 <section id="el-remoto" class="slide level2 solo-diagrama center">
 <h2>El remoto</h2>
-<p><img data-src="imagenes/remoto-copias.svg" alt="GitHub guarda la copia de referencia y cada integrante tiene la historia completa en su computador"></p>
+<p><img data-src="imagenes/remoto-copias.svg" alt="GitHub guarda la copia de referencia y tu computador guarda la historia completa del proyecto"></p>
 </section>
 <section id="qué-es-un-pull-request" class="slide level2 center">
 <h2>Qué es un Pull Request</h2>
-<p>Una <strong>propuesta de cambio</strong>. Dice: “tengo esto listo en mi rama, quiero meterlo en <code>main</code>, revísenlo”.</p>
+<p>Una <strong>propuesta de cambio</strong>. Dice: “tengo esto listo en mi rama, quiero meterlo en <code>main</code>”.</p>
 <ul>
 <li>Vive en GitHub, no en tu computador. No existe ningún <code>git pull-request</code>.</li>
-<li>Muestra el cambio línea por línea, para que la otra persona lo lea antes de que entre.</li>
-<li>Deja registro de quién propuso, quién revisó y qué se conversó.</li>
-<li><code>main</code> no se toca hasta que alguien pulse el botón de fusión.</li>
+<li>Muestra el cambio línea por línea, para que lo leas completo antes de que entre.</li>
+<li>Deja registro de qué propusiste y por qué.</li>
+<li><code>main</code> no se toca hasta que pulsas el botón de fusión.</li>
 </ul>
 </section>
 <section id="el-pull-request" class="slide level2 solo-diagrama center">
 <h2>El Pull Request</h2>
-<p><img data-src="imagenes/pull-request.svg" alt="Un Pull Request muestra la rama, los commits, los archivos cambiados, el comentario de quien revisa y el boton de fusion"></p>
+<p><img data-src="imagenes/pull-request.svg" alt="Un Pull Request muestra la rama, los commits, los archivos cambiados y el botón de fusión que pulsas tú mismo"></p>
 </section>
 <section id="el-ciclo-completo" class="slide level2 center">
 <h2>El ciclo completo</h2>
-<p><img data-src="imagenes/git-flujo-pull-request.svg" alt="Flujo en dos carriles: creas la rama, commiteas y publicas; en GitHub se abre el Pull Request, se revisa y se fusiona"></p>
+<p><img data-src="imagenes/git-flujo-pull-request.svg" alt="Flujo en dos carriles: creas la rama, commiteas y publicas; en GitHub abres el Pull Request, lo revisas y lo fusionas"></p>
 <p><code>git push -u origin &lt;rama&gt;</code> publica la rama por primera vez. <code>git pull</code> deja tu <code>main</code> al día después de la fusión.</p>
 </section>
 <section id="lo-que-no-se-versiona" class="slide level2 solo-diagrama center">
 <h2>Lo que no se versiona</h2>
-<p><img data-src="imagenes/gitignore-filtro.svg" alt="El gitignore deja pasar las paginas y el README, y retiene node_modules, bin y los archivos con claves"></p>
+<p><img data-src="imagenes/gitignore-filtro.svg" alt="El gitignore deja pasar main.dart y pubspec.yaml, y retiene .dart_tool, build y los archivos con claves"></p>
 </section>
 <section id="una-clave-subida-ya-está-quemada" class="slide level2 center">
 <h2>Una clave subida ya está quemada</h2>
 <div class="aviso">
 <p>Borrarla un minuto después no sirve. El historial la conserva, y cualquiera con el enlace puede leerla.</p>
 </div>
-<p>Por eso <code>appsettings.Development.json</code> entra al <code>.gitignore</code> <strong>antes</strong> del primer commit.</p>
+<p>Por eso un archivo con claves entra al <code>.gitignore</code> <strong>antes</strong> del primer commit.</p>
 </section>
 <section id="tres-reglas" class="slide level2 center">
 <h2>Tres reglas</h2>
@@ -356,11 +352,100 @@
 <p><strong>El mensaje explica el cambio</strong>, no el archivo que tocaste.</p>
 </div>
 </section>
+<section id="por-qué-definir-el-alcance-ahora" class="slide level2 center">
+<h2>Por qué definir el alcance ahora</h2>
+<ul>
+<li>Desde hoy, casi todo lo que entregues en el semestre es un incremento del mismo proyecto.</li>
+<li>Sin alcance claro, cada semana empiezas de cero o cambias de idea a mitad de camino.</li>
+<li>La demo de la semana 17, en un dispositivo real, es este mismo proyecto, más grande.</li>
+</ul>
+<div class="fragment">
+<p>Hoy no programas el proyecto. Hoy decides qué va a ser.</p>
+</div>
+</section>
+<section id="qué-es-un-mvp" class="slide level2 center">
+<h2>Qué es un MVP</h2>
+<ul>
+<li>MVP: producto mínimo viable. La versión más pequeña que ya sirve para algo real.</li>
+<li>No es “la mitad del proyecto”. Es el proyecto completo, con menos funciones.</li>
+<li>Cada unidad del semestre le agrega una capa a ese MVP: navegación, datos, persistencia, Firebase.</li>
+</ul>
+<div class="fragment">
+<p>Si tu MVP no cabe en las horas independientes de 17 semanas, el MVP está mal definido, no el semestre.</p>
+</div>
+</section>
+<section id="las-cinco-partes-de-docsalcance.md" class="slide level2 center">
+<h2>Las cinco partes de docs/alcance.md</h2>
+<ul>
+<li><strong>Problema.</strong> Qué resuelve tu app, en una frase.</li>
+<li><strong>Usuario objetivo.</strong> Quién la usa y para qué.</li>
+<li><strong>Funcionalidades mínimas.</strong> La lista concreta de lo que va a hacer el MVP.</li>
+<li><strong>Qué queda fuera de alcance.</strong> Lo que decides no hacer este semestre.</li>
+<li><strong>Stack.</strong> Flutter y los paquetes o servicios que ya sabes que vas a necesitar.</li>
+</ul>
+</section>
+<section id="funcionalidades-mínimas-el-corazón-del-mvp" class="slide level2 center">
+<h2>Funcionalidades mínimas: el corazón del MVP</h2>
+<ul>
+<li>Escribe verbos, no sustantivos: “el usuario registra un gasto”, no “gastos”.</li>
+<li>Cada funcionalidad mínima debe poder mostrarse en una demo de dos minutos.</li>
+<li>Si una funcionalidad depende de otra que todavía no existe, va después, no en el MVP.</li>
+</ul>
+<div class="fragment">
+<p>Cuenta las funcionalidades que escribiste. Si pasan de cinco, revisa cuáles son de verdad mínimas.</p>
+</div>
+</section>
+<section id="qué-queda-fuera-de-alcance" class="slide level2 center">
+<h2>Qué queda fuera de alcance</h2>
+<ul>
+<li>Decir qué no vas a hacer es tan importante como decir que sí.</li>
+<li>Ejemplos típicos que sobran en un MVP: modo oscuro, varios idiomas, panel de administrador, red social propia.</li>
+<li>No es una lista de renuncias. Es lo que evita que te quedes sin tiempo en la semana 15.</li>
+</ul>
+</section>
+<section id="decisión-hola_iue-o-un-proyecto-nuevo" class="slide level2 center">
+<h2>Decisión: hola_iue o un proyecto nuevo</h2>
+<ul>
+<li><code>hola_iue</code> ya tiene Flutter funcionando, <code>pubspec.yaml</code> configurado y tu primer <code>StatefulWidget</code>.</li>
+<li>Seguir con él evita repetir la instalación y el <code>flutter create</code>.</li>
+<li>Empezar de cero solo tiene sentido si tu idea de proyecto no cabe en la estructura actual.</li>
+</ul>
+<div class="fragment">
+<p>Si dudas, sigue con <code>hola_iue</code>. Cambiar el nombre es más fácil que reconstruir el entorno.</p>
+</div>
+</section>
+<section id="qué-va-a-pasar-con-este-documento" class="slide level2 center">
+<h2>Qué va a pasar con este documento</h2>
+<ul>
+<li><code>docs/alcance.md</code> no se escribe una vez y se olvida.</li>
+<li>Cada semana con porcentaje evaluativo revisa si el entregable sigue dentro del alcance.</li>
+<li>Si el alcance cambia a mitad de semestre, se actualiza el documento y se explica por qué.</li>
+<li>La sustentación de la semana 17 se compara contra lo que escribiste hoy.</li>
+</ul>
+</section>
+<section id="cierre-a-escribir" class="slide level2 center">
+<h2>Cierre: a escribir</h2>
+<ul>
+<li>Los próximos minutos son para escribir, no para escuchar.</li>
+<li>Abre <code>docs/alcance.md</code> en tu proyecto y completa las cinco partes.</li>
+<li>Si terminas antes, revisa que cada funcionalidad mínima sea alcanzable con lo que ya sabes de Flutter.</li>
+</ul>
+<div class="fragment">
+<p><span class="grande">Escribe. Paso por las mesas si tienes dudas.</span></p>
+</div>
+</section>
 <section id="siguientes-pasos" class="slide level2 center">
 <h2>Siguientes pasos</h2>
-<p><span class="grande">Crear un proyecto y ejecutar el flujo completo.</span></p>
+<ul>
+<li>Aplica el flujo completo en tu propio proyecto: ramas, commits con mensaje, fusión.</li>
+<li>Provoca un conflicto a propósito, entre dos ramas tuyas, y resuélvelo.</li>
+<li>Sube el historial ordenado a GitHub.</li>
+</ul>
+<div class="fragment">
+<p><span class="grande">Entrega el enlace de tu repositorio por el canal de actividades.</span></p>
 
 
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

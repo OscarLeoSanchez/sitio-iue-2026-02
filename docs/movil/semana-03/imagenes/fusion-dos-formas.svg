@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="330" viewBox="0 0 900 330" role="img" aria-label="Dos formas de fusionar: avance rapido cuando main no se movio, y commit de fusion cuando las dos ramas avanzaron" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fd-punta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#0e8f8f"/>
+    </marker>
+    <filter id="fd-sombra" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0f2540" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+  <g text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <text x="225" y="44" font-size="17" font-weight="700" fill="#0f2540">Avance rápido</text>
+    <text x="225" y="68" font-size="13" fill="#5b6876">main no se movió mientras trabajabas</text>
+    <text x="675" y="44" font-size="17" font-weight="700" fill="#0f2540">Commit de fusión</text>
+    <text x="675" y="68" font-size="13" fill="#5b6876">las dos ramas avanzaron</text>
+  </g>
+  <line x1="450" y1="88" x2="450" y2="300" stroke="#cfd8e3" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <line x1="100" y1="180" x2="350" y2="180" stroke="#17456f" stroke-width="3"/>
+  <g filter="url(#fd-sombra)">
+    <circle cx="100" cy="180" r="20" fill="#ffffff" stroke="#17456f" stroke-width="2.5"/>
+    <circle cx="170" cy="180" r="20" fill="#ffffff" stroke="#17456f" stroke-width="2.5"/>
+    <circle cx="270" cy="180" r="20" fill="#ffffff" stroke="#0e8f8f" stroke-width="2.5"/>
+    <circle cx="350" cy="180" r="20" fill="#ffffff" stroke="#0e8f8f" stroke-width="2.5"/>
+  </g>
+  <rect x="140" y="228" width="62" height="26" rx="6" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="171" y="246" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#9fb0c0">main</text>
+  <line x1="210" y1="241" x2="308" y2="241" stroke="#0e8f8f" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#fd-punta)"/>
+  <rect x="319" y="228" width="62" height="26" rx="6" fill="#0e8f8f"/>
+  <text x="350" y="246" text-anchor="middle" font-family="Consolas, Menlo, DejaVu Sans Mono, monospace" font-size="13" fill="#ffffff">main</text>
+  <text x="225" y="292" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" fill="#5b6876">La etiqueta avanza y no se crea ningún commit</text>
+  <path d="M 520,220 L 830,220" fill="none" stroke="#17456f" stroke-width="3"/>
+  <path d="M 600,220 C 630,220 640,140 670,140" fill="none" stroke="#0e8f8f" stroke-width="3"/>
+  <path d="M 670,140 L 740,140" fill="none" stroke="#0e8f8f" stroke-width="3"/>
+  <path d="M 740,140 C 780,140 795,220 830,220" fill="none" stroke="#0e8f8f" stroke-width="3"/>
+  <g filter="url(#fd-sombra)">
+    <circle cx="520" cy="220" r="20" fill="#ffffff" stroke="#17456f" stroke-width="2.5"/>
+    <circle cx="600" cy="220" r="20" fill="#ffffff" stroke="#17456f" stroke-width="2.5"/>
+    <circle cx="740" cy="220" r="20" fill="#ffffff" stroke="#17456f" stroke-width="2.5"/>
+    <circle cx="670" cy="140" r="20" fill="#ffffff" stroke="#0e8f8f" stroke-width="2.5"/>
+    <circle cx="740" cy="140" r="20" fill="#ffffff" stroke="#0e8f8f" stroke-width="2.5"/>
+    <circle cx="830" cy="220" r="24" fill="#17456f" stroke="#0f2540" stroke-width="2"/>
+  </g>
+  <text x="675" y="292" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" fill="#5b6876">Git crea un commit con dos padres</text>
+</svg>
