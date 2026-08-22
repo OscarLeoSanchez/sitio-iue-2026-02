@@ -1,0 +1,144 @@
+---
+title: "Definición del proyecto: de un problema a una solución"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                                |
+|------------|------------------------------------------------|
+| Asignatura | Programación Web (IF2003)                     |
+| Grupo      | 603 de Ingeniería Informática                 |
+| Docente    | Oscar Leonel Sánchez Conde                    |
+:::
+
+## Lo que vas a lograr
+
+Antes de escribir una sola línea de código, un equipo de software recorre un camino que va de un
+problema real a una solución concreta. Esta guía te enseña ese camino: cómo entender a quién le
+duele un problema, convertir ese entendimiento en historias de usuario, decidir qué entra y qué
+queda por fuera de un primer alcance, y dejarlo todo documentado antes de programar.
+
+Lo trabajas sobre un ejemplo real: el proyecto que construyo yo mismo durante el semestre para
+mostrarte, paso a paso, cómo se aplican los temas de cada semana. No es un ejercicio ficticio ni
+una tarea tuya; es la demo que vas a ver evolucionar clase a clase. Más adelante en el semestre,
+tu equipo de tres personas usa este mismo método para definir su propio proyecto.
+
+## El problema: un productor campesino sin herramientas digitales
+
+Un pequeño productor agrícola cultiva y cosecha, pero vende casi todo a través de un intermediario.
+El intermediario le compra barato y revende caro, y se queda con el margen que debería ser del
+productor. La razón no es falta de calidad en lo que cultiva: es falta de forma de llegar
+directamente a quien compra.
+
+Hoy el productor no lleva un inventario claro de lo que tiene disponible en cada temporada. No
+tiene dónde publicar su catálogo ni sus precios. No ve en un solo lugar los pedidos que le llegan
+por distintos medios. Y no tiene una vitrina propia en internet donde cualquier comprador pueda
+encontrarlo sin intermediarios de por medio.
+
+Ese es el problema que resuelve "Mercado Campesino Digital": un mercado que conecta productores
+agrícolas con compradores de forma directa. Este curso construye el lado del productor y de quien
+administra ese lado: el panel donde gestiona su catálogo y sus pedidos, y la vitrina pública donde
+el comprador lo encuentra.
+
+## De un problema a una solución: el método
+
+Convertir un problema en una solución de software sigue seis pasos. Son generales, aplicables a
+cualquier proyecto, y aquí los recorres con el mercado campesino como ejemplo.
+
+::: {.callout-note}
+## Un ejemplo que se construye en clase
+
+Algunas partes de este ejemplo, como historias de usuario adicionales o detalles del alcance, las
+completamos juntos durante la sesión. No todo está cerrado de antemano: la idea es que participes
+definiendo detalles concretos del ejemplo, no solo que los leas.
+:::
+
+### Paso 1. Entender el problema
+
+Antes de pensar en pantallas o en tecnología, entiendes a quién le duele el problema y por qué las
+opciones actuales no alcanzan. Esto significa ponerte en el lugar de esa persona: qué hace hoy, con
+qué herramientas, y en qué momento esas herramientas le fallan.
+
+En el mercado campesino, quien sufre el problema es el productor. Hoy usa lo que tiene a mano:
+una libreta para anotar lo que cosecha, llamadas o mensajes de texto para avisar que hay producto
+disponible, y la memoria para llevar la cuenta de los pedidos. Ninguna de esas herramientas escala:
+la libreta no se puede consultar desde el celular de un comprador, y un mensaje de texto no es un
+catálogo que alguien pueda explorar.
+
+### Paso 2. Usuarios y necesidades
+
+Identificas quién usa la solución y qué necesita cada uno, en frases simples, sin entrar todavía en
+pantallas ni en funciones concretas.
+
+En este proyecto hay dos actores. El **productor** es el usuario principal: necesita publicar y
+actualizar su catálogo, ver sus pedidos en un solo lugar y entender cómo le va con sus ventas. El
+**comprador** navega la vitrina pública sin necesitar una cuenta: necesita ver qué hay disponible y
+a qué precio, sin fricciones antes de decidir contactar al productor.
+
+### Paso 3. Historias de usuario
+
+Una historia de usuario resume una necesidad en el formato "Como [usuario], quiero [acción], para
+[beneficio]". Es corta a propósito: obliga a nombrar quién la necesita y por qué, sin describir
+todavía cómo se construye.
+
+Algunas historias del mercado campesino:
+
+- Como productor, quiero publicar mi catálogo con la disponibilidad de cada producto por
+  temporada, para que un comprador sepa qué tengo listo ahora mismo.
+- Como productor, quiero ver los pedidos que me llegan en un solo lugar, para no perder ninguno
+  entre distintos medios de contacto.
+- Como productor, quiero consultar un reporte básico de mis ventas, para saber qué producto me
+  está funcionando mejor.
+- Como comprador, quiero ver la vitrina pública del mercado sin crear una cuenta, para explorar el
+  catálogo antes de decidir si contacto a un productor.
+
+### Paso 4. Alcance y MVP
+
+Un MVP (producto mínimo viable) es la versión más pequeña de la solución que ya resuelve el
+problema central, sin todo lo que sería deseable tener eventualmente. Definir el alcance es
+decidir, por escrito, qué entra en esa primera versión y qué queda fuera.
+
+Este semestre entran: el panel de catálogo del productor, la gestión de los pedidos que recibe, la
+vitrina pública sin necesidad de cuenta para el comprador, y una API propia que expone ese
+catálogo. Quedan fuera: el cobro con pasarelas de pago reales, soportar varios mercados o regiones
+a la vez, y un esquema de roles y permisos complejo. Ninguna de esas ausencias es un descuido: es
+una decisión, y una decisión documentada es la que evita que el alcance crezca sin control a mitad
+de camino.
+
+### Paso 5. Bosquejo de la solución
+
+Antes de programar, dibujas en papel el flujo de pantallas: qué pantalla lleva a cuál, qué ve cada
+usuario en cada una. No es un diseño visual, no hay colores ni tipografías todavía; es solo la
+secuencia de lo que la persona va a encontrar.
+
+Para el mercado campesino, el flujo de ejemplo es: la vitrina pública muestra el catálogo general
+de todos los productores, sin pedir acceso. Desde el panel del productor, este entra a su propio
+catálogo y lo actualiza. Desde ahí navega a los pedidos que recibió, y desde los pedidos consulta
+reportes básicos de cuánto ha vendido y de qué. Cada flecha de ese bosquejo es una decisión sobre
+cómo se conectan las pantallas entre sí, antes de que exista una sola de ellas.
+
+### Paso 6. Documentarlo
+
+Escribir el problema, los usuarios, las historias y el alcance en un documento no es un trámite:
+es lo que te permite volver a consultar qué se decidió y por qué, en vez de reconstruirlo de
+memoria semana tras semana. Ese documento no es definitivo el día que lo escribes. Lo revisas y lo
+ajustas a medida que avanza el semestre, cada vez que aprendes algo nuevo sobre el problema o sobre
+quién lo usa.
+
+## Lo que sigue
+
+Este método (entender el problema, identificar usuarios, escribir historias de usuario, acotar el
+alcance, bosquejar el flujo y documentarlo) es el mismo que tu equipo de tres personas aplica más
+adelante en el semestre para definir su propio proyecto. La sesión donde arrancan ese proyecto
+todavía está por definirse; lo que trabajaste aquí es la preparación para llegar a ella sabiendo
+qué hacer.
+
+::: {.pie-doc}
+Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.
+:::

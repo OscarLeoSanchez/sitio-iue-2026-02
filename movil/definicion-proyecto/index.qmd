@@ -1,0 +1,123 @@
+---
+title: "Definición del proyecto: de un problema a una solución"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                       |
+|------------|---------------------------------------|
+| Asignatura | Programación Móvil (IF2004)          |
+| Grupos     | 601 y 602 de Ingeniería Informática  |
+| Docente    | Oscar Leonel Sánchez Conde            |
+:::
+
+## Lo que vas a lograr
+
+Antes de escribir una sola línea de código, recorres el proceso completo que convierte un
+problema real en una solución de software. Practicas ese proceso con un ejemplo real: el
+proyecto que construyo yo mismo durante el semestre para ilustrar cada tema del curso. No es una
+tarea tuya, es la demostración que acompaña las clases.
+
+Esta sesión te prepara para un paso posterior: cada equipo de tres personas va a definir su
+propio proyecto con este mismo método.
+
+## El problema
+
+Un comprador que busca fruta, verdura o productos frescos de productores campesinos cercanos no
+tiene hoy una forma sencilla de saber qué hay disponible según la temporada, ni de pedirlo con
+confianza sobre su origen. Termina comprando en una cadena grande, a través de intermediarios,
+sin saber qué compra ni a quién beneficia su compra.
+
+"Mercado Campesino Digital" conecta productores agrícolas con compradores sin intermediarios.
+Durante el curso construyes el lado del comprador: una aplicación móvil que muestra el catálogo
+de productores cercanos con su disponibilidad de temporada, enriquecido con una API real de
+clima que indica qué está en cosecha, permite armar un carrito, simular el pago, hacer
+seguimiento del pedido y recibir notificaciones de disponibilidad y de estado.
+
+## De un problema a una solución: el método
+
+::: {.callout-note}
+Algunas partes de este ejemplo se completan en vivo, contigo y tus compañeros, durante la clase:
+historias de usuario adicionales, detalles de qué queda fuera de alcance. No todo está cerrado
+de antemano.
+:::
+
+### Paso 1. Entender el problema (empatía)
+
+Antes de pensar en pantallas o funciones, identificas quién sufre el problema, qué le pasa hoy y
+por qué las alternativas actuales no le alcanzan. Sin esta base, terminas construyendo una
+solución que nadie necesita.
+
+En el mercado campesino, el comprador de productos frescos hoy elige entre dos opciones pobres:
+la cadena grande, con precios más altos y sin trazabilidad sobre el origen, o el mercado
+campesino físico, limitado a un horario y un lugar fijos. Ninguna opción le muestra qué está en
+temporada ni le conecta directamente con quien produce.
+
+### Paso 2. Usuarios y necesidades
+
+Nombras el actor principal de la solución y describes, en frases simples, qué necesita. Un
+proyecto con demasiados usuarios distintos desde el inicio se vuelve difícil de acotar.
+
+El actor principal es el comprador urbano que quiere productos frescos y de temporada. Necesita
+saber qué hay disponible cerca de él, confiar en el origen de lo que compra y hacer el pedido sin
+fricción, desde el teléfono.
+
+### Paso 3. Historias de usuario
+
+Una historia de usuario resume una necesidad en una frase con formato fijo: "Como [usuario],
+quiero [acción], para [beneficio]". Ese formato obliga a conectar cada función con quien la usa y
+con el valor que le entrega, antes de pensar en cómo se construye.
+
+Para el comprador del mercado campesino:
+
+- Como comprador, quiero ver el catálogo de productores cercanos con su disponibilidad de
+  temporada, para decidir qué comprar y a quién.
+- Como comprador, quiero armar un carrito con productos de varios productores y hacer un solo
+  pedido, para no repetir el proceso de compra varias veces.
+- Como comprador, quiero recibir una notificación cuando cambie el estado de mi pedido, para
+  saber cuándo va a llegar sin tener que revisar la aplicación.
+- Como comprador, quiero recibir una notificación cuando un producto que me interesa entre en
+  temporada, para comprarlo apenas esté disponible.
+
+### Paso 4. Alcance y MVP
+
+Un MVP, o producto mínimo viable, es la versión más pequeña de la solución que ya le entrega
+valor real al usuario. Definir el alcance significa trazar una línea explícita entre lo que
+construyes ahora y lo que queda para después. Esa línea evita que el proyecto crezca sin control.
+
+Este semestre, el proyecto del comprador incluye catálogo de productores por temporada, carrito
+de compra, checkout simulado y notificación de estado del pedido. Queda fuera de alcance: pasarela
+de pago real, logística de entrega real y calificaciones de productores.
+
+### Paso 5. Bosquejo de la solución
+
+Antes de programar, dibujas en papel el flujo de pantallas: qué pantalla sigue a cuál, sin
+preocuparte todavía por el diseño visual. Ese bosquejo cuesta minutos y evita reescribir
+pantallas completas más adelante.
+
+El flujo del comprador arranca en una pantalla de inicio con la lista de productores cercanos,
+avanza al detalle de un productor con su catálogo de temporada, de ahí al carrito con los
+productos seleccionados, sigue a un checkout simulado que confirma el pedido sin pasarela de pago
+real y termina en una pantalla de seguimiento que muestra el estado del pedido.
+
+### Paso 6. Documentarlo
+
+Escribir el alcance en un documento, y no solo tenerlo en la cabeza, evita que crezca sin
+control a mitad de camino. El documento no queda fijo: lo revisas y ajustas a medida que avanza
+el semestre, con lo que aprendes en cada entrega.
+
+## Lo que sigue
+
+En las próximas semanas, cada equipo de tres personas aplica este mismo método a su propio
+proyecto: entiende el problema de su usuario, escribe sus historias de usuario y define su
+alcance y su MVP.
+
+::: {.pie-doc}
+Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.
+:::

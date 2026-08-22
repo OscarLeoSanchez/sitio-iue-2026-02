@@ -28,6 +28,8 @@ website:
       contents:
         - text: "Presentación del curso"
           href: movil/index.qmd
+        - text: "Definición del proyecto"
+          href: movil/definicion-proyecto/index.qmd
         - section: "Unidad 1. Fundamentos del desarrollo móvil"
           contents:
             - text: "Semana 1. Instalación del entorno"
@@ -47,6 +49,8 @@ website:
       contents:
         - text: "Presentación del curso"
           href: web/index.qmd
+        - text: "Definición del proyecto"
+          href: web/definicion-proyecto/index.qmd
         - section: "Unidad 1. Entornos, versionado e IA"
           contents:
             - text: "Semana 1. Entornos de desarrollo"
