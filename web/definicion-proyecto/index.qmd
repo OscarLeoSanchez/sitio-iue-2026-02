@@ -23,7 +23,7 @@ queda por fuera de un primer alcance, y dejarlo todo documentado antes de progra
 Lo trabajas sobre un ejemplo real: el proyecto que construyo yo mismo durante el semestre para
 mostrarte, paso a paso, cómo se aplican los temas de cada semana. No es un ejercicio ficticio ni
 una tarea tuya; es la demo que vas a ver evolucionar clase a clase. Más adelante en el semestre,
-tu equipo de tres personas usa este mismo método para definir su propio proyecto.
+tu equipo usa este mismo método para definir su propio proyecto.
 
 ## El problema: un productor campesino sin herramientas digitales
 
@@ -130,8 +130,8 @@ quién lo usa.
 ## Lo que sigue
 
 Este método (entender el problema, identificar usuarios, escribir historias de usuario, acotar el
-alcance, bosquejar el flujo y documentarlo) es el mismo que tu equipo de tres personas aplica más
-adelante en el semestre para definir su propio proyecto. La sesión donde arrancan ese proyecto
+alcance, bosquejar el flujo y documentarlo) es el mismo que tu equipo aplica más adelante en el
+semestre para definir su propio proyecto. La sesión donde arrancan ese proyecto
 todavía está por definirse; lo que trabajaste aquí es la preparación para llegar a ella sabiendo
 qué hacer.
 

@@ -771,7 +771,7 @@
     "href": "web/definicion-proyecto/index.html#lo-que-vas-a-lograr",
     "title": "Definición del proyecto: de un problema a una solución",
     "section": "1 Lo que vas a lograr",
-    "text": "1 Lo que vas a lograr\nAntes de escribir una sola línea de código, un equipo de software recorre un camino que va de un problema real a una solución concreta. Esta guía te enseña ese camino: cómo entender a quién le duele un problema, convertir ese entendimiento en historias de usuario, decidir qué entra y qué queda por fuera de un primer alcance, y dejarlo todo documentado antes de programar.\nLo trabajas sobre un ejemplo real: el proyecto que construyo yo mismo durante el semestre para mostrarte, paso a paso, cómo se aplican los temas de cada semana. No es un ejercicio ficticio ni una tarea tuya; es la demo que vas a ver evolucionar clase a clase. Más adelante en el semestre, tu equipo de tres personas usa este mismo método para definir su propio proyecto.",
+    "text": "1 Lo que vas a lograr\nAntes de escribir una sola línea de código, un equipo de software recorre un camino que va de un problema real a una solución concreta. Esta guía te enseña ese camino: cómo entender a quién le duele un problema, convertir ese entendimiento en historias de usuario, decidir qué entra y qué queda por fuera de un primer alcance, y dejarlo todo documentado antes de programar.\nLo trabajas sobre un ejemplo real: el proyecto que construyo yo mismo durante el semestre para mostrarte, paso a paso, cómo se aplican los temas de cada semana. No es un ejercicio ficticio ni una tarea tuya; es la demo que vas a ver evolucionar clase a clase. Más adelante en el semestre, tu equipo usa este mismo método para definir su propio proyecto.",
     "crumbs": [
       "Definición del proyecto"
     ]
@@ -801,7 +801,7 @@
     "href": "web/definicion-proyecto/index.html#lo-que-sigue",
     "title": "Definición del proyecto: de un problema a una solución",
     "section": "4 Lo que sigue",
-    "text": "4 Lo que sigue\nEste método (entender el problema, identificar usuarios, escribir historias de usuario, acotar el alcance, bosquejar el flujo y documentarlo) es el mismo que tu equipo de tres personas aplica más adelante en el semestre para definir su propio proyecto. La sesión donde arrancan ese proyecto todavía está por definirse; lo que trabajaste aquí es la preparación para llegar a ella sabiendo qué hacer.\n\nProgramación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.\nTransparencia. La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.",
+    "text": "4 Lo que sigue\nEste método (entender el problema, identificar usuarios, escribir historias de usuario, acotar el alcance, bosquejar el flujo y documentarlo) es el mismo que tu equipo aplica más adelante en el semestre para definir su propio proyecto. La sesión donde arrancan ese proyecto todavía está por definirse; lo que trabajaste aquí es la preparación para llegar a ella sabiendo qué hacer.\n\nProgramación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.\nTransparencia. La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Opus 5 de Anthropic. Todo el contenido fue revisado y validado.",
     "crumbs": [
       "Definición del proyecto"
     ]
