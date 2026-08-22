@@ -153,11 +153,11 @@ Una **propuesta de cambio**. Dice: "tengo esto listo en mi rama, quiero meterlo 
 
 ## El Pull Request {.solo-diagrama}
 
-![](imagenes/pull-request.svg){fig-alt="Un Pull Request muestra la rama, los commits, los archivos cambiados y el botón de fusión que pulsas tú mismo"}
+![](imagenes/pull-request.svg){fig-alt="Un Pull Request muestra la rama, los commits, los archivos cambiados y el botón de fusión que pulsa otro integrante del equipo"}
 
 ## El ciclo completo
 
-![](imagenes/git-flujo-pull-request.svg){fig-alt="Flujo en dos carriles: creas la rama, commiteas y publicas; en GitHub abres el Pull Request, lo revisas y lo fusionas"}
+![](imagenes/git-flujo-pull-request.svg){fig-alt="Flujo en dos carriles: creas la rama, commiteas y publicas; en GitHub abres el Pull Request, el equipo lo revisa y lo fusiona"}
 
 `git push -u origin <rama>` publica la rama por primera vez. `git pull` deja tu `main` al día
 después de la fusión.
@@ -237,16 +237,16 @@ mínimas.
   red social propia.
 - No es una lista de renuncias. Es lo que evita que te quedes sin tiempo en la semana 15.
 
-## Decisión: hola_iue o un proyecto nuevo
+## El equipo crea un proyecto nuevo
 
-- `hola_iue` ya tiene Flutter funcionando, `pubspec.yaml` configurado y tu primer
-  `StatefulWidget`.
-- Seguir con él evita repetir la instalación y el `flutter create`.
-- Empezar de cero solo tiene sentido si tu idea de proyecto no cabe en la estructura actual.
+- Equipos de dos o tres, formados hoy en clase: el mismo equipo hasta la Semana 17.
+- El proyecto nace con `flutter create <nombre>`, nunca continuando `hola_iue`.
+- El nombre sale de la idea real que el equipo acaba de escribir en `docs/alcance.md`.
 
 . . .
 
-Si dudas, sigue con `hola_iue`. Cambiar el nombre es más fácil que reconstruir el entorno.
+`hola_iue` sigue siendo tu ejercicio de práctica de la Semana 2. El proyecto del semestre arranca
+de cero, con tu equipo.
 
 ## Qué va a pasar con este documento
 
@@ -257,9 +257,9 @@ Si dudas, sigue con `hola_iue`. Cambiar el nombre es más fácil que reconstruir
 
 ## Cierre: a escribir
 
-- Los próximos minutos son para escribir, no para escuchar.
-- Abre `docs/alcance.md` en tu proyecto y completa las cinco partes.
-- Si terminas antes, revisa que cada funcionalidad mínima sea alcanzable con lo que ya sabes de
+- Los próximos minutos son para escribir en equipo, no para escuchar.
+- Abran `docs/alcance.md` y completen las cinco partes entre todos los integrantes.
+- Si terminan antes, revisen que cada funcionalidad mínima sea alcanzable con lo que ya saben de
   Flutter.
 
 . . .
@@ -268,10 +268,11 @@ Si dudas, sigue con `hola_iue`. Cambiar el nombre es más fácil que reconstruir
 
 ## Siguientes pasos
 
-- Aplica el flujo completo en tu propio proyecto: ramas, commits con mensaje, fusión.
-- Provoca un conflicto a propósito, entre dos ramas tuyas, y resuélvelo.
-- Sube el historial ordenado a GitHub.
+- Apliquen el flujo completo en el proyecto del equipo: ramas, commits con mensaje, fusión revisada
+  por otro integrante.
+- Provoquen un conflicto a propósito, entre dos integrantes del equipo, y resuélvanlo.
+- Suban el historial ordenado a GitHub.
 
 . . .
 
-[Entrega el enlace de tu repositorio por el canal de actividades.]{.grande}
+[Entreguen el enlace del repositorio del equipo por el canal de actividades.]{.grande}

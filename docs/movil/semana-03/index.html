@@ -215,8 +215,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#definiendo-el-alcance-de-tu-proyecto" id="toc-definiendo-el-alcance-de-tu-proyecto" class="nav-link" data-scroll-target="#definiendo-el-alcance-de-tu-proyecto"><span class="header-section-number">3</span> Definiendo el alcance de tu proyecto</a>
   <ul class="collapse">
+  <li><a href="#formación-del-equipo" id="toc-formación-del-equipo" class="nav-link" data-scroll-target="#formación-del-equipo">Formación del equipo</a></li>
   <li><a href="#docsalcance.md-las-cinco-partes" id="toc-docsalcance.md-las-cinco-partes" class="nav-link" data-scroll-target="#docsalcance.md-las-cinco-partes"><code>docs/alcance.md</code>: las cinco partes</a></li>
-  <li><a href="#continuar-con-hola_iue-o-crear-un-proyecto-nuevo" id="toc-continuar-con-hola_iue-o-crear-un-proyecto-nuevo" class="nav-link" data-scroll-target="#continuar-con-hola_iue-o-crear-un-proyecto-nuevo">Continuar con <code>hola_iue</code> o crear un proyecto nuevo</a></li>
+  <li><a href="#crea-el-proyecto-flutter-del-equipo" id="toc-crea-el-proyecto-flutter-del-equipo" class="nav-link" data-scroll-target="#crea-el-proyecto-flutter-del-equipo">Crea el proyecto Flutter del equipo</a></li>
   <li><a href="#un-ejemplo-completo" id="toc-un-ejemplo-completo" class="nav-link" data-scroll-target="#un-ejemplo-completo">Un ejemplo completo</a></li>
   </ul></li>
   <li><a href="#laboratorio" id="toc-laboratorio" class="nav-link" data-scroll-target="#laboratorio"><span class="header-section-number">4</span> Laboratorio</a>
@@ -314,16 +315,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="lo-que-vas-a-lograr" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
-<p>Hasta la semana pasada, <code>hola_iue</code> vivía sin historia: si algo se rompía, no había forma de volver atrás. Esta semana entra Git, y con él arranca también el proyecto que vas a construir el resto del semestre.</p>
-<p>En clase practicas el flujo completo de Git en un repositorio de práctica desechable: nada de lo que hagas ahí se entrega ni se califica, es solo para que el mecanismo te quede claro sin arriesgar tu proyecto real. Después, ya en tu proyecto, defines por escrito qué vas a construir y aplicas el mismo flujo de Git sobre código que sí importa.</p>
+<p>Hasta la semana pasada, <code>hola_iue</code> fue tu ejercicio de práctica: el proyecto que creaste con <code>flutter create</code> para aprender Dart y Flutter. Esta semana entra Git, y con él arranca también el <strong>proyecto integrador del semestre</strong>, que construyes en equipo, no sobre <code>hola_iue</code>.</p>
+<p>Esta semana formas equipo con uno o dos compañeros más (hasta tres integrantes en total), y ese equipo se mantiene junto sobre el mismo repositorio hasta la demo final de la Semana 17.</p>
+<p>En clase practicas el flujo completo de Git en un repositorio de práctica desechable: nada de lo que hagas ahí se entrega ni se califica, es solo para que el mecanismo te quede claro sin arriesgar el proyecto del equipo. Después, ya con tu equipo, definen por escrito qué van a construir, crean un proyecto Flutter nuevo y aplican el mismo flujo de Git sobre código que sí importa.</p>
 <p>Al terminar la guía sabes:</p>
 <ol type="1">
 <li>Explicar qué hace Git con tus archivos y en qué se diferencia de GitHub.</li>
 <li>Llevar un historial de commits legible, con mensajes que siguen una convención.</li>
-<li>Trabajar en una rama y fusionarla mediante un Pull Request.</li>
-<li>Provocar un conflicto de fusión a propósito y resolverlo sin romper el archivo.</li>
-<li>Escribir el alcance de tu proyecto del semestre en <code>docs/alcance.md</code>.</li>
-<li>Poner tu proyecto bajo control de versiones, con historial, ramas y al menos un conflicto real resuelto y documentado.</li>
+<li>Trabajar en una rama y fusionarla mediante un Pull Request revisado por otro integrante del equipo.</li>
+<li>Provocar un conflicto de fusión real entre dos integrantes del equipo y resolverlo sin romper el archivo.</li>
+<li>Escribir, junto con tu equipo, el alcance del proyecto del semestre en <code>docs/alcance.md</code>.</li>
+<li>Poner el proyecto del equipo bajo control de versiones, con historial, ramas y al menos un conflicto real resuelto y documentado.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -721,22 +723,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Deja registro.</strong> Queda escrito qué se propuso, qué se revisó y cuándo se fusionó. Dentro de tres meses eso explica por qué tu código es como es.</li>
 <li><strong><code>main</code> no se toca hasta la fusión.</strong> Mientras el Pull Request esté abierto, la rama principal sigue igual.</li>
 </ul>
-<p>En un proyecto de equipo, la regla suele ser que otra persona revisa y fusiona tu Pull Request. En tu proyecto individual <strong>tú abres el Pull Request y tú lo fusionas</strong>, después de leer el diff completo en <code>Files changed</code> como si lo revisara otra persona: es la misma disciplina de mirar el cambio antes de que entre a <code>main</code>, solo que sin nadie más de por medio.</p>
+<p>La regla que sigue tu equipo es que <strong>nadie fusiona su propio Pull Request</strong>: abres el tuyo, y otro integrante lo revisa en <code>Files changed</code> y lo fusiona. Es la misma disciplina de mirar el cambio antes de que entre a <code>main</code>, pero con una segunda mirada real, no la tuya propia.</p>
 </section>
 <section id="el-flujo-de-trabajo-del-curso" class="level3">
 <h3 class="anchored" data-anchor-id="el-flujo-de-trabajo-del-curso">El flujo de trabajo del curso</h3>
-<p>Este es el ciclo que vas a repetir en cada entrega del curso. Cada funcionalidad nueva nace en una rama, se publica, la revisas tú mismo y solo entonces entra a <code>main</code>.</p>
+<p>Este es el ciclo que vas a repetir en cada entrega del curso. Cada funcionalidad nueva nace en una rama, se publica, la revisa otro integrante de tu equipo y solo entonces entra a <code>main</code>.</p>
 <div class="diagrama">
-<p><img src="imagenes/git-flujo-pull-request.svg" class="img-fluid" alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, lo revisas y lo fusionas; despues bajas el resultado con git pull"></p>
+<p><img src="imagenes/git-flujo-pull-request.svg" class="img-fluid" alt="Flujo de trabajo en dos carriles: en tu computador creas la rama, haces commits y publicas; en GitHub abres el Pull Request, el equipo lo revisa y lo fusiona; despues bajas el resultado con git pull"></p>
 <p>Los pasos 1, 2, 3 y 6 son comandos en tu terminal. Los pasos 4 y 5 ocurren en el navegador.</p>
 </div>
 <p>Los seis pasos, en palabras:</p>
 <ol type="1">
 <li><strong>Creas la rama.</strong> <code>main</code> queda intacta mientras experimentas.</li>
 <li><strong>Trabajas y commiteas.</strong> Cuantas veces necesites, siempre en tu rama.</li>
-<li><strong>Publicas la rama.</strong> Ahí queda respaldada en GitHub, pero <code>main</code> sigue sin tocarse.</li>
+<li><strong>Publicas la rama.</strong> Ahí el resto del equipo ya puede verla, pero <code>main</code> sigue sin tocarse.</li>
 <li><strong>Abres el Pull Request.</strong> Es una propuesta: “quiero meter esto en <code>main</code>”.</li>
-<li><strong>Revisas el diff y fusionas.</strong> Lees <code>Files changed</code> con calma y pulsas el botón de fusión.</li>
+<li><strong>Otro integrante revisa el diff y fusiona.</strong> Lee <code>Files changed</code> con calma y pulsa el botón de fusión: nunca la misma persona que abrió el Pull Request.</li>
 <li><strong>Bajas el resultado.</strong> Tu <code>main</code> local se pone al día con la de GitHub.</li>
 </ol>
 </section>
@@ -814,56 +816,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="definiendo-el-alcance-de-tu-proyecto" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="definiendo-el-alcance-de-tu-proyecto"><span class="header-section-number">3</span> Definiendo el alcance de tu proyecto</h2>
-<p>Esta semana no solo arranca Git: también arranca el <strong>proyecto integrador</strong>, el que vas a ir construyendo semana a semana hasta la demo final de la Semana 17. Antes de escribir código nuevo, decides por escrito qué vas a construir. Sin eso, un proyecto de semestre crece sin control: cada semana agregas “una cosa más” y en la Semana 15 tienes diez funcionalidades a medio hacer en vez de cinco que funcionan bien.</p>
-<p>El documento que fija esto se llama <code>docs/alcance.md</code>, vive dentro de tu propio repositorio de proyecto y tiene cinco partes obligatorias.</p>
+<p>Esta semana no solo arranca Git: también arranca el <strong>proyecto integrador</strong>, el que tu equipo va a ir construyendo semana a semana hasta la demo final de la Semana 17. Antes de escribir código nuevo, el equipo decide por escrito qué va a construir. Sin eso, un proyecto de semestre crece sin control: cada semana alguien agrega “una cosa más” y en la Semana 15 el equipo tiene diez funcionalidades a medio hacer en vez de cinco que funcionan bien.</p>
+<p>El documento que fija esto se llama <code>docs/alcance.md</code>, vive dentro del repositorio compartido del equipo y tiene cinco partes obligatorias, escritas y acordadas entre todos los integrantes.</p>
+<section id="formación-del-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="formación-del-equipo">Formación del equipo</h3>
+<p>Los equipos se arman en clase: <strong>dos o tres integrantes, nunca más de tres</strong>. Si el número de estudiantes no cierra parejo, el docente ajusta con algún equipo de dos en vez de dejar a alguien sin equipo.</p>
+<p>Es el mismo equipo con el que vas a trabajar hasta la Semana 17, la gente con la que sustentas el proyecto en la evaluación final. Elige pensando en eso, no solo en quién está sentado cerca.</p>
+</section>
 <section id="docsalcance.md-las-cinco-partes" class="level3">
 <h3 class="anchored" data-anchor-id="docsalcance.md-las-cinco-partes"><code>docs/alcance.md</code>: las cinco partes</h3>
-<p><strong>Problema que resuelve.</strong> Una o dos frases. Qué necesidad atiende tu app, sin vender la idea, solo describirla.</p>
+<p><strong>Problema que resuelve.</strong> Una o dos frases. Qué necesidad atiende la app del equipo, sin vender la idea, solo describirla.</p>
 <p><strong>Usuario objetivo.</strong> Quién la va a usar. No “todo el mundo”: entre más concreto el usuario, más fácil es decidir qué funcionalidades importan de verdad.</p>
-<p><strong>Funcionalidades mínimas (MVP).</strong> La lista concreta de lo que vas a construir. MVP es <em>minimum viable product</em>: lo mínimo que hace que tu app sirva para algo, no la versión con todo lo que se te ocurra. Piensa en un curso de 17 semanas: cinco o seis funcionalidades bien hechas valen más que quince a medias.</p>
-<p><strong>Qué queda fuera de alcance.</strong> Tan importante como la lista anterior. Escribe explícitamente qué NO vas a hacer este semestre. Es lo que te permite decir “no” cuando se te ocurra una idea nueva a mitad de camino.</p>
-<p><strong>Stack.</strong> Flutter y Dart son fijos para todo el curso. Agrega lo que planeas usar de Git, Firebase (Authentication, Firestore, Storage), SQLite, Clean Architecture o IA (en dispositivo o por API), según lo que tu proyecto necesite.</p>
-<p>Este documento no se escribe una sola vez y se olvida: lo vas a revisar y a veces ajustar mientras avanza el semestre, y es el que vas a mirar en la Semana 17 para confirmar que cumpliste lo que te propusiste.</p>
+<p><strong>Funcionalidades mínimas (MVP).</strong> La lista concreta de lo que va a construir el equipo. MVP es <em>minimum viable product</em>: lo mínimo que hace que la app sirva para algo, no la versión con todo lo que se les ocurra. Piensen en un curso de 17 semanas: cinco o seis funcionalidades bien hechas valen más que quince a medias.</p>
+<p><strong>Qué queda fuera de alcance.</strong> Tan importante como la lista anterior. Escriban explícitamente qué NO van a hacer este semestre. Es lo que les permite decir “no” cuando a alguien se le ocurra una idea nueva a mitad de camino.</p>
+<p><strong>Stack.</strong> Flutter y Dart son fijos para todo el curso. Agreguen lo que planean usar de Git, Firebase (Authentication, Firestore, Storage), SQLite, Clean Architecture o IA (en dispositivo o por API), según lo que el proyecto necesite.</p>
+<p>Este documento no se escribe una sola vez y se olvida: el equipo lo va a revisar y a veces ajustar mientras avanza el semestre, y es el que van a mirar en la Semana 17 para confirmar que cumplieron lo que se propusieron.</p>
 </section>
-<section id="continuar-con-hola_iue-o-crear-un-proyecto-nuevo" class="level3">
-<h3 class="anchored" data-anchor-id="continuar-con-hola_iue-o-crear-un-proyecto-nuevo">Continuar con <code>hola_iue</code> o crear un proyecto nuevo</h3>
-<p>Tienes dos caminos, y ninguno es mejor que el otro:</p>
-<ul>
-<li><strong>Continuar con <code>hola_iue</code>.</strong> Si tu idea encaja razonablemente en lo que ya generaste con <code>flutter create</code> en la Semana 02, sigues desde ahí. Le vas a cambiar casi todo el contenido de todas formas.</li>
-<li><strong>Crear un proyecto nuevo.</strong> Si tu idea no tiene nada que ver con lo que trae la plantilla, o prefieres un nombre de paquete distinto, corres <code>flutter create</code> otra vez con el nombre que corresponda a tu proyecto.</li>
-</ul>
-<p>Es una decisión normal, no una señal de que algo salió mal en la Semana 2. <code>hola_iue</code> siempre fue un proyecto de práctica; lo que importa esta semana es que el proyecto que sigas usando de aquí en adelante tenga un nombre que tenga sentido para tu idea real.</p>
+<section id="crea-el-proyecto-flutter-del-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="crea-el-proyecto-flutter-del-equipo">Crea el proyecto Flutter del equipo</h3>
+<p>Con el alcance ya escrito, el equipo crea el proyecto: nunca continuando <code>hola_iue</code>, sea de quien sea.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flutter</span> create <span class="op">&lt;</span>nombre_relacionado_con_tu_idea<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El nombre sale de la idea real del equipo, no de una plantilla genérica. Si el proyecto se llama “EstudioFacil”, el nombre del paquete puede ser algo como <code>estudio_facil</code> (Dart exige minúsculas y guion bajo, sin espacios).</p>
+<p><code>hola_iue</code> sigue siendo el ejercicio de práctica de la Semana 2: cada integrante lo conserva en su máquina si quiere, pero ninguno lo convierte en el proyecto del semestre. Uno de los integrantes corre <code>flutter create</code> una sola vez y publica el resultado en GitHub; el resto del equipo clona ese mismo repositorio.</p>
 </section>
 <section id="un-ejemplo-completo" class="level3">
 <h3 class="anchored" data-anchor-id="un-ejemplo-completo">Un ejemplo completo</h3>
 <p>Así se ve un <code>docs/alcance.md</code> ya lleno, para un proyecto distinto al que usan los diagramas de esta guía:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Alcance del proyecto: EstudioFacil</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema que resuelve</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Repasar para un parcial revisando apuntes sueltos en varios archivos es lento, y no hay forma</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rapida de repasar temas cortos en momentos libres, como la fila del bus.</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Usuario objetivo</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Estudiantes de pregrado de la IUE que quieren repasar con tarjetas de pregunta y respuesta desde</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>el celular, incluso sin conexion constante a internet.</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Funcionalidades minimas (MVP)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Crear, editar y borrar mazos de tarjetas (pregunta y respuesta).</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estudiar un mazo: la tarjeta se voltea al tocarla para mostrar la respuesta.</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Guardar el progreso de estudio en el dispositivo, aunque no haya internet.</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Iniciar sesion con correo institucional.</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sincronizar los mazos en la nube para no perderlos si cambia de celular.</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Que queda fuera de alcance</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Compartir mazos entre estudiantes o hacerlos publicos.</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Repeticion espaciada (un algoritmo de repaso tipo Anki).</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Version web o de escritorio: el proyecto es solo movil.</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estadisticas de estudio mas alla de un contador simple de tarjetas repasadas.</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stack</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>Flutter y Dart. Git y GitHub para el control de versiones. SQLite para el progreso local.</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>Firebase Authentication y Firestore para el inicio de sesion y la sincronizacion en la nube.</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>Arquitectura por capas a partir de la unidad del curso que la introduce.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Alcance del proyecto: EstudioFacil</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema que resuelve</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Repasar para un parcial revisando apuntes sueltos en varios archivos es lento, y no hay forma</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>rapida de repasar temas cortos en momentos libres, como la fila del bus.</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Usuario objetivo</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Estudiantes de pregrado de la IUE que quieren repasar con tarjetas de pregunta y respuesta desde</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>el celular, incluso sin conexion constante a internet.</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Funcionalidades minimas (MVP)</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Crear, editar y borrar mazos de tarjetas (pregunta y respuesta).</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estudiar un mazo: la tarjeta se voltea al tocarla para mostrar la respuesta.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Guardar el progreso de estudio en el dispositivo, aunque no haya internet.</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Iniciar sesion con correo institucional.</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sincronizar los mazos en la nube para no perderlos si cambia de celular.</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Que queda fuera de alcance</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Compartir mazos entre estudiantes o hacerlos publicos.</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Repeticion espaciada (un algoritmo de repaso tipo Anki).</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Version web o de escritorio: el proyecto es solo movil.</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estadisticas de estudio mas alla de un contador simple de tarjetas repasadas.</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stack</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>Flutter y Dart. Git y GitHub para el control de versiones. SQLite para el progreso local.</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>Firebase Authentication y Firestore para el inicio de sesion y la sincronizacion en la nube.</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>Arquitectura por capas a partir de la unidad del curso que la introduce.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Nota el nivel de detalle: cada funcionalidad del MVP es una frase concreta y verificable, no una palabra suelta como “notificaciones” o “estadisticas”. Lo mismo aplica a lo que queda fuera: cada punto dice explícitamente qué no vas a construir, no solo “el resto”.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -891,30 +896,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Alcance del proyecto: RiegoVivero</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema que resuelve</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>El dueño de un vivero pequeño pierde plantas porque no lleva un registro de cuando regó cada una</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y se le olvida revisar las que necesitan atención especial.</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Usuario objetivo</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>El dueño de un vivero pequeño, con quince a treinta plantas distintas, que usa el celular para</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>casi todo su trabajo diario.</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Funcionalidades minimas (MVP)</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Registrar cada planta con su nombre y cada cuantos dias necesita riego.</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marcar una planta como regada hoy.</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ver una lista de las plantas que hay que regar hoy, ordenada por urgencia.</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recibir una notificacion local si una planta lleva regada mas dias de la cuenta.</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Que queda fuera de alcance</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Varios usuarios o viveros distintos en la misma cuenta.</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recomendaciones automaticas de cuidado por tipo de planta.</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Control de otras tareas del vivero (fertilizacion, poda, ventas).</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stack</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Flutter y Dart. Git y GitHub. SQLite para guardar las plantas y su historial de riego. Sin</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>Firebase por ahora: el vivero funciona sin conexion la mayor parte del dia.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Alcance del proyecto: RiegoVivero</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problema que resuelve</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>El dueño de un vivero pequeño pierde plantas porque no lleva un registro de cuando regó cada una</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>y se le olvida revisar las que necesitan atención especial.</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Usuario objetivo</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>El dueño de un vivero pequeño, con quince a treinta plantas distintas, que usa el celular para</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>casi todo su trabajo diario.</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Funcionalidades minimas (MVP)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Registrar cada planta con su nombre y cada cuantos dias necesita riego.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marcar una planta como regada hoy.</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ver una lista de las plantas que hay que regar hoy, ordenada por urgencia.</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recibir una notificacion local si una planta lleva regada mas dias de la cuenta.</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Que queda fuera de alcance</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Varios usuarios o viveros distintos en la misma cuenta.</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Recomendaciones automaticas de cuidado por tipo de planta.</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Control de otras tareas del vivero (fertilizacion, poda, ventas).</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stack</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>Flutter y Dart. Git y GitHub. SQLite para guardar las plantas y su historial de riego. Sin</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>Firebase por ahora: el vivero funciona sin conexion la mayor parte del dia.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Fíjate en algo clave: este alcance NO usa Firebase, aunque el ejemplo de la sección anterior sí. No hay una lista fija de tecnologías que todo proyecto deba usar. El stack sale de lo que tu proyecto necesita, no al revés.</p>
 </div>
 </div>
@@ -923,26 +928,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="laboratorio" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="laboratorio"><span class="header-section-number">4</span> Laboratorio</h2>
-<p>Sigue los pasos en orden en un <strong>repositorio de práctica</strong>, separado de tu proyecto real. Nada de lo que hagas aquí se entrega: es para que el mecanismo de Git te quede claro sin arriesgar tu proyecto.</p>
+<p>Sigue los pasos en orden en un <strong>repositorio de práctica</strong>, separado del proyecto de tu equipo. Nada de lo que hagas aquí se entrega: es para que el mecanismo de Git te quede claro sin arriesgar el proyecto del equipo. Lo practicas solo, y luego aplicas exactamente el mismo mecanismo con tus compañeros de equipo sobre el repositorio real.</p>
 <section id="configura-tu-identidad" class="level3">
 <h3 class="anchored" data-anchor-id="configura-tu-identidad"><span class="paso">1</span> Configura tu identidad</h3>
 <p>Git firma cada commit con un nombre y un correo. Configúralos una sola vez en tu máquina:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre Completo"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu.correo@correo.iue.edu.co"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre Completo"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu.correo@correo.iue.edu.co"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La tercera línea hace que los repositorios nuevos usen <code>main</code> como rama principal en vez del antiguo <code>master</code>.</p>
 <p>Verifica:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="crea-tu-repositorio-de-práctica" class="level3">
 <h3 class="anchored" data-anchor-id="crea-tu-repositorio-de-práctica"><span class="paso">2</span> Crea tu repositorio de práctica</h3>
 <p>Crea una carpeta llamada <code>taller-git</code>, abre una terminal adentro y ejecuta:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Crea adentro un archivo <code>notas.txt</code> con dos líneas, que es lo que vas a versionar durante el laboratorio:</p>
 <pre class="text"><code>Taller de Git
 Practica personal de ramas y fusiones.</code></pre>
 <p>Mira el estado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>On branch main
 
 No commits yet
@@ -956,13 +961,13 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 </section>
 <section id="tu-primer-commit" class="level3">
 <h3 class="anchored" data-anchor-id="tu-primer-commit"><span class="paso">3</span> Tu primer commit</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: primeras notas del taller"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: primeras notas del taller"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>[main (root-commit) 4fd9bfc] chore: primeras notas del taller
  1 file changed, 2 insertions(+)
  create mode 100644 notas.txt</code></pre>
 <p>Revisa la historia:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="publica-en-github" class="level3">
 <h3 class="anchored" data-anchor-id="publica-en-github"><span class="paso">4</span> Publica en GitHub</h3>
@@ -973,8 +978,8 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 <li><strong>No marques</strong> ninguna casilla de inicialización. Tu repositorio ya tiene un primer commit, y si GitHub crea los suyos vas a chocar con ellos en el primer <code>push</code>.</li>
 </ul>
 <p>GitHub te muestra la dirección del repositorio. Cópiala y conéctala con tu repositorio local:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/taller-git.git</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>origin</code> es el nombre convencional del remoto principal. La bandera <code>-u</code> deja la conexión recordada, así que de aquí en adelante te basta con <code>git push</code>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -994,46 +999,59 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 <section id="rama-y-pull-request-sin-conflicto" class="level3">
 <h3 class="anchored" data-anchor-id="rama-y-pull-request-sin-conflicto"><span class="paso">5</span> Rama y Pull Request sin conflicto</h3>
 <p>Crea la rama y muévete a ella en un solo comando:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Agrega una línea nueva al final de <code>notas.txt</code>, sin tocar las dos que ya existen:</p>
 <pre class="text"><code>Taller de Git
 Practica personal de ramas y fusiones.
 Cada commit deja un mensaje claro.</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: agrega una tercera linea a las notas"</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: agrega una tercera linea a las notas"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Entra a GitHub. Aparece un aviso amarillo con el botón <strong>Compare &amp; pull request</strong>. Pulsa ahí, completa el título y la descripción, y crea el Pull Request.</p>
 <p>Revisa la pestaña <strong>Files changed</strong> para ver el diff en el navegador, y fusiona con <strong>Merge pull request</strong>. GitHub te ofrece borrar la rama después: acepta.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aquí fusionas tú, en el entregable no
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estás practicando solo en tu repositorio, así que abres y fusionas tu propio Pull Request. En el repositorio del equipo la regla cambia: <strong>nadie fusiona el suyo</strong>. Cada quien abre el suyo y lo fusiona otro integrante, después de revisarlo.</p>
+</div>
+</div>
 <p>De vuelta en tu máquina, tráete el resultado y limpia la rama local:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/segunda-linea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="provoca-un-conflicto-con-dos-ramas-propias-y-resuélvelo" class="level3">
 <h3 class="anchored" data-anchor-id="provoca-un-conflicto-con-dos-ramas-propias-y-resuélvelo"><span class="paso">6</span> Provoca un conflicto con dos ramas propias, y resuélvelo</h3>
 <p>Ahora vas a provocar un conflicto real, con calma, en vez de que te tome por sorpresa a la medianoche antes de una entrega.</p>
 <p>Vas a crear <strong>dos ramas propias</strong>, las dos desde el mismo punto de <code>main</code>, y las dos van a cambiar <strong>la misma línea</strong> de <code>notas.txt</code> de forma distinta.</p>
 <p>Crea la primera rama y cambia la primera línea del archivo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/ajusta-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/ajusta-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>Taller de Git y GitHub
 Practica personal de ramas y fusiones.
 Cada commit deja un mensaje claro.</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: ajusta el titulo del taller"</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/ajusta-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: ajusta el titulo del taller"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/ajusta-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Sin fusionar todavía, vuelve a <code>main</code> y crea la segunda rama <strong>desde el mismo punto de partida</strong>, cambiando la misma línea de otra forma:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>Taller de control de versiones
 Practica personal de ramas y fusiones.
 Cada commit deja un mensaje claro.</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: renombra el taller"</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"feat: renombra el taller"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En GitHub, abre un Pull Request para cada rama contra <code>main</code>: <strong>PR-A</strong> para <code>feature/ajusta-titulo</code> y <strong>PR-B</strong> para <code>feature/otro-titulo</code>. Ninguna de las dos rutas ha tocado <code>main</code> todavía, así que las dos se muestran listas para fusionar.</p>
 <p>Fusiona <strong>PR-A</strong> primero, con <strong>Merge pull request</strong>. Se fusiona limpio: es la primera rama que llega a <code>main</code>, así que no hay nada con qué chocar.</p>
 <p>Ahora entra a <strong>PR-B</strong>. GitHub ya no ofrece el botón de fusión directo: muestra un aviso de que la rama tiene conflictos con <code>main</code>, porque mientras <code>feature/otro-titulo</code> esperaba, <code>main</code> cambió esa misma línea a través de PR-A.</p>
 <p>Resuelve desde tu terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch feature/otro-titulo</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch feature/otro-titulo</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>Auto-merging notas.txt
 CONFLICT (content): Merge conflict in notas.txt
 Automatic merge failed; fix conflicts and then commit the result.</code></pre>
@@ -1057,17 +1075,17 @@ Taller de Git y GitHub
 Practica personal de ramas y fusiones.
 Cada commit deja un mensaje claro.</code></pre>
 <p>Marca el archivo como resuelto y cierra la fusión local:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add notas.txt</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"merge: resuelve el conflicto del titulo del taller"</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add notas.txt</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"merge: resuelve el conflicto del titulo del taller"</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Vuelve a GitHub y abre <strong>PR-B</strong> de nuevo: ya no muestra el aviso de conflicto, y el botón <strong>Merge pull request</strong> está disponible. Complétalo.</p>
 <p>De vuelta en tu máquina:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/ajusta-titulo</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/ajusta-titulo</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/otro-titulo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Mira la historia dibujada:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Vas a ver cómo las dos ramas nacen del mismo commit y se juntan por separado en <code>main</code>, con el commit de fusión de PR-B cargando la resolución del conflicto.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1087,19 +1105,19 @@ Cada commit deja un mensaje claro.</code></pre>
 <h3 class="anchored" data-anchor-id="deshacer-sin-miedo"><span class="paso">7</span> Deshacer sin miedo</h3>
 <p>Tres situaciones distintas, tres comandos distintos.</p>
 <p><strong>Editaste un archivo y quieres botar el cambio.</strong> Todavía no hiciste <code>add</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore notas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore notas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Ya hiciste <code>add</code> y quieres sacarlo del área de preparación</strong>, sin perder la edición:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> notas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> notas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>El commit ya está hecho y publicado.</strong> No lo borres: crea un commit que deshaga sus cambios. Así la historia sigue siendo cierta y nadie que ya haya descargado tu rama queda desincronizado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="op">&lt;</span>hash-del-commit<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert <span class="op">&lt;</span>hash-del-commit<span class="op">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="etiqueta-la-versión-del-taller" class="level3">
 <h3 class="anchored" data-anchor-id="etiqueta-la-versión-del-taller"><span class="paso">8</span> Etiqueta la versión del taller</h3>
 <p>Una etiqueta le pone nombre a un commit concreto. Marca el estado con el que cierras la práctica:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Verifica:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>v0.1.0</code></pre>
 <p>En GitHub la etiqueta aparece en la sección <strong>Tags</strong> de la portada del repositorio. Con esto, <code>taller-git</code> cumplió su función: puedes borrarlo cuando quieras, no lo necesitas más.</p>
 </section>
@@ -1127,10 +1145,10 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-config" class="level4">
 <h4 class="anchored" data-anchor-id="git-config"><code>git config</code></h4>
 <p>Lee y escribe la configuración de Git. Con <code>--global</code> la escribe para tu usuario en toda la máquina; sin <code>--global</code>, solo para el repositorio actual.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre"</span>      <span class="co"># firma tus commits</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu@correo.com"</span> <span class="co"># correo asociado</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main    <span class="co"># rama inicial de repos nuevos</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span>                     <span class="co"># muestra toda la configuracion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Tu Nombre"</span>      <span class="co"># firma tus commits</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"tu@correo.com"</span> <span class="co"># correo asociado</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main    <span class="co"># rama inicial de repos nuevos</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span>                     <span class="co"># muestra toda la configuracion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>El nombre y el correo quedan grabados dentro de <strong>cada</strong> commit que hagas. Si los cambias después, los commits viejos conservan los datos viejos. Configúralos antes del primer commit.</p>
 </section>
 </section>
@@ -1139,14 +1157,14 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-init" class="level4">
 <h4 class="anchored" data-anchor-id="git-init"><code>git init</code></h4>
 <p>Convierte la carpeta actual en un repositorio, creando la carpeta oculta <code>.git</code>. Se ejecuta una sola vez por proyecto.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>No crea archivos tuyos ni sube nada a ningún lado. Solo empieza a llevar la historia. Si borras <code>.git</code>, pierdes el historial completo y la carpeta vuelve a ser una carpeta normal.</p>
 </section>
 <section id="git-status" class="level4">
 <h4 class="anchored" data-anchor-id="git-status"><code>git status</code></h4>
 <p>El comando que más vas a usar. Responde tres preguntas: en qué rama estás, qué archivos cambiaron y en qué área está cada uno.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status          <span class="co"># version completa, con sugerencias de que hacer</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="at">--short</span>   <span class="co"># version compacta, una linea por archivo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status          <span class="co"># version completa, con sugerencias de que hacer</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="at">--short</span>   <span class="co"># version compacta, una linea por archivo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En la versión corta, la primera columna es el área de preparación y la segunda el directorio de trabajo:</p>
 <table class="caption-top table">
 <thead>
@@ -1187,11 +1205,11 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-log" class="level4">
 <h4 class="anchored" data-anchor-id="git-log"><code>git log</code></h4>
 <p>Muestra la historia, del commit más reciente al más antiguo.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log                            <span class="co"># completo: hash, autor, fecha y mensaje</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span>                  <span class="co"># una linea por commit</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span>    <span class="co"># dibuja las ramas y las fusiones</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--merges</span> <span class="at">--oneline</span>         <span class="co"># solo los commits de fusion</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-3</span>                         <span class="co"># solo los tres ultimos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log                            <span class="co"># completo: hash, autor, fecha y mensaje</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span>                  <span class="co"># una linea por commit</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span>    <span class="co"># dibuja las ramas y las fusiones</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--merges</span> <span class="at">--oneline</span>         <span class="co"># solo los commits de fusion</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-3</span>                         <span class="co"># solo los tres ultimos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>git log</code> abre un paginador cuando la salida es larga: te mueves con las flechas del teclado y sales con la tecla <code>q</code>. Es la causa número uno de “se me quedó pegada la terminal”.</p>
 </section>
 </section>
@@ -1200,16 +1218,16 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-add" class="level4">
 <h4 class="anchored" data-anchor-id="git-add"><code>git add</code></h4>
 <p>Mueve cambios del directorio de trabajo al área de preparación. No guarda nada en la historia todavía: solo arma la lista de lo que va a entrar en el próximo commit.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add main.dart         <span class="co"># un archivo</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add lib/              <span class="co"># todo lo de una carpeta</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .                 <span class="co"># todo lo que cambio, respetando el .gitignore</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add main.dart         <span class="co"># un archivo</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add lib/              <span class="co"># todo lo de una carpeta</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .                 <span class="co"># todo lo que cambio, respetando el .gitignore</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Preparar archivo por archivo en vez de <code>git add .</code> es lo que te permite partir un trabajo grande en varios commits pequeños con sentido propio.</p>
 </section>
 <section id="git-commit" class="level4">
 <h4 class="anchored" data-anchor-id="git-commit"><code>git commit</code></h4>
 <p>Toma lo que está en el área de preparación y lo guarda como un commit en la historia local.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: agrega la pantalla de login"</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"fix: corrige el boton que no responde"</span>   <span class="co"># prepara y guarda de un golpe</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: agrega la pantalla de login"</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"fix: corrige el boton que no responde"</span>   <span class="co"># prepara y guarda de un golpe</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>-m</code> recibe el mensaje. Sin esa bandera, Git abre un editor de texto en la terminal, y salir de ahí sin saber cómo es incómodo. Úsala siempre.</li>
 <li><code>-a</code> prepara automáticamente los archivos que Git <strong>ya rastrea</strong>. No incluye archivos nuevos, así que después de crear un archivo necesitas <code>git add</code> de todas formas.</li>
@@ -1219,9 +1237,9 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-diff" class="level4">
 <h4 class="anchored" data-anchor-id="git-diff"><code>git diff</code></h4>
 <p>Muestra las diferencias línea por línea. Las líneas con <code>+</code> son las que agregaste, las que tienen <code>-</code> las que quitaste.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff              <span class="co"># lo modificado que aun no preparaste</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--staged</span>     <span class="co"># lo que ya esta preparado, listo para el commit</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff main         <span class="co"># tu rama actual comparada con main</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff              <span class="co"># lo modificado que aun no preparaste</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--staged</span>     <span class="co"># lo que ya esta preparado, listo para el commit</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff main         <span class="co"># tu rama actual comparada con main</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Vale la pena mirarlo siempre antes de commitear: es la última oportunidad de darte cuenta de que ibas a guardar una línea de depuración.</p>
 </section>
 </section>
@@ -1230,26 +1248,26 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-switch" class="level4">
 <h4 class="anchored" data-anchor-id="git-switch"><code>git switch</code></h4>
 <p>Se mueve entre ramas, y con <code>-c</code> crea la rama y se mueve en un solo paso.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/login   <span class="co"># crea la rama y se para en ella</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main                <span class="co"># vuelve a main</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-</span>                   <span class="co"># vuelve a la rama anterior</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/login   <span class="co"># crea la rama y se para en ella</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main                <span class="co"># vuelve a main</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-</span>                   <span class="co"># vuelve a la rama anterior</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En guías viejas vas a ver <code>git checkout</code> para lo mismo. Funciona, pero <code>checkout</code> hace además otras tres cosas distintas y por eso se separó en <code>switch</code> y <code>restore</code>. Usa los nuevos.</p>
 </section>
 <section id="git-branch" class="level4">
 <h4 class="anchored" data-anchor-id="git-branch"><code>git branch</code></h4>
 <p>Administra las ramas sin cambiarse a ellas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch              <span class="co"># lista las ramas locales, con un asterisco en la actual</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-a</span>           <span class="co"># incluye las que existen en el remoto</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/login   <span class="co"># borra una rama ya fusionada</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-D</span> feature/login   <span class="co"># la borra aunque no este fusionada</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch              <span class="co"># lista las ramas locales, con un asterisco en la actual</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-a</span>           <span class="co"># incluye las que existen en el remoto</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> feature/login   <span class="co"># borra una rama ya fusionada</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-D</span> feature/login   <span class="co"># la borra aunque no este fusionada</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>-d</code> en minúscula te protege: se niega a borrar una rama cuyo trabajo no esté en ninguna otra parte. <code>-D</code> no pregunta. Piensa dos veces antes de usarla.</p>
 </section>
 <section id="git-merge" class="level4">
 <h4 class="anchored" data-anchor-id="git-merge"><code>git merge</code></h4>
 <p>Trae los commits de otra rama a la rama en la que estás parado. Importa mucho dónde estás: si quieres pasar <code>feature/login</code> a <code>main</code>, primero te mueves a <code>main</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/login</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span>         <span class="co"># cancela una fusion que quedo en conflicto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/login</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge <span class="at">--abort</span>         <span class="co"># cancela una fusion que quedo en conflicto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si las dos ramas no tocaron las mismas líneas, la fusión es automática. Si sí, Git escribe los marcadores en el archivo y espera que resuelvas.</p>
 </section>
 </section>
@@ -1258,36 +1276,36 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-remote" class="level4">
 <h4 class="anchored" data-anchor-id="git-remote"><code>git remote</code></h4>
 <p>Administra las direcciones de los repositorios remotos. <code>origin</code> es el nombre convencional del principal, y no tiene nada de mágico: es solo una etiqueta.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span>                                        <span class="co"># lista los remotos configurados</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/u/repo.git  <span class="co"># conecta con GitHub</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote remove origin                             <span class="co"># desconecta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span>                                        <span class="co"># lista los remotos configurados</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/u/repo.git  <span class="co"># conecta con GitHub</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote remove origin                             <span class="co"># desconecta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="git-clone" class="level4">
 <h4 class="anchored" data-anchor-id="git-clone"><code>git clone</code></h4>
 <p>Descarga un repositorio completo desde GitHub, con toda su historia, y deja el remoto ya configurado. Es lo que usas si vas a trabajar el mismo proyecto desde otro computador.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/usuario/proyecto.git</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/usuario/proyecto.git</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Se ejecuta <strong>una sola vez</strong>. Después de eso, para actualizar se usa <code>git pull</code>, no otro <code>clone</code>.</p>
 </section>
 <section id="git-push" class="level4">
 <h4 class="anchored" data-anchor-id="git-push"><code>git push</code></h4>
 <p>Sube tus commits locales al remoto.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push                              <span class="co"># sube la rama actual, si ya tiene remoto asignado</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main               <span class="co"># la primera vez: sube y recuerda la conexion</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/login      <span class="co"># publica una rama nueva</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0                <span class="co"># sube una etiqueta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push                              <span class="co"># sube la rama actual, si ya tiene remoto asignado</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main               <span class="co"># la primera vez: sube y recuerda la conexion</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/login      <span class="co"># publica una rama nueva</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0                <span class="co"># sube una etiqueta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La bandera <code>-u</code> (de <em>upstream</em>) enlaza tu rama local con la del remoto. Solo hace falta la primera vez que publicas esa rama.</p>
 </section>
 <section id="git-pull" class="level4">
 <h4 class="anchored" data-anchor-id="git-pull"><code>git pull</code></h4>
 <p>Baja lo que hay en el remoto y lo fusiona con tu rama actual. Es <code>fetch</code> más <code>merge</code> en un solo comando.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Hazlo <strong>antes</strong> de empezar a trabajar cada día, y siempre después de fusionar un Pull Request. Trabajar sobre una <code>main</code> desactualizada es la forma más común de fabricarse un conflicto innecesario.</p>
 </section>
 <section id="git-fetch" class="level4">
 <h4 class="anchored" data-anchor-id="git-fetch"><code>git fetch</code></h4>
 <p>Baja la información del remoto pero <strong>no</strong> toca tus archivos. Sirve para mirar qué cambió antes de integrarlo, y es el primer paso para resolver un conflicto detectado en un Pull Request.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> main..origin/main   <span class="co"># que trae el remoto que tu no tienes</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> main..origin/main   <span class="co"># que trae el remoto que tu no tienes</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="deshacer" class="level3">
@@ -1295,14 +1313,14 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-restore" class="level4">
 <h4 class="anchored" data-anchor-id="git-restore"><code>git restore</code></h4>
 <p>Descarta cambios que todavía no están en un commit. Es el comando que se lleva trabajo por delante, así que lee bien cuál de las dos formas necesitas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore main.dart            <span class="co"># bota lo que editaste y no habias preparado</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> main.dart   <span class="co"># saca del area de preparacion, conserva la edicion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore main.dart            <span class="co"># bota lo que editaste y no habias preparado</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> main.dart   <span class="co"># saca del area de preparacion, conserva la edicion</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>El primero <strong>no tiene deshacer</strong>: lo que botes ahí no está en ninguna parte y no se recupera.</p>
 </section>
 <section id="git-revert" class="level4">
 <h4 class="anchored" data-anchor-id="git-revert"><code>git revert</code></h4>
 <p>Crea un commit nuevo que deshace los cambios de otro commit. Es la forma correcta de corregir algo que ya publicaste, porque no reescribe la historia y no rompe la copia de nadie.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert 4fd9bfc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> revert 4fd9bfc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Existe también <code>git reset</code>, que sí borra commits. No lo uses este semestre sin preguntarme: es la manera más rápida de perder trabajo.</p>
 </section>
 </section>
@@ -1311,10 +1329,10 @@ Cada commit deja un mensaje claro.</code></pre>
 <section id="git-tag" class="level4">
 <h4 class="anchored" data-anchor-id="git-tag"><code>git tag</code></h4>
 <p>Le pone un nombre estable a un commit. Se usa para marcar entregas y versiones.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag                    <span class="co"># lista las etiquetas</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0              <span class="co"># etiqueta el commit actual</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0      <span class="co"># la publica en GitHub</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show v0.1.0             <span class="co"># muestra a que commit apunta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag                    <span class="co"># lista las etiquetas</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag v0.1.0              <span class="co"># etiqueta el commit actual</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v0.1.0      <span class="co"># la publica en GitHub</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show v0.1.0             <span class="co"># muestra a que commit apunta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Las etiquetas <strong>no</strong> viajan con un <code>git push</code> normal. Hay que subirlas aparte.</p>
 </section>
 </section>
@@ -1428,33 +1446,36 @@ Cada commit deja un mensaje claro.</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Importante</span>Repositorio de tu proyecto: 10% del curso, individual
+<span class="screen-reader-only">Importante</span>Repositorio de tu equipo: 10% del curso, en equipo
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Qué entregas.</strong> Un <strong>repositorio público en GitHub</strong> con tu proyecto (<code>hola_iue</code> o el nuevo que hayas creado), que tenga:</p>
+<p><strong>Con quién.</strong> Equipos de <strong>dos o tres personas</strong>, los mismos que se formaron en la sesión.</p>
+<p><strong>Qué entrega el equipo.</strong> Un único <strong>repositorio público en GitHub</strong> con el proyecto nuevo del equipo (nunca <code>hola_iue</code>), donde todos los integrantes aparecen commiteando, abriendo Pull Requests y revisando los de los demás.</p>
 <ul>
-<li><code>docs/alcance.md</code> completo, con las cinco partes de la sección de arriba.</li>
-<li>Un historial de commits con mensajes con prefijo de tipo.</li>
-<li>Al menos una rama fusionada mediante Pull Request.</li>
-<li>Un conflicto de fusión real, provocado por ti mismo con dos ramas propias y resuelto siguiendo el mismo mecanismo del laboratorio, con un registro de cómo lo resolviste.</li>
+<li><code>README.md</code> con el nombre del proyecto, una descripción breve y los <strong>nombres completos de todos los integrantes</strong> con su usuario de GitHub.</li>
+<li><code>docs/alcance.md</code> completo, con las cinco partes de la sección de arriba, acordadas entre todos.</li>
+<li>Un historial de commits con mensajes con prefijo de tipo, con al menos <strong>4 commits propios por integrante</strong>.</li>
+<li>Al menos una rama por integrante, fusionada mediante Pull Request y revisada por otro integrante distinto de quien la abrió: <strong>nadie fusiona su propio Pull Request</strong>.</li>
+<li>Un conflicto de fusión real, provocado por <strong>dos integrantes distintos</strong> editando la misma línea (no un solo estudiante con dos ramas propias), resuelto siguiendo el mismo mecanismo del laboratorio y con un registro de cómo se resolvió.</li>
 <li>La app corriendo: <code>flutter run</code> funciona sin errores sobre el último commit.</li>
 </ul>
-<p><strong>Cómo entregas.</strong> Compartes el enlace del repositorio en el canal de actividades de Teams.</p>
+<p><strong>Cómo entrega el equipo.</strong> Uno de los integrantes comparte el enlace del repositorio en el canal de actividades de Teams, con los <strong>nombres completos de todos los integrantes</strong> del equipo.</p>
 <p><strong>Cuándo.</strong> Antes del inicio de la sesión de la Semana 4.</p>
 </div>
 </div>
 <section id="cómo-se-arma-paso-a-paso" class="level3">
 <h3 class="anchored" data-anchor-id="cómo-se-arma-paso-a-paso">Cómo se arma, paso a paso</h3>
 <ol type="1">
-<li><strong>Decide el proyecto.</strong> Continúa con <code>hola_iue</code> o crea el nuevo, según lo que definiste en “Continuar con <code>hola_iue</code> o crear un proyecto nuevo”.</li>
-<li><strong>Inicia el repositorio.</strong> <code>git init</code> dentro de la carpeta del proyecto. Abre el <code>.gitignore</code> que <code>flutter create</code> ya generó y confirma que incluye <code>.dart_tool/</code> y <code>build/</code>.</li>
-<li><strong>Escribe <code>docs/alcance.md</code>.</strong> Usa el ejemplo de la sección anterior como plantilla, con tu propia idea.</li>
-<li><strong>Primeros commits.</strong> Con prefijo de tipo, un cambio por commit: la estructura del proyecto, el alcance, algún ajuste inicial de la pantalla.</li>
-<li><strong>Publica en GitHub.</strong> Repositorio público, <code>git remote add origin</code> y <code>git push -u origin main</code>.</li>
-<li><strong>Abre y fusiona un Pull Request real.</strong> Una rama con una mejora real de tu proyecto (no hace falta que sea grande), fusionada limpia.</li>
-<li><strong>Provoca y resuelve un conflicto real, y documéntalo.</strong> Misma mecánica del laboratorio: dos ramas propias que editan la misma línea de <code>docs/alcance.md</code> o de tu <code>README.md</code>. La primera se fusiona limpia; la segunda produce el conflicto que resuelves con <code>git fetch</code>, <code>git merge</code>, los marcadores, <code>git add</code>, <code>git commit</code> y <code>git push</code>. Deja un registro breve del conflicto (qué línea, qué decía cada versión, qué escogiste) en el mismo archivo o en el mensaje del commit de fusión.</li>
-<li><strong>Verifica que la app sigue corriendo.</strong> <code>flutter run</code> sobre el commit final, sin errores.</li>
+<li><strong>Escriban <code>docs/alcance.md</code> entre todos.</strong> Usa el ejemplo de la sección anterior como plantilla, con la idea real del equipo.</li>
+<li><strong>Crea el proyecto del equipo.</strong> <code>flutter create &lt;nombre&gt;</code> con el nombre relacionado con la idea que acaban de definir, según “Crea el proyecto Flutter del equipo”. Un integrante lo corre y publica el repositorio en GitHub, público.</li>
+<li><strong>Invita al resto del equipo como colaboradores</strong>, en <code>Settings</code>, <code>Collaborators</code>, <code>Add people</code>. Cada quien clona el repositorio con <code>git clone</code>.</li>
+<li><strong>Revisa el <code>.gitignore</code>.</strong> <code>flutter create</code> ya lo genera: confirma que incluye <code>.dart_tool/</code> y <code>build/</code>.</li>
+<li><strong>Repartan el trabajo.</strong> Cada integrante trabaja en su propia rama, con su propio <code>user.name</code> y <code>user.email</code> configurados en su máquina.</li>
+<li><strong>Cada quien publica su rama y abre su Pull Request</strong>, con una descripción de dos líneas o más sobre una mejora real del proyecto.</li>
+<li><strong>Cada quien revisa y fusiona el Pull Request de otro integrante</strong>, nunca el propio, dejando al menos un comentario en <code>Files changed</code>.</li>
+<li><strong>Provoquen y resuelvan un conflicto real entre dos integrantes, y documéntenlo.</strong> Misma mecánica del laboratorio, pero con dos personas distintas: cada una edita la misma línea de <code>docs/alcance.md</code> o del <code>README.md</code> desde su propia rama. La primera se fusiona limpia; la segunda produce el conflicto que se resuelve con <code>git fetch</code>, <code>git merge</code>, los marcadores, <code>git add</code>, <code>git commit</code> y <code>git push</code>. Dejen un registro breve del conflicto (qué línea, qué decía cada versión, quién lo resolvió y qué escogieron) en <code>docs/alcance.md</code>.</li>
+<li><strong>Verifiquen que la app sigue corriendo.</strong> <code>flutter run</code> sobre el commit final, sin errores.</li>
 </ol>
 </section>
 </section>
@@ -1483,8 +1504,8 @@ and then push using the remote name
     git push &lt;name&gt;</code></pre>
 <p><strong>Causa.</strong> El repositorio local no sabe a dónde subir. Falta el remoto.</p>
 <p><strong>Solución.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/tu-proyecto.git</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/TU-USUARIO/tu-proyecto.git</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para revisar qué remotos tienes configurados: <code>git remote -v</code>.</p>
 </section>
 </div>
@@ -1498,8 +1519,8 @@ and then push using the remote name
 build
 hint: Use -f if you really want to add them.</code></pre>
 <p><strong>Solución.</strong> Sácalo del rastreo sin borrarlo de tu disco, y commitea ese cambio:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="at">-r</span> build</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: deja de rastrear la carpeta build"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="at">-r</span> build</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: deja de rastrear la carpeta build"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </div>
 <div class="error-caso">
@@ -1508,7 +1529,7 @@ hint: Use -f if you really want to add them.</code></pre>
 <h3 class="anchored" data-anchor-id="quedaron-marcadores-de-conflicto-en-el-archivo">Quedaron marcadores de conflicto en el archivo</h3>
 <p><strong>Causa.</strong> Resolviste el conflicto eligiendo el texto correcto pero olvidaste borrar las líneas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Si es un archivo Dart, el proyecto deja de compilar.</p>
 <p><strong>Solución.</strong> Búscalas en todo el proyecto antes de commitear:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si no responde nada, está limpio.</p>
 </section>
 </div>
@@ -1528,15 +1549,18 @@ hint: Use -f if you really want to add them.</code></pre>
 <p><strong>Antes de entregar, revisa que tienes todo esto</strong></p>
 <ul class="task-list">
 <li><label><input type="checkbox"><code>git config --global --list</code> muestra tu nombre y tu correo</label></li>
-<li><label><input type="checkbox"><code>docs/alcance.md</code> existe y tiene las cinco partes: problema, usuario objetivo, MVP, fuera de alcance y stack</label></li>
-<li><label><input type="checkbox">El repositorio de tu proyecto es público en GitHub</label></li>
+<li><label><input type="checkbox">El repositorio es del equipo, no una continuación de <code>hola_iue</code></label></li>
+<li><label><input type="checkbox"><code>README.md</code> tiene los nombres completos de todos los integrantes con su usuario de GitHub</label></li>
+<li><label><input type="checkbox"><code>docs/alcance.md</code> existe y tiene las cinco partes: problema, usuario objetivo, MVP, fuera de alcance y stack, acordadas entre todos</label></li>
+<li><label><input type="checkbox">El repositorio del equipo es público en GitHub</label></li>
 <li><label><input type="checkbox"><code>git log --oneline</code> muestra varios commits, todos con prefijo de tipo</label></li>
-<li><label><input type="checkbox">La pestaña Pull requests muestra al menos uno fusionado</label></li>
-<li><label><input type="checkbox"><code>git log --oneline --graph</code> muestra un commit de fusión con dos padres, del conflicto que resolviste</label></li>
+<li><label><input type="checkbox"><code>git shortlog -sn</code> muestra al menos 4 commits por integrante</label></li>
+<li><label><input type="checkbox">La pestaña Pull requests muestra al menos uno fusionado por integrante, y nadie fusionó el suyo propio</label></li>
+<li><label><input type="checkbox"><code>git log --oneline --graph</code> muestra un commit de fusión con dos padres, del conflicto entre dos integrantes distintos</label></li>
 <li><label><input type="checkbox"><code>git grep -n "&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</code> no responde nada</label></li>
-<li><label><input type="checkbox">El registro del conflicto (qué línea, qué decía cada versión, qué escogiste) está en el repositorio</label></li>
+<li><label><input type="checkbox">El registro del conflicto (qué línea, qué decía cada versión, quién lo resolvió y qué escogieron) está en <code>docs/alcance.md</code></label></li>
 <li><label><input type="checkbox"><code>flutter run</code> corre sin errores sobre el último commit</label></li>
-<li><label><input type="checkbox">Compartiste el enlace del repositorio en el canal de actividades de Teams</label></li>
+<li><label><input type="checkbox">El equipo compartió el enlace del repositorio en el canal de actividades de Teams, con los nombres de todos los integrantes</label></li>
 </ul>
 </div>
 </section>
