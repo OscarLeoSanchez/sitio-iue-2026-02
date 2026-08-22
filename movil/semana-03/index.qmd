@@ -26,8 +26,8 @@ Hasta la semana pasada, `hola_iue` fue tu ejercicio de práctica: el proyecto qu
 `flutter create` para aprender Dart y Flutter. Esta semana entra Git, y con él arranca también el
 **proyecto integrador del semestre**, que construyes en equipo, no sobre `hola_iue`.
 
-Esta semana formas equipo con uno o dos compañeros más (hasta tres integrantes en total), y ese
-equipo se mantiene junto sobre el mismo repositorio hasta la demo final de la Semana 17.
+Esta semana formas equipo con dos compañeros más (tres integrantes en total), y ese equipo se
+mantiene junto sobre el mismo repositorio hasta la demo final de la Semana 17.
 
 En clase practicas el flujo completo de Git en un repositorio de práctica desechable: nada de lo
 que hagas ahí se entrega ni se califica, es solo para que el mecanismo te quede claro sin arriesgar
@@ -475,9 +475,9 @@ equipo y tiene cinco partes obligatorias, escritas y acordadas entre todos los i
 
 ### Formación del equipo
 
-Los equipos se arman en clase: **dos o tres integrantes, nunca más de tres**. Si el número de
-estudiantes no cierra parejo, el docente ajusta con algún equipo de dos en vez de dejar a alguien
-sin equipo.
+Los equipos se arman en clase: **tres integrantes**. Si el número de estudiantes no cierra en
+múltiplos de tres, el docente ajusta como excepción con algún equipo de dos, en vez de dejar a
+alguien sin equipo.
 
 Es el mismo equipo con el que vas a trabajar hasta la Semana 17, la gente con la que sustentas el
 proyecto en la evaluación final. Elige pensando en eso, no solo en quién está sentado cerca.
@@ -1265,7 +1265,7 @@ Las etiquetas **no** viajan con un `git push` normal. Hay que subirlas aparte.
 ::: {.callout-important}
 ## Repositorio de tu equipo: 10% del curso, en equipo
 
-**Con quién.** Equipos de **dos o tres personas**, los mismos que se formaron en la sesión.
+**Con quién.** Equipos de **tres personas**, los mismos que se formaron en la sesión.
 
 **Qué entrega el equipo.** Un único **repositorio público en GitHub** con el proyecto nuevo del
 equipo (nunca `hola_iue`), donde todos los integrantes aparecen commiteando, abriendo Pull Requests

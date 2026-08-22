@@ -239,7 +239,7 @@ mínimas.
 
 ## El equipo crea un proyecto nuevo
 
-- Equipos de dos o tres, formados hoy en clase: el mismo equipo hasta la Semana 17.
+- Equipos de tres, formados hoy en clase: el mismo equipo hasta la Semana 17.
 - El proyecto nace con `flutter create <nombre>`, nunca continuando `hola_iue`.
 - El nombre sale de la idea real que el equipo acaba de escribir en `docs/alcance.md`.
 
