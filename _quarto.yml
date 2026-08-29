@@ -42,6 +42,10 @@ website:
             # boton que esta al inicio de la guia de la semana.
             - text: "Semana 3. Git y el arranque de tu proyecto"
               href: movil/semana-03/index.qmd
+        - section: "Unidad 2. Interfaz, datos y persistencia"
+          contents:
+            - text: "Semana 4. Material Design y widgets"
+              href: movil/semana-04/index.qmd
     - id: web
       style: docked
       background: light

@@ -37,7 +37,7 @@ semestre.
 ::: {.calendario}
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| 04 | Material Design y widgets | Pantallas principales del proyecto con tema claro y oscuro | - |
+| **[04](semana-04/index.qmd)** | Material Design y widgets | Pantallas principales del proyecto con tema claro y oscuro | - |
 | 05 | Navegación | Pantallas conectadas, con información entre ellas | - |
 | 06 | Formularios y componentes reutilizables | Formulario principal validado y dos componentes reutilizables | **10%** |
 | 07 | JSON y APIs REST | Datos externos integrados con manejo de errores | - |
