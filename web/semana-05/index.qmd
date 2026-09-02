@@ -494,6 +494,13 @@ la imagen aparece.
 
 ## Parte 2. CSS3 moderno: cómo se ve la página
 
+::: {.callout-tip}
+## Recurso complementario
+
+Antes de seguir, revisa [Fundamentos de CSS desde cero](fundamentos-css-interactivo.html), una
+página con ejemplos interactivos de los conceptos que vienen a continuación.
+:::
+
 ### Cómo se conecta CSS con HTML
 
 CSS (Cascading Style Sheets) define la apariencia: colores, tamaños, espaciados, disposición. Se
@@ -1384,6 +1391,7 @@ continuar.
 - Diseño responsivo, web.dev: [web.dev/learn/design](https://web.dev/learn/design)
 - Soporte de navegadores por funcionalidad, Can I Use: [caniuse.com](https://caniuse.com/)
 - Diapositivas de la sesión: [presentación de la Semana 5](presentacion.qmd)
+- Para profundizar en CSS con ejemplos interactivos: [Fundamentos de CSS desde cero](fundamentos-css-interactivo.html)
 
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.

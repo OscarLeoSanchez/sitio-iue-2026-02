@@ -1,0 +1,3308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos de CSS desde cero</title>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --azul: #2f6fed;
+      --azul-oscuro: #1f4faf;
+      --azul-claro: #eaf2ff;
+      --celeste: #f4f9ff;
+      --verde: #138a72;
+      --verde-claro: #e9f8f3;
+      --violeta: #7b61d1;
+      --violeta-claro: #f2efff;
+      --amarillo: #fff5cc;
+      --rojo: #c44545;
+      --texto: #203040;
+      --texto-suave: #607080;
+      --borde: #d8e2ee;
+      --fondo: #f5f8fc;
+      --blanco: #ffffff;
+      --sombra: 0 12px 35px rgba(31, 79, 175, 0.09);
+      --radio: 18px;
+      --ancho: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+      line-height: 1.65;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .topbar-inner {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      color: var(--azul-oscuro);
+      letter-spacing: -0.02em;
+    }
+
+    .progress-track {
+      width: min(360px, 45vw);
+      height: 8px;
+      background: #e9eef5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--azul), var(--violeta));
+      transition: width 0.15s linear;
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      place-items: center;
+      padding: 76px 22px 56px;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(47, 111, 237, 0.12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(123, 97, 209, 0.12), transparent 28%),
+        linear-gradient(180deg, #ffffff, #f7faff);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .hero-content {
+      max-width: 930px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--azul-claro);
+      color: var(--azul-oscuro);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.18;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5.3rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.035em;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      font-size: 1.14rem;
+      color: var(--texto-suave);
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--azul);
+      color: white;
+      box-shadow: 0 8px 20px rgba(47, 111, 237, 0.23);
+    }
+
+    .btn-soft {
+      background: white;
+      color: var(--azul-oscuro);
+      border: 1px solid var(--borde);
+    }
+
+    .layout {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 26px;
+      padding: 34px 22px 80px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 78px;
+      align-self: start;
+      max-height: calc(100vh - 96px);
+      overflow: auto;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      padding: 16px;
+    }
+
+    .sidebar strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--azul-oscuro);
+    }
+
+    .sidebar nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: var(--texto-suave);
+      padding: 8px 10px;
+      border-radius: 9px;
+      font-size: 0.92rem;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      color: var(--azul-oscuro);
+      background: var(--azul-claro);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .lesson {
+      scroll-margin-top: 88px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+      padding: clamp(22px, 4vw, 42px);
+      margin-bottom: 28px;
+    }
+
+    .lesson-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--azul-claro);
+      color: var(--azul-oscuro);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      color: var(--texto-suave);
+      font-size: 1.05rem;
+      max-width: 850px;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 22px 0;
+    }
+
+    .concept-card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--borde);
+      background: #fbfdff;
+    }
+
+    .concept-card strong {
+      display: block;
+      color: var(--azul-oscuro);
+      margin-bottom: 5px;
+    }
+
+    .note {
+      padding: 16px 18px;
+      border-left: 4px solid var(--azul);
+      background: var(--azul-claro);
+      border-radius: 0 14px 14px 0;
+      margin: 20px 0;
+    }
+
+    .note.warning {
+      border-left-color: #c68a00;
+      background: var(--amarillo);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 22px;
+    }
+
+    .panel {
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .panel-title {
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--borde);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow: auto;
+      background: #142033;
+      color: #eaf0f8;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.91rem;
+      line-height: 1.55;
+      tab-size: 2;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    :not(pre) > code {
+      background: #eef4fb;
+      color: #17456f;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.92em;
+    }
+
+    .explanation-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .explanation-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf1f6;
+    }
+
+    .explanation-item code {
+      font-weight: 700;
+    }
+
+    .demo {
+      padding: 22px;
+      background: #f9fbfe;
+      min-height: 180px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: end;
+      padding: 16px;
+      border-bottom: 1px solid var(--borde);
+      background: #ffffff;
+    }
+
+    .control {
+      display: grid;
+      gap: 5px;
+      min-width: 150px;
+    }
+
+    .control label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--texto-suave);
+    }
+
+    .control select,
+    .control input[type="range"],
+    .control input[type="number"],
+    .control input[type="color"] {
+      width: 100%;
+    }
+
+    select,
+    input[type="number"] {
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      padding: 8px 10px;
+      background: white;
+      color: var(--texto);
+    }
+
+    input[type="color"] {
+      min-height: 39px;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      background: white;
+      padding: 4px;
+    }
+
+    .value {
+      font-weight: 800;
+      color: var(--azul-oscuro);
+    }
+
+    .syntax-demo {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin: 24px 0;
+    }
+
+    .syntax-code {
+      padding: 18px;
+      border-radius: 16px;
+      background: #142033;
+      color: white;
+      font-family: Consolas, monospace;
+      font-size: 1.05rem;
+    }
+
+    .syntax-code .selector { color: #83d0ff; }
+    .syntax-code .property { color: #ffd780; }
+    .syntax-code .cssvalue { color: #93e6aa; }
+
+    .syntax-labels {
+      display: grid;
+      gap: 8px;
+    }
+
+    .syntax-label {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--borde);
+      background: white;
+    }
+
+    .selector-playground p {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .selector-playground .destacado {
+      font-weight: 700;
+    }
+
+    .selector-status {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #eef4fb;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+    }
+
+    .cascade-text {
+      padding: 18px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--borde);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .unit-parent {
+      width: 100%;
+      border: 2px dashed #90a7c2;
+      padding: 14px;
+      border-radius: 12px;
+      background: white;
+    }
+
+    .unit-child {
+      height: 58px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--azul-claro);
+      border: 2px solid var(--azul);
+      color: var(--azul-oscuro);
+      font-weight: 800;
+      transition: width 0.25s ease;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .color-preview {
+      min-height: 150px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-weight: 800;
+      transition: background 0.2s ease;
+    }
+
+    .box-stage {
+      padding: 34px;
+      overflow: auto;
+      background:
+        linear-gradient(45deg, #f1f5fa 25%, transparent 25%),
+        linear-gradient(-45deg, #f1f5fa 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f1f5fa 75%),
+        linear-gradient(-45deg, transparent 75%, #f1f5fa 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    .box-margin {
+      display: inline-block;
+      background: #ffe0a7;
+      padding: 18px;
+      transition: padding 0.2s ease;
+    }
+
+    .box-border {
+      background: #f7f1b5;
+      border-style: solid;
+      border-color: #b39000;
+      transition: border-width 0.2s ease;
+    }
+
+    .box-padding {
+      background: #cfeab8;
+      padding: 20px;
+      transition: padding 0.2s ease;
+    }
+
+    .box-content {
+      width: 250px;
+      background: #b9dcff;
+      padding: 18px;
+      text-align: center;
+      font-weight: 800;
+      color: #17456f;
+      transition: width 0.2s ease;
+    }
+
+    .box-result {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--verde-claro);
+      color: #0d6252;
+      margin-top: 14px;
+      font-family: Consolas, monospace;
+    }
+
+    .variable-card {
+      background: var(--demo-primary, #2f6fed);
+      color: white;
+      padding: var(--demo-space, 18px);
+      border-radius: var(--demo-radius, 16px);
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 25px rgba(31, 79, 175, 0.17);
+    }
+
+    .type-demo {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 22px;
+      border: 1px solid var(--borde);
+      background: white;
+      border-radius: 14px;
+    }
+
+    .flex-demo {
+      min-height: 280px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 12px;
+      flex-wrap: nowrap;
+      padding: 18px;
+      border: 2px dashed #9eb1c8;
+      border-radius: 14px;
+      background: white;
+      overflow: auto;
+      transition: all 0.25s ease;
+    }
+
+    .flex-item {
+      min-width: 84px;
+      min-height: 70px;
+      padding: 14px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--azul-claro);
+      border: 1px solid #afc9f7;
+      color: var(--azul-oscuro);
+      font-weight: 800;
+    }
+
+    .grid-demo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      transition: all 0.25s ease;
+    }
+
+    .grid-item {
+      min-height: 95px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--violeta-claro);
+      border: 1px solid #cfc5f3;
+      color: #5944aa;
+      font-weight: 800;
+    }
+
+    .responsive-frame-wrap {
+      overflow-x: auto;
+      padding: 18px;
+      background: #eef3f9;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    #responsiveFrame {
+      display: block;
+      width: 390px;
+      max-width: 100%;
+      height: 430px;
+      margin: 0 auto;
+      border: 10px solid #1e2938;
+      border-radius: 18px;
+      background: white;
+      transition: width 0.25s ease;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--borde);
+      vertical-align: top;
+    }
+
+    .compare-table th {
+      background: #f8fafc;
+      color: var(--azul-oscuro);
+    }
+
+    .step-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .step-tab {
+      border: 1px solid var(--borde);
+      background: white;
+      color: var(--texto-suave);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-weight: 700;
+    }
+
+    .step-tab.active {
+      background: var(--azul);
+      color: white;
+      border-color: var(--azul);
+    }
+
+    .final-preview {
+      min-height: 360px;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .preview-site {
+      min-height: 360px;
+      background: white;
+      color: #213244;
+      transition: all 0.25s ease;
+    }
+
+    .preview-site .site-header,
+    .preview-site .site-main,
+    .preview-site .site-footer {
+      padding: 18px;
+    }
+
+    .preview-site .site-header {
+      border-bottom: 1px solid #dce4ee;
+    }
+
+    .preview-site .site-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    .preview-site .site-main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .preview-site .site-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .preview-site .site-card {
+      border: 1px solid #dce4ee;
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .preview-site.enhanced {
+      background: #f7faff;
+    }
+
+    .preview-site.enhanced .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #ffffff;
+    }
+
+    .preview-site.enhanced .site-card {
+      background: white;
+      box-shadow: 0 6px 18px rgba(31, 79, 175, 0.08);
+    }
+
+    .preview-site.enhanced .site-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .quiz {
+      display: grid;
+      gap: 14px;
+    }
+
+    .quiz-question {
+      padding: 18px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: #fbfdff;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .quiz-options button {
+      text-align: left;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: white;
+      color: var(--texto);
+    }
+
+    .quiz-options button.correct {
+      background: var(--verde-claro);
+      border-color: #70b7a7;
+      color: #0d6252;
+    }
+
+    .quiz-options button.wrong {
+      background: #fff0f0;
+      border-color: #e3a4a4;
+      color: #913737;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      font-weight: 700;
+      min-height: 24px;
+    }
+
+    footer.page-footer {
+      padding: 28px 22px 50px;
+      text-align: center;
+      color: var(--texto-suave);
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        max-height: none;
+      }
+
+      .sidebar nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .concept-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .progress-track {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 50px;
+      }
+
+      .layout {
+        padding-inline: 12px;
+      }
+
+      .lesson {
+        border-radius: 18px;
+        padding: 20px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+
+      .explanation-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .syntax-demo {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-site.enhanced .site-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* Material avanzado e interactivo */
+    .live-builder {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+      gap: 20px;
+      margin-top: 22px;
+      align-items: start;
+    }
+
+    .live-builder-controls,
+    .live-builder-preview {
+      min-width: 0;
+    }
+
+    .rule-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .rule-toggle,
+    .pseudo-rule-toggle,
+    .flex-rule-toggle,
+    .grid-rule-toggle {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px 10px;
+      text-align: left;
+      border: 1px solid var(--borde);
+      background: white;
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--texto);
+      transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+
+    .rule-toggle:hover,
+    .pseudo-rule-toggle:hover,
+    .flex-rule-toggle:hover,
+    .grid-rule-toggle:hover {
+      transform: translateY(-1px);
+      border-color: #abc4ec;
+    }
+
+    .rule-toggle > span,
+    .pseudo-rule-toggle > span,
+    .flex-rule-toggle > span,
+    .grid-rule-toggle > span {
+      grid-row: 1 / span 2;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: #edf3fb;
+      color: var(--azul-oscuro);
+      font-weight: 800;
+    }
+
+    .rule-toggle code,
+    .pseudo-rule-toggle code,
+    .flex-rule-toggle code,
+    .grid-rule-toggle code {
+      background: transparent;
+      padding: 0;
+      color: #173c6d;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .pseudo-rule-toggle small,
+    .flex-rule-toggle small,
+    .grid-rule-toggle small {
+      color: var(--texto-suave);
+      font-size: .78rem;
+    }
+
+    .rule-toggle.active,
+    .pseudo-rule-toggle.active,
+    .flex-rule-toggle.active,
+    .grid-rule-toggle.active {
+      background: #edf5ff;
+      border-color: #6f9fe9;
+      box-shadow: 0 6px 18px rgba(47,111,237,.1);
+    }
+
+    .rule-toggle.active > span,
+    .pseudo-rule-toggle.active > span,
+    .flex-rule-toggle.active > span,
+    .grid-rule-toggle.active > span {
+      background: var(--azul);
+      color: white;
+    }
+
+    .preview-label {
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 8px;
+    }
+
+    .unstyled-stage {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background:
+        linear-gradient(#edf2f8 1px, transparent 1px),
+        linear-gradient(90deg, #edf2f8 1px, transparent 1px),
+        white;
+      background-size: 24px 24px;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      overflow: auto;
+    }
+
+    .layer-card {
+      box-sizing: border-box;
+      transition: all .22s ease;
+    }
+
+    .layer-card h3 { margin-bottom: 8px; }
+    .layer-card p { margin: 0 0 10px; }
+    .layer-card a { color: #2f6fed; }
+
+    .active-css-box {
+      margin-top: 14px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .active-css-box > strong {
+      display: block;
+      padding: 10px 14px;
+      background: #f7f9fc;
+      border-bottom: 1px solid var(--borde);
+      color: var(--texto-suave);
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .active-css-box pre { max-height: 240px; }
+
+    .effect-explanation {
+      margin-top: 12px;
+      min-height: 54px;
+      padding: 13px 15px;
+      border-radius: 12px;
+      background: var(--verde-claro);
+      border: 1px solid #b9e4d6;
+      color: #155f51;
+    }
+
+    .pseudo-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, .85fr) minmax(300px, 1.15fr);
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .pseudo-demo {
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #f8fafc;
+      border: 1px solid var(--borde);
+    }
+
+    .pseudo-example {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pseudo-link {
+      display: inline-block;
+      width: fit-content;
+      padding: 9px 12px;
+      border-radius: 9px;
+      background: white;
+      border: 1px solid var(--borde);
+      text-decoration: none;
+      color: var(--azul-oscuro);
+      transition: .15s ease;
+    }
+
+    .pseudo-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #afbdcc;
+      border-radius: 9px;
+      outline: 0;
+    }
+
+    .pseudo-check-label {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      padding: 10px 12px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+    }
+
+    .pseudo-list {
+      margin: 0;
+      padding-left: 28px;
+    }
+
+    .pseudo-list li {
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+
+    .pseudo-disabled {
+      padding: 9px 12px;
+      border: 1px solid #ccd5df;
+      border-radius: 9px;
+    }
+
+    .role-diagram {
+      margin: 22px 0;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f7fbff;
+      border: 1px solid #cfe0f5;
+    }
+
+    .role-parent {
+      position: relative;
+      padding: 48px 18px 18px;
+      border: 3px solid #4f82cf;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .role-tag {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      padding: 4px 8px;
+      border-radius: 7px;
+      background: var(--azul-claro);
+      color: var(--azul-oscuro);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .role-parent > code {
+      display: block;
+      margin-bottom: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .role-children {
+      display: flex;
+      gap: 12px;
+    }
+
+    .role-children > div {
+      flex: 1;
+      display: grid;
+      gap: 2px;
+      place-items: center;
+      min-height: 82px;
+      border: 2px solid #9ab8e4;
+      border-radius: 11px;
+      background: #edf5ff;
+    }
+
+    .role-children small { color: var(--texto-suave); }
+
+    .flex-stage-wrap {
+      position: relative;
+      padding: 38px 44px 42px 38px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--borde);
+    }
+
+    .flex-build-demo {
+      min-height: 260px;
+      padding: 16px;
+      border: 2px dashed #8da6c2;
+      border-radius: 13px;
+      background: white;
+      overflow: auto;
+      transition: .2s ease;
+    }
+
+    .flex-build-item {
+      min-width: 90px;
+      min-height: 62px;
+      margin: 4px;
+      padding: 12px;
+      border: 1px solid #a9c4ef;
+      border-radius: 10px;
+      background: #eaf2ff;
+      color: var(--azul-oscuro);
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .axis {
+      position: absolute;
+      pointer-events: none;
+      color: #5f7185;
+      font-size: .72rem;
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .axis-main {
+      left: 42px;
+      right: 48px;
+      top: 20px;
+      border-top: 2px solid #7995b7;
+      text-align: center;
+    }
+
+    .axis-main span { background: #f8fafc; padding: 0 8px; position: relative; top: -11px; }
+
+    .axis-cross {
+      top: 46px;
+      bottom: 44px;
+      right: 20px;
+      border-right: 2px solid #9a85c9;
+      writing-mode: vertical-rl;
+      text-align: center;
+    }
+
+    .axis-cross span { background: #f8fafc; padding: 8px 0; position: relative; right: -9px; }
+
+    .axis-explainer {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .axis-card {
+      padding: 16px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: #fbfdff;
+    }
+
+    .mini-axis {
+      min-height: 110px;
+      margin-top: 12px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: white;
+      border: 1px dashed #b7c5d5;
+      overflow: hidden;
+    }
+
+    .mini-axis::before,
+    .mini-axis::after {
+      content: "";
+      position: absolute;
+      background: #89a2bf;
+    }
+
+    .row-axis::before { height: 2px; left: 14px; right: 14px; top: 45%; }
+    .row-axis::after { width: 2px; top: 12px; bottom: 12px; left: 50%; background: #a793d3; }
+    .column-axis::before { width: 2px; top: 12px; bottom: 12px; left: 50%; }
+    .column-axis::after { height: 2px; left: 14px; right: 14px; top: 45%; background: #a793d3; }
+
+    .mini-axis span {
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,.92);
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-size: .75rem;
+    }
+
+    .flex-item-lab {
+      min-height: 170px;
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      padding: 18px;
+      border: 2px dashed #9eb1c8;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .flex-item-lab > div {
+      flex: 0 1 110px;
+      min-height: 80px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      border: 1px solid #b6cdf1;
+      background: var(--azul-claro);
+      color: var(--azul-oscuro);
+      font-weight: 800;
+      transition: .2s ease;
+    }
+
+    .grid-role-children {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .grid-role-children > div,
+    .grid-build-demo > div,
+    .grid-template-demo > div,
+    .auto-grid > div {
+      min-height: 70px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--violeta-claro);
+      border: 1px solid #c8bcf1;
+      color: #5842a4;
+      font-weight: 800;
+    }
+
+    .grid-build-demo {
+      min-height: 300px;
+      padding: 16px;
+      border: 2px dashed #a99bd0;
+      border-radius: 14px;
+      background:
+        linear-gradient(#f0edf8 1px, transparent 1px),
+        linear-gradient(90deg, #f0edf8 1px, transparent 1px),
+        white;
+      background-size: 32px 32px;
+      transition: .2s ease;
+    }
+
+    .fr-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .grid-preset,
+    .quick-widths button {
+      border: 1px solid var(--borde);
+      background: white;
+      color: var(--azul-oscuro);
+      border-radius: 9px;
+      padding: 8px 10px;
+      font-weight: 700;
+    }
+
+    .grid-preset.active,
+    .quick-widths button.active {
+      background: var(--azul);
+      color: white;
+      border-color: var(--azul);
+    }
+
+    .grid-template-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      min-height: 170px;
+      padding: 16px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: #fbfdff;
+      transition: .25s ease;
+    }
+
+    .auto-grid-frame {
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 14px;
+      background: #eef3f8;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .auto-grid {
+      width: 650px;
+      max-width: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      padding: 14px;
+      border: 2px dashed #9d8dca;
+      border-radius: 12px;
+      background: white;
+      transition: width .2s ease;
+    }
+
+    .compact-controls { border: 1px solid var(--borde); border-top: 0; border-radius: 0 0 14px 14px; }
+
+    .areas-demo {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      grid-template-rows: 70px 170px 60px;
+      grid-template-areas: "header header" "aside main" "footer footer";
+      gap: 8px;
+      min-height: 320px;
+    }
+
+    .areas-demo > div {
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-weight: 800;
+      border: 1px solid var(--borde);
+    }
+    .area-header { grid-area: header; background: #eaf2ff; color: #1f4faf; }
+    .area-aside { grid-area: aside; background: #f2efff; color: #5944aa; }
+    .area-main { grid-area: main; background: #e9f8f3; color: #0d6252; }
+    .area-footer { grid-area: footer; background: #f7f9fc; color: #56687a; }
+
+    .mobile-first-flow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .mf-step {
+      padding: 15px;
+      border-radius: 13px;
+      border: 1px solid var(--borde);
+      background: white;
+      display: grid;
+      gap: 3px;
+    }
+
+    .mf-step span { font-size: .75rem; color: var(--texto-suave); text-transform: uppercase; font-weight: 800; }
+    .mf-step strong { color: var(--azul-oscuro); }
+    .mf-step small { color: var(--texto-suave); }
+    .mf-step.active { background: var(--azul-claro); border-color: #a9c7f4; }
+
+    .breakpoint-scale {
+      position: relative;
+      height: 76px;
+      margin: 24px 8px 8px;
+      border-top: 10px solid #dbe5ef;
+      border-radius: 999px;
+    }
+
+    .bp-segment {
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, #9ec0f7, #a9d8ca, #c9bdef);
+      border-radius: 999px;
+    }
+
+    .bp-segment strong,
+    .bp-segment span {
+      position: absolute;
+      top: 20px;
+    }
+
+    .bp-segment strong { left: 0; }
+    .bp-segment span { left: 0; top: 42px; color: var(--texto-suave); font-size: .78rem; }
+
+    .bp-mark {
+      position: absolute;
+      top: -18px;
+      width: 2px;
+      height: 28px;
+      background: #71859b;
+    }
+
+    .bp-mark.important { width: 3px; background: var(--azul); }
+    .bp-mark span { position: absolute; top: 34px; transform: translateX(-50%); font-size: .78rem; font-weight: 800; color: #536579; }
+
+    .quick-widths {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .breakpoint-live-status {
+      padding: 16px;
+      border-bottom: 1px solid var(--borde);
+      background: #fbfdff;
+    }
+
+    .current-range {
+      margin-bottom: 10px;
+      font-weight: 800;
+      color: var(--azul-oscuro);
+    }
+
+    .rule-activity {
+      display: grid;
+      gap: 7px;
+    }
+
+    .responsive-rule {
+      display: grid;
+      grid-template-columns: minmax(150px, .7fr) 1fr;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 9px;
+      border: 1px solid #e0e7ef;
+      background: #f7f9fb;
+      opacity: .52;
+    }
+
+    .responsive-rule.active {
+      opacity: 1;
+      border-color: #86b0ee;
+      background: #edf5ff;
+    }
+
+    .responsive-rule.active::after {
+      content: "Aplicando";
+      grid-column: 1 / -1;
+      color: #15624f;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    #responsiveFrame {
+      max-width: none;
+      height: 520px;
+    }
+
+    @media (max-width: 860px) {
+      .live-builder,
+      .pseudo-layout,
+      .axis-explainer {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-first-flow { grid-template-columns: 1fr; }
+      .responsive-rule { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Fundamentos de CSS</div>
+      <div class="progress-track" aria-label="Progreso de lectura">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="eyebrow">Programación Web. CSS desde cero</span>
+      <h1>Aprender CSS viendo qué cambia</h1>
+      <p>
+        Esta guía parte de una página HTML sencilla y construye el diseño paso a paso.
+        Cada sección explica el concepto, muestra el código y permite modificar valores
+        para observar el comportamiento directamente en el navegador.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#que-es-css">Comenzar la clase</a>
+        <a class="btn btn-soft" href="#laboratorio-final">Ir al ejemplo final</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <strong>Contenido</strong>
+      <nav id="sideNav">
+        <a href="#que-es-css">1. Qué es CSS</a>
+        <a href="#sintaxis">2. Sintaxis</a>
+        <a href="#conexion">3. Conexión con HTML</a>
+        <a href="#selectores">4. Selectores</a>
+        <a href="#css-en-vivo">5. CSS por capas</a>
+        <a href="#pseudo-clases">6. Pseudo-clases</a>
+        <a href="#cascada">7. Cascada</a>
+        <a href="#unidades">8. Unidades</a>
+        <a href="#colores">9. Colores</a>
+        <a href="#box-model">10. Modelo de caja</a>
+        <a href="#variables">11. Variables CSS</a>
+        <a href="#tipografia">12. Tipografía</a>
+        <a href="#flexbox">13. Flexbox</a>
+        <a href="#grid">14. Grid</a>
+        <a href="#responsive">15. Mobile-first</a>
+        <a href="#accesibilidad">16. Accesibilidad</a>
+        <a href="#laboratorio-final">17. Ejemplo final</a>
+        <a href="#quiz">18. Comprobación</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="lesson" id="que-es-css">
+        <div class="lesson-number">1</div>
+        <h2>Qué es CSS y para qué sirve</h2>
+        <p class="lead">
+          HTML define qué elementos existen. CSS define cómo se presentan esos elementos.
+          El navegador construye primero la estructura HTML y después aplica las reglas CSS
+          que coinciden con cada elemento.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <strong>HTML</strong>
+            Define títulos, párrafos, botones, imágenes, formularios y secciones.
+          </div>
+          <div class="concept-card">
+            <strong>CSS</strong>
+            Define colores, tamaños, espacios, bordes, posiciones y distribución.
+          </div>
+          <div class="concept-card">
+            <strong>JavaScript</strong>
+            Añade comportamiento, lógica e interacción. No es necesario para aplicar estilos básicos.
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">HTML sin CSS</div>
+            <pre><code>&lt;h1&gt;Mi proyecto&lt;/h1&gt;
+&lt;p&gt;Esta es una página web.&lt;/p&gt;
+&lt;button&gt;Conocer más&lt;/button&gt;</code></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-title">CSS que modifica ese HTML</div>
+            <pre><code>h1 {
+  color: #2f6fed;
+}
+
+p {
+  font-size: 18px;
+}
+
+button {
+  background-color: #2f6fed;
+  color: white;
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="note">
+          Idea central para la clase: CSS no crea el contenido. CSS selecciona contenido que ya existe y cambia su presentación.
+        </div>
+      </section>
+
+      <section class="lesson" id="sintaxis">
+        <div class="lesson-number">2</div>
+        <h2>La sintaxis de una regla CSS</h2>
+        <p class="lead">
+          Una regla CSS responde tres preguntas. A quién se aplica, qué característica se modifica y qué valor tendrá esa característica.
+        </p>
+
+        <div class="syntax-demo">
+          <div class="syntax-labels">
+            <div class="syntax-label"><strong>Selector</strong><br>El elemento que quiero modificar.</div>
+            <div class="syntax-label"><strong>Propiedad</strong><br>La característica que quiero cambiar.</div>
+            <div class="syntax-label"><strong>Valor</strong><br>El resultado que quiero aplicar.</div>
+          </div>
+          <div class="syntax-code">
+            <span class="selector">p</span> {
+              <br>&nbsp;&nbsp;<span class="property">color</span>: <span class="cssvalue">blue</span>;
+              <br>&nbsp;&nbsp;<span class="property">font-size</span>: <span class="cssvalue">18px</span>;
+              <br>}
+          </div>
+        </div>
+
+        <div class="explanation-list">
+          <div class="explanation-item"><code>p</code><span>Es el selector. La regla buscará todos los elementos <code>&lt;p&gt;</code>.</span></div>
+          <div class="explanation-item"><code>{ }</code><span>Las llaves contienen todas las declaraciones de estilo que pertenecen a esa regla.</span></div>
+          <div class="explanation-item"><code>color</code><span>Es una propiedad CSS. En este caso controla el color del texto.</span></div>
+          <div class="explanation-item"><code>blue</code><span>Es el valor asignado a la propiedad <code>color</code>.</span></div>
+          <div class="explanation-item"><code>;</code><span>Finaliza una declaración. Es buena práctica escribirlo siempre.</span></div>
+        </div>
+      </section>
+
+      <section class="lesson" id="conexion">
+        <div class="lesson-number">3</div>
+        <h2>Cómo se conecta CSS con HTML</h2>
+        <p class="lead">
+          Existen tres formas. Para proyectos reales se recomienda una hoja de estilos externa porque separa la estructura de la presentación y permite reutilizar el mismo CSS.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <strong>CSS externo</strong>
+            La práctica recomendada. El HTML enlaza un archivo <code>.css</code> desde <code>&lt;head&gt;</code>.
+          </div>
+          <div class="concept-card">
+            <strong>CSS interno</strong>
+            Las reglas se escriben dentro de <code>&lt;style&gt;</code>. Es útil para ejercicios pequeños.
+          </div>
+          <div class="concept-card">
+            <strong>CSS en línea</strong>
+            Se escribe en el atributo <code>style</code>. Conviene evitarlo en proyectos mantenibles.
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Forma recomendada</div>
+          <pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Mi proyecto&lt;/title&gt;
+
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+
+        <div class="explanation-list">
+          <div class="explanation-item"><code>rel="stylesheet"</code><span>Le indica al navegador que el archivo enlazado es una hoja de estilos.</span></div>
+          <div class="explanation-item"><code>href="estilos.css"</code><span>Indica la ubicación del archivo CSS que debe cargar el navegador.</span></div>
+          <div class="explanation-item"><code>&lt;head&gt;</code><span>Es la zona del documento donde se enlazan hojas de estilo y se declaran metadatos.</span></div>
+        </div>
+      </section>
+
+      <section class="lesson" id="selectores">
+        <div class="lesson-number">4</div>
+        <h2>Selectores. Cómo decirle a CSS qué debe modificar</h2>
+        <p class="lead">
+          El selector determina qué elementos reciben una regla. Los tres selectores iniciales más importantes son elemento, clase e identificador.
+        </p>
+
+        <table class="compare-table">
+          <thead>
+            <tr><th>Selector</th><th>Ejemplo</th><th>Qué selecciona</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Elemento</td><td><code>p</code></td><td>Todos los párrafos.</td></tr>
+            <tr><td>Clase</td><td><code>.destacado</code></td><td>Todos los elementos que tengan <code>class="destacado"</code>.</td></tr>
+            <tr><td>ID</td><td><code>#principal</code></td><td>El elemento cuyo <code>id</code> sea <code>principal</code>.</td></tr>
+            <tr><td>Descendiente</td><td><code>nav a</code></td><td>Todos los enlaces que estén dentro de un <code>nav</code>.</td></tr>
+            <tr><td>Hijo directo</td><td><code>ul &gt; li</code></td><td>Los <code>li</code> que sean hijos inmediatos del <code>ul</code>.</td></tr>
+            <tr><td>Pseudo-clase</td><td><code>a:hover</code></td><td>Un enlace mientras el mouse está encima.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-title">Laboratorio de selectores</div>
+          <div class="controls">
+            <div class="control">
+              <label for="selectorType">Regla que quieres activar</label>
+              <select id="selectorType">
+                <option value="element">p</option>
+                <option value="class">.destacado</option>
+                <option value="id">#especial</option>
+                <option value="descendant">.selector-playground p</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="applySelector">Aplicar selector</button>
+            <button class="btn btn-soft" id="resetSelector">Restablecer</button>
+          </div>
+          <div class="demo selector-playground" id="selectorPlayground">
+            <p>Párrafo normal.</p>
+            <p class="destacado">Párrafo con class="destacado".</p>
+            <p id="especial">Párrafo con id="especial".</p>
+            <div class="selector-status" id="selectorStatus">Selecciona una regla y pulsa Aplicar selector.</div>
+          </div>
+        </div>
+
+        <div class="note">
+          Una clase puede repetirse en muchos elementos. Un ID debe identificar un elemento único dentro de la página.
+        </div>
+      </section>
+
+
+      <section class="lesson" id="css-en-vivo">
+        <div class="lesson-number">5</div>
+        <h2>CSS por capas. Construye el estilo declaración por declaración</h2>
+        <p class="lead">
+          En un proyecto real una regla CSS casi nunca aparece completa de una vez. Se construye agregando declaraciones. En este laboratorio puedes activar varias propiedades, quitarlas y observar exactamente qué aporta cada una.
+        </p>
+
+        <div class="note">
+          Haz clic en una declaración. El botón cambia de estado, la línea correspondiente se resalta y el navegador aplica esa propiedad al elemento de ejemplo. Puedes activar varias al mismo tiempo.
+        </div>
+
+        <div class="live-builder">
+          <div class="live-builder-controls">
+            <h3>1. Parte de HTML sin diseño</h3>
+            <pre><code>&lt;article class="tarjeta"&gt;
+  &lt;h3&gt;Curso de Programación Web&lt;/h3&gt;
+  &lt;p&gt;HTML crea la estructura. CSS controla la presentación.&lt;/p&gt;
+  &lt;a href="#"&gt;Ver contenido&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+
+            <h3 style="margin-top:18px">2. Activa declaraciones CSS</h3>
+            <div class="rule-stack" id="styleLayerRules">
+              <button class="rule-toggle" data-prop="width" data-css="width" data-value="320px" data-explain="Limita el ancho de la tarjeta. Sin width, un elemento de bloque intenta ocupar todo el ancho disponible."><span>1</span><code>width: 320px;</code></button>
+              <button class="rule-toggle" data-prop="backgroundColor" data-css="background-color" data-value="#ffffff" data-explain="Define el color del fondo del elemento. El fondo ocupa el contenido y el padding."><span>2</span><code>background-color: #ffffff;</code></button>
+              <button class="rule-toggle" data-prop="padding" data-css="padding" data-value="24px" data-explain="Crea espacio interno entre el contenido y el borde de la caja."><span>3</span><code>padding: 24px;</code></button>
+              <button class="rule-toggle" data-prop="border" data-css="border" data-value="1px solid #cfdbea" data-explain="Dibuja el límite visible de la caja. Aquí se combinan grosor, estilo y color."><span>4</span><code>border: 1px solid #cfdbea;</code></button>
+              <button class="rule-toggle" data-prop="borderRadius" data-css="border-radius" data-value="18px" data-explain="Redondea las esquinas de la caja sin modificar su estructura HTML."><span>5</span><code>border-radius: 18px;</code></button>
+              <button class="rule-toggle" data-prop="boxShadow" data-css="box-shadow" data-value="0 16px 35px rgba(31,79,175,.15)" data-explain="Crea una sombra exterior. No cambia el espacio que la caja ocupa en el flujo del documento."><span>6</span><code>box-shadow: 0 16px 35px rgba(31,79,175,.15);</code></button>
+              <button class="rule-toggle" data-prop="color" data-css="color" data-value="#17324d" data-explain="Cambia el color del texto y normalmente se hereda por los elementos hijos."><span>7</span><code>color: #17324d;</code></button>
+              <button class="rule-toggle" data-prop="lineHeight" data-css="line-height" data-value="1.6" data-explain="Controla la separación vertical entre líneas de texto. Un valor sin unidad escala con el tamaño de fuente."><span>8</span><code>line-height: 1.6;</code></button>
+            </div>
+            <button class="btn btn-soft" id="resetStyleLayers" style="margin-top:12px">Quitar todos los estilos</button>
+          </div>
+
+          <div class="live-builder-preview">
+            <div class="preview-label">Resultado visible</div>
+            <div class="unstyled-stage">
+              <article class="layer-card" id="styleLayerCard">
+                <h3>Curso de Programación Web</h3>
+                <p>HTML crea la estructura. CSS controla la presentación.</p>
+                <a href="#css-en-vivo">Ver contenido</a>
+              </article>
+            </div>
+            <div class="active-css-box">
+              <strong>CSS activo en este momento</strong>
+              <pre><code id="styleLayerCode">.tarjeta {
+  /* todavía no has activado declaraciones */
+}</code></pre>
+            </div>
+            <div class="effect-explanation" id="styleLayerExplanation">Activa una declaración para ver su efecto y su explicación.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="pseudo-clases">
+        <div class="lesson-number">6</div>
+        <h2>Pseudo-clases. Estilos que dependen del estado</h2>
+        <p class="lead">
+          Una pseudo-clase no busca otro elemento HTML. Selecciona un elemento que ya existe cuando cumple una condición: el mouse está encima, tiene el foco, está marcado, ocupa cierta posición o se encuentra deshabilitado.
+        </p>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">Forma general</div>
+            <pre><code>selector:pseudo-clase {
+  propiedad: valor;
+}
+
+/* Ejemplos */
+a:hover { color: #b42318; }
+input:focus { outline: 3px solid #2f6fed; }
+input:checked + span { font-weight: 700; }
+li:first-child { background: #eaf2ff; }
+li:nth-child(2n) { background: #f3f6fa; }</code></pre>
+          </div>
+          <div class="concept-card">
+            <strong>No confundas pseudo-clase y pseudo-elemento</strong>
+            <p><code>:hover</code> describe un estado del elemento existente.</p>
+            <p><code>::before</code> y <code>::after</code> crean una caja generada que se comporta como una parte adicional del elemento.</p>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-title">Activa las reglas y luego provoca el estado</div>
+          <div class="pseudo-layout">
+            <div>
+              <div class="rule-stack" id="pseudoRuleStack">
+                <button class="pseudo-rule-toggle" data-pseudo="hover"><span>1</span><code>.enlace:hover</code><small>Pasa el mouse sobre el enlace</small></button>
+                <button class="pseudo-rule-toggle" data-pseudo="focus"><span>2</span><code>.campo:focus</code><small>Haz clic o usa Tab sobre el campo</small></button>
+                <button class="pseudo-rule-toggle" data-pseudo="checked"><span>3</span><code>.check:checked + span</code><small>Marca la casilla</small></button>
+                <button class="pseudo-rule-toggle" data-pseudo="first"><span>4</span><code>li:first-child</code><small>Selecciona el primer hijo</small></button>
+                <button class="pseudo-rule-toggle" data-pseudo="nth"><span>5</span><code>li:nth-child(2n)</code><small>Selecciona posiciones pares</small></button>
+                <button class="pseudo-rule-toggle" data-pseudo="disabled"><span>6</span><code>button:disabled</code><small>Selecciona controles deshabilitados</small></button>
+              </div>
+              <button class="btn btn-soft" id="resetPseudo" style="margin-top:12px">Desactivar reglas</button>
+            </div>
+
+            <div class="pseudo-demo" id="pseudoDemo">
+              <div class="pseudo-example">
+                <strong>Estado hover</strong>
+                <a class="pseudo-link enlace" href="#pseudo-clases">Pasa el mouse por aquí</a>
+              </div>
+              <div class="pseudo-example">
+                <label for="pseudoInput"><strong>Estado focus</strong></label>
+                <input class="pseudo-input campo" id="pseudoInput" type="text" placeholder="Haz clic en este campo">
+              </div>
+              <label class="pseudo-check-label">
+                <input class="pseudo-check check" type="checkbox">
+                <span>Estado checked</span>
+              </label>
+              <div class="pseudo-example">
+                <strong>Posición entre hermanos</strong>
+                <ol class="pseudo-list">
+                  <li>Elemento 1</li>
+                  <li>Elemento 2</li>
+                  <li>Elemento 3</li>
+                  <li>Elemento 4</li>
+                </ol>
+              </div>
+              <button class="pseudo-disabled" disabled>Botón deshabilitado</button>
+            </div>
+          </div>
+          <div class="active-css-box">
+            <strong>Reglas de pseudo-clase activas</strong>
+            <pre><code id="pseudoCode">/* Activa una o varias reglas */</code></pre>
+          </div>
+        </div>
+
+        <div class="note">
+          <code>:focus</code> es especialmente importante para accesibilidad. Si una persona navega con teclado necesita identificar visualmente qué control tiene el foco.
+        </div>
+      </section>
+
+      <section class="lesson" id="cascada">
+        <div class="lesson-number">7</div>
+        <h2>Cascada, especificidad y herencia</h2>
+        <p class="lead">
+          Varias reglas pueden intentar modificar la misma propiedad del mismo elemento. CSS necesita decidir cuál gana. Esa decisión forma parte de la cascada.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card"><strong>Cascada</strong>Determina qué declaración termina aplicándose cuando existen reglas que compiten.</div>
+          <div class="concept-card"><strong>Especificidad</strong>Un selector por ID pesa más que una clase, y una clase pesa más que un selector de elemento.</div>
+          <div class="concept-card"><strong>Herencia</strong>Algunas propiedades como <code>color</code> y <code>font-family</code> pasan del padre a los hijos.</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Laboratorio de especificidad</div>
+          <div class="controls">
+            <label><input type="checkbox" id="ruleElement" checked> Activar <code>p { color: black; }</code></label>
+            <label><input type="checkbox" id="ruleClass" checked> Activar <code>.aviso { color: orange; }</code></label>
+            <label><input type="checkbox" id="ruleId" checked> Activar <code>#mensaje { color: red; }</code></label>
+          </div>
+          <div class="demo">
+            <p id="cascadeMessage" class="cascade-text aviso">Este mismo párrafo coincide con las tres reglas.</p>
+            <div class="selector-status" id="cascadeStatus"></div>
+          </div>
+        </div>
+
+        <div class="note warning">
+          Evita usar <code>!important</code> como solución rutinaria. Hace más difícil razonar sobre qué regla debe ganar y suele ocultar problemas de especificidad.
+        </div>
+      </section>
+
+      <section class="lesson" id="unidades">
+        <div class="lesson-number">8</div>
+        <h2>Unidades de medida</h2>
+        <p class="lead">
+          CSS puede usar medidas fijas y medidas relativas. Las relativas permiten que el diseño se adapte mejor al tamaño del contenedor, de la tipografía o de la pantalla.
+        </p>
+
+        <table class="compare-table">
+          <thead><tr><th>Unidad</th><th>Referencia</th><th>Uso típico</th></tr></thead>
+          <tbody>
+            <tr><td><code>px</code></td><td>Medida fija.</td><td>Bordes y detalles precisos.</td></tr>
+            <tr><td><code>%</code></td><td>Normalmente el tamaño disponible del padre.</td><td>Anchos fluidos.</td></tr>
+            <tr><td><code>rem</code></td><td>El tamaño de fuente del elemento raíz.</td><td>Tipografía y espaciados.</td></tr>
+            <tr><td><code>em</code></td><td>El tamaño de fuente del contexto del elemento.</td><td>Componentes escalables.</td></tr>
+            <tr><td><code>vw</code></td><td>1 por ciento del ancho de la ventana.</td><td>Tamaños relacionados con viewport.</td></tr>
+            <tr><td><code>vh</code></td><td>1 por ciento de la altura de la ventana.</td><td>Secciones relacionadas con la altura de pantalla.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-title">Laboratorio de ancho</div>
+          <div class="controls">
+            <div class="control">
+              <label for="unitValue">Valor</label>
+              <input id="unitValue" type="range" min="10" max="100" value="50">
+            </div>
+            <div class="control">
+              <label for="unitType">Unidad</label>
+              <select id="unitType">
+                <option value="%">%</option>
+                <option value="px">px</option>
+                <option value="vw">vw</option>
+              </select>
+            </div>
+            <div class="value" id="unitLabel">width: 50%;</div>
+          </div>
+          <div class="demo">
+            <div class="unit-parent">
+              Elemento padre
+              <div class="unit-child" id="unitChild">Elemento hijo</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="colores">
+        <div class="lesson-number">9</div>
+        <h2>Colores en CSS</h2>
+        <p class="lead">
+          Un mismo color puede escribirse de varias formas. HEX es compacto, RGB expresa componentes de rojo, verde y azul, y HSL expresa matiz, saturación y luminosidad.
+        </p>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">Ejemplos equivalentes</div>
+            <pre><code>.caja {
+  background: #2f7bb8;
+}
+
+.caja {
+  background: rgb(47, 123, 184);
+}
+
+.caja {
+  background: hsl(207, 59%, 45%);
+}</code></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Prueba un color</div>
+            <div class="controls">
+              <div class="control">
+                <label for="colorPicker">Color</label>
+                <input id="colorPicker" type="color" value="#2f6fed">
+              </div>
+            </div>
+            <div class="demo">
+              <div class="color-preview" id="colorPreview">#2f6fed</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="box-model">
+        <div class="lesson-number">10</div>
+        <h2>Modelo de caja</h2>
+        <p class="lead">
+          Para CSS, cada elemento es una caja rectangular. Entender sus cuatro capas permite saber por qué un elemento ocupa más espacio del esperado.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card"><strong>Content</strong>El contenido real del elemento.</div>
+          <div class="concept-card"><strong>Padding</strong>Espacio interno entre contenido y borde.</div>
+          <div class="concept-card"><strong>Border</strong>Línea que rodea el padding y el contenido.</div>
+        </div>
+        <div class="concept-card" style="margin-bottom:22px"><strong>Margin</strong>Espacio externo que separa la caja de los elementos vecinos.</div>
+
+        <div class="panel">
+          <div class="panel-title">Laboratorio del modelo de caja</div>
+          <div class="controls">
+            <div class="control">
+              <label for="contentWidth">Width del contenido</label>
+              <input type="range" id="contentWidth" min="120" max="360" value="250">
+              <span class="value" id="contentWidthLabel">250px</span>
+            </div>
+            <div class="control">
+              <label for="paddingValue">Padding</label>
+              <input type="range" id="paddingValue" min="0" max="50" value="20">
+              <span class="value" id="paddingLabel">20px</span>
+            </div>
+            <div class="control">
+              <label for="borderValue">Border</label>
+              <input type="range" id="borderValue" min="0" max="12" value="4">
+              <span class="value" id="borderLabel">4px</span>
+            </div>
+            <div class="control">
+              <label for="marginValue">Margin</label>
+              <input type="range" id="marginValue" min="0" max="45" value="18">
+              <span class="value" id="marginLabel">18px</span>
+            </div>
+            <div class="control">
+              <label for="boxSizing">box-sizing</label>
+              <select id="boxSizing">
+                <option value="content-box">content-box</option>
+                <option value="border-box">border-box</option>
+              </select>
+            </div>
+          </div>
+          <div class="box-stage">
+            <div class="box-margin" id="boxMargin">
+              <div class="box-border" id="boxBorder">
+                <div class="box-padding" id="boxPadding">
+                  <div class="box-content" id="boxContent">Contenido</div>
+                </div>
+              </div>
+            </div>
+            <div class="box-result" id="boxResult"></div>
+          </div>
+        </div>
+
+        <div class="note">
+          En proyectos modernos es habitual usar <code>*, *::before, *::after { box-sizing: border-box; }</code> para que el ancho declarado incluya padding y borde.
+        </div>
+      </section>
+
+      <section class="lesson" id="variables">
+        <div class="lesson-number">11</div>
+        <h2>Variables CSS</h2>
+        <p class="lead">
+          Las variables permiten guardar un valor con un nombre y reutilizarlo. Esto evita repetir colores, radios o espacios en decenas de reglas.
+        </p>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">Código</div>
+            <pre><code>:root {
+  --color-primario: #2f6fed;
+  --espaciado: 18px;
+  --radio: 16px;
+}
+
+.tarjeta {
+  background: var(--color-primario);
+  padding: var(--espaciado);
+  border-radius: var(--radio);
+}</code></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Modifica las variables</div>
+            <div class="controls">
+              <div class="control">
+                <label for="variableColor">Color primario</label>
+                <input type="color" id="variableColor" value="#2f6fed">
+              </div>
+              <div class="control">
+                <label for="variableSpace">Espaciado</label>
+                <input type="range" id="variableSpace" min="8" max="40" value="18">
+              </div>
+              <div class="control">
+                <label for="variableRadius">Radio</label>
+                <input type="range" id="variableRadius" min="0" max="40" value="16">
+              </div>
+            </div>
+            <div class="demo">
+              <article class="variable-card" id="variableCard">
+                <h3>Tarjeta con variables</h3>
+                <p>Cambiar una variable modifica todas las propiedades que dependen de ella.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="tipografia">
+        <div class="lesson-number">12</div>
+        <h2>Tipografía básica</h2>
+        <p class="lead">
+          CSS controla familia tipográfica, tamaño, peso e interlineado. Una buena tipografía mejora la lectura antes de añadir cualquier efecto visual.
+        </p>
+
+        <div class="panel">
+          <div class="panel-title">Laboratorio tipográfico</div>
+          <div class="controls">
+            <div class="control">
+              <label for="fontSize">font-size</label>
+              <input type="range" id="fontSize" min="12" max="28" value="17">
+            </div>
+            <div class="control">
+              <label for="lineHeight">line-height</label>
+              <input type="range" id="lineHeight" min="10" max="22" value="16">
+            </div>
+            <div class="control">
+              <label for="fontWeight">font-weight</label>
+              <select id="fontWeight">
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+              </select>
+            </div>
+          </div>
+          <div class="demo">
+            <div class="type-demo" id="typeDemo">
+              <h3>La legibilidad también es diseño</h3>
+              <p>
+                Este párrafo permite observar cómo cambian el tamaño de fuente, el interlineado y el peso.
+                Un texto demasiado pequeño o con líneas demasiado juntas puede ser difícil de leer incluso si los colores son correctos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="flexbox">
+        <div class="lesson-number">13</div>
+        <h2>Flexbox desde cero. Qué cambia cuando escribes display: flex</h2>
+        <p class="lead">
+          Flexbox es un modelo de distribución para organizar los hijos directos de un contenedor en una dimensión principal. Antes de estudiar alineación es necesario distinguir dos roles: el contenedor flex y los flex items.
+        </p>
+
+        <div class="role-diagram">
+          <div class="role-parent">
+            <span class="role-tag">Contenedor</span>
+            <code>.contenedor { display: flex; }</code>
+            <div class="role-children">
+              <div><span>Hijo 1</span><small>flex item</small></div>
+              <div><span>Hijo 2</span><small>flex item</small></div>
+              <div><span>Hijo 3</span><small>flex item</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <code>display: flex</code> se escribe en el padre. Sus hijos directos se convierten en flex items. Los nietos no se convierten automáticamente en flex items de ese contenedor.
+        </div>
+
+        <h3>Construcción por pasos</h3>
+        <p>Activa las reglas en orden. También puedes desactivarlas para comprobar qué propiedad era responsable del comportamiento.</p>
+
+        <div class="live-builder flex-builder">
+          <div class="live-builder-controls">
+            <div class="rule-stack" id="flexBuildRules">
+              <button class="flex-rule-toggle" data-key="display"><span>1</span><code>display: flex;</code><small>Activa Flexbox en el padre</small></button>
+              <button class="flex-rule-toggle" data-key="direction"><span>2</span><code>flex-direction: row;</code><small>Define la dirección del eje principal</small></button>
+              <button class="flex-rule-toggle" data-key="justify"><span>3</span><code>justify-content: space-between;</code><small>Distribuye espacio sobre el eje principal</small></button>
+              <button class="flex-rule-toggle" data-key="align"><span>4</span><code>align-items: center;</code><small>Alinea sobre el eje cruzado</small></button>
+              <button class="flex-rule-toggle" data-key="gap"><span>5</span><code>gap: 16px;</code><small>Separa los flex items</small></button>
+              <button class="flex-rule-toggle" data-key="wrap"><span>6</span><code>flex-wrap: wrap;</code><small>Permite crear nuevas líneas</small></button>
+            </div>
+            <button class="btn btn-soft" id="resetFlexBuild" style="margin-top:12px">Reiniciar Flexbox</button>
+          </div>
+
+          <div class="live-builder-preview">
+            <div class="preview-label">Padre y cuatro hijos</div>
+            <div class="flex-stage-wrap">
+              <div class="axis axis-main"><span>Eje principal</span></div>
+              <div class="axis axis-cross"><span>Eje cruzado</span></div>
+              <div class="flex-build-demo" id="flexBuildDemo">
+                <div class="flex-build-item">1</div>
+                <div class="flex-build-item">2</div>
+                <div class="flex-build-item">3</div>
+                <div class="flex-build-item">4</div>
+              </div>
+            </div>
+            <div class="active-css-box">
+              <strong>CSS activo</strong>
+              <pre><code id="flexBuildCode">.contenedor {
+  /* display normal: block */
+}</code></pre>
+            </div>
+            <div class="effect-explanation" id="flexBuildExplanation">Empieza activando <code>display: flex</code>. Ese es el cambio que convierte a los hijos directos en flex items.</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:30px">Los dos ejes cambian con flex-direction</h3>
+        <div class="axis-explainer">
+          <div class="axis-card">
+            <strong>flex-direction: row</strong>
+            <div class="mini-axis row-axis"><span>Principal: horizontal</span><span>Cruzado: vertical</span></div>
+          </div>
+          <div class="axis-card">
+            <strong>flex-direction: column</strong>
+            <div class="mini-axis column-axis"><span>Principal: vertical</span><span>Cruzado: horizontal</span></div>
+          </div>
+        </div>
+        <div class="note warning">
+          <code>justify-content</code> no significa siempre horizontal y <code>align-items</code> no significa siempre vertical. Dependen de cuál sea el eje principal definido por <code>flex-direction</code>.
+        </div>
+
+        <div class="panel" style="margin-top:22px">
+          <div class="panel-title">Laboratorio completo del contenedor flex</div>
+          <div class="controls">
+            <div class="control">
+              <label for="flexDirection">flex-direction</label>
+              <select id="flexDirection">
+                <option value="row">row</option>
+                <option value="column">column</option>
+                <option value="row-reverse">row-reverse</option>
+                <option value="column-reverse">column-reverse</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="justifyContent">justify-content</label>
+              <select id="justifyContent">
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="alignItems">align-items</label>
+              <select id="alignItems">
+                <option value="stretch">stretch</option>
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="flexWrap">flex-wrap</label>
+              <select id="flexWrap">
+                <option value="nowrap">nowrap</option>
+                <option value="wrap">wrap</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="flexGap">gap</label>
+              <input type="range" id="flexGap" min="0" max="40" value="12">
+            </div>
+          </div>
+          <div class="demo">
+            <div class="flex-demo" id="flexDemo">
+              <div class="flex-item">1</div>
+              <div class="flex-item">2</div>
+              <div class="flex-item">3</div>
+              <div class="flex-item">4</div>
+            </div>
+            <div class="selector-status" id="flexStatus"></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:30px">Propiedades de los hijos flexibles</h3>
+        <p>Las propiedades anteriores viven en el padre. Estas viven en un hijo individual y permiten que un elemento se comporte distinto a sus hermanos.</p>
+        <div class="panel">
+          <div class="controls">
+            <div class="control">
+              <label for="itemGrow">flex-grow del elemento 2</label>
+              <input id="itemGrow" type="range" min="0" max="4" value="0">
+            </div>
+            <div class="control">
+              <label for="itemOrder">order del elemento 2</label>
+              <select id="itemOrder"><option value="0">0</option><option value="-1">-1</option><option value="1">1</option><option value="2">2</option></select>
+            </div>
+            <div class="control">
+              <label for="itemSelf">align-self del elemento 2</label>
+              <select id="itemSelf"><option value="auto">auto</option><option value="flex-start">flex-start</option><option value="center">center</option><option value="flex-end">flex-end</option><option value="stretch">stretch</option></select>
+            </div>
+          </div>
+          <div class="demo">
+            <div class="flex-item-lab" id="flexItemLab">
+              <div>1</div><div id="specialFlexItem">2</div><div>3</div>
+            </div>
+            <div class="selector-status" id="flexItemStatus"></div>
+          </div>
+        </div>
+
+        <div class="split" style="margin-top:22px">
+          <div class="concept-card"><strong>Usa Flexbox</strong><p>Menús, barras de herramientas, botones en una fila, centrar contenido, distribuir elementos en una dirección.</p></div>
+          <div class="concept-card"><strong>No lo fuerces</strong><p>Si necesitas coordinar filas y columnas simultáneamente, normalmente CSS Grid describe mejor el problema.</p></div>
+        </div>
+      </section>
+
+      <section class="lesson" id="grid">
+        <div class="lesson-number">14</div>
+        <h2>CSS Grid desde cero. Filas, columnas y espacio disponible</h2>
+        <p class="lead">
+          Grid es un sistema bidimensional. El contenedor define una retícula y sus hijos se distribuyen dentro de filas y columnas. Resulta especialmente útil cuando la alineación debe mantenerse en las dos dimensiones.
+        </p>
+
+        <div class="role-diagram grid-role">
+          <div class="role-parent">
+            <span class="role-tag">Grid container</span>
+            <code>.galeria { display: grid; grid-template-columns: repeat(3, 1fr); }</code>
+            <div class="grid-role-children">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card"><strong>Track</strong>Una fila o una columna completa de la cuadrícula.</div>
+          <div class="concept-card"><strong>Cell</strong>La intersección entre una fila y una columna.</div>
+          <div class="concept-card"><strong>Gap</strong>El espacio entre tracks. No agrega espacio en los bordes externos.</div>
+        </div>
+
+        <h3>Construcción por pasos</h3>
+        <div class="live-builder">
+          <div class="live-builder-controls">
+            <div class="rule-stack" id="gridBuildRules">
+              <button class="grid-rule-toggle" data-key="display"><span>1</span><code>display: grid;</code><small>Activa el modelo Grid</small></button>
+              <button class="grid-rule-toggle" data-key="columns"><span>2</span><code>grid-template-columns: repeat(3, 1fr);</code><small>Crea tres columnas iguales</small></button>
+              <button class="grid-rule-toggle" data-key="gap"><span>3</span><code>gap: 16px;</code><small>Separa filas y columnas</small></button>
+              <button class="grid-rule-toggle" data-key="rows"><span>4</span><code>grid-auto-rows: minmax(90px, auto);</code><small>Define altura mínima y crecimiento</small></button>
+            </div>
+            <button class="btn btn-soft" id="resetGridBuild" style="margin-top:12px">Reiniciar Grid</button>
+          </div>
+          <div class="live-builder-preview">
+            <div class="grid-build-demo" id="gridBuildDemo">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+            </div>
+            <div class="active-css-box">
+              <strong>CSS activo</strong>
+              <pre><code id="gridBuildCode">.galeria {
+  /* todavía usa el flujo normal */
+}</code></pre>
+            </div>
+            <div class="effect-explanation" id="gridBuildExplanation">Activa <code>display: grid</code> para convertir el contenedor en una cuadrícula.</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:30px">Qué significa fr</h3>
+        <p><code>fr</code> representa una fracción del espacio disponible después de descontar anchos fijos y espacios. No equivale a un porcentaje fijo.</p>
+        <div class="fr-demo">
+          <button class="grid-preset active" data-template="1fr 1fr 1fr" data-label="Tres partes iguales">1fr 1fr 1fr</button>
+          <button class="grid-preset" data-template="1fr 2fr 1fr" data-label="La columna central recibe el doble de espacio">1fr 2fr 1fr</button>
+          <button class="grid-preset" data-template="220px 1fr" data-label="Una columna fija y otra que ocupa el resto">220px 1fr</button>
+          <button class="grid-preset" data-template="repeat(2, minmax(0, 1fr))" data-label="Dos columnas flexibles con minmax">repeat(2, minmax(0, 1fr))</button>
+        </div>
+        <div class="grid-template-demo" id="gridTemplateDemo">
+          <div>A</div><div>B</div><div>C</div><div>D</div>
+        </div>
+        <div class="selector-status" id="gridTemplateStatus">grid-template-columns: 1fr 1fr 1fr; Tres partes iguales.</div>
+
+        <h3 style="margin-top:30px">Patrón responsivo sin escribir varios breakpoints</h3>
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">auto-fit + minmax</div>
+            <pre><code>.galeria {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}</code></pre>
+          </div>
+          <div class="concept-card">
+            <strong>Cómo se lee</strong>
+            <p><code>minmax(180px, 1fr)</code> dice que cada columna nunca debe ser menor de 180px y puede crecer para compartir el espacio.</p>
+            <p><code>auto-fit</code> crea tantas columnas como quepan. Cuando dejan de caber, los elementos pasan a la siguiente fila.</p>
+          </div>
+        </div>
+        <div class="auto-grid-frame" id="autoGridFrame">
+          <div class="auto-grid" id="autoGrid"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div>
+        </div>
+        <div class="controls compact-controls">
+          <div class="control" style="min-width:260px"><label for="autoGridWidth">Ancho disponible</label><input type="range" id="autoGridWidth" min="260" max="850" value="650"></div>
+          <span class="value" id="autoGridWidthLabel">650px</span>
+        </div>
+
+        <h3 style="margin-top:30px">grid-template-areas para el esqueleto de una página</h3>
+        <div class="split">
+          <div class="panel">
+            <pre><code>.pagina {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-areas:
+    "header header"
+    "aside  main"
+    "footer footer";
+}
+
+header { grid-area: header; }
+aside  { grid-area: aside; }
+main   { grid-area: main; }
+footer { grid-area: footer; }</code></pre>
+          </div>
+          <div class="areas-demo">
+            <div class="area-header">header</div>
+            <div class="area-aside">aside</div>
+            <div class="area-main">main</div>
+            <div class="area-footer">footer</div>
+          </div>
+        </div>
+
+        <div class="note">
+          Flexbox y Grid no compiten. Un patrón habitual es usar Grid para el esqueleto general y Flexbox dentro del encabezado, el menú o cada tarjeta.
+        </div>
+      </section>
+
+      <section class="lesson" id="responsive">
+        <div class="lesson-number">15</div>
+        <h2>Mobile-first y breakpoints. Diseñar desde el espacio mínimo</h2>
+        <p class="lead">
+          Mobile-first no significa crear una versión móvil separada. Significa que las reglas base funcionan en el ancho más pequeño y los <code>@media (min-width: ...)</code> agregan o sobrescriben propiedades cuando el diseño dispone de más espacio.
+        </p>
+
+        <div class="mobile-first-flow">
+          <div class="mf-step active"><span>Base</span><strong>Teléfono</strong><small>Sin media query</small></div>
+          <div class="mf-step"><span>Primer corte</span><strong>Tablet</strong><small>min-width: 768px</small></div>
+          <div class="mf-step"><span>Segundo corte</span><strong>Escritorio</strong><small>min-width: 1024px</small></div>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">CSS mobile-first</div>
+            <pre><code>/* 1. Base. Se aplica a todos los anchos */
+.galeria {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* 2. Desde 768px se sobrescribe una propiedad */
+@media (min-width: 768px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3. Desde 1024px se vuelve a sobrescribir */
+@media (min-width: 1024px) {
+  .galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+          </div>
+          <div class="concept-card">
+            <strong>La cascada sigue funcionando</strong>
+            <p>A 500px solo coincide la regla base.</p>
+            <p>A 800px coinciden la base y el primer <code>@media</code>. La regla de dos columnas sobrescribe la propiedad anterior.</p>
+            <p>A 1100px coinciden las tres. La última regla aplicable establece tres columnas.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:30px">Qué es realmente un breakpoint</h3>
+        <p>Un breakpoint es el ancho donde tu diseño necesita cambiar. Valores como 576px, 768px, 992px, 1024px y 1200px son referencias frecuentes, pero no constituyen una obligación de CSS.</p>
+        <div class="breakpoint-scale">
+          <div class="bp-segment base"><strong>0</strong><span>Reglas base</span></div>
+          <div class="bp-mark" style="left:45%"><span>576</span></div>
+          <div class="bp-mark important" style="left:60%"><span>768</span></div>
+          <div class="bp-mark important" style="left:80%"><span>1024</span></div>
+          <div class="bp-mark" style="left:94%"><span>1200</span></div>
+        </div>
+
+        <div class="panel" style="margin-top:26px">
+          <div class="panel-title">Simulador real de viewport y reglas activas</div>
+          <div class="controls">
+            <div class="control" style="min-width:300px">
+              <label for="frameWidth">Ancho del navegador simulado</label>
+              <input type="range" id="frameWidth" min="320" max="1280" value="390">
+            </div>
+            <span class="value" id="frameWidthLabel">390px</span>
+            <div class="quick-widths">
+              <button data-width="375">375</button>
+              <button data-width="767">767</button>
+              <button data-width="768">768</button>
+              <button data-width="1023">1023</button>
+              <button data-width="1024">1024</button>
+              <button data-width="1200">1200</button>
+            </div>
+          </div>
+
+          <div class="breakpoint-live-status">
+            <div class="current-range" id="currentRange">Base móvil: 1 columna</div>
+            <div class="rule-activity">
+              <div class="responsive-rule active" id="ruleBase"><code>Base</code><span>grid-template-columns: 1fr;</span></div>
+              <div class="responsive-rule" id="rule768"><code>@media min-width: 768px</code><span>repeat(2, 1fr)</span></div>
+              <div class="responsive-rule" id="rule1024"><code>@media min-width: 1024px</code><span>repeat(3, 1fr)</span></div>
+            </div>
+          </div>
+
+          <div class="responsive-frame-wrap">
+            <iframe id="responsiveFrame" title="Simulación de diseño responsivo"></iframe>
+          </div>
+        </div>
+
+        <h3 style="margin-top:30px">Mobile-first aplicado a más de una propiedad</h3>
+        <table class="compare-table">
+          <thead><tr><th>Propiedad</th><th>Base móvil</th><th>Desde 768px</th><th>Desde 1024px</th></tr></thead>
+          <tbody>
+            <tr><td>Navegación</td><td>Columna</td><td>Fila</td><td>Fila</td></tr>
+            <tr><td>Galería</td><td>1 columna</td><td>2 columnas</td><td>3 columnas</td></tr>
+            <tr><td>Padding</td><td>16px</td><td>24px</td><td>32px</td></tr>
+            <tr><td>Tipografía</td><td>Puede usar <code>clamp()</code></td><td>Fluida</td><td>Fluida</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note warning">
+          No diseñes primero una página enorme para escritorio y luego intentes esconder o comprimir todo. Mobile-first obliga a priorizar contenido, flujo y espacio desde la restricción más fuerte.
+        </div>
+      </section>
+
+      <section class="lesson" id="accesibilidad">
+        <div class="lesson-number">16</div>
+        <h2>CSS y accesibilidad</h2>
+        <p class="lead">
+          Un diseño no está terminado solo porque se ve bien. Debe conservar contraste suficiente, foco visible y tamaños legibles para diferentes personas y dispositivos.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <strong>Contraste</strong>
+            El texto debe diferenciarse claramente del fondo. Un gris demasiado claro puede ser ilegible.
+          </div>
+          <div class="concept-card">
+            <strong>Foco</strong>
+            Quien navega con teclado necesita ver qué enlace, botón o campo está activo.
+          </div>
+          <div class="concept-card">
+            <strong>Responsive</strong>
+            El contenido debe poder leerse sin zoom excesivo ni desplazamiento horizontal innecesario.
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">Evitar</div>
+            <pre><code>a:focus {
+  outline: none;
+}</code></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Mejor</div>
+            <pre><code>a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #2f6fed;
+  outline-offset: 3px;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="laboratorio-final">
+        <div class="lesson-number">17</div>
+        <h2>Ejemplo final. Construcción paso a paso</h2>
+        <p class="lead">
+          En este ejemplo se integra todo. Primero existe una estructura HTML semántica. Después se agregan estilos base, Flexbox, Grid y finalmente el comportamiento responsivo.
+        </p>
+
+        <div class="step-tabs" id="stepTabs">
+          <button class="step-tab active" data-step="1">Paso 1. HTML</button>
+          <button class="step-tab" data-step="2">Paso 2. Base CSS</button>
+          <button class="step-tab" data-step="3">Paso 3. Encabezado</button>
+          <button class="step-tab" data-step="4">Paso 4. Tarjetas</button>
+          <button class="step-tab" data-step="5">Paso 5. Responsive</button>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <div class="panel-title">Código del paso</div>
+            <pre><code id="stepCode"></code></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Resultado conceptual</div>
+            <div class="demo">
+              <div class="final-preview">
+                <div class="preview-site" id="previewSite">
+                  <header class="site-header">
+                    <strong>Mi proyecto</strong>
+                    <nav class="site-nav">
+                      <span>Inicio</span>
+                      <span>Servicios</span>
+                      <span>Contacto</span>
+                    </nav>
+                  </header>
+                  <main class="site-main">
+                    <h3>Una solución web sencilla</h3>
+                    <p>Esta sección explica brevemente el propósito del proyecto.</p>
+                    <div class="site-grid">
+                      <article class="site-card"><strong>Servicio uno</strong><p>Descripción breve.</p></article>
+                      <article class="site-card"><strong>Servicio dos</strong><p>Descripción breve.</p></article>
+                      <article class="site-card"><strong>Servicio tres</strong><p>Descripción breve.</p></article>
+                    </div>
+                  </main>
+                  <footer class="site-footer">Programación Web 2026</footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="explanation-list" id="stepExplanation"></div>
+      </section>
+
+      <section class="lesson" id="quiz">
+        <div class="lesson-number">18</div>
+        <h2>Comprobación rápida</h2>
+        <p class="lead">Selecciona una respuesta en cada pregunta. La página explica inmediatamente por qué es correcta o incorrecta.</p>
+
+        <div class="quiz">
+          <div class="quiz-question" data-answer="b">
+            <strong>1. ¿Qué selector se utiliza para una clase?</strong>
+            <div class="quiz-options">
+              <button data-option="a">#tarjeta</button>
+              <button data-option="b">.tarjeta</button>
+              <button data-option="c">tarjeta()</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question" data-answer="c">
+            <strong>2. ¿Qué propiedad crea espacio dentro de la caja, entre el contenido y el borde?</strong>
+            <div class="quiz-options">
+              <button data-option="a">margin</button>
+              <button data-option="b">gap</button>
+              <button data-option="c">padding</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question" data-answer="a">
+            <strong>3. ¿Qué herramienta es más apropiada para una cuadrícula de filas y columnas?</strong>
+            <div class="quiz-options">
+              <button data-option="a">CSS Grid</button>
+              <button data-option="b">font-size</button>
+              <button data-option="c">border-radius</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question" data-answer="b">
+            <strong>4. En un enfoque mobile-first, ¿qué se escribe primero?</strong>
+            <div class="quiz-options">
+              <button data-option="a">El diseño exclusivo para escritorio</button>
+              <button data-option="b">El CSS base para pantallas pequeñas</button>
+              <button data-option="c">Solo reglas con !important</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="page-footer">
+    Material didáctico de apoyo para Programación Web. Fundamentos de CSS con ejemplos interactivos.
+  </footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const sideLinks = [...document.querySelectorAll('#sideNav a')];
+    const lessons = [...document.querySelectorAll('.lesson')];
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percentage = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = percentage + '%';
+
+      let currentId = '';
+      lessons.forEach(section => {
+        if (section.getBoundingClientRect().top <= 140) {
+          currentId = section.id;
+        }
+      });
+
+      sideLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
+    }
+
+    window.addEventListener('scroll', updateProgress);
+    updateProgress();
+
+    const selectorType = document.getElementById('selectorType');
+    const selectorPlayground = document.getElementById('selectorPlayground');
+    const selectorStatus = document.getElementById('selectorStatus');
+
+    function resetSelectorDemo() {
+      selectorPlayground.querySelectorAll('p').forEach(p => {
+        p.style.color = '';
+        p.style.background = '';
+        p.style.borderColor = 'transparent';
+        p.style.transform = '';
+      });
+      selectorStatus.textContent = 'Selecciona una regla y pulsa Aplicar selector.';
+    }
+
+    document.getElementById('applySelector').addEventListener('click', () => {
+      resetSelectorDemo();
+      const type = selectorType.value;
+      let targets = [];
+      let rule = '';
+
+      if (type === 'element') {
+        targets = selectorPlayground.querySelectorAll('p');
+        rule = 'p { color: #2f6fed; background: #eaf2ff; }';
+      }
+      if (type === 'class') {
+        targets = selectorPlayground.querySelectorAll('.destacado');
+        rule = '.destacado { color: #138a72; background: #e9f8f3; }';
+      }
+      if (type === 'id') {
+        targets = selectorPlayground.querySelectorAll('#especial');
+        rule = '#especial { color: #7b61d1; background: #f2efff; }';
+      }
+      if (type === 'descendant') {
+        targets = selectorPlayground.querySelectorAll('.selector-playground p');
+        rule = '.selector-playground p { border-color: #2f6fed; }';
+      }
+
+      targets.forEach(target => {
+        target.style.color = type === 'class' ? '#138a72' : type === 'id' ? '#7b61d1' : '#2f6fed';
+        target.style.background = type === 'class' ? '#e9f8f3' : type === 'id' ? '#f2efff' : '#eaf2ff';
+        target.style.borderColor = '#9dbcf8';
+      });
+
+      selectorStatus.textContent = rule + ' Elementos afectados: ' + targets.length;
+    });
+
+    document.getElementById('resetSelector').addEventListener('click', resetSelectorDemo);
+
+    const ruleElement = document.getElementById('ruleElement');
+    const ruleClass = document.getElementById('ruleClass');
+    const ruleId = document.getElementById('ruleId');
+    const cascadeMessage = document.getElementById('cascadeMessage');
+    const cascadeStatus = document.getElementById('cascadeStatus');
+
+    function updateCascade() {
+      let color = '#203040';
+      let winner = 'Ninguna regla adicional. Se conserva el color base.';
+
+      if (ruleElement.checked) {
+        color = 'black';
+        winner = 'Gana p { color: black; } porque es la única regla activa.';
+      }
+      if (ruleClass.checked) {
+        color = '#c67a00';
+        winner = 'Gana .aviso porque una clase tiene mayor especificidad que un selector de elemento.';
+      }
+      if (ruleId.checked) {
+        color = '#c44545';
+        winner = 'Gana #mensaje porque un ID tiene mayor especificidad que una clase y que un selector de elemento.';
+      }
+
+      cascadeMessage.style.color = color;
+      cascadeStatus.textContent = winner;
+    }
+
+    [ruleElement, ruleClass, ruleId].forEach(el => el.addEventListener('change', updateCascade));
+    updateCascade();
+
+    const unitValue = document.getElementById('unitValue');
+    const unitType = document.getElementById('unitType');
+    const unitChild = document.getElementById('unitChild');
+    const unitLabel = document.getElementById('unitLabel');
+
+    function updateUnit() {
+      let value = unitValue.value;
+      const unit = unitType.value;
+
+      if (unit === 'px') {
+        value = Math.round((Number(unitValue.value) / 100) * 500);
+      }
+
+      unitChild.style.width = value + unit;
+      unitLabel.textContent = 'width: ' + value + unit + ';';
+    }
+
+    unitValue.addEventListener('input', updateUnit);
+    unitType.addEventListener('change', updateUnit);
+    updateUnit();
+
+    const colorPicker = document.getElementById('colorPicker');
+    const colorPreview = document.getElementById('colorPreview');
+
+    function getContrastText(hex) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+      return brightness > 150 ? '#203040' : '#ffffff';
+    }
+
+    function updateColor() {
+      const color = colorPicker.value;
+      colorPreview.style.background = color;
+      colorPreview.style.color = getContrastText(color);
+      colorPreview.textContent = color;
+    }
+
+    colorPicker.addEventListener('input', updateColor);
+    updateColor();
+
+    const contentWidth = document.getElementById('contentWidth');
+    const paddingValue = document.getElementById('paddingValue');
+    const borderValue = document.getElementById('borderValue');
+    const marginValue = document.getElementById('marginValue');
+    const boxSizing = document.getElementById('boxSizing');
+    const boxContent = document.getElementById('boxContent');
+    const boxPadding = document.getElementById('boxPadding');
+    const boxBorder = document.getElementById('boxBorder');
+    const boxMargin = document.getElementById('boxMargin');
+    const boxResult = document.getElementById('boxResult');
+
+    function updateBoxModel() {
+      const width = Number(contentWidth.value);
+      const padding = Number(paddingValue.value);
+      const border = Number(borderValue.value);
+      const margin = Number(marginValue.value);
+      const sizing = boxSizing.value;
+
+      document.getElementById('contentWidthLabel').textContent = width + 'px';
+      document.getElementById('paddingLabel').textContent = padding + 'px';
+      document.getElementById('borderLabel').textContent = border + 'px';
+      document.getElementById('marginLabel').textContent = margin + 'px';
+
+      boxPadding.style.padding = padding + 'px';
+      boxBorder.style.borderWidth = border + 'px';
+      boxMargin.style.padding = margin + 'px';
+
+      if (sizing === 'content-box') {
+        boxContent.style.width = width + 'px';
+        const totalWithoutMargin = width + (padding * 2) + (border * 2);
+        const totalWithMargin = totalWithoutMargin + (margin * 2);
+        boxResult.textContent = 'content-box: width controla solo el contenido. Ancho visual sin margin = ' + totalWithoutMargin + 'px. Espacio total incluyendo margin = ' + totalWithMargin + 'px.';
+      } else {
+        const internalContentWidth = Math.max(40, width - (padding * 2) - (border * 2));
+        boxContent.style.width = internalContentWidth + 'px';
+        const totalWithoutMargin = width;
+        const totalWithMargin = width + (margin * 2);
+        boxResult.textContent = 'border-box: width controla contenido, padding y border juntos. El contenido interno queda en ' + internalContentWidth + 'px. Ancho visual = ' + totalWithoutMargin + 'px. Espacio total incluyendo margin = ' + totalWithMargin + 'px.';
+      }
+    }
+
+    [contentWidth, paddingValue, borderValue, marginValue].forEach(el => el.addEventListener('input', updateBoxModel));
+    boxSizing.addEventListener('change', updateBoxModel);
+    updateBoxModel();
+
+    const variableColor = document.getElementById('variableColor');
+    const variableSpace = document.getElementById('variableSpace');
+    const variableRadius = document.getElementById('variableRadius');
+    const variableCard = document.getElementById('variableCard');
+
+    function updateVariables() {
+      variableCard.style.setProperty('--demo-primary', variableColor.value);
+      variableCard.style.setProperty('--demo-space', variableSpace.value + 'px');
+      variableCard.style.setProperty('--demo-radius', variableRadius.value + 'px');
+    }
+
+    variableColor.addEventListener('input', updateVariables);
+    variableSpace.addEventListener('input', updateVariables);
+    variableRadius.addEventListener('input', updateVariables);
+    updateVariables();
+
+    const fontSize = document.getElementById('fontSize');
+    const lineHeight = document.getElementById('lineHeight');
+    const fontWeight = document.getElementById('fontWeight');
+    const typeDemo = document.getElementById('typeDemo');
+
+    function updateTypography() {
+      typeDemo.style.fontSize = fontSize.value + 'px';
+      typeDemo.style.lineHeight = (Number(lineHeight.value) / 10).toFixed(1);
+      typeDemo.style.fontWeight = fontWeight.value;
+    }
+
+    fontSize.addEventListener('input', updateTypography);
+    lineHeight.addEventListener('input', updateTypography);
+    fontWeight.addEventListener('change', updateTypography);
+    updateTypography();
+
+    const flexDirection = document.getElementById('flexDirection');
+    const justifyContent = document.getElementById('justifyContent');
+    const alignItems = document.getElementById('alignItems');
+    const flexWrap = document.getElementById('flexWrap');
+    const flexGap = document.getElementById('flexGap');
+    const flexDemo = document.getElementById('flexDemo');
+    const flexStatus = document.getElementById('flexStatus');
+
+    function updateFlex() {
+      flexDemo.style.flexDirection = flexDirection.value;
+      flexDemo.style.justifyContent = justifyContent.value;
+      flexDemo.style.alignItems = alignItems.value;
+      flexDemo.style.flexWrap = flexWrap.value;
+      flexDemo.style.gap = flexGap.value + 'px';
+
+      flexStatus.textContent =
+        'display: flex; flex-direction: ' + flexDirection.value +
+        '; justify-content: ' + justifyContent.value +
+        '; align-items: ' + alignItems.value +
+        '; flex-wrap: ' + flexWrap.value +
+        '; gap: ' + flexGap.value + 'px;';
+    }
+
+    [flexDirection, justifyContent, alignItems, flexWrap].forEach(el => el.addEventListener('change', updateFlex));
+    flexGap.addEventListener('input', updateFlex);
+    updateFlex();
+
+
+    const responsiveFrame = document.getElementById('responsiveFrame');
+    const frameWidth = document.getElementById('frameWidth');
+    const frameWidthLabel = document.getElementById('frameWidthLabel');
+    const currentRange = document.getElementById('currentRange');
+    const ruleBase = document.getElementById('ruleBase');
+    const rule768 = document.getElementById('rule768');
+    const rule1024 = document.getElementById('rule1024');
+
+    responsiveFrame.srcdoc = `
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          * { box-sizing: border-box; }
+          body { margin: 0; font-family: Arial, sans-serif; background: #f5f8fc; color: #203040; }
+          header { padding: 16px; background: white; border-bottom: 1px solid #d8e2ee; }
+          header .inner { display: flex; flex-direction: column; gap: 10px; }
+          nav { display: flex; flex-direction: column; gap: 6px; }
+          nav a { color: #285caa; text-decoration: none; }
+          main { padding: 16px; }
+          h1 { font-size: clamp(1.6rem, 4vw + .5rem, 2.6rem); margin: 0 0 8px; }
+          .estado { display: inline-block; margin-bottom: 12px; padding: 6px 9px; border-radius: 8px; background: #eaf2ff; color: #1f4faf; font-weight: bold; font-size: 12px; }
+          .galeria { display: grid; grid-template-columns: 1fr; gap: 12px; }
+          .tarjeta { background: white; padding: 14px; border: 1px solid #d8e2ee; border-radius: 12px; }
+          .only-tablet, .only-desktop { display: none; }
+
+          @media (min-width: 768px) {
+            header, main { padding-left: 24px; padding-right: 24px; }
+            header .inner { flex-direction: row; justify-content: space-between; align-items: center; }
+            nav { flex-direction: row; gap: 14px; }
+            .galeria { grid-template-columns: repeat(2, 1fr); }
+            .only-mobile { display: none; }
+            .only-tablet { display: inline-block; }
+          }
+
+          @media (min-width: 1024px) {
+            header, main { padding-left: 32px; padding-right: 32px; }
+            .galeria { grid-template-columns: repeat(3, 1fr); }
+            .only-tablet { display: none; }
+            .only-desktop { display: inline-block; }
+          }
+        </style>
+      </head>
+      <body>
+        <header>
+          <div class="inner">
+            <strong>Proyecto responsive</strong>
+            <nav><a href="#">Inicio</a><a href="#">Servicios</a><a href="#">Contacto</a></nav>
+          </div>
+        </header>
+        <main>
+          <h1>Diseño mobile-first</h1>
+          <span class="estado only-mobile">Base: menos de 768px</span>
+          <span class="estado only-tablet">Tablet: desde 768px</span>
+          <span class="estado only-desktop">Escritorio: desde 1024px</span>
+          <div class="galeria">
+            <article class="tarjeta"><strong>Tarjeta 1</strong><p>El número de columnas depende del ancho disponible.</p></article>
+            <article class="tarjeta"><strong>Tarjeta 2</strong><p>También cambia la navegación y el padding.</p></article>
+            <article class="tarjeta"><strong>Tarjeta 3</strong><p>Las reglas se acumulan por la cascada.</p></article>
+          </div>
+        </main>
+      </body>
+      </html>`;
+
+    function updateFrameWidth() {
+      const width = Number(frameWidth.value);
+      responsiveFrame.style.width = width + 'px';
+      frameWidthLabel.textContent = width + 'px';
+
+      ruleBase.classList.add('active');
+      rule768.classList.toggle('active', width >= 768);
+      rule1024.classList.toggle('active', width >= 1024);
+
+      if (width < 768) {
+        currentRange.textContent = 'Base móvil activa. Resultado: 1 columna y navegación vertical.';
+      } else if (width < 1024) {
+        currentRange.textContent = 'Breakpoint de 768px activo. Resultado: 2 columnas y navegación horizontal.';
+      } else {
+        currentRange.textContent = 'Breakpoints de 768px y 1024px activos. Resultado final: 3 columnas.';
+      }
+
+      document.querySelectorAll('.quick-widths button').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.width) === width);
+      });
+    }
+
+    frameWidth.addEventListener('input', updateFrameWidth);
+    document.querySelectorAll('.quick-widths button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        frameWidth.value = btn.dataset.width;
+        updateFrameWidth();
+      });
+    });
+    updateFrameWidth();
+
+
+    // CSS por capas
+    const styleLayerCard = document.getElementById('styleLayerCard');
+    const styleLayerCode = document.getElementById('styleLayerCode');
+    const styleLayerExplanation = document.getElementById('styleLayerExplanation');
+    const styleLayerButtons = [...document.querySelectorAll('.rule-toggle')];
+
+    function renderStyleLayers(lastButton) {
+      const active = styleLayerButtons.filter(btn => btn.classList.contains('active'));
+      styleLayerCard.removeAttribute('style');
+      active.forEach(btn => {
+        styleLayerCard.style[btn.dataset.prop] = btn.dataset.value;
+      });
+
+      if (!active.length) {
+        styleLayerCode.textContent = '.tarjeta {\n  /* todavía no has activado declaraciones */\n}';
+      } else {
+        styleLayerCode.textContent = '.tarjeta {\n' + active.map(btn => '  ' + btn.dataset.css + ': ' + btn.dataset.value + ';').join('\n') + '\n}';
+      }
+
+      if (lastButton) {
+        styleLayerExplanation.innerHTML = '<code>' + lastButton.dataset.css + '</code>. ' + lastButton.dataset.explain;
+      } else if (!active.length) {
+        styleLayerExplanation.textContent = 'Activa una declaración para ver su efecto y su explicación.';
+      }
+    }
+
+    styleLayerButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        renderStyleLayers(btn);
+      });
+    });
+    document.getElementById('resetStyleLayers').addEventListener('click', () => {
+      styleLayerButtons.forEach(btn => btn.classList.remove('active'));
+      renderStyleLayers();
+    });
+    renderStyleLayers();
+
+    // Pseudo-clases habilitables
+    const pseudoRules = {
+      hover: `.pseudo-demo .enlace:hover {\n  background: #cfe0ff;\n  color: #153d78;\n  transform: translateY(-2px);\n}`,
+      focus: `.pseudo-demo .campo:focus {\n  border-color: #2f6fed;\n  outline: 3px solid rgba(47,111,237,.22);\n}`,
+      checked: `.pseudo-demo .check:checked + span {\n  color: #0d6252;\n  font-weight: 800;\n  background: #e9f8f3;\n  padding: 4px 8px;\n  border-radius: 6px;\n}`,
+      first: `.pseudo-demo li:first-child {\n  background: #eaf2ff;\n  color: #1f4faf;\n  font-weight: 800;\n}`,
+      nth: `.pseudo-demo li:nth-child(2n) {\n  background: #f2efff;\n  color: #5944aa;\n}`,
+      disabled: `.pseudo-demo button:disabled {\n  opacity: .55;\n  background: #e8edf2;\n  cursor: not-allowed;\n}`
+    };
+    const pseudoStyle = document.createElement('style');
+    pseudoStyle.id = 'dynamicPseudoStyles';
+    document.head.appendChild(pseudoStyle);
+    const pseudoButtons = [...document.querySelectorAll('.pseudo-rule-toggle')];
+    const pseudoCode = document.getElementById('pseudoCode');
+
+    function renderPseudoRules() {
+      const active = pseudoButtons.filter(btn => btn.classList.contains('active'));
+      const rules = active.map(btn => pseudoRules[btn.dataset.pseudo]);
+      pseudoStyle.textContent = rules.join('\n\n');
+      pseudoCode.textContent = rules.length ? rules.join('\n\n') : '/* Activa una o varias reglas */';
+    }
+    pseudoButtons.forEach(btn => btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      renderPseudoRules();
+    }));
+    document.getElementById('resetPseudo').addEventListener('click', () => {
+      pseudoButtons.forEach(btn => btn.classList.remove('active'));
+      renderPseudoRules();
+    });
+    renderPseudoRules();
+
+    // Flexbox por pasos
+    const flexBuildDemo = document.getElementById('flexBuildDemo');
+    const flexBuildCode = document.getElementById('flexBuildCode');
+    const flexBuildExplanation = document.getElementById('flexBuildExplanation');
+    const flexBuildButtons = [...document.querySelectorAll('.flex-rule-toggle')];
+    const flexBuildMap = {
+      display: { css: 'display: flex;', prop: 'display', value: 'flex', explanation: 'El padre cambia de flujo normal a contenedor flex. Sus hijos directos pasan a ser flex items y se colocan sobre el eje principal.' },
+      direction: { css: 'flex-direction: row;', prop: 'flexDirection', value: 'row', explanation: 'row establece un eje principal horizontal. Si fuera column, el eje principal sería vertical.' },
+      justify: { css: 'justify-content: space-between;', prop: 'justifyContent', value: 'space-between', explanation: 'Distribuye el espacio libre sobre el eje principal. El primer y último elemento quedan en los extremos.' },
+      align: { css: 'align-items: center;', prop: 'alignItems', value: 'center', explanation: 'Alinea todos los flex items sobre el eje cruzado. Con row, el eje cruzado es vertical.' },
+      gap: { css: 'gap: 16px;', prop: 'gap', value: '16px', explanation: 'Crea separación entre flex items sin tener que colocar márgenes individuales.' },
+      wrap: { css: 'flex-wrap: wrap;', prop: 'flexWrap', value: 'wrap', explanation: 'Permite que los elementos creen una nueva línea cuando no caben. Sin wrap intentan permanecer en una sola línea.' }
+    };
+
+    function renderFlexBuild(lastKey) {
+      flexBuildDemo.removeAttribute('style');
+      const active = flexBuildButtons.filter(btn => btn.classList.contains('active'));
+      active.forEach(btn => {
+        const rule = flexBuildMap[btn.dataset.key];
+        flexBuildDemo.style[rule.prop] = rule.value;
+      });
+      flexBuildCode.textContent = active.length
+        ? '.contenedor {\n' + active.map(btn => '  ' + flexBuildMap[btn.dataset.key].css).join('\n') + '\n}'
+        : '.contenedor {\n  /* display normal: block */\n}';
+      if (lastKey) flexBuildExplanation.textContent = flexBuildMap[lastKey].explanation;
+    }
+    flexBuildButtons.forEach(btn => btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      renderFlexBuild(btn.dataset.key);
+    }));
+    document.getElementById('resetFlexBuild').addEventListener('click', () => {
+      flexBuildButtons.forEach(btn => btn.classList.remove('active'));
+      flexBuildExplanation.textContent = 'Empieza activando display: flex. Ese es el cambio que convierte a los hijos directos en flex items.';
+      renderFlexBuild();
+    });
+    renderFlexBuild();
+
+    // Propiedades de flex items
+    const itemGrow = document.getElementById('itemGrow');
+    const itemOrder = document.getElementById('itemOrder');
+    const itemSelf = document.getElementById('itemSelf');
+    const specialFlexItem = document.getElementById('specialFlexItem');
+    const flexItemStatus = document.getElementById('flexItemStatus');
+    function updateFlexItem() {
+      specialFlexItem.style.flexGrow = itemGrow.value;
+      specialFlexItem.style.order = itemOrder.value;
+      specialFlexItem.style.alignSelf = itemSelf.value;
+      flexItemStatus.textContent = '.elemento-2 { flex-grow: ' + itemGrow.value + '; order: ' + itemOrder.value + '; align-self: ' + itemSelf.value + '; }';
+    }
+    itemGrow.addEventListener('input', updateFlexItem);
+    itemOrder.addEventListener('change', updateFlexItem);
+    itemSelf.addEventListener('change', updateFlexItem);
+    updateFlexItem();
+
+    // Grid por pasos
+    const gridBuildDemo = document.getElementById('gridBuildDemo');
+    const gridBuildCode = document.getElementById('gridBuildCode');
+    const gridBuildExplanation = document.getElementById('gridBuildExplanation');
+    const gridBuildButtons = [...document.querySelectorAll('.grid-rule-toggle')];
+    const gridBuildMap = {
+      display: { css: 'display: grid;', prop: 'display', value: 'grid', explanation: 'Activa CSS Grid. Aún existe una sola columna implícita porque todavía no definiste grid-template-columns.' },
+      columns: { css: 'grid-template-columns: repeat(3, 1fr);', prop: 'gridTemplateColumns', value: 'repeat(3, 1fr)', explanation: 'Crea tres tracks de columna. Cada 1fr recibe la misma fracción del espacio disponible.' },
+      gap: { css: 'gap: 16px;', prop: 'gap', value: '16px', explanation: 'Separa los tracks horizontal y verticalmente sin agregar espacio en el borde exterior del grid.' },
+      rows: { css: 'grid-auto-rows: minmax(90px, auto);', prop: 'gridAutoRows', value: 'minmax(90px, auto)', explanation: 'Cada fila implícita mide como mínimo 90px y puede crecer si el contenido necesita más altura.' }
+    };
+    function renderGridBuild(lastKey) {
+      gridBuildDemo.removeAttribute('style');
+      const active = gridBuildButtons.filter(btn => btn.classList.contains('active'));
+      active.forEach(btn => {
+        const rule = gridBuildMap[btn.dataset.key];
+        gridBuildDemo.style[rule.prop] = rule.value;
+      });
+      gridBuildCode.textContent = active.length
+        ? '.galeria {\n' + active.map(btn => '  ' + gridBuildMap[btn.dataset.key].css).join('\n') + '\n}'
+        : '.galeria {\n  /* todavía usa el flujo normal */\n}';
+      if (lastKey) gridBuildExplanation.textContent = gridBuildMap[lastKey].explanation;
+    }
+    gridBuildButtons.forEach(btn => btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      renderGridBuild(btn.dataset.key);
+    }));
+    document.getElementById('resetGridBuild').addEventListener('click', () => {
+      gridBuildButtons.forEach(btn => btn.classList.remove('active'));
+      gridBuildExplanation.textContent = 'Activa display: grid para convertir el contenedor en una cuadrícula.';
+      renderGridBuild();
+    });
+    renderGridBuild();
+
+    // Plantillas Grid
+    const gridTemplateDemo = document.getElementById('gridTemplateDemo');
+    const gridTemplateStatus = document.getElementById('gridTemplateStatus');
+    const gridPresetButtons = [...document.querySelectorAll('.grid-preset')];
+    gridPresetButtons.forEach(btn => btn.addEventListener('click', () => {
+      gridPresetButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      gridTemplateDemo.style.gridTemplateColumns = btn.dataset.template;
+      gridTemplateStatus.textContent = 'grid-template-columns: ' + btn.dataset.template + '; ' + btn.dataset.label + '.';
+    }));
+
+    const autoGridWidth = document.getElementById('autoGridWidth');
+    const autoGrid = document.getElementById('autoGrid');
+    const autoGridWidthLabel = document.getElementById('autoGridWidthLabel');
+    function updateAutoGrid() {
+      autoGrid.style.width = autoGridWidth.value + 'px';
+      autoGridWidthLabel.textContent = autoGridWidth.value + 'px';
+    }
+    autoGridWidth.addEventListener('input', updateAutoGrid);
+    updateAutoGrid();
+
+    const steps = {
+      1: {
+        code: `&lt;body&gt;\n  &lt;header&gt;\n    &lt;h1&gt;Mi proyecto&lt;/h1&gt;\n    &lt;nav&gt;...&lt;/nav&gt;\n  &lt;/header&gt;\n\n  &lt;main&gt;\n    &lt;section&gt;\n      &lt;h2&gt;Servicios&lt;/h2&gt;\n      &lt;div class="galeria"&gt;...&lt;/div&gt;\n    &lt;/section&gt;\n  &lt;/main&gt;\n\n  &lt;footer&gt;Programación Web 2026&lt;/footer&gt;\n&lt;/body&gt;`,
+        enhanced: false,
+        grid: false,
+        explanation: [
+          ['header', 'Contiene la identidad del sitio y la navegación principal.'],
+          ['main', 'Contiene el contenido principal de la página.'],
+          ['section', 'Agrupa contenido que pertenece a un mismo tema.'],
+          ['footer', 'Contiene información final o secundaria de la página.']
+        ]
+      },
+      2: {
+        code: `*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n:root {\n  --primario: #2f6fed;\n  --texto: #203040;\n}\n\nbody {\n  margin: 0;\n  font-family: Arial, sans-serif;\n  color: var(--texto);\n  line-height: 1.6;\n}`,
+        enhanced: true,
+        grid: false,
+        explanation: [
+          ['box-sizing', 'Hace más predecible el cálculo del ancho de los elementos.'],
+          [':root', 'Guarda variables globales reutilizables.'],
+          ['body', 'Define estilos base que pueden heredarse a gran parte de la página.']
+        ]
+      },
+      3: {
+        code: `header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 16px;\n  flex-wrap: wrap;\n}\n\nnav {\n  display: flex;\n  gap: 12px;\n}`,
+        enhanced: true,
+        grid: false,
+        explanation: [
+          ['display: flex', 'Convierte los hijos directos del header en elementos flexibles.'],
+          ['justify-content', 'Distribuye título y navegación a lo largo del eje principal.'],
+          ['align-items', 'Alinea los elementos en el eje cruzado.'],
+          ['flex-wrap', 'Permite que el menú pase a otra línea si el ancho es insuficiente.']
+        ]
+      },
+      4: {
+        code: `.galeria {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}\n\n.tarjeta {\n  padding: 16px;\n  border: 1px solid #d8e2ee;\n  border-radius: 12px;\n}`,
+        enhanced: true,
+        grid: true,
+        explanation: [
+          ['display: grid', 'Activa el modelo de cuadrícula.'],
+          ['repeat(3, 1fr)', 'Crea tres columnas iguales que comparten el espacio disponible.'],
+          ['gap', 'Crea separación uniforme entre filas y columnas.'],
+          ['border-radius', 'Redondea visualmente las esquinas de cada tarjeta.']
+        ]
+      },
+      5: {
+        code: `.galeria {\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 768px) {\n  .galeria {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}`,
+        enhanced: true,
+        grid: true,
+        explanation: [
+          ['Regla base', 'Una columna para pantallas pequeñas.'],
+          ['@media', 'Activa reglas adicionales cuando el viewport alcanza al menos 768px.'],
+          ['repeat(3, 1fr)', 'En pantallas amplias se aprovecha el espacio con tres columnas.']
+        ]
+      }
+    };
+
+    const stepTabs = [...document.querySelectorAll('.step-tab')];
+    const stepCode = document.getElementById('stepCode');
+    const stepExplanation = document.getElementById('stepExplanation');
+    const previewSite = document.getElementById('previewSite');
+
+    function renderStep(stepNumber) {
+      const data = steps[stepNumber];
+      stepCode.innerHTML = data.code;
+      previewSite.classList.toggle('enhanced', data.enhanced);
+      previewSite.querySelector('.site-grid').style.gridTemplateColumns = data.grid ? 'repeat(3, 1fr)' : '1fr';
+
+      stepExplanation.innerHTML = data.explanation.map(item =>
+        '<div class="explanation-item"><code>' + item[0] + '</code><span>' + item[1] + '</span></div>'
+      ).join('');
+
+      stepTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.step === String(stepNumber)));
+    }
+
+    stepTabs.forEach(tab => {
+      tab.addEventListener('click', () => renderStep(Number(tab.dataset.step)));
+    });
+    renderStep(1);
+
+    document.querySelectorAll('.quiz-question').forEach(question => {
+      const correct = question.dataset.answer;
+      const feedback = question.querySelector('.quiz-feedback');
+      question.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          question.querySelectorAll('button').forEach(b => b.classList.remove('correct', 'wrong'));
+          if (button.dataset.option === correct) {
+            button.classList.add('correct');
+            feedback.textContent = 'Correcto. La respuesta corresponde al comportamiento explicado en la guía.';
+            feedback.style.color = '#0d6252';
+          } else {
+            button.classList.add('wrong');
+            feedback.textContent = 'No es la opción correcta. Revisa la sección relacionada y vuelve a intentarlo.';
+            feedback.style.color = '#913737';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
