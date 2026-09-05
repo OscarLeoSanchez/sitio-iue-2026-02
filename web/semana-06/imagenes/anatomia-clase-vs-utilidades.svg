@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="320" viewBox="0 0 720 320" role="img" aria-label="Anatomia de una tarjeta: la clase card de Bootstrap agrupa varias propiedades bajo un nombre, la combinacion de utilidades de Tailwind expone cada propiedad por separado" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="ac-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#ac-sombra)">
+      <rect x="30" y="30" width="310" height="270" rx="10" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+    </g>
+    <text x="185" y="56" font-size="13.5" font-weight="700" fill="#17456f">class="card"</text>
+    <rect x="130" y="72" width="110" height="34" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.6"/>
+    <text x="185" y="93" font-size="11" fill="#17456f" font-family="Cascadia Mono, Consolas, monospace">card</text>
+    <path d="M185,106 L185,130" stroke="#2f7bb8" stroke-width="1.3" marker-end="url(#ac-flecha)"/>
+    <g font-size="10" fill="#5b6876">
+      <text x="185" y="150">border: 1px solid</text>
+      <text x="185" y="168">border-radius: .375rem</text>
+      <text x="185" y="186">box-shadow: sutil</text>
+      <text x="185" y="204">padding interno del cuerpo</text>
+    </g>
+    <text x="185" y="240" font-size="10.5" fill="#5b6876">Todo llega junto al escribir</text>
+    <text x="185" y="256" font-size="10.5" fill="#5b6876">una sola clase</text>
+
+    <g filter="url(#ac-sombra)">
+      <rect x="380" y="30" width="310" height="270" rx="10" fill="#f4faf7" stroke="#0e8f8f" stroke-width="1.6"/>
+    </g>
+    <text x="535" y="56" font-size="12.5" font-weight="700" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">border rounded-lg shadow p-4</text>
+    <rect x="405" y="72" width="90" height="28" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="450" y="91" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">border</text>
+    <rect x="500" y="72" width="90" height="28" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="545" y="91" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">rounded-lg</text>
+    <rect x="595" y="72" width="80" height="28" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="635" y="91" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">shadow</text>
+    <path d="M450,100 L450,130" stroke="#0e8f8f" stroke-width="1.1" marker-end="url(#ac-flecha-t)"/>
+    <path d="M545,100 L545,130" stroke="#0e8f8f" stroke-width="1.1" marker-end="url(#ac-flecha-t)"/>
+    <path d="M635,100 L635,130" stroke="#0e8f8f" stroke-width="1.1" marker-end="url(#ac-flecha-t)"/>
+    <g font-size="10" fill="#5b6876">
+      <text x="535" y="150">border: es solo el borde</text>
+      <text x="535" y="168">rounded-lg: es solo el radio</text>
+      <text x="535" y="186">shadow: es solo la sombra</text>
+      <text x="535" y="204">p-4: es solo el padding</text>
+    </g>
+    <text x="535" y="240" font-size="10.5" fill="#5b6876">Cada palabra es una sola</text>
+    <text x="535" y="256" font-size="10.5" fill="#5b6876">propiedad, visible en el HTML</text>
+
+    <defs>
+      <marker id="ac-flecha" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+        <path d="M0,0 L8,0 L4,8 Z" fill="#2f7bb8"/>
+      </marker>
+      <marker id="ac-flecha-t" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+        <path d="M0,0 L8,0 L4,8 Z" fill="#0e8f8f"/>
+      </marker>
+    </defs>
+  </g>
+</svg>

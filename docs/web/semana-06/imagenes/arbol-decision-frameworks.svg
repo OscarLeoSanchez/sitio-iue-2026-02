@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Arbol de decision para elegir framework CSS: proyecto muy pequeno usa CSS puro, si se necesita salir rapido con componentes ya armados usa Bootstrap, si se necesita control fino y un diseno propio usa Tailwind" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="ad-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#ad-sombra)">
+      <rect x="270" y="20" width="180" height="50" rx="8" fill="#ffffff" stroke="#16202b" stroke-width="1.6"/>
+    </g>
+    <text x="360" y="42" font-size="11.5" font-weight="700" fill="#16202b">Que necesita tu</text>
+    <text x="360" y="58" font-size="11.5" font-weight="700" fill="#16202b">proyecto ahora</text>
+
+    <path d="M330,70 L140,120" stroke="#5b6876" stroke-width="1.3" fill="none"/>
+    <path d="M360,70 L360,120" stroke="#5b6876" stroke-width="1.3" fill="none"/>
+    <path d="M390,70 L590,120" stroke="#5b6876" stroke-width="1.3" fill="none"/>
+
+    <g filter="url(#ad-sombra)">
+      <rect x="30" y="122" width="220" height="60" rx="8" fill="#f6f8fa" stroke="#5b6876" stroke-width="1.4"/>
+    </g>
+    <text x="140" y="148" font-size="11" fill="#16202b">Pagina pequena, pocos</text>
+    <text x="140" y="164" font-size="11" fill="#16202b">elementos, control total</text>
+    <path d="M140,182 L140,205" stroke="#5b6876" stroke-width="1.2" marker-end="url(#ad-flecha)"/>
+    <rect x="60" y="207" width="160" height="34" rx="17" fill="#ffffff" stroke="#5b6876" stroke-width="1.6"/>
+    <text x="140" y="229" font-size="11" font-weight="700" fill="#16202b">CSS puro</text>
+
+    <g filter="url(#ad-sombra)">
+      <rect x="250" y="122" width="220" height="60" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.4"/>
+    </g>
+    <text x="360" y="148" font-size="11" fill="#17456f">Salir rapido, con</text>
+    <text x="360" y="164" font-size="11" fill="#17456f">componentes ya armados</text>
+    <path d="M360,182 L360,205" stroke="#2f7bb8" stroke-width="1.2" marker-end="url(#ad-flecha-a)"/>
+    <rect x="280" y="207" width="160" height="34" rx="17" fill="#17456f"/>
+    <text x="360" y="229" font-size="11" font-weight="700" fill="#ffffff">Bootstrap</text>
+
+    <g filter="url(#ad-sombra)">
+      <rect x="480" y="122" width="220" height="60" rx="8" fill="#f4faf7" stroke="#0e8f8f" stroke-width="1.4"/>
+    </g>
+    <text x="590" y="148" font-size="11" fill="#0e8f8f">Diseno propio, sin pelear</text>
+    <text x="590" y="164" font-size="11" fill="#0e8f8f">contra el estilo de otro</text>
+    <path d="M590,182 L590,205" stroke="#0e8f8f" stroke-width="1.2" marker-end="url(#ad-flecha-b)"/>
+    <rect x="510" y="207" width="160" height="34" rx="17" fill="#0e8f8f"/>
+    <text x="590" y="229" font-size="11" font-weight="700" fill="#ffffff">Tailwind</text>
+
+    <text x="360" y="280" font-size="11" fill="#5b6876">En el proyecto del curso, primero se construye con Bootstrap</text>
+    <text x="360" y="298" font-size="11" fill="#5b6876">y luego el mismo panel se rehace con Tailwind, para comparar</text>
+    <text x="360" y="316" font-size="11" fill="#5b6876">con la experiencia propia, no solo con la teoria</text>
+
+    <defs>
+      <marker id="ad-flecha" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+        <path d="M0,0 L8,0 L4,8 Z" fill="#5b6876"/>
+      </marker>
+      <marker id="ad-flecha-a" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+        <path d="M0,0 L8,0 L4,8 Z" fill="#2f7bb8"/>
+      </marker>
+      <marker id="ad-flecha-b" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+        <path d="M0,0 L8,0 L4,8 Z" fill="#0e8f8f"/>
+      </marker>
+    </defs>
+  </g>
+</svg>

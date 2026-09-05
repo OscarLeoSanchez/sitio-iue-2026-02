@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="340" viewBox="0 0 720 340" role="img" aria-label="Sin framework se repite una regla CSS por cada boton; con un framework una sola clase reutilizable da estilo a los tres" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="pf-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#pf-sombra)">
+      <rect x="30" y="30" width="310" height="280" rx="10" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+    </g>
+    <text x="185" y="58" font-size="15" font-weight="700" fill="#a32d22">CSS puro, boton por boton</text>
+
+    <rect x="55" y="80" width="260" height="42" rx="6" fill="#ffffff" stroke="#a32d22" stroke-width="1.2"/>
+    <text x="185" y="106" font-size="12" fill="#5b6876" font-family="Cascadia Mono, Consolas, monospace">.boton-1 { padding, color... }</text>
+
+    <rect x="55" y="132" width="260" height="42" rx="6" fill="#ffffff" stroke="#a32d22" stroke-width="1.2"/>
+    <text x="185" y="158" font-size="12" fill="#5b6876" font-family="Cascadia Mono, Consolas, monospace">.boton-2 { padding, color... }</text>
+
+    <rect x="55" y="184" width="260" height="42" rx="6" fill="#ffffff" stroke="#a32d22" stroke-width="1.2"/>
+    <text x="185" y="210" font-size="12" fill="#5b6876" font-family="Cascadia Mono, Consolas, monospace">.boton-3 { padding, color... }</text>
+
+    <text x="185" y="250" font-size="11.5" fill="#5b6876">Tres reglas casi identicas,</text>
+    <text x="185" y="268" font-size="11.5" fill="#5b6876">una por cada boton nuevo</text>
+
+    <g filter="url(#pf-sombra)">
+      <rect x="380" y="30" width="310" height="280" rx="10" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+    </g>
+    <text x="535" y="58" font-size="15" font-weight="700" fill="#2e7d5b">Framework, una clase para todos</text>
+
+    <rect x="470" y="82" width="130" height="40" rx="6" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.4"/>
+    <text x="535" y="107" font-size="12.5" fill="#2e7d5b" font-family="Cascadia Mono, Consolas, monospace">.btn</text>
+
+    <path d="M 480 122 L 430 165" stroke="#2e7d5b" stroke-width="1.4" fill="none" marker-end="url(#pf-flecha)"/>
+    <path d="M 535 122 L 535 165" stroke="#2e7d5b" stroke-width="1.4" fill="none" marker-end="url(#pf-flecha)"/>
+    <path d="M 590 122 L 640 165" stroke="#2e7d5b" stroke-width="1.4" fill="none" marker-end="url(#pf-flecha)"/>
+
+    <rect x="400" y="170" width="70" height="34" rx="17" fill="#ffffff" stroke="#2e7d5b"/>
+    <text x="435" y="192" font-size="11" fill="#16202b">Guardar</text>
+    <rect x="500" y="170" width="70" height="34" rx="17" fill="#ffffff" stroke="#2e7d5b"/>
+    <text x="535" y="192" font-size="11" fill="#16202b">Enviar</text>
+    <rect x="605" y="170" width="70" height="34" rx="17" fill="#ffffff" stroke="#2e7d5b"/>
+    <text x="640" y="192" font-size="11" fill="#16202b">Borrar</text>
+
+    <text x="535" y="245" font-size="11.5" fill="#5b6876">Una definicion, aplicada a</text>
+    <text x="535" y="263" font-size="11.5" fill="#5b6876">cualquier cantidad de botones</text>
+
+    <defs>
+      <marker id="pf-flecha" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="#2e7d5b"/>
+      </marker>
+    </defs>
+  </g>
+</svg>

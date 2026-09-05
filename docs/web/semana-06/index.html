@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Leonel Sánchez Conde">
+
+<title>Semana 6. Frameworks CSS: Bootstrap 5 y Tailwind CSS – Clases IUE 2026-02</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../estilos/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8713356167177fd77be9341a95314561.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-45b919444fffd8287a9867ee5b62a0b4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-05/index.html">Unidad 2. Frontend</a></li><li class="breadcrumb-item"><a href="../../web/semana-06/index.html">Semana 6. Bootstrap 5 y Tailwind CSS</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Clases IUE 2026-02</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/definicion-proyecto/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Definición del proyecto</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 1. Entornos, versionado e IA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 1. Entornos de desarrollo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 2. Git y GitHub</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 2. Frontend</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 5. HTML5 y CSS3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-06/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Semana 6. Bootstrap 5 y Tailwind CSS</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta guía</h2>
+   
+  <ul>
+  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</a></li>
+  <li><a href="#parte-1.-por-qué-existen-los-frameworks-css" id="toc-parte-1.-por-qué-existen-los-frameworks-css" class="nav-link" data-scroll-target="#parte-1.-por-qué-existen-los-frameworks-css"><span class="header-section-number">2</span> Parte 1. Por qué existen los frameworks CSS</a>
+  <ul class="collapse">
+  <li><a href="#el-problema-que-ya-viviste-la-semana-pasada" id="toc-el-problema-que-ya-viviste-la-semana-pasada" class="nav-link" data-scroll-target="#el-problema-que-ya-viviste-la-semana-pasada">El problema que ya viviste la semana pasada</a></li>
+  <li><a href="#dos-filosofías-no-un-framework-mejor-que-el-otro" id="toc-dos-filosofías-no-un-framework-mejor-que-el-otro" class="nav-link" data-scroll-target="#dos-filosofías-no-un-framework-mejor-que-el-otro">Dos filosofías, no un framework mejor que el otro</a></li>
+  </ul></li>
+  <li><a href="#parte-2.-bootstrap-5" id="toc-parte-2.-bootstrap-5" class="nav-link" data-scroll-target="#parte-2.-bootstrap-5"><span class="header-section-number">3</span> Parte 2. Bootstrap 5</a>
+  <ul class="collapse">
+  <li><a href="#cómo-se-incluye" id="toc-cómo-se-incluye" class="nav-link" data-scroll-target="#cómo-se-incluye">Cómo se incluye</a></li>
+  <li><a href="#el-sistema-de-grillas-de-doce-columnas" id="toc-el-sistema-de-grillas-de-doce-columnas" class="nav-link" data-scroll-target="#el-sistema-de-grillas-de-doce-columnas">El sistema de grillas de doce columnas</a></li>
+  <li><a href="#breakpoints-la-grilla-que-responde" id="toc-breakpoints-la-grilla-que-responde" class="nav-link" data-scroll-target="#breakpoints-la-grilla-que-responde">Breakpoints: la grilla que responde</a></li>
+  <li><a href="#componentes-principales" id="toc-componentes-principales" class="nav-link" data-scroll-target="#componentes-principales">Componentes principales</a></li>
+  <li><a href="#utilidades-de-bootstrap" id="toc-utilidades-de-bootstrap" class="nav-link" data-scroll-target="#utilidades-de-bootstrap">Utilidades de Bootstrap</a></li>
+  </ul></li>
+  <li><a href="#parte-3.-tailwind-css" id="toc-parte-3.-tailwind-css" class="nav-link" data-scroll-target="#parte-3.-tailwind-css"><span class="header-section-number">4</span> Parte 3. Tailwind CSS</a>
+  <ul class="collapse">
+  <li><a href="#filosofía-utility-first-en-la-práctica" id="toc-filosofía-utility-first-en-la-práctica" class="nav-link" data-scroll-target="#filosofía-utility-first-en-la-práctica">Filosofía utility-first, en la práctica</a></li>
+  <li><a href="#cómo-se-incluye-1" id="toc-cómo-se-incluye-1" class="nav-link" data-scroll-target="#cómo-se-incluye-1">Cómo se incluye</a></li>
+  <li><a href="#espaciado-color-y-tipografía" id="toc-espaciado-color-y-tipografía" class="nav-link" data-scroll-target="#espaciado-color-y-tipografía">Espaciado, color y tipografía</a></li>
+  <li><a href="#flexbox-y-grid-con-clases-de-tailwind" id="toc-flexbox-y-grid-con-clases-de-tailwind" class="nav-link" data-scroll-target="#flexbox-y-grid-con-clases-de-tailwind">Flexbox y Grid con clases de Tailwind</a></li>
+  <li><a href="#breakpoints-con-prefijo" id="toc-breakpoints-con-prefijo" class="nav-link" data-scroll-target="#breakpoints-con-prefijo">Breakpoints con prefijo</a></li>
+  <li><a href="#estados-hover-focus-y-más" id="toc-estados-hover-focus-y-más" class="nav-link" data-scroll-target="#estados-hover-focus-y-más">Estados: hover, focus y más</a></li>
+  <li><a href="#por-qué-el-html-se-ve-cargado-de-clases-y-qué-se-gana-a-cambio" id="toc-por-qué-el-html-se-ve-cargado-de-clases-y-qué-se-gana-a-cambio" class="nav-link" data-scroll-target="#por-qué-el-html-se-ve-cargado-de-clases-y-qué-se-gana-a-cambio">Por qué el HTML se ve “cargado” de clases, y qué se gana a cambio</a></li>
+  </ul></li>
+  <li><a href="#parte-4.-taller.-el-panel-de-catálogo-del-productor" id="toc-parte-4.-taller.-el-panel-de-catálogo-del-productor" class="nav-link" data-scroll-target="#parte-4.-taller.-el-panel-de-catálogo-del-productor"><span class="header-section-number">5</span> Parte 4. Taller. El panel de catálogo del productor</a>
+  <ul class="collapse">
+  <li><a href="#construye-el-panel-con-bootstrap" id="toc-construye-el-panel-con-bootstrap" class="nav-link" data-scroll-target="#construye-el-panel-con-bootstrap"><span class="paso">1</span> Construye el panel con Bootstrap</a></li>
+  <li><a href="#reconstruye-el-mismo-panel-con-tailwind" id="toc-reconstruye-el-mismo-panel-con-tailwind" class="nav-link" data-scroll-target="#reconstruye-el-mismo-panel-con-tailwind"><span class="paso">2</span> Reconstruye el mismo panel con Tailwind</a></li>
+  <li><a href="#compara-las-dos-versiones" id="toc-compara-las-dos-versiones" class="nav-link" data-scroll-target="#compara-las-dos-versiones"><span class="paso">3</span> Compara las dos versiones</a></li>
+  </ul></li>
+  <li><a href="#lista-de-chequeo-de-la-semana" id="toc-lista-de-chequeo-de-la-semana" class="nav-link" data-scroll-target="#lista-de-chequeo-de-la-semana"><span class="header-section-number">6</span> Lista de chequeo de la semana</a></li>
+  <li><a href="#trabajo-independiente-unas-6-h" id="toc-trabajo-independiente-unas-6-h" class="nav-link" data-scroll-target="#trabajo-independiente-unas-6-h"><span class="header-section-number">7</span> Trabajo independiente (unas 6 h)</a></li>
+  <li><a href="#recursos" id="toc-recursos" class="nav-link" data-scroll-target="#recursos"><span class="header-section-number">8</span> Recursos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-05/index.html">Unidad 2. Frontend</a></li><li class="breadcrumb-item"><a href="../../web/semana-06/index.html">Semana 6. Bootstrap 5 y Tailwind CSS</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Semana 6. Frameworks CSS: Bootstrap 5 y Tailwind CSS</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oscar Leonel Sánchez Conde </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 de septiembre de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ficha">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Asignatura</td>
+<td>Programación Web (IF2003)</td>
+</tr>
+<tr class="even">
+<td>Grupo</td>
+<td>603 de Ingeniería Informática</td>
+</tr>
+<tr class="odd">
+<td>Unidad</td>
+<td>Unidad 2. Frontend</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="acceso">
+<p>Diapositivas de la sesión</p>
+<p><a href="../../web/semana-06/presentacion.html" class="btn-doc" target="_blank">Abrir las diapositivas</a></p>
+</div>
+<section id="lo-que-vas-a-lograr" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">1</span> Lo que vas a lograr</h2>
+<p>La semana pasada escribiste HTML y CSS puro para la vitrina pública de tu proyecto: cada regla, cada <code>padding</code>, cada media query salió de tu propia mano. Esa base era necesaria para que entendieras qué hace realmente el navegador con esas reglas. Esta semana das el siguiente paso: usar un <strong>framework CSS</strong>, una hoja de estilos ya escrita por otros que resuelve los problemas más comunes de maquetación para que no los repitas cada vez.</p>
+<p>Vas a construir la misma pieza del proyecto, el panel de catálogo del productor, dos veces: primero con <strong>Bootstrap 5</strong>, después con <strong>Tailwind CSS</strong>. No es trabajo doble por capricho: es la única forma de comparar dos filosofías distintas con la experiencia propia, no solo con lo que dice un artículo.</p>
+<p>Al terminar la guía sabes:</p>
+<ol type="1">
+<li>Explicar qué problema resuelve un framework CSS frente a escribir CSS puro, y qué precio se paga a cambio.</li>
+<li>Distinguir un framework de <strong>componentes</strong> (Bootstrap) de uno <strong>utility-first</strong> (Tailwind), con un ejemplo concreto de cada uno.</li>
+<li>Usar el sistema de grillas de Bootstrap, sus componentes principales y sus clases de utilidad.</li>
+<li>Usar las clases de utilidad de Tailwind para maquetar, dar color, tipografía y responsividad.</li>
+<li>Elegir con criterios técnicos, no con gusto personal, cuál framework conviene para una tarea dada.</li>
+<li>Tener el panel de catálogo del productor de tu proyecto construido en ambas versiones, con una sustentación escrita de tu elección.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Antes de empezar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Necesitas la vitrina pública de la Semana 5 (<code>index.html</code> y <code>estilos.css</code>) publicada en la rama <code>main</code> de tu repositorio. Ninguno de los dos frameworks de hoy necesita instalar nada: los dos se incluyen por <strong>CDN</strong>, una dirección de internet desde donde el navegador descarga el archivo la primera vez que abres la página. Sigues sin necesitar Node.js, un empaquetador ni una terminal para compilar nada: eso llega más adelante en el curso, cuando el frontend se integre con el proyecto completo.</p>
+</div>
+</div>
+</section>
+<section id="parte-1.-por-qué-existen-los-frameworks-css" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="parte-1.-por-qué-existen-los-frameworks-css"><span class="header-section-number">2</span> Parte 1. Por qué existen los frameworks CSS</h2>
+<section id="el-problema-que-ya-viviste-la-semana-pasada" class="level3">
+<h3 class="anchored" data-anchor-id="el-problema-que-ya-viviste-la-semana-pasada">El problema que ya viviste la semana pasada</h3>
+<p>Construir la tarjeta de un producto, un botón con estados de <code>hover</code> y <code>focus</code>, o una galería responsiva a mano no es difícil una vez, como hiciste en la Semana 5. El problema aparece cuando ese mismo trabajo se repite: un botón “Guardar”, después un botón “Enviar”, después uno “Cancelar”, cada uno con su propia regla CSS casi idéntica a la anterior, solo con el color o el texto cambiado.</p>
+<div class="diagrama">
+<p><img src="imagenes/por-que-frameworks.svg" class="img-fluid" alt="Sin framework se repite una regla CSS por cada boton; con un framework una sola clase reutilizable da estilo a los tres"></p>
+<p>Un framework CSS extrae el patrón repetido a una sola clase, y esa clase queda lista para cualquier botón nuevo.</p>
+</div>
+<p>Un <strong>framework CSS</strong> es, en el fondo, una hoja de estilos ya escrita, probada por miles de proyectos, que resuelve de antemano los problemas más comunes de maquetación: una grilla que funciona en cualquier pantalla, un botón que ya tiene su estado de <code>hover</code> resuelto, un sistema de espaciados consistente en vez de números sueltos como <code>13px</code> o <code>27px</code> regados por el archivo. Incluirlo no reemplaza lo que aprendiste la semana pasada: sigues necesitando HTML semántico y seguir entendiendo qué hace cada regla, porque un framework mal usado también puede terminar en una página desordenada.</p>
+<p>Lo que gana un equipo al usar un framework:</p>
+<ul>
+<li><strong>Velocidad.</strong> Un componente de interfaz que tomaría media hora a mano (un menú desplegable accesible, una alerta con botón de cerrar) ya viene resuelto.</li>
+<li><strong>Consistencia.</strong> Todos los botones, todas las tarjetas, todo el espaciado sigue las mismas reglas sin que nadie tenga que acordarse de repetirlas.</li>
+<li><strong>Una base ya revisada.</strong> Miles de proyectos ya encontraron los errores de accesibilidad y de compatibilidad entre navegadores más comunes; el framework ya los corrigió.</li>
+</ul>
+<p>Lo que se paga a cambio:</p>
+<ul>
+<li><strong>Una curva de aprendizaje propia.</strong> Hay que aprender el vocabulario del framework (los nombres de sus clases o de sus componentes), además de CSS.</li>
+<li><strong>Peso adicional.</strong> El navegador descarga código para componentes que quizás tu página nunca usa, salvo que el framework permita recortarlo.</li>
+<li><strong>Un estilo visual reconocible</strong>, salvo que se personalice a propósito: una página con Bootstrap sin ajustes se ve “a Bootstrap”.</li>
+</ul>
+</section>
+<section id="dos-filosofías-no-un-framework-mejor-que-el-otro" class="level3">
+<h3 class="anchored" data-anchor-id="dos-filosofías-no-un-framework-mejor-que-el-otro">Dos filosofías, no un framework mejor que el otro</h3>
+<p>No todos los frameworks CSS resuelven el problema de la misma forma. Bootstrap y Tailwind representan las dos filosofías más usadas en la industria hoy, y esta semana las trabajas juntas para que la diferencia deje de ser una definición de manual y se vuelva algo que experimentaste con tus propias manos.</p>
+<div class="diagrama">
+<p><img src="imagenes/dos-filosofias.svg" class="img-fluid" alt="Bootstrap entrega componentes ya armados, Tailwind entrega utilidades pequenas que se combinan"></p>
+</div>
+<p><strong>Bootstrap</strong> es un framework <strong>de componentes</strong>: entrega piezas de interfaz completas, ya diseñadas y con su propio nombre de clase (<code>card</code>, <code>navbar</code>, <code>btn</code>). Escribes una clase y llega el componente entero, con su tipografía, sus colores, su espaciado y su comportamiento ya decididos.</p>
+<p><strong>Tailwind</strong> es un framework <strong>utility-first</strong>: entrega piezas mínimas, cada una responsable de una sola propiedad CSS (<code>flex</code>, <code>p-4</code>, <code>rounded-lg</code>, <code>text-white</code>), y tú las combinas para construir tu propio diseño. No hay un componente <code>card</code> predefinido: hay utilidades que, combinadas, arman una tarjeta con tu propia apariencia.</p>
+<p>Ni Bootstrap ni Tailwind reemplazan el CSS que aprendiste en la Semana 5: los dos generan CSS por detrás, y ese CSS sigue las mismas reglas de cascada, especificidad y modelo de caja que ya conoces. La diferencia está en <strong>qué escribes tú</strong> para llegar a ese resultado.</p>
+<p>El mismo botón, escrito de las tres formas:</p>
+<div class="diagrama">
+<p><img src="imagenes/boton-tres-formas.svg" class="img-fluid" alt="El mismo boton escrito de tres formas: HTML puro con CSS aparte, Bootstrap con la clase btn btn-primary, y Tailwind con utilidades combinadas"></p>
+<p>En CSS puro escribes la regla completa una vez y la reutilizas con una clase propia. En Bootstrap, una clase ya trae el diseño completo. En Tailwind, cada palabra de la clase es una sola propiedad, visible sin abrir ningún archivo CSS.</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>CSS puro</th>
+<th>Bootstrap</th>
+<th>Tailwind</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qué escribes</td>
+<td>Cada propiedad, tú decides el valor</td>
+<td>El nombre del componente</td>
+<td>Una utilidad por propiedad</td>
+</tr>
+<tr class="even">
+<td>Tamaño del CSS final</td>
+<td>El mínimo posible, el que tú escribiste</td>
+<td>Grande, salvo que se recorte lo que no se usa</td>
+<td>Pequeño en producción: solo genera las clases que tu HTML usa de verdad</td>
+</tr>
+<tr class="odd">
+<td>Curva de aprendizaje</td>
+<td>CSS puro, sin vocabulario adicional</td>
+<td>Aprender los nombres de los componentes</td>
+<td>Aprender los nombres de las utilidades</td>
+</tr>
+<tr class="even">
+<td>Personalizar el diseño</td>
+<td>Control total, pero todo a mano</td>
+<td>Requiere sobrescribir estilos del componente</td>
+<td>Se ajusta con variables del propio Tailwind, sin pelear contra nada</td>
+</tr>
+<tr class="odd">
+<td>Legibilidad del HTML</td>
+<td>Limpio, la clase no dice cómo se ve</td>
+<td>Limpio, una clase por componente</td>
+<td>Cargado de clases cortas, pero explícito: se lee la apariencia sin abrir el CSS</td>
+</tr>
+<tr class="even">
+<td>Cuándo conviene</td>
+<td>Páginas pequeñas o con diseño muy propio</td>
+<td>Salir rápido con una interfaz estándar y consistente</td>
+<td>Un diseño propio, con control fino, sin escribir CSS a mano</td>
+</tr>
+</tbody>
+</table>
+<p>Guarda esta tabla: el taller final de hoy te pide sustentar, con criterios como estos, cuál framework vas a seguir usando en tu proyecto.</p>
+</section>
+</section>
+<section id="parte-2.-bootstrap-5" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="parte-2.-bootstrap-5"><span class="header-section-number">3</span> Parte 2. Bootstrap 5</h2>
+<section id="cómo-se-incluye" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-se-incluye">Cómo se incluye</h3>
+<p>Bootstrap se incluye con dos líneas: una hoja de estilos (<code>link</code>) y un archivo de JavaScript (<code>script</code>) que le da comportamiento a los componentes interactivos (menús desplegables, modales, alertas que se cierran). Los dos se cargan desde un CDN, sin instalar nada.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"es"</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Panel del productor<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ot">    href</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ot">    rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="dt">&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ot">    src</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"</span><span class="dt">&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El <code>link</code> de Bootstrap va en <code>&lt;head&gt;</code>, igual que tu propio <code>estilos.css</code>. Si usas los dos juntos, tu archivo va <strong>después</strong> del de Bootstrap: la cascada de la Semana 5 sigue aplicando, así que la regla que carga al final gana cuando ambas tienen la misma especificidad, y eso te deja sobrescribir lo que necesites de Bootstrap con tus propias clases.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"estilos.css"</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El <code>script</code> de Bootstrap va justo antes de cerrar <code>&lt;/body&gt;</code>, como cualquier script que no necesita bloquear el resto de la carga de la página. La versión <strong>5.3.8</strong> es la última estable de la serie 5.x al momento de escribir esta guía; verifica en <a href="https://getbootstrap.com/docs/5.3/getting-started/download/">getbootstrap.com</a> si existe una más reciente antes de empezar el taller.</p>
+</section>
+<section id="el-sistema-de-grillas-de-doce-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="el-sistema-de-grillas-de-doce-columnas">El sistema de grillas de doce columnas</h3>
+<p>Bootstrap organiza el ancho de la página en una grilla de <strong>doce columnas</strong>, pensada para que cualquier combinación de anchos sume un número exacto y previsible.</p>
+<div class="diagrama">
+<p><img src="imagenes/bootstrap-grid-columnas.svg" class="img-fluid" alt="El grid de Bootstrap: un container centra el contenido, una row agrupa columnas, y doce columnas reparten el ancho disponible"></p>
+<p>Cada fila (<code>row</code>) reparte sus columnas hasta sumar doce, sin importar cuántos elementos tenga.</p>
+</div>
+<p>Tres niveles anidados:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"row"</span><span class="dt">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-4"</span><span class="dt">&gt;</span>Ocupa 4 de 12<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-4"</span><span class="dt">&gt;</span>Ocupa 4 de 12<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-4"</span><span class="dt">&gt;</span>Ocupa 4 de 12<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>container</code></td>
+<td>Centra el contenido con un ancho máximo, y le da un margen lateral en pantallas angostas</td>
+</tr>
+<tr class="even">
+<td><code>container-fluid</code></td>
+<td>Igual que <code>container</code>, pero ocupa siempre el 100% del ancho disponible, sin límite máximo</td>
+</tr>
+<tr class="odd">
+<td><code>row</code></td>
+<td>Contenedor de columnas. Por debajo usa Flexbox: es un <code>display: flex</code> con los márgenes ya resueltos</td>
+</tr>
+<tr class="even">
+<td><code>col-N</code></td>
+<td>Una columna que ocupa <code>N</code> de las doce partes disponibles, con <code>N</code> de 1 a 12</td>
+</tr>
+<tr class="odd">
+<td><code>col</code> (sin número)</td>
+<td>Una columna que reparte el espacio sobrante en partes iguales con sus hermanas</td>
+</tr>
+</tbody>
+</table>
+<p>Los números no tienen que sumar doce en cada fila: si suman menos, sobra espacio; si un grupo se pasa de doce, el sobrante salta a una línea nueva.</p>
+</section>
+<section id="breakpoints-la-grilla-que-responde" class="level3">
+<h3 class="anchored" data-anchor-id="breakpoints-la-grilla-que-responde">Breakpoints: la grilla que responde</h3>
+<p>Cada tamaño de columna puede llevar un prefijo de <strong>breakpoint</strong>, para que el número de columnas cambie según el ancho de pantalla, con la misma lógica mobile-first que aprendiste la semana pasada: sin prefijo, la regla aplica desde el teléfono; el prefijo agrega una regla que reemplaza esa base a partir de cierto ancho.</p>
+<div class="diagrama">
+<p><img src="imagenes/breakpoints-comparacion.svg" class="img-fluid" alt="Comparacion de puntos de quiebre: Bootstrap usa sm md lg xl xxl con prefijo antes de la propiedad, Tailwind usa sm md lg xl 2xl como prefijo de la clase"></p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"row"</span><span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-6 col-lg-4"</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    Una columna completa en telefono, la mitad en tablet, un tercio en escritorio</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Prefijo</th>
+<th>Ancho mínimo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(ninguno)</td>
+<td>Cualquier ancho, es la base</td>
+</tr>
+<tr class="even">
+<td><code>sm</code></td>
+<td>576px</td>
+</tr>
+<tr class="odd">
+<td><code>md</code></td>
+<td>768px</td>
+</tr>
+<tr class="even">
+<td><code>lg</code></td>
+<td>992px</td>
+</tr>
+<tr class="odd">
+<td><code>xl</code></td>
+<td>1200px</td>
+</tr>
+<tr class="even">
+<td><code>xxl</code></td>
+<td>1400px</td>
+</tr>
+</tbody>
+</table>
+<p><code>col-12 col-md-6 col-lg-4</code> se lee de izquierda a derecha, agregando reglas a medida que crece la pantalla: doce columnas (el ancho completo) en teléfono, seis a partir de <code>md</code>, cuatro a partir de <code>lg</code>. Es exactamente el mismo patrón mobile-first de la Semana 5, expresado con clases en vez de con <code>@media</code> escritos a mano.</p>
+</section>
+<section id="componentes-principales" class="level3">
+<h3 class="anchored" data-anchor-id="componentes-principales">Componentes principales</h3>
+<p><strong>Navbar</strong>, la barra de navegación superior:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> class</span><span class="op">=</span><span class="st">"navbar navbar-expand-lg bg-body-tertiary"</span><span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container-fluid"</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> class</span><span class="op">=</span><span class="st">"navbar-brand"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="dt">&gt;</span>Mercado Campesino<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"navbar-toggler"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> data-bs-toggle</span><span class="op">=</span><span class="st">"collapse"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ot">            data-bs-target</span><span class="op">=</span><span class="st">"#menuPrincipal"</span><span class="ot"> aria-controls</span><span class="op">=</span><span class="st">"menuPrincipal"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ot">            aria-expanded</span><span class="op">=</span><span class="st">"false"</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">"Abrir menu de navegacion"</span><span class="dt">&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"navbar-toggler-icon"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"collapse navbar-collapse"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"menuPrincipal"</span><span class="dt">&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">ul</span><span class="ot"> class</span><span class="op">=</span><span class="st">"navbar-nav ms-auto"</span><span class="dt">&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="ot"> class</span><span class="op">=</span><span class="st">"nav-item"</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> class</span><span class="op">=</span><span class="st">"nav-link active"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="dt">&gt;</span>Catalogo<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="ot"> class</span><span class="op">=</span><span class="st">"nav-item"</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> class</span><span class="op">=</span><span class="st">"nav-link"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="dt">&gt;</span>Pedidos<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>navbar-expand-lg</code> mantiene el menú siempre visible a partir del breakpoint <code>lg</code>, y lo colapsa detrás de un botón hamburguesa en pantallas más angostas. <code>data-bs-toggle</code> y <code>data-bs-target</code> son los que activan el comportamiento de abrir y cerrar: esa lógica vive en el <code>bootstrap.bundle.min.js</code> que enlazaste antes, sin que tengas que escribir una línea de JavaScript.</p>
+<p><strong>Card</strong>, la tarjeta de contenido:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"width: 18rem;"</span><span class="dt">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-title"</span><span class="dt">&gt;</span>Tomate cherry<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-text"</span><span class="dt">&gt;</span>Precio: $4.500 / kg. Disponible: 30 kg.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-danger"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>card</code> trae el borde, el radio de esquina y el espaciado interno ya resueltos. <code>btn</code> es la clase base de cualquier botón de Bootstrap, y siempre va acompañada de una clase de variante (<code>btn-primary</code>, <code>btn-outline-danger</code>, <code>btn-secondary</code>) que define el color según su intención.</p>
+<p><strong>Formularios</strong>, con las clases que reemplazan al CSS que escribiste a mano la semana pasada:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"nombreProducto"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-label"</span><span class="dt">&gt;</span>Nombre del producto<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-control"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"nombreProducto"</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"precioProducto"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-label"</span><span class="dt">&gt;</span>Precio<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"number"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-control"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"precioProducto"</span><span class="ot"> min</span><span class="op">=</span><span class="st">"0"</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"submit"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="dt">&gt;</span>Guardar producto<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>form-control</code> da a cada campo el mismo ancho, el mismo borde y el mismo estado de <code>focus</code>. <code>form-label</code> da a cada etiqueta el mismo espaciado respecto a su campo. <code>mb-3</code> es una clase de <strong>utilidad</strong> de espaciado, un margen inferior de nivel 3: Bootstrap no es solo componentes, también trae un juego de utilidades más pequeño que el de Tailwind, para los ajustes puntuales que no merecen un componente completo.</p>
+<p><strong>Modal</strong>, una ventana emergente para agregar o editar un producto sin salir de la página:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="ot"> data-bs-toggle</span><span class="op">=</span><span class="st">"modal"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ot">        data-bs-target</span><span class="op">=</span><span class="st">"#modalProducto"</span><span class="dt">&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  Agregar producto</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal fade"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"modalProducto"</span><span class="ot"> tabindex</span><span class="op">=</span><span class="st">"-1"</span><span class="ot"> aria-labelledby</span><span class="op">=</span><span class="st">"tituloModal"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ot">     aria-hidden</span><span class="op">=</span><span class="st">"true"</span><span class="dt">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-dialog"</span><span class="dt">&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-content"</span><span class="dt">&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-header"</span><span class="dt">&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-title"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"tituloModal"</span><span class="dt">&gt;</span>Nuevo producto<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn-close"</span><span class="ot"> data-bs-dismiss</span><span class="op">=</span><span class="st">"modal"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ot">                aria-label</span><span class="op">=</span><span class="st">"Cerrar"</span><span class="dt">&gt;&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-body"</span><span class="dt">&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-control"</span><span class="ot"> placeholder</span><span class="op">=</span><span class="st">"Nombre del producto"</span><span class="dt">&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-footer"</span><span class="dt">&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-secondary"</span><span class="ot"> data-bs-dismiss</span><span class="op">=</span><span class="st">"modal"</span><span class="dt">&gt;</span>Cancelar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="dt">&gt;</span>Guardar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Igual que el <code>navbar</code>, el modal abre y cierra solo gracias a <code>data-bs-toggle</code> y <code>data-bs-dismiss</code>, sin JavaScript propio. <code>aria-labelledby</code>, <code>aria-hidden</code> y <code>aria-label</code> ya vienen resueltos en la plantilla oficial de Bootstrap: el equipo del framework ya pensó en accesibilidad antes que tú, y respetar la plantilla tal cual es la forma de no perder ese trabajo.</p>
+</section>
+<section id="utilidades-de-bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="utilidades-de-bootstrap">Utilidades de Bootstrap</h3>
+<p>Además de sus componentes, Bootstrap trae utilidades cortas para casos donde un componente completo sería exagerado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"d-flex justify-content-between align-items-center p-3 mb-4 bg-light rounded"</span><span class="dt">&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="dt">&gt;</span>Contenido alineado con utilidades, sin escribir CSS aparte<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Utilidad</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>d-flex</code>, <code>d-grid</code>, <code>d-none</code></td>
+<td>Cambian el <code>display</code> del elemento (equivalen a <code>display: flex</code>, <code>grid</code>, <code>none</code>)</td>
+</tr>
+<tr class="even">
+<td><code>justify-content-*</code>, <code>align-items-*</code></td>
+<td>Las mismas propiedades de Flexbox que ya conoces, como clase</td>
+</tr>
+<tr class="odd">
+<td><code>m-0</code> a <code>m-5</code>, <code>p-0</code> a <code>p-5</code></td>
+<td>Margen y padding en pasos fijos, del más chico al más grande</td>
+</tr>
+<tr class="even">
+<td><code>mt-</code>, <code>mb-</code>, <code>ms-</code>, <code>me-</code></td>
+<td>Margen en un solo lado: arriba, abajo, izquierda (<code>start</code>), derecha (<code>end</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>text-center</code>, <code>text-start</code>, <code>text-end</code></td>
+<td>Alineación de texto</td>
+</tr>
+<tr class="even">
+<td><code>rounded</code>, <code>rounded-circle</code></td>
+<td>Radio de esquina</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto 1. Traduce tu grilla de la Semana 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Toma la galería de tarjetas que construiste la semana pasada con CSS Grid (una columna en teléfono, tres en escritorio). Reconstruye esa misma distribución usando <code>row</code> y <code>col-12 col-md-4</code> de Bootstrap, sin escribir ningún <code>@media</code> propio.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Solución del Reto 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"row g-3"</span><span class="dt">&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card"</span><span class="dt">&gt;&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span>Tarjeta 1<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card"</span><span class="dt">&gt;&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span>Tarjeta 2<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card"</span><span class="dt">&gt;&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span>Tarjeta 3<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>g-3</code> es la utilidad de <code>gap</code> para una <code>row</code>: separa las columnas entre sí sin necesitar un margen manual en cada una. <code>col-12</code> hace que cada tarjeta ocupe el ancho completo en teléfono; <code>col-md-4</code> la reduce a un tercio a partir de <code>md</code>, el mismo resultado del <code>grid-template-columns: repeat(3, 1fr)</code> que ya conoces, sin escribir la media query.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="parte-3.-tailwind-css" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="parte-3.-tailwind-css"><span class="header-section-number">4</span> Parte 3. Tailwind CSS</h2>
+<section id="filosofía-utility-first-en-la-práctica" class="level3">
+<h3 class="anchored" data-anchor-id="filosofía-utility-first-en-la-práctica">Filosofía utility-first, en la práctica</h3>
+<p>Donde Bootstrap te da un componente terminado, Tailwind te da piezas sueltas y te deja construir el componente. La primera vez que se ve una clase larga de Tailwind puede parecer que el HTML se “ensució” de estilos, y en cierto sentido es así: cada clase describe una única propiedad visual, a la vista, sin tener que abrir ningún archivo CSS para saber cómo se ve algo.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex items-center justify-between p-4 rounded-lg shadow bg-white"</span><span class="dt">&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  Contenido alineado, con fondo, sombra y esquinas redondeadas</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="diagrama">
+<p><img src="imagenes/anatomia-clase-vs-utilidades.svg" class="img-fluid" alt="La clase card de Bootstrap agrupa varias propiedades bajo un nombre, la combinacion de utilidades de Tailwind expone cada propiedad por separado"></p>
+</div>
+<p>Léela como una lista, no como una palabra: <code>flex</code> (display flex), <code>items-center</code> (align-items: center), <code>justify-between</code> (justify-content: space-between), <code>p-4</code> (padding en los cuatro lados), <code>rounded-lg</code> (radio de esquina grande), <code>shadow</code> (sombra sutil), <code>bg-white</code> (fondo blanco). Nada de eso vive escondido en un archivo aparte: el HTML mismo es la documentación de cómo se ve.</p>
+</section>
+<section id="cómo-se-incluye-1" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-se-incluye-1">Cómo se incluye</h3>
+<p>Tailwind se incluye con un único <code>script</code>, el <strong>Play CDN</strong>, pensado para aprender y prototipar sin ningún paso de instalación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"es"</span><span class="dt">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Panel del productor<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-gray-50"</span><span class="dt">&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-3xl font-bold text-gray-900"</span><span class="dt">&gt;</span>Mi catalogo<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>El Play CDN no es para producción
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La documentación oficial de Tailwind lo dice explícitamente: el Play CDN está pensado solo para desarrollo y aprendizaje, no para un sitio que reciba visitas reales. En producción, un proyecto Tailwind se instala con su CLI o con una herramienta como Vite, que analiza tu HTML y genera un único archivo CSS con exactamente las clases que usaste, mucho más liviano que cargar Tailwind completo desde el navegador. Ese flujo de instalación queda fuera de esta semana: aquí el Play CDN es la herramienta correcta para comparar y aprender rápido, y lo dejas explícito en la sustentación que entregas al final.</p>
+</div>
+</div>
+</section>
+<section id="espaciado-color-y-tipografía" class="level3">
+<h3 class="anchored" data-anchor-id="espaciado-color-y-tipografía">Espaciado, color y tipografía</h3>
+<p>Tailwind organiza sus utilidades en una escala numérica consistente, no en nombres sueltos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>Padding pequeño<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-4"</span><span class="dt">&gt;</span>Padding mediano<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-8"</span><span class="dt">&gt;</span>Padding grande<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Utilidad</th>
+<th>Qué controla</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p-N</code>, <code>px-N</code>, <code>py-N</code></td>
+<td>Padding: en los cuatro lados, horizontal, o vertical</td>
+</tr>
+<tr class="even">
+<td><code>m-N</code>, <code>mx-N</code>, <code>my-N</code></td>
+<td>Margen, con la misma lógica</td>
+</tr>
+<tr class="odd">
+<td><code>gap-N</code></td>
+<td>Espacio entre elementos de un <code>flex</code> o un <code>grid</code></td>
+</tr>
+<tr class="even">
+<td><code>text-{tamaño}</code></td>
+<td>Tamaño de fuente: <code>text-sm</code>, <code>text-base</code>, <code>text-xl</code>, <code>text-3xl</code></td>
+</tr>
+<tr class="odd">
+<td><code>font-{peso}</code></td>
+<td>Peso de fuente: <code>font-normal</code>, <code>font-medium</code>, <code>font-bold</code></td>
+</tr>
+<tr class="even">
+<td><code>text-{color}-{tono}</code></td>
+<td>Color de texto, por ejemplo <code>text-gray-600</code>, <code>text-red-700</code></td>
+</tr>
+<tr class="odd">
+<td><code>bg-{color}-{tono}</code></td>
+<td>Color de fondo, por ejemplo <code>bg-blue-500</code>, <code>bg-white</code></td>
+</tr>
+</tbody>
+</table>
+<p>El número después de <code>p</code>, <code>m</code> o <code>gap</code> no es un píxel exacto: es un paso dentro de una escala de espaciado (<code>1</code> equivale a <code>0.25rem</code>, <code>4</code> a <code>1rem</code>, <code>8</code> a <code>2rem</code>), la misma idea de <code>rem</code> de la Semana 5, ya convertida en clases. El color sigue el patrón <code>{propiedad}-{color}-{tono}</code>, con el tono en pasos de 100 (muy claro) a 900 (muy oscuro): <code>bg-blue-100</code> es un azul casi blanco, <code>bg-blue-900</code> es un azul casi negro.</p>
+</section>
+<section id="flexbox-y-grid-con-clases-de-tailwind" class="level3">
+<h3 class="anchored" data-anchor-id="flexbox-y-grid-con-clases-de-tailwind">Flexbox y Grid con clases de Tailwind</h3>
+<p>Las mismas dos herramientas de maquetación de la Semana 5 existen en Tailwind como utilidades directas, sin escribir una sola línea de CSS:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Flexbox: la barra de navegacion, logo a la izquierda, menu a la derecha --&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">header</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex items-center justify-between p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-lg"</span><span class="dt">&gt;</span>Mercado Campesino<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex gap-4"</span><span class="dt">&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-700 hover:text-blue-600"</span><span class="dt">&gt;</span>Catalogo<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-700 hover:text-blue-600"</span><span class="dt">&gt;</span>Pedidos<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Grid: la galeria de productos, mobile-first --&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"grid grid-cols-1 md:grid-cols-3 gap-4 p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border rounded-lg p-4"</span><span class="dt">&gt;</span>Tarjeta 1<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border rounded-lg p-4"</span><span class="dt">&gt;</span>Tarjeta 2<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border rounded-lg p-4"</span><span class="dt">&gt;</span>Tarjeta 3<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>flex</code>, <code>items-center</code>, <code>justify-between</code> son literalmente <code>display: flex</code>, <code>align-items: center</code>, <code>justify-content: space-between</code>, con otro nombre. <code>grid-cols-1</code> y <code>grid-cols-3</code> son <code>grid-template-columns: repeat(1, minmax(0, 1fr))</code> y su equivalente con 3, generadas por Tailwind sin que tengas que escribirlas.</p>
+</section>
+<section id="breakpoints-con-prefijo" class="level3">
+<h3 class="anchored" data-anchor-id="breakpoints-con-prefijo">Breakpoints con prefijo</h3>
+<p>Tailwind aplica la misma estrategia mobile-first que ya conoces: una utilidad sin prefijo rige desde el teléfono, y un prefijo antes de la utilidad (<code>md:</code>, <code>lg:</code>) la reemplaza a partir de ese ancho.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"</span><span class="dt">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  Una columna en telefono, dos en tablet, tres en escritorio</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Prefijo</th>
+<th>Ancho mínimo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(ninguno)</td>
+<td>Cualquier ancho, es la base</td>
+</tr>
+<tr class="even">
+<td><code>sm:</code></td>
+<td>640px</td>
+</tr>
+<tr class="odd">
+<td><code>md:</code></td>
+<td>768px</td>
+</tr>
+<tr class="even">
+<td><code>lg:</code></td>
+<td>1024px</td>
+</tr>
+<tr class="odd">
+<td><code>xl:</code></td>
+<td>1280px</td>
+</tr>
+<tr class="even">
+<td><code>2xl:</code></td>
+<td>1536px</td>
+</tr>
+</tbody>
+</table>
+<p><code>grid-cols-1 md:grid-cols-2 lg:grid-cols-3</code> se lee igual que el <code>col-12 col-md-6 col-lg-4</code> de Bootstrap: la lectura de izquierda a derecha agrega reglas a medida que la pantalla crece. Los valores en píxeles no son idénticos entre los dos frameworks (<code>md</code> es 768px en ambos, pero <code>lg</code> es 992px en Bootstrap y 1024px en Tailwind): son puntos de referencia parecidos, decididos por cada equipo, no un estándar único de la web.</p>
+</section>
+<section id="estados-hover-focus-y-más" class="level3">
+<h3 class="anchored" data-anchor-id="estados-hover-focus-y-más">Estados: hover, focus y más</h3>
+<p>Un prefijo antes de la utilidad también puede describir un <strong>estado</strong> en vez de un ancho de pantalla:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-blue-600 text-white px-4 py-2 rounded-lg</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">               hover:bg-blue-700 focus:ring-2 focus:ring-blue-300"</span><span class="dt">&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  Guardar producto</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>hover:bg-blue-700</code> dice “cuando el mouse esté encima, cambia el fondo a este azul más oscuro”, equivalente a escribir <code>.boton:hover { background: ...; }</code> a mano. <code>focus:ring-2 focus:ring-blue-300</code> agrega un anillo de foco visible al usar el teclado, la misma idea del <code>outline</code> accesible que viste en la Semana 5, pero como utilidad lista para combinar.</p>
+</section>
+<section id="por-qué-el-html-se-ve-cargado-de-clases-y-qué-se-gana-a-cambio" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-el-html-se-ve-cargado-de-clases-y-qué-se-gana-a-cambio">Por qué el HTML se ve “cargado” de clases, y qué se gana a cambio</h3>
+<p>La primera reacción frente a una línea como <code>class="flex items-center justify-between p-4 rounded-lg shadow bg-white hover:shadow-md"</code> suele ser que es difícil de leer. Es una objeción real, y la respuesta no es que “te acostumbras”: es que <strong>cada palabra dice exactamente una cosa</strong>, sin que tengas que saltar a otro archivo para saber qué hace. En Bootstrap, para saber qué es exactamente <code>card</code>, hay que ir a buscar su definición en el CSS del framework; en Tailwind, la definición está en el propio nombre de la clase.</p>
+<p>Ese intercambio (más clases en el HTML, a cambio de que cada una sea autoexplicativa) es la decisión de diseño central de Tailwind, y es también el argumento más común en contra: en un proyecto grande, sin disciplina, una línea de clases puede crecer mucho. Frameworks como React o Vue, que verás más adelante en tu carrera, suelen resolver esto extrayendo esa combinación de clases a un componente reutilizable una sola vez.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto 2. Convierte una tarjeta de Bootstrap a Tailwind
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tienes esta tarjeta escrita con Bootstrap:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"width: 18rem;"</span><span class="dt">&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-title"</span><span class="dt">&gt;</span>Miel de abeja<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-text"</span><span class="dt">&gt;</span>Precio: $18.000. Disponible: 12 unidades.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Reconstrúyela con utilidades de Tailwind: un contenedor con borde, esquinas redondeadas, sombra sutil y padding interno; un título en negrita; un párrafo en un gris más suave que el título.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Solución del Reto 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border rounded-lg shadow-sm p-4 w-72"</span><span class="dt">&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-lg text-gray-900"</span><span class="dt">&gt;</span>Miel de abeja<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-600"</span><span class="dt">&gt;</span>Precio: $18.000. Disponible: 12 unidades.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>border</code> y <code>rounded-lg</code> reemplazan el borde y el radio que <code>card</code> traía incluidos. <code>shadow-sm</code> es una sombra más sutil que <code>shadow</code>, apropiada para una tarjeta de contenido. <code>w-72</code> fija un ancho parecido al <code>18rem</code> en línea del ejemplo original: Tailwind también convierte anchos comunes en utilidades (<code>w-72</code> equivale a <code>18rem</code>), en vez de necesitar un atributo <code>style</code>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="parte-4.-taller.-el-panel-de-catálogo-del-productor" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="parte-4.-taller.-el-panel-de-catálogo-del-productor"><span class="header-section-number">5</span> Parte 4. Taller. El panel de catálogo del productor</h2>
+<p>Vas a construir dos veces la misma pieza de interfaz: el panel donde un productor ve y administra su catálogo. Es la funcionalidad que le corresponde a esta semana dentro del proyecto de referencia del curso, y la misma que construyes sobre tu propio proyecto.</p>
+<div class="diagrama">
+<p><img src="imagenes/mockup-panel-productor.svg" class="img-fluid" alt="Mockup del panel de catalogo del productor: encabezado con boton para agregar producto, y una lista de tarjetas de producto con nombre, precio, cantidad disponible y botones de editar y quitar"></p>
+<p>El objetivo del taller: un encabezado con el título y un botón para agregar producto, y una cuadrícula de tarjetas de producto, una columna en teléfono y tres en escritorio.</p>
+</div>
+<p>El panel necesita, como mínimo: un encabezado con el nombre del panel y un botón para agregar producto; una cuadrícula de tarjetas, cada una con el nombre del producto, su precio, su cantidad disponible y dos botones (editar y quitar); y un aviso visual cuando un producto está agotado (cantidad disponible en cero), según la regla de negocio del proyecto de referencia: un producto sin disponibilidad se muestra como agotado, no se oculta.</p>
+<section id="construye-el-panel-con-bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="construye-el-panel-con-bootstrap"><span class="paso">1</span> Construye el panel con Bootstrap</h3>
+<p>Crea <code>panel-bootstrap.html</code> en tu proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"es"</span><span class="dt">&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Catalogo del productor (Bootstrap)<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">link</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="ot">    href</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="ot">    rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="dt">&gt;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container py-4"</span><span class="dt">&gt;</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"d-flex justify-content-between align-items-center mb-4"</span><span class="dt">&gt;</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> class</span><span class="op">=</span><span class="st">"h3 mb-0"</span><span class="dt">&gt;</span>Mi catalogo<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="ot"> data-bs-toggle</span><span class="op">=</span><span class="st">"modal"</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="ot">              data-bs-target</span><span class="op">=</span><span class="st">"#modalProducto"</span><span class="dt">&gt;</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        Agregar producto</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"row g-3"</span><span class="dt">&gt;</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card h-100"</span><span class="dt">&gt;</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-title"</span><span class="dt">&gt;</span>Tomate cherry<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-text"</span><span class="dt">&gt;</span>Precio: $4.500 / kg<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 30 kg<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-primary btn-sm"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-danger btn-sm"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card h-100"</span><span class="dt">&gt;</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-title"</span><span class="dt">&gt;</span>Lechuga crespa<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-text"</span><span class="dt">&gt;</span>Precio: $2.000 / u<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 0 u<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"badge text-bg-danger mb-2"</span><span class="dt">&gt;</span>Agotado<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-primary btn-sm"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-danger btn-sm"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"col-12 col-md-4"</span><span class="dt">&gt;</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card h-100"</span><span class="dt">&gt;</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-body"</span><span class="dt">&gt;</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-title"</span><span class="dt">&gt;</span>Miel de abeja<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"card-text"</span><span class="dt">&gt;</span>Precio: $18.000 / u<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 12 u<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-primary btn-sm"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-outline-danger btn-sm"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal fade"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"modalProducto"</span><span class="ot"> tabindex</span><span class="op">=</span><span class="st">"-1"</span><span class="ot"> aria-labelledby</span><span class="op">=</span><span class="st">"tituloModal"</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a><span class="ot">       aria-hidden</span><span class="op">=</span><span class="st">"true"</span><span class="dt">&gt;</span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-dialog"</span><span class="dt">&gt;</span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-content"</span><span class="dt">&gt;</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-header"</span><span class="dt">&gt;</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-title"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"tituloModal"</span><span class="dt">&gt;</span>Nuevo producto<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn-close"</span><span class="ot"> data-bs-dismiss</span><span class="op">=</span><span class="st">"modal"</span></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a><span class="ot">                  aria-label</span><span class="op">=</span><span class="st">"Cerrar"</span><span class="dt">&gt;&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-body"</span><span class="dt">&gt;</span></span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"nombreNuevo"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-label"</span><span class="dt">&gt;</span>Nombre<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-control"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"nombreNuevo"</span><span class="dt">&gt;</span></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"precioNuevo"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-label"</span><span class="dt">&gt;</span>Precio<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"number"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"form-control"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"precioNuevo"</span><span class="ot"> min</span><span class="op">=</span><span class="st">"0"</span><span class="dt">&gt;</span></span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"modal-footer"</span><span class="dt">&gt;</span></span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-secondary"</span><span class="ot"> data-bs-dismiss</span><span class="op">=</span><span class="st">"modal"</span><span class="dt">&gt;</span>Cancelar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="dt">&gt;</span>Guardar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span></span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a><span class="ot">    src</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"</span><span class="dt">&gt;</span></span>
+<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>h-100</code> en cada <code>card</code> hace que las tres tarjetas de una misma fila midan lo mismo de alto, aunque el texto de una sea más corto que el de otra: sin esa clase, la fila se ve pareja solo cuando el contenido tiene exactamente la misma longitud. Abre el archivo con Live Server y confirma que el botón “Agregar producto” abre el modal, y que en un ancho de teléfono las tres tarjetas pasan a una sola columna.</p>
+</section>
+<section id="reconstruye-el-mismo-panel-con-tailwind" class="level3">
+<h3 class="anchored" data-anchor-id="reconstruye-el-mismo-panel-con-tailwind"><span class="paso">2</span> Reconstruye el mismo panel con Tailwind</h3>
+<p>Crea <code>panel-tailwind.html</code>. El contenido es el mismo; lo que cambia es cómo lo maquetas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"es"</span><span class="dt">&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="dt">&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Catalogo del productor (Tailwind)<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-gray-50"</span><span class="dt">&gt;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"max-w-5xl mx-auto p-6"</span><span class="dt">&gt;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex justify-between items-center mb-6"</span><span class="dt">&gt;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-2xl font-bold text-gray-900"</span><span class="dt">&gt;</span>Mi catalogo<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">button</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="ot">        class</span><span class="op">=</span><span class="st">"bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="st">               focus:ring-2 focus:ring-blue-300"</span><span class="dt">&gt;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        Agregar producto</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"grid grid-cols-1 md:grid-cols-3 gap-4"</span><span class="dt">&gt;</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-white border rounded-lg shadow-sm p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-gray-900"</span><span class="dt">&gt;</span>Tomate cherry<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-600 text-sm mb-3"</span><span class="dt">&gt;</span>Precio: $4.500 / kg<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 30 kg<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex gap-2"</span><span class="dt">&gt;</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-blue-50"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-red-600 text-red-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-red-50"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-white border rounded-lg shadow-sm p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-gray-900"</span><span class="dt">&gt;</span>Lechuga crespa<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-600 text-sm mb-1"</span><span class="dt">&gt;</span>Precio: $2.000 / u<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 0 u<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>          Agotado</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex gap-2"</span><span class="dt">&gt;</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-blue-50"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-red-600 text-red-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-red-50"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-white border rounded-lg shadow-sm p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-gray-900"</span><span class="dt">&gt;</span>Miel de abeja<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-600 text-sm mb-3"</span><span class="dt">&gt;</span>Precio: $18.000 / u<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 12 u<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex gap-2"</span><span class="dt">&gt;</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-blue-50"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>          <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-red-600 text-red-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="st">                         hover:bg-red-50"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nota lo que falta: no hay un modal con <code>data-*</code> porque Tailwind no incluye JavaScript propio. Para esta primera comparación, deja el botón “Agregar producto” sin funcionalidad: la parte de mostrar y ocultar una ventana con JavaScript la ves en la Semana 7, cuando el curso entra de lleno a manipulación del DOM.</p>
+</section>
+<section id="compara-las-dos-versiones" class="level3">
+<h3 class="anchored" data-anchor-id="compara-las-dos-versiones"><span class="paso">3</span> Compara las dos versiones</h3>
+<p>Abre los dos archivos uno al lado del otro. Verifica en cada uno, con las herramientas de desarrollador de Chrome, un ancho de teléfono (375px) y uno de escritorio (1280px):</p>
+<ul>
+<li>¿La cuadrícula pasa de una columna a tres en el mismo punto en ambas versiones?</li>
+<li>¿Cuál HTML es más corto? ¿Cuál es más fácil de modificar sin mirar ninguna documentación?</li>
+<li>Cambia el color del botón “Agregar producto” en las dos versiones. ¿Qué tan rápido lo lograste en cada una?</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reto 3. Agrega un cuarto producto agotado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la versión de Tailwind, agrega una cuarta tarjeta de producto con disponibilidad en cero, reutilizando la etiqueta <code>Agotado</code> de la segunda tarjeta. Verifica que la cuadrícula siga viéndose bien con cuatro tarjetas en vez de tres (en escritorio quedan tres en la primera fila y una sola en la segunda, ocupando un tercio del ancho).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Solución del Reto 3
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"bg-white border rounded-lg shadow-sm p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h5</span><span class="ot"> class</span><span class="op">=</span><span class="st">"font-bold text-gray-900"</span><span class="dt">&gt;</span>Huevos de campo<span class="dt">&lt;/</span><span class="kw">h5</span><span class="dt">&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"text-gray-600 text-sm mb-1"</span><span class="dt">&gt;</span>Precio: $12.000 / docena<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>Disponible: 0 docenas<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full mb-3"</span><span class="dt">&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    Agotado</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex gap-2"</span><span class="dt">&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-blue-600 text-blue-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">                   hover:bg-blue-50"</span><span class="dt">&gt;</span>Editar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"border border-red-600 text-red-600 text-sm px-3 py-1 rounded-full</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="st">                   hover:bg-red-50"</span><span class="dt">&gt;</span>Quitar<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grid-cols-1 md:grid-cols-3</code> no necesita ningún ajuste al agregar una tarjeta: Grid reparte automáticamente el sobrante en una nueva fila, exactamente igual que como se comportó en la Semana 5.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="lista-de-chequeo-de-la-semana" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="lista-de-chequeo-de-la-semana"><span class="header-section-number">6</span> Lista de chequeo de la semana</h2>
+<div class="checklist">
+<ul class="task-list">
+<li><label><input type="checkbox"><code>panel-bootstrap.html</code> incluye Bootstrap por CDN, con el <code>link</code> de CSS y el <code>script</code> del bundle antes de cerrar <code>body</code>.</label></li>
+<li><label><input type="checkbox">El panel de Bootstrap usa <code>container</code>, <code>row</code> y <code>col-*</code> para su cuadrícula, y <code>card</code> para cada producto.</label></li>
+<li><label><input type="checkbox">El modal “Agregar producto” de Bootstrap abre y cierra correctamente.</label></li>
+<li><label><input type="checkbox"><code>panel-tailwind.html</code> incluye Tailwind por el Play CDN, sin ningún archivo CSS aparte.</label></li>
+<li><label><input type="checkbox">El panel de Tailwind usa <code>grid</code> con <code>grid-cols-1</code> y un prefijo responsivo para pasar a tres columnas.</label></li>
+<li><label><input type="checkbox">Los dos paneles muestran el mismo contenido: nombre, precio, disponibilidad, aviso de agotado, y botones de editar y quitar.</label></li>
+<li><label><input type="checkbox">Los dos paneles se ven correctamente en 375px y en 1280px de ancho.</label></li>
+<li><label><input type="checkbox">Existe un archivo o sección de sustentación, con al menos tres criterios técnicos, que explica cuál framework vas a seguir usando en tu proyecto.</label></li>
+</ul>
+</div>
+</section>
+<section id="trabajo-independiente-unas-6-h" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="trabajo-independiente-unas-6-h"><span class="header-section-number">7</span> Trabajo independiente (unas 6 h)</h2>
+<p>Termina y pule las dos versiones del panel de catálogo del productor sobre tu propio proyecto, con tus propios productos o servicios, no los del ejemplo de esta guía. Las dos versiones deben verse correctamente en al menos dos anchos de referencia (375px y 1280px).</p>
+<p>Escribe la sustentación: uno o dos párrafos, en el mismo repositorio, que expliquen con cuál framework vas a seguir el resto del proyecto (o si decides seguir sin ninguno, con CSS puro), con al menos tres criterios técnicos concretos de los discutidos en la Parte 1. “Me gustó más” no es un criterio técnico; “el HTML queda más corto pero pierdo detalle sobre cada estilo” sí lo es.</p>
+<p>Texto del pacto: “Sección del proyecto rehecha en cada framework, con sustentación.” Esta semana no tiene porcentaje evaluativo, pero el docente revisa el avance como prerrequisito de la Semana 7.</p>
+<p>Entregable concreto: <code>panel-bootstrap.html</code>, <code>panel-tailwind.html</code> y la sustentación (un archivo <code>sustentacion-semana-06.md</code>, o una sección al final del <code>README.md</code> de tu proyecto), en la rama <code>main</code>, con un commit que lo deje publicado antes del inicio de la sesión de la Semana 7.</p>
+</section>
+<section id="recursos" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="recursos"><span class="header-section-number">8</span> Recursos</h2>
+<ul>
+<li>Documentación oficial de Bootstrap 5.3: <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">getbootstrap.com/docs/5.3</a></li>
+<li>Sistema de grillas de Bootstrap: <a href="https://getbootstrap.com/docs/5.3/layout/grid/">getbootstrap.com/docs/5.3/layout/grid</a></li>
+<li>Documentación oficial de Tailwind CSS: <a href="https://tailwindcss.com/docs/styling-with-utility-classes">tailwindcss.com/docs</a></li>
+<li>Play CDN de Tailwind: <a href="https://tailwindcss.com/docs/installation/play-cdn">tailwindcss.com/docs/installation/play-cdn</a></li>
+<li>Referencia de todas las utilidades de Tailwind: <a href="https://tailwindcss.com/docs/installation">tailwindcss.com/docs/installation</a></li>
+<li>Diapositivas de la sesión: <a href="../../web/semana-06/presentacion.html">presentación de la Semana 6</a></li>
+</ul>
+<div class="pie-doc">
+<p>Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>
+<p><strong>Transparencia.</strong> La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Sonnet 5 de Anthropic. Todo el contenido fue revisado y validado.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oscarleosanchez\.github\.io\/sitio-iue-2026-02\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Oscar Leonel Sánchez Conde</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Institución Universitaria de Envigado. Facultad de Ingenierías</p>
+</div>
+    <div class="nav-footer-right">
+<p>Semestre 2026-02</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

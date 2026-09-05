@@ -67,6 +67,10 @@ website:
           contents:
             - text: "Semana 5. HTML5 y CSS3"
               href: web/semana-05/index.qmd
+            # Las diapositivas no van en la barra lateral: se abren con el
+            # boton que esta al inicio de la guia de la semana.
+            - text: "Semana 6. Bootstrap 5 y Tailwind CSS"
+              href: web/semana-06/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

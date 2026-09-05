@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="340" viewBox="0 0 720 340" role="img" aria-label="Dos filosofias de framework CSS: Bootstrap entrega componentes ya armados, Tailwind entrega utilidades pequenas que se combinan" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="df-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#df-sombra)">
+      <rect x="30" y="30" width="310" height="280" rx="10" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+    </g>
+    <text x="185" y="58" font-size="15" font-weight="700" fill="#17456f">Bootstrap: componentes</text>
+    <text x="185" y="78" font-size="11.5" fill="#5b6876">piezas grandes ya armadas</text>
+
+    <rect x="60" y="100" width="250" height="60" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.4"/>
+    <text x="185" y="124" font-size="12" fill="#17456f" font-family="Cascadia Mono, Consolas, monospace">class="card"</text>
+    <text x="185" y="144" font-size="10.5" fill="#5b6876">trae borde, sombra y espaciado juntos</text>
+
+    <rect x="60" y="172" width="250" height="46" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.4"/>
+    <text x="185" y="200" font-size="12" fill="#17456f" font-family="Cascadia Mono, Consolas, monospace">class="btn btn-primary"</text>
+
+    <text x="185" y="250" font-size="11" fill="#5b6876">Aprendes el nombre del</text>
+    <text x="185" y="266" font-size="11" fill="#5b6876">componente, no cada propiedad</text>
+
+    <g filter="url(#df-sombra)">
+      <rect x="380" y="30" width="310" height="280" rx="10" fill="#f4faf7" stroke="#0e8f8f" stroke-width="1.8"/>
+    </g>
+    <text x="535" y="58" font-size="15" font-weight="700" fill="#0e8f8f">Tailwind: utilidades</text>
+    <text x="535" y="78" font-size="11.5" fill="#5b6876">piezas pequenas que combinas</text>
+
+    <rect x="405" y="100" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="435" y="119" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">flex</text>
+    <rect x="470" y="100" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="500" y="119" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">p-4</text>
+    <rect x="535" y="100" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="565" y="119" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">rounded</text>
+    <rect x="405" y="136" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="435" y="155" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">shadow</text>
+    <rect x="470" y="136" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="500" y="155" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">bg-white</text>
+    <rect x="535" y="136" width="60" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f"/>
+    <text x="565" y="155" font-size="9.5" fill="#0e8f8f" font-family="Cascadia Mono, Consolas, monospace">gap-4</text>
+
+    <path d="M 470 172 L 470 190" stroke="#0e8f8f" stroke-width="1.2" fill="none" marker-end="url(#df-flecha)"/>
+    <rect x="405" y="192" width="260" height="30" rx="6" fill="#ffffff" stroke="#0e8f8f" stroke-width="1.6"/>
+    <text x="535" y="211" font-size="10" fill="#16202b" font-family="Cascadia Mono, Consolas, monospace">flex p-4 rounded shadow bg-white gap-4</text>
+
+    <text x="535" y="250" font-size="11" fill="#5b6876">Combinas utilidades sueltas</text>
+    <text x="535" y="266" font-size="11" fill="#5b6876">para armar tu propio diseno</text>
+
+    <defs>
+      <marker id="df-flecha" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="#0e8f8f"/>
+      </marker>
+    </defs>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700" height="380" viewBox="0 0 700 380" role="img" aria-label="Mockup del panel de catalogo del productor: encabezado con boton para agregar producto, y una lista de tarjetas de producto con nombre, precio, cantidad disponible y botones de editar y quitar" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="mp-sombra" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f2540" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <g filter="url(#mp-sombra)">
+      <rect x="30" y="20" width="640" height="340" rx="10" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.6"/>
+    </g>
+    <rect x="30" y="20" width="640" height="60" rx="10" fill="#f6f8fa"/>
+    <rect x="30" y="60" width="640" height="20" fill="#f6f8fa"/>
+    <text x="55" y="56" font-size="15" font-weight="700" fill="#16202b">Mi catalogo</text>
+    <rect x="530" y="35" width="140" height="34" rx="17" fill="#17456f"/>
+    <text x="600" y="57" font-size="11.5" fill="#ffffff" text-anchor="middle">Agregar producto</text>
+
+    <g>
+      <rect x="55" y="105" width="180" height="130" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.4"/>
+      <text x="75" y="130" font-size="12" font-weight="700" fill="#16202b">Tomate cherry</text>
+      <text x="75" y="150" font-size="11" fill="#5b6876">Precio: $4.500 / kg</text>
+      <text x="75" y="168" font-size="11" fill="#5b6876">Disponible: 30 kg</text>
+      <rect x="75" y="190" width="60" height="26" rx="13" fill="#ffffff" stroke="#2f7bb8"/>
+      <text x="105" y="207" font-size="9.5" fill="#17456f" text-anchor="middle">Editar</text>
+      <rect x="145" y="190" width="60" height="26" rx="13" fill="#ffffff" stroke="#a32d22"/>
+      <text x="175" y="207" font-size="9.5" fill="#a32d22" text-anchor="middle">Quitar</text>
+
+      <rect x="260" y="105" width="180" height="130" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.4"/>
+      <text x="280" y="130" font-size="12" font-weight="700" fill="#16202b">Lechuga crespa</text>
+      <text x="280" y="150" font-size="11" fill="#5b6876">Precio: $2.000 / u</text>
+      <text x="280" y="168" font-size="11" fill="#5b6876">Disponible: 0 u</text>
+      <text x="280" y="184" font-size="10" fill="#a32d22">Agotado</text>
+      <rect x="280" y="196" width="60" height="26" rx="13" fill="#ffffff" stroke="#2f7bb8"/>
+      <text x="310" y="213" font-size="9.5" fill="#17456f" text-anchor="middle">Editar</text>
+      <rect x="350" y="196" width="60" height="26" rx="13" fill="#ffffff" stroke="#a32d22"/>
+      <text x="380" y="213" font-size="9.5" fill="#a32d22" text-anchor="middle">Quitar</text>
+
+      <rect x="465" y="105" width="180" height="130" rx="8" fill="#ffffff" stroke="#cfd8e3" stroke-width="1.4"/>
+      <text x="485" y="130" font-size="12" font-weight="700" fill="#16202b">Miel de abeja</text>
+      <text x="485" y="150" font-size="11" fill="#5b6876">Precio: $18.000 / u</text>
+      <text x="485" y="168" font-size="11" fill="#5b6876">Disponible: 12 u</text>
+      <rect x="485" y="190" width="60" height="26" rx="13" fill="#ffffff" stroke="#2f7bb8"/>
+      <text x="515" y="207" font-size="9.5" fill="#17456f" text-anchor="middle">Editar</text>
+      <rect x="555" y="190" width="60" height="26" rx="13" fill="#ffffff" stroke="#a32d22"/>
+      <text x="585" y="207" font-size="9.5" fill="#a32d22" text-anchor="middle">Quitar</text>
+    </g>
+
+    <text x="350" y="270" font-size="11.5" fill="#5b6876" text-anchor="middle">Una columna en telefono, tres en escritorio</text>
+    <rect x="55" y="290" width="580" height="50" rx="8" fill="#f6f8fa" stroke="#cfd8e3" stroke-dasharray="4 3"/>
+    <text x="350" y="320" font-size="11" fill="#5b6876" text-anchor="middle">Este mismo panel se construye dos veces: con Bootstrap y con Tailwind</text>
+  </g>
+</svg>
