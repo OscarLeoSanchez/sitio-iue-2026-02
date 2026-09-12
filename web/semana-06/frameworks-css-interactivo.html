@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap y Tailwind desde cero</title>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --azul: #0d6efd;
+      --azul-oscuro: #084298;
+      --azul-claro: #eaf2ff;
+      --azul-tenue: #f4f8ff;
+      --turquesa: #0ea5e9;
+      --turquesa-oscuro: #0369a1;
+      --turquesa-claro: #e5f6fd;
+      --turquesa-tenue: #f2fbff;
+      --verde: #138a72;
+      --verde-claro: #e9f8f3;
+      --amarillo: #fff5cc;
+      --rojo: #c44545;
+      --rojo-claro: #fdeceb;
+      --texto: #1c2a3e;
+      --texto-suave: #5c6b81;
+      --borde: #dbe3ef;
+      --fondo: #eef2f9;
+      --blanco: #ffffff;
+      --sombra: 0 16px 40px rgba(21, 45, 82, 0.10);
+      --sombra-suave: 0 6px 18px rgba(21, 45, 82, 0.06);
+      --radio: 20px;
+      --radio-chico: 12px;
+      --ancho: 1240px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+      line-height: 1.65;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: #eaf0f9;
+      padding: 0.1rem 0.4rem;
+      border-radius: 6px;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 0;
+      overflow: auto;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 10px 0 18px;
+    }
+
+    th {
+      text-align: left;
+      padding: 9px 8px;
+      border-bottom: 2px solid var(--borde);
+      color: var(--texto-suave);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    /* Encabezado y progreso */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .topbar-inner {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      color: #142238;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: background 0.2s ease;
+    }
+
+    .brand-tag.bs { background: var(--azul); }
+    .brand-tag.tw { background: var(--turquesa); }
+    .brand-tag.cierre { background: #56606f; }
+
+    .progress-track {
+      width: min(340px, 38vw);
+      height: 8px;
+      background: #e6ecf5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--azul), var(--turquesa));
+      transition: width 0.15s linear;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      place-items: center;
+      padding: 68px 22px 54px;
+      background:
+        radial-gradient(circle at 6% 15%, rgba(13, 110, 253, 0.12), transparent 34%),
+        radial-gradient(circle at 94% 10%, rgba(14, 165, 233, 0.14), transparent 32%),
+        linear-gradient(180deg, #ffffff, #f6f9ff);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .hero-content {
+      max-width: 920px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #eef2fb;
+      color: #33415c;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+      margin: 18px 0 14px;
+      color: #142238;
+    }
+
+    .hero p {
+      color: var(--texto-suave);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto 26px;
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 22px;
+      text-align: left;
+    }
+
+    .hero-card {
+      border-radius: 16px;
+      padding: 18px 20px;
+      color: #ffffff;
+    }
+
+    .hero-card.bs { background: linear-gradient(135deg, #0d6efd, #084298); }
+    .hero-card.tw { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
+
+    .hero-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-card p {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.9rem;
+      margin: 0 0 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .btn-white {
+      background: #ffffff;
+      color: #142238;
+    }
+
+    .btn-soft {
+      background: #ffffff;
+      color: #33415c;
+      border-color: var(--borde);
+    }
+
+    /* Layout general */
+
+    .layout {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 30px;
+      padding: 34px 22px 90px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 76px;
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      padding: 18px;
+      font-size: 0.88rem;
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
+    }
+
+    .sidebar-group {
+      margin-bottom: 14px;
+    }
+
+    .sidebar-group-title {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .sidebar-group-title.bs { background: var(--azul); }
+    .sidebar-group-title.tw { background: var(--turquesa); }
+    .sidebar-group-title.cierre { background: #56606f; }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar nav a {
+      padding: 6px 9px;
+      border-radius: 9px;
+      text-decoration: none;
+      color: #3d4c63;
+      font-size: 0.86rem;
+    }
+
+    .sidebar nav a:hover {
+      background: var(--azul-tenue);
+      color: var(--azul-oscuro);
+    }
+
+    .sidebar nav a.active {
+      background: var(--azul);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .part-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 26px;
+      border-radius: var(--radio);
+      color: #ffffff;
+      margin: 8px 0 20px;
+      box-shadow: var(--sombra);
+    }
+
+    .part-title.bs { background: linear-gradient(120deg, #0d6efd, #084298); }
+    .part-title.tw { background: linear-gradient(120deg, #0ea5e9, #0369a1); }
+    .part-title.cierre { background: linear-gradient(120deg, #56606f, #2c3542); }
+
+    .part-title .part-number {
+      font-size: 2.1rem;
+      font-weight: 900;
+      opacity: 0.55;
+    }
+
+    .part-title h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .part-title p {
+      margin: 4px 0 0;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Secciones de leccion */
+
+    .lesson {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-left: 5px solid var(--borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-suave);
+      padding: 28px clamp(18px, 3vw, 40px);
+      margin-bottom: 22px;
+      scroll-margin-top: 88px;
+    }
+
+    .lesson.bs { border-left-color: var(--azul); }
+    .lesson.tw { border-left-color: var(--turquesa); }
+    .lesson.cierre { border-left-color: #56606f; }
+
+    .lesson-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .lesson-tag.bs { background: var(--azul); }
+    .lesson-tag.tw { background: var(--turquesa); }
+    .lesson-tag.cierre { background: #56606f; }
+
+    .lesson h2 {
+      margin: 2px 0 10px;
+      font-size: 1.32rem;
+      color: #16233a;
+    }
+
+    .lesson h3 {
+      margin: 26px 0 8px;
+      font-size: 1.06rem;
+      color: #223250;
+    }
+
+    .lead {
+      color: var(--texto-suave);
+      font-size: 1rem;
+      max-width: 780px;
+    }
+
+    .note {
+      background: var(--amarillo);
+      border: 1px solid #f0d99a;
+      border-radius: var(--radio-chico);
+      padding: 12px 16px;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+
+    .note.info {
+      background: var(--azul-claro);
+      border-color: #bcd6fb;
+    }
+
+    .note.tw {
+      background: var(--turquesa-claro);
+      border-color: #a9e2f6;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .concept-card {
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-chico);
+      padding: 14px;
+      background: #fbfcff;
+      font-size: 0.9rem;
+      color: var(--texto-suave);
+    }
+
+    .concept-card strong {
+      display: block;
+      color: var(--texto);
+      margin-bottom: 4px;
+    }
+
+    .diagram-figure {
+      margin: 18px 0;
+      text-align: center;
+    }
+
+    .diagram-figure img {
+      max-width: 100%;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 10px;
+    }
+
+    .diagram-figure figcaption {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      margin-top: 8px;
+    }
+
+    /* Marcos de codigo */
+
+    .code-box {
+      background: #0f172a;
+      color: #dbeafe;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      margin: 10px 0;
+    }
+
+    /* Banco de trabajo: controles a un lado, resultado en vivo al otro */
+
+    .workbench {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 18px;
+      margin: 16px 0;
+      align-items: start;
+    }
+
+    .workbench-controls {
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fbfcff;
+    }
+
+    .workbench-title {
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #16233a;
+      font-size: 0.94rem;
+    }
+
+    .rule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rule-toggle {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3px 10px;
+      text-align: left;
+      border: 1px solid var(--borde);
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      transition: 0.15s;
+    }
+
+    .rule-toggle .rule-num {
+      grid-row: 1 / 3;
+      align-self: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e7ecf5;
+      color: #56607a;
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .rule-toggle code {
+      background: none;
+      padding: 0;
+      font-weight: 700;
+      color: #16233a;
+    }
+
+    .rule-toggle small {
+      color: var(--texto-suave);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .rule-toggle:hover {
+      border-color: var(--azul);
+    }
+
+    .rule-toggle.active {
+      border-color: var(--azul);
+      background: var(--azul-tenue);
+    }
+
+    .rule-toggle.active .rule-num {
+      background: var(--azul);
+      color: #ffffff;
+    }
+
+    .tw .rule-toggle.active {
+      border-color: var(--turquesa);
+      background: var(--turquesa-tenue);
+    }
+
+    .tw .rule-toggle.active .rule-num {
+      background: var(--turquesa);
+    }
+
+    /* Grupos de seleccion unica, en forma de pildora segmentada */
+
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .segmented-label {
+      font-weight: 700;
+      font-size: 0.84rem;
+      margin: 10px 0 6px;
+      display: block;
+      color: #33415c;
+    }
+
+    .segmented button {
+      border: 1px solid var(--borde);
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 0.82rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .segmented button.active {
+      background: var(--azul);
+      color: #ffffff;
+      border-color: var(--azul);
+    }
+
+    .tw-scope .segmented button.active {
+      background: var(--turquesa);
+      border-color: var(--turquesa);
+    }
+
+    .workbench-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .iframe-shell {
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .iframe-toolbar {
+      background: #eef3f9;
+      border-bottom: 1px solid var(--borde);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      color: var(--texto-suave);
+    }
+
+    .iframe-toolbar .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #c3ccd9;
+    }
+
+    .iframe-toolbar .label {
+      margin-left: auto;
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    iframe.stage {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .explanation {
+      padding: 12px 14px;
+      background: var(--verde-claro);
+      border: 1px solid #b7e2d5;
+      border-radius: var(--radio-chico);
+      font-size: 0.88rem;
+    }
+
+    .explanation strong {
+      color: #0d5a48;
+    }
+
+    /* Deslizador */
+
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .control-row label {
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    input[type="range"] {
+      width: 200px;
+    }
+
+    /* Interruptor de dispositivo */
+
+    .device-switch {
+      display: inline-flex;
+      border: 1px solid var(--borde);
+      border-radius: 999px;
+      padding: 3px;
+      background: #ffffff;
+      gap: 3px;
+    }
+
+    .device-switch button {
+      border: 0;
+      background: transparent;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--texto-suave);
+    }
+
+    .device-switch button.active {
+      background: var(--azul);
+      color: #ffffff;
+    }
+
+    .device-lab {
+      overflow-x: auto;
+      background: #eef2f9;
+      border-radius: 16px;
+      padding: 20px 18px;
+    }
+
+    .device-frame-wrap {
+      margin: 0 auto;
+      transition: width 0.25s ease;
+      width: 1280px;
+    }
+
+    .device-frame-wrap.tablet { width: 700px; }
+    .device-frame-wrap.mobile { width: 375px; }
+
+    .device-hint {
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      margin: 8px 2px 0;
+    }
+
+    /* Comparacion lado a lado */
+
+    .compare-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .compare-card {
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .compare-head {
+      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
+
+    .compare-head.bs { background: var(--azul); }
+    .compare-head.tw { background: var(--turquesa); }
+
+    /* Herramienta de decision */
+
+    .decision-tool {
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fbfcff;
+    }
+
+    .decision-question {
+      margin-bottom: 16px;
+    }
+
+    .decision-question p {
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .decision-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .decision-options button {
+      border: 1px solid var(--borde);
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+    }
+
+    .decision-options button.chosen {
+      background: var(--azul-claro);
+      border-color: var(--azul);
+      color: var(--azul-oscuro);
+      font-weight: 700;
+    }
+
+    .decision-result {
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--verde-claro);
+      border: 1px solid #b7e2d5;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .decision-result.show {
+      display: block;
+    }
+
+    /* Comprobacion final */
+
+    .quiz-question {
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fbfcff;
+    }
+
+    .quiz-question p {
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quiz-options button {
+      border: 1px solid var(--borde);
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+    }
+
+    .quiz-options button.correct {
+      background: var(--verde-claro);
+      border-color: var(--verde);
+      color: #0d5a48;
+      font-weight: 700;
+    }
+
+    .quiz-options button.wrong {
+      background: var(--rojo-claro);
+      border-color: var(--rojo);
+      color: #8a2f2f;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      min-height: 1.2em;
+    }
+
+    .reveal-toggle {
+      border: 1px solid var(--borde);
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin: 6px 0 12px;
+    }
+
+    .pie-doc {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 0 22px 50px;
+      color: var(--texto-suave);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        max-height: none;
+      }
+
+      .concept-grid,
+      .compare-grid,
+      .workbench,
+      .hero-split {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Bootstrap y Tailwind <span class="brand-tag bs" id="topTag">Parte 1</span></div>
+      <div class="progress-track" aria-label="Progreso de lectura">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="eyebrow">Programacion Web. Frameworks CSS</span>
+      <h1>Bootstrap y Tailwind, clase por clase</h1>
+      <p>
+        El laboratorio tiene dos partes completas, una por framework. Cada modulo corre un
+        fragmento real dentro de un marco aislado: activas una clase, el marco se reconstruye con
+        esa clase real aplicada, el codigo HTML queda visible y la explicacion de esa clase
+        aparece al mismo tiempo, sin esperar al final.
+      </p>
+      <div class="hero-split">
+        <div class="hero-card bs">
+          <strong>Parte 1. Bootstrap 5</strong>
+          <p>Un framework de componentes: activas una clase y llega la pieza completa ya
+            disenada.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn btn-white" href="#bs-obtener">Empezar con Bootstrap</a>
+            <a class="btn btn-soft" href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener">Sitio oficial</a>
+          </div>
+        </div>
+        <div class="hero-card tw">
+          <strong>Parte 2. Tailwind CSS</strong>
+          <p>Un framework utility-first: combinas piezas minimas, una por propiedad, hasta armar
+            tu propio diseno.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn btn-white" href="#tw-obtener">Empezar con Tailwind</a>
+            <a class="btn btn-soft" href="https://tailwindcss.com/docs/styling-with-utility-classes" target="_blank" rel="noopener">Sitio oficial</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <span class="sidebar-group-title bs">Parte 1. Bootstrap</span>
+        <nav>
+          <a href="#bs-obtener">1.1 Como obtenerlo</a>
+          <a href="#bs-contenedor">1.2 Container, row y col</a>
+          <a href="#bs-doce-columnas">1.3 Reparte doce columnas</a>
+          <a href="#bs-breakpoints">1.4 Breakpoints</a>
+          <a href="#bs-espaciado">1.5 Espaciado</a>
+          <a href="#bs-color-forma">1.6 Color, texto y forma</a>
+          <a href="#bs-flex">1.7 Utilidades flexbox</a>
+          <a href="#bs-botones">1.8 Botones</a>
+          <a href="#bs-navbar">1.9 Navbar</a>
+          <a href="#bs-cards">1.10 Cards</a>
+          <a href="#bs-formularios">1.11 Formularios</a>
+          <a href="#bs-modal">1.12 Modal</a>
+          <a href="#bs-practica">1.13 Practica completa</a>
+        </nav>
+      </div>
+      <div class="sidebar-group">
+        <span class="sidebar-group-title tw">Parte 2. Tailwind</span>
+        <nav>
+          <a href="#tw-obtener">2.1 Como obtenerlo</a>
+          <a href="#tw-espaciado">2.2 Escala de espaciado</a>
+          <a href="#tw-color">2.3 Color y tono</a>
+          <a href="#tw-tipografia">2.4 Tipografia</a>
+          <a href="#tw-flex">2.5 Utilidades flexbox</a>
+          <a href="#tw-grid">2.6 Grid con prefijo</a>
+          <a href="#tw-breakpoints">2.7 Breakpoints</a>
+          <a href="#tw-estados">2.8 Hover y focus</a>
+          <a href="#tw-botones">2.9 Botones desde cero</a>
+          <a href="#tw-cards">2.10 Tarjetas desde cero</a>
+          <a href="#tw-practica">2.11 Practica completa</a>
+        </nav>
+      </div>
+      <div class="sidebar-group">
+        <span class="sidebar-group-title cierre">Cierre</span>
+        <nav>
+          <a href="#comparacion">3.1 Comparacion en vivo</a>
+          <a href="#decision">3.2 Herramienta de decision</a>
+          <a href="#quiz">3.3 Comprobacion</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main>
+      <div class="part-title bs">
+        <span class="part-number">1</span>
+        <div>
+          <h2>Bootstrap 5. Framework de componentes</h2>
+          <p>Desde como se incluye hasta el panel de catalogo completo.</p>
+        </div>
+      </div>
+
+      <section class="lesson bs" id="bs-obtener">
+        <span class="lesson-tag bs">1.1</span>
+        <h2>Como obtener Bootstrap</h2>
+        <p class="lead">
+          La forma mas rapida es un CDN: una direccion de internet desde donde el navegador
+          descarga el archivo la primera vez que abres la pagina, sin instalar nada. Elige una
+          opcion para ver el codigo completo y la explicacion de cada linea.
+        </p>
+
+        <div class="segmented" id="bsObtenerOptions">
+          <button data-value="cdn" class="active">CDN (la que usa esta guia)</button>
+          <button data-value="npm">Instalar con npm (para mas adelante)</button>
+        </div>
+
+        <pre class="code-box"><code id="bsObtenerCode"></code></pre>
+        <div class="explanation" id="bsObtenerExplain"></div>
+
+        <div class="note info">
+          Pagina oficial de Bootstrap 5.3, con la lista completa de componentes y utilidades:
+          <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener">getbootstrap.com/docs/5.3</a>.
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-contenedor">
+        <span class="lesson-tag bs">1.2</span>
+        <h2>Container, row y col: las tres piezas del grid</h2>
+        <p class="lead">
+          Toda maquetacion de Bootstrap se arma anidando estas tres clases. Actívalas en orden y
+          observa como cada una agrega una capa a la estructura.
+        </p>
+
+        <div class="diagram-figure">
+          <img src="imagenes/bootstrap-grid-columnas.svg"
+               alt="El grid de Bootstrap: un container centra el contenido, una row agrupa columnas, y doce columnas reparten el ancho disponible">
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Activa cada clase en orden</div>
+            <div class="rule-list" id="bsContenedorRules">
+              <button class="rule-toggle" data-key="container"><span class="rule-num">1</span><code>container</code><small>Centra el contenido en la pagina y le da un ancho maximo, con margen lateral en pantallas angostas. Sin esta clase, el contenido se pega al borde izquierdo de la pantalla y crece sin limite en monitores anchos.</small></button>
+              <button class="rule-toggle" data-key="row"><span class="rule-num">2</span><code>row</code><small>Envuelve las columnas. Por debajo es display flex, con margenes negativos ya resueltos para que las columnas encajen sin desbordar el container. Sin esta clase, las columnas no se alinean en una misma fila.</small></button>
+              <button class="rule-toggle" data-key="col"><span class="rule-num">3</span><code>col-4</code><small>Cada columna ocupa 4 de las doce partes disponibles de la row: tres columnas de 4 suman las doce completas. Sin esta clase, cada div ocupa el ancho completo y cae en su propia linea, como cualquier bloque normal.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">index.html</span></div>
+              <iframe class="stage" id="bsContenedorFrame" title="Container, row y col en vivo" height="130"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsContenedorCode"></code></pre>
+            <div class="explanation" id="bsContenedorExplain"></div>
+          </div>
+        </div>
+
+        <div class="note info">
+          Los numeros de las columnas no tienen que sumar doce en cada fila: si suman menos, sobra
+          espacio; si un grupo se pasa de doce, el sobrante salta a una linea nueva.
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-doce-columnas">
+        <span class="lesson-tag bs">1.3</span>
+        <h2>Reparte las doce columnas entre varios elementos</h2>
+        <p class="lead">
+          Mueve el deslizador. El numero de elementos cambia y la clase <code>col-md-N</code> de
+          cada uno se recalcula para que la fila siga sumando doce.
+        </p>
+
+        <div class="control-row">
+          <label for="bsGridRange">Columnas visibles: <strong id="bsGridValue">3</strong></label>
+          <input type="range" id="bsGridRange" min="1" max="6" value="3">
+        </div>
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">panel.html</span></div>
+              <iframe class="stage" id="bsGridFrame" title="Grid de Bootstrap en vivo" height="140"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="bsGridCode"></code></pre>
+            <div class="explanation" id="bsGridExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-breakpoints">
+        <span class="lesson-tag bs">1.4</span>
+        <h2>Breakpoints: la misma columna en tres anchos</h2>
+        <p class="lead">
+          Un prefijo de breakpoint agrega una regla que reemplaza la base a partir de cierto
+          ancho, siguiendo la misma logica mobile-first de la Semana 5: la clase sin prefijo manda
+          hasta que el ancho de la pantalla alcanza el prefijo, y a partir de ahi una nueva regla
+          toma el control. Construye la clase de la columna y cambia de dispositivo para ver
+          exactamente en que ancho entra a funcionar cada prefijo.
+        </p>
+
+        <div class="diagram-figure">
+          <img src="imagenes/breakpoints-comparacion.svg"
+               alt="Comparacion de puntos de quiebre: Bootstrap usa sm md lg xl xxl con prefijo antes de la propiedad, Tailwind usa sm md lg xl 2xl como prefijo de la clase">
+        </div>
+
+        <div class="workbench-controls" style="margin-bottom:16px;">
+          <div class="workbench-title">Construye la clase responsiva de la columna</div>
+          <div class="rule-list" id="bsBreakRules">
+            <button class="rule-toggle active" data-key="base" disabled><span class="rule-num">1</span><code>col-12</code><small>Base sin prefijo: ocupa las doce columnas (el ancho completo) desde el telefono mas angosto. Sin esta base, la columna no tendria ningun ancho definido en pantallas pequenas.</small></button>
+            <button class="rule-toggle" data-key="md"><span class="rule-num">2</span><code>col-md-6</code><small>Desde 768px de ancho en adelante, reemplaza a col-12: la columna pasa a ocupar solo 6 de 12, es decir dos columnas por fila.</small></button>
+            <button class="rule-toggle" data-key="lg"><span class="rule-num">3</span><code>col-lg-4</code><small>Desde 992px de ancho en adelante, reemplaza a col-md-6: la columna pasa a ocupar 4 de 12, es decir tres columnas por fila.</small></button>
+          </div>
+          <div class="control-row" style="margin-top:14px;">
+            <span class="device-switch" id="bsDeviceSwitch">
+              <button data-device="desktop" class="active">Escritorio 1280px</button>
+              <button data-device="tablet">Tablet 700px</button>
+              <button data-device="mobile">Movil 375px</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="device-lab">
+          <div class="device-frame-wrap" id="bsDeviceWrap">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="bsBreakLabel">col-12</span></div>
+              <iframe class="stage" id="bsBreakFrame" title="Breakpoints de Bootstrap" height="230"></iframe>
+            </div>
+          </div>
+        </div>
+        <p class="device-hint">
+          El marco mide literalmente el ancho indicado por el boton activo. Si no cabe completo en
+          la pantalla, se puede desplazar hacia los lados para verlo entero.
+        </p>
+
+        <table>
+          <thead><tr><th>Prefijo</th><th>Ancho minimo</th></tr></thead>
+          <tbody>
+            <tr><td>(ninguno)</td><td>Cualquier ancho, es la base</td></tr>
+            <tr><td><code>sm</code></td><td>576px</td></tr>
+            <tr><td><code>md</code></td><td>768px</td></tr>
+            <tr><td><code>lg</code></td><td>992px</td></tr>
+            <tr><td><code>xl</code></td><td>1200px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="lesson bs" id="bs-espaciado">
+        <span class="lesson-tag bs">1.5</span>
+        <h2>Utilidades de espaciado: padding y margen</h2>
+        <p class="lead">
+          Bootstrap usa una escala fija de seis pasos, del mas chico al mas grande, en vez de
+          numeros sueltos como 13px o 27px. Elige un paso de padding, uno de margen, y agrega
+          margenes de un solo lado.
+        </p>
+
+        <span class="segmented-label">Padding (relleno interno)</span>
+        <div class="segmented" id="bsPaddingOptions">
+          <button data-value="p-0" class="active">p-0</button>
+          <button data-value="p-1">p-1</button>
+          <button data-value="p-2">p-2</button>
+          <button data-value="p-3">p-3</button>
+          <button data-value="p-4">p-4</button>
+          <button data-value="p-5">p-5</button>
+        </div>
+
+        <span class="segmented-label">Margen externo</span>
+        <div class="segmented" id="bsMarginOptions">
+          <button data-value="m-0" class="active">m-0</button>
+          <button data-value="m-1">m-1</button>
+          <button data-value="m-2">m-2</button>
+          <button data-value="m-3">m-3</button>
+          <button data-value="m-4">m-4</button>
+          <button data-value="m-5">m-5</button>
+        </div>
+
+        <span class="segmented-label">Margen de un solo lado (se suma al margen externo)</span>
+        <div class="segmented" id="bsSideOptions">
+          <button data-value="mt-4">mt-4 (arriba)</button>
+          <button data-value="mb-4">mb-4 (abajo)</button>
+          <button data-value="ms-4">ms-4 (inicio, izquierda)</button>
+          <button data-value="me-4">me-4 (fin, derecha)</button>
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="bsSpaceLabel">p-0 m-0</span></div>
+              <iframe class="stage" id="bsSpaceFrame" title="Espaciado de Bootstrap en vivo" height="150"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="bsSpaceCode"></code></pre>
+            <div class="explanation" id="bsSpaceExplain">
+              La escala de espaciado va de 0 (nada) a 5 (el mas grande): 1 equivale a 0.25rem
+              (4px), 2 a 0.5rem (8px), 3 a 1rem (16px), 4 a 1.5rem (24px) y 5 a 3rem (48px).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-color-forma">
+        <span class="lesson-tag bs">1.6</span>
+        <h2>Utilidades de color, texto y forma</h2>
+        <p class="lead">
+          Estas utilidades resuelven casos donde un componente completo seria exagerado: un fondo
+          de color, un texto alineado, una esquina redondeada, una sombra.
+        </p>
+
+        <span class="segmented-label">Color de fondo</span>
+        <div class="segmented" id="bsBgOptions">
+          <button data-value="bg-primary" class="active">bg-primary</button>
+          <button data-value="bg-success">bg-success</button>
+          <button data-value="bg-danger">bg-danger</button>
+          <button data-value="bg-warning">bg-warning</button>
+          <button data-value="bg-dark">bg-dark</button>
+        </div>
+
+        <span class="segmented-label">Alineacion de texto</span>
+        <div class="segmented" id="bsTextOptions">
+          <button data-value="text-start" class="active">text-start</button>
+          <button data-value="text-center">text-center</button>
+          <button data-value="text-end">text-end</button>
+        </div>
+
+        <span class="segmented-label">Radio de esquina y sombra</span>
+        <div class="segmented" id="bsShapeOptions">
+          <button data-value="rounded-0" class="active">rounded-0</button>
+          <button data-value="rounded-3">rounded-3</button>
+          <button data-value="rounded-pill">rounded-pill</button>
+          <button data-value="shadow">agregar shadow</button>
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="bsColorLabel"></span></div>
+              <iframe class="stage" id="bsColorFrame" title="Color y forma de Bootstrap en vivo" height="120"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="bsColorCode"></code></pre>
+            <div class="explanation" id="bsColorExplain">
+              <code>bg-primary</code> aplica el azul del tema, y el texto se ajusta a blanco
+              automaticamente en los colores oscuros de la paleta.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-flex">
+        <span class="lesson-tag bs">1.7</span>
+        <h2>Utilidades Flexbox</h2>
+        <p class="lead">
+          Las mismas propiedades de Flexbox que ya conoces de la Semana 5, como clase lista para
+          usar. Activa <code>d-flex</code> primero: sin ella, las demas utilidades no tienen
+          ningun efecto porque el contenedor sigue en su display normal.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Construye el contenedor flexible</div>
+            <div class="rule-list" id="bsFlexRules">
+              <button class="rule-toggle" data-key="flex"><span class="rule-num">1</span><code>d-flex</code><small>Cambia el display del contenedor a flex. Sin esta clase, sus hijos no son flex items.</small></button>
+              <button class="rule-toggle" data-key="between"><span class="rule-num">2</span><code>justify-content-between</code><small>Distribuye el espacio sobrante entre los elementos sobre el eje principal, empujando el primero al inicio y el ultimo al final. Solo tiene efecto si d-flex esta activo.</small></button>
+              <button class="rule-toggle" data-key="center"><span class="rule-num">3</span><code>align-items-center</code><small>Centra los elementos sobre el eje cruzado (vertical, cuando la fila es horizontal). Sin d-flex activo, no cambia nada visible.</small></button>
+              <button class="rule-toggle" data-key="gap"><span class="rule-num">4</span><code>gap-3</code><small>Separa los elementos entre si un paso 3 de la escala de espaciado, sin necesitar un margen manual en cada uno.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">flex.html</span></div>
+              <iframe class="stage" id="bsFlexFrame" title="Flexbox de Bootstrap en vivo" height="120"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsFlexCode"></code></pre>
+            <div class="explanation" id="bsFlexExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-botones">
+        <span class="lesson-tag bs">1.8</span>
+        <h2>Botones: clase base mas variante</h2>
+        <p class="lead">
+          <code>btn</code> nunca va sola: siempre se acompana de una clase de variante que define
+          el color segun su intencion, y opcionalmente de una clase de tamano.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Arma el boton</div>
+            <div class="rule-list" id="bsBtnRules">
+              <button class="rule-toggle" data-key="btn"><span class="rule-num">1</span><code>btn</code><small>Clase base: quita el subrayado y el estilo por defecto del navegador, agrega relleno interno y esquinas redondeadas, y prepara el boton para recibir una variante de color.</small></button>
+              <button class="rule-toggle" data-key="variante"><span class="rule-num">2</span><code>btn-primary</code><small>Variante de color: rellena el boton con el azul del tema y pone el texto en blanco. Sin ella, btn sola queda casi transparente, sin color propio.</small></button>
+              <button class="rule-toggle" data-key="outline"><span class="rule-num">3</span><code>btn-outline-danger</code><small>Version con borde: reemplaza a la variante rellena, deja el fondo transparente y usa el color rojo de peligro solo en el borde y el texto.</small></button>
+              <button class="rule-toggle" data-key="tamano"><span class="rule-num">4</span><code>btn-lg</code><small>Aumenta el tamano de fuente y el relleno interno del boton, sin cambiar su color ni su variante.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">botones.html</span></div>
+              <iframe class="stage" id="bsBtnFrame" title="Botones de Bootstrap en vivo" height="100"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsBtnCode"></code></pre>
+            <div class="explanation" id="bsBtnExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-navbar">
+        <span class="lesson-tag bs">1.9</span>
+        <h2>Navbar por partes</h2>
+        <p class="lead">
+          Activa cada clase en orden y observa que cambia. Tambien puedes desactivarlas para
+          confirmar cual era responsable de cada comportamiento.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Laboratorio del navbar</div>
+            <div class="rule-list" id="bsNavbarRules">
+              <button class="rule-toggle" data-key="dark"><span class="rule-num">1</span><code>bg-dark, data-bs-theme="dark"</code><small>Da al navbar un fondo oscuro y ajusta el color del texto para que siga siendo legible.</small></button>
+              <button class="rule-toggle" data-key="expand"><span class="rule-num">2</span><code>navbar-expand-lg</code><small>Mantiene el menu expandido desde el breakpoint lg. Por debajo aparece el boton hamburguesa.</small></button>
+              <button class="rule-toggle" data-key="toggle"><span class="rule-num">3</span><code>data-bs-toggle="collapse"</code><small>Activa el colapso del menu al hacer clic en el boton hamburguesa, sin JavaScript propio.</small></button>
+              <button class="rule-toggle" data-key="auto"><span class="rule-num">4</span><code>ms-auto</code><small>Aplica margen automatico al inicio del eje horizontal y empuja los enlaces hacia la derecha.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">navbar.html</span></div>
+              <iframe class="stage" id="bsNavbarFrame" title="Navbar de Bootstrap en construccion" height="90"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsNavbarCode"></code></pre>
+            <div class="explanation" id="bsNavbarExplain"></div>
+          </div>
+        </div>
+        <div class="note info">
+          Reduce el ancho de la ventana del navegador para ver el boton hamburguesa entrar en
+          accion una vez <code>navbar-expand-lg</code> este activo.
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-cards">
+        <span class="lesson-tag bs">1.10</span>
+        <h2>Cards por partes</h2>
+        <p class="lead">
+          Una card se construye anidando clases dentro de <code>card</code>. Cada una tiene un
+          trabajo especifico dentro de la tarjeta.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Construye la tarjeta de producto</div>
+            <div class="rule-list" id="bsCardRules">
+              <button class="rule-toggle" data-key="card"><span class="rule-num">1</span><code>card</code><small>Aplica el borde, el radio de esquina y el fondo blanco de una tarjeta al div exterior. Sin ella, el contenido no tiene ningun limite visual.</small></button>
+              <button class="rule-toggle" data-key="body"><span class="rule-num">2</span><code>card-body</code><small>Agrega el relleno interno consistente alrededor del contenido. Sin ella, el texto queda pegado al borde de la tarjeta.</small></button>
+              <button class="rule-toggle" data-key="title"><span class="rule-num">3</span><code>card-title</code><small>Da al titulo el tamano de fuente y el margen inferior propios de una card, para separarlo del texto que sigue.</small></button>
+              <button class="rule-toggle" data-key="text"><span class="rule-num">4</span><code>card-text</code><small>Ajusta el color a un gris mas suave y el espaciado del parrafo de descripcion, para que no compita visualmente con el titulo.</small></button>
+              <button class="rule-toggle" data-key="boton"><span class="rule-num">5</span><code>btn btn-outline-primary btn-sm</code><small>Agrega un boton de accion pequeno, con borde en vez de relleno, para no competir con el color del titulo dentro de un espacio chico.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">card.html</span></div>
+              <iframe class="stage" id="bsCardFrame" title="Card de Bootstrap en vivo" height="150"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsCardCode"></code></pre>
+            <div class="explanation" id="bsCardExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-formularios">
+        <span class="lesson-tag bs">1.11</span>
+        <h2>Formularios por partes</h2>
+        <p class="lead">
+          Las clases de formulario reemplazan el CSS que escribirias a mano para que cada campo
+          tenga el mismo ancho, el mismo borde y el mismo estado de foco.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Construye el campo</div>
+            <div class="rule-list" id="bsFormRules">
+              <button class="rule-toggle" data-key="mb"><span class="rule-num">1</span><code>mb-3</code><small>Envuelve la etiqueta y el campo, y agrega separacion respecto al siguiente elemento.</small></button>
+              <button class="rule-toggle" data-key="label"><span class="rule-num">2</span><code>form-label</code><small>Da a la etiqueta el mismo espaciado respecto a su campo en todo el formulario.</small></button>
+              <button class="rule-toggle" data-key="control"><span class="rule-num">3</span><code>form-control</code><small>Da al campo el mismo ancho, el mismo borde y el mismo estado de foco que cualquier otro campo del formulario.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">formulario.html</span></div>
+              <iframe class="stage" id="bsFormFrame" title="Formulario de Bootstrap en vivo" height="100"></iframe>
+            </div>
+            <pre class="code-box"><code id="bsFormCode"></code></pre>
+            <div class="explanation" id="bsFormExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson bs" id="bs-modal">
+        <span class="lesson-tag bs">1.12</span>
+        <h2>Modal: abre y cierra sin JavaScript propio</h2>
+        <p class="lead">
+          Haz clic en el boton dentro del marco. El modal es real: abre y cierra gracias al
+          <code>bootstrap.bundle.min.js</code> cargado adentro.
+        </p>
+        <div class="iframe-shell">
+          <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">modal.html</span></div>
+          <iframe class="stage" id="modalFrame" title="Modal de Bootstrap en vivo" height="130"></iframe>
+        </div>
+        <table>
+          <thead><tr><th>Atributo</th><th>Que hace</th></tr></thead>
+          <tbody>
+            <tr><td><code>data-bs-toggle="modal"</code></td><td>Marca el boton que abre el modal cuyo id coincide con data-bs-target</td></tr>
+            <tr><td><code>data-bs-target="#modalDemo"</code></td><td>Apunta al id del modal que debe abrirse</td></tr>
+            <tr><td><code>data-bs-dismiss="modal"</code></td><td>Cierra el modal desde cualquier boton dentro de el</td></tr>
+            <tr><td><code>aria-hidden="true"</code></td><td>Oculta el modal a lectores de pantalla mientras esta cerrado, ya resuelto en la plantilla oficial</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="lesson bs" id="bs-practica">
+        <span class="lesson-tag bs">1.13</span>
+        <h2>Practica completa: el panel de catalogo</h2>
+        <p class="lead">
+          El mismo resultado del taller de la guia, ya construido con todas las clases anteriores.
+          Revisalo en vivo y despliega el codigo cuando quieras compararlo con el tuyo.
+        </p>
+        <div class="iframe-shell">
+          <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">panel-bootstrap.html</span></div>
+          <iframe class="stage" id="bsPracticaFrame" title="Panel de catalogo en Bootstrap" height="260"></iframe>
+        </div>
+        <button class="reveal-toggle" id="bsPracticaToggle">Mostrar el codigo completo</button>
+        <pre class="code-box" id="bsPracticaCode" style="display:none;"></pre>
+      </section>
+
+      <div class="part-title tw">
+        <span class="part-number">2</span>
+        <div>
+          <h2>Tailwind CSS. Framework utility-first</h2>
+          <p>Desde el Play CDN hasta el mismo panel de catalogo, construido con utilidades.</p>
+        </div>
+      </div>
+
+      <section class="lesson tw" id="tw-obtener">
+        <span class="lesson-tag tw">2.1</span>
+        <h2>Como obtener Tailwind</h2>
+        <p class="lead">
+          Para aprender y prototipar, un unico <code>script</code> basta: el Play CDN. Elige una
+          opcion para ver el codigo completo y la explicacion.
+        </p>
+
+        <div class="segmented tw-scope" id="twObtenerOptions">
+          <button data-value="play" class="active">Play CDN (la que usa esta guia)</button>
+          <button data-value="cli">CLI o Vite (para produccion)</button>
+        </div>
+
+        <pre class="code-box"><code id="twObtenerCode"></code></pre>
+        <div class="explanation" id="twObtenerExplain"></div>
+
+        <div class="note tw">
+          Pagina oficial de Tailwind CSS, con la referencia completa de utilidades:
+          <a href="https://tailwindcss.com/docs/styling-with-utility-classes" target="_blank" rel="noopener">tailwindcss.com/docs</a>.
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-espaciado">
+        <span class="lesson-tag tw">2.2</span>
+        <h2>La escala de espaciado</h2>
+        <p class="lead">
+          El numero despues de <code>p</code>, <code>m</code> o <code>gap</code> no es un pixel
+          exacto: es un paso dentro de una escala. Elige un paso y mira el valor real en rem y en
+          pixeles.
+        </p>
+
+        <span class="segmented-label">Padding (relleno interno)</span>
+        <div class="segmented tw-scope" id="twPaddingOptions">
+          <button data-value="1">p-1</button>
+          <button data-value="2" class="active">p-2</button>
+          <button data-value="4">p-4</button>
+          <button data-value="8">p-8</button>
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="twSpaceLabel">class="p-2"</span></div>
+              <iframe class="stage" id="twSpaceFrame" title="Espaciado de Tailwind en vivo" height="110"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="twSpaceCode"></code></pre>
+            <div class="explanation" id="twSpaceExplain"></div>
+          </div>
+        </div>
+
+        <table>
+          <thead><tr><th>Clase</th><th>Valor en rem</th><th>Valor en pixeles</th></tr></thead>
+          <tbody>
+            <tr><td><code>p-1</code></td><td>0.25rem</td><td>4px</td></tr>
+            <tr><td><code>p-2</code></td><td>0.5rem</td><td>8px</td></tr>
+            <tr><td><code>p-4</code></td><td>1rem</td><td>16px</td></tr>
+            <tr><td><code>p-8</code></td><td>2rem</td><td>32px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="lesson tw" id="tw-color">
+        <span class="lesson-tag tw">2.3</span>
+        <h2>Color y tono: {propiedad}-{color}-{tono}</h2>
+        <p class="lead">
+          El tono va en pasos de 100 (muy claro) a 900 (muy oscuro). Elige un color y mueve el
+          tono para ver cuando conviene cambiar el texto a blanco para que siga siendo legible.
+        </p>
+
+        <span class="segmented-label">Color</span>
+        <div class="segmented tw-scope" id="twColorOptions">
+          <button data-value="blue" class="active">blue</button>
+          <button data-value="emerald">emerald</button>
+          <button data-value="rose">rose</button>
+          <button data-value="gray">gray</button>
+        </div>
+
+        <div class="control-row">
+          <label for="twToneRange">Tono: <strong id="twToneValue">500</strong></label>
+          <input type="range" id="twToneRange" min="0" max="4" step="1" value="2">
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="twColorLabel">bg-blue-500</span></div>
+              <iframe class="stage" id="twColorFrame" title="Color de Tailwind en vivo" height="110"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="twColorCode"></code></pre>
+            <div class="explanation" id="twColorExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-tipografia">
+        <span class="lesson-tag tw">2.4</span>
+        <h2>Tipografia: tamano y peso</h2>
+        <p class="lead">
+          <code>text-{tamano}</code> controla el tamano de fuente y <code>font-{peso}</code> el
+          grosor del trazo. Combina ambas.
+        </p>
+
+        <span class="segmented-label">Tamano</span>
+        <div class="segmented tw-scope" id="twSizeOptions">
+          <button data-value="text-sm">text-sm</button>
+          <button data-value="text-base" class="active">text-base</button>
+          <button data-value="text-xl">text-xl</button>
+          <button data-value="text-3xl">text-3xl</button>
+        </div>
+
+        <span class="segmented-label">Peso</span>
+        <div class="segmented tw-scope" id="twWeightOptions">
+          <button data-value="font-normal" class="active">font-normal</button>
+          <button data-value="font-medium">font-medium</button>
+          <button data-value="font-bold">font-bold</button>
+        </div>
+
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="twTypeLabel"></span></div>
+              <iframe class="stage" id="twTypeFrame" title="Tipografia de Tailwind en vivo" height="90"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="twTypeCode"></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-flex">
+        <span class="lesson-tag tw">2.5</span>
+        <h2>Utilidades flexbox</h2>
+        <p class="lead">
+          Las mismas propiedades de la Semana 5, con otro nombre. Activa <code>flex</code>
+          primero: sin ella, el resto no cambia nada visible.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Construye el contenedor flexible</div>
+            <div class="rule-list" id="twFlexRules">
+              <button class="rule-toggle" data-key="flex"><span class="rule-num">1</span><code>flex</code><small>Es display: flex, con otro nombre. Activa el modelo flexible en el contenedor.</small></button>
+              <button class="rule-toggle" data-key="between"><span class="rule-num">2</span><code>justify-between</code><small>Es justify-content: space-between. Reparte el espacio sobrante entre los elementos.</small></button>
+              <button class="rule-toggle" data-key="center"><span class="rule-num">3</span><code>items-center</code><small>Es align-items: center. Centra los elementos sobre el eje cruzado.</small></button>
+              <button class="rule-toggle" data-key="gap"><span class="rule-num">4</span><code>gap-4</code><small>Separa los elementos 1rem entre si, sin margen manual en cada uno.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">flex.html</span></div>
+              <iframe class="stage" id="twFlexFrame" title="Flexbox de Tailwind en vivo" height="120"></iframe>
+            </div>
+            <pre class="code-box"><code id="twFlexCode"></code></pre>
+            <div class="explanation" id="twFlexExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-grid">
+        <span class="lesson-tag tw">2.6</span>
+        <h2>Grid con prefijo responsivo</h2>
+        <p class="lead">
+          <code>grid-cols-N</code> reparte N columnas iguales. Un prefijo como <code>md:</code>
+          reemplaza esa regla desde ese ancho.
+        </p>
+
+        <div class="control-row">
+          <label for="twGridRange">Columnas en escritorio: <strong id="twGridValue">3</strong></label>
+          <input type="range" id="twGridRange" min="1" max="6" value="3">
+        </div>
+        <div class="workbench">
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">grid.html</span></div>
+              <iframe class="stage" id="twGridFrame" title="Grid de Tailwind en vivo" height="140"></iframe>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <pre class="code-box"><code id="twGridCode"></code></pre>
+            <div class="explanation" id="twGridExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-breakpoints">
+        <span class="lesson-tag tw">2.7</span>
+        <h2>Breakpoints: el mismo prefijo mobile-first</h2>
+        <p class="lead">
+          Construye la clase responsiva del grid columna por columna y cambia de dispositivo para
+          confirmar en que ancho entra a funcionar cada prefijo, con la misma logica mobile-first:
+          la regla sin prefijo manda hasta que el ancho de pantalla alcanza el prefijo.
+        </p>
+
+        <div class="workbench-controls" style="margin-bottom:16px;">
+          <div class="workbench-title">Construye grid-cols-1 md:grid-cols-2 lg:grid-cols-3</div>
+          <div class="rule-list tw" id="twBreakRules">
+            <button class="rule-toggle active" data-key="base" disabled><span class="rule-num">1</span><code>grid-cols-1</code><small>Base sin prefijo: una columna desde el telefono mas angosto. Sin esta base, el grid no tendria ninguna cantidad de columnas definida en pantallas pequenas.</small></button>
+            <button class="rule-toggle" data-key="md"><span class="rule-num">2</span><code>md:grid-cols-2</code><small>Desde 768px de ancho en adelante, reemplaza a grid-cols-1: el grid pasa a repartirse en dos columnas.</small></button>
+            <button class="rule-toggle" data-key="lg"><span class="rule-num">3</span><code>lg:grid-cols-3</code><small>Desde 1024px de ancho en adelante, reemplaza a md:grid-cols-2: el grid pasa a repartirse en tres columnas.</small></button>
+          </div>
+          <div class="control-row" style="margin-top:14px;">
+            <span class="device-switch" id="twDeviceSwitch">
+              <button data-device="desktop" class="active">Escritorio 1280px</button>
+              <button data-device="tablet">Tablet 700px</button>
+              <button data-device="mobile">Movil 375px</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="device-lab">
+          <div class="device-frame-wrap" id="twDeviceWrap">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label" id="twBreakLabel">grid-cols-1</span></div>
+              <iframe class="stage" id="twBreakFrame" title="Breakpoints de Tailwind" height="230"></iframe>
+            </div>
+          </div>
+        </div>
+        <p class="device-hint">
+          El marco mide literalmente el ancho indicado por el boton activo. Si no cabe completo en
+          la pantalla, se puede desplazar hacia los lados para verlo entero.
+        </p>
+
+        <table>
+          <thead><tr><th>Prefijo</th><th>Ancho minimo</th></tr></thead>
+          <tbody>
+            <tr><td>(ninguno)</td><td>Cualquier ancho, es la base</td></tr>
+            <tr><td><code>sm:</code></td><td>640px</td></tr>
+            <tr><td><code>md:</code></td><td>768px</td></tr>
+            <tr><td><code>lg:</code></td><td>1024px</td></tr>
+            <tr><td><code>xl:</code></td><td>1280px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="lesson tw" id="tw-estados">
+        <span class="lesson-tag tw">2.8</span>
+        <h2>Estados: hover y focus como prefijo</h2>
+        <p class="lead">
+          Un prefijo antes de la utilidad puede describir un estado en vez de un ancho de
+          pantalla. El interruptor simula cada estado sin depender del mouse ni del teclado.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Simula los estados</div>
+            <div class="rule-list tw" id="twEstadosRules">
+              <button class="rule-toggle" data-key="hover"><span class="rule-num">H</span><code>hover:bg-blue-700</code><small>Cuando el mouse esta encima, cambia el fondo a un azul mas oscuro.</small></button>
+              <button class="rule-toggle" data-key="focus"><span class="rule-num">F</span><code>focus:ring-2 focus:ring-blue-300</code><small>Al recibir foco con el teclado, agrega un anillo visible alrededor del boton.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">boton.html</span></div>
+              <iframe class="stage" id="twEstadosFrame" title="Estados de Tailwind en vivo" height="90"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-botones">
+        <span class="lesson-tag tw">2.9</span>
+        <h2>Construye un boton desde cero</h2>
+        <p class="lead">
+          A diferencia de Bootstrap, aqui no existe una clase <code>btn</code>. Cada propiedad se
+          agrega por separado hasta llegar al mismo resultado visual.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Arma el boton, una utilidad a la vez</div>
+            <div class="rule-list tw" id="twBtnRules">
+              <button class="rule-toggle" data-key="bg"><span class="rule-num">1</span><code>bg-blue-600</code><small>Color de fondo azul, tono 600.</small></button>
+              <button class="rule-toggle" data-key="text"><span class="rule-num">2</span><code>text-white</code><small>Color de texto blanco, para que se lea sobre el fondo azul.</small></button>
+              <button class="rule-toggle" data-key="font"><span class="rule-num">3</span><code>font-bold</code><small>Peso de fuente en negrita.</small></button>
+              <button class="rule-toggle" data-key="padding"><span class="rule-num">4</span><code>px-5 py-2.5</code><small>Relleno horizontal y vertical del boton.</small></button>
+              <button class="rule-toggle" data-key="rounded"><span class="rule-num">5</span><code>rounded-lg</code><small>Radio de esquina grande.</small></button>
+              <button class="rule-toggle" data-key="hover"><span class="rule-num">6</span><code>hover:bg-blue-700</code><small>Al pasar el mouse encima, el fondo cambia a un azul mas oscuro.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">boton.html</span></div>
+              <iframe class="stage" id="twBtnFrame" title="Boton de Tailwind en vivo" height="90"></iframe>
+            </div>
+            <pre class="code-box"><code id="twBtnCode"></code></pre>
+            <div class="explanation" id="twBtnExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-cards">
+        <span class="lesson-tag tw">2.10</span>
+        <h2>Construye una tarjeta desde cero</h2>
+        <p class="lead">
+          El mismo resultado de una card de Bootstrap, esta vez sin un nombre de componente:
+          combinando utilidades de borde, sombra y espaciado.
+        </p>
+
+        <div class="workbench">
+          <div class="workbench-controls">
+            <div class="workbench-title">Construye la tarjeta de producto</div>
+            <div class="rule-list tw" id="twCardRules">
+              <button class="rule-toggle" data-key="border"><span class="rule-num">1</span><code>border rounded-lg</code><small>Agrega un borde delgado y esquinas redondeadas al contenedor.</small></button>
+              <button class="rule-toggle" data-key="shadow"><span class="rule-num">2</span><code>shadow-sm</code><small>Sombra sutil, apropiada para una tarjeta de contenido.</small></button>
+              <button class="rule-toggle" data-key="padding"><span class="rule-num">3</span><code>p-4</code><small>Relleno interno de 1rem en los cuatro lados.</small></button>
+              <button class="rule-toggle" data-key="title"><span class="rule-num">4</span><code>font-bold text-gray-900</code><small>Da al titulo un peso de negrita y un color casi negro.</small></button>
+              <button class="rule-toggle" data-key="text"><span class="rule-num">5</span><code>text-gray-600</code><small>Un gris mas suave que el titulo para el parrafo de descripcion.</small></button>
+            </div>
+          </div>
+          <div class="workbench-preview">
+            <div class="iframe-shell">
+              <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">card.html</span></div>
+              <iframe class="stage" id="twCardFrame" title="Tarjeta de Tailwind en vivo" height="150"></iframe>
+            </div>
+            <pre class="code-box"><code id="twCardCode"></code></pre>
+            <div class="explanation" id="twCardExplain"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson tw" id="tw-practica">
+        <span class="lesson-tag tw">2.11</span>
+        <h2>Practica completa: el panel de catalogo</h2>
+        <p class="lead">
+          El mismo panel de la Parte 1, reconstruido solo con utilidades de Tailwind. Compara el
+          codigo fuente de las dos versiones.
+        </p>
+        <div class="iframe-shell">
+          <div class="iframe-toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">panel-tailwind.html</span></div>
+          <iframe class="stage" id="twPracticaFrame" title="Panel de catalogo en Tailwind" height="260"></iframe>
+        </div>
+        <button class="reveal-toggle" id="twPracticaToggle">Mostrar el codigo completo</button>
+        <pre class="code-box" id="twPracticaCode" style="display:none;"></pre>
+      </section>
+
+      <div class="part-title cierre">
+        <span class="part-number">3</span>
+        <div>
+          <h2>Cierre: comparar y decidir</h2>
+          <p>Con las dos partes recorridas, ahora se comparan directamente.</p>
+        </div>
+      </div>
+
+      <section class="lesson cierre" id="comparacion">
+        <span class="lesson-tag cierre">3.1</span>
+        <h2>El mismo panel, lado a lado, en vivo</h2>
+        <p class="lead">
+          Cada version se muestra al ancho real del dispositivo elegido, una debajo de la otra
+          para que el mismo ancho aplique a las dos por igual. Cambia el ancho y activa el
+          producto agotado en los dos marcos al mismo tiempo.
+        </p>
+
+        <div class="diagram-figure">
+          <img src="imagenes/mockup-panel-productor.svg"
+               alt="Mockup del panel de catalogo del productor: encabezado con boton para agregar producto, y una lista de tarjetas de producto con nombre, precio, cantidad disponible y botones de editar y quitar">
+        </div>
+
+        <div class="control-row">
+          <span class="device-switch" id="cmpDeviceSwitch">
+            <button data-device="desktop" class="active">Escritorio 1280px</button>
+            <button data-device="tablet">Tablet 700px</button>
+            <button data-device="mobile">Movil 375px</button>
+          </span>
+          <label><input type="checkbox" id="cmpAgotado"> Marcar Lechuga crespa como agotada</label>
+        </div>
+
+        <div class="device-lab">
+          <div class="device-frame-wrap" id="cmpDeviceWrap">
+            <div class="compare-grid">
+              <div class="compare-card">
+                <div class="compare-head bs">Bootstrap. panel-bootstrap.html</div>
+                <iframe class="stage" id="cmpBsFrame" title="Panel de catalogo en Bootstrap" height="300"></iframe>
+              </div>
+              <div class="compare-card">
+                <div class="compare-head tw">Tailwind. panel-tailwind.html</div>
+                <iframe class="stage" id="cmpTwFrame" title="Panel de catalogo en Tailwind" height="300"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="device-hint">
+          El marco mide literalmente el ancho indicado por el boton activo. Si no cabe completo en
+          la pantalla, se puede desplazar hacia los lados para verlo entero.
+        </p>
+      </section>
+
+      <section class="lesson cierre" id="decision">
+        <span class="lesson-tag cierre">3.2</span>
+        <h2>Herramienta de decision</h2>
+        <p class="lead">
+          Responde las tres preguntas segun tu propio proyecto. La recomendacion usa los mismos
+          criterios de la guia, no gusto personal.
+        </p>
+
+        <div class="diagram-figure">
+          <img src="imagenes/arbol-decision-frameworks.svg"
+               alt="Arbol de decision para elegir framework CSS: proyecto muy pequeno usa CSS puro, si se necesita salir rapido con componentes ya armados usa Bootstrap, si se necesita control fino y un diseno propio usa Tailwind">
+        </div>
+
+        <div class="decision-tool">
+          <div class="decision-question" data-q="1">
+            <p>1. Que tan grande es lo que vas a construir</p>
+            <div class="decision-options">
+              <button data-valor="pequeno">Una pagina pequena, casi sin repeticion</button>
+              <button data-valor="mediano">Un proyecto con varias vistas</button>
+            </div>
+          </div>
+          <div class="decision-question" data-q="2">
+            <p>2. Que necesitas primero</p>
+            <div class="decision-options">
+              <button data-valor="rapido">Salir rapido con una interfaz estandar</button>
+              <button data-valor="propio">Un diseno propio y reconocible</button>
+            </div>
+          </div>
+          <div class="decision-question" data-q="3">
+            <p>3. Que tan comodo te sientes personalizando</p>
+            <div class="decision-options">
+              <button data-valor="poco">Prefiero tocar lo minimo posible</button>
+              <button data-valor="mucho">Me gusta ajustar cada detalle</button>
+            </div>
+          </div>
+          <div class="decision-result" id="decisionResultado"></div>
+        </div>
+      </section>
+
+      <section class="lesson cierre" id="quiz">
+        <span class="lesson-tag cierre">3.3</span>
+        <h2>Comprobacion rapida</h2>
+        <p class="lead">Responde antes de cerrar el laboratorio.</p>
+
+        <div class="quiz-question" data-answer="b">
+          <p>1. Si tres columnas usan col-md-4, cuanto suman en una fila de doce.</p>
+          <div class="quiz-options">
+            <button data-valor="a">8</button>
+            <button data-valor="b">12</button>
+            <button data-valor="c">16</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="a">
+          <p>2. Cual filosofia entrega piezas minimas, una por propiedad CSS.</p>
+          <div class="quiz-options">
+            <button data-valor="a">Tailwind, utility-first</button>
+            <button data-valor="b">Bootstrap, de componentes</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="c">
+          <p>3. Cual atributo abre y cierra un modal de Bootstrap sin JavaScript propio.</p>
+          <div class="quiz-options">
+            <button data-valor="a">onclick</button>
+            <button data-valor="b">class="modal-open"</button>
+            <button data-valor="c">data-bs-toggle="modal"</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="b">
+          <p>4. En Tailwind, que ancho minimo activa el prefijo md:.</p>
+          <div class="quiz-options">
+            <button data-valor="a">576px</button>
+            <button data-valor="b">768px</button>
+            <button data-valor="c">992px</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="a">
+          <p>5. Por que el Play CDN de Tailwind no se usa en produccion.</p>
+          <div class="quiz-options">
+            <button data-valor="a">Carga Tailwind completo en el navegador en vez de solo las clases usadas</button>
+            <button data-valor="b">No soporta hover ni focus</button>
+            <button data-valor="c">No permite usar grid</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="a">
+          <p>6. En Bootstrap, cual clase nunca va sola y siempre necesita una variante de color.</p>
+          <div class="quiz-options">
+            <button data-valor="a">btn</button>
+            <button data-valor="b">card</button>
+            <button data-valor="c">container</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question" data-answer="c">
+          <p>7. En Tailwind, cuanto equivale p-4 en pixeles.</p>
+          <div class="quiz-options">
+            <button data-valor="a">4px</button>
+            <button data-valor="b">8px</button>
+            <button data-valor="c">16px</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="pie-doc">
+    Programacion Web (IF2003). Institucion Universitaria de Envigado. Facultad de Ingenierias.
+    Semestre 2026-02.
+  </div>
+
+  <script>
+    const BOOTSTRAP_CSS = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css';
+    const BOOTSTRAP_JS = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js';
+    const TAILWIND_JS = 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4';
+
+    function bootstrapDoc(bodyHtml, extraStyle) {
+      return `<!DOCTYPE html><html><head><meta charset="UTF-8">
+        <link href="${BOOTSTRAP_CSS}" rel="stylesheet">
+        <style>body{margin:0;padding:14px;font-family:"Segoe UI",Arial,sans-serif;}${extraStyle || ''}</style>
+        </head><body>${bodyHtml}
+        <script src="${BOOTSTRAP_JS}"><\/script>
+        </body></html>`;
+    }
+
+    function tailwindDoc(bodyHtml, extraStyle) {
+      return `<!DOCTYPE html><html><head><meta charset="UTF-8">
+        <script src="${TAILWIND_JS}"><\/script>
+        <style>body{margin:0;padding:14px;font-family:"Segoe UI",Arial,sans-serif;}${extraStyle || ''}</style>
+        </head><body>${bodyHtml}</body></html>`;
+    }
+
+    /* Constructor generico: botones data-key que se activan o desactivan,
+       cada uno aporta su propia clase y su propia explicacion */
+
+    function mountBuilder(prefix, config) {
+      const rulesRoot = document.getElementById(prefix + 'Rules');
+      const frame = document.getElementById(prefix + 'Frame');
+      const codeEl = document.getElementById(prefix + 'Code');
+      const explainEl = document.getElementById(prefix + 'Explain');
+      const labelEl = document.getElementById(prefix + 'Label');
+      const buttons = rulesRoot.querySelectorAll('.rule-toggle:not([disabled])');
+      const activeSet = new Set(config.initial || []);
+
+      function render() {
+        const orderedActive = config.rules.filter(r => activeSet.has(r.key) || r.always);
+        const { html, code, label } = config.build(orderedActive.map(r => r.key));
+        frame.srcdoc = config.doc(html, config.extraStyle || '');
+        if (codeEl) codeEl.textContent = code;
+        if (labelEl && label) labelEl.textContent = label;
+        if (explainEl) {
+          const activos = orderedActive.filter(r => !r.always);
+          explainEl.innerHTML = activos.length
+            ? activos.map(r => `<strong>${r.classText}</strong> ${r.explanation}`).join(' ')
+            : (config.emptyText || 'Activa una clase para ver el efecto.');
+        }
+        rulesRoot.querySelectorAll('.rule-toggle').forEach(b => {
+          if (!b.hasAttribute('disabled')) b.classList.toggle('active', activeSet.has(b.dataset.key));
+        });
+      }
+
+      buttons.forEach(b => b.addEventListener('click', () => {
+        const k = b.dataset.key;
+        if (activeSet.has(k)) activeSet.delete(k); else activeSet.add(k);
+        render();
+      }));
+
+      render();
+      return { render, activeSet };
+    }
+
+    function ruleData(rulesRoot) {
+      return Array.from(rulesRoot.querySelectorAll('.rule-toggle')).map(b => ({
+        key: b.dataset.key,
+        classText: b.querySelector('code').textContent,
+        explanation: b.querySelector('small').textContent,
+        always: b.hasAttribute('disabled')
+      }));
+    }
+
+    /* Grupo de seleccion unica en pildoras */
+
+    function mountSegmented(id, onChange, initial) {
+      const root = document.getElementById(id);
+      const buttons = root.querySelectorAll('button');
+      let current = initial || buttons[0].dataset.value;
+      function apply() {
+        buttons.forEach(b => b.classList.toggle('active', b.dataset.value === current));
+        onChange(current);
+      }
+      buttons.forEach(b => b.addEventListener('click', () => { current = b.dataset.value; apply(); }));
+      apply();
+      return { get: () => current, set: (v) => { current = v; apply(); } };
+    }
+
+    function mountDeviceSwitch(id, wrapEl) {
+      const root = document.getElementById(id);
+      root.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          root.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          wrapEl.className = 'device-frame-wrap';
+          if (btn.dataset.device !== 'desktop') wrapEl.classList.add(btn.dataset.device);
+        });
+      });
+    }
+
+    /* 1.1 Como obtener Bootstrap */
+
+    const bsObtenerTextos = {
+      cdn: {
+        code: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel del productor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"><\/script>
+</body>
+</html>`,
+        explain: 'El <strong>link</strong> va en head y aporta los estilos y las utilidades. El <strong>script</strong> va justo antes de cerrar body, para no bloquear la carga del resto de la pagina, y activa componentes interactivos como el modal y el navbar.'
+      },
+      npm: {
+        code: `npm install bootstrap
+
+// En tu archivo principal de JavaScript
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';`,
+        explain: 'Con npm, Bootstrap se descarga una sola vez a node_modules y un empaquetador (Vite, Webpack) decide que parte incluir en el archivo final. Esta ruta llega mas adelante en el curso, cuando el frontend se integre con un proyecto completo.'
+      }
+    };
+
+    mountSegmented('bsObtenerOptions', (valor) => {
+      const datos = bsObtenerTextos[valor];
+      document.getElementById('bsObtenerCode').textContent = datos.code;
+      document.getElementById('bsObtenerExplain').innerHTML = datos.explain;
+    }, 'cdn');
+
+    /* 1.2 Container, row, col */
+
+    mountBuilder('bsContenedor', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsContenedorRules')),
+      emptyText: 'Sin ninguna clase activa, los tres div son bloques normales, uno debajo del otro, sin ancho maximo ni distribucion en columnas.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const colAttr = has('col') ? ' class="col-4"' : '';
+        const nombres = ['Uno', 'Dos', 'Tres'];
+
+        const codeItems = nombres.map(n => `    <div${colAttr}>${n}</div>`).join('\n');
+        let code = codeItems;
+        if (has('row')) code = `  <div class="row">\n${codeItems}\n  </div>`;
+        if (has('container')) code = `<div class="container">\n${code}\n</div>`;
+
+        const items = nombres.map(n => `<div${colAttr} style="border:1px dashed #9ab7df;padding:8px;">${n}</div>`).join('');
+        let inner = has('row') ? `<div class="row">${items}</div>` : items;
+        let outer = has('container') ? `<div class="container">${inner}</div>` : inner;
+        return { html: outer, code };
+      }
+    });
+
+    /* 1.3 Deslizador de columnas */
+
+    const bsGridRange = document.getElementById('bsGridRange');
+    const bsGridValue = document.getElementById('bsGridValue');
+    const bsGridFrame = document.getElementById('bsGridFrame');
+    const bsGridCode = document.getElementById('bsGridCode');
+    const bsGridExplain = document.getElementById('bsGridExplain');
+
+    function mdColFor(n) {
+      if (n === 1) return 12;
+      if (n === 2) return 6;
+      if (n === 3) return 4;
+      if (n === 4) return 3;
+      return 2;
+    }
+
+    function renderBsGrid() {
+      const n = Number(bsGridRange.value);
+      bsGridValue.textContent = n;
+      const md = mdColFor(n);
+      let cols = '';
+      let colsCode = '';
+      for (let i = 1; i <= n; i++) {
+        cols += `<div class="col-12 col-md-${md}"><div class="p-3 bg-primary-subtle border border-primary rounded text-center">Columna ${i}<br><small>col-md-${md}</small></div></div>`;
+        colsCode += `\n    <div class="col-12 col-md-${md}">Columna ${i}</div>`;
+      }
+      bsGridFrame.srcdoc = bootstrapDoc(`<div class="container-fluid"><div class="row g-2">${cols}</div></div>`);
+      bsGridCode.textContent = `<div class="row">${colsCode}\n  </div>`;
+      bsGridExplain.innerHTML = `Con ${n} columna${n > 1 ? 's' : ''} usamos <code>col-md-${md}</code>: ${Array(n).fill(md).join(' + ')} = ${md * n}.`;
+    }
+
+    bsGridRange.addEventListener('input', renderBsGrid);
+    renderBsGrid();
+
+    /* 1.4 Breakpoints */
+
+    const bsBreakLabel = document.getElementById('bsBreakLabel');
+    mountBuilder('bsBreak', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsBreakRules')),
+      build(keys) {
+        const parts = ['col-12'];
+        if (keys.includes('md')) parts.push('col-md-6');
+        if (keys.includes('lg')) parts.push('col-lg-4');
+        const cls = parts.join(' ');
+        bsBreakLabel.textContent = cls;
+        const html = `<div class="row g-2">
+          <div class="${cls}"><div class="p-3 bg-primary text-white rounded text-center">A</div></div>
+          <div class="${cls}"><div class="p-3 bg-success text-white rounded text-center">B</div></div>
+          <div class="${cls}"><div class="p-3 bg-warning rounded text-center">C</div></div>
+        </div>`;
+        return { html, code: `class="${cls}"` };
+      }
+    });
+
+    mountDeviceSwitch('bsDeviceSwitch', document.getElementById('bsDeviceWrap'));
+
+    /* 1.5 Espaciado */
+
+    const bsSpaceState = { padding: 'p-0', margin: 'm-0', side: null };
+
+    function renderBsSpace() {
+      const clases = [bsSpaceState.padding, bsSpaceState.margin, bsSpaceState.side].filter(Boolean).join(' ');
+      document.getElementById('bsSpaceLabel').textContent = clases;
+      document.getElementById('bsSpaceCode').textContent = `<div class="${clases} bg-primary-subtle border border-primary">Caja de prueba</div>`;
+      document.getElementById('bsSpaceFrame').srcdoc = bootstrapDoc(`<div style="background:#eef3fb;"><div class="${clases} bg-primary-subtle border border-primary">Caja de prueba</div></div>`);
+    }
+
+    mountSegmented('bsPaddingOptions', (v) => { bsSpaceState.padding = v; renderBsSpace(); }, 'p-0');
+    mountSegmented('bsMarginOptions', (v) => { bsSpaceState.margin = v; renderBsSpace(); }, 'm-0');
+
+    const bsSideRoot = document.getElementById('bsSideOptions');
+    bsSideRoot.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.value;
+        const yaActivo = bsSpaceState.side === v;
+        bsSideRoot.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        bsSpaceState.side = yaActivo ? null : v;
+        if (!yaActivo) btn.classList.add('active');
+        renderBsSpace();
+      });
+    });
+    renderBsSpace();
+
+    /* 1.6 Color, texto y forma */
+
+    const bsColorState = { bg: 'bg-primary', text: 'text-start', shape: 'rounded-0', shadow: false };
+
+    function renderBsColor() {
+      const clases = [bsColorState.bg, bsColorState.text, bsColorState.shape, bsColorState.shadow ? 'shadow' : ''].filter(Boolean).join(' ');
+      const necesitaBlanco = ['bg-primary', 'bg-success', 'bg-danger', 'bg-dark'].includes(bsColorState.bg);
+      const clasesFinal = necesitaBlanco ? `${clases} text-white` : clases;
+      document.getElementById('bsColorLabel').textContent = clasesFinal;
+      document.getElementById('bsColorCode').textContent = `<div class="${clasesFinal} p-4">Contenido de prueba</div>`;
+      document.getElementById('bsColorFrame').srcdoc = bootstrapDoc(`<div class="${clasesFinal} p-4">Contenido de prueba</div>`);
+    }
+
+    mountSegmented('bsBgOptions', (v) => { bsColorState.bg = v; renderBsColor(); }, 'bg-primary');
+    mountSegmented('bsTextOptions', (v) => { bsColorState.text = v; renderBsColor(); }, 'text-start');
+
+    const bsShapeRoot = document.getElementById('bsShapeOptions');
+    bsShapeRoot.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.value === 'shadow') {
+          bsColorState.shadow = !bsColorState.shadow;
+          btn.classList.toggle('active', bsColorState.shadow);
+        } else {
+          bsShapeRoot.querySelectorAll('button[data-value^="rounded"]').forEach(b => b.classList.remove('active'));
+          bsColorState.shape = btn.dataset.value;
+          btn.classList.add('active');
+        }
+        renderBsColor();
+      });
+    });
+    renderBsColor();
+
+    /* 1.7 Flexbox de Bootstrap */
+
+    mountBuilder('bsFlex', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsFlexRules')),
+      emptyText: 'Sin d-flex, los tres elementos son bloques normales, uno debajo del otro.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const clases = ['d-flex', has('between') && 'justify-content-between', has('center') && 'align-items-center', has('gap') && 'gap-3'].filter(Boolean);
+        const cls = has('flex') ? clases.join(' ') : '';
+        const html = `<div class="${cls}" style="min-height:70px;background:#f4f8ff;padding:10px;">
+          <div class="bg-primary text-white p-2 rounded">Uno</div>
+          <div class="bg-primary text-white p-2 rounded">Dos</div>
+          <div class="bg-primary text-white p-2 rounded">Tres</div>
+        </div>`;
+        return { html, code: `<div class="${cls}">...</div>` };
+      }
+    });
+
+    /* 1.8 Botones */
+
+    mountBuilder('bsBtn', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsBtnRules')),
+      emptyText: 'Sin ninguna clase, es un boton HTML sin ningun estilo de Bootstrap.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const clases = [has('btn') && 'btn', has('variante') && !has('outline') && 'btn-primary', has('outline') && 'btn-outline-danger', has('tamano') && 'btn-lg'].filter(Boolean).join(' ');
+        return { html: `<button class="${clases}">Guardar producto</button>`, code: `<button class="${clases}">Guardar producto</button>` };
+      }
+    });
+
+    /* 1.9 Navbar */
+
+    const bsNavbarLabelKeys = {};
+    mountBuilder('bsNavbar', {
+      doc: bootstrapDoc,
+      extraStyle: 'html,body{overflow:visible;}',
+      rules: ruleData(document.getElementById('bsNavbarRules')),
+      emptyText: 'Ninguna clase esta activa. El navbar se ve como una fila de enlaces sin fondo ni comportamiento.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const dark = has('dark') ? 'bg-dark' : '';
+        const theme = has('dark') ? ' data-bs-theme="dark"' : '';
+        const expand = has('expand') ? 'navbar-expand-lg' : '';
+        const auto = has('auto') ? 'ms-auto' : '';
+        const toggler = has('toggle')
+          ? `<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#demoNav"><span class="navbar-toggler-icon"></span></button>`
+          : '';
+        const collapseClass = has('toggle') ? 'collapse navbar-collapse' : 'navbar-collapse';
+        const html = `<nav class="navbar ${expand} ${dark}"${theme}>
+          <div class="container-fluid">
+            <span class="navbar-brand">Mi app</span>
+            ${toggler}
+            <div class="${collapseClass}" id="demoNav">
+              <div class="navbar-nav ${auto}">
+                <a class="nav-link active" href="#">Inicio</a>
+                <a class="nav-link" href="#">Catalogo</a>
+              </div>
+            </div>
+          </div>
+        </nav>`;
+        const cls = `navbar ${expand} ${dark}`.replace(/\s+/g, ' ').trim();
+        return { html, code: `<nav class="${cls}"${theme}>...</nav>` };
+      }
+    });
+
+    /* 1.10 Cards */
+
+    mountBuilder('bsCard', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsCardRules')),
+      emptyText: 'Sin ninguna clase, es un div sin borde, sin relleno y sin jerarquia visual.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const outer = has('card') ? 'card' : '';
+        const body = has('body') ? 'card-body' : '';
+        const title = has('title') ? 'card-title' : '';
+        const text = has('text') ? 'card-text' : '';
+        const btn = has('boton') ? `<button class="btn btn-outline-primary btn-sm">Editar</button>` : '';
+        const html = `<div class="${outer}" style="max-width:20rem;">
+          <div class="${body}">
+            <h5 class="${title}">Tomate cherry</h5>
+            <p class="${text}">Precio: $4.500 por kg. Disponible: 30 kg.</p>
+            ${btn}
+          </div>
+        </div>`;
+        const code = `<div class="${outer}">\n  <div class="${body}">\n    <h5 class="${title}">Tomate cherry</h5>\n    <p class="${text}">Precio: $4.500 por kg.</p>\n    ${has('boton') ? '<button class="btn btn-outline-primary btn-sm">Editar</button>' : ''}\n  </div>\n</div>`;
+        return { html, code };
+      }
+    });
+
+    /* 1.11 Formularios */
+
+    mountBuilder('bsForm', {
+      doc: bootstrapDoc,
+      rules: ruleData(document.getElementById('bsFormRules')),
+      emptyText: 'Sin ninguna clase, el campo y la etiqueta usan el estilo por defecto del navegador.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const wrap = has('mb') ? 'mb-3' : '';
+        const label = has('label') ? 'form-label' : '';
+        const control = has('control') ? 'form-control' : '';
+        const html = `<div class="${wrap}">
+          <label class="${label}" for="p">Nombre del producto</label>
+          <input type="text" class="${control}" id="p">
+        </div>`;
+        const code = `<div class="${wrap}">\n  <label class="${label}" for="p">Nombre del producto</label>\n  <input type="text" class="${control}" id="p">\n</div>`;
+        return { html, code };
+      }
+    });
+
+    /* 1.12 Modal real */
+
+    document.getElementById('modalFrame').srcdoc = bootstrapDoc(`
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDemo">Agregar producto</button>
+      <div class="modal fade" id="modalDemo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Nuevo producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="form-control" placeholder="Nombre del producto">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>`, 'html,body{overflow:visible;}');
+
+    /* 1.13 Practica completa Bootstrap */
+
+    const panelBootstrapCode = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo del productor (Bootstrap)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 mb-0">Mi catalogo</h1>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">Agregar producto</button>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <div class="card h-100"><div class="card-body">
+          <h5 class="card-title">Tomate cherry</h5>
+          <p class="card-text">Precio: $4.500 / kg<br>Disponible: 30 kg</p>
+          <button class="btn btn-outline-primary btn-sm">Editar</button>
+          <button class="btn btn-outline-danger btn-sm">Quitar</button>
+        </div></div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card h-100"><div class="card-body">
+          <h5 class="card-title">Lechuga crespa</h5>
+          <p class="card-text">Precio: $2.000 / u<br>Disponible: 0 u</p>
+          <span class="badge text-bg-danger mb-2">Agotado</span><br>
+          <button class="btn btn-outline-primary btn-sm">Editar</button>
+          <button class="btn btn-outline-danger btn-sm">Quitar</button>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"><\/script>
+</body>
+</html>`;
+
+    document.getElementById('bsPracticaFrame').srcdoc = bootstrapDoc(`
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Mi catalogo</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">Agregar producto</button>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-md-4"><div class="card h-100"><div class="card-body">
+          <h5 class="card-title">Tomate cherry</h5>
+          <p class="card-text">Precio: $4.500 / kg<br>Disponible: 30 kg</p>
+          <button class="btn btn-outline-primary btn-sm">Editar</button>
+          <button class="btn btn-outline-danger btn-sm">Quitar</button>
+        </div></div></div>
+        <div class="col-12 col-md-4"><div class="card h-100"><div class="card-body">
+          <h5 class="card-title">Lechuga crespa</h5>
+          <p class="card-text">Precio: $2.000 / u<br>Disponible: 0 u</p>
+          <span class="badge text-bg-danger mb-2">Agotado</span><br>
+          <button class="btn btn-outline-primary btn-sm">Editar</button>
+          <button class="btn btn-outline-danger btn-sm">Quitar</button>
+        </div></div></div>
+      </div>
+      <div class="modal fade" id="modalProducto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog"><div class="modal-content">
+          <div class="modal-header"><h5 class="modal-title">Nuevo producto</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body"><input type="text" class="form-control" placeholder="Nombre del producto"></div>
+          <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button></div>
+        </div></div>
+      </div>`, 'html,body{overflow:visible;}');
+
+    document.getElementById('bsPracticaCode').textContent = panelBootstrapCode;
+    document.getElementById('bsPracticaToggle').addEventListener('click', function () {
+      const el = document.getElementById('bsPracticaCode');
+      const oculto = el.style.display === 'none';
+      el.style.display = oculto ? 'block' : 'none';
+      this.textContent = oculto ? 'Ocultar el codigo completo' : 'Mostrar el codigo completo';
+    });
+
+    /* 2.1 Como obtener Tailwind */
+
+    const twObtenerTextos = {
+      play: {
+        code: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel del productor</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>
+</head>
+<body class="bg-gray-50">
+  <h1 class="text-3xl font-bold text-gray-900">Mi catalogo</h1>
+</body>
+</html>`,
+        explain: 'Un unico script en head genera las clases de Tailwind directamente en el navegador, a medida que las usas en el HTML. No hay build ni archivo CSS que enlazar.'
+      },
+      cli: {
+        code: `npm install tailwindcss @tailwindcss/cli
+
+npx @tailwindcss/cli -i ./entrada.css -o ./salida.css --watch`,
+        explain: 'La CLI o Vite analizan tu HTML y generan un unico archivo CSS con exactamente las clases que usaste, mucho mas liviano que cargar Tailwind completo desde el navegador. Este flujo llega mas adelante en el curso.'
+      }
+    };
+
+    mountSegmented('twObtenerOptions', (valor) => {
+      const datos = twObtenerTextos[valor];
+      document.getElementById('twObtenerCode').textContent = datos.code;
+      document.getElementById('twObtenerExplain').innerHTML = datos.explain;
+    }, 'play');
+
+    /* 2.2 Espaciado de Tailwind */
+
+    const twSpaceRemMap = { '1': '0.25rem (4px)', '2': '0.5rem (8px)', '4': '1rem (16px)', '8': '2rem (32px)' };
+
+    mountSegmented('twPaddingOptions', (v) => {
+      const cls = `p-${v}`;
+      document.getElementById('twSpaceLabel').textContent = `class="${cls}"`;
+      document.getElementById('twSpaceCode').textContent = `<div class="${cls} bg-sky-100 border border-sky-400">Caja de prueba</div>`;
+      document.getElementById('twSpaceFrame').srcdoc = tailwindDoc(`<div class="${cls} bg-sky-100 border border-sky-400 rounded">Caja de prueba</div>`);
+      document.getElementById('twSpaceExplain').innerHTML = `<code>p-${v}</code> equivale a <strong>${twSpaceRemMap[v]}</strong> de relleno interno en los cuatro lados.`;
+    }, '2');
+
+    /* 2.3 Color y tono de Tailwind */
+
+    const twTonos = [100, 300, 500, 700, 900];
+    const twColorState = { color: 'blue', toneIndex: 2 };
+
+    function renderTwColor() {
+      const tono = twTonos[twColorState.toneIndex];
+      document.getElementById('twToneValue').textContent = tono;
+      const textCls = tono >= 500 ? 'text-white' : 'text-gray-900';
+      const cls = `bg-${twColorState.color}-${tono} ${textCls}`;
+      document.getElementById('twColorLabel').textContent = `class="${cls}"`;
+      document.getElementById('twColorCode').textContent = `<div class="${cls} p-4 rounded-lg">Contenido de prueba</div>`;
+      document.getElementById('twColorFrame').srcdoc = tailwindDoc(`<div class="${cls} p-4 rounded-lg">Contenido de prueba</div>`);
+      document.getElementById('twColorExplain').innerHTML = tono >= 500
+        ? `Con tono ${tono}, el fondo es oscuro: se agrega <code>text-white</code> para mantener el contraste.`
+        : `Con tono ${tono}, el fondo es claro: se usa <code>text-gray-900</code> para que el texto siga siendo legible.`;
+    }
+
+    mountSegmented('twColorOptions', (v) => { twColorState.color = v; renderTwColor(); }, 'blue');
+    const twToneRange = document.getElementById('twToneRange');
+    twToneRange.addEventListener('input', () => { twColorState.toneIndex = Number(twToneRange.value); renderTwColor(); });
+    renderTwColor();
+
+    /* 2.4 Tipografia */
+
+    const twTypeState = { size: 'text-base', weight: 'font-normal' };
+
+    function renderTwType() {
+      const cls = `${twTypeState.size} ${twTypeState.weight}`;
+      document.getElementById('twTypeLabel').textContent = `class="${cls}"`;
+      document.getElementById('twTypeCode').textContent = `<p class="${cls}">Mi catalogo de productos</p>`;
+      document.getElementById('twTypeFrame').srcdoc = tailwindDoc(`<p class="${cls}">Mi catalogo de productos</p>`);
+    }
+
+    mountSegmented('twSizeOptions', (v) => { twTypeState.size = v; renderTwType(); }, 'text-base');
+    mountSegmented('twWeightOptions', (v) => { twTypeState.weight = v; renderTwType(); }, 'font-normal');
+    renderTwType();
+
+    /* 2.5 Flexbox de Tailwind */
+
+    mountBuilder('twFlex', {
+      doc: tailwindDoc,
+      rules: ruleData(document.getElementById('twFlexRules')),
+      emptyText: 'Sin flex, los tres elementos son bloques normales, uno debajo del otro.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const clases = [has('flex') && 'flex', has('between') && 'justify-between', has('center') && 'items-center', has('gap') && 'gap-4'].filter(Boolean).join(' ');
+        const html = `<div class="${clases}" style="min-height:70px;background:#f0f9ff;padding:10px;">
+          <div class="bg-sky-600 text-white p-2 rounded">Uno</div>
+          <div class="bg-sky-600 text-white p-2 rounded">Dos</div>
+          <div class="bg-sky-600 text-white p-2 rounded">Tres</div>
+        </div>`;
+        return { html, code: `<div class="${clases}">...</div>` };
+      }
+    });
+
+    /* 2.6 Grid de Tailwind */
+
+    const twGridRange = document.getElementById('twGridRange');
+    const twGridValue = document.getElementById('twGridValue');
+    const twGridFrame = document.getElementById('twGridFrame');
+    const twGridCode = document.getElementById('twGridCode');
+    const twGridExplain = document.getElementById('twGridExplain');
+
+    function renderTwGrid() {
+      const n = Number(twGridRange.value);
+      twGridValue.textContent = n;
+      let cols = '';
+      for (let i = 1; i <= n; i++) {
+        cols += `<div class="border rounded-lg p-3 text-center bg-sky-50">Columna ${i}</div>`;
+      }
+      twGridFrame.srcdoc = tailwindDoc(`<div class="grid grid-cols-1 md:grid-cols-${n} gap-3">${cols}</div>`);
+      twGridCode.textContent = `<div class="grid grid-cols-1 md:grid-cols-${n} gap-3">\n  ...\n</div>`;
+      twGridExplain.innerHTML = `En telefono siempre es una columna (<code>grid-cols-1</code>). Desde <code>md</code> pasa a ${n} columna${n > 1 ? 's' : ''} (<code>md:grid-cols-${n}</code>).`;
+    }
+
+    twGridRange.addEventListener('input', renderTwGrid);
+    renderTwGrid();
+
+    /* 2.7 Breakpoints de Tailwind */
+
+    const twBreakLabel = document.getElementById('twBreakLabel');
+    mountBuilder('twBreak', {
+      doc: tailwindDoc,
+      rules: ruleData(document.getElementById('twBreakRules')),
+      build(keys) {
+        const parts = ['grid-cols-1'];
+        if (keys.includes('md')) parts.push('md:grid-cols-2');
+        if (keys.includes('lg')) parts.push('lg:grid-cols-3');
+        const cls = parts.join(' ');
+        twBreakLabel.textContent = cls;
+        const html = `<div class="grid ${cls} gap-2">
+          <div class="p-3 bg-sky-600 text-white rounded text-center">A</div>
+          <div class="p-3 bg-emerald-600 text-white rounded text-center">B</div>
+          <div class="p-3 bg-amber-500 rounded text-center">C</div>
+        </div>`;
+        return { html, code: `class="grid ${cls} gap-2"` };
+      }
+    });
+
+    mountDeviceSwitch('twDeviceSwitch', document.getElementById('twDeviceWrap'));
+
+    /* 2.8 Estados */
+
+    mountBuilder('twEstados', {
+      doc: tailwindDoc,
+      extraStyle: '.sim-hover{background-color:#1d4ed8 !important;}.sim-focus{box-shadow:0 0 0 4px #93c5fd !important;}',
+      rules: ruleData(document.getElementById('twEstadosRules')),
+      emptyText: 'Sin simular ningun estado, el boton se ve en su estado normal.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const clases = ['bg-blue-600', 'text-white', 'px-4', 'py-2', 'rounded-lg', has('hover') && 'sim-hover', has('focus') && 'sim-focus'].filter(Boolean).join(' ');
+        return { html: `<button class="${clases}">Guardar producto</button>`, code: `<button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-300">Guardar producto</button>` };
+      }
+    });
+
+    /* 2.9 Boton de Tailwind desde cero */
+
+    mountBuilder('twBtn', {
+      doc: tailwindDoc,
+      extraStyle: '.sim-hover-btn{background-color:#1d4ed8 !important;}',
+      rules: ruleData(document.getElementById('twBtnRules')),
+      emptyText: 'Sin ninguna utilidad, es un boton HTML sin estilo.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const clases = [has('bg') && 'bg-blue-600', has('text') && 'text-white', has('font') && 'font-bold', has('padding') && 'px-5 py-2.5', has('rounded') && 'rounded-lg', has('hover') && 'sim-hover-btn'].filter(Boolean).join(' ');
+        return { html: `<button class="${clases}">Guardar producto</button>`, code: `<button class="${clases.replace('sim-hover-btn', 'hover:bg-blue-700')}">Guardar producto</button>` };
+      }
+    });
+
+    /* 2.10 Tarjeta de Tailwind desde cero */
+
+    mountBuilder('twCard', {
+      doc: tailwindDoc,
+      rules: ruleData(document.getElementById('twCardRules')),
+      emptyText: 'Sin ninguna utilidad, es un div sin borde ni jerarquia visual.',
+      build(keys) {
+        const has = (k) => keys.includes(k);
+        const outer = [has('border') && 'border rounded-lg', has('shadow') && 'shadow-sm', has('padding') && 'p-4'].filter(Boolean).join(' ');
+        const title = has('title') ? 'font-bold text-gray-900' : '';
+        const text = has('text') ? 'text-gray-600' : '';
+        const html = `<div class="${outer} bg-white" style="max-width:20rem;">
+          <h5 class="${title}">Tomate cherry</h5>
+          <p class="${text}">Precio: $4.500 por kg. Disponible: 30 kg.</p>
+        </div>`;
+        const code = `<div class="${outer}">\n  <h5 class="${title}">Tomate cherry</h5>\n  <p class="${text}">Precio: $4.500 por kg.</p>\n</div>`;
+        return { html, code };
+      }
+    });
+
+    /* 2.11 Practica completa Tailwind */
+
+    const panelTailwindCode = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo del productor (Tailwind)</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>
+</head>
+<body class="bg-gray-50">
+  <div class="max-w-5xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-900">Mi catalogo</h1>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Agregar producto</button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white border rounded-lg shadow-sm p-4">
+        <h5 class="font-bold text-gray-900">Tomate cherry</h5>
+        <p class="text-gray-600 text-sm mb-3">Precio: $4.500 / kg<br>Disponible: 30 kg</p>
+      </div>
+      <div class="bg-white border rounded-lg shadow-sm p-4">
+        <h5 class="font-bold text-gray-900">Lechuga crespa</h5>
+        <p class="text-gray-600 text-sm mb-1">Precio: $2.000 / u<br>Disponible: 0 u</p>
+        <span class="inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full mb-3">Agotado</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    document.getElementById('twPracticaFrame').srcdoc = tailwindDoc(`
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-bold text-gray-900">Mi catalogo</h1>
+        <button class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm">Agregar producto</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="bg-white border rounded-lg shadow-sm p-3">
+          <h5 class="font-bold text-gray-900">Tomate cherry</h5>
+          <p class="text-gray-600 text-sm">Precio: $4.500 / kg. Disponible: 30 kg.</p>
+        </div>
+        <div class="bg-white border rounded-lg shadow-sm p-3">
+          <h5 class="font-bold text-gray-900">Lechuga crespa</h5>
+          <p class="text-gray-600 text-sm mb-1">Precio: $2.000 / u. Disponible: 0 u.</p>
+          <span class="inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">Agotado</span>
+        </div>
+      </div>`, 'body{background:#f9fafb;}');
+
+    document.getElementById('twPracticaCode').textContent = panelTailwindCode;
+    document.getElementById('twPracticaToggle').addEventListener('click', function () {
+      const el = document.getElementById('twPracticaCode');
+      const oculto = el.style.display === 'none';
+      el.style.display = oculto ? 'block' : 'none';
+      this.textContent = oculto ? 'Ocultar el codigo completo' : 'Mostrar el codigo completo';
+    });
+
+    /* 3.1 Comparacion lado a lado */
+
+    const cmpBsFrame = document.getElementById('cmpBsFrame');
+    const cmpTwFrame = document.getElementById('cmpTwFrame');
+    const cmpAgotado = document.getElementById('cmpAgotado');
+
+    function renderComparacion() {
+      const agotado = cmpAgotado.checked;
+
+      cmpBsFrame.srcdoc = bootstrapDoc(`
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1 class="h5 mb-0">Mi catalogo</h1>
+          <button class="btn btn-primary btn-sm">Agregar producto</button>
+        </div>
+        <div class="row g-2">
+          <div class="col-12 col-md-6"><div class="card h-100"><div class="card-body">
+            <h6 class="card-title">Tomate cherry</h6>
+            <p class="card-text small">Precio: $4.500/kg. Disponible: 30 kg.</p>
+            <button class="btn btn-sm btn-outline-primary">Editar</button>
+            <button class="btn btn-sm btn-outline-danger">Quitar</button>
+          </div></div></div>
+          <div class="col-12 col-md-6"><div class="card h-100"><div class="card-body">
+            <h6 class="card-title">Lechuga crespa</h6>
+            <p class="card-text small">Precio: $2.000/u. Disponible: ${agotado ? '0' : '15'} u.</p>
+            ${agotado ? '<span class="badge text-bg-danger mb-2">Agotado</span><br>' : ''}
+            <button class="btn btn-sm btn-outline-primary">Editar</button>
+            <button class="btn btn-sm btn-outline-danger">Quitar</button>
+          </div></div></div>
+        </div>`);
+
+      cmpTwFrame.srcdoc = tailwindDoc(`
+        <div class="flex justify-between items-center mb-3">
+          <h1 class="text-lg font-bold text-gray-900">Mi catalogo</h1>
+          <button class="bg-blue-600 text-white text-sm px-3 py-1.5 rounded-lg">Agregar producto</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-white border rounded-lg shadow-sm p-3">
+            <h6 class="font-bold text-gray-900">Tomate cherry</h6>
+            <p class="text-gray-600 text-sm mb-2">Precio: $4.500/kg. Disponible: 30 kg.</p>
+            <div class="flex gap-2">
+              <button class="border border-blue-600 text-blue-600 text-xs px-2 py-1 rounded-full">Editar</button>
+              <button class="border border-red-600 text-red-600 text-xs px-2 py-1 rounded-full">Quitar</button>
+            </div>
+          </div>
+          <div class="bg-white border rounded-lg shadow-sm p-3">
+            <h6 class="font-bold text-gray-900">Lechuga crespa</h6>
+            <p class="text-gray-600 text-sm mb-1">Precio: $2.000/u. Disponible: ${agotado ? '0' : '15'} u.</p>
+            ${agotado ? '<span class="inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full mb-2">Agotado</span>' : ''}
+            <div class="flex gap-2">
+              <button class="border border-blue-600 text-blue-600 text-xs px-2 py-1 rounded-full">Editar</button>
+              <button class="border border-red-600 text-red-600 text-xs px-2 py-1 rounded-full">Quitar</button>
+            </div>
+          </div>
+        </div>`);
+    }
+
+    cmpAgotado.addEventListener('change', renderComparacion);
+    renderComparacion();
+    mountDeviceSwitch('cmpDeviceSwitch', document.getElementById('cmpDeviceWrap'));
+
+    /* 3.2 Herramienta de decision */
+
+    const decisionRespuestas = {};
+    const decisionResultado = document.getElementById('decisionResultado');
+
+    document.querySelectorAll('.decision-question').forEach(pregunta => {
+      pregunta.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          pregunta.querySelectorAll('button').forEach(b => b.classList.remove('chosen'));
+          btn.classList.add('chosen');
+          decisionRespuestas[pregunta.dataset.q] = btn.dataset.valor;
+          evaluarDecision();
+        });
+      });
+    });
+
+    function evaluarDecision() {
+      if (Object.keys(decisionRespuestas).length < 3) return;
+      const r1 = decisionRespuestas['1'];
+      const r2 = decisionRespuestas['2'];
+      const r3 = decisionRespuestas['3'];
+      let texto;
+      if (r1 === 'pequeno' && r3 === 'poco') {
+        texto = 'CSS puro. Un proyecto muy pequeno, sin repeticion, no necesita el vocabulario extra de un framework.';
+      } else if (r2 === 'rapido' && r3 === 'poco') {
+        texto = 'Bootstrap. Buscas salir rapido con una interfaz estandar y prefieres tocar lo minimo: los componentes ya armados resuelven eso.';
+      } else if (r2 === 'propio' && r3 === 'mucho') {
+        texto = 'Tailwind. Quieres un diseno propio y te gusta ajustar cada detalle: las utilidades te dejan ese control fino sin pelear contra un componente ya armado.';
+      } else {
+        texto = 'Cualquiera de los dos sirve para tu caso. Vuelve a la tabla de la Parte 1 de la guia y decide con el criterio que mas pese para tu equipo: velocidad de salida o control fino del diseno.';
+      }
+      decisionResultado.textContent = texto;
+      decisionResultado.classList.add('show');
+    }
+
+    /* 3.3 Comprobacion final */
+
+    document.querySelectorAll('.quiz-question').forEach(pregunta => {
+      const correcta = pregunta.dataset.answer;
+      const feedback = pregunta.querySelector('.quiz-feedback');
+      pregunta.querySelectorAll('.quiz-options button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          pregunta.querySelectorAll('.quiz-options button').forEach(b => {
+            b.classList.remove('correct', 'wrong');
+            b.disabled = true;
+          });
+          const acerto = btn.dataset.valor === correcta;
+          btn.classList.add(acerto ? 'correct' : 'wrong');
+          pregunta.querySelector(`[data-valor="${correcta}"]`).classList.add('correct');
+          feedback.textContent = acerto ? 'Correcto.' : 'La respuesta correcta queda marcada en verde.';
+        });
+      });
+    });
+
+    /* Progreso de lectura, parte actual y navegacion activa */
+
+    const progressBar = document.getElementById('progressBar');
+    const topTag = document.getElementById('topTag');
+    const secciones = Array.from(document.querySelectorAll('main .lesson'));
+    const enlaces = Array.from(document.querySelectorAll('.sidebar a'));
+
+    function actualizarProgreso() {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const avance = total > 0 ? (window.scrollY / total) * 100 : 0;
+      progressBar.style.width = `${Math.min(100, Math.max(0, avance))}%`;
+
+      let actual = secciones[0];
+      secciones.forEach(seccion => {
+        if (seccion.getBoundingClientRect().top - 110 <= 0) actual = seccion;
+      });
+      enlaces.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${actual.id}`));
+
+      if (actual.classList.contains('tw')) {
+        topTag.textContent = 'Parte 2';
+        topTag.className = 'brand-tag tw';
+      } else if (actual.classList.contains('cierre')) {
+        topTag.textContent = 'Cierre';
+        topTag.className = 'brand-tag cierre';
+      } else {
+        topTag.textContent = 'Parte 1';
+        topTag.className = 'brand-tag bs';
+      }
+    }
+
+    window.addEventListener('scroll', actualizarProgreso, { passive: true });
+    actualizarProgreso();
+  </script>
+</body>
+</html>

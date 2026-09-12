@@ -38,8 +38,8 @@ semestre.
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
 | **[04](semana-04/index.qmd)** | Material Design y widgets | Pantallas principales del proyecto con tema claro y oscuro | - |
-| 05 | Navegación | Pantallas conectadas, con información entre ellas | - |
-| 06 | Formularios y componentes reutilizables | Formulario principal validado y dos componentes reutilizables | **10%** |
+| **[05](semana-05/index.qmd)** | Navegación | Pantallas conectadas, con información entre ellas | - |
+| **[06](semana-06/index.qmd)** | Formularios y componentes reutilizables | Formulario principal validado y dos componentes reutilizables | **10%** |
 | 07 | JSON y APIs REST | Datos externos integrados con manejo de errores | - |
 | 08 | Persistencia local | Proyecto que abre y opera sin conexión | **10%** |
 :::

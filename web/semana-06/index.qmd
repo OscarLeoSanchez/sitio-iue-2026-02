@@ -14,9 +14,17 @@ date-format: "D [de] MMMM [de] YYYY"
 :::
 
 ::: {.acceso}
+::: {.acceso-item}
 Diapositivas de la sesión
 
 [Abrir las diapositivas](presentacion.qmd){.btn-doc target="_blank"}
+:::
+
+::: {.acceso-item}
+Laboratorio interactivo de Bootstrap y Tailwind
+
+[Abrir el laboratorio](frameworks-css-interactivo.html){.btn-doc target="_blank"}
+:::
 :::
 
 ## Lo que vas a lograr
@@ -892,6 +900,7 @@ Entregable concreto: `panel-bootstrap.html`, `panel-tailwind.html` y la sustenta
 - Play CDN de Tailwind: [tailwindcss.com/docs/installation/play-cdn](https://tailwindcss.com/docs/installation/play-cdn)
 - Referencia de todas las utilidades de Tailwind: [tailwindcss.com/docs/installation](https://tailwindcss.com/docs/installation)
 - Diapositivas de la sesión: [presentación de la Semana 6](presentacion.qmd)
+- Para practicar con ejemplos interactivos: [Bootstrap y Tailwind desde cero](frameworks-css-interactivo.html)
 
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.

@@ -46,6 +46,10 @@ website:
           contents:
             - text: "Semana 4. Material Design y widgets"
               href: movil/semana-04/index.qmd
+            - text: "Semana 5. Navegación"
+              href: movil/semana-05/index.qmd
+            - text: "Semana 6. Formularios y componentes reutilizables"
+              href: movil/semana-06/index.qmd
     - id: web
       style: docked
       background: light
