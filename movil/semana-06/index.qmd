@@ -15,30 +15,297 @@ date-format: "D [de] MMMM [de] YYYY"
 
 ## Lo que vas a lograr
 
-En la Semana 5 conectaste el login y el inicio de `taller_login` con `Navigator`, rutas con nombre
-y paso de datos. Esta semana cierra dos cosas pendientes de ese formulario: que valide de verdad lo
-que el usuario escribe, y que deje de repetir el mismo código de campo tres veces.
+En la Semana 5 aprendiste a navegar entre pantallas con `Navigator.push` y `Navigator.pop`, primero
+en MiniMarket y después en `taller_login`. Esta semana arranca convirtiendo MiniMarket en una app
+con varias secciones principales (Inicio, Productos, Carrito, Perfil) manejadas con una barra de
+navegación inferior. Después vuelves a `taller_login` para cerrar dos cosas pendientes de ese
+formulario: que valide de verdad lo que el usuario escribe, y que deje de repetir el mismo código de
+campo tres veces.
 
 Al terminar la guía sabes:
 
-1. Envolver un formulario en `Form` y validar sus campos con `GlobalKey<FormState>`.
-2. Escribir funciones `validator` para correo y contraseña, y bloquear la navegación si el
+1. Distinguir navegación entre secciones principales (barra inferior) de navegación hacia un
+   detalle (`Navigator.push`).
+2. Construir una barra de navegación inferior con `NavigationBar` y un índice de sección.
+3. Combinar `NavigationBar` y `Navigator.push` en la misma app, cada uno en su propio nivel.
+4. Envolver un formulario en `Form` y validar sus campos con `GlobalKey<FormState>`.
+5. Escribir funciones `validator` para correo y contraseña, y bloquear la navegación si el
    formulario no es válido.
-3. Extraer un widget reutilizable a partir de código duplicado, exponiendo los parámetros
+6. Extraer un widget reutilizable a partir de código duplicado, exponiendo los parámetros
    necesarios.
-4. Decidir cuándo conviene extraer un widget y cuándo no vale la pena todavía.
+7. Decidir cuándo conviene extraer un widget y cuándo no vale la pena todavía.
 
 ::: {.callout-note}
 ## Antes de empezar
 
-Necesitas `taller_login` de la Semana 5 funcionando: login, inicio, rutas con nombre, paso de datos
-y navegación anidada. Todo lo de esta guía continúa ese mismo proyecto.
+Necesitas MiniMarket de la Semana 5 funcionando (listado de productos y detalle con
+`Navigator.push`) y `taller_login` con login, inicio, rutas con nombre, paso de datos y navegación
+anidada. Todo lo de esta guía continúa esos dos proyectos.
 
 Esta guía usa Flutter 3.41.9 (canal stable) y Dart SDK 3.11.5, las mismas versiones verificadas
 desde la Semana 2.
 :::
 
-## Parte 1. Validación con Form
+## Parte 1. Dos tipos de navegación
+
+Hasta ahora, toda la navegación de MiniMarket fue de un tipo: de `ProductosScreen` hacia
+`DetalleProductoScreen`, con `Navigator.push`. Tiene sentido usar `push` ahí porque el detalle está
+conceptualmente "dentro" de productos: se profundiza en un producto concreto.
+
+Pero una app real casi siempre tiene también secciones principales que no están una dentro de la
+otra. MiniMarket va a crecer con cuatro: Inicio, Productos, Carrito y Perfil. Ninguna de esas
+secciones está dentro de otra, son secciones hermanas. Para eso una barra de navegación inferior
+tiene más sentido que apilar pantallas con `Navigator.push`.
+
+## Parte 2. NavigationBar y un índice de sección
+
+Flutter tiene un componente moderno para esto, `NavigationBar` (Material 3). Evita mezclarlo con
+`BottomNavigationBar`, que es el componente anterior: en esta guía usas solo `NavigationBar`.
+
+La idea central es una variable que indica qué sección está activa en este momento:
+
+```dart
+int paginaActual = 0; // 0 = Inicio, 1 = Productos, 2 = Carrito, 3 = Perfil
+```
+
+Como esta variable cambia con la interacción del usuario y eso afecta lo que se ve en pantalla, la
+pantalla que la contiene debe ser un `StatefulWidget`, el mismo mecanismo que ya conoces de
+`setState`.
+
+## Parte 3. Pantallas nuevas, mínimas
+
+Necesitas una pantalla por sección. `ProductosScreen` ya existe, tal cual la dejaste en la Semana 5:
+se reutiliza sin cambios. Las otras tres son, por ahora, marcadores de posición simples:
+
+```dart
+class InicioScreen extends StatelessWidget {
+  const InicioScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Inicio', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+
+class CarritoScreen extends StatelessWidget {
+  const CarritoScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Carrito', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+
+class PerfilScreen extends StatelessWidget {
+  const PerfilScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Perfil', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+```
+
+Las mejoras a `InicioScreen` y `PerfilScreen` llegan en la Parte 7.
+
+## Parte 4. PrincipalScreen: un StatefulWidget con paginaActual
+
+`PrincipalScreen` es la pantalla contenedora, la que Flutter muestra como `home` de la app. Guarda
+`paginaActual` y una lista `paginas` con una pantalla por índice, en el mismo orden que vas a usar
+en la barra:
+
+```dart
+class PrincipalScreen extends StatefulWidget {
+  const PrincipalScreen({super.key});
+
+  @override
+  State<PrincipalScreen> createState() => _PrincipalScreenState();
+}
+
+class _PrincipalScreenState extends State<PrincipalScreen> {
+  int paginaActual = 0;
+
+  final paginas = [
+    const InicioScreen(),
+    const ProductosScreen(),
+    const CarritoScreen(),
+    const PerfilScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('MiniMarket')),
+      body: paginas[paginaActual],
+    );
+  }
+}
+```
+
+::: {.diagrama}
+![](imagenes/indice-paginas.svg){fig-alt="Mapeo de indice a pagina: paginaActual vale 1, la lista paginas tiene a InicioScreen en el indice 0, ProductosScreen en el indice 1, CarritoScreen en el indice 2 y PerfilScreen en el indice 3, y el body del Scaffold muestra paginas en el indice actual, que es ProductosScreen"}
+
+El body del Scaffold muestra siempre paginas en la posicion paginaActual.
+:::
+
+Nota que **todavía no usas `IndexedStack`**: `body: paginas[paginaActual]` alcanza y es
+conceptualmente transparente, muestra directamente la pantalla del índice actual. `IndexedStack`
+resuelve un problema distinto (que el estado de una sección se pierda al salir de ella), y ya lo
+usaste en la Semana 5 con `taller_login` (Parte 14, `BottomNavigationBar` + `IndexedStack`) para las
+pestañas Inicio y Cuenta dentro de una sola pantalla. Aquí no hace falta todavía: cada sección de
+MiniMarket es una pantalla completa, sin estado propio que conservar al cambiar de sección.
+
+## Parte 5. Construir el NavigationBar
+
+Agrega la barra en `bottomNavigationBar` del `Scaffold`:
+
+```dart
+bottomNavigationBar: NavigationBar(
+  selectedIndex: paginaActual,
+  destinations: const [
+    NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Inicio'),
+    NavigationDestination(icon: Icon(Icons.shopping_bag_outlined), selectedIcon: Icon(Icons.shopping_bag), label: 'Productos'),
+    NavigationDestination(icon: Icon(Icons.shopping_cart_outlined), selectedIcon: Icon(Icons.shopping_cart), label: 'Carrito'),
+    NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Perfil'),
+  ],
+)
+```
+
+Con esto la barra ya se ve, con "Productos" marcado porque `selectedIndex: paginaActual` vale 0 por
+ahora, pero tocar un destino todavía no hace nada: falta conectar el toque con un cambio de estado.
+Agrega `onDestinationSelected`:
+
+```dart
+bottomNavigationBar: NavigationBar(
+  selectedIndex: paginaActual,
+  onDestinationSelected: (index) {
+    setState(() {
+      paginaActual = index;
+    });
+  },
+  destinations: const [
+    NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Inicio'),
+    NavigationDestination(icon: Icon(Icons.shopping_bag_outlined), selectedIcon: Icon(Icons.shopping_bag), label: 'Productos'),
+    NavigationDestination(icon: Icon(Icons.shopping_cart_outlined), selectedIcon: Icon(Icons.shopping_cart), label: 'Carrito'),
+    NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Perfil'),
+  ],
+),
+```
+
+El flujo completo, de principio a fin: el usuario toca "Productos", `onDestinationSelected` recibe
+`index = 1`, llama a `setState`, `paginaActual` pasa a valer `1`, Flutter reconstruye el `build`, y
+`body: paginas[paginaActual]` ahora apunta a `paginas[1]`, que es `ProductosScreen`.
+
+| Parámetro de NavigationBar | Para qué sirve |
+|---|---|
+| `selectedIndex` | Cuál destino se ve marcado como activo |
+| `destinations` | La lista de íconos y etiquetas, en el mismo orden que `paginas` |
+| `onDestinationSelected` | Recibe el índice tocado; aquí solo actualiza `paginaActual` con `setState` |
+
+::: {.callout-important}
+## El orden importa
+
+El orden de `destinations` en el `NavigationBar` debe coincidir exactamente con el orden de
+`paginas` en `_PrincipalScreenState`. Si Productos es el índice 1 en una lista y el índice 2 en la
+otra, tocar "Productos" en la barra muestra Carrito.
+:::
+
+## Parte 6. Navbar y Navigator conviviendo
+
+Este es el concepto más importante de esta parte de la guía. Mientras el usuario está en la sección
+Productos (navegación principal, nivel 1) y toca un producto de la lista, se abre el detalle con
+`Navigator.push` (navegación secundaria, nivel 2, apilada encima de Productos). Son dos sistemas de
+navegación distintos, funcionando a la vez, cada uno resolviendo un problema diferente.
+
+::: {.diagrama}
+![](imagenes/dos-niveles-navegacion.svg){fig-alt="Dos niveles de navegacion conviviendo: una fila horizontal con las secciones principales Inicio, Productos, Carrito y Perfil manejadas por NavigationBar, y desde la seccion Productos una rama hacia abajo con Navigator.push hacia Detalle producto, que es navegacion secundaria"}
+
+El Navbar cambia de seccion; Navigator.push profundiza dentro de una seccion.
+:::
+
+No necesitas cambiar nada en `ProductosScreen` para que esto funcione: el `onTap` que ya escribiste
+en la Semana 5 sigue funcionando exactamente igual dentro de `PrincipalScreen`, porque
+`Navigator.push` siempre apila sobre la pantalla actual, sin importar si esa pantalla llegó ahí por
+un `NavigationBar` o por otro `push`.
+
+## Parte 7. Mejorar Inicio y Perfil
+
+Con el patrón funcionando, dale algo de contenido real a `InicioScreen` y `PerfilScreen`, sin
+lógica funcional todavía:
+
+```dart
+class InicioScreen extends StatelessWidget {
+  const InicioScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        const Text('Bienvenido', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 4),
+        const Text('Encuentra tus productos favoritos', style: TextStyle(color: Colors.black54)),
+        const SizedBox(height: 16),
+        Card(
+          child: ListTile(
+            leading: const Icon(Icons.local_offer_outlined),
+            title: const Text('Ofertas'),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: const Icon(Icons.shopping_cart_outlined),
+            title: const Text('Mi carrito'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+```dart
+class PerfilScreen extends StatelessWidget {
+  const PerfilScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
+        const SizedBox(height: 12),
+        const Center(
+          child: Text('Nombre del cliente', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        ),
+        const SizedBox(height: 16),
+        const ListTile(leading: Icon(Icons.email_outlined), title: Text('correo@ejemplo.com')),
+        const ListTile(leading: Icon(Icons.phone_outlined), title: Text('300 000 0000')),
+      ],
+    );
+  }
+}
+```
+
+::: {.callout-tip}
+## Reto: agrega el carrito a la app
+
+`CarritoScreen` sigue siendo un marcador de posición. Dale un contenido mínimo parecido a
+`InicioScreen`: un título "Tu carrito" y una lista vacía con un texto "Todavía no agregaste
+productos". No hace falta lógica real de compras todavía.
+:::
+
+Con `NavigationBar` y `Navigator.push` conviviendo, la navegación principal de tu app ya está
+completa. Una app real casi siempre convive también con formularios que hay que validar: ahora
+vuelves a `taller_login` para aplicar eso sobre el ejemplo de login que ya conoces.
+
+## Parte 8. Validación con Form
 
 Hasta la Semana 5, la única validación del login era un `if` manual que revisaba si el correo
 estaba vacío. `Form` reemplaza ese mecanismo por uno declarado junto a cada campo, que además
@@ -188,7 +455,7 @@ TextFormField(
 ```
 :::
 
-## Parte 2. Extraer un widget reutilizable: CampoTexto
+## Parte 9. Extraer un widget reutilizable: CampoTexto
 
 Los tres `TextFormField` del formulario (correo, contraseña, confirmar contraseña) se parecen
 mucho entre sí: cada uno repite `decoration`, `border` y la estructura general. Antes de extraer
@@ -298,7 +565,7 @@ CampoTexto(
 
 Cada instancia recibe sus propios parámetros: el widget es el mismo, los datos cambian.
 
-## Parte 3. Extraer un widget reutilizable: TarjetaProductor
+## Parte 10. Extraer un widget reutilizable: TarjetaProductor
 
 En `_ContenidoInicio` de la Semana 05, el `itemBuilder` del `ListView.builder` construye un `Card`
 con un `ListTile` en cada vuelta. Es el mismo problema que el formulario: la estructura se repite,
@@ -511,6 +778,7 @@ Detalle completo, rúbrica de 100 puntos y procedimiento de verificación en
 ::: {.checklist}
 **Antes de entregar, revisa que tienes todo esto**
 
+- [ ] MiniMarket tiene un `NavigationBar` con cuatro secciones y `Navigator.push` funcionando dentro de Productos
 - [ ] El formulario principal de `taller_login` está envuelto en `Form` con `GlobalKey<FormState>`
 - [ ] Cada campo tiene su `validator` y muestra un mensaje de error claro
 - [ ] La navegación se bloquea si el formulario no es válido

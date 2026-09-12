@@ -16,29 +16,364 @@ date-format: "D [de] MMMM [de] YYYY"
 ## Lo que vas a lograr
 
 Hasta ahora cada pantalla que armaste vivía sola: `Scaffold`, widgets, un tema. Esta semana
-conectas pantallas entre sí. Vas a construir un proyecto de práctica nuevo, `taller_login`, con una
-pantalla de login y una pantalla de inicio, y vas a moverte entre ellas pasando información en los
-dos sentidos.
+conectas pantallas entre sí. Empiezas con una app nueva y simple, MiniMarket, para entender
+`Navigator.push` y `Navigator.pop` sin distracciones. Después construyes un proyecto de práctica más
+completo, `taller_login`, con una pantalla de login y una pantalla de inicio, y profundizas con
+rutas con nombre, paso de datos y navegación anidada.
 
 Al terminar la guía sabes:
 
 1. Navegar de una pantalla a otra con `Navigator.push` y entender la pila de navegación.
-2. Registrar rutas con nombre en `MaterialApp` y navegar con `Navigator.pushNamed`.
-3. Pasar datos de una pantalla a otra con una clase de argumentos tipada.
-4. Recibir de vuelta un resultado con `Navigator.pop` y `await Navigator.push`.
-5. Construir una navegación anidada mínima con `BottomNavigationBar` e `IndexedStack`.
+2. Pasar datos sencillos a otra pantalla mediante el constructor del widget.
+3. Registrar rutas con nombre en `MaterialApp` y navegar con `Navigator.pushNamed`.
+4. Pasar datos de una pantalla a otra con una clase de argumentos tipada.
+5. Recibir de vuelta un resultado con `Navigator.pop` y `await Navigator.push`.
+6. Construir una navegación anidada mínima con `BottomNavigationBar` e `IndexedStack`.
 
 ::: {.callout-note}
 ## Antes de empezar
 
 Necesitas el entorno de Flutter funcionando desde la Semana 1, y ya conoces `Scaffold`, `Column`,
-`Row`, `TextField` y botones de la Semana 4: esta guía no los reexplica, solo los usa.
+`Row`, `ListView`, `ListView.builder`, `TextField` y botones de la Semana 4: esta guía no los
+reexplica, solo los usa.
 
 Esta guía usa Flutter 3.41.9 (canal stable) y Dart SDK 3.11.5, las mismas versiones verificadas
 desde la Semana 2.
 :::
 
-## Parte 1. La pantalla de login
+## Parte 1. Que es una pantalla
+
+Flutter no tiene una entidad especial llamada "pantalla". Una pantalla es, sencillamente, un widget
+que normalmente devuelve un `Scaffold`. Recuerda cómo arranca cualquier app que ya construiste:
+
+```dart
+void main() {
+  runApp(const MiApp());
+}
+
+class MiApp extends StatelessWidget {
+  const MiApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProductosScreen(),
+    );
+  }
+}
+```
+
+`home` indica cuál widget se muestra al abrir la app. Una versión mínima de `ProductosScreen` es
+esto:
+
+```dart
+class ProductosScreen extends StatelessWidget {
+  const ProductosScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('MiniMarket')),
+      body: const Center(child: Text('Productos')),
+    );
+  }
+}
+```
+
+Que una pantalla sea aproximadamente lo mismo que un widget importa porque, más adelante en esta
+guía, `Navigator.push` en el fondo lo que hace es colocar otro widget encima del actual.
+
+## Parte 2. El listado de MiniMarket
+
+Vas a construir MiniMarket, una app de dos pantallas: un listado de productos y el detalle de uno
+de ellos. Para el listado reutilizas exactamente lo que ya sabes de `ListView.builder` de la Semana
+04, con una lista de mapas como datos:
+
+```dart
+class ProductosScreen extends StatelessWidget {
+  const ProductosScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final productos = [
+      {'nombre': 'Manzana', 'precio': '3000', 'icono': Icons.apple},
+      {'nombre': 'Pan', 'precio': '5000', 'icono': Icons.breakfast_dining},
+      {'nombre': 'Leche', 'precio': '4500', 'icono': Icons.local_drink},
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('MiniMarket')),
+      body: ListView.builder(
+        itemCount: productos.length,
+        itemBuilder: (context, index) {
+          final producto = productos[index];
+          return ListTile(
+            leading: Icon(producto['icono'] as IconData),
+            title: Text(producto['nombre'].toString()),
+            subtitle: Text('\$${producto['precio']}'),
+            trailing: const Icon(Icons.chevron_right),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+
+Hasta aquí no hay navegación todavía: solo se muestra información, igual que en la Semana 04.
+
+## Parte 3. Una segunda pantalla, vacía
+
+Cuando el usuario toca "Manzana", necesitas mostrar otra pantalla. Créala primero vacía, sin
+conectarla todavía a nada:
+
+```dart
+class DetalleProductoScreen extends StatelessWidget {
+  const DetalleProductoScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Detalle')),
+      body: const Center(child: Text('Detalle del producto')),
+    );
+  }
+}
+```
+
+Ahora mismo `ProductosScreen` y `DetalleProductoScreen` existen las dos, pero están desconectadas:
+nada en la app sabe todavía cómo pasar de una a otra.
+
+## Parte 4. Navigator.push
+
+Flutter administra las pantallas visibles con un objeto llamado `Navigator`. Su operación
+fundamental es `push`: agregar una pantalla nueva encima de la actual. Pruébalo primero con un
+botón, sin mezclarlo todavía con la lista:
+
+```dart
+ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const DetalleProductoScreen();
+        },
+      ),
+    );
+  },
+  child: const Text('Ver detalle'),
+)
+```
+
+| Pieza | Para qué sirve |
+|---|---|
+| `Navigator` | El objeto que administra las pantallas visibles de la app |
+| `push` | Agrega una pantalla nueva encima de la actual |
+| `context` | Permite a Flutter ubicar este widget en el árbol y encontrar el `Navigator` correspondiente |
+| `MaterialPageRoute` | Describe la ruta nueva: qué pantalla mostrar y con qué transición |
+| `builder` | Recibe el `context` y devuelve el widget de la pantalla nueva |
+
+El `builder` con `return` explícito se puede simplificar con una función flecha, porque el cuerpo es
+una sola expresión:
+
+```dart
+builder: (context) => const DetalleProductoScreen(),
+```
+
+Vas a usar esta forma más corta de aquí en adelante.
+
+## Parte 5. La pila de navegación
+
+Antes del `push` solo `ProductosScreen` está visible. Después del `push`, `DetalleProductoScreen`
+queda visible y `ProductosScreen` sigue debajo: no desapareció, por eso más adelante se puede volver
+a ella.
+
+::: {.diagrama}
+![](imagenes/pila-navegacion-minimarket.svg){fig-alt="Pila de navegacion en MiniMarket: ProductosScreen queda en la base de la pila, Navigator.push apila DetalleProductoScreen encima, Navigator.pop la retira y vuelve a mostrar ProductosScreen"}
+
+ProductosScreen no desaparece: sigue debajo, por eso Navigator.pop puede volver a ella.
+:::
+
+Un buen momento para notar algo que Flutter hace solo: como `DetalleProductoScreen` tiene un
+`AppBar` con `title`, aparece automáticamente una flecha de regreso en esa barra, sin que la hayas
+puesto tú. Aparece porque el `Navigator` sabe que hay una pantalla debajo en la pila.
+
+## Parte 6. Navigator.pop
+
+`Navigator.pop(context)` quita la pantalla actual de la pila y vuelve a mostrar la anterior. Frase
+para recordar: `push` agrega una pantalla, `pop` quita la pantalla actual.
+
+Agrega un botón "Volver" al final del `body` de `DetalleProductoScreen`:
+
+```dart
+ElevatedButton(
+  onPressed: () => Navigator.pop(context),
+  child: const Text('Volver'),
+),
+```
+
+## Parte 7. Navegar desde el ListView
+
+Quita el botón "Ver detalle" de la Parte 4: ya no lo necesitas. En su lugar, agrega `onTap` al
+`ListTile` del listado, con el mismo `Navigator.push` de antes:
+
+```dart
+ListTile(
+  leading: Icon(producto['icono'] as IconData),
+  title: Text(producto['nombre'].toString()),
+  subtitle: Text('\$${producto['precio']}'),
+  trailing: const Icon(Icons.chevron_right),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const DetalleProductoScreen(),
+      ),
+    );
+  },
+),
+```
+
+Con esto, tocar cualquier producto del listado abre `DetalleProductoScreen`. Pero los tres
+productos abren exactamente la misma pantalla, con el mismo texto fijo "Detalle del producto". Si
+tocas Manzana o tocas Leche, ves lo mismo: la pantalla de detalle todavía no sabe cuál producto se
+tocó.
+
+## Parte 8. Pasar datos por el constructor
+
+Necesitas que la pantalla de detalle reciba información sobre qué producto abrir. Todavía no hace
+falta nada más complicado que lo que ya conoces de widgets con parámetros: el constructor.
+
+Reescribe `DetalleProductoScreen` para que reciba `nombre` y `precio`:
+
+```dart
+class DetalleProductoScreen extends StatelessWidget {
+  final String nombre;
+  final String precio;
+
+  const DetalleProductoScreen({
+    super.key,
+    required this.nombre,
+    required this.precio,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Detalle del producto')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.shopping_basket, size: 80),
+            const SizedBox(height: 20),
+            Text(nombre, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Text('\$$precio', style: const TextStyle(fontSize: 22)),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Volver'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+Y actualiza el `onTap` del `ListTile` para pasar los datos de cada producto:
+
+```dart
+onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) {
+        return DetalleProductoScreen(
+          nombre: producto['nombre'].toString(),
+          precio: producto['precio'].toString(),
+        );
+      },
+    ),
+  );
+},
+```
+
+::: {.diagrama}
+![](imagenes/flujo-listview-detalle.svg){fig-alt="Flujo de navegacion desde una lista: el usuario toca un ListTile del ListView, se dispara onTap, onTap llama a Navigator.push con los datos del producto, y se muestra DetalleProductoScreen con ese nombre y precio"}
+
+Cada producto de la lista abre el mismo widget, pero con datos distintos.
+:::
+
+Ahora cada producto abre su propio detalle: `nombre` y `precio` viajan de `ProductosScreen` a
+`DetalleProductoScreen` por el constructor, exactamente igual que cualquier otro widget con
+parámetros que ya construiste.
+
+::: {.callout-tip}
+## Reto 1: un producto nuevo
+
+Agrega "Cafe $12.000" al listado, sin modificar `DetalleProductoScreen`. Confirma que la pantalla de
+detalle funciona para el producto nuevo sin ningún cambio: eso demuestra que sirve para cualquier
+producto, no solo para los tres originales.
+:::
+
+::: {.callout-tip}
+## Reto 2: una descripcion
+
+Agrega un campo `descripcion` a cada mapa de producto y muéstralo en `DetalleProductoScreen`. Vas a
+necesitar agregar un parámetro `descripcion` al constructor y pasarlo desde el `onTap`, igual que
+hiciste con `nombre` y `precio`.
+:::
+
+::: {.callout-tip}
+## Reto 3: una tercera pantalla
+
+Crea una pantalla `AcercaDeScreen` (un `Scaffold` con `AppBar` "Acerca de" y un texto en el `body`)
+y navega hacia ella con `Navigator.push` desde un botón en `ProductosScreen`. El objetivo es que
+apliques el patrón de la Parte 4 por tu cuenta, sin mirar el código de arriba.
+:::
+
+::: {.callout-note collapse="true"}
+## Una solución posible del Reto 2
+
+```dart
+final productos = [
+  {'nombre': 'Manzana', 'precio': '3000', 'icono': Icons.apple, 'descripcion': 'Fresca y crujiente'},
+  {'nombre': 'Pan', 'precio': '5000', 'icono': Icons.breakfast_dining, 'descripcion': 'Horneado del dia'},
+  {'nombre': 'Leche', 'precio': '4500', 'icono': Icons.local_drink, 'descripcion': 'Entera, un litro'},
+];
+```
+
+```dart
+class DetalleProductoScreen extends StatelessWidget {
+  final String nombre;
+  final String precio;
+  final String descripcion;
+
+  const DetalleProductoScreen({
+    super.key,
+    required this.nombre,
+    required this.precio,
+    required this.descripcion,
+  });
+
+  // dentro del Column, debajo del precio:
+  // Text(descripcion, style: const TextStyle(color: Colors.black54)),
+}
+```
+:::
+
+Con `Navigator.push`, la pila y el paso de datos por el constructor entendidos, ya tienes el patrón
+básico y sólido. Ahora profundizas con un ejemplo más completo, `taller_login`, que introduce piezas
+que en apps reales se vuelven necesarias: rutas con nombre en vez de pasar el widget directo, una
+clase de argumentos para paso de datos más robusto, retorno de resultado y una barra de navegación
+inferior real.
+
+## Parte 9. La pantalla de login
 
 Vas a construir un proyecto de práctica desechable, igual que `taller_widgets` de la Semana 4,
 nunca el proyecto real de tu equipo.
@@ -239,7 +574,7 @@ estable. Documenta en tu propio proyecto qué URL usaste, porque una imagen de r
 existir con el tiempo.
 :::
 
-## Parte 2. Pila de navegación
+## Parte 10. Pila de navegación en taller_login
 
 `Navigator` administra las pantallas de tu app como una pila: la última pantalla que entra es la
 primera que sale. `Navigator.push` agrega una pantalla nueva arriba de la pila; `Navigator.pop` la
@@ -355,7 +690,7 @@ TextButton(
 Colócalo debajo de la lista de productores, dentro de la misma `Column`.
 :::
 
-## Parte 3. Rutas con nombre
+## Parte 11. Rutas con nombre
 
 Con `Navigator.push` y `MaterialPageRoute` alcanza para una app pequeña, pero a medida que crecen
 las pantallas conviene darles un nombre único y centralizar el mapa de rutas en `MaterialApp`.
@@ -419,7 +754,7 @@ En `routes`, agrega `'/registro': (context) => const RegistroScreen(),` y cambia
 del enlace de registro por `Navigator.pushNamed(context, '/registro')`.
 :::
 
-## Parte 4. Paso de datos entre pantallas
+## Parte 12. Paso de datos entre pantallas con una clase de argumentos
 
 `InicioScreen` hoy no sabe quién inició sesión. Vas a pasarle el correo escrito en el login como
 argumento, con una clase propia en vez de un valor suelto: así el tipo de dato queda claro y el
@@ -521,7 +856,7 @@ onPressed: () {
 ```
 :::
 
-## Parte 5. Retorno de resultado
+## Parte 13. Retorno de resultado
 
 Ahora la vuelta: un botón "Cerrar sesión" en `InicioScreen` que regresa al login y le avisa que
 debe limpiar los campos del formulario.
@@ -596,7 +931,7 @@ if (resultado != null) {
 ```
 :::
 
-## Parte 6. Navegación anidada
+## Parte 14. Navegación anidada
 
 Todo lo anterior es la pila principal del `Navigator`: una pantalla arriba de otra. Pero dentro de
 una misma pantalla también puedes tener secciones que cambian sin apilar nada nuevo. Agrega dos
@@ -840,6 +1175,7 @@ equipo, con al menos un commit por integrante.
 ::: {.checklist}
 **Antes de entregar, revisa que tienes todo esto**
 
+- [ ] MiniMarket navega del listado al detalle con `Navigator.push` y datos por el constructor
 - [ ] `taller_login` corre sin errores, con login e inicio navegables
 - [ ] Puedes explicar la diferencia entre `Navigator.push` y `Navigator.pushNamed`
 - [ ] El correo escrito en el login aparece en el saludo de la pantalla de inicio
