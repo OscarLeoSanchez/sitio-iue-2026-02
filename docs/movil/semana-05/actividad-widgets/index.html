@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Leonel Sánchez Conde">
+
+<title>Actividad de widgets de Flutter – Clases IUE 2026-02</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../estilos/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8713356167177fd77be9341a95314561.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-61ae5e842f7184b706e4279056f840a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta guía</h2>
+   
+  <ul>
+  <li><a href="#cómo-funciona-la-actividad" id="toc-cómo-funciona-la-actividad" class="nav-link active" data-scroll-target="#cómo-funciona-la-actividad"><span class="header-section-number">1</span> Cómo funciona la actividad</a></li>
+  <li><a href="#paso-1.-registra-tus-widgets" id="toc-paso-1.-registra-tus-widgets" class="nav-link" data-scroll-target="#paso-1.-registra-tus-widgets"><span class="header-section-number">2</span> Paso 1. Registra tus widgets</a>
+  <ul class="collapse">
+  <li><a href="#qué-widgets-puedes-elegir" id="toc-qué-widgets-puedes-elegir" class="nav-link" data-scroll-target="#qué-widgets-puedes-elegir">Qué widgets puedes elegir</a></li>
+  </ul></li>
+  <li><a href="#paso-2.-investiga" id="toc-paso-2.-investiga" class="nav-link" data-scroll-target="#paso-2.-investiga"><span class="header-section-number">3</span> Paso 2. Investiga</a></li>
+  <li><a href="#paso-3.-pruébalo" id="toc-paso-3.-pruébalo" class="nav-link" data-scroll-target="#paso-3.-pruébalo"><span class="header-section-number">4</span> Paso 3. Pruébalo</a></li>
+  <li><a href="#paso-4.-escribe-tu-documento" id="toc-paso-4.-escribe-tu-documento" class="nav-link" data-scroll-target="#paso-4.-escribe-tu-documento"><span class="header-section-number">5</span> Paso 4. Escribe tu documento</a></li>
+  <li><a href="#entregable" id="toc-entregable" class="nav-link" data-scroll-target="#entregable"><span class="header-section-number">6</span> Entregable</a></li>
+  <li><a href="#paso-5.-sustentación-en-clase" id="toc-paso-5.-sustentación-en-clase" class="nav-link" data-scroll-target="#paso-5.-sustentación-en-clase"><span class="header-section-number">7</span> Paso 5. Sustentación en clase</a></li>
+  <li><a href="#ejemplo-de-cómo-debe-redactarse" id="toc-ejemplo-de-cómo-debe-redactarse" class="nav-link" data-scroll-target="#ejemplo-de-cómo-debe-redactarse"><span class="header-section-number">8</span> Ejemplo de cómo debe redactarse</a></li>
+  <li><a href="#rúbrica-de-evaluación" id="toc-rúbrica-de-evaluación" class="nav-link" data-scroll-target="#rúbrica-de-evaluación"><span class="header-section-number">9</span> Rúbrica de evaluación</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Actividad de widgets de Flutter</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oscar Leonel Sánchez Conde </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">19 de septiembre de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ficha">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Asignatura</td>
+<td>Programación Móvil (IF2004)</td>
+</tr>
+<tr class="even">
+<td>Grupos</td>
+<td>601 y 602 de Ingeniería Informática</td>
+</tr>
+<tr class="odd">
+<td>Unidad</td>
+<td>Unidad 2. Interfaz, datos y persistencia</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En Flutter todo lo que se ve en pantalla es un widget. En las semanas anteriores trabajaron con los más comunes, pero el SDK trae cientos más, y saber que existen (y cuándo usarlos) es lo que separa una interfaz improvisada de una bien construida.</p>
+<p>En esta actividad cada estudiante investiga <strong>3 widgets nuevos</strong>, los prueba en código, deja su investigación por escrito y <strong>los explica en la siguiente clase</strong>. Lo que se evalúa es que entiendas el widget, no que copies su definición.</p>
+<section id="cómo-funciona-la-actividad" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="cómo-funciona-la-actividad"><span class="header-section-number">1</span> Cómo funciona la actividad</h2>
+<ol type="1">
+<li><strong>Elige 3 widgets y regístralos</strong> en el canal de actividades de Teams, verificando antes que no se repitan. Nadie puede repetir widgets.</li>
+<li><strong>Investiga</strong> cada uno en fuentes confiables.</li>
+<li><strong>Pruébalos</strong> en código: los ejemplos deben ejecutar de verdad.</li>
+<li><strong>Escribe tu documento</strong> en Markdown y súbelo al repositorio de tu equipo.</li>
+<li><strong>Sustenta en clase</strong>: en 5 minutos muestras tus 3 widgets funcionando y los explicas.</li>
+</ol>
+</section>
+<section id="paso-1.-registra-tus-widgets" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="paso-1.-registra-tus-widgets"><span class="header-section-number">2</span> Paso 1. Registra tus widgets</h2>
+<p>El registro se hace en la publicación <strong>Actividad Widget</strong> del canal de actividades de Teams. Ahí está el archivo de Excel donde se van anotando los widgets de todos. Sigue estos pasos en orden:</p>
+<ol type="1">
+<li><strong>Verifica en el Excel que tus widgets no estén repetidos.</strong> Busca cada nombre (<code>Ctrl + F</code>): si ya está, elige otro.</li>
+<li><strong>Agrega tu fila en el Excel</strong>, con tu nombre, tu grupo y los tres widgets que vas a investigar.</li>
+<li><strong>Responde a la publicación</strong> con los nombres de tus tres widgets.</li>
+</ol>
+<p>Reglas del registro:</p>
+<ul>
+<li><strong>El primero que registra un widget se lo queda.</strong> Cuenta la hora de tu respuesta en la publicación.</li>
+<li><strong>Escribe el nombre exactamente como aparece en la documentación oficial</strong>, en inglés y con mayúsculas: <code>CircleAvatar</code>, no “circle avatar” ni “avatar circular”.</li>
+<li><strong>Las variantes de un mismo widget cuentan como uno solo.</strong> <code>Slider</code> y <code>Slider.adaptive</code> son el mismo widget. En cambio <code>Checkbox</code> y <code>CheckboxListTile</code> son widgets distintos.</li>
+<li><strong>Son 3 widgets por estudiante</strong>, y los tres deben ser distintos entre sí.</li>
+</ul>
+<section id="qué-widgets-puedes-elegir" class="level3">
+<h3 class="anchored" data-anchor-id="qué-widgets-puedes-elegir">Qué widgets puedes elegir</h3>
+<p>Puedes elegir cualquier widget del SDK de Flutter (paquetes <code>widgets</code>, <code>material</code> o <code>cupertino</code>) que cumpla estas condiciones:</p>
+<ul>
+<li><p><strong>No es uno de los widgets básicos.</strong> Estos <strong>no valen</strong>:</p>
+<pre class="text"><code>MaterialApp, Scaffold, AppBar, Text, Icon, Image, TextField, Row, Column,
+Center, SafeArea, ListView, ListTile, GridView, Card, y todos los botones
+(ElevatedButton, TextButton, OutlinedButton, IconButton, FloatingActionButton, etc.)</code></pre></li>
+<li><p><strong>No es el widget del ejemplo de este documento</strong>: <code>CircleAvatar</code>.</p></li>
+<li><p><strong>No viene de un paquete externo</strong> (los que se instalan desde <code>pub.dev</code>).</p></li>
+</ul>
+<p>Si no sabes por dónde empezar, este banco tiene sugerencias. <strong>No es una lista cerrada</strong>: puedes elegir otro widget del SDK que te llame la atención.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Categoría</th>
+<th>Widgets sugeridos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entrada y selección</td>
+<td><code>Checkbox</code>, <code>Radio</code>, <code>Slider</code>, <code>RangeSlider</code>, <code>DropdownMenu</code>, <code>Autocomplete</code>, <code>SearchBar</code>, <code>ChoiceChip</code>, <code>FilterChip</code>, <code>CheckboxListTile</code>, <code>SwitchListTile</code>, <code>CalendarDatePicker</code>, <code>Stepper</code></td>
+</tr>
+<tr class="even">
+<td>Navegación y estructura</td>
+<td><code>Drawer</code>, <code>NavigationBar</code>, <code>NavigationRail</code>, <code>TabBar</code> con <code>TabBarView</code>, <code>BottomAppBar</code>, <code>SliverAppBar</code>, <code>PageView</code>, <code>Hero</code></td>
+</tr>
+<tr class="odd">
+<td>Avisos y diálogos</td>
+<td><code>AlertDialog</code>, <code>SimpleDialog</code>, <code>MaterialBanner</code>, <code>Tooltip</code>, <code>CircularProgressIndicator</code>, <code>LinearProgressIndicator</code>, <code>RefreshIndicator</code>, <code>Badge</code></td>
+</tr>
+<tr class="even">
+<td>Contenido y presentación</td>
+<td><code>ExpansionTile</code>, <code>DataTable</code>, <code>Table</code>, <code>ClipRRect</code>, <code>ClipOval</code>, <code>Opacity</code>, <code>FadeInImage</code>, <code>Placeholder</code>, <code>VerticalDivider</code>, <code>ListWheelScrollView</code></td>
+</tr>
+<tr class="odd">
+<td>Layout adaptable</td>
+<td><code>AspectRatio</code>, <code>FractionallySizedBox</code>, <code>ConstrainedBox</code>, <code>FittedBox</code>, <code>IntrinsicHeight</code>, <code>LayoutBuilder</code>, <code>OrientationBuilder</code>, <code>Offstage</code>, <code>RotatedBox</code></td>
+</tr>
+<tr class="even">
+<td>Gestos e interacción</td>
+<td><code>GestureDetector</code>, <code>InkWell</code>, <code>Dismissible</code>, <code>Draggable</code>, <code>ReorderableListView</code>, <code>InteractiveViewer</code>, <code>Scrollbar</code></td>
+</tr>
+<tr class="odd">
+<td>Animación</td>
+<td><code>AnimatedContainer</code>, <code>AnimatedOpacity</code>, <code>AnimatedCrossFade</code>, <code>AnimatedSwitcher</code>, <code>AnimatedAlign</code>, <code>AnimatedPositioned</code>, <code>TweenAnimationBuilder</code></td>
+</tr>
+<tr class="even">
+<td>Datos asíncronos</td>
+<td><code>FutureBuilder</code>, <code>StreamBuilder</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="paso-2.-investiga" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="paso-2.-investiga"><span class="header-section-number">3</span> Paso 2. Investiga</h2>
+<p>Empieza siempre por la <strong>documentación oficial</strong>: busca el nombre del widget en <a href="https://api.flutter.dev">api.flutter.dev</a> y revisa también el catálogo de widgets en <a href="https://docs.flutter.dev/ui/widgets">docs.flutter.dev/ui/widgets</a>. Ahí está lo que hace, sus propiedades y, muchas veces, un ejemplo. Puedes apoyarte en otras fuentes (videos, artículos, la comunidad), pero la oficial es tu referencia principal.</p>
+<p>Mientras investigas, respóndete estas preguntas. Son las que conviene poder contestar en clase:</p>
+<ul>
+<li>¿Qué problema resuelve este widget? ¿Qué pasaría si no existiera?</li>
+<li>¿Qué propiedades son las que realmente lo cambian?</li>
+<li>¿Cuándo lo usarías y cuándo elegirías otro?</li>
+<li>¿Qué error o confusión típica tiene?</li>
+</ul>
+</section>
+<section id="paso-3.-pruébalo" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="paso-3.-pruébalo"><span class="header-section-number">4</span> Paso 3. Pruébalo</h2>
+<p>Cada widget debe tener <strong>dos ejemplos que ejecuten</strong>: uno mínimo y uno personalizado. No basta con copiarlos de la documentación: modifícalos, rómpelos a propósito y observa qué pasa.</p>
+<p>La forma más rápida de probarlos es en <a href="https://dartpad.dev">DartPad</a>, sin instalar nada. Pega esta plantilla y reemplaza el <code>Text</code> por tu widget:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode dart code-with-copy"><code class="sourceCode dart"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="st">'package:flutter/material.dart'</span>;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main() <span class="op">=&gt;</span> runApp(<span class="at">const</span> MaterialApp(home<span class="op">:</span> Prueba()));</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Prueba <span class="kw">extends</span> StatelessWidget <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> Prueba(<span class="op">{</span><span class="kw">super</span><span class="op">.</span>key<span class="op">}</span>);</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">@override</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  Widget build(BuildContext context) <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> Scaffold(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      appBar<span class="op">:</span> AppBar(title<span class="op">:</span> <span class="at">const</span> Text(<span class="st">'Prueba de widget'</span>))<span class="op">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      body<span class="op">:</span> Center(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        child<span class="op">:</span> <span class="at">const</span> Text(<span class="st">'Reemplaza esto por tu widget'</span>)<span class="op">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      )<span class="op">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    );</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>También puedes probarlos en tu proyecto del emulador. Lo importante es que en clase puedas <strong>mostrarlos funcionando</strong>.</p>
+</section>
+<section id="paso-4.-escribe-tu-documento" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="paso-4.-escribe-tu-documento"><span class="header-section-number">5</span> Paso 4. Escribe tu documento</h2>
+<p>Crea un archivo Markdown con tu investigación. Debe empezar así:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Investigación de widgets de Flutter</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>**Nombre del estudiante:**</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>**Grupo:**</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>**Fecha:**</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>**Mis widgets:** <span class="in">`Widget1`</span>, <span class="in">`Widget2`</span>, <span class="in">`Widget3`</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Luego, <strong>por cada widget</strong>, incluye estas secciones en este orden:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sección</th>
+<th>Qué debe contener</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Qué es y para qué sirve</strong></td>
+<td>Qué hace el widget y qué problema resuelve, con tus palabras.</td>
+</tr>
+<tr class="even">
+<td><strong>Cuándo usarlo y cuándo no</strong></td>
+<td>Una situación donde es la mejor opción y una donde conviene otro widget (menciónalo).</td>
+</tr>
+<tr class="odd">
+<td><strong>Ejemplo mínimo</strong></td>
+<td>Código corto que ejecuta, con el widget funcionando.</td>
+</tr>
+<tr class="even">
+<td><strong>Explicación del ejemplo</strong></td>
+<td>Qué hace cada parte relevante del código.</td>
+</tr>
+<tr class="odd">
+<td><strong>Propiedades importantes</strong></td>
+<td>Tabla con <strong>mínimo 4</strong> propiedades: qué hacen y un ejemplo de valor.</td>
+</tr>
+<tr class="even">
+<td><strong>Ejemplo personalizado</strong></td>
+<td>Código que ejecuta, usando varias de esas propiedades.</td>
+</tr>
+<tr class="odd">
+<td><strong>Dónde lo usarías en Mercado Campesino</strong></td>
+<td>Una pantalla o momento concreto de la app donde tendría sentido y por qué.</td>
+</tr>
+<tr class="even">
+<td><strong>Fuentes y ayudas usadas</strong></td>
+<td>Enlaces consultados y, si usaste alguna herramienta de apoyo (incluida inteligencia artificial), cuál y para qué.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sobre la autenticidad.</strong> Este documento debe salir de lo que tú entendiste. Se puede consultar documentación, foros y compañeros para aprender, pero no se pegan textos ni código que no puedas explicar. Declarar una ayuda no te resta puntos. Ocultarla y no poder explicar lo que entregaste, sí. Si dos documentos tienen textos iguales, se revisan los dos.</p>
+</section>
+<section id="entregable" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="entregable"><span class="header-section-number">6</span> Entregable</h2>
+<p>Sube tu archivo a la carpeta <code>actividades/widgets/</code> del <strong>repositorio de tu equipo</strong>, con tus propios commits. El nombre no lleva tildes, eñes ni espacios:</p>
+<pre class="text"><code>widgets_apellido_nombre.md</code></pre>
+<p>Debe estar en el repositorio <strong>antes de la clase</strong> en la que se sustenta.</p>
+</section>
+<section id="paso-5.-sustentación-en-clase" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="paso-5.-sustentación-en-clase"><span class="header-section-number">7</span> Paso 5. Sustentación en clase</h2>
+<p>Cada estudiante sustenta en la siguiente clase y tiene <strong>5 minutos para presentar sus 3 widgets</strong>.</p>
+<p>Por cada widget, tu sustentación incluye:</p>
+<ol type="1">
+<li><strong>Mostrarlo funcionando</strong>, en DartPad o en el emulador, con tu propio código.</li>
+<li><strong>Explicar con tus palabras</strong> qué hace y para qué se usa, sin leer.</li>
+<li><strong>Nombrar sus propiedades más importantes</strong> y decir cuándo lo usarías y cuándo no.</li>
+</ol>
+<p>Al final, prepárate para <strong>cambiar algo en vivo</strong> si te lo piden, por ejemplo una propiedad o un valor, diciendo qué va a pasar antes de ejecutarlo, y para responder una o dos preguntas.</p>
+<p>Cinco minutos para tres widgets pasan rápido: prepara lo esencial de cada uno y ensaya antes de la clase.</p>
+<p>Los compañeros escuchan y toman nota: en la siguiente actividad es probable que necesiten estos widgets.</p>
+<p>Si no estás presente el día de la sustentación sin causa justificada, esa parte no se puede calificar.</p>
+</section>
+<section id="ejemplo-de-cómo-debe-redactarse" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="ejemplo-de-cómo-debe-redactarse"><span class="header-section-number">8</span> Ejemplo de cómo debe redactarse</h2>
+<p>A continuación un ejemplo con <code>CircleAvatar</code>, que por eso <strong>no se puede elegir</strong>. Úsalo como guía de la estructura y del nivel de detalle. Tu documento debe tener este mismo formato para cada widget.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Investigación de widgets de Flutter</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>**Nombre del estudiante:** Nombre Apellido<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>**Grupo:** 601<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>**Fecha:** 25 de septiembre de 2026<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>**Mis widgets:** <span class="in">`CircleAvatar`</span>, <span class="in">`Widget2`</span>, <span class="in">`Widget3`</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. `CircleAvatar`</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Qué es y para qué sirve</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="in">`CircleAvatar`</span> dibuja un círculo que puede contener una imagen, un ícono o unas iniciales. Se usa</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>casi siempre para representar a una persona o una entidad, como la foto de perfil de un usuario o la</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>imagen de un productor.</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Resuelve un problema de diseño concreto: recortar en círculo un contenido de cualquier tamaño y</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>mantener siempre la misma forma, sin tener que armar un <span class="in">`Container`</span> con bordes redondeados a mano.</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cuándo usarlo y cuándo no</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>Es la mejor opción para la imagen de perfil o para una lista de personas, donde cada fila lleva un</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>avatar. No conviene cuando la imagen es grande y ocupa el protagonismo de la pantalla, como una</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>portada; ahí es mejor un <span class="in">`Image`</span> con un <span class="in">`ClipRRect`</span>, porque un círculo pequeño no está pensado para</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>eso.</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo mínimo</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="in">```dart</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="in">CircleAvatar(</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="in">  radius: 32,</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="in">  backgroundColor: Colors.green,</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">  child: Text(</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="in">    'MC',</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="in">    style: TextStyle(color: Colors.white),</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="fu">### Explicación del ejemplo</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>El widget dibuja un círculo verde de radio 32 (o sea, 64 de diámetro). Dentro va un <span class="in">`Text`</span> con las</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>iniciales <span class="in">`MC`</span>, que se centran solas: <span class="in">`CircleAvatar`</span> ya se encarga de ubicar su <span class="in">`child`</span> en el medio.</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Propiedades importantes</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Propiedad <span class="pp">|</span> Qué hace <span class="pp">|</span> Ejemplo <span class="pp">|</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`radius`</span> <span class="pp">|</span> Define el tamaño del círculo. <span class="pp">|</span> <span class="in">`radius: 40`</span> <span class="pp">|</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`backgroundColor`</span> <span class="pp">|</span> Color de fondo del círculo. <span class="pp">|</span> <span class="in">`backgroundColor: Colors.green`</span> <span class="pp">|</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`foregroundColor`</span> <span class="pp">|</span> Color por defecto del texto o el ícono de adentro. <span class="pp">|</span> <span class="in">`foregroundColor: Colors.white`</span> <span class="pp">|</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`backgroundImage`</span> <span class="pp">|</span> Pone una imagen como fondo del círculo. <span class="pp">|</span> <span class="in">`backgroundImage: NetworkImage(url)`</span> <span class="pp">|</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`child`</span> <span class="pp">|</span> Widget que va en el centro, como un <span class="in">`Text`</span> o un <span class="in">`Icon`</span>. <span class="pp">|</span> <span class="in">`child: Icon(Icons.person)`</span> <span class="pp">|</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo personalizado</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="in">```dart</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="in">CircleAvatar(</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="in">  radius: 40,</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">  backgroundColor: Colors.green.shade100,</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">  foregroundColor: Colors.green.shade900,</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="in">  child: const Icon(Icons.storefront, size: 36),</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>Aquí el círculo es más grande, tiene un verde claro de fondo y el ícono de una tienda toma el verde</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>oscuro gracias a <span class="in">`foregroundColor`</span>, sin tener que pintarlo directamente en el <span class="in">`Icon`</span>.</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### Dónde lo usaría en Mercado Campesino</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>En la pantalla de detalle de un productor, para mostrar su foto o, si no tiene, las iniciales de su</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>finca. También en la lista de productores cercanos, porque da un aspecto uniforme aunque las fotos</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>lleguen con tamaños distintos.</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fuentes y ayudas usadas</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Documentación oficial: https://api.flutter.dev/flutter/material/CircleAvatar-class.html</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Probé los ejemplos en DartPad. No usé otras herramientas de apoyo.</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. `Widget2`</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rúbrica-de-evaluación" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="rúbrica-de-evaluación"><span class="header-section-number">9</span> Rúbrica de evaluación</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Descripción</th>
+<th style="text-align: right;">Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Registro y entrega</td>
+<td>Registró y publicó sus 3 widgets sin repetirlos, entregó el archivo a tiempo con el nombre y la carpeta indicados, y declaró sus fuentes y ayudas.</td>
+<td style="text-align: right;">10%</td>
+</tr>
+<tr class="even">
+<td>Contenido del documento</td>
+<td>Explica con sus palabras qué hace cada widget, cuándo usarlo o no, sus propiedades y dónde lo usaría en la app.</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr class="odd">
+<td>Ejemplos de código</td>
+<td>Cada widget tiene un ejemplo mínimo y uno personalizado que ejecutan y están bien explicados.</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr class="even">
+<td>Sustentación en clase</td>
+<td>En 5 minutos muestra los 3 widgets funcionando, los explica sin leer y responde lo que se le pida.</td>
+<td style="text-align: right;">50%</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="pie-doc">
+<p>Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>
+<p><strong>Transparencia.</strong> La redacción de esta guía contó con el apoyo de inteligencia artificial, usando el modelo Claude Sonnet 5 de Anthropic. Todo el contenido fue revisado y validado.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oscarleosanchez\.github\.io\/sitio-iue-2026-02\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Oscar Leonel Sánchez Conde</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Institución Universitaria de Envigado. Facultad de Ingenierías</p>
+</div>
+    <div class="nav-footer-right">
+<p>Semestre 2026-02</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
