@@ -1393,6 +1393,12 @@ continuar.
 - Diapositivas de la sesión: [presentación de la Semana 5](presentacion.qmd)
 - Para profundizar en CSS con ejemplos interactivos: [Fundamentos de CSS desde cero](fundamentos-css-interactivo.html)
 
+::: {.acceso}
+Actividad de pantalla
+
+[Abrir la actividad](actividad-pantalla/index.html){.btn-doc target="_blank"}
+:::
+
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
 Semestre 2026-02.

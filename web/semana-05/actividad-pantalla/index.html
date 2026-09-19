@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad de pantalla</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin-bottom: .3rem; font-size: 1.05rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .93rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .paso { display: flex; gap: 12px; margin-top: 1.4rem; }
+  .num { flex: 0 0 34px; height: 34px; border-radius: 50%; background: var(--verde); color: #fff;
+         font-weight: 700; display: grid; place-items: center; }
+  .paso > div:not(.num) { flex: 1; min-width: 0; }
+  .paso h3 { margin-top: 4px; }
+  .paso p { margin: .3rem 0; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.lista li, ol.lista li { margin: 5px 0; }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .85rem; } }
+  @media print { body { background: #fff; } .paso, table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad de pantalla</h1>
+  <p>Programación Web (IF2003), grupo 603</p>
+</header>
+
+<h2>Objetivo</h2>
+<p>Cada integrante toma <strong>una pantalla distinta</strong> del diseño del equipo y la construye
+con HTML y con el framework CSS que elija, <strong>Tailwind CSS o Bootstrap 5</strong>, en su propia
+rama del repositorio. Nadie repite pantalla. La actividad es individual, dentro del equipo.</p>
+
+<div class="caja">
+  <strong>No se evalúa que la pantalla quede terminada.</strong> Se evalúa el proceso de
+  construcción durante la clase, y que entiendas lo que haces y por qué lo haces.
+</div>
+
+<h2>Proceso</h2>
+
+<div class="paso">
+  <div class="num">1</div>
+  <div>
+    <h3>Reparto</h3>
+    <p>El equipo revisa el diseño, reparte las pantallas y cada integrante confirma la suya. Uno de
+    ustedes anota la asignación en un archivo <code>ASIGNACION.md</code> en <code>main</code>. Si el
+    diseño tiene menos pantallas que integrantes, se divide una pantalla por secciones.</p>
+  </div>
+</div>
+
+<div class="paso">
+  <div class="num">2</div>
+  <div>
+    <h3>Elección del framework</h3>
+    <p>Decide entre Tailwind y Bootstrap para tu pantalla. Vas a tener que justificar la decisión, así
+    que piensa qué te ofrece cada uno para esta pantalla en particular.</p>
+  </div>
+</div>
+
+<div class="paso">
+  <div class="num">3</div>
+  <div>
+    <h3>Plan</h3>
+    <p>Antes de escribir código, define qué partes tiene tu pantalla (encabezado, tarjetas,
+    formulario, navegación) y en qué orden las vas a construir. Crea tu rama
+    <code>pantalla/&lt;nombre&gt;</code> y abre un Pull Request en borrador con ese plan.</p>
+  </div>
+</div>
+
+<div class="paso">
+  <div class="num">4</div>
+  <div>
+    <h3>Construcción por partes</h3>
+    <p>Construye la pantalla bloque por bloque: primero la estructura HTML y después el estilo. Cada
+    avance con sentido se guarda en un commit, con un mensaje que diga qué se hizo. Un solo commit
+    grande al final no muestra tu proceso.</p>
+  </div>
+</div>
+
+<div class="paso">
+  <div class="num">5</div>
+  <div>
+    <h3>Revisión cruzada</h3>
+    <p>Revisa el trabajo de otro integrante y déjale comentarios concretos en su Pull Request.
+    Responde los que recibas.</p>
+  </div>
+</div>
+
+<div class="paso">
+  <div class="num">6</div>
+  <div>
+    <h3>Cierre</h3>
+    <p>En un archivo <code>PROCESO.md</code> de tu rama escribe lo que hiciste, lo que te bloqueó,
+    las decisiones que tomaste, por qué elegiste ese framework y lo que queda pendiente. Haz el
+    último commit y el push.</p>
+  </div>
+</div>
+
+<h2>Qué debes poder explicar</h2>
+<p>Durante la clase, el docente pasa por cada puesto y pregunta sobre tu trabajo. Debes poder
+responder:</p>
+<ul class="lista">
+  <li><strong>Por qué elegiste ese framework</strong> y qué ventajas o costos tiene frente al otro.</li>
+  <li><strong>Qué hace cada clase que usaste</strong> (por ejemplo <code>flex</code>,
+  <code>grid-cols-3</code> o <code>p-4</code> en Tailwind; <code>container</code>, <code>row</code>
+  o <code>col-md-4</code> en Bootstrap) y qué pasaría si la quitas o la cambias.</li>
+  <li><strong>Por qué estructuraste la pantalla así:</strong> qué etiquetas HTML usaste y cómo se
+  adapta a móvil y a escritorio.</li>
+  <li><strong>Qué decisiones tomaste al interpretar el diseño,</strong> incluido lo que cambiaste o
+  dejaste por fuera y por qué.</li>
+  <li><strong>Qué comentaste en la revisión de tu compañero</strong> y por qué.</li>
+</ul>
+
+<div class="caja aviso">
+  Usar una clase sin saber qué hace, o no poder explicar una decisión propia, cuenta en contra,
+  aunque la pantalla se vea bien. Explicar con claridad lo que hiciste, aunque esté incompleto,
+  cuenta a favor.
+</div>
+
+<h2>Qué se revisa</h2>
+<ul class="lista">
+  <li>El historial de Git durante la clase: avances progresivos, no un solo commit al final.</li>
+  <li>Tus respuestas a las preguntas del docente sobre tu pantalla.</li>
+  <li>Tu revisión al trabajo de otro integrante.</li>
+  <li>El archivo <code>PROCESO.md</code>.</li>
+</ul>
+
+<h2>Advertencias</h2>
+<ul class="lista">
+  <li>Los commits anteriores a la clase no cuentan.</li>
+  <li>Copiar el trabajo de otro es detectable por el historial de Git y se trata como fraude
+  académico.</li>
+  <li>Si el repositorio es privado, no se puede calificar.</li>
+</ul>
+
+</main>
+</body>
+</html>
