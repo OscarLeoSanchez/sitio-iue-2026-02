@@ -78,6 +78,8 @@ website:
             # boton que esta al inicio de la guia de la semana.
             - text: "Semana 6. Bootstrap 5 y Tailwind CSS"
               href: web/semana-06/index.qmd
+        - text: "Proyecto: entregable 1"
+          href: web/proyecto-entregable-1/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

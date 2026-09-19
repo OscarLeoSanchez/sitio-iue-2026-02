@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad: definición del proyecto</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; --azul: #1f5f8b; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin: 1.6rem 0 .3rem; font-size: 1.08rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: #22261f; color: #eef1e4; padding: 12px 14px; border-radius: 8px; overflow-x: auto;
+        font-size: .86rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  table.ancha { min-width: 680px; }
+  .scroll { overflow-x: auto; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .ejemplo { border-left: 4px solid var(--azul); background: #eef4f9; padding: 8px 14px; margin: 8px 0 14px; border-radius: 0 6px 6px 0; font-size: .93rem; }
+  .ejemplo > strong:first-child { color: var(--azul); display: block; margin-bottom: 2px; }
+  .ejemplo p { margin: .3rem 0; }
+  .ejemplo ul { margin: .3rem 0; padding-left: 1.2rem; }
+  .sec { margin-top: 1.6rem; padding-top: .2rem; }
+  .sec > h3 { display: flex; gap: 10px; align-items: center; }
+  .num { flex: 0 0 30px; height: 30px; border-radius: 50%; background: var(--verde); color: #fff;
+         font-weight: 700; font-size: .9rem; display: grid; place-items: center; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.lista li, ol.lista li { margin: 5px 0; }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .84rem; } }
+  @media print { body { background: #fff; } table, pre, .ejemplo { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad: definición del proyecto</h1>
+  <p>Primer entregable del proyecto. Programación Web (IF2003), grupo 603</p>
+</header>
+
+<h2>Objetivo</h2>
+<p>Tu equipo escribe la <strong>definición completa de su proyecto</strong>: qué problema resuelve,
+qué va a hacer la plataforma, cómo se va a ver y con qué reglas va a funcionar. Este documento es la
+<strong>fuente de verdad</strong> de todo el semestre: cada pantalla, cada consulta a la base de datos
+y cada decisión de código se justifica en él. Lo que no está escrito aquí no se construye, y lo que
+se construye tiene que poder rastrearse hasta aquí.</p>
+
+<div class="caja">
+  Por eso el documento debe recoger <strong>todo lo que el equipo espera lograr</strong> con el
+  proyecto, no solo una parte. Si más adelante algo cambia, el cambio se registra en el documento
+  con un commit, no se hace en silencio.
+</div>
+
+<p>Los ejemplos de esta página usan un proyecto ficticio, <strong>SalaYa</strong>, una plataforma para
+reservar salas de estudio de una biblioteca. Sirven para mostrar el nivel de detalle esperado.
+<strong>Tu proyecto debe tratar otro problema</strong>, distinto de SalaYa y del Mercado Campesino
+Digital de la guía.</p>
+
+<h2>Qué se entrega</h2>
+<table>
+  <tr><th>Entregable</th><th>Contenido</th></tr>
+  <tr><td>Documento de definición</td><td>Un archivo en el repositorio con las 13 secciones descritas más abajo.</td></tr>
+  <tr><td>Mockup</td><td>Una propuesta visual de cómo se verá la plataforma, con una imagen por pantalla.</td></tr>
+  <tr><td>Presentación</td><td>Diapositivas con una parte no técnica y una parte técnica.</td></tr>
+  <tr><td>Sustentación</td><td>Exposición del equipo, con preguntas individuales.</td></tr>
+</table>
+<p>Todo se sube a un repositorio de Git en GitHub.</p>
+
+<h2>Condiciones mínimas del proyecto</h2>
+<p>Sea cual sea el tema, la plataforma que definas tiene que incluir como mínimo:</p>
+<ul class="lista">
+  <li><strong>Base de datos.</strong> La plataforma guarda su información en una base de datos, no en
+  variables ni en archivos sueltos.</li>
+  <li><strong>Al menos 4 pantallas distintas.</strong> Distintas en propósito, no la misma pantalla con
+  otro texto.</li>
+  <li><strong>Inicio de sesión (login).</strong> Si tu plataforma es pública, el login puede ser solo para
+  administradores. Si necesita cuentas para todos, entonces es para todos.</li>
+  <li><strong>Al menos dos roles</strong> con permisos distintos (por ejemplo, estudiante y
+  administrador).</li>
+  <li><strong>Un mockup</strong> de cómo se visualizará la plataforma.</li>
+</ul>
+
+<h2>El documento de definición</h2>
+<p>Escríbelo en Markdown, en <code>docs/definicion.md</code>, con estas secciones en este orden. Cada
+una dice qué debe contener y trae un ejemplo. <strong>Los ejemplos son cortos a propósito: los tuyos
+deben ser más completos.</strong></p>
+
+<div class="sec">
+<h3><span class="num">1</span> Descripción general</h3>
+<p>Qué es la plataforma, para quién es y qué hace, explicado a alguien que no conoce el proyecto. Es la
+versión detallada: incluye el contexto, la idea de solución y cómo se usa en términos generales.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p>SalaYa es una plataforma web para que los estudiantes de una universidad reserven salas de estudio
+de la biblioteca y para que el personal administre la disponibilidad. El estudiante consulta qué salas
+están libres a la hora que necesita, reserva en pocos pasos y ve sus reservas. El administrador crea
+las salas, define su capacidad y puede cancelar reservas.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">2</span> Problema</h3>
+<p>Qué situación real se quiere resolver, a quién le afecta y con qué consecuencias. Con datos o
+hechos concretos, no con generalidades.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p>Hoy los estudiantes reservan salas escribiendo su nombre en una planilla de papel en el mostrador.
+En una semana normal se presentan al menos cinco choques de horario, y para saber qué sala está libre
+hay que ir a preguntar en persona.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">3</span> Objetivos</h3>
+<p>Un objetivo general y dos o más específicos. Deben ser <strong>medibles</strong>: que al final se
+pueda comprobar si se lograron.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>General:</strong> permitir que un estudiante reserve una sala de estudio sin desplazarse al
+mostrador.</p>
+<ul>
+  <li>Eliminar los choques de horario: ninguna sala tiene dos reservas en el mismo horario.</li>
+  <li>Permitir que un estudiante complete una reserva en menos de dos minutos.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">4</span> Stakeholders, actores y roles</h3>
+<p>Quién tiene interés en el proyecto y quién usa la plataforma. Indica los <strong>roles</strong> y lo
+que puede hacer cada uno, incluido cómo funciona el login.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li><strong>Estudiante</strong> (rol): consulta salas, reserva y cancela sus propias reservas.</li>
+  <li><strong>Administrador</strong> (rol): gestiona salas y ve todas las reservas.</li>
+  <li><strong>Biblioteca</strong> (stakeholder): no usa la plataforma directamente, pero es la dueña del
+  proceso que se mejora.</li>
+  <li><strong>Login:</strong> el estudiante y el administrador inician sesión con correo y contraseña.
+  La lista de salas es visible sin sesión.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">5</span> Alcance</h3>
+<p>Qué incluye el proyecto y, con la misma claridad, <strong>qué no incluye</strong>. Lo que no está en
+"incluye" no se construye.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Incluye:</strong> consulta de salas, reservas, cancelación, gestión de salas por el
+administrador, inicio de sesión.</p>
+<p><strong>No incluye:</strong> pagos, notificaciones por mensaje de texto, reservas de libros,
+aplicación móvil.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">6</span> Funcionalidades</h3>
+<p>La lista de lo que la plataforma permite hacer, agrupada por rol. Es el nivel "qué ofrece"; el detalle
+técnico va en los requerimientos.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li><strong>Estudiante:</strong> ver salas y su disponibilidad, reservar una sala, ver y cancelar sus
+  reservas.</li>
+  <li><strong>Administrador:</strong> crear, editar y desactivar salas, ver todas las reservas, cancelar
+  una reserva.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">7</span> Requerimientos funcionales</h3>
+<p>Lo que el sistema <strong>debe hacer</strong>, uno por línea, con identificador (RF-01, RF-02...), rol
+y prioridad. Cada funcionalidad de la sección 6 se traduce en uno o más requerimientos.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>ID</th><th>Requerimiento</th><th>Rol</th><th>Prioridad</th></tr>
+  <tr><td>RF-01</td><td>El sistema debe permitir reservar una sala indicando fecha, hora de inicio y duración.</td><td>Estudiante</td><td>Alta</td></tr>
+  <tr><td>RF-02</td><td>El sistema no debe permitir dos reservas sobre la misma sala en el mismo horario.</td><td>Todos</td><td>Alta</td></tr>
+  <tr><td>RF-03</td><td>El sistema debe permitir crear, editar y desactivar salas.</td><td>Administrador</td><td>Alta</td></tr>
+  <tr><td>RF-04</td><td>El sistema debe mostrar al estudiante la lista de sus reservas activas.</td><td>Estudiante</td><td>Media</td></tr>
+</table></div></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">8</span> Requerimientos no funcionales</h3>
+<p>Cómo debe comportarse el sistema, no qué hace. Agrupados por categoría (rendimiento, seguridad,
+usabilidad, compatibilidad, mantenibilidad, disponibilidad) y con un valor <strong>medible</strong>.
+"Debe ser rápido" no sirve; "carga en menos de dos segundos" sí.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>ID</th><th>Categoría</th><th>Requerimiento</th></tr>
+  <tr><td>RNF-01</td><td>Rendimiento</td><td>La lista de salas carga en menos de 2 segundos con conexión estable.</td></tr>
+  <tr><td>RNF-02</td><td>Seguridad</td><td>Las contraseñas se guardan cifradas, nunca en texto plano. Solo el administrador accede al panel de gestión.</td></tr>
+  <tr><td>RNF-03</td><td>Usabilidad</td><td>La plataforma se ve y se usa bien desde un ancho de 360 px.</td></tr>
+  <tr><td>RNF-04</td><td>Compatibilidad</td><td>Funciona en las versiones vigentes de Chrome, Edge y Firefox.</td></tr>
+</table></div></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">9</span> Reglas de negocio</h3>
+<p>Las normas del negocio que el sistema tiene que respetar, independientes de cómo se programe.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li>RN-01. Una reserva dura como máximo 2 horas.</li>
+  <li>RN-02. Un estudiante no puede tener más de 2 reservas activas al mismo tiempo.</li>
+  <li>RN-03. Una sala desactivada no aparece como disponible, pero conserva su historial de reservas.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">10</span> Modelo de datos</h3>
+<p>Qué información guarda la base de datos: las entidades, sus atributos principales y cómo se relacionan
+entre sí. Puede ser una tabla, una lista o un diagrama.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Entidad</th><th>Atributos principales</th></tr>
+  <tr><td>Usuario</td><td>id, nombre, correo, contraseña (cifrada), rol</td></tr>
+  <tr><td>Sala</td><td>id, nombre, capacidad, activa</td></tr>
+  <tr><td>Reserva</td><td>id, usuario_id, sala_id, inicio, fin, estado</td></tr>
+</table></div>
+<p><strong>Relaciones:</strong> un usuario tiene muchas reservas; una sala tiene muchas reservas; cada
+reserva pertenece a un usuario y a una sala.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">11</span> Pantallas y flujo</h3>
+<p>Al menos 4 pantallas distintas, con su propósito, qué rol la usa y cómo se pasa de una a otra.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Pantalla</th><th>Rol</th><th>Para qué sirve</th></tr>
+  <tr><td>Inicio de sesión</td><td>Todos</td><td>Entrar con correo y contraseña.</td></tr>
+  <tr><td>Lista de salas</td><td>Estudiante</td><td>Ver salas y su disponibilidad.</td></tr>
+  <tr><td>Nueva reserva</td><td>Estudiante</td><td>Elegir fecha, hora y duración, y confirmar.</td></tr>
+  <tr><td>Mis reservas</td><td>Estudiante</td><td>Ver y cancelar reservas propias.</td></tr>
+  <tr><td>Gestión de salas</td><td>Administrador</td><td>Crear, editar y desactivar salas.</td></tr>
+</table></div>
+<p><strong>Flujo del estudiante:</strong> inicio de sesión, lista de salas, nueva reserva, mis
+reservas.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">12</span> Mockup</h3>
+<p>Una propuesta visual de cómo se va a ver la plataforma: <strong>una imagen por cada pantalla</strong>
+de la sección 11, y el recorrido entre ellas. Puedes hacerlo con la herramienta que prefieras (Figma,
+Google Stitch, Pencil, a mano y fotografiado, etc.), siempre que se vea con claridad qué hay en cada
+pantalla. El documento enlaza las imágenes y explica cada una en dos o tres líneas.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><code>docs/mockup/01-login.png</code>: formulario centrado con correo, contraseña y botón
+"Ingresar". <code>docs/mockup/02-lista-salas.png</code>: tarjetas de sala con nombre, capacidad y un
+botón "Reservar".</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">13</span> Historias de usuario, casos de uso, restricciones y supuestos</h3>
+<p>Historias de usuario para las funciones principales de cada rol, al menos un caso de uso completo
+(actor, precondición, flujo y excepción) y las restricciones y supuestos del proyecto, como se vio en
+la guía de definición del proyecto.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Historia:</strong> como estudiante, quiero ver qué salas están libres a una hora, para
+reservar sin ir al mostrador.</p>
+<p><strong>Caso de uso, reservar una sala.</strong> Actor: estudiante. Precondición: tiene sesión
+iniciada. Flujo: elige una sala, indica fecha, hora y duración, y confirma; el sistema guarda la
+reserva. Excepción: si la sala ya está reservada en ese horario, el sistema rechaza la reserva y lo
+explica.</p>
+<p><strong>Restricción:</strong> sin pagos ni notificaciones por mensaje en esta versión.</p></div>
+</div>
+
+<h3>Historial de cambios</h3>
+<p>Cierra el documento con una tabla breve de cambios (fecha, qué cambió, quién). Como el documento es
+la fuente de verdad, cualquier modificación posterior a la sustentación queda registrada ahí.</p>
+
+<h3>Referencias y declaración de uso de inteligencia artificial</h3>
+<p>El documento termina con estas dos partes. Son obligatorias.</p>
+<ul class="lista">
+  <li><strong>Referencias.</strong> Las fuentes que respaldan lo que escribiste: documentación oficial,
+  artículos, libros, normativa, sitios de la organización o negocio que estudias. Cada una con su
+  enlace o su dato completo, y con una nota de qué parte del documento apoya.</li>
+  <li><strong>Declaración de uso de inteligencia artificial.</strong> Indica qué herramienta usaste,
+  <strong>para qué</strong> (en qué sección o parte del proyecto), qué le pediste, qué aceptaste, qué
+  corregiste y qué descartaste. Si no usaste ninguna, escríbelo también.</li>
+</ul>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Referencia:</strong> Mozilla Developer Network, "Accesibilidad web", usada para el requerimiento
+RNF-03. Enlace: developer.mozilla.org/es/docs/Web/Accessibility</p>
+<p><strong>Declaración:</strong> usamos un asistente de IA en la sección 3 para revisar la redacción de los
+objetivos. Le pedimos que dijera si eran medibles; aceptamos su sugerencia de agregar un plazo al
+segundo objetivo y descartamos otra que cambiaba el alcance. El problema, los requerimientos y el
+modelo de datos los escribimos y decidimos nosotros.</p></div>
+
+<h2>Cómo se sube a Git</h2>
+<p>Un repositorio de GitHub del equipo, <strong>público</strong>, con esta estructura como mínimo:</p>
+<pre><code>README.md              nombre del proyecto, integrantes y enlace a la definición
+docs/definicion.md     el documento de las 13 secciones
+docs/mockup/           una imagen por pantalla
+docs/presentacion/     las diapositivas (PDF o PPTX)</code></pre>
+<ul class="lista">
+  <li>Todos los integrantes hacen commits propios, con mensajes que digan qué se hizo.</li>
+  <li>Los cambios se integran con Pull Request, y nadie fusiona su propio Pull Request.</li>
+  <li>Nombres de archivo sin tildes, sin eñe y sin espacios.</li>
+</ul>
+
+<h2>Sustentación</h2>
+<p>El equipo presenta el proyecto con diapositivas, en dos partes. Todos los integrantes participan.</p>
+
+<h3>Parte no técnica</h3>
+<p>Dirigida a alguien que no programa, como un cliente o un jurado sin formación técnica. Cubre:</p>
+<ul class="lista">
+  <li><strong>El problema:</strong> qué pasa hoy y a quién le afecta.</li>
+  <li><strong>Los objetivos:</strong> qué se quiere lograr y cómo se sabrá que se logró.</li>
+  <li><strong>El alcance:</strong> qué incluye y qué no incluye el proyecto.</li>
+  <li><strong>El mockup:</strong> el recorrido de cada rol por la plataforma, pantalla por pantalla.</li>
+</ul>
+
+<h3>Parte técnica</h3>
+<p>Dirigida a otros desarrolladores. Cubre:</p>
+<ul class="lista">
+  <li>Los requerimientos funcionales y no funcionales principales.</li>
+  <li>Los roles, sus permisos y cómo funciona el login.</li>
+  <li>El modelo de datos: entidades y relaciones.</li>
+  <li>Las pantallas y el flujo entre ellas.</li>
+  <li>Las restricciones y las decisiones importantes que tomó el equipo, con su razón.</li>
+</ul>
+
+<div class="caja aviso">
+  <strong>Preguntas individuales.</strong> Cualquier integrante puede ser preguntado por cualquier parte
+  del documento, no solo por la que escribió. Debes poder explicar lo que dice el documento y por qué
+  el equipo decidió así.
+</div>
+
+<h2>Rúbrica de evaluación</h2>
+<p>La rúbrica suma 100 puntos. <strong>La sustentación pesa el 35%</strong>, porque lo que se evalúa
+es que el equipo entienda y pueda defender su proyecto, no solo que lo haya escrito.</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Criterio</th><th>Peso</th><th>Excelente</th><th>Aceptable</th><th>Insuficiente</th></tr>
+  <tr>
+    <td><strong>Sustentación</strong></td><td>35</td>
+    <td><strong>35.</strong> Presenta las dos partes con claridad: la no técnica (problema, objetivos, alcance y mockup) y la técnica (requerimientos, roles, modelo de datos y decisiones). Todos participan y cada integrante responde con precisión sobre cualquier parte del documento.</td>
+    <td><strong>21.</strong> Cubre las dos partes, pero alguna queda superficial, o algún integrante no puede explicar partes que no escribió.</td>
+    <td><strong>10.</strong> Falta una de las dos partes, o varios integrantes no pueden explicar el documento.</td>
+  </tr>
+  <tr>
+    <td><strong>Coherencia</strong></td><td>20</td>
+    <td><strong>20.</strong> Las secciones se corresponden: cada funcionalidad tiene sus requerimientos, cada requerimiento tiene su pantalla, cada pantalla aparece en el mockup y el modelo de datos sostiene lo que la plataforma hace.</td>
+    <td><strong>12.</strong> La mayoría de las secciones se corresponden, con algunas desconexiones (por ejemplo, una pantalla sin requerimiento).</td>
+    <td><strong>6.</strong> Las secciones parecen escritas por separado y no se relacionan entre sí.</td>
+  </tr>
+  <tr>
+    <td><strong>Completitud y concreción</strong></td><td>20</td>
+    <td><strong>20.</strong> Están las 13 secciones y las condiciones mínimas (base de datos, 4 pantallas, login, 2 roles). Los ejemplos son propios, los objetivos y requerimientos no funcionales son medibles, y se incluyen las referencias y la declaración de uso de IA.</td>
+    <td><strong>12.</strong> Falta alguna sección menor, las referencias o la declaración de IA son incompletas, o varios requerimientos son generales y no medibles.</td>
+    <td><strong>6.</strong> Faltan varias secciones o alguna condición mínima, o el contenido es genérico.</td>
+  </tr>
+  <tr>
+    <td><strong>Mockup</strong></td><td>15</td>
+    <td><strong>15.</strong> Hay una imagen por cada pantalla (mínimo 4), se entiende el recorrido de cada rol y cada imagen está explicada.</td>
+    <td><strong>9.</strong> Cubre las pantallas, pero faltan explicaciones o no se entiende el recorrido de algún rol.</td>
+    <td><strong>4.</strong> Solo hay algunas pantallas, o las imágenes son ilegibles.</td>
+  </tr>
+  <tr>
+    <td><strong>Trabajo en Git</strong></td><td>10</td>
+    <td><strong>10.</strong> Repositorio público con la estructura pedida, commits de todos los integrantes y Pull Requests sin autofusión.</td>
+    <td><strong>6.</strong> Estructura correcta, pero el reparto de commits es desigual o hubo Pull Requests sin revisión.</td>
+    <td><strong>3.</strong> Un solo autor casi en todo el historial, o ningún Pull Request.</td>
+  </tr>
+</table></div>
+<p>Si no se entrega o no se sustenta, el criterio vale 0.</p>
+
+<div class="caja">
+  <strong>Nota individual en la sustentación.</strong> El documento, el mockup y el trabajo en Git
+  reciben la misma nota para todo el equipo. La sustentación se califica por persona: cada integrante
+  recibe su propio puntaje según cómo participa y responde.
+</div>
+
+<h2>Advertencias</h2>
+<ul class="lista">
+  <li>Copiar la definición de otro equipo, o dejar los ejemplos de SalaYa como si fueran del proyecto,
+  se trata como fraude académico. Se nota en el historial de Git y en la sustentación.</li>
+  <li>El uso de inteligencia artificial está permitido <strong>solo como apoyo</strong>, por ejemplo para
+  aclarar una duda, revisar la redacción o generar ideas. Estas herramientas <strong>no deben escribir
+  ni construir todo</strong> el documento.</li>
+  <li><strong>La declaración de uso de inteligencia artificial es obligatoria.</strong> El documento
+  termina con la sección de declaración y referencias descrita arriba. Declarar el uso no resta puntos.
+  Usar IA sin declararlo, o no poder explicar lo que se escribió, sí.</li>
+  <li>Si el repositorio es privado, la entrega no se puede calificar.</li>
+</ul>
+
+</main>
+</body>
+</html>
