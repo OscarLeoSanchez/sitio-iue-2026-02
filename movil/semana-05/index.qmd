@@ -1196,9 +1196,17 @@ equipo, con al menos un commit por integrante.
 ## Actividad evaluativa
 
 ::: {.acceso}
+::: {.acceso-item}
 Actividad de navegación entre pantallas
 
 [Abrir la actividad](actividad-navegacion/index.html){.btn-doc target="_blank"}
+:::
+
+::: {.acceso-item}
+Actividad de widgets de Flutter
+
+[Abrir la actividad](actividad-widgets/index.qmd){.btn-doc target="_blank"}
+:::
 :::
 
 ::: {.pie-doc}

@@ -1,0 +1,306 @@
+---
+title: "Actividad de widgets de Flutter"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                                        |
+|------------|--------------------------------------------------------|
+| Asignatura | Programación Móvil (IF2004)                             |
+| Grupos     | 601 y 602 de Ingeniería Informática                     |
+| Unidad     | Unidad 2. Interfaz, datos y persistencia                |
+:::
+
+En Flutter todo lo que se ve en pantalla es un widget. En las semanas anteriores trabajaron con los
+más comunes, pero el SDK trae cientos más, y saber que existen (y cuándo usarlos) es lo que separa
+una interfaz improvisada de una bien construida.
+
+En esta actividad cada estudiante investiga **3 widgets nuevos**, los prueba en código, deja su
+investigación por escrito y **los explica en la siguiente clase**. Lo que se evalúa es que entiendas
+el widget, no que copies su definición.
+
+
+## Cómo funciona la actividad
+
+1. **Elige 3 widgets y regístralos** en el canal de actividades de Teams, verificando antes que no se
+   repitan. Nadie puede repetir widgets.
+2. **Investiga** cada uno en fuentes confiables.
+3. **Pruébalos** en código: los ejemplos deben ejecutar de verdad.
+4. **Escribe tu documento** en Markdown y súbelo al repositorio de tu equipo.
+5. **Sustenta en clase**: en 5 minutos muestras tus 3 widgets funcionando y los explicas.
+
+
+## Paso 1. Registra tus widgets
+
+El registro se hace en la publicación **Actividad Widget** del canal de actividades de Teams. Ahí está
+el archivo de Excel donde se van anotando los widgets de todos. Sigue estos pasos en orden:
+
+1. **Verifica en el Excel que tus widgets no estén repetidos.** Busca cada nombre (`Ctrl + F`): si ya
+   está, elige otro.
+2. **Agrega tu fila en el Excel**, con tu nombre, tu grupo y los tres widgets que vas a investigar.
+3. **Responde a la publicación** con los nombres de tus tres widgets.
+
+Reglas del registro:
+
+- **El primero que registra un widget se lo queda.** Cuenta la hora de tu respuesta en la publicación.
+- **Escribe el nombre exactamente como aparece en la documentación oficial**, en inglés y con
+  mayúsculas: `CircleAvatar`, no "circle avatar" ni "avatar circular".
+- **Las variantes de un mismo widget cuentan como uno solo.** `Slider` y `Slider.adaptive` son el
+  mismo widget. En cambio `Checkbox` y `CheckboxListTile` son widgets distintos.
+- **Son 3 widgets por estudiante**, y los tres deben ser distintos entre sí.
+
+### Qué widgets puedes elegir
+
+Puedes elegir cualquier widget del SDK de Flutter (paquetes `widgets`, `material` o `cupertino`) que
+cumpla estas condiciones:
+
+- **No es uno de los widgets básicos.** Estos **no valen**:
+
+  ```text
+  MaterialApp, Scaffold, AppBar, Text, Icon, Image, TextField, Row, Column,
+  Center, SafeArea, ListView, ListTile, GridView, Card, y todos los botones
+  (ElevatedButton, TextButton, OutlinedButton, IconButton, FloatingActionButton, etc.)
+  ```
+
+- **No es el widget del ejemplo de este documento**: `CircleAvatar`.
+- **No viene de un paquete externo** (los que se instalan desde `pub.dev`).
+
+Si no sabes por dónde empezar, este banco tiene sugerencias. **No es una lista cerrada**: puedes
+elegir otro widget del SDK que te llame la atención.
+
+| Categoría | Widgets sugeridos |
+|---|---|
+| Entrada y selección | `Checkbox`, `Radio`, `Slider`, `RangeSlider`, `DropdownMenu`, `Autocomplete`, `SearchBar`, `ChoiceChip`, `FilterChip`, `CheckboxListTile`, `SwitchListTile`, `CalendarDatePicker`, `Stepper` |
+| Navegación y estructura | `Drawer`, `NavigationBar`, `NavigationRail`, `TabBar` con `TabBarView`, `BottomAppBar`, `SliverAppBar`, `PageView`, `Hero` |
+| Avisos y diálogos | `AlertDialog`, `SimpleDialog`, `MaterialBanner`, `Tooltip`, `CircularProgressIndicator`, `LinearProgressIndicator`, `RefreshIndicator`, `Badge` |
+| Contenido y presentación | `ExpansionTile`, `DataTable`, `Table`, `ClipRRect`, `ClipOval`, `Opacity`, `FadeInImage`, `Placeholder`, `VerticalDivider`, `ListWheelScrollView` |
+| Layout adaptable | `AspectRatio`, `FractionallySizedBox`, `ConstrainedBox`, `FittedBox`, `IntrinsicHeight`, `LayoutBuilder`, `OrientationBuilder`, `Offstage`, `RotatedBox` |
+| Gestos e interacción | `GestureDetector`, `InkWell`, `Dismissible`, `Draggable`, `ReorderableListView`, `InteractiveViewer`, `Scrollbar` |
+| Animación | `AnimatedContainer`, `AnimatedOpacity`, `AnimatedCrossFade`, `AnimatedSwitcher`, `AnimatedAlign`, `AnimatedPositioned`, `TweenAnimationBuilder` |
+| Datos asíncronos | `FutureBuilder`, `StreamBuilder` |
+
+
+## Paso 2. Investiga
+
+Empieza siempre por la **documentación oficial**: busca el nombre del widget en
+[api.flutter.dev](https://api.flutter.dev) y revisa también el catálogo de widgets en
+[docs.flutter.dev/ui/widgets](https://docs.flutter.dev/ui/widgets). Ahí está lo que hace, sus
+propiedades y, muchas veces, un ejemplo. Puedes apoyarte en otras fuentes (videos, artículos, la
+comunidad), pero la oficial es tu referencia principal.
+
+Mientras investigas, respóndete estas preguntas. Son las que conviene poder contestar en clase:
+
+- ¿Qué problema resuelve este widget? ¿Qué pasaría si no existiera?
+- ¿Qué propiedades son las que realmente lo cambian?
+- ¿Cuándo lo usarías y cuándo elegirías otro?
+- ¿Qué error o confusión típica tiene?
+
+
+## Paso 3. Pruébalo
+
+Cada widget debe tener **dos ejemplos que ejecuten**: uno mínimo y uno personalizado. No basta con
+copiarlos de la documentación: modifícalos, rómpelos a propósito y observa qué pasa.
+
+La forma más rápida de probarlos es en [DartPad](https://dartpad.dev), sin instalar nada. Pega esta
+plantilla y reemplaza el `Text` por tu widget:
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MaterialApp(home: Prueba()));
+
+class Prueba extends StatelessWidget {
+  const Prueba({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Prueba de widget')),
+      body: Center(
+        child: const Text('Reemplaza esto por tu widget'),
+      ),
+    );
+  }
+}
+```
+
+También puedes probarlos en tu proyecto del emulador. Lo importante es que en clase puedas
+**mostrarlos funcionando**.
+
+
+## Paso 4. Escribe tu documento
+
+Crea un archivo Markdown con tu investigación. Debe empezar así:
+
+```md
+# Investigación de widgets de Flutter
+
+**Nombre del estudiante:**
+**Grupo:**
+**Fecha:**
+
+**Mis widgets:** `Widget1`, `Widget2`, `Widget3`
+```
+
+Luego, **por cada widget**, incluye estas secciones en este orden:
+
+| Sección | Qué debe contener |
+|---|---|
+| **Qué es y para qué sirve** | Qué hace el widget y qué problema resuelve, con tus palabras. |
+| **Cuándo usarlo y cuándo no** | Una situación donde es la mejor opción y una donde conviene otro widget (menciónalo). |
+| **Ejemplo mínimo** | Código corto que ejecuta, con el widget funcionando. |
+| **Explicación del ejemplo** | Qué hace cada parte relevante del código. |
+| **Propiedades importantes** | Tabla con **mínimo 4** propiedades: qué hacen y un ejemplo de valor. |
+| **Ejemplo personalizado** | Código que ejecuta, usando varias de esas propiedades. |
+| **Dónde lo usarías en Mercado Campesino** | Una pantalla o momento concreto de la app donde tendría sentido y por qué. |
+| **Fuentes y ayudas usadas** | Enlaces consultados y, si usaste alguna herramienta de apoyo (incluida inteligencia artificial), cuál y para qué. |
+
+**Sobre la autenticidad.** Este documento debe salir de lo que tú entendiste. Se puede consultar
+documentación, foros y compañeros para aprender, pero no se pegan textos ni código que no puedas
+explicar. Declarar una ayuda no te resta puntos. Ocultarla y no poder explicar lo que entregaste,
+sí. Si dos documentos tienen textos iguales, se revisan los dos.
+
+
+## Entregable
+
+Sube tu archivo a la carpeta `actividades/widgets/` del **repositorio de tu equipo**, con tus propios
+commits. El nombre no lleva tildes, eñes ni espacios:
+
+```text
+widgets_apellido_nombre.md
+```
+
+Debe estar en el repositorio **antes de la clase** en la que se sustenta.
+
+
+## Paso 5. Sustentación en clase
+
+Cada estudiante sustenta en la siguiente clase y tiene **5 minutos para presentar sus 3 widgets**.
+
+Por cada widget, tu sustentación incluye:
+
+1. **Mostrarlo funcionando**, en DartPad o en el emulador, con tu propio código.
+2. **Explicar con tus palabras** qué hace y para qué se usa, sin leer.
+3. **Nombrar sus propiedades más importantes** y decir cuándo lo usarías y cuándo no.
+
+Al final, prepárate para **cambiar algo en vivo** si te lo piden, por ejemplo una propiedad o un valor,
+diciendo qué va a pasar antes de ejecutarlo, y para responder una o dos preguntas.
+
+Cinco minutos para tres widgets pasan rápido: prepara lo esencial de cada uno y ensaya antes de la
+clase.
+
+Los compañeros escuchan y toman nota: en la siguiente actividad es probable que necesiten estos
+widgets.
+
+Si no estás presente el día de la sustentación sin causa justificada, esa parte no se puede calificar.
+
+
+## Ejemplo de cómo debe redactarse
+
+A continuación un ejemplo con `CircleAvatar`, que por eso **no se puede elegir**. Úsalo como guía de
+la estructura y del nivel de detalle. Tu documento debe tener este mismo formato para cada widget.
+
+````md
+# Investigación de widgets de Flutter
+
+**Nombre del estudiante:** Nombre Apellido<br>
+**Grupo:** 601<br>
+**Fecha:** 25 de septiembre de 2026<br>
+
+**Mis widgets:** `CircleAvatar`, `Widget2`, `Widget3`
+
+
+## 1. `CircleAvatar`
+
+### Qué es y para qué sirve
+
+`CircleAvatar` dibuja un círculo que puede contener una imagen, un ícono o unas iniciales. Se usa
+casi siempre para representar a una persona o una entidad, como la foto de perfil de un usuario o la
+imagen de un productor.
+
+Resuelve un problema de diseño concreto: recortar en círculo un contenido de cualquier tamaño y
+mantener siempre la misma forma, sin tener que armar un `Container` con bordes redondeados a mano.
+
+### Cuándo usarlo y cuándo no
+
+Es la mejor opción para la imagen de perfil o para una lista de personas, donde cada fila lleva un
+avatar. No conviene cuando la imagen es grande y ocupa el protagonismo de la pantalla, como una
+portada; ahí es mejor un `Image` con un `ClipRRect`, porque un círculo pequeño no está pensado para
+eso.
+
+### Ejemplo mínimo
+
+```dart
+CircleAvatar(
+  radius: 32,
+  backgroundColor: Colors.green,
+  child: Text(
+    'MC',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+```
+
+### Explicación del ejemplo
+
+El widget dibuja un círculo verde de radio 32 (o sea, 64 de diámetro). Dentro va un `Text` con las
+iniciales `MC`, que se centran solas: `CircleAvatar` ya se encarga de ubicar su `child` en el medio.
+
+### Propiedades importantes
+
+| Propiedad | Qué hace | Ejemplo |
+|---|---|---|
+| `radius` | Define el tamaño del círculo. | `radius: 40` |
+| `backgroundColor` | Color de fondo del círculo. | `backgroundColor: Colors.green` |
+| `foregroundColor` | Color por defecto del texto o el ícono de adentro. | `foregroundColor: Colors.white` |
+| `backgroundImage` | Pone una imagen como fondo del círculo. | `backgroundImage: NetworkImage(url)` |
+| `child` | Widget que va en el centro, como un `Text` o un `Icon`. | `child: Icon(Icons.person)` |
+
+### Ejemplo personalizado
+
+```dart
+CircleAvatar(
+  radius: 40,
+  backgroundColor: Colors.green.shade100,
+  foregroundColor: Colors.green.shade900,
+  child: const Icon(Icons.storefront, size: 36),
+)
+```
+
+Aquí el círculo es más grande, tiene un verde claro de fondo y el ícono de una tienda toma el verde
+oscuro gracias a `foregroundColor`, sin tener que pintarlo directamente en el `Icon`.
+
+### Dónde lo usaría en Mercado Campesino
+
+En la pantalla de detalle de un productor, para mostrar su foto o, si no tiene, las iniciales de su
+finca. También en la lista de productores cercanos, porque da un aspecto uniforme aunque las fotos
+lleguen con tamaños distintos.
+
+### Fuentes y ayudas usadas
+
+- Documentación oficial: https://api.flutter.dev/flutter/material/CircleAvatar-class.html
+- Probé los ejemplos en DartPad. No usé otras herramientas de apoyo.
+
+## 2. `Widget2`
+````
+
+
+## Rúbrica de evaluación
+
+| Criterio | Descripción | Peso |
+|---|---|---:|
+| Registro y entrega | Registró y publicó sus 3 widgets sin repetirlos, entregó el archivo a tiempo con el nombre y la carpeta indicados, y declaró sus fuentes y ayudas. | 10% |
+| Contenido del documento | Explica con sus palabras qué hace cada widget, cuándo usarlo o no, sus propiedades y dónde lo usaría en la app. | 20% |
+| Ejemplos de código | Cada widget tiene un ejemplo mínimo y uno personalizado que ejecutan y están bien explicados. | 20% |
+| Sustentación en clase | En 5 minutos muestra los 3 widgets funcionando, los explica sin leer y responde lo que se le pida. | 50% |
+| **Total** |  | **100%** |
+
+::: {.pie-doc}
+Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta guía contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Sonnet 5 de Anthropic. Todo el contenido fue revisado y validado.
+:::
