@@ -1,0 +1,42 @@
+name: Renderizar sitio
+
+# Regenera docs/ con quarto render en los servidores de GitHub.
+# Sirve cuando el disco local no alcanza para renderizar.
+# Se ejecuta a mano: Actions > Renderizar sitio > Run workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Quarto muestra la fecha de ultima modificacion de cada .qmd. En un clon
+      # nuevo todos tienen la fecha de hoy, asi que se restaura la del ultimo commit.
+      - name: Restaurar fechas de modificacion
+        run: |
+          git ls-files -z -- '*.qmd' | while IFS= read -r -d '' f; do
+            touch -d "$(git log -1 --format=%cI -- "$f")" "$f"
+          done
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.37
+
+      - name: Renderizar
+        run: quarto render
+
+      - name: Subir docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Regenera el sitio con quarto render"
+          git push

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad de navegación</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin-bottom: .3rem; font-size: 1.05rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: #22261f; color: #eef1e4; padding: 12px 14px; border-radius: 8px; overflow-x: auto;
+        font-size: .86rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .93rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .paso { display: flex; gap: 12px; margin-top: 1.4rem; }
+  .num { flex: 0 0 34px; height: 34px; border-radius: 50%; background: var(--verde); color: #fff;
+         font-weight: 700; display: grid; place-items: center; }
+  .paso > div:not(.num) { flex: 1; min-width: 0; }
+  .paso h3 { margin-top: 4px; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.check { list-style: none; padding-left: 0; }
+  ul.check li { margin: 6px 0; }
+  .scroll { overflow-x: auto; }
+  table.ancha { min-width: 600px; }
+  .banco { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 14px 0; }
+  .tarjeta { border: 1px solid var(--borde); border-radius: 10px; background: #fff; padding: 10px; font-size: .88rem; }
+  .tarjeta img { width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--borde); }
+  .tarjeta h3 { margin: 10px 0 2px; font-size: 1rem; }
+  .tarjeta p { margin: 4px 0; }
+  .tarjeta .rot { color: var(--suave); font-size: .82rem; }
+  @media (max-width: 700px) { .banco { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { .banco { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .85rem; } }
+  @media print { body { background: #fff; } .banco { grid-template-columns: repeat(3, 1fr); } .tarjeta { break-inside: avoid; } pre { white-space: pre-wrap; } .paso, table, pre { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad de navegación entre pantallas</h1>
+</header>
+
+<h2>Objetivo</h2>
+<p>Cada integrante construye una pantalla de la aplicación del comprador y, entre los tres,
+diseñan y programan la navegación que las conecta con <code>Navigator.push</code> y
+<code>Navigator.pop</code>, pasando datos de una pantalla a otra. Todo el trabajo se hace con Git y
+GitHub, como en la Semana 3.</p>
+
+<div class="caja aviso">
+  <strong>Aquí se evalúa el proceso, no solo el resultado.</strong> Primero se diseña el flujo, después
+  se programa. Cada integrante debe poder explicar, paso a paso, qué hace cada salto de navegación y
+  qué pasa en la pila. Una app que funciona pero que su autor no sabe explicar vale poco. Se valora
+  que el código sea de quien lo entrega.
+</div>
+
+<div class="caja">
+  <strong>Reglas del juego.</strong> Los datos van fijos en el código (nada de API ni base de datos).
+  Los campos de texto no se validan todavía. El repositorio debe ser <strong>público</strong>: un
+  repositorio privado no se puede calificar.
+</div>
+
+<h2>Qué se hace</h2>
+<table>
+  <tr><th>Pasos</th><th>Qué se hace</th></tr>
+  <tr><td>1 y 2</td><td>Crear el proyecto, subirlo y clonarlo</td></tr>
+  <tr><td>3 y 4</td><td>Elegir pantallas y diseñar el flujo</td></tr>
+  <tr><td>5 y 6</td><td>Construir cada pantalla y fusionar los Pull Requests</td></tr>
+  <tr><td>7</td><td>Programar la navegación</td></tr>
+  <tr><td>8</td><td>Revisar y entregar</td></tr>
+  <tr><td>Después</td><td>Sustentación individual</td></tr>
+</table>
+
+<h2>Paso a paso</h2>
+
+<div class="paso"><div class="num">1</div><div>
+  <h3>Un integrante crea el proyecto y lo sube a GitHub</h3>
+  <p>El equipo elige quién. Esa persona crea en GitHub un repositorio <strong>público y vacío</strong>
+  (sin README) y, en la terminal:</p>
+<pre><code>flutter create navegacion_mercado
+cd navegacion_mercado</code></pre>
+  <p>Reemplaza el contenido de <code>lib/main.dart</code> por esta base, que después mostrará la
+  primera pantalla del flujo:</p>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() =&gt; runApp(const MercadoApp());
+
+class MercadoApp extends StatelessWidget {
+  const MercadoApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Mercado Campesino',
+      home: const Scaffold(
+        body: Center(child: Text('Mercado Campesino')),
+      ),
+    );
+  }
+}</code></pre>
+  <p>Borra también el archivo <code>test/widget_test.dart</code>: hace referencia a la app de
+  ejemplo que acabas de reemplazar y marcaría un error. Luego sube el proyecto:</p>
+<pre><code>git init
+git add .
+git commit -m "Proyecto base"
+git branch -M main
+git remote add origin URL_DEL_REPOSITORIO
+git push -u origin main</code></pre>
+  <p>Por último, en GitHub (Settings, Collaborators) agrega a los otros dos integrantes.</p>
+</div></div>
+
+<div class="paso"><div class="num">2</div><div>
+  <h3>Los otros integrantes aceptan la invitación y clonan</h3>
+<pre><code>git clone URL_DEL_REPOSITORIO
+cd navegacion_mercado
+flutter pub get
+flutter run</code></pre>
+  <p>Todos deben ver la app base corriendo antes de seguir.</p>
+</div></div>
+
+<div class="paso"><div class="num">3</div><div>
+  <h3>Cada integrante elige una pantalla distinta</h3>
+  <p>Escojan del banco de pantallas (más abajo). <strong>Dentro del equipo no se repiten.</strong>
+  Todavía no escriban código: primero se diseña el flujo.</p>
+</div></div>
+
+<div class="paso"><div class="num">4</div><div>
+  <h3>Diseñen el flujo antes de programar</h3>
+  <p>Este es el paso que más pesa. Entre los tres deciden cómo se recorre la app y lo dejan por
+  escrito en el repositorio:</p>
+  <ul class="lista">
+    <li><strong>Una representación del flujo entre pantallas.</strong> Muestra cómo se pasa de una
+    pantalla a otra y qué hace el usuario para hacerlo (por ejemplo, "toca el productor"). La forma la
+    eligen ustedes, y va en el <code>README.md</code>.</li>
+    <li><strong>Una tabla en el <code>README.md</code>,</strong> con una fila por cada salto entre
+    pantallas:</li>
+  </ul>
+  <div class="scroll">
+  <table class="ancha">
+    <tr><th>Desde</th><th>Hacia</th><th>Acción del usuario</th><th>Método de Navigator</th><th>Datos que viajan</th><th>Pila después del salto</th></tr>
+    <tr><td>(pantalla A)</td><td>(pantalla B)</td><td>(qué toca)</td><td>(cuál y por qué)</td><td>(qué dato y en qué sentido)</td><td>(pantallas, de abajo hacia arriba)</td></tr>
+  </table>
+  </div>
+  <ul class="lista">
+    <li><strong>Una sección "Decisiones".</strong> Una línea por cada decisión no obvia, por ejemplo por
+    qué eligieron ese recorrido o por qué un dato viaja de una pantalla a otra.</li>
+  </ul>
+  <p>Suban el diseño en una rama <code>diseno/flujo</code> con su Pull Request, y que lo fusione otro
+  integrante. <strong>El commit del diseño debe ser anterior al código de navegación.</strong></p>
+  <div class="caja">
+    El diseño puede cambiar mientras programan. Si descubren que estaba mal, corrijan el diseño y
+    anoten en el README <strong>qué cambió y por qué</strong> (sección "Cambios respecto al diseño").
+    Eso suma: muestra que entienden lo que hacen.
+  </div>
+</div></div>
+
+<div class="paso"><div class="num">5</div><div>
+  <h3>Cada integrante construye su pantalla en una rama propia</h3>
+  <p>Cada pantalla vive en su propio archivo, <code>lib/pantallas/nombre.dart</code>. Ejemplo para el
+  Carrito:</p>
+<pre><code>import 'package:flutter/material.dart';
+
+class PantallaCarrito extends StatelessWidget {
+  const PantallaCarrito({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Carrito')),
+      body: const Center(child: Text('Carrito')),
+    );
+  }
+}</code></pre>
+  <p>Si la pantalla necesita estado propio, usen <code>StatefulWidget</code>. Trabajen en su rama con
+  commits pequeños y frecuentes, uno por cada avance real:</p>
+<pre><code>git switch -c pantalla/carrito
+# crear el archivo y construir la pantalla
+git add .
+git commit -m "Agrega pantalla de carrito"
+git push -u origin pantalla/carrito</code></pre>
+  <p>Después abre un Pull Request hacia <code>main</code> desde GitHub.</p>
+  <div class="caja aviso">
+    Para ver su pantalla sola mientras trabajan, cambien temporalmente <code>home</code> en
+    <code>main.dart</code> por su pantalla. <strong>Ese cambio no se incluye en el commit.</strong>
+  </div>
+</div></div>
+
+<div class="paso"><div class="num">6</div><div>
+  <h3>Revisen y fusionen los Pull Requests</h3>
+  <ul class="lista">
+    <li><strong>Nadie fusiona su propio Pull Request.</strong> Lo revisa y lo fusiona otro integrante.</li>
+    <li>Si dos integrantes tocaron el mismo archivo y aparece un conflicto, resuélvanlo conservando el
+    trabajo de todos, como en la Semana 3.</li>
+    <li>Cuando estén las tres pantallas fusionadas, todos hacen <code>git switch main</code> y
+    <code>git pull</code>.</li>
+  </ul>
+</div></div>
+
+<div class="paso"><div class="num">7</div><div>
+  <h3>Programen la navegación según el diseño</h3>
+  <p>Cada integrante, en una rama <code>navegacion/su-pantalla</code>, programa las salidas de
+  <strong>su</strong> pantalla con <code>Navigator.push</code> y <code>Navigator.pop</code>, siguiendo
+  la tabla, y abre su Pull Request (mismas reglas del paso 6). El integrante cuya pantalla sea la
+  primera del flujo la pone como <code>home</code> en <code>main.dart</code>.</p>
+  <p><strong>La navegación debe cumplir:</strong></p>
+  <ul class="lista">
+    <li>Las tres pantallas se alcanzan desde la primera con <code>Navigator.push</code>.</li>
+    <li>Al menos un paso de datos de ida: la pantalla de destino recibe el dato por su constructor y
+    lo muestra.</li>
+    <li>Desde cada pantalla, salvo la primera, se vuelve con <code>Navigator.pop</code>, tanto con un
+    botón de la pantalla como con el botón Atrás del sistema.</li>
+    <li>Se puede recorrer todo el flujo sin que la app se cierre ni quede en negro.</li>
+    <li>El código hace lo que dice la tabla. Si no coincide, se corrige lo que esté mal y se anota.</li>
+  </ul>
+</div></div>
+
+<div class="paso"><div class="num">8</div><div>
+  <h3>Revisen y entreguen</h3>
+  <ul class="check">
+    <li><label><input type="checkbox"> El repositorio es público y la app corre desde un clon nuevo.</label></li>
+    <li><label><input type="checkbox"> El <code>README.md</code> tiene los integrantes, la pantalla de cada uno, la tabla de navegación con la pila, las "Decisiones" y, si hubo, los "Cambios respecto al diseño".</label></li>
+    <li><label><input type="checkbox"> La representación del flujo está en el README y su commit es anterior al código de navegación.</label></li>
+    <li><label><input type="checkbox"> El README tiene la sección "Ayudas usadas" (ver Autenticidad).</label></li>
+    <li><label><input type="checkbox"> Los tres integrantes tienen commits propios y progresivos, y los Pull Requests los fusionó otra persona.</label></li>
+    <li><label><input type="checkbox"> Se cumplen las condiciones de la navegación.</label></li>
+  </ul>
+  <p>Un integrante comparte el enlace del repositorio en el canal de actividades de Teams.</p>
+</div></div>
+
+<h2>Banco de pantallas</h2>
+<p>Elijan tres, una por integrante. Las imágenes son el <strong>diseño de referencia</strong>, no recursos para la app: hay que construir la pantalla con widgets. Cada tarjeta indica lo <strong>mínimo</strong> que se pide; lo opcional suma pero no se exige.</p>
+<div class="caja">
+  Los datos van fijos en el código. Los botones que llevan a pantallas que no están en el banco (Editar perfil, Mis pedidos, Ver seguimiento, pestañas de la barra inferior) se dejan sin acción o se omiten. Lo que cada pantalla recibe es una sugerencia: el equipo decide qué viaja en su flujo.
+</div>
+<div class="banco">
+  <div class="tarjeta">
+    <a href="imagenes/01-login.png" target="_blank"><img src="imagenes/01-login.png" alt="Diseño de la pantalla Inicio de sesión"></a>
+    <h3>Inicio de sesión</h3>
+    <p class="rot"><code>/login</code></p>
+    <p><strong>Mínimo:</strong> Título, campo de correo, campo de contraseña y botón Iniciar sesión.</p>
+    <p><strong>Opcional:</strong> Imagen de cabecera, mostrar contraseña, enlace Regístrate, Google.</p>
+    <p><strong>Datos:</strong> Envía el correo a la pantalla siguiente.</p>
+  </div>
+  <div class="tarjeta">
+    <a href="imagenes/03-inicio.png" target="_blank"><img src="imagenes/03-inicio.png" alt="Diseño de la pantalla Inicio"></a>
+    <h3>Inicio</h3>
+    <p class="rot"><code>/inicio</code></p>
+    <p><strong>Mínimo:</strong> Saludo con el correo recibido y la lista de los 5 productores (nombre, vereda y distancia) con <code>ListView.builder</code>.</p>
+    <p><strong>Opcional:</strong> Buscador, categorías, contador del carrito, barra inferior.</p>
+    <p><strong>Datos:</strong> Recibe el correo. Envía el productor elegido.</p>
+  </div>
+  <div class="tarjeta">
+    <a href="imagenes/04-detalle-productor.png" target="_blank"><img src="imagenes/04-detalle-productor.png" alt="Diseño de la pantalla Detalle de productor"></a>
+    <h3>Detalle de productor</h3>
+    <p class="rot"><code>/productor</code></p>
+    <p><strong>Mínimo:</strong> Nombre y vereda del productor recibido, y sus 4 productos con precio y un botón + para agregar.</p>
+    <p><strong>Opcional:</strong> Foto de portada, insignias, botón Ver carrito.</p>
+    <p><strong>Datos:</strong> Recibe el productor.</p>
+  </div>
+  <div class="tarjeta">
+    <a href="imagenes/05-carrito.png" target="_blank"><img src="imagenes/05-carrito.png" alt="Diseño de la pantalla Carrito"></a>
+    <h3>Carrito</h3>
+    <p class="rot"><code>/carrito</code></p>
+    <p><strong>Mínimo:</strong> Productos agregados con cantidad y precio, total, y el botón Continuar al checkout, que aquí lleva a la Confirmación.</p>
+    <p><strong>Opcional:</strong> Agrupar por productor, botón para quitar un producto.</p>
+    <p><strong>Datos:</strong> Recibe los productos.</p>
+  </div>
+  <div class="tarjeta">
+    <a href="imagenes/07-confirmacion.png" target="_blank"><img src="imagenes/07-confirmacion.png" alt="Diseño de la pantalla Confirmación"></a>
+    <h3>Confirmación</h3>
+    <p class="rot"><code>/confirmacion</code></p>
+    <p><strong>Mínimo:</strong> Mensaje de pedido confirmado, número de pedido, total, cantidad de productores y botón Volver al inicio.</p>
+    <p><strong>Opcional:</strong> Ícono de éxito. El botón Ver seguimiento queda sin acción.</p>
+    <p><strong>Datos:</strong> Recibe el resumen del pedido.</p>
+  </div>
+  <div class="tarjeta">
+    <a href="imagenes/10-cuenta.png" target="_blank"><img src="imagenes/10-cuenta.png" alt="Diseño de la pantalla Cuenta"></a>
+    <h3>Cuenta</h3>
+    <p class="rot"><code>/cuenta</code></p>
+    <p><strong>Mínimo:</strong> Nombre, correo del comprador y botón Cerrar sesión.</p>
+    <p><strong>Opcional:</strong> Estadísticas y lista de opciones (sin acción).</p>
+    <p><strong>Datos:</strong> Recibe el correo. El botón Cerrar sesión vuelve a la pantalla anterior.</p>
+  </div>
+</div>
+<div class="caja">
+  <strong>Combinaciones que dan un flujo natural:</strong> Inicio de sesión, Inicio y Cuenta;
+  Inicio, Detalle de productor y Carrito; Carrito, Confirmación e Inicio.
+  Si eligen otra combinación, la tabla del paso 4 debe justificar el recorrido.
+</div>
+
+<h2>Cómo se evalúa</h2>
+<p>De mayor a menor peso:</p>
+<ol class="lista">
+  <li><strong>Diseño del flujo.</strong> La representación del flujo y la tabla existen, son coherentes, indican qué pasa en la pila y justifican las decisiones. Se ve que se pensó antes de programar y, si el diseño cambió, se explica por qué.</li>
+  <li><strong>Comprensión (sustentación individual).</strong> Cada integrante explica el comportamiento de los saltos, incluidos los que no programó.</li>
+  <li><strong>Autenticidad y proceso.</strong> Historial de commits progresivo, código propio y ayudas declaradas.</li>
+  <li><strong>Navegación funcional.</strong> Cumple las condiciones del paso 7 y coincide con el diseño.</li>
+  <li><strong>Pantallas.</strong> Cada una cumple el mínimo del banco y corre sin errores.</li>
+  <li><strong>Trabajo en equipo con Git.</strong> Ramas, Pull Requests sin autofusión y commits de los tres.</li>
+</ol>
+
+<h2>Sustentación individual</h2>
+<p>Preguntas típicas:</p>
+<ul class="lista">
+  <li>¿Qué hace este <code>push</code> (o este <code>pop</code>) y por qué está aquí?</li>
+  <li>¿Cómo está la pila antes y después del salto? ¿Qué hace el botón Atrás?</li>
+  <li>¿Cómo viaja el dato y dónde se recibe?</li>
+  <li><strong>Prueba en vivo:</strong> "quita este pop o cambia el destino de este push y, antes de ejecutar, dime qué va a pasar".</li>
+</ul>
+
+<h2>Autenticidad del código</h2>
+<ul class="lista">
+  <li>El código lo escribe quien lo entrega. Se puede consultar documentación, la guía de la Semana 5 y a los compañeros para entender, pero no se pegan bloques que no se comprenden.</li>
+  <li>Si se usó ayuda externa (documentación, foros, herramientas de IA), se declara en el README, en la sección "Ayudas usadas": qué se consultó y para qué. Declarar una ayuda no resta; ocultarla y no poder explicar el código, sí.</li>
+  <li>Se revisa el historial: commits pequeños repartidos en el tiempo, no un solo commit enorme al final.</li>
+  <li>La valoración de una parte es individual: si su autor no puede explicarla ni modificarla en vivo, no se cuenta, aunque funcione.</li>
+</ul>
+
+</main>
+</body>
+</html>

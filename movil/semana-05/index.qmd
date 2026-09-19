@@ -1193,6 +1193,14 @@ equipo, con al menos un commit por integrante.
 - Pasar datos entre pantallas: [docs.flutter.dev/cookbook/navigation/passing-data](https://docs.flutter.dev/cookbook/navigation/passing-data)
 - Devolver datos desde una pantalla: [docs.flutter.dev/cookbook/navigation/returning-data](https://docs.flutter.dev/cookbook/navigation/returning-data)
 
+## Actividad evaluativa
+
+::: {.acceso}
+Actividad de navegación entre pantallas
+
+[Abrir la actividad](actividad-navegacion/index.html){.btn-doc target="_blank"}
+:::
+
 ::: {.pie-doc}
 Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
 Semestre 2026-02.
