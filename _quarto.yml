@@ -53,6 +53,8 @@ website:
               href: movil/semana-05/index.qmd
             - text: "Semana 6. Formularios y componentes reutilizables"
               href: movil/semana-06/index.qmd
+        - text: "Proyecto: entregable 1"
+          href: movil/proyecto-entregable-1/index.qmd
     - id: web
       style: docked
       background: light

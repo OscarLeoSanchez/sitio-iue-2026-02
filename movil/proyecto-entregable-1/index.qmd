@@ -1,0 +1,43 @@
+---
+title: "Proyecto: entregable 1"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                          |
+|------------|------------------------------------------|
+| Asignatura | Programación Móvil (IF2004)              |
+| Grupos     | 601 y 602 de Ingeniería Informática      |
+| Entregable | Definición del proyecto y navegación     |
+:::
+
+## Lo que vas a lograr
+
+El primer entregable del proyecto tiene dos partes. La primera es la **definición completa de tu
+aplicación**: el problema que resuelve, sus objetivos, su alcance, sus funcionalidades, sus
+requerimientos funcionales y no funcionales, su modelo de datos, sus pantallas con el mapa de
+navegación y una propuesta de mockup. Ese documento es la fuente de verdad de todo lo que el equipo
+construye después. La segunda es el **esqueleto navegable de la app en Flutter**: las pantallas
+creadas y la navegación entre ellas funcionando, solo con lo visto en clase.
+
+Todo se entrega en el repositorio de GitHub del equipo, con la documentación escrita en Markdown, y
+se sustenta con una presentación de diapositivas que tiene una parte no técnica y una parte técnica.
+
+La actividad explica el contenido de cada sección con un ejemplo, la plantilla del documento, las
+condiciones mínimas del proyecto, qué se pide en la navegación, cómo se sustenta y cómo se evalúa.
+
+::: {.acceso}
+Actividad: definición del proyecto y navegación
+
+[Abrir la actividad](actividad/index.html){.btn-doc target="_blank"}
+:::
+
+::: {.pie-doc}
+Programación Móvil (IF2004). Institución Universitaria de Envigado. Facultad de Ingenierías.
+Semestre 2026-02.
+
+**Transparencia.** La redacción de esta página contó con el apoyo de inteligencia artificial,
+usando el modelo Claude Fable 5.1 de Anthropic. Todo el contenido fue revisado y validado.
+:::

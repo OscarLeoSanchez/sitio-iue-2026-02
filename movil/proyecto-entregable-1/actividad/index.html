@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad: definición del proyecto y navegación</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; --azul: #1f5f8b; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin: 1.6rem 0 .3rem; font-size: 1.08rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: #22261f; color: #eef1e4; padding: 12px 14px; border-radius: 8px; overflow-x: auto;
+        font-size: .86rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  table.ancha { min-width: 680px; }
+  .scroll { overflow-x: auto; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .ejemplo { border-left: 4px solid var(--azul); background: #eef4f9; padding: 8px 14px; margin: 8px 0 14px; border-radius: 0 6px 6px 0; font-size: .93rem; }
+  .ejemplo > strong:first-child { color: var(--azul); display: block; margin-bottom: 2px; }
+  .ejemplo p { margin: .3rem 0; }
+  .ejemplo ul { margin: .3rem 0; padding-left: 1.2rem; }
+  .ejemplo pre { margin: .4rem 0; }
+  .sec { margin-top: 1.6rem; padding-top: .2rem; }
+  .sec > h3 { display: flex; gap: 10px; align-items: center; }
+  .num { flex: 0 0 30px; height: 30px; border-radius: 50%; background: var(--verde); color: #fff;
+         font-weight: 700; font-size: .9rem; display: grid; place-items: center; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.lista li, ol.lista li { margin: 5px 0; }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .84rem; } }
+  @media print { body { background: #fff; } table, pre, .ejemplo { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad: definición del proyecto y navegación</h1>
+  <p>Primer entregable del proyecto. Programación Móvil (IF2004), grupos 601 y 602</p>
+</header>
+
+<h2>Objetivo</h2>
+<p>Tu equipo escribe la <strong>definición completa de su aplicación móvil</strong> y construye su
+<strong>esqueleto navegable en Flutter</strong>: qué problema resuelve, qué va a hacer la app, cómo se
+va a ver, con qué reglas va a funcionar y cómo se pasa de una pantalla a otra. El documento es la
+<strong>fuente de verdad</strong> de todo el semestre: cada pantalla, cada dato guardado y cada
+decisión de código se justifica en él. Lo que no está escrito aquí no se construye, y lo que se
+construye tiene que poder rastrearse hasta aquí.</p>
+
+<div class="caja">
+  <strong>Todo se entrega en un solo lugar: el repositorio de GitHub del equipo.</strong> No se
+  entregan archivos PDF ni Word. La documentación se escribe en Markdown dentro del repositorio, y lo
+  único que se envía es el enlace. Si más adelante algo cambia, el cambio se registra en el documento
+  con un commit, no se hace en silencio.
+</div>
+
+<p>Los ejemplos de esta página usan un proyecto ficticio, <strong>SalaYa</strong>, una app para
+reservar salas de estudio de una biblioteca. Sirven para mostrar el nivel de detalle esperado.
+<strong>Tu proyecto debe tratar otro problema</strong>, distinto de SalaYa y del Mercado Campesino
+Digital de la guía.</p>
+
+<h2>Qué se entrega</h2>
+<table>
+  <tr><th>Entregable</th><th>Contenido</th><th>Modalidad</th></tr>
+  <tr><td>Documento de definición</td><td>Un archivo Markdown en el repositorio, bien estructurado, con las 14 secciones descritas más abajo.</td><td>Equipo</td></tr>
+  <tr><td>Mockup</td><td>Una propuesta visual de cómo se verá la app, con una imagen por pantalla.</td><td>Equipo</td></tr>
+  <tr><td>Navegación en Flutter</td><td>El proyecto Flutter con todas las pantallas del mockup creadas y la navegación entre ellas funcionando.</td><td>Equipo</td></tr>
+  <tr><td>Presentación</td><td>Diapositivas preparadas por el equipo para la sustentación, con una parte no técnica y una parte técnica.</td><td>Equipo</td></tr>
+  <tr><td>Sustentación</td><td>15 minutos por equipo, apoyada en la presentación, con demo en vivo y ronda de preguntas.</td><td>Individual</td></tr>
+</table>
+<p>Se entrega <strong>únicamente el enlace al repositorio de GitHub</strong>. Todo lo demás vive
+dentro de él.</p>
+
+<h2>Condiciones mínimas del proyecto</h2>
+<p>Sea cual sea el tema, la app que definas tiene que incluir como mínimo:</p>
+<ul class="lista">
+  <li><strong>Datos que se guardan.</strong> La app conserva su información entre una apertura y la
+  siguiente, no en variables que se pierden al cerrarla.</li>
+  <li><strong>Al menos 5 pantallas distintas.</strong> Distintas en propósito, no la misma pantalla con
+  otro texto.</li>
+  <li><strong>Un flujo de lista a detalle.</strong> Una pantalla muestra una lista y, al tocar un
+  elemento, otra pantalla muestra su detalle. Ese paso lleva un dato de una pantalla a la otra.</li>
+  <li><strong>Un formulario.</strong> Al menos una pantalla donde el usuario ingresa información.</li>
+  <li><strong>Inicio de sesión (login)</strong> y los roles que tu app necesite, con lo que puede hacer
+  cada uno.</li>
+  <li><strong>Un mockup</strong> de cómo se visualizará la app en un teléfono.</li>
+</ul>
+
+<h2>El documento de definición</h2>
+<p>Escríbelo en Markdown, en <code>docs/definicion.md</code>, con estas secciones en este orden. Cada
+una dice qué debe contener y trae un ejemplo. <strong>Los ejemplos son cortos a propósito: los tuyos
+deben ser más completos.</strong></p>
+
+<h3>Un documento bien estructurado</h3>
+<p>El documento se lee directamente en GitHub, así que su estructura se califica. Un documento bien
+estructurado cumple esto:</p>
+<ul class="lista">
+  <li><strong>Un solo título de nivel 1</strong> (<code>#</code>) con el nombre del proyecto. Cada
+  sección es un título de nivel 2 (<code>##</code>) numerado, y sus partes son de nivel 3
+  (<code>###</code>). Sin saltos de nivel.</li>
+  <li><strong>Una ficha al inicio:</strong> integrantes, grupo, fecha y versión del documento.</li>
+  <li><strong>Una tabla de contenido</strong> con enlaces a cada sección
+  (<code>[2. Problema](#2-problema)</code>).</li>
+  <li><strong>Tablas de Markdown</strong> para los requerimientos, el modelo de datos, las pantallas y
+  las rutas. No listas sueltas ni capturas de una tabla hecha en otro programa.</li>
+  <li><strong>Identificadores estables:</strong> RF-01, RNF-01, RN-01, HU-01, P-01 para las pantallas.
+  Las secciones se citan entre sí con esos identificadores.</li>
+  <li><strong>Imágenes con ruta relativa</strong> (<code>![Login](mockup/01-login.png)</code>), para que
+  se vean en GitHub. Nada de enlaces a archivos del computador de alguien.</li>
+  <li><strong>Diagramas en Mermaid</strong> dentro de un bloque de código. GitHub los dibuja solos, y
+  así el diagrama queda versionado junto con el texto.</li>
+  <li><strong>Código siempre en bloques</strong> con el lenguaje indicado (<code>```dart</code>).</li>
+  <li>Párrafos cortos, sin texto de relleno y con ortografía revisada.</li>
+</ul>
+
+<p>Esta es la plantilla propuesta. Cópiala en <code>docs/definicion.md</code> y llénala:</p>
+<pre><code># Nombre del proyecto
+
+| | |
+|---|---|
+| Integrantes | Nombre 1, Nombre 2, Nombre 3 |
+| Curso y grupo | Programación Móvil (IF2004), grupo 601 |
+| Versión | 1.0, fecha |
+
+## Tabla de contenido
+
+1. [Descripción general](#1-descripción-general)
+2. [Problema](#2-problema)
+3. [Objetivos](#3-objetivos)
+   ... una línea por cada sección ...
+
+## 1. Descripción general
+## 2. Problema
+## 3. Objetivos
+### 3.1 Objetivo general
+### 3.2 Objetivos específicos
+## 4. Stakeholders, actores y roles
+## 5. Alcance
+### 5.1 Incluye
+### 5.2 No incluye
+## 6. Funcionalidades
+## 7. Requerimientos funcionales
+## 8. Requerimientos no funcionales
+## 9. Reglas de negocio
+## 10. Modelo de datos
+## 11. Pantallas y mapa de navegación
+## 12. Mockup
+## 13. Historias de usuario, casos de uso, restricciones y supuestos
+## 14. Arquitectura técnica y navegación implementada
+## Historial de cambios
+## Referencias
+## Declaración de uso de inteligencia artificial</code></pre>
+
+<div class="sec">
+<h3><span class="num">1</span> Descripción general</h3>
+<p>Qué es la app, para quién es y qué hace, explicado a alguien que no conoce el proyecto. Incluye el
+contexto, la idea de solución y cómo se usa en términos generales.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p>SalaYa es una app móvil para que los estudiantes de una universidad reserven salas de estudio de la
+biblioteca desde su teléfono. El estudiante consulta qué salas están libres a la hora que necesita,
+reserva en pocos pasos y ve sus reservas, incluso sin conexión.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">2</span> Problema</h3>
+<p>Qué situación real se quiere resolver, a quién le afecta y con qué consecuencias. Con datos o
+hechos concretos, no con generalidades. Explica también <strong>por qué la solución es una app
+móvil</strong> y no una página web o una hoja de cálculo.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p>Hoy los estudiantes reservan salas escribiendo su nombre en una planilla de papel en el mostrador.
+En una semana normal se presentan al menos cinco choques de horario. La solución es móvil porque el
+estudiante decide dónde estudiar mientras camina por el campus, con el teléfono en la mano y muchas
+veces con mala señal.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">3</span> Objetivos</h3>
+<p>Un objetivo general y dos o más específicos. Deben ser <strong>medibles</strong>: que al final se
+pueda comprobar si se lograron.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>General:</strong> permitir que un estudiante reserve una sala de estudio desde su teléfono,
+sin desplazarse al mostrador.</p>
+<ul>
+  <li>Eliminar los choques de horario: ninguna sala tiene dos reservas en el mismo horario.</li>
+  <li>Permitir que un estudiante complete una reserva en menos de un minuto y en máximo cuatro
+  toques.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">4</span> Stakeholders, actores y roles</h3>
+<p>Quién tiene interés en el proyecto y quién usa la app. Indica los <strong>roles</strong> y lo que
+puede hacer cada uno, incluido cómo funciona el login.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li><strong>Estudiante</strong> (rol): consulta salas, reserva y cancela sus propias reservas.</li>
+  <li><strong>Auxiliar de biblioteca</strong> (rol): ve las reservas del día y marca la llegada del
+  estudiante.</li>
+  <li><strong>Biblioteca</strong> (stakeholder): no usa la app directamente, pero es la dueña del
+  proceso que se mejora.</li>
+  <li><strong>Login:</strong> correo institucional y contraseña. La sesión se mantiene abierta hasta
+  que el usuario la cierra.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">5</span> Alcance</h3>
+<p>Qué incluye el proyecto y, con la misma claridad, <strong>qué no incluye</strong>. Lo que no está en
+"incluye" no se construye.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Incluye:</strong> consulta de salas, reservas, cancelación, registro de llegada, inicio de
+sesión, consulta de mis reservas sin conexión.</p>
+<p><strong>No incluye:</strong> pagos, reservas de libros, versión web, versión para iOS.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">6</span> Funcionalidades</h3>
+<p>La lista de lo que la app permite hacer, agrupada por rol. Es el nivel "qué ofrece"; el detalle
+técnico va en los requerimientos.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li><strong>Estudiante:</strong> ver salas y su disponibilidad, reservar una sala, ver y cancelar sus
+  reservas.</li>
+  <li><strong>Auxiliar:</strong> ver las reservas del día, marcar la llegada, liberar una sala.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">7</span> Requerimientos funcionales</h3>
+<p>Lo que la app <strong>debe hacer</strong>, uno por línea, con identificador (RF-01, RF-02...), rol
+y prioridad. Cada funcionalidad de la sección 6 se traduce en uno o más requerimientos.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>ID</th><th>Requerimiento</th><th>Rol</th><th>Prioridad</th></tr>
+  <tr><td>RF-01</td><td>La app debe permitir reservar una sala indicando fecha, hora de inicio y duración.</td><td>Estudiante</td><td>Alta</td></tr>
+  <tr><td>RF-02</td><td>La app no debe permitir dos reservas sobre la misma sala en el mismo horario.</td><td>Todos</td><td>Alta</td></tr>
+  <tr><td>RF-03</td><td>La app debe mostrar al estudiante la lista de sus reservas activas.</td><td>Estudiante</td><td>Alta</td></tr>
+  <tr><td>RF-04</td><td>La app debe permitir al auxiliar marcar la llegada de un estudiante.</td><td>Auxiliar</td><td>Media</td></tr>
+</table></div></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">8</span> Requerimientos no funcionales</h3>
+<p>Cómo debe comportarse la app, no qué hace. Agrupados por categoría y con un valor
+<strong>medible</strong>. En una app móvil importan sobre todo: uso sin conexión, rendimiento,
+usabilidad táctil, compatibilidad de dispositivos, seguridad y consumo de datos. "Debe ser rápida" no
+sirve; "abre en menos de tres segundos" sí.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>ID</th><th>Categoría</th><th>Requerimiento</th></tr>
+  <tr><td>RNF-01</td><td>Sin conexión</td><td>La pantalla Mis reservas muestra las últimas reservas guardadas aunque no haya conexión.</td></tr>
+  <tr><td>RNF-02</td><td>Rendimiento</td><td>La app abre y muestra la lista de salas en menos de 3 segundos en un teléfono de gama media.</td></tr>
+  <tr><td>RNF-03</td><td>Usabilidad</td><td>Todo elemento táctil mide como mínimo 48 por 48 píxeles lógicos.</td></tr>
+  <tr><td>RNF-04</td><td>Compatibilidad</td><td>Funciona desde Android 8.0 (API 26), en pantallas de 5 a 6,7 pulgadas.</td></tr>
+  <tr><td>RNF-05</td><td>Seguridad</td><td>La contraseña nunca se guarda en el teléfono en texto plano.</td></tr>
+</table></div></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">9</span> Reglas de negocio</h3>
+<p>Las normas del negocio que la app tiene que respetar, independientes de cómo se programe.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<ul>
+  <li>RN-01. Una reserva dura como máximo 2 horas.</li>
+  <li>RN-02. Un estudiante no puede tener más de 2 reservas activas al mismo tiempo.</li>
+  <li>RN-03. Si el estudiante no llega en los primeros 15 minutos, la sala se libera.</li>
+</ul></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">10</span> Modelo de datos</h3>
+<p>Qué información guarda la app: las entidades, sus atributos principales y cómo se relacionan entre
+sí. Indica qué se guarda en el teléfono y qué en un servidor, si aplica. Puede ser una tabla o un
+diagrama en Mermaid.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Entidad</th><th>Atributos principales</th><th>Dónde se guarda</th></tr>
+  <tr><td>Usuario</td><td>id, nombre, correo, rol</td><td>Servidor. En el teléfono solo la sesión</td></tr>
+  <tr><td>Sala</td><td>id, nombre, capacidad, activa</td><td>Servidor, con copia local</td></tr>
+  <tr><td>Reserva</td><td>id, usuario_id, sala_id, inicio, fin, estado</td><td>Servidor, con copia local</td></tr>
+</table></div>
+<p><strong>Relaciones:</strong> un usuario tiene muchas reservas; una sala tiene muchas reservas; cada
+reserva pertenece a un usuario y a una sala.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">11</span> Pantallas y mapa de navegación</h3>
+<p>Al menos 5 pantallas distintas, cada una con identificador (P-01, P-02...), su propósito, el rol que
+la usa y los requerimientos que atiende. Después, el <strong>mapa de navegación</strong>: un diagrama
+que muestra desde qué pantalla se llega a cuál y con qué acción. Las pantallas y los recorridos de este
+mapa son los mismos del mockup y los del código, aunque el aspecto visual de la app todavía no sea
+igual al del mockup.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>ID</th><th>Pantalla</th><th>Rol</th><th>Para qué sirve</th><th>Atiende</th></tr>
+  <tr><td>P-01</td><td>Inicio de sesión</td><td>Todos</td><td>Entrar con correo y contraseña.</td><td>RNF-05</td></tr>
+  <tr><td>P-02</td><td>Lista de salas</td><td>Estudiante</td><td>Ver salas y su disponibilidad.</td><td>RF-01</td></tr>
+  <tr><td>P-03</td><td>Detalle de sala</td><td>Estudiante</td><td>Ver capacidad, horarios libres y botón Reservar.</td><td>RF-01</td></tr>
+  <tr><td>P-04</td><td>Nueva reserva</td><td>Estudiante</td><td>Elegir fecha, hora y duración, y confirmar.</td><td>RF-01, RF-02</td></tr>
+  <tr><td>P-05</td><td>Mis reservas</td><td>Estudiante</td><td>Ver y cancelar reservas propias.</td><td>RF-03, RNF-01</td></tr>
+</table></div>
+<p>Mapa de navegación, escrito en Mermaid dentro del documento:</p>
+<pre><code>```mermaid
+flowchart LR
+  P01[P-01 Login] --&gt;|Ingresar| P02[P-02 Lista de salas]
+  P02 --&gt;|Tocar una sala| P03[P-03 Detalle de sala]
+  P03 --&gt;|Reservar| P04[P-04 Nueva reserva]
+  P04 --&gt;|Confirmar| P05[P-05 Mis reservas]
+  P02 --&gt;|Barra inferior| P05
+```</code></pre></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">12</span> Mockup</h3>
+<p>Una propuesta visual de cómo se va a ver la app <strong>en el tamaño de un teléfono</strong>:
+<strong>una imagen por cada pantalla</strong> de la sección 11, con el mismo identificador. Puedes
+hacerlo con la herramienta que prefieras (Figma, Google Stitch, Pencil, a mano y fotografiado, etc.),
+siempre que se vea con claridad qué hay en cada pantalla. Las imágenes se guardan en
+<code>docs/mockup/</code>, y el documento las muestra y explica cada una en dos o tres líneas. Si la
+herramienta genera un prototipo navegable, agrega el enlace público.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><code>docs/mockup/p01-login.png</code>: formulario centrado con correo, contraseña y botón
+"Ingresar". <code>docs/mockup/p02-lista-salas.png</code>: lista de tarjetas de sala con nombre,
+capacidad y estado, y barra de navegación inferior con Salas y Mis reservas.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">13</span> Historias de usuario, casos de uso, restricciones y supuestos</h3>
+<p>Historias de usuario para las funciones principales de cada rol (HU-01, HU-02...), al menos un caso
+de uso completo (actor, precondición, flujo y excepción) y las restricciones y supuestos del proyecto,
+como se vio en la guía de definición del proyecto.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>HU-01:</strong> como estudiante, quiero ver qué salas están libres a una hora, para reservar
+sin ir al mostrador.</p>
+<p><strong>Caso de uso, reservar una sala.</strong> Actor: estudiante. Precondición: tiene sesión
+iniciada. Flujo: toca una sala, indica fecha, hora y duración, y confirma; la app guarda la reserva y
+lo lleva a Mis reservas. Excepción: si la sala ya está reservada en ese horario, la app rechaza la
+reserva y lo explica.</p>
+<p><strong>Restricción:</strong> solo Android en esta versión. <strong>Supuesto:</strong> todo
+estudiante tiene correo institucional.</p></div>
+</div>
+
+<div class="sec">
+<h3><span class="num">14</span> Arquitectura técnica y navegación implementada</h3>
+<p>La sección que conecta el documento con el código. Incluye la versión de Flutter y de Dart, los
+paquetes que el equipo prevé usar y para qué, la estructura de carpetas de <code>lib/</code> y la
+<strong>tabla de rutas</strong>: qué archivo tiene cada pantalla, desde dónde se llega a ella y qué
+dato recibe.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Entorno:</strong> Flutter 3.41.9, Dart 3.11.5. <strong>Paquetes previstos:</strong>
+<code>sqflite</code> para la copia local de reservas.</p>
+<div class="scroll"><table>
+  <tr><th>Pantalla</th><th>Archivo</th><th>Se llega desde</th><th>Recibe</th></tr>
+  <tr><td>P-02</td><td><code>lib/pantallas/lista_salas.dart</code></td><td>P-01, al ingresar</td><td>Nada</td></tr>
+  <tr><td>P-03</td><td><code>lib/pantallas/detalle_sala.dart</code></td><td>P-02, con <code>Navigator.push</code></td><td>La sala tocada</td></tr>
+  <tr><td>P-04</td><td><code>lib/pantallas/nueva_reserva.dart</code></td><td>P-03, con <code>Navigator.push</code></td><td>El id de la sala</td></tr>
+</table></div></div>
+</div>
+
+<h3>Historial de cambios</h3>
+<p>Cierra el documento con una tabla breve de cambios (fecha, qué cambió, quién). Como el documento es
+la fuente de verdad, cualquier modificación posterior a la sustentación queda registrada ahí.</p>
+
+<h3>Referencias y declaración de uso de inteligencia artificial</h3>
+<p>El documento termina con estas dos partes. Son obligatorias.</p>
+<ul class="lista">
+  <li><strong>Referencias.</strong> Las fuentes que respaldan lo que escribiste: documentación oficial,
+  artículos, libros, normativa, apps similares que analizaste. Cada una con su enlace o su dato
+  completo, y con una nota de qué parte del documento apoya.</li>
+  <li><strong>Declaración de uso de inteligencia artificial.</strong> Indica qué herramienta usaste,
+  <strong>para qué</strong> (en qué sección del documento o parte del código), qué le pediste, qué
+  aceptaste, qué corregiste y qué descartaste. Si no usaste ninguna, escríbelo también.</li>
+</ul>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Referencia:</strong> Flutter, "Navigation and routing", usada para la sección 14. Enlace:
+docs.flutter.dev/ui/navigation</p>
+<p><strong>Declaración:</strong> usamos un asistente de IA en la sección 3 para revisar si los objetivos
+eran medibles; aceptamos agregar un límite de toques al segundo objetivo y descartamos otra sugerencia
+que cambiaba el alcance. El problema, los requerimientos, el mapa de navegación y el código de las
+pantallas los escribimos y decidimos nosotros.</p></div>
+
+<h2>La navegación en Flutter</h2>
+<p>En el mismo repositorio va el proyecto Flutter con el <strong>esqueleto navegable</strong> de la
+app. No se pide lógica ni guardar datos todavía: se pide que las pantallas existan y que se pueda
+recorrer la app completa.</p>
+
+<div class="caja">
+  <strong>En este punto no se pide perfección.</strong> El proyecto es un proceso que dura todo el
+  semestre, y este es su primer paso en código. <strong>No se exige que la implementación coincida al
+  100% con el diseño del mockup</strong>: los colores, los tamaños y los detalles visuales pueden
+  diferir. Lo que sí se exige es que la app <strong>sea navegable</strong>. Se valora el esfuerzo del
+  equipo por construir la implementación por su cuenta.
+</div>
+
+<div class="caja aviso">
+  <strong>Solo lo visto en clase.</strong> La implementación usa únicamente los widgets y las técnicas
+  trabajadas en el curso hasta ahora. <strong>No se permite usar implementaciones más avanzadas</strong>
+  como las que suele generar una IA: paquetes de navegación o de manejo de estado, arquitecturas por
+  capas, patrones o widgets que no hemos visto. Por eso la recomendación es que
+  <strong>construyan el código ustedes mismos</strong>: un código sencillo, escrito y entendido por el
+  equipo, vale más que uno sofisticado que nadie puede explicar. En la sustentación se le puede
+  preguntar a cualquier integrante por cualquier línea.
+</div>
+
+<ul class="lista">
+  <li>El proyecto ejecuta con <code>flutter run</code> sin errores, en emulador o en dispositivo.</li>
+  <li><strong>Todas las pantallas del mockup existen</strong> como widgets, cada una en su propio
+  archivo, con su <code>Scaffold</code>, su título y un contenido que permita reconocer qué pantalla
+  es. No tiene que verse igual al mockup. Los datos pueden ser fijos, escritos en el código.</li>
+  <li><strong>Se puede ir y volver</strong> entre todas las pantallas según el mapa de navegación de la
+  sección 11, con el mecanismo visto en clase (<code>Navigator.push</code> y
+  <code>Navigator.pop</code>). Si el mapa dice que de P-02 se llega a P-03, en la app también.</li>
+  <li><strong>Al menos un paso de datos</strong> entre pantallas: el detalle muestra el elemento que se
+  tocó en la lista, no siempre el mismo.</li>
+  <li>El código está organizado en carpetas. No todo en <code>main.dart</code>.</li>
+  <li>Sin pantallas huérfanas: ninguna pantalla a la que no se pueda llegar, y ninguna de la que no se
+  pueda salir.</li>
+</ul>
+
+<h2>Cómo se sube a Git</h2>
+<p>Un repositorio de GitHub del equipo, <strong>público</strong>, con esta estructura como mínimo:</p>
+<pre><code>README.md                nombre del proyecto, integrantes, cómo ejecutar, capturas
+                         y enlace a docs/definicion.md
+docs/definicion.md       el documento de las 14 secciones
+docs/mockup/             una imagen por pantalla: p01-login.png, p02-lista-salas.png...
+docs/presentacion/       las diapositivas de la sustentación
+lib/main.dart            punto de entrada de la app
+lib/pantallas/           un archivo por pantalla
+lib/widgets/             componentes reutilizables
+pubspec.yaml             dependencias con versiones fijadas</code></pre>
+<ul class="lista">
+  <li>Todos los integrantes hacen commits propios, con mensajes que digan qué se hizo, tanto en la
+  documentación como en el código.</li>
+  <li>Los cambios se integran con Pull Request, y nadie fusiona su propio Pull Request.</li>
+  <li>Nombres de archivo sin tildes, sin eñe y sin espacios.</li>
+  <li>El <code>.gitignore</code> de Flutter está presente: no se sube la carpeta <code>build/</code>.</li>
+</ul>
+<div class="caja aviso">
+  <strong>El historial se revisa.</strong> El docente revisa en GitHub el aporte en commits de
+  <strong>cada integrante</strong> y que las integraciones a la rama <code>main</code> se hayan hecho
+  por medio de <strong>Pull Request</strong>. Un integrante sin commits propios no tiene cómo demostrar
+  su aporte.
+</div>
+
+<h2>Sustentación</h2>
+<p>Cada equipo tiene <strong>15 minutos</strong>. Todos los integrantes participan, y la nota de la
+sustentación es <strong>individual</strong>.</p>
+<table>
+  <tr><th>Parte</th><th>Tiempo</th><th>Qué se muestra</th></tr>
+  <tr><td>No técnica</td><td>5 min</td><td>El problema, los objetivos, el alcance y el recorrido por el mockup.</td></tr>
+  <tr><td>Técnica</td><td>7 min</td><td>Demo en vivo de la navegación y explicación del documento y del código.</td></tr>
+  <tr><td>Preguntas</td><td>3 min</td><td>Al menos una pregunta del docente a cada integrante.</td></tr>
+</table>
+
+<div class="caja aviso">
+  <strong>Se sustenta con una presentación, no con un documento.</strong> El equipo prepara
+  <strong>diapositivas</strong> (PowerPoint, Google Slides, Canva o la herramienta que prefiera) y las
+  guarda en <code>docs/presentacion/</code>. <strong>No se permite sustentar mostrando el
+  <code>README.md</code>, el <code>docs/definicion.md</code> ni ningún otro documento completo</strong>
+  en pantalla, ni leerlo. La presentación resume y muestra: ideas cortas, las imágenes del mockup, el
+  mapa de navegación y los fragmentos de código que se van a explicar. Fuera de las diapositivas solo
+  se muestra la demo en vivo de la app y, si una pregunta lo requiere, el código.
+</div>
+
+<h3>Parte no técnica</h3>
+<p>Dirigida a alguien que no programa, como un cliente o un jurado sin formación técnica. Cubre:</p>
+<ul class="lista">
+  <li><strong>El problema:</strong> qué pasa hoy, a quién le afecta y por qué una app móvil.</li>
+  <li><strong>Los objetivos:</strong> qué se quiere lograr y cómo se sabrá que se logró.</li>
+  <li><strong>El alcance:</strong> qué incluye y qué no incluye el proyecto.</li>
+  <li><strong>El mockup:</strong> el recorrido de cada rol por la app, pantalla por pantalla.</li>
+</ul>
+
+<h3>Parte técnica</h3>
+<p>Dirigida a otros desarrolladores. Cubre:</p>
+<ul class="lista">
+  <li><strong>Demo en vivo:</strong> la app corriendo en emulador o dispositivo, recorriendo el mapa de
+  navegación completo.</li>
+  <li>Los requerimientos funcionales y no funcionales principales.</li>
+  <li>El modelo de datos: entidades y relaciones.</li>
+  <li>El código de la navegación: cómo se pasa de una pantalla a otra y cómo viaja el dato de la lista
+  al detalle.</li>
+  <li>La estructura del repositorio y las decisiones importantes que tomó el equipo, con su razón.</li>
+</ul>
+
+<div class="caja aviso">
+  <strong>Ronda de preguntas.</strong> Toda sustentación cierra con una ronda de preguntas. A cualquier
+  integrante se le puede preguntar por cualquier parte del documento o del código, no solo por la que
+  escribió: <strong>por qué</strong> se hizo así, <strong>para qué sirve</strong> algo o
+  <strong>cómo funciona</strong>. No se espera un código perfecto ni avanzado; se espera que cada
+  persona entienda lo que su equipo entregó.
+</div>
+
+<h2>Rúbrica de evaluación</h2>
+<p>La rúbrica tiene cuatro criterios y suma 100 puntos. <strong>La sustentación pesa el 35% y es
+individual</strong>, porque lo que se evalúa es que cada integrante entienda y pueda defender su
+proyecto, no solo que el equipo lo haya escrito. El 65% restante es la misma nota para todo el
+equipo.</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Criterio</th><th>Peso</th><th>Excelente</th><th>Aceptable</th><th>Insuficiente</th></tr>
+  <tr>
+    <td><strong>Sustentación</strong> (individual)</td><td>35</td>
+    <td><strong>35.</strong> Explica con claridad y sin leer su parte no técnica y su parte técnica, apoyado en las diapositivas del equipo y dentro del tiempo. En la ronda de preguntas responde con precisión el porqué, el para qué y el cómo de cualquier parte del documento o del código, incluidas las que no escribió.</td>
+    <td><strong>21.</strong> Cubre lo que le corresponde, pero de forma superficial o leyendo, o no puede explicar partes que no escribió.</td>
+    <td><strong>10.</strong> Participa muy poco, no puede explicar el documento ni el código, o el equipo sustenta mostrando un documento en lugar de una presentación.</td>
+  </tr>
+  <tr>
+    <td><strong>Documento y mockup</strong></td><td>30</td>
+    <td><strong>30.</strong> Están las 14 secciones, las condiciones mínimas, las referencias y la declaración de uso de IA. El Markdown está bien estructurado: jerarquía de títulos, tabla de contenido, tablas, identificadores e imágenes que cargan. Las secciones se corresponden entre sí y hay una imagen de mockup explicada por cada pantalla.</td>
+    <td><strong>18.</strong> Falta alguna sección menor o alguna pantalla del mockup, la estructura es irregular, hay desconexiones entre secciones o varios requerimientos son generales y no medibles.</td>
+    <td><strong>9.</strong> Faltan varias secciones o alguna condición mínima, el contenido es genérico, o el documento es un bloque de texto sin estructura.</td>
+  </tr>
+  <tr>
+    <td><strong>Navegación en Flutter</strong></td><td>20</td>
+    <td><strong>20.</strong> La app ejecuta y es navegable: están las pantallas del mapa de navegación, se puede ir y volver entre ellas y hay paso de datos de la lista al detalle. Usa solo lo visto en clase y se nota el esfuerzo propio del equipo. No se exige que se vea igual al mockup.</td>
+    <td><strong>12.</strong> La app ejecuta y se navega, pero falta alguna pantalla o algún recorrido, o el detalle muestra siempre lo mismo.</td>
+    <td><strong>6.</strong> La app no ejecuta o no es navegable, o el código usa implementaciones no vistas en clase que el equipo no puede explicar.</td>
+  </tr>
+  <tr>
+    <td><strong>Trabajo en Git</strong></td><td>15</td>
+    <td><strong>15.</strong> Repositorio público con la estructura pedida, commits propios de todos los integrantes en la documentación y en el código, e integraciones a <code>main</code> por Pull Request, sin autofusión.</td>
+    <td><strong>9.</strong> Estructura correcta, pero el reparto de commits es desigual o hubo integraciones a <code>main</code> sin Pull Request o sin revisión.</td>
+    <td><strong>4.</strong> Un solo autor casi en todo el historial, o ningún Pull Request.</td>
+  </tr>
+</table></div>
+<p>Si no se entrega o no se sustenta, el criterio vale 0.</p>
+
+<div class="caja">
+  <strong>Nota individual en la sustentación.</strong> El documento, el mockup, la navegación y el
+  trabajo en Git reciben la misma nota para todo el equipo. La sustentación se califica por persona:
+  cada integrante recibe su propio puntaje según cómo participa y responde. Quien no esté presente sin
+  causa justificada recibe 0 en ese criterio.
+</div>
+
+<h2>Advertencias</h2>
+<ul class="lista">
+  <li>El uso de inteligencia artificial está permitido <strong>solo como apoyo</strong>, por ejemplo para
+  aclarar una duda, revisar la redacción o generar ideas. Estas herramientas <strong>no deben escribir
+  ni construir todo</strong> el documento ni el código.</li>
+  <li><strong>La declaración de uso de inteligencia artificial es obligatoria.</strong> Declarar el uso
+  no resta puntos. Usar IA sin declararlo, o no poder explicar lo que se escribió, sí.</li>
+  <li>Si la demo no ejecuta el día de la sustentación, la navegación se califica solo con lo que se
+  pueda leer en el repositorio, y como máximo en el nivel Aceptable.</li>
+  <li>No se reciben documentos en PDF ni en Word. Si el repositorio es privado, la entrega no se puede
+  calificar.</li>
+</ul>
+
+</main>
+</body>
+</html>
