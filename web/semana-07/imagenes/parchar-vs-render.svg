@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="340" viewBox="0 0 720 340" role="img" aria-label="Parchar el DOM a mano obliga a actualizar cada lugar afectado por separado; con render se cambia el arreglo y una función redibuja todo de forma consistente" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-amber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="fl-red" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker></defs>
+  <text x="180" y="28" font-size="13" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Parchar a mano</text>
+  <rect x="20" y="130" width="130" height="56" rx="8" fill="#fff8e8" stroke="#b7791f" stroke-width="1.8"/>
+  <text x="85.0" y="162.2" font-size="12" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Quitar producto</text>
+  <rect x="215" y="44" width="140" height="52" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="285.0" y="73.8" font-size="11" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">quitar la tarjeta</text>
+  <path d="M 150 158 L 213 70" stroke="#a32d22" stroke-width="1.6" fill="none" marker-end="url(#fl-red)"/>
+  <rect x="215" y="114" width="140" height="52" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="285.0" y="143.8" font-size="11" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">bajar el contador</text>
+  <path d="M 150 158 L 213 140" stroke="#a32d22" stroke-width="1.6" fill="none" marker-end="url(#fl-red)"/>
+  <rect x="215" y="184" width="140" height="52" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="285.0" y="213.8" font-size="11" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">recalcular el total</text>
+  <path d="M 150 158 L 213 210" stroke="#a32d22" stroke-width="1.6" fill="none" marker-end="url(#fl-red)"/>
+  <rect x="215" y="254" width="140" height="52" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="285.0" y="283.9" font-size="11" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">aviso si queda vacío</text>
+  <path d="M 150 158 L 213 280" stroke="#a32d22" stroke-width="1.6" fill="none" marker-end="url(#fl-red)"/>
+  <text x="180" y="332" font-size="11.5" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Olvidas un lugar y la pantalla miente</text>
+  <text x="540" y="28" font-size="13" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Estado y render</text>
+  <rect x="380" y="130" width="120" height="56" rx="8" fill="#fff8e8" stroke="#b7791f" stroke-width="1.8"/>
+  <text x="440.0" y="162.0" font-size="11.5" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Quitar producto</text>
+  <rect x="540" y="60" width="160" height="56" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="620.0" y="92.0" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">cambia el arreglo</text>
+  <rect x="540" y="200" width="160" height="70" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="620.0" y="231.0" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">render()</text>
+  <text x="620.0" y="247.1" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">dibuja todo</text>
+  <path d="M 500 150 L 538 100" stroke="#b7791f" stroke-width="1.6" fill="none" marker-end="url(#fl-amber)"/>
+  <path d="M 620 116 L 620 198" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <text x="540" y="296" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">tarjetas, contador, total y aviso</text>
+  <text x="540" y="332" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">salen del mismo arreglo, siempre coherentes</text>
+</svg>

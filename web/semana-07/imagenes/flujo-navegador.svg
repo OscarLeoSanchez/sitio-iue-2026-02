@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="346" viewBox="0 0 720 346" role="img" aria-label="Del archivo HTML a la pantalla: el parser HTML construye el árbol DOM, el parser CSS construye el CSSOM, ambos se combinan en el árbol de render, luego layout y paint" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="fl-gray" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#5b6876"/></marker><marker id="fl-green" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="fl-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker></defs>
+  <rect x="20" y="30" width="120" height="56" rx="8" fill="#f6f8fa" stroke="#5b6876" stroke-width="1.8"/>
+  <text x="80.0" y="54.0" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Texto HTML</text>
+  <text x="80.0" y="70.1" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">del archivo</text>
+  <rect x="180" y="30" width="130" height="56" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="245.0" y="62.4" font-size="12.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Parser HTML</text>
+  <rect x="350" y="30" width="130" height="56" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="415.0" y="62.4" font-size="12.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Árbol DOM</text>
+  <path d="M 140 58 L 178 58" stroke="#5b6876" stroke-width="1.6" fill="none" marker-end="url(#fl-gray)"/>
+  <path d="M 310 58 L 348 58" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <rect x="20" y="130" width="120" height="56" rx="8" fill="#f6f8fa" stroke="#5b6876" stroke-width="1.8"/>
+  <text x="80.0" y="154.0" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Texto CSS</text>
+  <text x="80.0" y="170.1" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">(hojas de estilo)</text>
+  <rect x="180" y="130" width="130" height="56" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="245.0" y="162.4" font-size="12.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Parser CSS</text>
+  <rect x="350" y="130" width="130" height="56" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="415.0" y="162.4" font-size="12.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">CSSOM</text>
+  <path d="M 140 158 L 178 158" stroke="#5b6876" stroke-width="1.6" fill="none" marker-end="url(#fl-gray)"/>
+  <path d="M 310 158 L 348 158" stroke="#0e8f8f" stroke-width="1.6" fill="none" marker-end="url(#fl-teal)"/>
+  <text x="510" y="52" font-size="11.5" fill="#5b6876" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">El DOM: qué elementos</text>
+  <text x="510" y="68" font-size="11.5" fill="#5b6876" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">hay y cómo se anidan</text>
+  <text x="510" y="152" font-size="11.5" fill="#5b6876" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">El CSSOM: qué reglas</text>
+  <text x="510" y="168" font-size="11.5" fill="#5b6876" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">de estilo existen</text>
+  <rect x="170" y="250" width="150" height="56" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="245.0" y="282.4" font-size="12.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Árbol de render</text>
+  <rect x="370" y="250" width="130" height="56" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="435.0" y="282.4" font-size="12.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Layout</text>
+  <rect x="550" y="250" width="150" height="56" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="625.0" y="273.6" font-size="12.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Paint</text>
+  <text x="625.0" y="291.1" font-size="12.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">(píxeles)</text>
+  <path d="M 482 58 L 496 58 L 496 215 L 245 215 L 245 248" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <path d="M 482 158 L 496 158" stroke="#0e8f8f" stroke-width="1.6" fill="none"/>
+  <path d="M 320 278 L 368 278" stroke="#2e7d5b" stroke-width="1.6" fill="none" marker-end="url(#fl-green)"/>
+  <path d="M 500 278 L 548 278" stroke="#2e7d5b" stroke-width="1.6" fill="none" marker-end="url(#fl-green)"/>
+  <text x="360" y="334" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Si JavaScript cambia el DOM, el navegador repite estos pasos finales</text>
+</svg>

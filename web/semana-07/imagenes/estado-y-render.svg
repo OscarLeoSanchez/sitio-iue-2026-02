@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="330" viewBox="0 0 720 330" role="img" aria-label="Ciclo de estado y render: los datos viven en un arreglo, render dibuja las tarjetas en el DOM, el usuario genera un evento y el evento cambia los datos, que vuelven a dibujarse" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-amber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="fl-green" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="fl-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker></defs>
+  <rect x="40" y="40" width="230" height="80" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="155.0" y="75.5" font-size="13" fill="#2f7bb8" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Datos</text>
+  <text x="155.0" y="93.7" font-size="13" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">productos (arreglo)</text>
+  <rect x="450" y="40" width="230" height="80" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="565.0" y="75.5" font-size="13" fill="#0e8f8f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Función de dibujo</text>
+  <text x="565.0" y="93.7" font-size="13" fill="#0a6666" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">render()</text>
+  <rect x="450" y="210" width="230" height="80" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="565.0" y="245.5" font-size="13" fill="#2e7d5b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">DOM</text>
+  <text x="565.0" y="263.7" font-size="13" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">tarjetas en pantalla</text>
+  <rect x="40" y="210" width="230" height="80" rx="8" fill="#fff8e8" stroke="#b7791f" stroke-width="1.8"/>
+  <text x="155.0" y="245.5" font-size="13" fill="#b7791f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Evento</text>
+  <text x="155.0" y="263.7" font-size="13" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">clic, input, submit</text>
+  <path d="M 270 80 L 448 80" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <text x="359" y="68" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">lee</text>
+  <path d="M 565 120 L 565 208" stroke="#0e8f8f" stroke-width="1.6" fill="none" marker-end="url(#fl-teal)"/>
+  <text x="572" y="168" font-size="11.5" fill="#5b6876" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">reemplaza</text>
+  <path d="M 448 250 L 272 250" stroke="#2e7d5b" stroke-width="1.6" fill="none" marker-end="url(#fl-green)"/>
+  <text x="359" y="238" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">la persona actúa</text>
+  <path d="M 155 208 L 155 122" stroke="#b7791f" stroke-width="1.6" fill="none" marker-end="url(#fl-amber)"/>
+  <text x="148" y="168" font-size="11.5" fill="#5b6876" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">modifica</text>
+  <text x="360" y="164" font-size="12" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Se cambian los datos,</text>
+  <text x="360" y="182" font-size="12" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">no el DOM a mano</text>
+  <text x="360" y="318" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">El DOM es consecuencia de los datos: la pantalla siempre refleja el arreglo</text>
+</svg>
