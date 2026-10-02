@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="350" viewBox="0 0 720 350" role="img" aria-label="Familias de códigos de estado HTTP: 2xx éxito, 3xx redirección, 4xx error del cliente, 5xx error del servidor" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="350" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="24" width="165" height="270" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="102" y="66" font-size="30" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2xx</text>
+<text x="102" y="92" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Éxito</text>
+<path d="M 34 106 L 171 106" fill="none" stroke="#2e7d5b" stroke-width="1"/>
+<text x="102" y="130" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">200 OK</text>
+<text x="102" y="150" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">201 Created</text>
+<text x="102" y="170" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">204 No Content</text>
+<rect x="32" y="224" width="141" height="50" rx="6" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="102" y="246" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La petición salió bien</text>
+<rect x="195" y="24" width="165" height="270" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="277" y="66" font-size="30" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3xx</text>
+<text x="277" y="92" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Redirección</text>
+<path d="M 209 106 L 346 106" fill="none" stroke="#2f7bb8" stroke-width="1"/>
+<text x="277" y="130" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">301 Moved</text>
+<text x="277" y="150" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">304 Not Modified</text>
+<rect x="207" y="224" width="141" height="50" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="277" y="246" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Busca en otro lugar</text>
+<rect x="370" y="24" width="165" height="270" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="452" y="66" font-size="30" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">4xx</text>
+<text x="452" y="92" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Error del cliente</text>
+<path d="M 384 106 L 521 106" fill="none" stroke="#b7791f" stroke-width="1"/>
+<text x="452" y="130" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">400 Bad Request</text>
+<text x="452" y="150" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">401 Unauthorized</text>
+<text x="452" y="170" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">404 Not Found</text>
+<rect x="382" y="224" width="141" height="50" rx="6" fill="#ffffff" stroke="#b7791f" stroke-width="1.2"/>
+<text x="452" y="246" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Quien pidió se equivocó</text>
+<rect x="545" y="24" width="165" height="270" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="627" y="66" font-size="30" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">5xx</text>
+<text x="627" y="92" font-size="13" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Error del servidor</text>
+<path d="M 559 106 L 696 106" fill="none" stroke="#a32d22" stroke-width="1"/>
+<text x="627" y="130" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">500 Internal Error</text>
+<text x="627" y="150" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">503 Unavailable</text>
+<rect x="557" y="224" width="141" height="50" rx="6" fill="#ffffff" stroke="#a32d22" stroke-width="1.2"/>
+<text x="627" y="246" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Quien responde falló</text>
+<text x="360" y="322" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ante un 4xx, reintentar casi nunca ayuda. Ante un 5xx, a veces sí.</text>
+</g>
+</svg>

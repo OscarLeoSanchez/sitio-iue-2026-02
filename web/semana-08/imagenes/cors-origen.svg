@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Origen: esquema, host y puerto. Si cualquiera de los tres difiere del origen de tu página, la petición es de origen cruzado" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="20" width="680" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="36" y="44" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen de tu página</text>
+<text x="36" y="63" font-size="14" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">http://localhost:8921</text>
+<text x="690" y="56" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">esquema + host + puerto</text>
+<rect x="20" y="92" width="680" height="38" rx="6" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="34" y="116" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">http://localhost:8921/api.js</text>
+<text x="380" y="116" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Mismo origen</text>
+<text x="686" y="116" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">solo cambia la ruta</text>
+<rect x="20" y="138" width="680" height="38" rx="6" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="34" y="162" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">http://localhost:5500/api</text>
+<text x="380" y="162" font-size="12" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen distinto</text>
+<text x="686" y="162" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otro puerto</text>
+<rect x="20" y="184" width="680" height="38" rx="6" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="34" y="208" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">https://localhost:8921/api</text>
+<text x="380" y="208" font-size="12" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen distinto</text>
+<text x="686" y="208" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otro esquema</text>
+<rect x="20" y="230" width="680" height="38" rx="6" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="34" y="254" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">http://127.0.0.1:8921/api</text>
+<text x="380" y="254" font-size="12" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen distinto</text>
+<text x="686" y="254" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otro host</text>
+<rect x="20" y="276" width="680" height="38" rx="6" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="34" y="300" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">https://dummyjson.com/products</text>
+<text x="380" y="300" font-size="12" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen distinto</text>
+<text x="686" y="300" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otro esquema, host y puerto</text>
+<text x="360" y="340" font-size="12.5" fill="#16202b" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origen distinto no es un error: solo activa la regla de CORS.</text>
+</g>
+</svg>

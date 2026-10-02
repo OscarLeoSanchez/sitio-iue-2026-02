@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="420" viewBox="0 0 720 420" role="img" aria-label="Árbol de decisión de fetch: solo rechaza si no hubo respuesta; un 404 o un 500 cumplen la promesa con ok en false" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="420" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="255" y="14" width="210" height="44" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="360.0" y="36" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">fetch(url)</text>
+<path d="M 360 58 L 360 84" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<rect x="235" y="84" width="250" height="50" rx="24" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="360" y="106" font-size="12" fill="#16202b" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">¿Llegó alguna respuesta</text>
+<text x="360" y="123" font-size="12" fill="#16202b" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">del servidor?</text>
+<path d="M 245 120 L 130 160" fill="none" stroke="#a32d22" stroke-width="1.6" marker-end="url(#f-rojo)"/>
+<text x="160" y="138" font-size="12" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">No</text>
+<path d="M 475 120 L 590 160" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="560" y="138" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sí</text>
+<rect x="20" y="160" width="220" height="120" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="130.0" y="182" font-size="13" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Promesa RECHAZADA</text>
+<text x="130.0" y="204" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">TypeError:</text>
+<text x="130.0" y="219" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Failed to fetch</text>
+<text x="130.0" y="234" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sin red, CORS, DNS, URL rota</text>
+<rect x="480" y="160" width="220" height="80" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="590.0" y="182" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Promesa CUMPLIDA</text>
+<text x="590.0" y="204" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">con un objeto Response</text>
+<path d="M 590 240 L 590 266" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<rect x="480" y="266" width="220" height="50" rx="24" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="590" y="297" font-size="12.5" fill="#16202b" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">¿response.ok?</text>
+<path d="M 495 316 L 430 350" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-ambar)"/>
+<text x="440" y="334" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">false</text>
+<path d="M 685 316 L 650 350" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="702" y="342" font-size="11.5" fill="#1f5c42" font-weight="700" text-anchor="end" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">true</text>
+<rect x="300" y="350" width="230" height="60" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="415.0" y="372" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">404, 500, 503...</text>
+<text x="415.0" y="394" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Tú lanzas el error con throw</text>
+<rect x="560" y="350" width="150" height="60" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="635.0" y="372" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">200 a 299</text>
+<text x="635.0" y="394" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sigue: response.json()</text>
+<text x="160" y="330" font-size="11.5" fill="#a32d22" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">catch recibe el error solo</text>
+<text x="160" y="348" font-size="11.5" fill="#a32d22" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">porque fetch lo rechazó</text>
+<text x="160" y="392" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">En ambos casos tu código debe</text>
+<text x="160" y="408" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">mostrar un estado de error</text>
+</g>
+</svg>
