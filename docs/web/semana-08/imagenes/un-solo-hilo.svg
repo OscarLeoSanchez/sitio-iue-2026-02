@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Un solo hilo: si JavaScript esperara bloqueando, la página se congelaría; con asincronía el hilo queda libre mientras la red trabaja" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="34" font-size="13" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Esperar bloqueando (lo que NO ocurre)</text>
+<rect x="20" y="46" width="680" height="50" rx="4" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="30" y="54" width="70" height="34" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="65" y="76" font-size="11" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tu código</text>
+<rect x="100" y="54" width="480" height="34" rx="4" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="340" y="76" font-size="12" fill="#a32d22" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">hilo detenido esperando la respuesta: ni clics ni scroll</text>
+<rect x="580" y="54" width="110" height="34" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="635" y="76" font-size="11" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">sigue tu código</text>
+<text x="20" y="134" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Esperar sin bloquear (fetch)</text>
+<text x="20" y="154" font-size="11" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Hilo de JavaScript</text>
+<rect x="20" y="160" width="680" height="50" rx="4" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="30" y="168" width="70" height="34" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="65" y="190" font-size="11" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">fetch()</text>
+<rect x="100" y="168" width="200" height="34" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="200" y="190" font-size="11" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">libre: clics, scroll, render</text>
+<rect x="300" y="168" width="70" height="34" rx="4" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.6"/>
+<text x="335" y="190" font-size="11" fill="#3a4654" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otro clic</text>
+<rect x="370" y="168" width="100" height="34" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="420" y="190" font-size="11" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">libre</text>
+<rect x="580" y="168" width="110" height="34" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="635" y="190" font-size="10.5" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">llega la respuesta</text>
+<text x="20" y="232" font-size="11" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Red (fuera del hilo, la maneja el navegador)</text>
+<rect x="20" y="238" width="680" height="40" rx="4" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="100" y="244" width="480" height="28" rx="4" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="340" y="263" font-size="11.5" fill="#0b6e6e" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición viajando, servidor trabajando, respuesta regresando</text>
+<path d="M 20 306 L 700 306" fill="none" stroke="#8795a3" stroke-width="1.2" marker-end="url(#f-gris)"/>
+<text x="700" y="326" font-size="11" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tiempo</text>
+<text x="20" y="326" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Un hilo hace una cosa a la vez. Esperar bien significa no ocupar el hilo mientras se espera.</text>
+</g>
+</svg>

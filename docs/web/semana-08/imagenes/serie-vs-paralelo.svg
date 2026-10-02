@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Tres peticiones de un segundo cada una: en serie tardan tres segundos, en paralelo con Promise.all tardan uno" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="28" font-size="13" fill="#a32d22" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">En serie: await, await, await</text>
+<rect x="80" y="40" width="180" height="30" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="170" y="60" font-size="11.5" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición A</text>
+<rect x="270" y="40" width="180" height="30" rx="4" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="360" y="60" font-size="11.5" fill="#0b6e6e" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición B</text>
+<rect x="460" y="40" width="180" height="30" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="550" y="60" font-size="11.5" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición C</text>
+<text x="660" y="90" font-size="12.5" fill="#a32d22" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Total: 3 s</text>
+<text x="20" y="136" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">En paralelo: Promise.all([...])</text>
+<rect x="80" y="148" width="180" height="30" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="170" y="168" font-size="11.5" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición A</text>
+<rect x="80" y="184" width="180" height="30" rx="4" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="170" y="204" font-size="11.5" fill="#0b6e6e" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición B</text>
+<rect x="80" y="220" width="180" height="30" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="170" y="240" font-size="11.5" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">petición C</text>
+<text x="280" y="168" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Total: 1 s</text>
+<path d="M 80 276 L 660 276" fill="none" stroke="#8795a3" stroke-width="1.2" marker-end="url(#f-gris)"/>
+<path d="M 80 270 L 80 282" fill="none" stroke="#8795a3" stroke-width="1.2"/>
+<text x="80" y="298" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">0 s</text>
+<path d="M 270 270 L 270 282" fill="none" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="298" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1 s</text>
+<path d="M 460 270 L 460 282" fill="none" stroke="#8795a3" stroke-width="1.2"/>
+<text x="460" y="298" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2 s</text>
+<path d="M 650 270 L 650 282" fill="none" stroke="#8795a3" stroke-width="1.2"/>
+<text x="650" y="298" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3 s</text>
+<rect x="20" y="314" width="680" height="36" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="360" y="337" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Solo conviene el paralelo si ninguna petición necesita el resultado de la otra.</text>
+</g>
+</svg>

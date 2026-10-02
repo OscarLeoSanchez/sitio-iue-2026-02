@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="440" viewBox="0 0 720 440" role="img" aria-label="Dos recorridos de CORS: solicitud simple con una sola ida y vuelta, y solicitud con preflight que primero pregunta con OPTIONS" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="440" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="14" width="330" height="412" rx="8" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="185" y="40" font-size="14" fill="#0b6e6e" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Solicitud simple (GET)</text>
+<rect x="34" y="54" width="120" height="28" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="94" y="73" font-size="12" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Navegador</text>
+<rect x="216" y="54" width="120" height="28" rx="6" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="276" y="73" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Servidor</text>
+<path d="M 94 82 L 94 340" fill="none" stroke="#2f7bb8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 276 82 L 276 340" fill="none" stroke="#2e7d5b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 98 128 L 272 128" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<text x="185" y="110" font-size="10.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">GET /products</text>
+<text x="185" y="123" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Origin: http://localhost:8921</text>
+<path d="M 272 206 L 98 206" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="185" y="188" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">200 OK + JSON</text>
+<text x="185" y="201" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Access-Control-Allow-Origin: ...</text>
+<text x="185" y="366" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El navegador compara el origen con la cabecera</text>
+<text x="185" y="382" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y entrega o esconde la respuesta a tu código.</text>
+<rect x="370" y="14" width="330" height="412" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="535" y="40" font-size="14" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Con preflight (POST con JSON)</text>
+<rect x="384" y="54" width="120" height="28" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="444" y="73" font-size="12" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Navegador</text>
+<rect x="566" y="54" width="120" height="28" rx="6" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="626" y="73" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Servidor</text>
+<path d="M 444 82 L 444 340" fill="none" stroke="#2f7bb8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 626 82 L 626 340" fill="none" stroke="#2e7d5b" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 448 120 L 622 120" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<text x="535" y="102" font-size="10.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">OPTIONS /products/add</text>
+<text x="535" y="115" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">pregunta antes de enviar</text>
+<path d="M 622 180 L 448 180" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="535" y="162" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">204 + Allow-Methods</text>
+<text x="535" y="175" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Allow-Headers: content-type</text>
+<path d="M 448 240 L 622 240" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<text x="535" y="222" font-size="10.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">POST /products/add</text>
+<text x="535" y="235" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cuerpo JSON</text>
+<path d="M 622 300 L 448 300" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="535" y="282" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">200 OK + JSON</text>
+<text x="535" y="366" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El preflight lo envía el navegador solo,</text>
+<text x="535" y="382" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tú no escribes ese OPTIONS.</text>
+</g>
+</svg>

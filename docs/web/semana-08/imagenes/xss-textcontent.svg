@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="380" viewBox="0 0 720 380" role="img" aria-label="Pintar un dato de la API con innerHTML ejecuta el código escondido en él; con textContent se muestra como texto inofensivo" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="380" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="20" width="680" height="64" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="360" y="44" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Dato que llegó de una API (nombre de un producto)</text>
+<text x="360" y="68" font-size="14" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">&lt;img src="x" onerror="alert(1)"&gt;</text>
+<path d="M 190 86 L 190 124" fill="none" stroke="#a32d22" stroke-width="1.6" marker-end="url(#f-rojo)"/>
+<path d="M 530 86 L 530 124" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<rect x="20" y="124" width="330" height="190" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="185" y="148" font-size="12.5" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">tarjeta.innerHTML = nombre</text>
+<text x="185" y="178" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El navegador interpreta el texto</text>
+<text x="185" y="197" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">como HTML y crea un elemento img.</text>
+<text x="185" y="216" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La imagen falla y se ejecuta</text>
+<text x="185" y="235" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el atributo onerror.</text>
+<rect x="40" y="268" width="290" height="32" rx="6" fill="#ffffff" stroke="#a32d22" stroke-width="1.2"/>
+<text x="185" y="289" font-size="12.5" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Se ejecuta código ajeno</text>
+<rect x="370" y="124" width="330" height="190" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="535" y="148" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">tarjeta.textContent = nombre</text>
+<text x="535" y="178" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El navegador trata todo como</text>
+<text x="535" y="197" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">texto y lo dibuja tal cual.</text>
+<text x="535" y="216" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">No se crea ningún elemento</text>
+<text x="535" y="235" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ni se ejecuta nada.</text>
+<rect x="390" y="268" width="290" height="32" rx="6" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="535" y="289" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">&lt;img src="x" onerror="alert(1)"&gt;</text>
+<text x="360" y="346" font-size="12.5" fill="#16202b" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Regla práctica: todo lo que viene de afuera se pinta con textContent.</text>
+<text x="360" y="366" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Si necesitas HTML con datos, crea los elementos con createElement.</text>
+</g>
+</svg>

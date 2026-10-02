@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="380" viewBox="0 0 720 380" role="img" aria-label="Los cuatro estados de la interfaz: cargando, éxito con datos, vacío y error, con el reintento que vuelve a cargando" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="380" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="280" y="20" width="160" height="70" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="360.0" y="42" font-size="14" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cargando</text>
+<text x="360.0" y="64" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">mensaje o esqueleto</text>
+<path d="M 300 90 L 140 160" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 360 90 L 360 160" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 420 90 L 580 160" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<text x="50" y="138" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">con datos</text>
+<text x="368" y="130" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">lista vacía</text>
+<text x="560" y="112" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">falla</text>
+<rect x="30" y="160" width="200" height="120" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="130.0" y="182" font-size="14" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Éxito</text>
+<text x="130.0" y="204" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Muestras las tarjetas.</text>
+<text x="130.0" y="220" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">RN-03: sin cantidad,</text>
+<text x="130.0" y="236" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">se ve como agotado.</text>
+<rect x="260" y="160" width="200" height="120" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="360.0" y="182" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Vacío</text>
+<text x="360.0" y="204" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">No hubo error, pero no</text>
+<text x="360.0" y="220" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">hay productos.</text>
+<text x="360.0" y="236" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Dilo con un mensaje.</text>
+<rect x="490" y="160" width="200" height="120" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.6"/>
+<text x="590.0" y="182" font-size="14" fill="#a32d22" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Error</text>
+<text x="590.0" y="204" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Di qué pasó y qué</text>
+<text x="590.0" y="220" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">puede hacer la persona.</text>
+<text x="590.0" y="236" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Botón Reintentar.</text>
+<path d="M 690 230 L 705 230 L 705 55 L 445 55" fill="none" stroke="#a32d22" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#f-rojo)"/>
+<text x="700" y="46" font-size="11" fill="#a32d22" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Reintentar</text>
+<rect x="20" y="310" width="680" height="52" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="360" y="332" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Un solo estado a la vez. Si falta uno, la persona ve una pantalla en blanco</text>
+<text x="360" y="350" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y no sabe si debe esperar, reintentar o buscar ayuda.</text>
+</g>
+</svg>

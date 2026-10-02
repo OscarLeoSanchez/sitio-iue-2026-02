@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="250" viewBox="0 0 720 250" role="img" aria-label="Una NodeList tiene length, forEach y acceso por índice pero no map ni filter; un Array tiene map, filter, find y reduce; Array.from convierte una NodeList en Array" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker></defs>
+  <rect x="20" y="30" width="250" height="140" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="145.0" y="79.0" font-size="12" fill="#a32d22" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">NodeList</text>
+  <text x="145.0" y="95.8" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Tiene: length, [i], forEach</text>
+  <text x="145.0" y="112.6" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">No tiene: map, filter, find,</text>
+  <text x="145.0" y="129.4" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">reduce, some, every</text>
+  <rect x="450" y="30" width="250" height="140" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="575.0" y="79.0" font-size="12" fill="#2e7d5b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Array</text>
+  <text x="575.0" y="95.8" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Tiene: length, [i], forEach</text>
+  <text x="575.0" y="112.6" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">map, filter, find, reduce,</text>
+  <text x="575.0" y="129.4" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">some, every, push, sort</text>
+  <path d="M 272 100 L 448 100" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <text x="360" y="84" font-size="12" fill="#17456f" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">Array.from(nodos)</text>
+  <text x="360" y="126" font-size="12" fill="#17456f" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">[...nodos]</text>
+  <text x="360" y="204" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">querySelectorAll devuelve una foto de ese momento:</text>
+  <text x="360" y="222" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">si luego agregas tarjetas, la NodeList no se entera</text>
+</svg>

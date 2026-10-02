@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="JSON es texto; un objeto de JavaScript es una estructura en memoria. JSON.parse convierte de texto a objeto y JSON.stringify de objeto a texto" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="30" width="250" height="130" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="145" y="56" font-size="14" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">JSON (texto)</text>
+<text x="34" y="84" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">{"nombre": "Tomate",</text>
+<text x="34" y="102" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve"> "precio": 4500,</text>
+<text x="34" y="120" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve"> "stock": 3}</text>
+<rect x="450" y="30" width="250" height="130" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="575" y="56" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Objeto de JavaScript</text>
+<text x="464" y="84" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">{ nombre: 'Tomate',</text>
+<text x="464" y="102" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">  precio: 4500,</text>
+<text x="464" y="120" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">  stock: 3 }</text>
+<path d="M 275 76 L 445 76" fill="none" stroke="#0e8f8f" stroke-width="1.6" marker-end="url(#f-teal)"/>
+<text x="360" y="66" font-size="12" fill="#0b6e6e" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">JSON.parse(texto)</text>
+<path d="M 445 120 L 275 120" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="360" y="142" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">JSON.stringify(obj)</text>
+<rect x="20" y="184" width="680" height="150" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="360" y="210" font-size="13.5" fill="#3a4654" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Lo que JSON exige y JavaScript perdona</text>
+<text x="48" y="238" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Las claves siempre van entre comillas dobles. Las comillas simples no valen.</text>
+<text x="48" y="260" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sin coma final después del último elemento y sin comentarios.</text>
+<text x="48" y="282" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Solo existen texto, número, true, false, null, listas y objetos.</text>
+<text x="48" y="304" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">undefined, funciones y NaN no existen en JSON. Las fechas viajan como texto.</text>
+</g>
+</svg>

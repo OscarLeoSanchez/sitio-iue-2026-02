@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="440" viewBox="0 0 720 440" role="img" aria-label="El bucle de eventos: pila de llamadas, Web APIs, cola de microtareas y cola de tareas" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="440" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="20" width="190" height="272" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="115.0" y="42" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Pila de llamadas</text>
+<text x="115.0" y="64" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Lo que JavaScript</text>
+<text x="115.0" y="80" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ejecuta ahora.</text>
+<rect x="50" y="104" width="130" height="30" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="115" y="124" font-size="10.5" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">cargarCatalogo()</text>
+<rect x="50" y="138" width="130" height="30" rx="6" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="115" y="158" font-size="11" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">fetch(url)</text>
+<text x="115" y="270" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">(una sola a la vez)</text>
+<rect x="260" y="20" width="440" height="74" rx="8" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="480.0" y="42" font-size="14" fill="#0b6e6e" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Web APIs</text>
+<text x="480.0" y="64" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Las ejecuta el navegador, fuera de tu hilo: temporizadores, red, eventos</text>
+<path d="M 212 52 L 256 52" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<text x="234" y="42" font-size="10.5" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">delega</text>
+<rect x="260" y="142" width="200" height="90" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="360.0" y="164" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cola de microtareas</text>
+<text x="360.0" y="186" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">then, catch, await,</text>
+<text x="360.0" y="201" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">queueMicrotask. Prioridad alta.</text>
+<rect x="500" y="142" width="200" height="90" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="600.0" y="164" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cola de tareas</text>
+<text x="600.0" y="186" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">setTimeout, clics,</text>
+<text x="600.0" y="201" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">mensajes de red. Una por vuelta.</text>
+<path d="M 360 96 L 360 138" fill="none" stroke="#0e8f8f" stroke-width="1.6" marker-end="url(#f-teal)"/>
+<text x="368" y="122" font-size="10.5" fill="#0b6e6e" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">promesa resuelta</text>
+<path d="M 600 96 L 600 138" fill="none" stroke="#0e8f8f" stroke-width="1.6" marker-end="url(#f-teal)"/>
+<text x="608" y="122" font-size="10.5" fill="#0b6e6e" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">timer o evento listo</text>
+<path d="M 360 234 L 360 258" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<path d="M 600 234 L 600 258" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-ambar)"/>
+<rect x="260" y="260" width="440" height="34" rx="17" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="480" y="282" font-size="12" fill="#3a4654" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Bucle de eventos: si la pila está vacía, mete lo siguiente</text>
+<path d="M 256 277 L 214 277" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<rect x="20" y="320" width="680" height="100" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="36" y="344" font-size="12.5" fill="#3a4654" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cada vuelta del bucle:</text>
+<text x="36" y="366" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1. Ejecuta todo el código sincrónico hasta que la pila queda vacía.</text>
+<text x="36" y="383" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2. Vacía por completo la cola de microtareas, aunque se agreguen más mientras tanto.</text>
+<text x="36" y="400" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3. Toma una sola tarea de la cola de tareas, la ejecuta y vuelve al paso 2.</text>
+</g>
+</svg>

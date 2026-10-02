@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="330" viewBox="0 0 720 330" role="img" aria-label="Método de depuración en cuatro pasos: reproducir el error, aislar dónde ocurre, formular una hipótesis y comprobarla; si la hipótesis falla se plantea otra" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-amber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="fl-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker></defs>
+  <rect x="10" y="40" width="150" height="110" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="85.0" y="74.9" font-size="11.5" fill="#2f7bb8" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">1. Reproducir</text>
+  <text x="85.0" y="91.0" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Pasos exactos y</text>
+  <text x="85.0" y="107.1" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">valores exactos</text>
+  <text x="85.0" y="123.2" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">que fallan</text>
+  <path d="M 160 95 L 191 95" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <rect x="193" y="40" width="150" height="110" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="268.0" y="74.9" font-size="11.5" fill="#0e8f8f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">2. Aislar</text>
+  <text x="268.0" y="91.0" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">¿Qué línea?</text>
+  <text x="268.0" y="107.1" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">console.log o</text>
+  <text x="268.0" y="123.2" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">breakpoint</text>
+  <path d="M 343 95 L 374 95" stroke="#0e8f8f" stroke-width="1.6" fill="none" marker-end="url(#fl-teal)"/>
+  <rect x="376" y="40" width="150" height="110" rx="8" fill="#fff8e8" stroke="#b7791f" stroke-width="1.8"/>
+  <text x="451.0" y="74.9" font-size="11.5" fill="#b7791f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">3. Hipótesis</text>
+  <text x="451.0" y="91.0" font-size="11.5" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Una causa concreta</text>
+  <text x="451.0" y="107.1" font-size="11.5" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">y qué debería</text>
+  <text x="451.0" y="123.2" font-size="11.5" fill="#6b4a0c" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">ver si es cierta</text>
+  <path d="M 526 95 L 557 95" stroke="#b7791f" stroke-width="1.6" fill="none" marker-end="url(#fl-amber)"/>
+  <rect x="559" y="40" width="150" height="110" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="634.0" y="74.9" font-size="11.5" fill="#2e7d5b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">4. Comprobar</text>
+  <text x="634.0" y="91.0" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Cambia una sola</text>
+  <text x="634.0" y="107.1" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">cosa y repite</text>
+  <text x="634.0" y="123.2" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">el caso del paso 1</text>
+  <path d="M 625 152 L 625 188 L 451 188 L 451 154" stroke="#b7791f" stroke-width="1.6" fill="none" stroke-dasharray="5 4" marker-end="url(#fl-amber)"/>
+  <text x="538" y="208" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">si no se cumple, nueva hipótesis</text>
+  <rect x="110" y="250" width="500" height="56" rx="8" fill="#f6f8fa" stroke="#5b6876" stroke-width="1.8"/>
+  <text x="360.0" y="274.0" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Regla: cambia una cosa a la vez y comprueba qué pasó</text>
+  <text x="360.0" y="290.1" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Si cambias tres cosas y funciona, no sabes cuál lo arregló</text>
+</svg>

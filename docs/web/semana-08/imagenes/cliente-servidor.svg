@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="284" viewBox="0 0 720 284" role="img" aria-label="Cliente y servidor: el navegador envía una petición y el servidor devuelve una respuesta" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="720" height="284" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="30" y="40" width="220" height="150" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="140.0" y="62" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cliente</text>
+<text x="140.0" y="84" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Tu navegador</text>
+<text x="140.0" y="100" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ejecuta el panel</text>
+<text x="140.0" y="116" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">del productor</text>
+<rect x="470" y="40" width="220" height="150" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="580.0" y="62" font-size="14" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Servidor</text>
+<text x="580.0" y="84" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Un programa que</text>
+<text x="580.0" y="100" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">escucha peticiones</text>
+<text x="580.0" y="116" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en dummyjson.com</text>
+<text x="360" y="30" font-size="12" fill="#5b6876" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Internet</text>
+<path d="M 255 95 L 465 95" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<text x="360" y="85" font-size="12" fill="#17456f" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1. Petición: GET /products</text>
+<path d="M 465 150 L 255 150" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="360" y="180" font-size="12" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2. Respuesta: 200 y un JSON</text>
+<rect x="30" y="220" width="660" height="44" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="360" y="247" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El cliente siempre empieza la conversación. El servidor nunca te escribe primero.</text>
+</g>
+</svg>

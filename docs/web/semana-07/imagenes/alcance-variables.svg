@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="350" viewBox="0 0 720 350" role="img" aria-label="Alcance de variables: lo declarado afuera se ve desde adentro, lo declarado adentro no se ve desde afuera; let y const viven dentro del bloque donde se declaran" xmlns="http://www.w3.org/2000/svg">
+  <defs></defs>
+  <rect x="20" y="20" width="440" height="310" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="40" y="44" font-size="12" fill="#17456f" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">Alcance global del archivo</text>
+  <text x="40" y="66" font-size="12" fill="#16202b" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">const productos = [...]</text>
+  <text x="40" y="86" font-size="12" fill="#16202b" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">let texto = ""</text>
+  <rect x="40" y="104" width="400" height="206" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="60" y="128" font-size="12" fill="#0a6666" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" font-weight="700" style="white-space:pre">function render() {</text>
+  <text x="60" y="148" font-size="11.5" fill="#16202b" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">const visibles = productos.filter(...)</text>
+  <rect x="60" y="162" width="360" height="130" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="80" y="186" font-size="12" fill="#1d5a40" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" font-weight="700" style="white-space:pre">for (const p of visibles) {</text>
+  <text x="80" y="206" font-size="11.5" fill="#16202b" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">const tarjeta = crearTarjeta(p)</text>
+  <text x="80" y="226" font-size="11" fill="#5b6876" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">// aquí ves: tarjeta, p, visibles,</text>
+  <text x="80" y="242" font-size="11" fill="#5b6876" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">// productos y texto</text>
+  <text x="80" y="278" font-size="11.5" fill="#1d5a40" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">}  // tarjeta y p dejan de existir</text>
+  <rect x="490" y="40" width="210" height="120" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="595.0" y="87.4" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">El bloque interno puede</text>
+  <text x="595.0" y="104.2" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">leer lo declarado en los</text>
+  <text x="595.0" y="121.0" font-size="12" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">bloques que lo contienen</text>
+  <rect x="490" y="190" width="210" height="120" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="595.0" y="237.4" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Fuera del for no existe</text>
+  <text x="595.0" y="254.2" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">tarjeta: usarla ahí da</text>
+  <text x="595.0" y="271.0" font-size="12" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">ReferenceError</text>
+</svg>

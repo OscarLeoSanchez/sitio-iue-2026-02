@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720" height="300" viewBox="0 0 720 300" role="img" aria-label="Para agregar un elemento: createElement lo crea fuera de la página, se configura, append lo inserta en un padre del DOM y el navegador lo dibuja; remove lo saca" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="fl-blue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="fl-gray" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#5b6876"/></marker><marker id="fl-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker></defs>
+  <rect x="10" y="40" width="150" height="96" rx="8" fill="#f6f8fa" stroke="#5b6876" stroke-width="1.8"/>
+  <text x="85.0" y="75.9" font-size="11.5" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">1. Crear</text>
+  <text x="85.0" y="92.0" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">createElement</text>
+  <text x="85.0" y="108.1" font-size="11.5" fill="#16202b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">("article")</text>
+  <path d="M 160 88 L 191 88" stroke="#5b6876" stroke-width="1.6" fill="none" marker-end="url(#fl-gray)"/>
+  <rect x="193" y="40" width="150" height="96" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.8"/>
+  <text x="268.0" y="75.9" font-size="11.5" fill="#2f7bb8" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">2. Configurar</text>
+  <text x="268.0" y="92.0" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">textContent</text>
+  <text x="268.0" y="108.1" font-size="11.5" fill="#17456f" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">className, dataset</text>
+  <path d="M 343 88 L 374 88" stroke="#2f7bb8" stroke-width="1.6" fill="none" marker-end="url(#fl-blue)"/>
+  <rect x="376" y="40" width="150" height="96" rx="8" fill="#eaf6f6" stroke="#0e8f8f" stroke-width="1.8"/>
+  <text x="451.0" y="75.9" font-size="11.5" fill="#0e8f8f" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">3. Insertar</text>
+  <text x="451.0" y="92.0" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">padre.append(el)</text>
+  <text x="451.0" y="108.1" font-size="11.5" fill="#0a6666" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">entra al árbol</text>
+  <path d="M 526 88 L 557 88" stroke="#0e8f8f" stroke-width="1.6" fill="none" marker-end="url(#fl-teal)"/>
+  <rect x="559" y="40" width="150" height="96" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.8"/>
+  <text x="634.0" y="75.9" font-size="11.5" fill="#2e7d5b" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700">4. Dibujar</text>
+  <text x="634.0" y="92.0" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">el navegador</text>
+  <text x="634.0" y="108.1" font-size="11.5" fill="#1d5a40" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">calcula y pinta</text>
+  <text x="360" y="176" font-size="12" fill="#5b6876" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">Hasta el paso 3 el elemento existe en memoria, pero no se ve en la página</text>
+  <rect x="210" y="205" width="300" height="60" rx="8" fill="#fdf3f2" stroke="#a32d22" stroke-width="1.8"/>
+  <text x="360.0" y="231.0" font-size="11.5" fill="#7a1f17" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" style="white-space:pre">elemento.remove()</text>
+  <text x="360.0" y="247.1" font-size="11.5" fill="#7a1f17" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">lo saca del árbol y desaparece de la pantalla</text>
+</svg>
