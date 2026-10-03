@@ -12,6 +12,9 @@ project:
     # que ninguna pagina .qmd enlaza todavia.
     - web/semana-07/presentacion-interactiva.html
     - web/semana-08/presentacion-interactiva.html
+    # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
+    - movil/semana-07/presentacion-interactiva.html
+    - movil/semana-08/presentacion-interactiva.html
 
 lang: es
 
@@ -57,6 +60,10 @@ website:
               href: movil/semana-05/index.qmd
             - text: "Semana 6. Formularios y componentes reutilizables"
               href: movil/semana-06/index.qmd
+            - text: "Semana 7. JSON y APIs REST"
+              href: movil/semana-07/index.qmd
+            - text: "Semana 8. Persistencia local"
+              href: movil/semana-08/index.qmd
         - text: "Proyecto: entregable 1"
           href: movil/proyecto-entregable-1/index.qmd
     - id: web
