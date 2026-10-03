@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-08/index.html</loc>
-    <lastmod>2026-10-02T16:33:38.735Z</lastmod>
+    <lastmod>2026-10-02T21:00:47.779Z</lastmod>
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-06/presentacion.html</loc>
@@ -22,7 +22,11 @@
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/index.html</loc>
-    <lastmod>2026-10-02T16:03:05.965Z</lastmod>
+    <lastmod>2026-10-02T21:00:47.738Z</lastmod>
+  </url>
+  <url>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-08/index.html</loc>
+    <lastmod>2026-10-03T01:07:46.773Z</lastmod>
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-06/index.html</loc>
@@ -58,7 +62,7 @@
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/index.html</loc>
-    <lastmod>2026-09-12T02:43:36.336Z</lastmod>
+    <lastmod>2026-10-02T22:03:14.139Z</lastmod>
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-01/index.html</loc>
@@ -79,6 +83,10 @@
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-05/index.html</loc>
     <lastmod>2026-09-19T05:43:47.283Z</lastmod>
+  </url>
+  <url>
+    <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/movil/semana-07/index.html</loc>
+    <lastmod>2026-10-02T23:08:03.407Z</lastmod>
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/definicion-proyecto/index.html</loc>
@@ -102,6 +110,6 @@
   </url>
   <url>
     <loc>https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-07/index.html</loc>
-    <lastmod>2026-10-02T16:26:58.175Z</lastmod>
+    <lastmod>2026-10-02T21:00:47.754Z</lastmod>
   </url>
 </urlset>
