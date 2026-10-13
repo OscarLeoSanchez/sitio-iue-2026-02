@@ -1867,7 +1867,8 @@ function cargarProductos() {
     fijarAuto(v) {
       this.auto = !!v;
       this.conmutador.setAttribute('aria-checked', String(this.auto));
-      if (this.auto) this.evaluar(); else this.detener();
+      // Si un paso suelto está corriendo, deja de tener tope y el ciclo continúa.
+      if (this.auto) { this.limite = null; this.evaluar(); } else this.detener();
     }
     // Toda interacción manual apaga el automático y deja el paso donde está.
     manual() { this.fijarAuto(false); }
