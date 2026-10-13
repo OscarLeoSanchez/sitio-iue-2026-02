@@ -51,8 +51,10 @@ manipula, código con líneas vinculadas al efecto visible, y reto o falla provo
 
 - Toda diapositiva de concepto lleva al menos un diagrama o animación. Apunta a 45 a 55
   diapositivas y más de 35 animaciones o diagramas distintos.
-- Componente estrella: `Flujo`, con paquetes que viajan, narración por paso, pausa, paso a paso,
-  velocidad, barra arrastrable y parámetros que recalculan el recorrido.
+- Componente estrella: `Flujo`, con paquetes que viajan, narración por paso, bucle automático que
+  arranca solo y se detiene fuera de vista, control por pasos (anterior, siguiente y marcas
+  numeradas), interruptor Automático y parámetros que recalculan el recorrido. Sin apariencia de
+  video: nada de reproducir, reloj, barra de tiempo ni velocidad.
 - En cada concepto: desplegable "Profundiza" (definición, analogía, ejemplo, error común),
   términos con definición emergente enlazados a un glosario de 60 o más entradas, y panel de apoyo
   con analogía, errores frecuentes y nombres de documentación (MDN).

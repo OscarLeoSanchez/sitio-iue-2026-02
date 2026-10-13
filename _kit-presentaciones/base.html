@@ -493,17 +493,15 @@ html.experto .solo-experto.callout { display: grid !important; }
 .rp-boton:hover { background: var(--papel-2); }
 .rp-boton:active { transform: scale(.94); }
 .rp-boton svg { width: 18px; height: 18px; }
-.rp-boton.play { width: 46px; height: 46px; border-radius: 50%; background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
-.rp-boton.play:hover { background: #33433A; }
-.rp-boton.play svg { width: 20px; height: 20px; }
-.rp-tiempo { flex: 1; min-width: 160px; position: relative; display: flex; align-items: center; }
-.rp-tiempo input { position: relative; z-index: 1; }
-.rp-marcas { position: absolute; left: 10px; right: 10px; top: 50%; height: 14px; transform: translateY(-50%); pointer-events: none; }
-.rp-marcas i { position: absolute; top: 0; width: 2px; height: 14px; background: var(--blanco); border-radius: 2px; transform: translateX(-1px); z-index: 2; }
-.rp-velocidad { display: flex; padding: 3px; gap: 2px; border-radius: 11px; background: var(--papel-2); border: 1px solid var(--linea); }
-.rp-velocidad button { border: 0; background: transparent; border-radius: 8px; font-size: 13px; font-weight: 700; padding: 5px 8px; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
-.rp-velocidad button[aria-pressed="true"] { background: var(--blanco); color: var(--tinta); box-shadow: 0 1px 2px rgba(60, 48, 20, .15); }
-.rp-reloj { font-family: var(--mono); font-size: 13.5px; color: var(--tinta-suave); min-width: 108px; text-align: right; font-variant-numeric: tabular-nums; }
+.reproductor .rp-botones { flex: 1 1 260px; min-width: 0; }
+.rp-pasos { display: flex; flex: 1; min-width: 0; flex-wrap: wrap; gap: 4px; justify-content: flex-start; }
+.rp-paso { min-width: 30px; height: 30px; padding: 0 6px; border-radius: 9px; border: 1px solid var(--linea); background: var(--blanco); color: var(--tinta-suave); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; transition: background .2s, color .2s, border-color .2s, transform .2s var(--curva); }
+.rp-paso:hover { background: var(--papel-2); color: var(--tinta); }
+.rp-paso:active { transform: scale(.94); }
+.rp-paso.hecho { background: var(--tono-claro, var(--uva-claro)); border-color: transparent; color: var(--tono-osc, var(--uva-osc)); }
+.rp-paso[aria-current="step"] { background: var(--tono, var(--uva)); border-color: var(--tono, var(--uva)); color: #fff; }
+.flujo-lienzo, .lt-cuerpo, .bucle-tablero { transition: opacity .35s ease; }
+.rp-fundido .flujo-lienzo, .rp-fundido .lt-cuerpo, .rp-fundido .bucle-tablero { opacity: .25; }
 
 /* 6.7 Flujo */
 .flujo { --tono: var(--uva); --tono-claro: var(--uva-claro); --tono-osc: var(--uva-osc); background: var(--blanco); border: 1px solid var(--linea); border-radius: 22px; box-shadow: var(--sombra); display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
@@ -564,8 +562,6 @@ html.experto .solo-experto.callout { display: grid !important; }
 .bucle-izq .codigo { flex: 1; }
 .bucle-tablero { display: grid; grid-template-columns: 1fr 1.15fr; grid-template-rows: repeat(3, minmax(0, 1fr)) auto; gap: 10px; min-height: 0; }
 .bucle .fn-texto { font-size: 17px; }
-.bucle .rp-reloj { display: none; }
-.bucle .rp-tiempo { min-width: 90px; }
 .bucle .flujo-narracion { min-height: 50px; }
 .zona { background: var(--blanco); border: 1px solid var(--linea); border-radius: 16px; padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; min-height: 0; position: relative; transition: border-color .3s, box-shadow .3s; }
 .zona.activa { border-color: var(--tono); box-shadow: 0 0 0 3px var(--tono-claro); }
@@ -802,7 +798,6 @@ html.experto .solo-experto.callout { display: grid !important; }
   .tabla-kit { font-size: 15px; }
   .tabla-kit th, .tabla-kit td { padding: 8px 10px; }
   .codigo pre { font-size: 14px; }
-  .rp-reloj { display: none; }
   .ayuda { top: 60px; }
   .indice { padding: 64px 16px 40px; }
 }
@@ -1819,99 +1814,147 @@ function cargarProductos() {
   }
 
   /* ------------------------------------------------------------------------
-     Reproductor compartido: tiempo, pasos, velocidad, barra arrastrable
+     Reproductor compartido: bucle automático con control por pasos
      ------------------------------------------------------------------------ */
+  const PAUSA_BUCLE = 1500; // ms de reposo al terminar, antes de empezar otro ciclo
   class Reproductor {
-    constructor(contenedor, { alTick, formatoReloj, etiqueta = 'animación' }) {
+    constructor(contenedor, { alTick, etiqueta = 'animación' }) {
       this.alTick = alTick;
-      this.formatoReloj = formatoReloj || ((t, total) => (t / 1000).toFixed(1).replace('.', ',') + ' s / ' + (total / 1000).toFixed(1).replace('.', ',') + ' s');
-      this.t = 0; this.total = 1; this.vel = 1; this.jugando = false; this.limite = null; this.fines = [];
-      const b = (nombre, etq, clase = '') => h('button', { class: 'rp-boton ' + clase, type: 'button', 'aria-label': etq, title: etq }, ico(nombre));
-      this.bReiniciar = b('reiniciar', 'Reiniciar');
+      this.t = 0; this.total = 1; this.jugando = false; this.limite = null; this.fines = [];
+      this.auto = !reducido(); this.espera = null; this.marcado = -2; this.raf = 0;
+      const b = (nombre, etq) => h('button', { class: 'rp-boton', type: 'button', 'aria-label': etq, title: etq }, ico(nombre));
       this.bAnt = b('paso-ant', 'Paso anterior');
-      this.bPlay = b('play', 'Reproducir', 'play');
       this.bSig = b('paso-sig', 'Paso siguiente');
-      this.rango = h('input', { type: 'range', name: nuevoId('tiempo'), min: '0', max: '1000', step: '1', value: '0', 'aria-label': 'Línea de tiempo de la ' + etiqueta });
-      this.marcas = h('div', { class: 'rp-marcas', 'aria-hidden': 'true' });
-      this.reloj = h('span', { class: 'rp-reloj', 'aria-hidden': 'true' });
-      const velocidades = [0.5, 1, 2].map((v) => h('button', { type: 'button', 'aria-pressed': String(v === 1), 'data-v': v, text: String(v).replace('.', ',') + 'x', 'aria-label': 'Velocidad ' + String(v).replace('.', ',') + 'x' }));
-      const grupoVel = h('div', { class: 'rp-velocidad', role: 'group', 'aria-label': 'Velocidad' }, velocidades);
+      this.pasos = h('div', { class: 'rp-pasos', role: 'group', 'aria-label': 'Pasos de la ' + etiqueta });
+      this.conmutador = crearInterruptor('Automático', this.auto);
       this.el = h('div', { class: 'reproductor' },
-        h('div', { class: 'rp-botones' }, this.bReiniciar, this.bAnt, this.bPlay, this.bSig),
-        h('div', { class: 'rp-tiempo' }, this.marcas, this.rango),
-        grupoVel, this.reloj);
+        h('div', { class: 'rp-botones' }, this.bAnt, this.pasos, this.bSig),
+        this.conmutador);
       contenedor.append(this.el);
-      this.bPlay.addEventListener('click', () => (this.jugando ? this.pausa() : this.play()));
-      this.bReiniciar.addEventListener('click', () => { this.pausa(); this.ir(0); });
       this.bSig.addEventListener('click', () => this.pasoSiguiente());
       this.bAnt.addEventListener('click', () => this.pasoAnterior());
-      this.rango.addEventListener('input', () => { this.pausa(); this.ir((this.rango.value / 1000) * this.total); });
-      grupoVel.addEventListener('click', (e) => {
-        const bt = e.target.closest('button[data-v]');
+      this.pasos.addEventListener('click', (e) => {
+        const bt = e.target.closest('button[data-i]');
         if (!bt) return;
-        this.vel = Number(bt.dataset.v);
-        velocidades.forEach((x) => x.setAttribute('aria-pressed', String(x === bt)));
+        this.manual();
+        this.ir(this.fines[Number(bt.dataset.i)]);
       });
+      this.conmutador.addEventListener('kit:cambio', (e) => this.fijarAuto(e.detail));
       this.cuadro = this.cuadro.bind(this);
-      const diapo = diapoDe(contenedor);
-      if (diapo) diapo.addEventListener('kit:salir', () => this.pausa());
+      // Corre solo si la diapositiva está activa y el componente se ve.
+      this.raiz = contenedor.closest('.flujo, .linea-tiempo, .bucle') || contenedor;
+      this.diapo = diapoDe(contenedor);
+      this.enDiapo = !this.diapo || this.diapo.classList.contains('activa');
+      this.visible = !('IntersectionObserver' in W);
+      if (this.diapo) {
+        this.diapo.addEventListener('kit:salir', () => { this.enDiapo = false; this.detener(); });
+        this.diapo.addEventListener('kit:entrar', () => { this.enDiapo = true; if (this.auto) this.reiniciar(); });
+      }
+      if (!this.visible) {
+        const io = new IntersectionObserver((ents) => {
+          this.visible = ents[ents.length - 1].isIntersecting;
+          this.evaluar();
+        });
+        io.observe(this.raiz);
+      }
     }
+    activo() { return !this.diapo || esMovil() || this.enDiapo; }
+    evaluar() {
+      const sePuede = this.visible && this.activo();
+      if (this.jugando && !sePuede) this.detener();
+      else if (!this.jugando && sePuede && this.auto) this.correr(null);
+    }
+    fijarAuto(v) {
+      this.auto = !!v;
+      this.conmutador.setAttribute('aria-checked', String(this.auto));
+      if (this.auto) this.evaluar(); else this.detener();
+    }
+    // Toda interacción manual apaga el automático y deja el paso donde está.
+    manual() { this.fijarAuto(false); }
     fijar(total, fines) {
       this.total = Math.max(1, total);
-      this.fines = fines || [];
-      this.marcas.replaceChildren(...this.fines.filter((f) => f > 0 && f < this.total).map((f) => h('i', { style: { left: (f / this.total) * 100 + '%' } })));
+      this.fines = (fines || []).filter((f) => f > 0);
+      this.marcado = -2;
+      this.pasos.replaceChildren(...this.fines.map((f, i) => h('button', { class: 'rp-paso', type: 'button', 'data-i': String(i), text: String(i + 1), 'aria-label': 'Ir al paso ' + (i + 1) + ' de ' + this.fines.length })));
+    }
+    indicePaso() {
+      if (this.t <= 0.5) return -1;
+      const i = this.fines.findIndex((f) => this.t <= f + 0.5);
+      return i < 0 ? this.fines.length - 1 : i;
     }
     ir(t) {
       this.t = clamp(t, 0, this.total);
-      const pct = (this.t / this.total) * 100;
-      this.rango.value = String(Math.round(pct * 10));
-      this.rango.style.setProperty('--pct', pct + '%');
-      this.rango.setAttribute('aria-valuetext', this.formatoReloj(this.t, this.total));
-      this.reloj.textContent = this.formatoReloj(this.t, this.total);
+      const i = this.indicePaso();
+      if (i !== this.marcado) {
+        this.marcado = i;
+        Array.from(this.pasos.children).forEach((bt, k) => {
+          bt.classList.toggle('hecho', k < i);
+          if (k === i) bt.setAttribute('aria-current', 'step'); else bt.removeAttribute('aria-current');
+        });
+      }
       this.alTick(this.t);
     }
+    // Vuelve al inicio (o al estado final con movimiento reducido) y sigue si el automático está activo.
+    reiniciar() {
+      this.detener();
+      this.ir(reducido() && !this.auto ? this.total : 0);
+      this.evaluar();
+    }
     play(limite = null) {
-      if (this.t >= this.total - 0.5) this.ir(0);
+      if (limite == null) {
+        if (this.t >= this.total - 0.5) this.ir(0);
+        this.fijarAuto(true);
+      } else this.correr(limite);
+    }
+    pausa() { this.fijarAuto(false); }
+    correr(limite) {
       this.limite = limite;
       this.jugando = true;
-      this.bPlay.replaceChildren(ico('pausa'));
-      this.bPlay.setAttribute('aria-label', 'Pausa');
-      this.bPlay.title = 'Pausa';
+      this.espera = limite == null && this.t >= this.total - 0.5 ? 0 : null;
       this.ultimo = performance.now();
       cancelAnimationFrame(this.raf);
       this.raf = requestAnimationFrame(this.cuadro);
     }
-    pausa() {
+    detener() {
       this.jugando = false;
       this.limite = null;
+      this.espera = null;
       cancelAnimationFrame(this.raf);
-      this.bPlay.replaceChildren(ico('play'));
-      this.bPlay.setAttribute('aria-label', 'Reproducir');
-      this.bPlay.title = 'Reproducir';
+      this.raiz.classList.remove('rp-fundido');
     }
     cuadro(ahora) {
       if (!this.jugando) return;
-      const dt = Math.min(64, ahora - this.ultimo);
+      const dt = clamp(ahora - this.ultimo, 0, 64);
       this.ultimo = ahora;
-      let t = this.t + dt * this.vel;
-      const tope = this.limite != null ? this.limite : this.total;
-      if (t >= tope) {
-        this.ir(tope);
-        this.pausa();
-        return;
+      if (this.espera != null) {
+        // Reposo al final del ciclo: fundido breve y vuelta al inicio.
+        this.espera += dt;
+        if (this.espera >= PAUSA_BUCLE) {
+          this.espera = null;
+          this.ir(0);
+          this.raiz.classList.remove('rp-fundido');
+        } else if (this.espera >= PAUSA_BUCLE - 350) this.raiz.classList.add('rp-fundido');
+      } else {
+        const t = this.t + dt;
+        const tope = this.limite != null ? this.limite : this.total;
+        if (t >= tope) {
+          this.ir(tope);
+          if (this.limite != null) { this.detener(); return; }
+          this.espera = 0;
+        } else this.ir(t);
       }
-      this.ir(t);
       this.raf = requestAnimationFrame(this.cuadro);
     }
     pasoSiguiente() {
+      this.manual();
       const sig = this.fines.find((f) => f > this.t + 0.5);
       const destino = sig != null ? sig : this.total;
       if (this.t >= this.total - 0.5) return;
-      if (reducido()) { this.pausa(); this.ir(destino); return; }
+      if (reducido()) { this.ir(destino); return; }
       this.play(destino);
     }
     pasoAnterior() {
-      this.pausa();
+      this.manual();
       const previos = [0, ...this.fines].filter((f) => f < this.t - 0.5);
       this.ir(previos.length ? previos[previos.length - 1] : 0);
     }
@@ -1996,7 +2039,7 @@ function cargarProductos() {
         this.textoEl = h('div', { class: 'fn-texto', 'aria-live': 'polite' });
         const pie = h('div', { class: 'flujo-pie' }, h('div', { class: 'flujo-narracion' }, this.numEl, this.textoEl));
         e.append(pie);
-        this.rep = new Reproductor(pie, { alTick: (t) => this.render(t), etiqueta: 'animación del flujo', formatoReloj: this.cfg.formatoReloj || ((t, total) => Math.round(t) + ' ms / ' + Math.round(total) + ' ms') });
+        this.rep = new Reproductor(pie, { alTick: (t) => this.render(t), etiqueta: 'animación del flujo' });
         this.recalcular(false);
       }
       e._flujo = this;
@@ -2095,11 +2138,10 @@ function cargarProductos() {
       this.fines = this.pasos.map((x) => (acum += x.duracion));
       this.inicios = this.pasos.map((x, i) => this.fines[i] - x.duracion);
       this.idx = -2;
-      this.rep.pausa();
       this.rep.fijar(acum, this.fines);
-      this.rep.ir(0);
+      this.rep.reiniciar();
       if (avisar) {
-        this.textoEl.textContent = 'Cambiaste los parámetros: el flujo se recalculó. Pulsa Reproducir para verlo.';
+        if (this.rep.t < 1) this.textoEl.textContent = 'Cambiaste los parámetros: el flujo se recalculó.' + (this.rep.auto ? '' : ' Activa Automático o usa Paso siguiente para verlo.');
         if (this.cfg.alRecalcular) this.cfg.alRecalcular(this.valores, this.pasos, this);
       }
     }
@@ -2183,7 +2225,7 @@ function cargarProductos() {
       // narración
       if (!paso) {
         this.numEl.textContent = 'Inicio';
-        this.textoEl.innerHTML = this.cfg.intro || 'Pulsa <strong>Reproducir</strong> o avanza con <strong>Paso siguiente</strong>.';
+        this.textoEl.innerHTML = this.cfg.intro || 'Mira el recorrido o avanza con <strong>Paso siguiente</strong>.';
       } else {
         this.numEl.textContent = 'Paso ' + (i + 1) + ' de ' + this.pasos.length;
         this.textoEl.innerHTML = paso.texto || '';
@@ -2207,7 +2249,7 @@ function cargarProductos() {
     }
     reproducir() { this.rep.play(); }
     pausar() { this.rep.pausa(); }
-    reiniciar() { this.rep.pausa(); this.rep.ir(0); }
+    reiniciar() { this.rep.reiniciar(); }
     irPaso(i) { this.rep.pausa(); this.rep.ir(i < 0 ? 0 : this.fines[clamp(i, 0, this.fines.length - 1)]); }
     fijarParametro(id, v) { this.valores[id] = v; this.recalcular(true); }
   }
@@ -2244,7 +2286,7 @@ function cargarProductos() {
       this.resumen = h('span', { class: 'fn-num' });
       const pie = h('div', { class: 'lt-pie' }, h('div', { class: 'flujo-narracion' }, this.resumen, this.narr));
       e.append(cuerpo, pie);
-      this.rep = new Reproductor(pie, { alTick: (t) => this.render(t), etiqueta: 'línea de tiempo', formatoReloj: (t, total) => Math.round(Math.min(t, this.fin)) + ' ms' });
+      this.rep = new Reproductor(pie, { alTick: (t) => this.render(t), etiqueta: 'línea de tiempo' });
       this.recalcular();
       e._lineaTiempo = this;
     }
@@ -2273,9 +2315,8 @@ function cargarProductos() {
       }
       this.zona.querySelectorAll('.lt-carril').forEach((p) => p.style.setProperty('--paso-rejilla', (paso / this.escala) * 100 + '%'));
       const fines = [...new Set(this.barras.map((x) => x.fin))].sort((a, z) => a - z);
-      this.rep.pausa();
       this.rep.fijar(this.fin + 120, fines);
-      this.rep.ir(0);
+      this.rep.reiniciar();
       this.resumen.textContent = this.cfg.resumen ? this.cfg.resumen(this.valores, this.barras, this.fin) : 'Total: ' + Math.round(this.fin) + ' ms';
       if (this.cfg.alRecalcular) this.cfg.alRecalcular(this.valores, this.barras, this);
     }
@@ -2434,7 +2475,7 @@ function cargarProductos() {
       this.z.webapis.querySelector('.zona-titulo').append(h('span', { style: { marginLeft: 'auto' } }, this.reloj));
       const tablero = h('div', { class: 'bucle-tablero' }, this.z.pila, this.z.webapis, this.z.micro, this.z.tareas, this.z.consola);
       e.append(izq, tablero);
-      this.rep = new Reproductor(izq, { alTick: (t) => this.render(t), etiqueta: 'simulación del bucle de eventos', formatoReloj: (t, total) => 'Paso ' + Math.max(0, Math.ceil(t / (this.dur || 1200) - 1e-6)) + ' / ' + Math.round(total / (this.dur || 1200)) });
+      this.rep = new Reproductor(izq, { alTick: (t) => this.render(t), etiqueta: 'simulación del bucle de eventos' });
       this.cargar(0);
       e._bucle = this;
     }
@@ -2448,10 +2489,9 @@ function cargarProductos() {
       this.fichas.clear();
       const dur = this.cfg.duracionPaso || 1200;
       const n = this.fotos.length - 1;
-      this.rep.pausa();
-      this.rep.fijar(n * dur, Array.from({ length: n }, (_, k) => (k + 1) * dur));
       this.dur = dur;
-      this.rep.ir(0);
+      this.rep.fijar(n * dur, Array.from({ length: n }, (_, k) => (k + 1) * dur));
+      this.rep.reiniciar();
     }
     render(t) {
       const i = clamp(Math.ceil(t / this.dur - 1e-6), 0, this.fotos.length - 1);
@@ -3934,7 +3974,7 @@ function cargarProductos() {
     let x0 = null; let y0 = 0;
     ui.escenario.addEventListener('touchstart', (e) => {
       if (esMovil() || e.touches.length !== 1) { x0 = null; return; }
-      if (e.target.closest('input, textarea, .flujo-lienzo, .rp-tiempo, .ej-editor, .codigo-cuerpo, .arbol-dom svg')) { x0 = null; return; }
+      if (e.target.closest('input, textarea, .flujo-lienzo, .rp-pasos, .ej-editor, .codigo-cuerpo, .arbol-dom svg')) { x0 = null; return; }
       x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
     }, { passive: true });
     ui.escenario.addEventListener('touchend', (e) => {
@@ -4251,7 +4291,7 @@ Kit.listo(() => {
       { id: 'latencia', tipo: 'rango', etiqueta: 'Latencia de red', min: 200, max: 3000, paso: 100, valor: 900, unidad: 'ms', tono: 'uva' },
       { id: 'falla', tipo: 'interruptor', etiqueta: 'El servidor falla', valor: false, tono: 'tomate' },
     ],
-    intro: 'Pulsa <strong>Reproducir</strong> o avanza con <strong>Paso siguiente</strong>. Cambia la latencia o haz fallar el servidor y compara.',
+    intro: 'Mira el recorrido o avanza con <strong>Paso siguiente</strong>. Cambia la latencia o haz fallar el servidor y compara.',
     pasos: (v) => {
       const L = v.latencia;
       const inicio = [
@@ -4289,7 +4329,7 @@ Kit.listo(() => {
     ],
     conectores: [{ desde: 'nav', hasta: 'api', curva: -40 }, { desde: 'api', hasta: 'nav', curva: -40 }],
     parametros: [{ id: 'falla', tipo: 'interruptor', etiqueta: 'El servidor falla', valor: false, tono: 'tomate' }],
-    intro: 'Reproduce el flujo y mira cómo se ilumina la línea que se ejecuta en cada momento. Cambia de pestaña: las dos versiones hacen lo mismo.',
+    intro: 'Mira cómo se ilumina la línea que se ejecuta en cada momento. Cambia de pestaña: las dos versiones hacen lo mismo.',
     pasos: (v) => {
       const comunes = [
         { nodo: 'nav', duracion: 1800, texto: 'Se llama a <code>fetch</code>: sale la petición y obtienes una promesa pendiente.', codigo: c([3], [2], 'fetch devuelve una promesa de inmediato') },
@@ -4345,7 +4385,7 @@ Kit.listo(() => {
     },
     resumen: (v, barras, fin) => 'Total: ' + fin + ' ms',
     narrar: (t, v, barras, fin) => {
-      if (t <= 0) return 'Pulsa <strong>Reproducir</strong>. Cambia el modo y compara el tiempo total.';
+      if (t <= 0) return 'Cambia el modo y compara el tiempo total.';
       const enCurso = barras.filter((b) => b.carril !== 'pintar' && t > b.inicio && t < b.fin).map((b) => '<code>/api/' + b.carril + '</code>');
       if (enCurso.length) return 'Esperando ' + enCurso.join(', ') + (v.modo === 'fila' ? '. Las demás aguardan su turno.' : '. Todas viajan al mismo tiempo.');
       if (t < fin) return 'Llegaron todos los datos: ahora se pinta la página.';

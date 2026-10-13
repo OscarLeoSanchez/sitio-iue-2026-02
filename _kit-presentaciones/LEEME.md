@@ -374,7 +374,7 @@ Kit.flujo('#flujo-peticion', {
     { id: 'falla', tipo: 'interruptor', etiqueta: 'El servidor falla', valor: false, tono: 'tomate' },
     { id: 'modo', tipo: 'opciones', etiqueta: 'Modo', opciones: [{ valor: 'a', etiqueta: 'A' }, { valor: 'b', etiqueta: 'B' }], valor: 'a' },
   ],
-  intro: 'Texto inicial antes de reproducir (HTML).',
+  intro: 'Texto inicial, antes del primer paso (HTML).',
   pasos: (v) => [
     { nodo: 'nav', duracion: 1500, texto: 'Se llama a <code>fetch</code>.', estado: { nav: { texto: 'esperando', tono: 'maiz' } },
       codigo: { id: 'cod-fetch', lineas: [3], nota: 'Nota flotante' } },
@@ -391,8 +391,11 @@ Kit.flujo('#flujo-peticion', {
 - **Conector**: `desde`, `hasta`, `curva` (desplazamiento del arco; con izquierda a derecha, negativo arquea hacia arriba; usar el mismo valor en ida y vuelta separa los dos arcos), `tono`, `etiqueta`, `dyEtiqueta`, `flecha: true` (línea continua con punta), `paso`.
 - **Paso**: `desde`/`hasta` (mueve un paquete por el conector, en cualquier sentido; si no hay conector traza uno recto), `paquete` (etiqueta en monoespaciada; ancho aproximado 9,6 px por carácter), `tono`, `duracion` en ms (1500 por defecto), `texto` (narración HTML, se anuncia con `aria-live`), `nodo` o `pulso` (resalta con halo pulsante), `resaltar` (lista de ids), `estado` (`{ id: { texto, tono } }`, `{ id: 'texto' }` o `{ id: null }` para borrar; los estados se acumulan), `codigo` (objeto o arreglo `{ id, lineas, nota }` que resalta líneas de bloques de código; al cambiar de paso los demás se limpian).
 - `pasos` puede ser un arreglo o una función de los valores de `parametros`. Al cambiar un parámetro el flujo se recalcula y vuelve al inicio.
-- Controles: reiniciar, paso anterior, reproducir o pausar, paso siguiente (anima solo ese paso), barra arrastrable con marcas por paso, velocidad 0,5x, 1x, 2x, reloj en ms. Se pausa al salir de la diapositiva.
-- API: `f.reproducir()`, `f.pausar()`, `f.reiniciar()`, `f.irPaso(i)`, `f.fijarParametro(id, v)`, `f.valores`, `f.pasos`, `el._flujo`. Evento `kit:paso`.
+- Movimiento: la animación arranca sola al entrar a la diapositiva, espera unos 1,5 s al terminar y vuelve a empezar en bucle. Se detiene al salir de la diapositiva o de la pantalla y se reanuda al volver. No parece un video: sin botón de reproducir, sin reloj, sin barra de tiempo y sin velocidad.
+- Controles: paso anterior, paso siguiente (anima solo ese paso), una marca numerada por paso (clic para saltar a ese paso) e interruptor **Automático**. Cualquier interacción manual apaga el automático y deja el paso donde está; el interruptor lo reanuda desde ese paso. Al cambiar un parámetro el flujo se recalcula y, si el automático está activo, vuelve a empezar.
+- Con movimiento reducido (`prefers-reduced-motion` o `?sinmov`) no arranca solo: muestra el estado final, el interruptor nace apagado y se navega con anterior y siguiente.
+- La opción `formatoReloj` de versiones anteriores ya no se usa; se ignora.
+- API: `f.reproducir()` (activa el automático), `f.pausar()` (lo apaga), `f.reiniciar()` (vuelve al inicio), `f.irPaso(i)`, `f.fijarParametro(id, v)`, `f.valores`, `f.pasos`, `el._flujo`. Evento `kit:paso`.
 
 **Diagrama estático** (mapa conceptual, arquitectura): `Kit.diagrama(el, { vista, nodos, conectores, tituloSvg })`, misma configuración sin pasos ni controles; nodos teñidos con su tono. Con `paso` en nodos y conectores se construye por fragmentos.
 
@@ -411,7 +414,7 @@ Kit.lineaTiempo('#lt', {
 });
 ```
 
-Las barras crecen cuando el cabezal pasa; mismos controles que el flujo. Ancho mínimo recomendado: 700 px. Etiquetas cortas: una barra de 300 ms en una escala de 2,5 s mide unos 50 px.
+Las barras crecen cuando el cabezal pasa; mismo movimiento automático y mismos controles por pasos que el flujo (una marca por final de barra). Ancho mínimo recomendado: 700 px. Etiquetas cortas: una barra de 300 ms en una escala de 2,5 s mide unos 50 px.
 
 ## 15. Bucle de eventos (pila, Web APIs, colas)
 
