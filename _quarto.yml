@@ -12,6 +12,9 @@ project:
     # que ninguna pagina .qmd enlaza todavia.
     - web/semana-07/presentacion-interactiva.html
     - web/semana-08/presentacion-interactiva.html
+    # Presentaciones interactivas de Web (Semana 10), mismo motivo.
+    - web/semana-10/presentacion-interactiva-pipeline.html
+    - web/semana-10/presentacion-interactiva-mvc.html
     # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
     - movil/semana-07/presentacion-interactiva.html
     - movil/semana-08/presentacion-interactiva.html
@@ -95,6 +98,10 @@ website:
               href: web/semana-07/index.qmd
             - text: "Semana 8. Consumo de APIs"
               href: web/semana-08/index.qmd
+        - section: "Unidad 3. Backend con ASP.NET Core"
+          contents:
+            - text: "Semana 10. Servidor propio con ASP.NET Core MVC"
+              href: web/semana-10/index.qmd
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
   page-footer:
