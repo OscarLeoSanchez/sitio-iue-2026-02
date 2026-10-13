@@ -170,6 +170,14 @@ code:not(.sourceCode) {
   color: $code-color;
 }
 
+/* Quarto solo parte el codigo en linea dentro de p, dd y td; en listas,
+   llamados y titulos queda en white-space: pre y ensancha la pagina en el
+   telefono. Los bloques (pre > code) no entran en esta regla. */
+:not(pre) > code:not(.sourceCode) {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 /* Imagenes de salida real de terminal */
 figure {
   margin: 1.7rem 0;
