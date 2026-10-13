@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="370" viewBox="0 0 640 370" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">El orden importa: la cadena cortada</title>
+<desc id="d">Dos variantes con un middleware que responde 403 a /bloqueado sin llamar a siguiente. Si Registro va primero, imprime la línea con 403. Si el corte va primero, Registro nunca ve la petición.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker></defs>
+<rect x="0" y="0" width="640" height="370" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="24" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Variante 1: Registro antes del corte</text>
+<rect x="20" y="38" width="130" height="54" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="85" y="70" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">GET /bloqueado</text>
+<rect x="190" y="38" width="120" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="250.0" y="60" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Registro</text>
+<text x="250.0" y="80" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">mide y registra</text>
+<rect x="350" y="38" width="120" height="54" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="410.0" y="60" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Corte</text>
+<text x="410.0" y="80" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">403 y corta</text>
+<rect x="510" y="38" width="120" height="54" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="570.0" y="60" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Rutas</text>
+<text x="570.0" y="80" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">no se alcanzan</text>
+<path d="M 152 65 L 188 65" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 312 65 L 348 65" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 472 65 L 508 65" fill="none" stroke="#8795a3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-gris)"/>
+<rect x="20" y="108" width="600" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="320.0" y="127.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Consola: GET /bloqueado -&gt; 403 (3 ms)</text>
+<text x="20" y="210" font-size="13.5" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Variante 2: el corte antes de Registro</text>
+<rect x="20" y="224" width="130" height="54" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.6"/>
+<text x="85" y="256" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">GET /bloqueado</text>
+<rect x="190" y="224" width="120" height="54" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="250.0" y="246" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Corte</text>
+<text x="250.0" y="266" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">403 y corta</text>
+<rect x="350" y="224" width="120" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="410.0" y="246" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Registro</text>
+<text x="410.0" y="266" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nunca la ve</text>
+<rect x="510" y="224" width="120" height="54" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="570.0" y="246" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Rutas</text>
+<text x="570.0" y="266" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">no se alcanzan</text>
+<path d="M 152 251 L 188 251" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 312 251 L 348 251" fill="none" stroke="#8795a3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-gris)"/>
+<path d="M 472 251 L 508 251" fill="none" stroke="#8795a3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-gris)"/>
+<rect x="20" y="294" width="600" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="320.0" y="313.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Consola: no aparece ninguna línea para /bloqueado</text>
+</g>
+</svg>
