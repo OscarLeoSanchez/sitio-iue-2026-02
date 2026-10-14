@@ -1,111 +1,110 @@
 ---
-title: "Semana 10. Servidor propio con ASP.NET Core MVC, desde cero"
+title: "Semana 10. Mi servidor responde: rutas y respuestas"
 author: "Oscar Leonel Sánchez Conde"
 date: last-modified
 date-format: "D [de] MMMM [de] YYYY"
 ---
 
 ::: {.ficha}
-|                 |                                                                           |
-|-----------------|---------------------------------------------------------------------------|
-| Qué construyes  | El servidor de Mercado Campesino Digital, en seis etapas, desde un proyecto vacío |
-| Prerrequisitos  | Semana 8: peticiones HTTP, JSON y DevTools                                |
-| Herramientas    | .NET SDK 10, VS Code (o cualquier editor) y una terminal                  |
+|                 |                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------|
+| Qué construyes  | Un servidor propio, llamado Plaza, que responde texto, JSON, páginas HTML y archivos en las rutas que tú inventas |
+| Prerrequisitos  | Semana 8: peticiones HTTP, JSON y DevTools                                          |
+| Herramientas    | .NET SDK 10, VS Code y una terminal                                                 |
+| Tiempo          | 1 h con el docente (etapas 0 a 3) y el resto en casa                                |
 :::
 
 ::: {.acceso}
 ::: {.acceso-item}
-Presentación interactiva de las etapas 0 a 2: proyecto vacío, pipeline y middleware
+Presentación interactiva: el recorrido de una petición, con predicciones y retos
 
-[Abrir la presentación del pipeline](presentacion-interactiva-pipeline.html){.btn-doc target="_blank"}
+[Abrir la presentación](presentacion-interactiva-rutas.html){.btn-doc target="_blank"}
+:::
 :::
 
-::: {.acceso-item}
-Presentación interactiva de las etapas 3 a 5: MVC, rutas e inyección de dependencias
+::: {.callout-note}
+## Qué es esencial y qué es opcional
 
-[Abrir la presentación de MVC](presentacion-interactiva-mvc.html){.btn-doc target="_blank"}
-:::
+Si el tiempo de la clase no alcanza, este es el orden de prioridad:
+
+- **Esencial en la hora de clase:** etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto.
+- **Para terminar en casa:** etapas 4 y 5, y el segundo reto de cada etapa.
+- **Opcional siempre:** los recuadros "Profundiza" y las pruebas con `curl`. Puedes saltarlos y la
+  guía sigue funcionando.
 :::
 
 ## Lo que vas a lograr
 
-Hasta la Semana 8 tu panel del productor pedía los datos a un servidor ajeno. Esta semana el servidor
-lo escribes tú. Partes de una carpeta vacía y, en seis etapas, llegas a un servidor ASP.NET Core que
-atiende rutas como `/Catalogo` y `/Catalogo/Detalle/4` con el catálogo del proyecto Mercado
-Campesino Digital. Todo se hace con un editor y la terminal. No hay asistentes ni plantillas que
-generen código por ti: cada archivo lo escribes, lo ejecutas y ves qué cambió.
+Hasta la Semana 8 tu página pedía datos a un servidor que escribió otra persona. Hoy escribes tú el
+servidor. Partes de un proyecto vacío y, en seis etapas, lo haces responder cosas cada vez más
+interesantes: un texto, un dato en JSON, una página HTML y un archivo para descargar. La clase es un
+juego de crear rutas y mirar qué responde el servidor cuando le pides cosas distintas.
 
-### Cliente y servidor, en tu computador
-
-La conversación es la de la Semana 8: una petición y una respuesta. Cambia quién escribe el
-servidor. Tu servidor es un programa en C#. **Kestrel**, el servidor web que trae ASP.NET Core, abre
-un puerto y entrega cada petición al código de tu proyecto. Con `localhost`, el navegador y el
-servidor corren en el mismo computador.
+El proyecto se llama **Plaza** y vende productos campesinos. Todo se hace con un editor y la
+terminal: cada archivo lo escribes tú, lo ejecutas y ves qué cambió.
 
 ::: {.diagrama}
-![](imagenes/cliente-servidor-propio.svg){fig-alt="Un navegador envía la petición GET /Catalogo al programa MercadoCampesinoWeb, que corre en el mismo computador y escucha en localhost puerto 5190, y recibe una respuesta 200 con HTML."}
+![](imagenes/peticion-respuesta.svg){fig-alt="El navegador envía la petición GET /api/productos al servidor Plaza, que escucha en localhost puerto 5100. El servidor responde con tres partes: el estado 200 OK, el tipo de contenido application/json y el cuerpo con la lista de productos."}
 
-El cliente siempre empieza la conversación.
-:::
-
-### La línea de empaque
-
-Para recordar el orden de las piezas usarás una sola imagen: una **línea de empaque**. Cada petición
-es un **pedido** que llega con una etiqueta (la URL). Recorre una fila de **estaciones** (el
-pipeline). Un **encargado** lo arma (el controlador) con lo que hay en el **inventario** (el
-modelo) y lo entrega en una **caja** (la vista) que sale por la misma línea. Las herramientas que
-necesita el encargado las guarda un **almacén** (el contenedor de inyección de dependencias). Los
-nombres técnicos aparecen siempre con su nombre real. La línea de empaque ayuda a recordar el orden.
-
-::: {.diagrama}
-![](imagenes/linea-de-empaque.svg){fig-alt="Cinco cajas en fila: pedido, estación, encargado, inventario y caja, con su nombre técnico debajo: petición HTTP, middleware, controlador, modelo y vista. Una flecha de vuelta indica la respuesta y un almacén de herramientas se conecta al encargado."}
-
-Cada pieza de la línea tiene un nombre técnico. 
+El cliente pide y el servidor responde. Esa conversación es todo lo que ocurre hoy.
 :::
 
 ### Las seis etapas
 
-Cada etapa agrega una sola idea al proyecto y termina con algo que ejecutas y ves.
+Cada etapa agrega una sola idea y termina con algo que ejecutas y ves en el navegador.
 
-- **Etapa 0. Proyecto vacío.** El proyecto de `dotnet new web` y su `Program.cs`. Archivos: los 5 que
-  genera la plantilla.
-- **Etapa 1. Pipeline.** Un middleware en línea que registra cada petición y la ruta `/salud`.
-  Archivos nuevos: ninguno, cambia `Program.cs`.
-- **Etapa 2. Middleware como clase.** El mismo middleware, en su propia clase. Archivo nuevo:
-  `Middleware/RegistroPeticionesMiddleware.cs`.
-- **Etapa 3. MVC a mano.** Modelo, controlador y vista del catálogo. Archivos nuevos:
-  `Models/Producto.cs`, `Controllers/CatalogoController.cs` y `Views/Catalogo/Index.cshtml`.
-- **Etapa 4. Rutas y 404.** Detalle de un producto, ruta propia y respuesta 404. Archivo nuevo:
-  `Views/Catalogo/Detalle.cshtml`.
-- **Etapa 5. Inyección de dependencias.** Un servicio detrás de una interfaz y su registro. Archivos
-  nuevos: `Services/ICatalogoService.cs`, `Services/CatalogoEnMemoria.cs` y los de la demostración.
+| Etapa | Mi servidor responde... | Qué aprendes |
+|---|---|---|
+| 0 | `Hello World!` | Qué trae un proyecto vacío y cómo ejecutarlo |
+| 1 | Varias rutas de texto | Qué es una ruta y cómo se registra con `MapGet` |
+| 2 | Lo que le pides en la URL | Parámetros en la ruta y en el query string |
+| 3 | Datos en JSON | Un `record`, una lista y `Results.Json` |
+| 4 | Páginas HTML | Tipo de contenido, `wwwroot` y `fetch` |
+| 5 | Estados y archivos | 200, 201, 400, 404, 418, descargas y `POST` |
 
-El árbol de carpetas crece así. Vuelve a este diagrama al terminar cada etapa y comprueba que tu
-carpeta tiene lo mismo.
+Al terminar sabes:
+
+1. Crear un servidor con `dotnet new web` y leer cada línea de su `Program.cs`.
+2. Registrar rutas que devuelven texto, JSON, HTML y archivos.
+3. Leer datos de la ruta y del query string.
+4. Elegir el estado HTTP correcto para cada respuesta.
+5. Servir una página con su CSS y su JavaScript desde la carpeta `wwwroot`.
+6. Predecir qué responde tu servidor antes de pedirle algo.
+
+## Las palabras de la plaza
+
+Para entender un servidor piensa en una plaza de mercado. Tú llegas, vas a un puesto, dices qué
+quieres, y el vendedor te entrega algo o te dice que no lo tiene. Un servidor web hace exactamente
+eso, con otros nombres:
+
+| Palabra | Qué es, en palabras simples | En la plaza |
+|---|---|---|
+| **Cliente** | Quien pide. Tu navegador es un cliente. | El comprador que llega |
+| **Servidor** | Un programa que espera peticiones y las contesta. Se queda encendido hasta que lo detienes. | El puesto que atiende |
+| **Petición** | El mensaje que envía el cliente: qué quiere y dónde. | "Una libra de papa, por favor" |
+| **Respuesta** | Lo que devuelve el servidor: un estado, un tipo de contenido y, casi siempre, un cuerpo. | El vendedor te entrega la bolsa |
+| **URL** | La dirección completa de lo que pides. | El letrero con el puesto y el pasillo |
+| **Puerto** | Un número que dice por cuál ventanilla atiende un programa dentro de un computador. Un computador tiene miles. | El número de la ventanilla |
+| **localhost** | El nombre del computador en que estás. Pedir `localhost` es hablar con tu propia máquina. | Tu casa |
+| **Ruta** | La parte de la URL que viene después del puerto, como `/saludo`. Dice qué se pide. | El pasillo |
+| **Estado HTTP** | Un número de tres cifras con el que el servidor resume cómo le fue: `200` salió bien, `404` no hay eso. | La cara del vendedor: "aquí tiene" o "eso no tengo" |
+| **Tipo de contenido** | Una etiqueta que dice qué clase de dato viene en la respuesta: texto, HTML, JSON o una imagen. Con ella el navegador sabe qué hacer. | La etiqueta pegada a la bolsa |
+
+Una URL tiene partes, y cada parte tiene su nombre. Vuelve a este dibujo cuando una palabra no te
+suene:
 
 ::: {.diagrama}
-![](imagenes/arbol-por-etapa.svg){fig-alt="Matriz de archivos del proyecto contra las etapas 0 a 5. Un punto verde marca la etapa en que aparece cada archivo, uno ámbar las etapas en que cambia y uno gris pequeño que sigue igual."}
+![](imagenes/url-anatomia.svg){fig-alt="La URL http://localhost:5100/buscar?q=tomate dividida en cinco partes: el esquema http://, el host localhost, el puerto 5100, la ruta /buscar y el query string ?q=tomate."}
 
-Un punto verde marca el archivo que aparece, uno ámbar el que cambia y uno gris el que sigue igual.
+Cada parte de una URL responde una pregunta distinta.
 :::
-
-Al terminar la guía sabes:
-
-1. Crear un proyecto web vacío con `dotnet new web` y leer cada uno de sus archivos.
-2. Explicar el pipeline y escribir un middleware en línea y como clase.
-3. Predecir cómo cambia el resultado cuando cambia el orden de los middleware.
-4. Armar un catálogo con modelo, controlador y vista, y entender qué busca MVC y dónde.
-5. Predecir qué controlador y qué acción atiende una URL, y por qué una ruta termina en 404.
-6. Usar una interfaz y el contenedor de inyección de dependencias.
-7. Dejar el servidor de tu proyecto respondiendo a sus rutas base.
 
 ## Preparación del entorno
 
 ::: {.callout-note}
 ## Antes de empezar
 
-Necesitas el panel del productor de la Semana 8 (HTML, CSS y JavaScript con `fetch`), una terminal
-y el **.NET SDK 10**. Comprueba que está instalado:
+Necesitas una terminal, un editor y el **.NET SDK 10**. Comprueba que está instalado:
 
 ```text
 dotnet --version
@@ -115,45 +114,73 @@ La guía se escribió y se probó con la versión `10.0.302`. Los mensajes de `d
 idioma de tu sistema: aquí aparecen en español porque así salieron en la prueba.
 :::
 
-El editor es **VS Code**, aunque cualquier editor de texto sirve: el proyecto se compila y se ejecuta
-desde la terminal con el SDK, y el editor solo te ayuda a escribir.
+1. Crea una carpeta para tus proyectos de la clase y ábrela en VS Code.
+2. Abre la terminal integrada de VS Code (menú Terminal). Queda ubicada en la carpeta abierta.
+3. Opcional: instala la extensión de C# de Microsoft. Da colores y ayudas al escribir. El código se
+   compila y se ejecuta sin ella.
 
-1. Crea una carpeta para el proyecto y ábrela en VS Code. Desde una terminal dentro de la carpeta:
-   `code .`
-2. Instala la extensión de C# de Microsoft. En la máquina donde se preparó esta guía estaban
-   instaladas `ms-dotnettools.csharp` y `ms-dotnettools.csdevkit` (C# Dev Kit). Dan resaltado de
-   sintaxis y ayudas al escribir. El código no las necesita para compilar ni ejecutar.
-3. Abre la terminal integrada de VS Code (menú Terminal). Trabajarás en ella: es la misma terminal
-   que usarías fuera del editor y queda ya ubicada en la carpeta del proyecto.
+### Cómo se ejecuta cada etapa
+
+En todas las etapas usarás el mismo comando, desde la carpeta del proyecto:
+
+```text
+dotnet run --no-launch-profile --urls http://localhost:5100
+```
+
+- `dotnet run` compila el proyecto y lo ejecuta.
+- `--urls http://localhost:5100` fija en qué dirección y en qué puerto atiende el servidor. Así todos
+  los equipos usan la misma.
+- `--no-launch-profile` evita que `dotnet` aplique el archivo `launchSettings.json`, que abriría el
+  navegador por su cuenta.
+
+Para detener el servidor, presiona `Ctrl+C` en la terminal. **Cada vez que cambies el código, detén
+el servidor y vuelve a ejecutar el comando.**
+
+### Mirar la respuesta completa
+
+El navegador solo muestra el cuerpo. Para ver también el estado y el tipo de contenido tienes dos
+caminos:
+
+- La pestaña **Red** (Network) de DevTools, como en la Semana 8.
+- `curl`, una herramienta de terminal que pide una URL y escribe la respuesta. La opción `-i` agrega
+  el estado y los encabezados:
+
+```text
+curl -i http://localhost:5100/
+```
+
+En Windows PowerShell `curl` es un alias de otro comando. Si te da un error raro, escribe
+`curl.exe`.
 
 ::: {.callout-warning}
 ## Qué se probó y qué no
 
-Todos los comandos y las salidas de esta guía se ejecutaron en una máquina con Windows 11. Los pasos
-de la interfaz de VS Code (instalar la extensión, abrir la terminal integrada) no se probaron uno por
-uno: si tu pantalla se ve distinta, busca la opción equivalente. Cada vez que algo no se probó, la
-guía lo dice.
+Los comandos y las salidas de esta guía se ejecutaron en una máquina con Windows 11 y el SDK
+`10.0.302`, con `curl 8.14.1` desde Git Bash. Las páginas HTML se abrieron en un navegador sin
+errores propios en la consola. No se probaron otros sistemas operativos, la vista en un teléfono, ni
+el arranque con el perfil de `launchSettings.json`. Cuando algo no se probó, la guía lo dice.
 :::
 
-## Etapa 0. Un proyecto vacío
+## Etapa 0. Hola mundo
 
-### El problema
+### Qué vas a lograr
 
-Antes de escribir middleware o controladores necesitas saber qué trae un proyecto web y cuántas
-piezas son realmente imprescindibles. La plantilla `web` crea el proyecto más pequeño posible: no
-trae controladores, ni vistas, ni estilos. Es el punto de partida de todo lo demás.
+Crear un servidor, encenderlo y ver que responde. Al terminar tienes un programa de cuatro instrucciones
+escuchando en tu computador.
 
 ::: {.callout-tip}
 ## Predice antes de seguir
 
-Un servidor que responde "Hello World" es un programa. ¿Cuántas líneas de C# crees que hacen falta
-para que escuche peticiones y conteste una? Escribe un número y compáralo al final de la etapa.
+Cuando tengas el servidor encendido en `http://localhost:5100/`, ¿qué crees que responde si alguien
+pide `http://localhost:5100/otra`, una dirección que no programaste? Apuesta: un error, un texto de
+bienvenida o nada.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Respuesta
 
-Cuatro instrucciones. Están en `Program.cs`, que es todo el código que trae la plantilla.
+Un **404**, con el cuerpo vacío. El servidor solo sabe responder las rutas que le registraste. Para
+cualquier otra dice "no tengo eso".
 :::
 
 ### Crear el proyecto
@@ -161,1705 +188,1662 @@ Cuatro instrucciones. Están en `Program.cs`, que es todo el código que trae la
 En la terminal, dentro de la carpeta donde guardas tus proyectos:
 
 ```text
-dotnet new web -n MercadoCampesinoWeb
+dotnet new web -n Plaza
 ```
 
-La salida literal fue:
+`dotnet new web` pide al SDK una plantilla de **proyecto web vacío**. La opción `-n Plaza` le da
+nombre al proyecto. La salida fue:
 
 ```text
 La plantilla "ASP.NET Core vacío" se creó correctamente.
 
 Procesando acciones posteriores a la creación...
-Restaurando ...\MercadoCampesinoWeb\MercadoCampesinoWeb.csproj:
+Restaurando ...\Plaza\Plaza.csproj:
   Determinando los proyectos que se van a restaurar...
-  Se ha restaurado ...\MercadoCampesinoWeb\MercadoCampesinoWeb.csproj (en 109 ms).
+  Se ha restaurado ...\Plaza\Plaza.csproj (en 109 ms).
 Restauración realizada correctamente.
 ```
 
-Entra a la carpeta que se creó y ábrela en el editor:
+Entra a la carpeta y ábrela en el editor:
 
 ```text
-cd MercadoCampesinoWeb
+cd Plaza
 code .
 ```
 
-La plantilla generó estos archivos (la carpeta `obj/` aparece después, cuando el SDK restaura el
-proyecto):
+La plantilla crea estos archivos:
 
 ```text
-MercadoCampesinoWeb/
-  MercadoCampesinoWeb.csproj
+Plaza/
+  Plaza.csproj
   Program.cs
   appsettings.json
   appsettings.Development.json
   Properties/launchSettings.json
-  obj/            (lo crea el restore; no se versiona)
 ```
 
-No hay `wwwroot`, ni `Controllers`, ni `Views`, ni layout. La plantilla tampoco crea un
-`.gitignore`: si usas Git, `bin/` y `obj/` quedan sin ignorar hasta que agregues uno.
+Hoy solo editas uno: **`Program.cs`**. `Plaza.csproj` dice qué tipo de proyecto es y con qué versión
+de .NET se compila. Los `appsettings` guardan configuración y `launchSettings.json` guarda cómo
+arranca el proyecto desde el editor. No los vas a tocar.
 
-### Qué hace cada archivo
+### El código
 
-El archivo de proyecto, `MercadoCampesinoWeb.csproj`, dice qué es esto y cómo se compila:
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
-</Project>
-```
-
-| Línea | Qué significa |
-|---|---|
-| `Sdk="Microsoft.NET.Sdk.Web"` | Usa el SDK web: trae ASP.NET Core sin referenciar paquetes a mano |
-| `TargetFramework` `net10.0` | Compila contra .NET 10 |
-| `Nullable` `enable` | El compilador avisa de posibles referencias nulas |
-| `ImplicitUsings` `enable` | Agrega por defecto los `using` más comunes. Por eso `Program.cs` no tiene ninguno |
-
-Los dos `appsettings` son configuración. `appsettings.json` fija el nivel de registro del
-framework: `Microsoft.AspNetCore` en `Warning`. Consecuencia: el framework no
-imprime una línea por cada petición, solo los mensajes de arranque.
-
-`Properties/launchSettings.json` define dos perfiles, `http` y `https`, con sus puertos y con
-`ASPNETCORE_ENVIRONMENT` en `Development`. La plantilla sortea los puertos al crear el proyecto, así
-que en tu máquina serán otros.
-
-### Program.cs, línea por línea
-
-Todo el código del servidor es este archivo:
+Abre `Program.cs`. Este es todo el servidor:
 
 ```csharp
+// Etapa 0: el proyecto tal como lo crea "dotnet new web".
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+// Una sola ruta: cuando alguien pide "/" respondemos con este texto.
 app.MapGet("/", () => "Hello World!");
 
 app.Run();
 ```
 
-- **Línea 1,** `var builder = WebApplication.CreateBuilder(args);` Crea el constructor de la
-  aplicación. Lee configuración (`appsettings.json`, variables de entorno, `args`), prepara el
-  registro de servicios y el servidor Kestrel.
-- **Línea 2,** `var app = builder.Build();` Cierra el registro de servicios y construye la
-  aplicación. A partir de aquí configuras el pipeline, ya no los servicios.
-- **Línea 4,** `app.MapGet("/", () => "Hello World!");` Registra un endpoint: para `GET /` ejecuta la
-  función y escribe el texto como respuesta.
-- **Línea 6,** `app.Run();` Arranca el servidor y espera. El programa sigue vivo hasta que lo
-  detienes.
+Línea por línea, con lo que significa cada palabra:
 
-::: {.diagrama}
-![](imagenes/program-cuatro-lineas.svg){fig-alt="Las cuatro instrucciones de Program.cs en cuatro bloques: CreateBuilder prepara configuración, servicios y Kestrel; Build cierra el registro de servicios; MapGet define el endpoint; Run arranca el servidor."}
-
-Lo que va antes de `Build` es el registro de servicios. Lo que va después define cómo responde el servidor.
-:::
-
-El archivo no tiene `using` ni método `Main`. Son **instrucciones de nivel superior**: el compilador
-genera por ti la clase `Program` y el método `Main`.
+- **`var builder = WebApplication.CreateBuilder(args);`** Pide al framework un **constructor**: el
+  ayudante que monta el puesto antes de abrir. `var` le dice a C# "deduce tú el tipo de esta
+  variable". `args` son los argumentos con que ejecutaste el programa, por ejemplo `--urls`.
+- **`var app = builder.Build();`** Monta el puesto. `app` es la aplicación lista para recibir
+  peticiones.
+- **`app.MapGet("/", () => "Hello World!");`** Pone un letrero: cuando alguien pida la ruta `/` con el
+  método GET, ejecuta esta función y responde con su resultado.
+- **`app.Run();`** Abre el puesto y atiende hasta que lo detengas con `Ctrl+C`.
 
 ::: {.callout-note}
 ## C# justo a tiempo: lo que usa esta etapa
 
-- `var` declara una variable y deja que el compilador deduzca su tipo.
-- `() => "Hello World!"` es una **expresión lambda**: una función sin nombre. Los paréntesis vacíos
-  dicen que no recibe parámetros, y lo que está después de `=>` es lo que devuelve.
-- `args` son los argumentos con que se ejecutó el programa en la terminal.
+- **`MapGet`** une una ruta con una función. **GET** es el método que usa el navegador cuando
+  escribes una URL: significa "dame esto".
+- **`() => "Hello World!"`** es una **función sin nombre**, también llamada lambda. Lo que está a la
+  izquierda de `=>` son los datos que recibe (aquí ninguno, por eso los paréntesis vacíos) y lo que
+  está a la derecha es lo que devuelve.
+- Un texto entre comillas dobles, `"..."`, se llama **cadena**.
+- Cada instrucción termina en `;`.
 :::
 
-### Ejecutar el servidor
-
-Compila y ejecuta. Los dos comandos hacen un trabajo distinto: `dotnet build` solo comprueba que el
-código compila, y `dotnet run` compila y además arranca el programa.
+### Ejecutarlo
 
 ```text
-dotnet build
+dotnet run --no-launch-profile --urls http://localhost:5100
 ```
 
-```text
-  Determinando los proyectos que se van a restaurar...
-  Se ha restaurado ...\etapa-0-vacio\MercadoCampesinoWeb\MercadoCampesinoWeb.csproj (en 103 ms).
-  MercadoCampesinoWeb -> ...\etapa-0-vacio\MercadoCampesinoWeb\bin\Debug\net10.0\MercadoCampesinoWeb.dll
-Compilación correcta.
-    0 Advertencia(s)
-    0 Errores
-Tiempo transcurrido 00:00:02.21
-```
-
-Para que todos los equipos usen la misma dirección, en esta guía se ejecuta siempre con el puerto
-fijado:
-
-```text
-dotnet run --no-launch-profile --urls http://localhost:5190
-```
-
-`--urls` fija la dirección y el puerto. `--no-launch-profile` hace que ignore
-`launchSettings.json`. La consola muestra:
+La consola muestra:
 
 ```text
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://localhost:5190
+      Now listening on: http://localhost:5100
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Production
+      Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: ...\etapa-0-vacio\MercadoCampesinoWeb
+      Content root path: ...\Plaza
 ```
 
-Dos cosas para leer. `Now listening on: http://localhost:5190` es el programa avisando en qué
-puerta atiende. Y `Hosting environment: Production` aparece porque `--no-launch-profile` ignoró el
-archivo que fijaba `Development`. Esa línea te dice en qué entorno corre.
+`Now listening on: http://localhost:5100` es el servidor avisando por qué ventanilla atiende. Si en
+tu pantalla la línea `Hosting environment` dice `Production`, es normal con este comando y no cambia
+nada de lo que haces hoy.
 
-Abre `http://localhost:5190/` en el navegador. Esto es lo que respondió el servidor:
+Abre `http://localhost:5100/` en el navegador. Esto responde el servidor:
 
 | Petición | Estado | Tipo de contenido | Cuerpo |
 |---|---|---|---|
 | `GET /` | `200 OK` | `text/plain; charset=utf-8` | `Hello World!` |
 | `GET /otra` | `404 Not Found` | (ninguno) | vacío |
 
-La consola no imprime nada por petición. Para detener el servidor, la propia consola lo dice:
-`Press Ctrl+C to shut down`.
-
-### dotnet watch: recarga al guardar
-
-Cada cambio en el código te obliga a detener el servidor y volver a ejecutarlo. `dotnet watch`
-vigila los archivos y recarga cuando guardas:
+Con `curl` la primera respuesta se ve así:
 
 ```text
-dotnet watch run --no-launch-profile --urls http://localhost:5190
+$ curl -i http://localhost:5100/
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+
+Hello World!
 ```
 
-Lo que se midió en esta máquina:
+Presiona `Ctrl+C` para detener el servidor.
 
-| Prueba | Resultado observado |
-|---|---|
-| Arranque (incluye restore y build) | App respondiendo a los 9,7 s de lanzar el comando |
-| Cambiar el texto de `MapGet("/")` y guardar | `File updated: .\Program.cs` y `C# and Razor changes applied in 2729ms.` La respuesta cambió de `Hello World!` a `Hola, Mercado Campesino` 2,9 s después de guardar, sin reiniciar el proceso |
-| Quitar un `;` (error de compilación) | `Unable to apply changes due to compilation errors.` y `Program.cs(6,10): error CS1002: Se esperaba ;`. La app siguió respondiendo con la última versión buena |
-| Corregir el error | La app volvió a funcionar sin reiniciar `dotnet watch` |
-| Agregar una ruta nueva con `app.MapGet("/nueva", ...)` | `warning ENC0118: Es posible que el cambio de "código de nivel superior" no tenga efecto hasta que se reinicie la aplicación. Press "Ctrl + R" to restart.` y `GET /nueva` siguió respondiendo `404` |
+### Qué pasó por dentro
 
-Entonces: un cambio en el cuerpo de una lambda se aplica en caliente, y una ruta nueva en `Program.cs`
-pide reiniciar. El propio mensaje te dice cómo: `Ctrl + R` en la terminal de `dotnet watch`, o
-detenerlo y volver a ejecutarlo. Esas dos teclas no se pudieron probar en una terminal interactiva
-al preparar la guía, así que usa lo que el mensaje te indique en tu pantalla. Sin `dotnet watch`,
-`dotnet run` no recarga nada.
+1. Ejecutaste `dotnet run`: el SDK compiló `Program.cs` y arrancó el programa.
+2. El programa abrió el puerto `5100` y se quedó esperando.
+3. Escribiste `http://localhost:5100/` y el navegador envió `GET /` a ese puerto.
+4. El servidor buscó entre sus rutas una que coincidiera con `GET /`. Encontró la única que hay.
+5. Ejecutó la función, que devolvió `"Hello World!"`.
+6. Respondió con estado `200`, tipo `text/plain` y ese texto como cuerpo.
+7. El navegador vio `text/plain` y mostró el texto tal cual.
 
-### Cierre de la etapa 0
-
-- **Qué cambió:** el proyecto nace. No hay etapa anterior.
-- **Cómo verificarlo:** `dotnet run --no-launch-profile --urls http://localhost:5190` y abre
-  `http://localhost:5190/`.
-- **Qué debes ver:** `Hello World!` en el navegador, `404` en `/otra` y, en la consola,
-  `Now listening on: http://localhost:5190`. La respuesta a la pregunta del inicio: cuatro
-  instrucciones.
-
-## Etapa 1. El pipeline y el middleware en línea
-
-### El problema
-
-Quieres saber qué peticiones llegan al servidor y cuánto tardan, y ahora la consola no dice nada.
-Podrías escribir `Console.WriteLine` dentro de cada ruta, pero entonces tendrías que repetirlo en
-cada una y no verías las rutas que no existen. Lo que necesitas es un lugar que **vea todas las
-peticiones antes de que lleguen a cualquier ruta**.
+### Retos de la etapa 0
 
 ::: {.callout-tip}
-## Predice antes de seguir
+## Reto 1. Dile tu nombre
 
-Si pides `/no-existe`, que ninguna ruta atiende, ¿crees que el registro lo verá? Piensa dónde
-tendría que estar el código para verlo.
-:::
-
-::: {.callout-note collapse="true"}
-## Respuesta
-
-Sí, lo verá, siempre que esté antes de la selección de la ruta. Lo comprobarás en esta etapa:
-`/no-existe` queda registrado con `404`.
-:::
-
-### Modelo mental: el pipeline
-
-Una petición no llega directo a tu ruta. Antes pasa por una **cadena de middleware**, el
-**pipeline**. Cada middleware es una estación de la línea de empaque: recibe el pedido, hace su
-trabajo y decide si lo pasa a la estación siguiente. Cuando la última estación responde, la
-respuesta **vuelve por la misma cadena**.
-
-::: {.diagrama}
-![](imagenes/pipeline-ida-vuelta.svg){fig-alt="Un navegador, el middleware de registro y el endpoint salud en fila. La petición va hacia la derecha por el pipeline y la respuesta regresa hacia la izquierda. Dentro del registro, antes de siguiente arranca el reloj y después imprime la línea."}
-
-El middleware tiene dos momentos: lo que hace a la ida y lo que hace a la vuelta.
-:::
-
-### El código
-
-Cambia `Program.cs` por esto:
-
-```csharp
-using System.Diagnostics;
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-// Registro de peticiones. Va primero para ver todo lo que entra y medir todo lo que sigue.
-app.Use(async (contexto, siguiente) =>
-{
-    var reloj = Stopwatch.StartNew();
-
-    // Todo lo que sigue en la cadena corre aqui adentro; al volver ya hay respuesta.
-    await siguiente();
-
-    reloj.Stop();
-    Console.WriteLine(
-        $"{contexto.Request.Method} {contexto.Request.Path} -> {contexto.Response.StatusCode} ({reloj.ElapsedMilliseconds} ms)");
-});
-
-app.MapGet("/", () => "Mercado Campesino Digital");
-app.MapGet("/salud", () => "ok");
-
-app.Run();
-```
-
-Qué cambió respecto de la etapa 0:
-
-```diff
---- anterior
-+++ nuevo
-@@ -1,6 +1,22 @@
-+using System.Diagnostics;
-+
- var builder = WebApplication.CreateBuilder(args);
- var app = builder.Build();
- 
--app.MapGet("/", () => "Hello World!");
-+// Registro de peticiones. Va primero para ver todo lo que entra y medir todo lo que sigue.
-+app.Use(async (contexto, siguiente) =>
-+{
-+    var reloj = Stopwatch.StartNew();
-+
-+    // Todo lo que sigue en la cadena corre aqui adentro; al volver ya hay respuesta.
-+    await siguiente();
-+
-+    reloj.Stop();
-+    Console.WriteLine(
-+        $"{contexto.Request.Method} {contexto.Request.Path} -> {contexto.Response.StatusCode} ({reloj.ElapsedMilliseconds} ms)");
-+});
-+
-+app.MapGet("/", () => "Mercado Campesino Digital");
-+app.MapGet("/salud", () => "ok");
- 
- app.Run();
-```
-
-Por qué cada pieza:
-
-- `app.Use(async (contexto, siguiente) => ...)` registra un middleware en línea. `contexto` es la
-  petición y la respuesta en curso. `siguiente` es **el resto de la cadena**.
-- `await siguiente();` ejecuta el resto de la cadena y vuelve **cuando ya hay respuesta**. Por eso
-  el estado y el tiempo se leen después de esa línea.
-- Lo que va antes de `siguiente()` corre a la ida. Lo que va después, a la vuelta.
-- `app.MapGet("/salud", () => "ok");` es una segunda ruta, para tener algo más que pedir.
-
-::: {.callout-note}
-## C# justo a tiempo: lo que usa esta etapa
-
-- `using System.Diagnostics;` trae el espacio de nombres donde vive `Stopwatch`, un cronómetro.
-- Una lambda puede recibir parámetros: `(contexto, siguiente) => { ... }`.
-- `async` y `await` permiten esperar un trabajo sin bloquear el programa. `siguiente()` devuelve
-  algo que se espera con `await`.
-- `$"...{expresión}..."` es una **cadena interpolada**: dentro de las llaves va código C# cuyo
-  valor entra en el texto.
-:::
-
-### Verificar
-
-Ejecuta con `dotnet run --no-launch-profile --urls http://localhost:5190` y pide en el navegador `/`,
-`/salud`, `/no-existe` y `/favicon.ico`. Respuestas observadas:
-
-| Petición | Estado | Cuerpo |
-|---|---|---|
-| `GET /` | `200 OK` | `Mercado Campesino Digital` |
-| `GET /salud` | `200 OK` | `ok` |
-| `GET /no-existe` | `404 Not Found` | vacío |
-| `GET /favicon.ico` | `404 Not Found` | vacío |
-
-Y la consola, después de los mensajes de arranque:
-
-```text
-GET / -> 200 (3 ms)
-GET /salud -> 200 (0 ms)
-GET /no-existe -> 404 (0 ms)
-GET /favicon.ico -> 404 (0 ms)
-```
-
-Aun las rutas que no existen quedan registradas con `404`: el middleware está antes de la selección
-de la ruta. Los milisegundos varían en cada ejecución.
-
-### Experimento: el orden importa
-
-Un middleware que **no llama a `siguiente`** corta la cadena. Para verlo, agrega justo después del
-bloque de registro (y antes de los `MapGet`) este segundo middleware:
-
-```csharp
-app.Use(async (contexto, siguiente) =>
-{
-    if (contexto.Request.Path == "/bloqueado")
-    {
-        contexto.Response.StatusCode = 403;
-        await contexto.Response.WriteAsync("bloqueado por middleware");
-        return;
-    }
-
-    await siguiente();
-});
-```
-
-Pide `/bloqueado` y `/salud`. Observado con el registro **antes** del corte:
-
-```text
-GET /salud -> 200 (3 ms)
-GET /bloqueado -> 403 (0 ms)
-```
-
-`/bloqueado` responde `403` con el texto `bloqueado por middleware`, y el registro lo ve. Ahora mueve
-el bloque del corte **arriba** del registro. Lo medido fue que `/bloqueado` sigue respondiendo `403`
-y `/salud` `200`, pero la consola solo imprime la línea de `/salud`: la petición bloqueada no se
-registra.
-
-::: {.diagrama}
-![](imagenes/orden-cadena-cortada.svg){fig-alt="Dos variantes de la misma cadena. En la primera, Registro va antes del corte y la consola imprime la línea con 403. En la segunda, el corte va antes de Registro, que nunca ve la petición, y la consola no imprime nada para /bloqueado."}
-
-El mismo código, con otro orden, produce otro resultado.
-:::
-
-Resultados de las cuatro variantes que se probaron. `corta` es el middleware de arriba, `termina` es
-un `app.Run` que responde `fin de la cadena` y `registro` es el de la etapa:
-
-| Variante | Orden de registro | Respuestas | Consola |
-|---|---|---|---|
-| 1 | registro, corta, rutas | `/bloqueado` 403 `bloqueado por middleware`; `/salud` 200 `ok` | `GET /bloqueado -> 403 (3 ms)` y `GET /salud -> 200 (1 ms)` |
-| 2 | corta, registro, rutas | igual que la 1 | solo `GET /salud -> 200 (2 ms)` |
-| 3 | registro, `app.Run`, rutas | `/`, `/salud` y `/cualquiera`: 200 `fin de la cadena` | las tres, con 200 |
-| 4 | `app.Run`, registro, rutas | las tres: 200 `fin de la cadena` | ninguna línea |
-
-Dos reglas que salen de ahí:
-
-- Un middleware que no llama a `siguiente` corta la cadena: lo registrado después no se ejecuta para
-  esa petición.
-- `app.Run` es terminal. Las rutas de `MapGet` escritas después de él nunca se alcanzan. En la
-  variante 4 la petición se atiende y el registro no se entera: es el mismo código con otro orden.
-
-Quita el middleware del corte antes de pasar a la etapa 2.
-
-::: {.callout-tip}
-## Reto 1. Predice la consola
-
-Tienes tres middleware registrados en este orden: el de registro, un `app.Run` que responde
-`fin de la cadena` y después las rutas `MapGet("/")` y `MapGet("/salud")`. Pides `/salud`.
-¿Qué texto recibes y qué imprime la consola?
+Cambia el texto de la ruta `/` para que el servidor responda `Soy` y tu nombre. Reinicia el
+servidor y recarga la página.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Solución del Reto 1
 
-Recibes `fin de la cadena` con estado `200`, no `ok`. El `app.Run` es terminal y atiende toda
-petición que le llega, así que la ruta `/salud` nunca se alcanza. La consola imprime
-`GET /salud -> 200 (...)`: el registro está antes del `app.Run`, ve la petición y la mide. Es la
-variante 3 de la tabla.
+```csharp
+app.MapGet("/", () => "Soy Rosa");
+```
+
+Detén el servidor con `Ctrl+C`, ejecútalo de nuevo y recarga. Si no reinicias, el servidor sigue
+ejecutando el programa anterior, porque el código nuevo todavía no se compiló.
 :::
-
-### Cierre de la etapa 1
-
-- **Qué cambió:** `Program.cs` tiene un middleware en línea y una ruta `/salud`.
-- **Cómo verificarlo:** ejecuta y pide `/`, `/salud` y `/no-existe`.
-- **Qué debes ver:** `Mercado Campesino Digital`, `ok` y un `404`, y en la consola tres líneas
-  `GET ... -> ... (N ms)`, una por petición.
-
-## Etapa 2. El middleware como clase
-
-### El problema
-
-El bloque de registro vive dentro de `Program.cs` y ya ocupa una parte importante del archivo. Si
-agregas autenticación, errores y más, `Program.cs` se vuelve ilegible. Un middleware con nombre propio
-se puede leer, mover y reutilizar por separado.
 
 ::: {.callout-tip}
-## Predice antes de seguir
+## Reto 2. Mueve la ruta
 
-Si sacas el mismo código a una clase, ¿qué dos cosas tiene que recibir esa clase del framework para
-hacer lo mismo que el bloque en línea?
-:::
-
-::: {.callout-note collapse="true"}
-## Respuesta
-
-Necesita la **siguiente estación** (lo que en la lambda era el parámetro `siguiente`) y el
-**contexto** de cada petición. El framework entrega la primera al construir la clase, y el segundo
-cada vez que llega una petición.
-:::
-
-### El código
-
-Crea la carpeta `Middleware` y dentro el archivo `RegistroPeticionesMiddleware.cs`:
-
-```csharp
-using System.Diagnostics;
-
-namespace MercadoCampesinoWeb.Middleware;
-
-public class RegistroPeticionesMiddleware
-{
-    private readonly RequestDelegate _siguiente;
-
-    // El framework entrega aqui el siguiente eslabon de la cadena.
-    public RegistroPeticionesMiddleware(RequestDelegate siguiente)
-    {
-        _siguiente = siguiente;
-    }
-
-    public async Task InvokeAsync(HttpContext contexto)
-    {
-        var reloj = Stopwatch.StartNew();
-
-        await _siguiente(contexto);
-
-        reloj.Stop();
-        Console.WriteLine(
-            $"{contexto.Request.Method} {contexto.Request.Path} -> {contexto.Response.StatusCode} ({reloj.ElapsedMilliseconds} ms)");
-    }
-}
-```
-
-Y deja `Program.cs` así:
-
-```csharp
-using MercadoCampesinoWeb.Middleware;
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-// Primero en la cadena: ve todas las peticiones y mide todo lo que sigue.
-app.UseMiddleware<RegistroPeticionesMiddleware>();
-
-app.MapGet("/", () => "Mercado Campesino Digital");
-app.MapGet("/salud", () => "ok");
-
-app.Run();
-```
-
-Qué cambió respecto de la etapa 1:
-
-```diff
---- anterior
-+++ nuevo
-@@ -1,19 +1,9 @@
--using System.Diagnostics;
-+using MercadoCampesinoWeb.Middleware;
- 
- var builder = WebApplication.CreateBuilder(args);
- var app = builder.Build();
- 
--// Registro de peticiones. Va primero para ver todo lo que entra y medir todo lo que sigue.
--app.Use(async (contexto, siguiente) =>
--{
--    var reloj = Stopwatch.StartNew();
--
--    // Todo lo que sigue en la cadena corre aqui adentro; al volver ya hay respuesta.
--    await siguiente();
--
--    reloj.Stop();
--    Console.WriteLine(
--        $"{contexto.Request.Method} {contexto.Request.Path} -> {contexto.Response.StatusCode} ({reloj.ElapsedMilliseconds} ms)");
--});
-+// Primero en la cadena: ve todas las peticiones y mide todo lo que sigue.
-+app.UseMiddleware<RegistroPeticionesMiddleware>();
- 
- app.MapGet("/", () => "Mercado Campesino Digital");
-```
-
-::: {.diagrama}
-![](imagenes/middleware-linea-clase.svg){fig-alt="Cuatro pares que relacionan el middleware en línea con la clase: la lambda con InvokeAsync, el parámetro siguiente con el constructor, await siguiente con await _siguiente y app.Use con app.UseMiddleware."}
-
-El cuerpo no cambia. Cambia dónde vive y cómo recibe `siguiente`.
-:::
-
-::: {.callout-note}
-## C# justo a tiempo: lo que usa esta etapa
-
-- Una **clase** agrupa datos y comportamiento: `public class RegistroPeticionesMiddleware`.
-- `namespace MercadoCampesinoWeb.Middleware;` dice a qué grupo de nombres pertenece. El `using` de
-  `Program.cs` lo trae.
-- Un **campo privado** `private readonly RequestDelegate _siguiente;` guarda un valor dentro del
-  objeto. `readonly` impide cambiarlo después de la construcción.
-- El **constructor** tiene el nombre de la clase y recibe lo que el objeto necesita para existir.
-- Un método `async Task` es el equivalente de la lambda `async`.
-:::
-
-El framework **construye la clase una sola vez** y le entrega `RequestDelegate` en el constructor.
-`InvokeAsync` corre en cada petición. El método debe llamarse `Invoke` o `InvokeAsync`.
-
-### Verificar
-
-Ejecuta de nuevo. La salida es idéntica a la de la etapa 1: las mismas respuestas y las mismas
-líneas de consola. Es lo esperado, porque el comportamiento no cambió.
-
-```text
-GET / -> 200 (5 ms)
-GET /salud -> 200 (0 ms)
-GET /no-existe -> 404 (0 ms)
-GET /favicon.ico -> 404 (0 ms)
-```
-
-::: {.callout-tip}
-## Reto 2. Un nombre mal puesto
-
-Cambia el nombre del método `InvokeAsync` por `Registrar` y ejecuta `dotnet build` y después
-`dotnet run`. ¿Compila? ¿Cuándo aparece el error y qué dice?
+Cambia `"/"` por `"/hola"`. Reinicia y pide `/` y `/hola`. Antes de hacerlo, predice qué estado
+recibes en cada una.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Solución del Reto 2
 
-El proyecto **compila**: para el compilador `Registrar` es un método válido. El error aparece al
-arrancar, en `UseMiddleware`, porque el framework busca por nombre un método `Invoke` o
-`InvokeAsync`. El mensaje literal fue:
-
-```text
-System.InvalidOperationException: No public 'Invoke' or 'InvokeAsync' method found for middleware of type 'MercadoCampesinoWeb.Middleware.RegistroPeticionesMiddleware'.
+```csharp
+app.MapGet("/hola", () => "Hello World!");
 ```
 
-Devuelve el nombre `InvokeAsync` antes de seguir.
+`/hola` responde `200` con `Hello World!`. `/` responde `404` con el cuerpo vacío, porque ya no hay
+ninguna ruta registrada para `/`. La ruta es parte de la respuesta: cambiar la ruta cambia qué
+direcciones existen.
 :::
 
-### Cierre de la etapa 2
+### Cierre de la etapa 0
 
-- **Qué cambió:** el registro vive en `Middleware/RegistroPeticionesMiddleware.cs` y `Program.cs`
-  solo lo registra con `app.UseMiddleware<...>()`.
-- **Cómo verificarlo:** ejecuta y pide `/`, `/salud` y `/no-existe`.
-- **Qué debes ver:** exactamente lo mismo que en la etapa 1.
+- **Qué cambió:** el proyecto nace. Hay un servidor con una sola ruta.
+- **Cómo verificarlo:** ejecuta el comando y abre `http://localhost:5100/`.
+- **Qué debes ver:** `Hello World!`, un `404` en `/otra` y, en la consola, `Now listening on`.
 
-## Etapa 3. MVC armado a mano
+## Etapa 1. Varias rutas
 
-### El problema
+### Qué vas a lograr
 
-Hasta ahora cada respuesta es un texto escrito dentro de `Program.cs`. El catálogo del proyecto es
-una lista de productos con nombre, precio, cantidad y productor, y debe verse como una página HTML.
-Escribir todo eso dentro de una lambda mezclaría los datos, la decisión de qué mostrar y el HTML.
-**MVC** separa esas tres responsabilidades en tres piezas.
+Un servidor con cuatro rutas, cada una con su respuesta. Empiezas a "jugar": crear una ruta, pedirla
+y ver qué pasa.
+
+### La idea: una ruta es un pasillo
+
+Piensa en los pasillos de la plaza: en el de las frutas hay frutas, en el de los granos hay granos.
+Una **ruta** es el nombre de ese pasillo, y con `MapGet` le dices al servidor qué entregar cuando
+alguien lo visite. Cuantas más rutas registres, más pasillos tiene tu plaza.
 
 ::: {.callout-tip}
 ## Predice antes de seguir
 
-En la línea de empaque, ¿qué piezas hacen falta para devolver un catálogo en HTML? Nómbralas con su
-nombre de la línea (pedido, estación, encargado, inventario, caja) y con su nombre técnico.
+Abres `/hora`, esperas unos segundos y la abres otra vez. ¿Qué crees que verás: la misma hora las
+dos veces o una distinta? ¿Qué te dice eso sobre cuándo se ejecuta la función?
 :::
 
 ::: {.callout-note collapse="true"}
 ## Respuesta
 
-El **encargado** (controlador) recibe el pedido, consulta el **inventario** (modelo, la lista de
-`Producto`) y entrega los datos a la **caja** (vista), que los empaca como HTML. La petición llega
-hasta el encargado por la estación de rutas.
-:::
-
-::: {.diagrama}
-![](imagenes/mvc-recorrido.svg){fig-alt="La petición GET /Catalogo pasa por la ruta default, llega a CatalogoController.Index, que arma la lista del modelo Producto y la pasa con View a la vista Views/Catalogo/Index.cshtml, que produce el HTML."}
-
-El recorrido completo de una petición al catálogo.
+Una hora distinta. La función de la ruta **se ejecuta en cada petición**, no una vez al arrancar el
+servidor. Por eso la respuesta se calcula en el momento.
 :::
 
 ### El código
 
-Esta etapa agrega tres archivos y cambia `Program.cs`. Crea las carpetas `Models`, `Controllers`,
-`Views` y `Views/Catalogo`.
-
-**El modelo**, `Models/Producto.cs`:
+Reemplaza el contenido de `Program.cs` por:
 
 ```csharp
-namespace MercadoCampesinoWeb.Models;
-
-public class Producto
-{
-    public int Id { get; set; }
-    public string Nombre { get; set; } = "";
-    public decimal Precio { get; set; }
-    public int Cantidad { get; set; }
-    public string Productor { get; set; } = "";
-
-    // RN-03: sin cantidad disponible se muestra como agotado, sin ocultarse del catalogo.
-    public bool Agotado => Cantidad <= 0;
-}
-```
-
-::: {.callout-note}
-## C# justo a tiempo: modelo y propiedades
-
-- Una **propiedad** `public int Id { get; set; }` es un dato de la clase que se puede leer y
-  escribir. Cada producto tiene `Id`, `Nombre`, `Precio`, `Cantidad` y `Productor`.
-- `= "";` da un valor inicial a un texto, para que nunca sea nulo.
-- `public bool Agotado => Cantidad <= 0;` es una **propiedad calculada**: no guarda nada, responde
-  según `Cantidad`. Así expresas la regla RN-03: sin cantidad disponible, el producto se muestra
-  como agotado y no se oculta.
-:::
-
-**El controlador**, `Controllers/CatalogoController.cs`:
-
-```csharp
-using MercadoCampesinoWeb.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MercadoCampesinoWeb.Controllers;
-
-public class CatalogoController : Controller
-{
-    // La lista vive aqui por ahora; en la etapa 5 sale de un servicio.
-    public IActionResult Index()
-    {
-        var productos = new List<Producto>
-        {
-            new() { Id = 1, Nombre = "Papa criolla", Precio = 3200m, Cantidad = 40, Productor = "Finca La Esperanza" },
-            new() { Id = 2, Nombre = "Mora de Castilla", Precio = 6500m, Cantidad = 0, Productor = "Finca El Roble" },
-            new() { Id = 3, Nombre = "Panela redonda", Precio = 4800m, Cantidad = 25, Productor = "Trapiche San José" },
-        };
-
-        return View(productos);
-    }
-}
-```
-
-::: {.callout-note}
-## C# justo a tiempo: listas y objetos
-
-- `List<Producto>` es una lista que solo guarda `Producto`. El tipo entre `<` y `>` es el de sus
-  elementos.
-- `new() { Id = 1, Nombre = "...", ... }` crea un objeto y asigna sus propiedades en un solo paso.
-- Un controlador es una clase que **hereda** de `Controller` (`: Controller`). Cada método público
-  que devuelve `IActionResult` es una **acción**.
-- `View(productos)` le dice a MVC: usa la vista de esta acción y pásale esta lista.
-:::
-
-**La vista**, `Views/Catalogo/Index.cshtml`:
-
-```cshtml
-@using System.Globalization
-@using MercadoCampesinoWeb.Models
-@model List<Producto>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <title>Catálogo | Mercado Campesino Digital</title>
-</head>
-<body>
-    <h1>Catálogo de productos</h1>
-    <ul>
-        @foreach (var producto in Model)
-        {
-            <li>
-                @producto.Nombre, @producto.Precio.ToString("C0", new CultureInfo("es-CO")), @producto.Productor:
-                @(producto.Agotado ? "Agotado" : $"{producto.Cantidad} disponibles")
-            </li>
-        }
-    </ul>
-</body>
-</html>
-```
-
-Un archivo `.cshtml` es HTML con fragmentos de C# marcados con `@`. `@model List<Producto>` declara
-qué recibe la vista. `@foreach` repite el bloque por cada producto. `@producto.Nombre` escribe el
-valor, y `@(producto.Agotado ? "Agotado" : $"{producto.Cantidad} disponibles")` escoge un texto según
-la propiedad calculada del modelo. El precio sale formateado con la cultura `es-CO`:
-`Precio.ToString("C0", new CultureInfo("es-CO"))` produjo `$ 3.200`.
-
-La vista incluye su propio `<!DOCTYPE html>`, `<head>` y `<body>` porque todavía no hay layout:
-sin él, la vista es el documento completo.
-
-**Program.cs**, con el registro de MVC y la ruta:
-
-```csharp
-using MercadoCampesinoWeb.Middleware;
-
+// Etapa 1: varias rutas que responden texto.
 var builder = WebApplication.CreateBuilder(args);
-
-// Registra lo que MVC necesita: controladores y vistas Razor.
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
-app.UseMiddleware<RegistroPeticionesMiddleware>();
+// Cada MapGet une una dirección (la ruta) con lo que se responde.
+app.MapGet("/", () => "Bienvenido a la Plaza Campesina");
 
-app.MapGet("/salud", () => "ok");
+app.MapGet("/saludo", () => "Hola, buenos días desde la plaza");
 
-// Ruta convencional: /Catalogo llama a CatalogoController.Index. En "/" cae en Catalogo/Index.
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
+app.MapGet("/acerca", () => "Plaza: una tienda de productos campesinos hecha con ASP.NET Core");
+
+// La respuesta puede calcularse en el momento de la petición.
+app.MapGet("/hora", () => $"Son las {DateTime.Now:HH:mm:ss}");
 
 app.Run();
 ```
 
-Qué cambió respecto de la etapa 2:
+::: {.callout-note}
+## C# justo a tiempo: lo que usa esta etapa
 
-```diff
---- anterior
-+++ nuevo
-@@ -2,11 +2,18 @@
- 
- var builder = WebApplication.CreateBuilder(args);
-+
-+// Registra lo que MVC necesita: controladores y vistas Razor.
-+builder.Services.AddControllersWithViews();
-+
- var app = builder.Build();
- 
--// Primero en la cadena: ve todas las peticiones y mide todo lo que sigue.
- app.UseMiddleware<RegistroPeticionesMiddleware>();
- 
--app.MapGet("/", () => "Mercado Campesino Digital");
- app.MapGet("/salud", () => "ok");
- 
-+// Ruta convencional: /Catalogo llama a CatalogoController.Index. En "/" cae en Catalogo/Index.
-+app.MapControllerRoute(
-+    name: "default",
-+    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
-+
- app.Run();
-```
-
-- `builder.Services.AddControllersWithViews();` registra lo que MVC necesita: controladores y vistas.
-  Va **antes** de `Build()`.
-- `app.MapControllerRoute(...)` es la ruta convencional. Su patrón dice cómo leer una URL para elegir controlador y acción.
-- Se quitó `app.MapGet("/", ...)`: era la que respondía en `/`, y ahora lo hace el catálogo.
-
-### Qué hace falta para que compile y renderice
-
-Probado partiendo de la etapa 2:
-
-| Intento | Resultado observado |
-|---|---|
-| Solo `AddControllersWithViews` y `MapControllerRoute`, sin controlador | Compila. `GET /Catalogo` da `404`; `/` y `/salud` siguen respondiendo desde los `MapGet` |
-| Controlador con `return View(productos)` y sin vista | `500 Internal Server Error` |
-| Vista con `@model List<Producto>` sin `using` de `Models` | Error de compilación en `dotnet build` |
-| Vista con `@using MercadoCampesinoWeb.Models` al inicio | Compila y renderiza |
-| Sin `_ViewStart.cshtml` y sin layout | Renderiza sin problema |
-
-Por eso en esta etapa no existe `_ViewImports.cshtml` ni `_ViewStart.cshtml`: un `@using` en la
-propia vista basta.
-
-### Dónde busca MVC la vista
-
-Una acción que llama `View(...)` no dice el nombre del archivo. MVC lo deduce:
-`Views/<Controlador>/<Acción>.cshtml`, y si no lo encuentra, `Views/Shared/<Acción>.cshtml`.
-
-::: {.diagrama}
-![](imagenes/donde-busca-la-vista.svg){fig-alt="Cuando CatalogoController.Index llama View, MVC busca primero Views/Catalogo/Index.cshtml, después Views/Shared/Index.cshtml, y si no encuentra ninguna responde 500 con el mensaje The view Index was not found."}
-
-La carpeta se llama como el controlador, sin el sufijo `Controller`.
+- **`//`** inicia un comentario: texto para humanos que el compilador ignora.
+- **`$"Son las {DateTime.Now:HH:mm:ss}"`** es una **cadena interpolada**. El `$` antes de las comillas
+  habilita huecos: lo que va entre llaves es código C# y su valor se pega en el texto.
+- **`DateTime.Now`** es la fecha y la hora de este computador. **`:HH:mm:ss`** es el formato: hora de
+  0 a 23, minutos y segundos.
 :::
 
-### Verificar
+### Ejecutarlo
 
-Ejecuta y abre `/`, `/Catalogo`, `/Catalogo/Index` y `/salud`. Respuestas:
+Ejecuta y pide cada ruta en el navegador:
 
-| Petición | Estado |
-|---|---|
-| `GET /` | `200`, el catálogo |
-| `GET /Catalogo` | `200`, el catálogo |
-| `GET /Catalogo/Index` | `200`, el catálogo |
-| `GET /salud` | `200`, `ok` |
-| `GET /Catalogo/Detalle` | `404` |
-| `GET /Otro` | `404` |
+| Petición | Estado | Tipo de contenido | Cuerpo |
+|---|---|---|---|
+| `GET /` | `200 OK` | `text/plain; charset=utf-8` | `Bienvenido a la Plaza Campesina` |
+| `GET /saludo` | `200 OK` | `text/plain; charset=utf-8` | `Hola, buenos días desde la plaza` |
+| `GET /acerca` | `200 OK` | `text/plain; charset=utf-8` | `Plaza: una tienda de productos campesinos hecha con ASP.NET Core` |
+| `GET /hora` | `200 OK` | `text/plain; charset=utf-8` | `Son las 19:39:07` (la hora cambia) |
+| `GET /noexiste` | `404 Not Found` | (ninguno) | vacío |
 
-El HTML de `/Catalogo` que salió, línea por línea:
+Con `curl`, la última se ve así:
 
 ```text
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <title>Catálogo | Mercado Campesino Digital</title>
-</head>
-<body>
-    <h1>Catálogo de productos</h1>
-    <ul>
-            <li>
-                Papa criolla, $ 3.200, Finca La Esperanza:
-                40 disponibles
-            </li>
-            <li>
-                Mora de Castilla, $ 6.500, Finca El Roble:
-                Agotado
-            </li>
-            <li>
-                Panela redonda, $ 4.800, Trapiche San Jos&#xE9;:
-                25 disponibles
-            </li>
-    </ul>
-</body>
-</html>
+$ curl -i http://localhost:5100/noexiste
+HTTP/1.1 404 Not Found
+Content-Length: 0
+
 ```
 
-Dos detalles. La mora de Castilla sale `Agotado` y no desaparece: es RN-03. Y `José` sale como
-`Jos&#xE9;` en el HTML crudo: Razor codifica los caracteres no ASCII de los valores dinámicos. El
-navegador lo muestra bien; solo lo notas si lees el HTML con `curl`.
+### Qué pasó por dentro
 
-La primera petición MVC de cada ejecución es la más lenta (`GET / -> 200 (42 ms)`) y las siguientes
-bajan a 1 a 3 ms: es el calentamiento de MVC y Razor.
+Para `GET /saludo`:
+
+1. El navegador envía `GET /saludo`.
+2. El servidor recorre las rutas registradas y compara la ruta pedida con cada una.
+3. `"/saludo"` coincide con la segunda. Las otras no.
+4. Ejecuta esa función. Devuelve el texto `Hola, buenos días desde la plaza`.
+5. Responde `200` con tipo `text/plain`.
+
+Para `GET /noexiste` el paso 3 no encuentra ninguna coincidencia. El servidor no ejecuta ninguna
+función y responde `404` sin cuerpo.
+
+### Una comodidad: dotnet watch
+
+Detener y volver a ejecutar cansa. `dotnet watch` vigila tus archivos y recarga cuando guardas:
+
+```text
+dotnet watch run --no-launch-profile --urls http://localhost:5100
+```
+
+Lo que se observó al probarlo:
+
+- Cambiar el texto de una ruta que ya existe se aplica **sin reiniciar**. La consola mostró
+  `File updated: .\Program.cs` y `C# and Razor changes applied in 4530ms.` Tarda unos 5 segundos.
+- **Agregar una ruta nueva sí exige reiniciar.** Mostró `Restart is needed to apply the changes.` y
+  volvió a compilar todo.
+
+Si `dotnet watch` no reinicia solo, detenlo con `Ctrl+C` y ejecútalo de nuevo. Con `dotnet run` a
+secas, nada se recarga: reinicias tú. En una terminal normal `dotnet watch` te pregunta si reinicia;
+esa pregunta no se pudo probar al preparar la guía.
+
+### Retos de la etapa 1
 
 ::: {.callout-tip}
-## Reto 3. Una carpeta mal escrita
+## Reto 3. Una ruta con tu nombre
 
-Renombra `Views/Catalogo` a `Views/Catalog` y ejecuta. Pide `/Catalogo`. ¿Qué estado recibes? ¿Qué
-dice el mensaje y qué rutas lista?
+Crea la ruta `/nombre` que devuelva `Me llamo` y tu nombre. Pídela en el navegador.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Solución del Reto 3
 
-Recibes `500`. En la consola aparece:
-
-```text
-System.InvalidOperationException: The view 'Index' was not found. The following locations were searched:
-/Views/Catalogo/Index.cshtml
-/Views/Shared/Index.cshtml
-```
-
-El mensaje es el mismo que cuando el controlador no tiene vista. Lee las rutas que lista: son
-exactamente las dos del diagrama, y ninguna existe porque tu carpeta se llama `Catalog`. Devuélvele
-su nombre a la carpeta.
-:::
-
-### Cierre de la etapa 3
-
-- **Qué cambió:** `Program.cs` registra MVC y una ruta. Hay un modelo, un controlador y una vista.
-  `MapGet("/")` ya no existe.
-- **Cómo verificarlo:** ejecuta y abre `/` y `/Catalogo`.
-- **Qué debes ver:** tres productos, el segundo marcado `Agotado`, y en la consola
-  `GET / -> 200 (N ms)` y `GET /Catalogo -> 200 (N ms)`.
-
-## Etapa 4. Rutas y respuestas 404
-
-### El problema
-
-El catálogo muestra una lista, pero el comprador necesita abrir **un** producto. Para eso la URL
-tiene que llevar cuál. Tienes que decidir qué forma tienen las URL de tu servidor y qué debe pasar
-cuando piden algo que no existe.
-
-::: {.callout-tip}
-## Predice antes de seguir
-
-Con la ruta `{controller=Catalogo}/{action=Index}/{id?}`, ¿qué controlador y qué acción atiende
-`/`? ¿Y `/Catalogo/Detalle/1`?
-:::
-
-::: {.callout-note collapse="true"}
-## Respuesta
-
-`/` no trae segmentos, así que cada uno toma su valor por defecto: `Catalogo` e `Index`.
-`/Catalogo/Detalle/1` llena los tres: controlador `Catalogo`, acción `Detalle` e `id` igual a 1.
-:::
-
-### La ruta convencional
-
-El patrón tiene tres segmentos separados por `/`. Lo que va después de `=` es el valor por
-defecto cuando el segmento falta, y `?` marca el `id` como opcional.
-
-::: {.diagrama}
-![](imagenes/ruta-convencional.svg){fig-alt="El patrón con tres segmentos, controller con valor por defecto Catalogo, action con Index e id opcional, y tres URL de ejemplo: la barra, /Catalogo y /Catalogo/Detalle/1, con el controlador, la acción y el id que le corresponden."}
-
-Los segmentos que faltan toman su valor por defecto.
-:::
-
-Las rutas no distinguen mayúsculas: `/catalogo/detalle/3` respondió `200`.
-
-La ruta convencional usa `Catalogo` como controlador por defecto para que `/` muestre el catálogo: la vitrina pública es lo primero que debe ver el comprador.
-
-### El código
-
-**El controlador** gana una acción `Detalle` y una lista compartida:
+Agrega esta línea antes de `app.Run();`:
 
 ```csharp
-using MercadoCampesinoWeb.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MercadoCampesinoWeb.Controllers;
-
-public class CatalogoController : Controller
-{
-    // La lista vive aqui por ahora; en la etapa 5 sale de un servicio.
-    private static readonly List<Producto> Productos = new()
-    {
-        new() { Id = 1, Nombre = "Papa criolla", Precio = 3200m, Cantidad = 40, Productor = "Finca La Esperanza" },
-        new() { Id = 2, Nombre = "Mora de Castilla", Precio = 6500m, Cantidad = 0, Productor = "Finca El Roble" },
-        new() { Id = 3, Nombre = "Panela redonda", Precio = 4800m, Cantidad = 25, Productor = "Trapiche San José" },
-    };
-
-    public IActionResult Index()
-    {
-        return View(Productos);
-    }
-
-    // El parametro "id" se llena con el ultimo segmento de la ruta: /Catalogo/Detalle/1.
-    public IActionResult Detalle(int id)
-    {
-        var producto = Productos.FirstOrDefault(p => p.Id == id);
-        if (producto is null)
-        {
-            return NotFound();
-        }
-
-        return View(producto);
-    }
-}
+app.MapGet("/nombre", () => "Me llamo Rosa");
 ```
 
-::: {.callout-note}
-## C# justo a tiempo: lo que usa esta etapa
-
-- `Detalle(int id)` recibe un parámetro. MVC lo llena con el segmento `id` de la ruta.
-- `Productos.FirstOrDefault(p => p.Id == id)` busca el primer producto cuyo `Id` coincide, o
-  devuelve `null` si no hay ninguno. `p => p.Id == id` es otra lambda.
-- `producto is null` pregunta si no se encontró nada.
-- `NotFound()` responde `404`.
-- `private static readonly` hace que la lista sea una sola para toda la clase y no se pueda
-  reemplazar.
+Reinicia el servidor y abre `http://localhost:5100/nombre`. Responde `200`, `text/plain` y el texto.
+Es una ruta nueva, así que necesitas reiniciar.
 :::
-
-**La vista nueva**, `Views/Catalogo/Detalle.cshtml`:
-
-```cshtml
-@using System.Globalization
-@using MercadoCampesinoWeb.Models
-@model Producto
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <title>@Model.Nombre | Mercado Campesino Digital</title>
-</head>
-<body>
-    <h1>@Model.Nombre</h1>
-    <p>Precio: @Model.Precio.ToString("C0", new CultureInfo("es-CO"))</p>
-    <p>Productor: @Model.Productor</p>
-    <p>@(Model.Agotado ? "Agotado" : $"{Model.Cantidad} disponibles")</p>
-    <p><a href="@Url.Action("Index")">Volver al catálogo</a></p>
-</body>
-</html>
-```
-
-**El catálogo** enlaza cada producto con su detalle; cambia una línea de `Index.cshtml`:
-
-```diff
---- anterior
-+++ nuevo
-@@ -14,5 +14,5 @@
-         {
-             <li>
--                @producto.Nombre, @producto.Precio.ToString("C0", new CultureInfo("es-CO")), @producto.Productor:
-+                <a href="@Url.Action("Detalle", new { id = producto.Id })">@producto.Nombre</a>, @producto.Precio.ToString("C0", new CultureInfo("es-CO")), @producto.Productor:
-                 @(producto.Agotado ? "Agotado" : $"{producto.Cantidad} disponibles")
-             </li>
-```
-
-`Url.Action("Detalle", new { id = producto.Id })` **genera** la URL de esa acción. Así los enlaces no
-se escriben a mano.
-
-**Program.cs**, con una ruta propia antes de la convencional:
-
-```csharp
-using MercadoCampesinoWeb.Middleware;
-
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-app.UseMiddleware<RegistroPeticionesMiddleware>();
-
-app.MapGet("/salud", () => "ok");
-
-// Ruta propia con nombre. Va antes de la convencional: se evalua en el orden en que se registra.
-app.MapControllerRoute(
-    name: "producto",
-    pattern: "productos/{id:int}",
-    defaults: new { controller = "Catalogo", action = "Detalle" });
-
-// Ruta convencional: /Catalogo/Detalle/1 llama a CatalogoController.Detalle(1).
-// "Catalogo" e "Index" son los valores por defecto cuando el segmento no viene.
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
-
-app.Run();
-```
-
-Qué cambió respecto de la etapa 3:
-
-```diff
---- anterior
-+++ nuevo
-@@ -3,5 +3,4 @@
- var builder = WebApplication.CreateBuilder(args);
- 
--// Registra lo que MVC necesita: controladores y vistas Razor.
- builder.Services.AddControllersWithViews();
- 
-@@ -12,5 +11,12 @@
- app.MapGet("/salud", () => "ok");
- 
--// Ruta convencional: /Catalogo llama a CatalogoController.Index. En "/" cae en Catalogo/Index.
-+// Ruta propia con nombre. Va antes de la convencional: se evalua en el orden en que se registra.
-+app.MapControllerRoute(
-+    name: "producto",
-+    pattern: "productos/{id:int}",
-+    defaults: new { controller = "Catalogo", action = "Detalle" });
-+
-+// Ruta convencional: /Catalogo/Detalle/1 llama a CatalogoController.Detalle(1).
-+// "Catalogo" e "Index" son los valores por defecto cuando el segmento no viene.
- app.MapControllerRoute(
-     name: "default",
-```
-
-### La ruta propia y el orden
-
-La ruta `producto` tiene el patrón `productos/{id:int}`: la URL empieza por `productos` y el último
-segmento debe ser un entero (`:int`). Su `defaults` fija el controlador y la acción, porque el
-patrón no los trae. Las rutas se evalúan **en el orden en que se registran**.
-
-::: {.diagrama}
-![](imagenes/ruta-propia.svg){fig-alt="Dos rutas en orden, producto con patrón productos id entero y default. Cuatro URL: /productos/1 coincide con la ruta producto y da 200, /productos/abc no coincide y da 404, /Catalogo/Detalle/1 coincide con default y da 200, y la barra coincide con default y da 200."}
-
-La ruta propia va primero. Si coincide, la convencional ni se prueba.
-:::
-
-### Verificar
-
-Pide estas URL y compara:
-
-| Petición | Estado | Qué muestra |
-|---|---|---|
-| `/` | `200` | el catálogo |
-| `/Catalogo/Detalle/1` | `200` | Papa criolla |
-| `/Catalogo/Detalle/2` | `200` | Mora de Castilla, `Agotado` |
-| `/Catalogo/Detalle/999` | `404` | vacío |
-| `/Catalogo/Detalle/abc` | `404` | vacío |
-| `/Catalogo/Detalle` | `404` | vacío |
-| `/productos/1` | `200` | Papa criolla |
-| `/productos/abc` | `404` | vacío |
-| `/productos/999` | `404` | vacío |
-| `/Catalogo/Detalle/1/extra` | `404` | vacío |
-| `/catalogo/detalle/3` | `200` | Panela redonda |
-
-El HTML de `/Catalogo/Detalle/1`:
-
-```text
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <title>Papa criolla | Mercado Campesino Digital</title>
-</head>
-<body>
-    <h1>Papa criolla</h1>
-    <p>Precio: $ 3.200</p>
-    <p>Productor: Finca La Esperanza</p>
-    <p>40 disponibles</p>
-    <p><a href="/">Volver al catálogo</a></p>
-</body>
-</html>
-```
-
-Dos observaciones medidas:
-
-- Los enlaces del catálogo salieron como `/productos/1`, no `/Catalogo/Detalle/1`, aunque la vista
-  llama a `Url.Action("Detalle", new { id = producto.Id })`. Lo más probable es que `Url.Action`
-  use la primera ruta registrada capaz de generar esa acción. No se comprobó invirtiendo el orden.
-- Las dos URL de detalle (`/Catalogo/Detalle/1` y `/productos/1`) devuelven el mismo producto.
-
-### Los dos caminos al 404
-
-`/Catalogo/Detalle/999`, `/Catalogo/Detalle/abc` y `/Catalogo/Detalle` devuelven el mismo `404`
-vacío, pero llegan por caminos distintos:
-
-::: {.diagrama}
-![](imagenes/ruta-404.svg){fig-alt="Diagrama de decisión. Si ninguna ruta coincide, la respuesta es 404 sin acción. Si coincide, se ejecuta la acción Detalle, y si el producto no existe responde NotFound con 404; si existe, devuelve la vista con 200."}
-
-El navegador ve el mismo `404` en los dos caminos.
-:::
-
-Con un `Console.WriteLine` temporal en la acción se comprobó: `/Catalogo/Detalle/abc` llega a la acción
-con `id` igual a 0 y `ModelState.IsValid` en `False`, y `/Catalogo/Detalle` llega con `id` igual a 0
-y `ModelState.IsValid` en `True`. Los dos caen en `NotFound()` porque ningún producto tiene `Id` 0.
-El `404` no distingue entre "la ruta no existe" y "el producto no existe". En `/productos/abc` y
-`/productos/999` no se instrumentó la acción, así que no se afirma por cuál camino llegó cada uno.
 
 ::: {.callout-tip}
-## Reto 4. Predice los estados
+## Reto 4. La fecha de hoy
 
-Sin ejecutar, escribe el estado de cada petición: `/productos/1`, `/productos/abc`,
-`/catalogo/detalle/3` y `/Catalogo/Detalle/1/extra`. Después ejecuta y compara.
+Crea la ruta `/fecha` que responda `Hoy es` seguido de la fecha en formato día/mes/año. Usa la
+cadena interpolada y `DateTime.Now`, como en `/hora`.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Solución del Reto 4
 
-`/productos/1` da `200`: lo atiende la ruta propia. `/productos/abc` da `404`: `abc` no cumple
-`{id:int}` y no hay otra ruta que lo atienda. `/catalogo/detalle/3` da `200`: las rutas no
-distinguen mayúsculas, y se muestra Panela redonda. `/Catalogo/Detalle/1/extra` da `404`: sobra un
-segmento que ningún patrón admite.
+```csharp
+app.MapGet("/fecha", () => $"Hoy es {DateTime.Now:dd/MM/yyyy}");
+```
+
+Al pedirla responde `Hoy es 13/10/2026` (con la fecha de tu computador). Dentro de las llaves, lo que
+va después de los dos puntos es el formato: `dd` día, `MM` mes (en mayúscula, porque `mm` son
+minutos) y `yyyy` el año.
 :::
 
-### Cierre de la etapa 4
+### Cierre de la etapa 1
 
-- **Qué cambió:** hay una acción `Detalle`, una vista nueva, enlaces en el catálogo y una ruta propia
-  con nombre.
-- **Cómo verificarlo:** ejecuta y recorre las URL de la tabla.
-- **Qué debes ver:** los estados de la tabla, y en la consola `GET /Catalogo/Detalle/999 -> 404 (N ms)`.
+- **Qué cambió:** `Program.cs` tiene cuatro rutas de texto.
+- **Cómo verificarlo:** pide `/`, `/saludo`, `/acerca`, `/hora` y `/noexiste`.
+- **Qué debes ver:** cuatro textos con `200` y un `404` vacío.
 
-## Etapa 5. Inyección de dependencias
+## Etapa 2. Datos en la URL
 
-### El problema
+### Qué vas a lograr
 
-El catálogo vive dentro del controlador. Si mañana los productos salen de otro lugar, tendrías que
-reescribir el controlador. Al controlador le basta con saber **qué puede pedir**; **de dónde** salen los productos le da igual. Eso se logra separando el contrato de la clase que lo cumple.
+Que el servidor use lo que le pides en la URL. Con una sola ruta puedes saludar a cualquier persona o
+buscar cualquier producto.
+
+### La idea: el pedido dentro de la dirección
+
+En la plaza no tienes un puesto por cada comprador. Llegas al puesto y dices "una libra de **papa**".
+El puesto es la ruta y la papa es el **parámetro**. En una URL hay dos lugares para ese dato:
+
+- **En la ruta:** `/saludo/Maria`. La parte variable es un segmento más del camino.
+- **En el query string:** `/buscar?q=tomate`. Va después del signo `?`, como una nota pegada al
+  final de la dirección, con la forma `nombre=valor`.
+
+Un **parámetro** es un dato que el servidor recibe para decidir qué responder.
+
+::: {.diagrama}
+![](imagenes/ruta-con-parametro.svg){fig-alt="La ruta /saludo/{nombre} comparada con la petición /saludo/Maria. El segmento saludo coincide tal cual y el segmento Maria se guarda en el parámetro nombre. La función recibe nombre igual a Maria y responde Hola, Maria. Bienvenido a la plaza."}
+
+Lo que va entre llaves en la ruta llega a la función con el mismo nombre.
+:::
 
 ::: {.callout-tip}
 ## Predice antes de seguir
 
-El controlador necesita una lista de productos. ¿Quién debería crear el objeto que se la entrega: el
-propio controlador o alguien externo? ¿Qué ganas con cada opción?
+La ruta `/producto/{id:int}` dice que `id` debe ser un número entero. Si pides
+`/producto/tomate`, ¿qué crees que responde: un mensaje de error, un `400` o un `404`?
 :::
 
 ::: {.callout-note collapse="true"}
 ## Respuesta
 
-Si el controlador hace `new CatalogoEnMemoria()`, queda atado a esa clase: para cambiarla hay que
-editar el controlador. Si alguien externo se lo entrega, el controlador solo declara qué necesita y
-puedes cambiar la clase sin tocarlo. Ese "alguien externo" es el **contenedor de inyección de
-dependencias**.
+Un `404` con el cuerpo vacío. Para el servidor, `/producto/tomate` simplemente **no coincide** con la
+ruta `/producto/{id:int}`: es como pedir un pasillo que no existe.
 :::
 
-### La interfaz y su clase
+### El código
 
-Una **interfaz** es un contrato: lista qué métodos existe, sin escribirlos. Una clase **implementa**
-la interfaz cuando cumple ese contrato.
-
-::: {.diagrama}
-![](imagenes/interfaz-implementaciones.svg){fig-alt="CatalogoController usa solo la interfaz ICatalogoService, que declara Listar y Obtener. La clase CatalogoEnMemoria la implementa con una lista de ocho productos. Una segunda implementación con el mismo contrato aparece punteada."}
-
-El controlador conoce el contrato. Qué clase lo cumple lo decide el registro.
-:::
-
-Crea la carpeta `Services` y la interfaz, `Services/ICatalogoService.cs`:
+Reemplaza `Program.cs` por:
 
 ```csharp
-using MercadoCampesinoWeb.Models;
+// Etapa 2: rutas que reciben datos (parámetros en la ruta y query string).
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 
-namespace MercadoCampesinoWeb.Services;
+app.MapGet("/", () => "Bienvenido a la Plaza Campesina");
 
-public interface ICatalogoService
-{
-    IReadOnlyList<Producto> Listar();
+// Parámetro en la ruta: lo que va entre llaves llega como argumento del mismo nombre.
+// Ejemplo: /saludo/Maria
+app.MapGet("/saludo/{nombre}", (string nombre) => $"Hola, {nombre}. Bienvenido a la plaza");
 
-    // Devuelve null cuando no existe un producto con ese id.
-    Producto? Obtener(int id);
-}
-```
+// Restricción {id:int}: la ruta solo coincide si el valor es un número entero.
+// Ejemplo: /producto/7 responde; /producto/tomate no coincide con ninguna ruta (404).
+app.MapGet("/producto/{id:int}", (int id) => $"Producto número {id}");
 
-Y la clase que la implementa, `Services/CatalogoEnMemoria.cs`:
+// Sin restricción: acepta cualquier texto.
+// Ejemplo: /vendedor/rosa
+app.MapGet("/vendedor/{nombre}", (string nombre) => $"Vendedor: {nombre}");
 
-```csharp
-using MercadoCampesinoWeb.Models;
+// Query string: lo que va después del signo ? en la dirección.
+// Ejemplo: /buscar?q=tomate. Si "q" no viene, usamos "todo" como valor por defecto.
+app.MapGet("/buscar", (string? q) => $"Buscando: {q ?? "todo"}");
 
-namespace MercadoCampesinoWeb.Services;
+// Dos parámetros en la ruta. Ejemplo: /sumar/3/4
+app.MapGet("/sumar/{a:int}/{b:int}", (int a, int b) => $"{a} + {b} = {a + b}");
 
-public class CatalogoEnMemoria : ICatalogoService
-{
-    private readonly List<Producto> _productos = new()
-    {
-        new() { Id = 1, Nombre = "Papa criolla (libra)", Precio = 3200m, Cantidad = 40, Productor = "Finca La Esperanza" },
-        new() { Id = 2, Nombre = "Mora de Castilla (libra)", Precio = 6500m, Cantidad = 0, Productor = "Finca El Roble" },
-        new() { Id = 3, Nombre = "Panela redonda (unidad)", Precio = 4800m, Cantidad = 25, Productor = "Trapiche San José" },
-        new() { Id = 4, Nombre = "Café pergamino (libra)", Precio = 9500m, Cantidad = 12, Productor = "Finca Los Naranjos" },
-        new() { Id = 5, Nombre = "Plátano hartón (unidad)", Precio = 1800m, Cantidad = 60, Productor = "Finca La Esperanza" },
-        new() { Id = 6, Nombre = "Aguacate Hass (unidad)", Precio = 4500m, Cantidad = 18, Productor = "Finca El Roble" },
-        new() { Id = 7, Nombre = "Queso campesino (libra)", Precio = 14000m, Cantidad = 8, Productor = "Lácteos El Páramo" },
-        new() { Id = 8, Nombre = "Cebolla larga (atado)", Precio = 2500m, Cantidad = 30, Productor = "Hortalizas Santa Elena" },
-    };
-
-    public IReadOnlyList<Producto> Listar() => _productos;
-
-    public Producto? Obtener(int id) => _productos.FirstOrDefault(p => p.Id == id);
-}
+app.Run();
 ```
 
 ::: {.callout-note}
 ## C# justo a tiempo: lo que usa esta etapa
 
-- `interface ICatalogoService` declara métodos sin cuerpo. Por convención empieza por `I`.
-- `public class CatalogoEnMemoria : ICatalogoService` dice que la clase cumple esa interfaz, y el
-  compilador exige que tenga `Listar` y `Obtener`.
-- `Producto?` con signo de interrogación significa "un `Producto` o `null`".
-- `IReadOnlyList<Producto>` es una lista que quien la recibe puede recorrer pero no modificar.
-- `=> _productos;` en un método es la forma corta de `{ return _productos; }`.
+- **`(string nombre) => ...`** es una lambda que **recibe** un dato. El nombre del parámetro debe
+  coincidir con el de las llaves de la ruta: `{nombre}` y `nombre`.
+- **`string`** es texto y **`int`** es un número entero.
+- **`{id:int}`** es una **restricción**: la ruta solo coincide si el segmento es un entero.
+- **`string? q`** con signo de interrogación significa "puede no venir". Cuando falta, vale `null`,
+  que es "nada".
+- **`q ?? "todo"`** significa "usa `q`, y si no vino, usa `todo`".
+- Dentro de una cadena interpolada puede ir una operación: `{a + b}`.
 :::
 
-### El registro y el constructor
+### Ejecutarlo
 
-**Program.cs** le dice al contenedor qué clase entregar cuando alguien pida la interfaz:
+Prueba estas peticiones. Las que llevan `?` o `&` ponlas entre comillas si usas la terminal.
 
-```csharp
-using MercadoCampesinoWeb.Middleware;
-using MercadoCampesinoWeb.Services;
+| Petición | Estado | Cuerpo |
+|---|---|---|
+| `/saludo/Maria` | `200` | `Hola, Maria. Bienvenido a la plaza` |
+| `/saludo/María` | `200` | `Hola, María. Bienvenido a la plaza` |
+| `/producto/7` | `200` | `Producto número 7` |
+| `/producto/tomate` | `404` | vacío |
+| `/producto/3.5` | `404` | vacío |
+| `/vendedor/rosa` | `200` | `Vendedor: rosa` |
+| `/buscar?q=tomate` | `200` | `Buscando: tomate` |
+| `/buscar` | `200` | `Buscando: todo` |
+| `/buscar?q=` | `200` | `Buscando: ` (vacío, no `todo`) |
+| `/buscar?q=tomate&q=papa` | `200` | `Buscando: tomate,papa` |
+| `/sumar/3/4` | `200` | `3 + 4 = 7` |
+| `/sumar/3/x` | `404` | vacío |
+| `/sumar/3` | `404` | vacío |
 
-var builder = WebApplication.CreateBuilder(args);
+Tres cosas para notar:
 
-builder.Services.AddControllersWithViews();
+- **Dos ceros distintos.** `/buscar` y `/buscar?q=` no responden igual. Sin `q`, el valor es `null` y
+  se usa `todo`. Con `q=` vacío, el valor es un texto vacío, que no es `null`.
+- **`:int` falla con `404`.** `/sumar/3/x` no tiene la forma `{a:int}/{b:int}`, así que la ruta no
+  coincide y el servidor no ejecuta nada.
+- **Si repites `q`**, el servidor junta los valores con coma.
 
-// Un unico catalogo en memoria para toda la aplicacion.
-builder.Services.AddSingleton<ICatalogoService, CatalogoEnMemoria>();
+### Qué pasó por dentro
 
-// Demostracion de ciclos de vida: ver DiagnosticoController.
-builder.Services.AddSingleton<ServicioSingleton>();
-builder.Services.AddScoped<ServicioScoped>();
-builder.Services.AddTransient<ServicioTransient>();
+Para `GET /sumar/3/4`:
 
-var app = builder.Build();
+1. El servidor parte la ruta en segmentos: `sumar`, `3` y `4`.
+2. Compara con `/sumar/{a:int}/{b:int}`: el primero es literal y coincide; `3` y `4` son enteros y
+   cumplen la restricción.
+3. Guarda `a = 3` y `b = 4`.
+4. Ejecuta la función con esos valores. Calcula `a + b` y arma el texto `3 + 4 = 7`.
+5. Responde `200` con ese texto.
 
-app.UseMiddleware<RegistroPeticionesMiddleware>();
+Con `/sumar/3/x` el paso 2 falla en `x`: no es un entero. No hay otra ruta que coincida, así que el
+resultado es `404`.
 
-app.MapGet("/salud", () => "ok");
+::: {.callout-note collapse="true"}
+## Profundiza (opcional): cuando dos rutas se parecen
 
-app.MapControllerRoute(
-    name: "producto",
-    pattern: "productos/{id:int}",
-    defaults: new { controller = "Catalogo", action = "Detalle" });
+Si registras `/producto/{id:int}` y también `/producto/{nombre}`, el servidor elige la más
+específica. En la prueba, `/producto/5` respondió con la ruta del entero y `/producto/tomate` con la
+del texto. Solo se probó en ese orden de declaración.
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
-
-app.Run();
-```
-
-Qué cambió respecto de la etapa 4:
-
-```diff
---- anterior
-+++ nuevo
-@@ -1,7 +1,16 @@
- using MercadoCampesinoWeb.Middleware;
-+using MercadoCampesinoWeb.Services;
- 
- var builder = WebApplication.CreateBuilder(args);
- 
- builder.Services.AddControllersWithViews();
-+
-+// Un unico catalogo en memoria para toda la aplicacion.
-+builder.Services.AddSingleton<ICatalogoService, CatalogoEnMemoria>();
-+
-+// Demostracion de ciclos de vida: ver DiagnosticoController.
-+builder.Services.AddSingleton<ServicioSingleton>();
-+builder.Services.AddScoped<ServicioScoped>();
-+builder.Services.AddTransient<ServicioTransient>();
- 
- var app = builder.Build();
-@@ -11,5 +20,4 @@
- app.MapGet("/salud", () => "ok");
- 
--// Ruta propia con nombre. Va antes de la convencional: se evalua en el orden en que se registra.
- app.MapControllerRoute(
-     name: "producto",
-@@ -17,6 +25,4 @@
-     defaults: new { controller = "Catalogo", action = "Detalle" });
- 
--// Ruta convencional: /Catalogo/Detalle/1 llama a CatalogoController.Detalle(1).
--// "Catalogo" e "Index" son los valores por defecto cuando el segmento no viene.
- app.MapControllerRoute(
-     name: "default",
-```
-
-**El controlador** deja de crear los datos y los pide en su constructor:
-
-```csharp
-using MercadoCampesinoWeb.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MercadoCampesinoWeb.Controllers;
-
-public class CatalogoController : Controller
-{
-    private readonly ICatalogoService _catalogo;
-
-    // El controlador pide la interfaz; el contenedor entrega la implementacion registrada.
-    public CatalogoController(ICatalogoService catalogo)
-    {
-        _catalogo = catalogo;
-    }
-
-    public IActionResult Index()
-    {
-        return View(_catalogo.Listar());
-    }
-
-    public IActionResult Detalle(int id)
-    {
-        var producto = _catalogo.Obtener(id);
-        if (producto is null)
-        {
-            return NotFound();
-        }
-
-        return View(producto);
-    }
-}
-```
-
-La vista cambia una línea para declarar el tipo que ahora devuelve `Listar()`, que es `IReadOnlyList<Producto>`. No se midió si `@model List<Producto>` habría seguido funcionando.
-
-```diff
---- anterior
-+++ nuevo
-@@ -1,5 +1,5 @@
- @using System.Globalization
- @using MercadoCampesinoWeb.Models
--@model List<Producto>
-+@model IReadOnlyList<Producto>
- <!DOCTYPE html>
- <html lang="es">
-```
-
-::: {.diagrama}
-![](imagenes/di-contenedor.svg){fig-alt="Program.cs registra que ICatalogoService se resuelve con CatalogoEnMemoria en el contenedor. El controlador pide ICatalogoService en su constructor y el contenedor le entrega una instancia de CatalogoEnMemoria. Sin registro, la petición falla con Unable to resolve service."}
-
-Tres pasos: registrar al arrancar, pedir en el constructor, recibir la instancia.
+Algo parecido pasa con una ruta literal y una con parámetro: con `/dato/{n}` y `/dato/especial`
+declaradas, `/dato/especial` la atendió la literal.
 :::
 
-Lo que pasa en una petición a `/Catalogo`: MVC necesita crear `CatalogoController`; ve que su
-constructor pide un `ICatalogoService`; busca en el registro y encuentra `CatalogoEnMemoria`; la crea
-(la primera vez) y se la entrega. El controlador no escribe `new` en ningún momento.
-
-`AddSingleton<ICatalogoService, CatalogoEnMemoria>()` significa: "cuando pidan `ICatalogoService`,
-entrega una `CatalogoEnMemoria`, y que sea **la misma** durante toda la vida de la aplicación".
-
-### Verificar
-
-Ejecuta y compara con la etapa 4. Ahora el catálogo tiene ocho productos (los de
-`CatalogoEnMemoria`), con nombres como `Papa criolla (libra)`. Respuestas:
-
-| Petición | Estado |
-|---|---|
-| `/Catalogo` | `200`, ocho productos |
-| `/Catalogo/Detalle/7` | `200`, Queso campesino (libra), 8 disponibles |
-| `/Catalogo/Detalle/2` | `200`, Mora de Castilla (libra), `Agotado` |
-| `/Catalogo/Detalle/999` | `404` |
-| `/Catalogo/Detalle/abc` | `404` |
-| `/productos/4` | `200`, Café pergamino (libra) |
-| `/salud` | `200`, `ok` |
-
-Y en la consola:
-
-```text
-GET /Catalogo -> 200 (58 ms)
-GET /Catalogo/Detalle/7 -> 200 (21 ms)
-GET /Catalogo/Detalle/2 -> 200 (1 ms)
-GET /Catalogo/Detalle/999 -> 404 (0 ms)
-GET /Catalogo/Detalle/abc -> 404 (1 ms)
-GET /Catalogo/Detalle -> 404 (0 ms)
-GET /productos/4 -> 200 (1 ms)
-GET /Diagnostico -> 200 (3 ms)
-GET /Diagnostico -> 200 (0 ms)
-GET /salud -> 200 (0 ms)
-```
-
-Las líneas `/Diagnostico` corresponden a la demostración de ciclos de vida de esta misma etapa.
+### Retos de la etapa 2
 
 ::: {.callout-tip}
-## Reto 5. Un servicio sin registrar
+## Reto 5. Restar dos números
 
-Comenta la línea `builder.Services.AddSingleton<ICatalogoService, CatalogoEnMemoria>();` y ejecuta.
-¿La aplicación arranca? ¿Qué pasa al pedir `/Catalogo`? ¿Y al pedir `/salud`?
+Crea una ruta que reste dos números: `/restar/10/4` debe responder `10 - 4 = 6`. Pruébala también
+con `/restar/4/10`.
 :::
 
 ::: {.callout-note collapse="true"}
 ## Solución del Reto 5
 
-La aplicación **arranca** y `/salud` responde `200` con `ok`. Falla solo la petición que necesita el servicio: `/Catalogo` da `500` con el cuerpo vacío. La consola muestra el error, pero no imprime la línea `GET /Catalogo -> 500` del registro:
-
-```text
-System.InvalidOperationException: Unable to resolve service for type 'MercadoCampesinoWeb.Services.ICatalogoService' while attempting to activate 'MercadoCampesinoWeb.Controllers.CatalogoController'.
+```csharp
+app.MapGet("/restar/{a:int}/{b:int}", (int a, int b) => $"{a} - {b} = {a - b}");
 ```
 
-La causa es la línea de registro que falta. Tampoco se afecta `/Diagnostico`, que no usa ese servicio: responde `200`. Descomenta la línea.
+`/restar/10/4` responde `10 - 4 = 6` y `/restar/4/10` responde `4 - 10 = -6`. También acepta
+negativos: `/restar/-3/2` responde `-3 - 2 = -5`.
 :::
 
-### Demostración del docente: ciclos de vida
+::: {.callout-tip}
+## Reto 6. Saludo con query string
 
-El registro lleva un método que decide cuánto vive la instancia. Esta parte la muestra el docente en
-pantalla; el código queda aquí completo para que lo leas y, si quieres, lo reproduzcas.
+Crea `/hola` que lea el parámetro `nombre` del query string. `/hola?nombre=Rosa` responde
+`Hola, Rosa` y `/hola` sin nada responde `Hola, visitante`.
+:::
 
-| Registro | Cuánto vive la instancia |
-|---|---|
-| `AddSingleton` | Una para toda la aplicación |
-| `AddScoped` | Una por petición |
-| `AddTransient` | Una nueva cada vez que se pide |
-
-Tres clases idénticas a propósito, en `Services/ServiciosDeCicloDeVida.cs`. Cada una guarda un
-`Guid`, un identificador único que se asigna al crear la instancia; si dos inyecciones muestran el
-mismo `Guid`, son la misma instancia.
+::: {.callout-note collapse="true"}
+## Solución del Reto 6
 
 ```csharp
-namespace MercadoCampesinoWeb.Services;
-
-// Tres clases identicas a proposito: lo unico que cambia es como se registran en Program.cs.
-// El Guid se asigna al crear la instancia, asi que sirve para saber si dos inyecciones son la misma.
-public class ServicioSingleton
-{
-    public Guid Id { get; } = Guid.NewGuid();
-}
-
-public class ServicioScoped
-{
-    public Guid Id { get; } = Guid.NewGuid();
-}
-
-public class ServicioTransient
-{
-    public Guid Id { get; } = Guid.NewGuid();
-}
+app.MapGet("/hola", (string? nombre) => $"Hola, {nombre ?? "visitante"}");
 ```
 
-Un controlador que las pide **dos veces cada una** y las muestra, `Controllers/DiagnosticoController.cs`:
+Como `nombre` no aparece entre llaves en la ruta, C# lo busca en el query string. El `?` del tipo
+`string?` permite que falte, y `??` pone el valor por defecto.
+:::
+
+### Cierre de la etapa 2
+
+- **Qué cambió:** las rutas reciben datos de la ruta y del query string.
+- **Cómo verificarlo:** pide `/saludo/Maria`, `/producto/7`, `/producto/tomate` y `/buscar?q=tomate`.
+- **Qué debes ver:** tres respuestas `200` con texto y un `404` vacío para `tomate`.
+
+## Etapa 3. Responder JSON
+
+### Qué vas a lograr
+
+Que el servidor devuelva **datos** y no solo frases: la lista de productos de la plaza, en el formato
+que cualquier programa puede leer.
+
+### La idea: una ficha de producto
+
+**JSON** es un formato de texto para datos. Un objeto se escribe entre llaves, con pares
+`"clave": valor`. Una lista va entre corchetes. Es el formato que usaste con `fetch` en la Semana 8:
+
+```json
+{"id": 1, "nombre": "Tomate", "precio": 3500}
+```
+
+Para que el servidor arme ese texto, primero necesita saber qué forma tiene un producto. En C# eso
+se define con un **record**: una ficha con campos fijos, de solo datos.
 
 ```csharp
-using MercadoCampesinoWeb.Services;
-using Microsoft.AspNetCore.Mvc;
+record Producto(int Id, string Nombre, decimal Precio);
+```
 
-namespace MercadoCampesinoWeb.Controllers;
+Esa línea dice "un `Producto` tiene un `Id` entero, un `Nombre` de texto y un `Precio` decimal".
 
-public class DiagnosticoController : Controller
+::: {.callout-tip}
+## Predice antes de seguir
+
+El record tiene campos con mayúscula inicial: `Id`, `Nombre`, `Precio`. Cuando el servidor lo
+convierta a JSON, ¿cómo crees que se escribirán las claves: `Nombre` o `nombre`? ¿Y qué tipo de
+contenido tendrá la respuesta?
+:::
+
+::: {.callout-note collapse="true"}
+## Respuesta
+
+Las claves salen en minúscula: `"id"`, `"nombre"`, `"precio"`. El framework convierte los nombres al
+estilo habitual de JSON sin que lo pidas. El tipo de contenido es `application/json`, y por eso el
+navegador sabe que es JSON y no una frase.
+:::
+
+### El código
+
+Reemplaza `Program.cs` por:
+
+```csharp
+// Etapa 3: responder datos en formato JSON.
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+// Una lista en memoria con los productos de la plaza.
+var productos = new List<Producto>
 {
-    private readonly ServicioSingleton _singleton1;
-    private readonly ServicioSingleton _singleton2;
-    private readonly ServicioScoped _scoped1;
-    private readonly ServicioScoped _scoped2;
-    private readonly ServicioTransient _transient1;
-    private readonly ServicioTransient _transient2;
+    new(1, "Tomate", 3500m),
+    new(2, "Aguacate", 6000m),
+    new(3, "Papa", 2800m),
+    new(4, "Panela", 4500m),
+};
 
-    // Cada servicio se pide dos veces para comparar los Guid dentro de una misma peticion.
-    public DiagnosticoController(
-        ServicioSingleton singleton1, ServicioSingleton singleton2,
-        ServicioScoped scoped1, ServicioScoped scoped2,
-        ServicioTransient transient1, ServicioTransient transient2)
+app.MapGet("/", () => "Plaza Campesina: pruebe /api/productos");
+
+// Si devolvemos un objeto o una lista, se convierte a JSON automáticamente.
+app.MapGet("/api/productos", () => productos);
+
+// Un objeto anónimo también sirve: se crea al vuelo con "new { ... }".
+app.MapGet("/api/estado", () => new { ok = true, tienda = "Plaza", total = productos.Count });
+
+// Results.Json y Results.NotFound nos dejan elegir qué se responde en cada caso.
+app.MapGet("/api/productos/{id:int}", (int id) =>
+{
+    var producto = productos.FirstOrDefault(p => p.Id == id);
+
+    if (producto is null)
     {
-        _singleton1 = singleton1;
-        _singleton2 = singleton2;
-        _scoped1 = scoped1;
-        _scoped2 = scoped2;
-        _transient1 = transient1;
-        _transient2 = transient2;
+        return Results.NotFound();   // 404 si no existe
     }
 
-    public IActionResult Index()
-    {
-        var texto =
-            $"Singleton 1: {_singleton1.Id}\n" +
-            $"Singleton 2: {_singleton2.Id}\n" +
-            $"Scoped 1:    {_scoped1.Id}\n" +
-            $"Scoped 2:    {_scoped2.Id}\n" +
-            $"Transient 1: {_transient1.Id}\n" +
-            $"Transient 2: {_transient2.Id}\n";
+    return Results.Json(producto);   // 200 con el producto en JSON
+});
 
-        return Content(texto, "text/plain; charset=utf-8");
-    }
-}
+app.Run();
+
+// Un record es una forma corta de declarar una clase de solo datos.
+record Producto(int Id, string Nombre, decimal Precio);
 ```
 
-Los registros ya estaban en `Program.cs` (las tres últimas líneas de `builder.Services`). Pedir
-`/Diagnostico` dos veces seguidas dio:
+::: {.callout-note}
+## C# justo a tiempo: lo que usa esta etapa
+
+- **`record Producto(...)`** declara una clase de solo datos en una línea. Va **al final** del
+  archivo, después de las instrucciones.
+- **`List<Producto>`** es una lista que guarda productos. El tipo entre `<` y `>` es el de sus
+  elementos.
+- **`new(1, "Tomate", 3500m)`** crea un `Producto`. La `m` de `3500m` marca un número `decimal`, el
+  tipo adecuado para dinero.
+- **`new { ok = true, tienda = "Plaza" }`** crea un objeto anónimo: una ficha armada al vuelo, sin
+  declarar su tipo.
+- **`productos.FirstOrDefault(p => p.Id == id)`** busca el primer producto cuyo `Id` coincide, o
+  devuelve `null` si no hay ninguno. `p => p.Id == id` es otra lambda: "dado un `p`, ¿su `Id` es
+  `id`?".
+- **`producto is null`** pregunta si no se encontró nada.
+- **`Results.Json(...)`** y **`Results.NotFound()`** te dejan elegir qué respuesta dar en cada caso.
+- Una lambda con llaves `{ ... }` puede tener varias instrucciones y usa `return` para devolver.
+:::
+
+### Ejecutarlo
+
+| Petición | Estado | Tipo de contenido | Cuerpo |
+|---|---|---|---|
+| `/` | `200` | `text/plain; charset=utf-8` | `Plaza Campesina: pruebe /api/productos` |
+| `/api/productos` | `200` | `application/json; charset=utf-8` | la lista de cuatro productos |
+| `/api/productos/1` | `200` | `application/json; charset=utf-8` | `{"id":1,"nombre":"Tomate","precio":3500}` |
+| `/api/productos/99` | `404` | (ninguno) | vacío |
+| `/api/productos/abc` | `404` | (ninguno) | vacío |
+| `/api/estado` | `200` | `application/json; charset=utf-8` | `{"ok":true,"tienda":"Plaza","total":4}` |
+
+Con `curl`:
 
 ```text
-Singleton 1: 269bb6df-87fc-471e-b808-384393c3df24
-Singleton 2: 269bb6df-87fc-471e-b808-384393c3df24
-Scoped 1:    7f5ef6a4-3950-4865-a113-1a86c95a39c8
-Scoped 2:    7f5ef6a4-3950-4865-a113-1a86c95a39c8
-Transient 1: 39e9c901-59a2-454e-b887-31803b4668ba
-Transient 2: f5a20cce-989e-4ff3-9e51-054eaf45eb8a
+$ curl -i http://localhost:5100/api/productos
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[{"id":1,"nombre":"Tomate","precio":3500},{"id":2,"nombre":"Aguacate","precio":6000},{"id":3,"nombre":"Papa","precio":2800},{"id":4,"nombre":"Panela","precio":4500}]
+
+$ curl -i http://localhost:5100/api/productos/99
+HTTP/1.1 404 Not Found
+Content-Length: 0
+
 ```
 
-```text
-Singleton 1: 269bb6df-87fc-471e-b808-384393c3df24
-Singleton 2: 269bb6df-87fc-471e-b808-384393c3df24
-Scoped 1:    28a2fe1d-4621-4666-8b36-9ebd2fbc04f5
-Scoped 2:    28a2fe1d-4621-4666-8b36-9ebd2fbc04f5
-Transient 1: 8c08d721-ff12-4afe-b3f7-8350a11f98bc
-Transient 2: 2c5f7879-fe64-4a08-b0d2-d54b1ee7c9cd
-```
+Las rutas que devuelven datos para otros programas llevan por costumbre el prefijo `/api`. Es un
+acuerdo entre quienes escriben servidores para no mezclarlas con las páginas.
+
+### Qué pasó por dentro
+
+Para `GET /api/productos/3`:
+
+1. El servidor encuentra la ruta `/api/productos/{id:int}` y guarda `id = 3`.
+2. La función busca en la lista el producto con `Id` igual a 3 y encuentra Papa.
+3. Como no es `null`, devuelve `Results.Json(producto)`.
+4. El framework convierte el `Producto` a texto JSON: `{"id":3,"nombre":"Papa","precio":2800}`.
+5. Responde `200`, con tipo `application/json` y ese texto de cuerpo.
+
+Con `/api/productos/99` el paso 2 no encuentra nada, `producto` es `null` y la función devuelve
+`Results.NotFound()`: un `404`.
 
 ::: {.diagrama}
-![](imagenes/ciclos-de-vida.svg){fig-alt="Dos peticiones y tres servicios. Singleton muestra la misma letra A en las cuatro inyecciones. Scoped muestra B y B en la primera petición y C y C en la segunda. Transient muestra cuatro letras distintas."}
+![](imagenes/plaza-ruta-404.svg){fig-alt="Una petición primero busca una ruta que coincida. Si ninguna coincide, el servidor responde 404 con cuerpo vacío; por ejemplo /noexiste o /producto/tomate. Si una ruta coincide y la función no encuentra el producto, devuelve NotFound y también responde 404."}
 
-Cada ficha es una inyección y la letra identifica su `Guid`.
+Un 404 puede venir de dos lugares: de una ruta que no coincide o de una función que no encontró el dato.
 :::
 
-| Servicio | Dentro de una petición (1 contra 2) | Entre las dos peticiones |
-|---|---|---|
-| Singleton | mismo `Guid` | mismo `Guid` |
-| Scoped | mismo `Guid` | cambia |
-| Transient | `Guid` distintos | cambia, y cada inyección recibe uno nuevo |
+La lista vive en la **memoria** del programa. Si detienes el servidor y lo vuelves a encender,
+vuelve a empezar con los mismos cuatro productos.
 
-**Singleton vive todo el proceso, Scoped una petición y Transient una inyección.** Los `Guid` de tu
-ejecución serán otros: lo que debe coincidir es el patrón de iguales y distintos.
+### Retos de la etapa 3
 
-Un caso que conviene conocer: un servicio Singleton que pide un Scoped en su constructor. En una
-copia se probó:
+::: {.callout-tip}
+## Reto 7. Un producto por nombre
 
-- **Development:** la aplicación **no arranca**. El mensaje dice que no puede consumir el servicio
-  scoped `ServicioScoped` desde el singleton `SingletonQueUsaScoped`:
+Crea `/api/productos/nombre/{nombre}` que devuelva el producto cuyo nombre coincide. Debe dar `200`
+con el JSON del producto, o `404` si no existe. Prueba con `papa`, `Aguacate` y `kiwi`.
+:::
 
-  ```text
-  Cannot consume scoped service 'MercadoCampesinoWeb.Services.ServicioScoped' from singleton 'MercadoCampesinoWeb.Services.SingletonQueUsaScoped'.
-  ```
+::: {.callout-note collapse="true"}
+## Solución del Reto 7
 
-- **Production** (`--no-launch-profile`): arranca y `GET /Diagnostico` responde `200` sin error. El
-  contenedor no valida en Production y el problema queda oculto.
+```csharp
+app.MapGet("/api/productos/nombre/{nombre}", (string nombre) =>
+{
+    var producto = productos.FirstOrDefault(p => p.Nombre.ToLower() == nombre.ToLower());
+    return producto is null ? Results.NotFound() : Results.Json(producto);
+});
+```
 
-Por eso el entorno que muestra la consola (`Hosting environment`) importa: con
-`--no-launch-profile` estás en `Production` y algunos errores no se anuncian.
+`papa` responde `{"id":3,"nombre":"Papa","precio":2800}`, `Aguacate` responde el aguacate y `kiwi`
+responde `404`. `ToLower()` pasa ambos textos a minúscula para que `papa` y `Papa` coincidan. El
+signo `? :` elige entre dos valores: `condición ? si es verdadera : si es falsa`.
+:::
+
+::: {.callout-tip}
+## Reto 8. Los productos baratos
+
+Crea `/api/productos/baratos` que devuelva solo los productos con precio menor a 4000.
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 8
+
+```csharp
+app.MapGet("/api/productos/baratos", () => productos.Where(p => p.Precio < 4000));
+```
+
+Responde `[{"id":1,"nombre":"Tomate","precio":3500},{"id":3,"nombre":"Papa","precio":2800}]`.
+`Where` filtra la lista y deja solo los elementos para los que la lambda es verdadera. La ruta no
+choca con `/api/productos/{id:int}` porque `baratos` no es un entero.
+:::
+
+### Cierre de la etapa 3
+
+- **Qué cambió:** `Program.cs` tiene una lista de productos, un `record` y rutas que devuelven JSON.
+- **Cómo verificarlo:** pide `/api/productos`, `/api/productos/1`, `/api/productos/99` y `/api/estado`.
+- **Qué debes ver:** JSON con `200` en las tres primeras y un `404` vacío para el producto 99.
+
+## Etapa 4. Responder HTML
+
+### Qué vas a lograr
+
+Que el servidor entregue **páginas** que el navegador dibuja: primero una escrita dentro de
+`Program.cs` y después una página completa con su CSS y su JavaScript, guardada en archivos.
+
+### La idea: la etiqueta de la bolsa
+
+El navegador no adivina qué recibió. Mira el **tipo de contenido** de la respuesta: es la etiqueta
+pegada a la bolsa. Si dice `text/plain`, muestra el texto tal cual. Si dice `text/html`, lo interpreta
+como una página y dibuja los títulos, los párrafos y los enlaces.
+
+| Tipo de contenido | Qué hace el navegador |
+|---|---|
+| `text/plain` | Muestra el texto sin cambios |
+| `text/html` | Dibuja una página |
+| `application/json` | Muestra los datos como texto (y `fetch` los puede leer) |
+| `text/css` | Aplica los estilos si una página lo pide; si lo abres directo, lo muestra como texto |
+| `image/svg+xml` | Dibuja una imagen |
+
+::: {.callout-tip}
+## Predice antes de seguir
+
+Una ruta devuelve el texto `<h1>Hola</h1>` con un `MapGet` como los de las etapas anteriores, sin
+tocar el tipo de contenido. ¿Qué ves en el navegador: un título grande o las etiquetas escritas?
+:::
+
+::: {.callout-note collapse="true"}
+## Respuesta
+
+Ves las etiquetas escritas: `<h1>Hola</h1>`. Una función que devuelve un texto responde con tipo
+`text/plain`, y el navegador respeta esa etiqueta. Para que dibuje el título, tienes que responder
+con tipo `text/html`.
+:::
+
+### Parte A. Una página desde una cadena
+
+La ruta `/pagina` escribe el HTML dentro de `Program.cs` y lo entrega con `Results.Content`, que deja
+elegir el tipo de contenido.
+
+### Parte B. Una página desde archivos
+
+Escribir páginas largas dentro de una cadena es incómodo. Lo habitual es guardarlas como archivos en
+una carpeta especial, **`wwwroot`**: la carpeta **pública** del proyecto. El servidor entrega
+directamente lo que haya ahí, con el tipo de contenido que corresponde a cada extensión.
+
+::: {.diagrama}
+![](imagenes/wwwroot-publica.svg){fig-alt="Los archivos de la carpeta wwwroot se pueden pedir desde el navegador: index.html en / y en /index.html, estilos.css en /estilos.css y archivos/precios.txt en /archivos/precios.txt. Program.cs, Plaza.csproj y appsettings.json quedan fuera y no se sirven."}
+
+Lo que está dentro de `wwwroot` es público. Lo que está fuera solo lo usa el servidor.
+:::
+
+### El código
+
+Crea la carpeta `wwwroot` dentro de `Plaza`, al lado de `Program.cs`. Dentro, crea estos dos archivos.
+
+**`wwwroot/index.html`**:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plaza Campesina</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <main>
+        <h1>Plaza Campesina</h1>
+        <p>Productos frescos, directo del campo.</p>
+
+        <ul id="lista">
+            <li>Cargando...</li>
+        </ul>
+    </main>
+
+    <script>
+        // Pedimos la lista a la ruta /api/productos y la dibujamos en la página.
+        const lista = document.getElementById("lista");
+
+        fetch("/api/productos")
+            .then(respuesta => respuesta.json())
+            .then(productos => {
+                lista.innerHTML = "";
+
+                productos.forEach(producto => {
+                    const item = document.createElement("li");
+                    const precio = producto.precio.toLocaleString("es-CO");
+                    item.textContent = producto.nombre + ": $" + precio;
+                    lista.appendChild(item);
+                });
+            })
+            .catch(() => {
+                lista.innerHTML = "<li>No se pudo cargar la lista</li>";
+            });
+    </script>
+</body>
+</html>
+```
+
+**`wwwroot/estilos.css`**:
+
+```css
+body {
+    font-family: system-ui, sans-serif;
+    background: #f6f3e8;
+    color: #2b2b2b;
+    margin: 0;
+}
+
+main {
+    max-width: 32rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    color: #2e6b2f;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #ffffff;
+    border-left: 6px solid #2e6b2f;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+}
+```
+
+Y reemplaza `Program.cs` por:
+
+```csharp
+// Etapa 4: responder páginas HTML.
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+// Estas dos líneas sirven los archivos de la carpeta wwwroot.
+// UseDefaultFiles hace que "/" entregue wwwroot/index.html.
+// UseStaticFiles entrega el resto (estilos.css, imágenes, etc.).
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+var productos = new List<Producto>
+{
+    new(1, "Tomate", 3500m),
+    new(2, "Aguacate", 6000m),
+    new(3, "Papa", 2800m),
+    new(4, "Panela", 4500m),
+};
+
+// HTML escrito en una cadena. El tipo "text/html" le dice al navegador
+// que lo dibuje como página y no como texto plano.
+app.MapGet("/pagina", () =>
+{
+    var html = """
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="utf-8">
+            <title>Plaza</title>
+        </head>
+        <body>
+            <h1>Plaza Campesina</h1>
+            <p>Esta página sale de una cadena dentro de Program.cs.</p>
+        </body>
+        </html>
+        """;
+
+    return Results.Content(html, "text/html; charset=utf-8");
+});
+
+// La página de wwwroot/index.html pide estos datos con fetch.
+app.MapGet("/api/productos", () => productos);
+
+app.Run();
+
+record Producto(int Id, string Nombre, decimal Precio);
+```
+
+::: {.callout-warning}
+## Ya no hay MapGet("/")
+
+Fíjate que en este `Program.cs` **no existe** la ruta `/`. Si la dejas, gana sobre el
+`index.html`: pedirías `/` y verías el texto de la ruta, no tu página. Más abajo, en los errores,
+está el caso completo.
+:::
+
+::: {.callout-note}
+## C# justo a tiempo: lo que usa esta etapa
+
+- **`app.UseDefaultFiles();`** y **`app.UseStaticFiles();`** activan el servicio de archivos. La
+  primera hace que `/` entregue `index.html`. La segunda entrega el resto de lo que haya en
+  `wwwroot`. Van en ese orden.
+- **`Results.Content(html, "text/html; charset=utf-8")`** responde con el texto y con el tipo de
+  contenido que tú eliges.
+- **`"""..."""`** es una **cadena de varias líneas**. Todo lo que está entre las comillas triples se
+  guarda tal cual, con sus saltos de línea.
+:::
+
+La página `index.html` pide los datos a tu propia ruta con `fetch`, igual que en la Semana 8: pide
+`/api/productos`, recibe el JSON y dibuja una lista. Para el navegador, tu servidor es una API más.
+
+### Ejecutarlo
+
+Abre estas direcciones:
+
+| Petición | Estado | Tipo de contenido | Qué ves |
+|---|---|---|---|
+| `/` | `200` | `text/html` | La página "Plaza Campesina" con la lista de productos |
+| `/index.html` | `200` | `text/html` | La misma página |
+| `/estilos.css` | `200` | `text/css` | El archivo de estilos como texto |
+| `/pagina` | `200` | `text/html; charset=utf-8` | Una página con el título "Plaza Campesina" |
+| `/api/productos` | `200` | `application/json; charset=utf-8` | El JSON de la lista |
+| `/noexiste` | `404` | (ninguno) | vacío |
+
+La lista de la página aparece como `Tomate: $3.500`, `Aguacate: $6.000`, `Papa: $2.800` y
+`Panela: $4.500`. El formato con punto sale de `toLocaleString("es-CO")`, en el JavaScript.
+
+Los encabezados de `/pagina`, con `curl`:
+
+```text
+$ curl -i http://localhost:5100/pagina
+HTTP/1.1 200 OK
+Content-Length: 216
+Content-Type: text/html; charset=utf-8
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Plaza</title>
+</head>
+<body>
+    <h1>Plaza Campesina</h1>
+    <p>Esta página sale de una cadena dentro de Program.cs.</p>
+</body>
+</html>
+```
+
+Y los de `/`, donde el tipo lo decidió la extensión del archivo (el tamaño depende de tu archivo):
+
+```text
+$ curl -i http://localhost:5100/
+HTTP/1.1 200 OK
+Content-Length: 1212
+Content-Type: text/html
+```
+
+### Qué pasó por dentro
+
+Abrir una página dispara varias peticiones. Para abrir `/`:
+
+1. El navegador envía `GET /`.
+2. `UseDefaultFiles` ve que piden `/` y busca `index.html` en `wwwroot`. Lo encuentra.
+3. `UseStaticFiles` entrega el archivo con tipo `text/html`, porque termina en `.html`.
+4. El navegador lee la página y descubre que necesita `estilos.css`. Envía `GET /estilos.css`.
+5. El servidor entrega el archivo con tipo `text/css`.
+6. El JavaScript de la página ejecuta `fetch("/api/productos")`: una tercera petición.
+7. Esta no coincide con un archivo, así que la atiende la ruta `MapGet`. Devuelve JSON.
+8. El JavaScript dibuja la lista dentro de la página.
+
+Abre la pestaña **Red** de DevTools y recarga: verás estas peticiones, y una más a `/favicon.ico`, el
+ícono de la pestaña, que el navegador pide siempre y aquí responde `404`. Es el único error que
+aparece en la consola.
+
+::: {.callout-note collapse="true"}
+## Profundiza (opcional): charset
+
+Los archivos de `wwwroot` salen con `Content-Type: text/html` y `text/css`, sin `charset`. Funciona
+porque el HTML declara `<meta charset="utf-8">`. En cambio `/pagina` sí declara el `charset` en el
+encabezado, porque lo escribiste en `Results.Content`. Si guardas un archivo con tildes y se ven
+raras, revisa esa línea del HTML.
+:::
+
+### Retos de la etapa 4
+
+::: {.callout-tip}
+## Reto 9. Tu producto favorito
+
+Crea la ruta `/favorito` que devuelva una página HTML con el nombre y el precio de tu producto
+favorito de la lista. Usa un título `<h1>` y un párrafo.
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 9
+
+```csharp
+app.MapGet("/favorito", () =>
+{
+    var producto = productos.First(p => p.Nombre == "Papa");
+    var html = $"""
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="utf-8">
+            <title>Mi favorito</title>
+        </head>
+        <body>
+            <h1>{producto.Nombre}</h1>
+            <p>Precio: ${producto.Precio}</p>
+        </body>
+        </html>
+        """;
+
+    return Results.Content(html, "text/html; charset=utf-8");
+});
+```
+
+Al abrir `/favorito` ves el título `Papa` y el párrafo `Precio: $2800`. La cadena lleva `$` antes de
+las comillas triples para que `{producto.Nombre}` se reemplace por su valor. El `$` que está antes de
+`{producto.Precio}` es un símbolo de peso escrito tal cual.
+:::
+
+::: {.callout-tip}
+## Reto 10. Una segunda página
+
+Agrega una página `acerca.html` en `wwwroot` con un título `<h1>` que diga "Acerca de la plaza" y
+ábrela en `/acerca.html`. ¿Necesitas reiniciar el servidor?
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 10
+
+Crea `wwwroot/acerca.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Acerca</title>
+</head>
+<body>
+    <h1>Acerca de la plaza</h1>
+</body>
+</html>
+```
+
+Abre `http://localhost:5100/acerca.html`: responde `200` con tipo `text/html`. **No hace falta
+reiniciar**: el servidor lee los archivos de `wwwroot` en cada petición. Reiniciar solo hace falta
+cuando cambia el código de `Program.cs`.
+:::
+
+### Cierre de la etapa 4
+
+- **Qué cambió:** hay una carpeta `wwwroot` con una página y su CSS, y `Program.cs` activa el servicio
+  de archivos. Se quitó `MapGet("/")`.
+- **Cómo verificarlo:** abre `/`, `/pagina` y `/estilos.css`.
+- **Qué debes ver:** la página con los cuatro productos, otra página corta en `/pagina` y el CSS como
+  texto.
+
+## Etapa 5. Estados y archivos
+
+### Qué vas a lograr
+
+Que el servidor use el **estado correcto** en cada caso, entregue archivos para **descargar** y reciba
+datos de un formulario con **POST**.
+
+### La idea: la cara del vendedor
+
+Hasta ahora casi todo fue `200` o `404`. El estado es la forma en que el servidor resume cómo le
+fue, y se agrupa por la primera cifra:
+
+- **2xx:** salió bien.
+- **4xx:** el problema está en lo que pidió el cliente.
+- **5xx:** el servidor falló.
+
+::: {.diagrama}
+![](imagenes/estados-http.svg){fig-alt="Estados agrupados por la primera cifra. 2xx salió bien: 200 OK y 201 Created. 4xx el problema está en lo que pidió el cliente: 400 Bad Request, 404 Not Found, 405 Method Not Allowed, 415 Unsupported Media Type y 418 I'm a teapot. 5xx falló el servidor: 500 Internal Server Error."}
+
+Los estados que usa Plaza, con un ejemplo de cada uno.
+:::
+
+::: {.callout-tip}
+## Predice antes de seguir
+
+Vas a crear `/api/descuento/{porcentaje:int}`, que rechaza porcentajes fuera de 0 a 100. ¿Qué estado
+crees que da `/api/descuento/150`: `404` porque "no existe", u otro? ¿Y `/api/descuento/abc`?
+:::
+
+::: {.callout-note collapse="true"}
+## Respuesta
+
+`/api/descuento/150` da **`400 Bad Request`**: la ruta sí coincide (150 es un entero) y es la función
+la que rechaza el valor, con un mensaje. `/api/descuento/abc` da **`404`**: `abc` no es un entero, la
+ruta no coincide y la función nunca se ejecuta.
+:::
+
+### El código
+
+Primero, los archivos de `wwwroot`. Reemplaza `index.html` y `estilos.css`, y agrega dos archivos en
+carpetas nuevas.
+
+**`wwwroot/index.html`**, un formulario de contacto y dos enlaces de descarga:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contacto - Plaza Campesina</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <main>
+        <h1>Escríbale a la plaza</h1>
+
+        <form id="formulario">
+            <label>
+                Nombre
+                <input type="text" id="nombre" required>
+            </label>
+            <label>
+                Mensaje
+                <textarea id="mensaje" rows="3" required></textarea>
+            </label>
+            <button type="submit">Enviar</button>
+        </form>
+
+        <p id="resultado"></p>
+
+        <h2>Descargas</h2>
+        <ul>
+            <li><a href="/descargas/precios">Lista de precios (texto)</a></li>
+            <li><a href="/descargas/logo">Logo de la plaza (imagen)</a></li>
+        </ul>
+    </main>
+
+    <script>
+        const formulario = document.getElementById("formulario");
+        const resultado = document.getElementById("resultado");
+
+        formulario.addEventListener("submit", async evento => {
+            evento.preventDefault();
+
+            const datos = {
+                nombre: document.getElementById("nombre").value,
+                mensaje: document.getElementById("mensaje").value
+            };
+
+            // POST con JSON a la ruta /api/contacto.
+            const respuesta = await fetch("/api/contacto", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            });
+
+            if (respuesta.status === 201) {
+                const guardado = await respuesta.json();
+                resultado.textContent = "Recibido (201). Gracias, " + guardado.nombre + ".";
+                formulario.reset();
+            } else {
+                resultado.textContent = "No se pudo enviar. Estado: " + respuesta.status;
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+**`wwwroot/estilos.css`**:
+
+```css
+body {
+    font-family: system-ui, sans-serif;
+    background: #f6f3e8;
+    color: #2b2b2b;
+    margin: 0;
+}
+
+main {
+    max-width: 32rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1, h2 {
+    color: #2e6b2f;
+}
+
+label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+input, textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    font: inherit;
+}
+
+button {
+    background: #2e6b2f;
+    color: #ffffff;
+    border: 0;
+    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+ul {
+    padding-left: 1.2rem;
+}
+```
+
+**`wwwroot/archivos/precios.txt`**:
+
+```text
+Lista de precios de la Plaza Campesina
+
+Tomate     3500
+Aguacate   6000
+Papa       2800
+Panela     4500
+```
+
+**`wwwroot/imagenes/logo.svg`**:
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+    <circle cx="60" cy="60" r="56" fill="#2e6b2f"/>
+    <circle cx="60" cy="68" r="26" fill="#d9372b"/>
+    <path d="M60 42 C52 30 40 32 36 38 C46 38 54 42 60 42 Z" fill="#8cc152"/>
+    <path d="M60 42 C68 30 80 32 84 38 C74 38 66 42 60 42 Z" fill="#8cc152"/>
+</svg>
+```
+
+Y `Program.cs`:
+
+```csharp
+// Etapa 5: códigos de estado, archivos y recibir datos con POST.
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+// Sirve los archivos de la carpeta wwwroot ("/" entrega wwwroot/index.html).
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+var productos = new List<Producto>
+{
+    new(1, "Tomate", 3500m),
+    new(2, "Aguacate", 6000m),
+    new(3, "Papa", 2800m),
+    new(4, "Panela", 4500m),
+};
+
+// 200 OK con la lista.
+app.MapGet("/api/productos", () => Results.Ok(productos));
+
+// 200 OK si existe, 404 Not Found si no.
+app.MapGet("/api/productos/{id:int}", (int id) =>
+{
+    var producto = productos.FirstOrDefault(p => p.Id == id);
+
+    return producto is null
+        ? Results.NotFound(new { error = $"No existe el producto {id}" })
+        : Results.Ok(producto);
+});
+
+// 400 Bad Request cuando el dato recibido no es válido.
+// Ejemplo: /api/descuento/20 responde; /api/descuento/150 es un error del cliente.
+app.MapGet("/api/descuento/{porcentaje:int}", (int porcentaje) =>
+{
+    if (porcentaje < 0 || porcentaje > 100)
+    {
+        return Results.BadRequest(new { error = "El porcentaje debe estar entre 0 y 100" });
+    }
+
+    return Results.Ok(new { porcentaje, mensaje = $"Descuento del {porcentaje}% aplicado" });
+});
+
+// Cualquier código se puede elegir con Results.StatusCode. 418 es una broma clásica de HTTP.
+app.MapGet("/api/tetera", () => Results.StatusCode(418));
+
+// Results.File entrega un archivo. El tercer argumento es el nombre con que se descarga.
+app.MapGet("/descargas/precios", () =>
+{
+    var ruta = Path.Combine(app.Environment.WebRootPath, "archivos", "precios.txt");
+    return Results.File(ruta, "text/plain", "precios-plaza.txt");
+});
+
+app.MapGet("/descargas/logo", () =>
+{
+    var ruta = Path.Combine(app.Environment.WebRootPath, "imagenes", "logo.svg");
+    return Results.File(ruta, "image/svg+xml", "logo-plaza.svg");
+});
+
+// MapPost recibe datos que envía el cliente en el cuerpo de la petición.
+// El JSON llega convertido en un objeto Contacto.
+app.MapPost("/api/contacto", (Contacto contacto) =>
+{
+    if (string.IsNullOrWhiteSpace(contacto.Nombre) || string.IsNullOrWhiteSpace(contacto.Mensaje))
+    {
+        return Results.BadRequest(new { error = "Nombre y mensaje son obligatorios" });
+    }
+
+    // 201 Created: algo nuevo quedó registrado. Devolvemos lo recibido.
+    return Results.Created("/api/contacto", contacto);
+});
+
+app.Run();
+
+record Producto(int Id, string Nombre, decimal Precio);
+
+record Contacto(string Nombre, string Mensaje);
+```
+
+::: {.callout-note}
+## C# justo a tiempo: lo que usa esta etapa
+
+- **`Results.Ok`**, **`Results.NotFound`**, **`Results.BadRequest`** y **`Results.Created`** eligen el
+  estado `200`, `404`, `400` y `201`. Cada una acepta un objeto que se envía como JSON.
+- **`Results.StatusCode(418)`** elige cualquier número.
+- **`condición ? valorSi : valorNo`** es el operador ternario: elige entre dos valores.
+- **`||`** significa "o": la condición se cumple si alguna de las dos partes es verdadera.
+- **`Path.Combine`** une partes de una ruta de archivo. **`app.Environment.WebRootPath`** es dónde
+  está la carpeta `wwwroot` en tu disco.
+- **`app.MapPost`** atiende el método POST: el cliente **envía** datos en el cuerpo de la petición.
+  El parámetro `Contacto contacto` recibe ese JSON ya convertido en un objeto.
+- **`string.IsNullOrWhiteSpace(x)`** es verdadero si `x` es nulo, vacío o solo espacios.
+:::
+
+### Ejecutarlo
+
+| Petición | Estado | Tipo de contenido | Cuerpo |
+|---|---|---|---|
+| `/api/productos` | `200` | `application/json; charset=utf-8` | la lista |
+| `/api/productos/2` | `200` | `application/json; charset=utf-8` | `{"id":2,"nombre":"Aguacate","precio":6000}` |
+| `/api/productos/99` | `404` | `application/json; charset=utf-8` | `{"error":"No existe el producto 99"}` |
+| `/api/descuento/20` | `200` | `application/json; charset=utf-8` | `{"porcentaje":20,"mensaje":"Descuento del 20% aplicado"}` |
+| `/api/descuento/150` | `400` | `application/json; charset=utf-8` | `{"error":"El porcentaje debe estar entre 0 y 100"}` |
+| `/api/descuento/abc` | `404` | (ninguno) | vacío |
+| `/api/tetera` | `418` | (ninguno) | vacío |
+| `/descargas/precios` | `200` | `text/plain`, descarga | `precios-plaza.txt` |
+| `/descargas/logo` | `200` | `image/svg+xml`, descarga | `logo-plaza.svg` |
+
+Compara con la etapa 3: `/api/productos/99` seguía siendo un `404`, pero ahora trae un cuerpo JSON
+con el motivo. Un `404` puede ser vacío o explicar qué pasó.
+
+La respuesta de una descarga trae un encabezado extra, `Content-Disposition`, que le pide al
+navegador **guardar** el archivo en lugar de mostrarlo:
+
+```text
+$ curl -i http://localhost:5100/descargas/precios
+HTTP/1.1 200 OK
+Content-Length: 104
+Content-Type: text/plain
+Content-Disposition: attachment; filename=precios-plaza.txt; filename*=UTF-8''precios-plaza.txt
+
+Lista de precios de la Plaza Campesina
+
+Tomate     3500
+Aguacate   6000
+Papa       2800
+Panela     4500
+```
+
+Abre `/` en el navegador. La página tiene un formulario y dos enlaces de descarga. Escribe un nombre
+y un mensaje y presiona **Enviar**: aparece `Recibido (201). Gracias,` y tu nombre. Eso fue un POST
+con estado `201`.
+
+### Qué pasó por dentro
+
+Para el formulario:
+
+1. Presionas **Enviar**. El JavaScript de la página arma un objeto con `nombre` y `mensaje`.
+2. Con `fetch` envía un `POST /api/contacto` con ese objeto como JSON en el cuerpo y el tipo de
+   contenido `application/json`.
+3. El servidor busca una ruta `MapPost` para `/api/contacto`. La encuentra.
+4. Convierte el JSON a un objeto `Contacto` y ejecuta la función.
+5. Si falta el nombre o el mensaje, responde `400` con `{"error":"..."}`.
+6. Si todo está bien, responde `201 Created` y devuelve lo recibido.
+7. La página lee el estado: si es `201`, muestra el agradecimiento.
+
+Para una descarga, `Results.File(ruta, tipo, nombre)` lee el archivo del disco y lo envía con el tipo
+indicado y con `Content-Disposition: attachment`, que es lo que provoca que el navegador lo guarde con
+el nombre de tu tercer argumento.
+
+::: {.callout-note collapse="true"}
+## Profundiza (opcional): probar el POST con curl
+
+Desde Git Bash, con un archivo o con una cadena JSON:
+
+```text
+$ curl -i -X POST -H "Content-Type: application/json" -d '{"nombre":"Rosa","mensaje":"Quiero un kilo de tomate"}' http://localhost:5100/api/contacto
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+Location: /api/contacto
+
+{"nombre":"Rosa","mensaje":"Quiero un kilo de tomate"}
+```
+
+Y los casos que fallan, con su estado:
+
+| Qué envías | Estado |
+|---|---|
+| `{"nombre":"","mensaje":"hola"}` | `400`, `{"error":"Nombre y mensaje son obligatorios"}` |
+| `{}` | `400`, el mismo mensaje |
+| `-d` sin `Content-Type: application/json` | `415 Unsupported Media Type`, vacío |
+| Un `GET` a `/api/contacto` | `405 Method Not Allowed`, con `Allow: POST` |
+| JSON roto como `{nombre` | `400`, con un texto largo de error en Development |
+
+El `415` aparece porque `curl -d` envía por defecto `application/x-www-form-urlencoded`, y la ruta
+solo entiende JSON. El `405` aparece porque `/api/contacto` solo tiene `MapPost`.
+:::
+
+### Retos de la etapa 5
+
+::: {.callout-tip}
+## Reto 11. Una oferta con tres posibles respuestas
+
+Crea `/api/oferta/{id:int}/{porcentaje:int}`. Si el producto no existe, responde `404` con un
+mensaje. Si el porcentaje está fuera de 0 a 100, `400`. Si todo está bien, `200` con el nombre y el
+precio final con descuento.
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 11
+
+```csharp
+app.MapGet("/api/oferta/{id:int}/{porcentaje:int}", (int id, int porcentaje) =>
+{
+    var producto = productos.FirstOrDefault(p => p.Id == id);
+
+    if (producto is null)
+    {
+        return Results.NotFound(new { error = $"No existe el producto {id}" });
+    }
+
+    if (porcentaje < 0 || porcentaje > 100)
+    {
+        return Results.BadRequest(new { error = "El porcentaje debe estar entre 0 y 100" });
+    }
+
+    var precioFinal = producto.Precio - producto.Precio * porcentaje / 100;
+    return Results.Ok(new { producto.Nombre, precioFinal });
+});
+```
+
+`/api/oferta/1/20` responde `200` con `{"nombre":"Tomate","precioFinal":2800}`. `/api/oferta/9/20`
+responde `404` con `{"error":"No existe el producto 9"}`. `/api/oferta/1/150` responde `400` con el
+mensaje del porcentaje.
+:::
+
+::: {.callout-tip}
+## Reto 12. Otra descarga
+
+Crea el archivo `wwwroot/archivos/contacto.txt` con tu nombre y tu número de puesto, y una ruta
+`/descargas/contacto` que lo entregue para descargar con el nombre `contacto-plaza.txt`.
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 12
+
+```csharp
+app.MapGet("/descargas/contacto", () =>
+{
+    var ruta = Path.Combine(app.Environment.WebRootPath, "archivos", "contacto.txt");
+    return Results.File(ruta, "text/plain", "contacto-plaza.txt");
+});
+```
+
+La respuesta es `200` con `Content-Disposition: attachment; filename=contacto-plaza.txt`.
+Como `contacto.txt` está dentro de `wwwroot`, también se puede pedir directo en
+`/archivos/contacto.txt`, sin descarga forzada. Si un archivo solo debe salir por su ruta, guárdalo
+fuera de `wwwroot`.
+:::
 
 ### Cierre de la etapa 5
 
-- **Qué cambió:** hay una interfaz, una clase que la implementa y un registro en `Program.cs`. El
-  controlador recibe el servicio por constructor.
-- **Cómo verificarlo:** ejecuta y pide `/Catalogo` y `/Catalogo/Detalle/7`. Para la demostración,
-  `/Diagnostico` dos veces.
-- **Qué debes ver:** ocho productos, un `200` en el detalle 7 y, en la demostración, los `Guid`
-  iguales y distintos de la tabla.
+- **Qué cambió:** las rutas eligen su estado, hay descargas con `Results.File` y una ruta `MapPost`
+  que recibe un formulario.
+- **Cómo verificarlo:** pide `/api/descuento/20`, `/api/descuento/150`, `/api/tetera` y
+  `/descargas/precios`, y envía el formulario de `/`.
+- **Qué debes ver:** `200`, `400` con mensaje, `418`, una descarga y el mensaje `Recibido (201)`.
 
-## Errores frecuentes
+## Errores que te van a pasar
 
-Cada uno de estos errores apareció de verdad al preparar el material, con el mensaje que ves aquí.
+Cada uno de estos tropiezos apareció de verdad al preparar el material.
 
-### La consola dice Production y el error no tiene detalle
+### Agregué una ruta y da 404
 
-Un error en una acción devuelve `500` con el cuerpo vacío y la consola muestra
-`Hosting environment: Production`. `--no-launch-profile` ignora `launchSettings.json`, donde está
-`ASPNETCORE_ENVIRONMENT=Development`. El detalle del error sale en la consola. Para ver la página de
-error detallada hay que fijar esa variable de entorno.
+**Qué ves:** escribiste una ruta nueva, guardaste, recargaste y sigue el `404`.
 
-### El registro no imprime nada cuando la petición falla
+**Por qué:** el servidor ejecuta el programa que compiló al arrancar. Con `dotnet run`, el código
+nuevo no existe hasta que reinicies. Con `dotnet watch`, cambiar el texto de una ruta se aplica en
+caliente, pero **una ruta nueva exige reiniciar**: avisa con `Restart is needed to apply the changes`
+o con una advertencia `ENC0118`.
 
-La consola tiene los `fail:` de MVC, pero no una línea `GET /Catalogo -> 500`. El `Console.WriteLine`
-está después de `await siguiente()` y una excepción salta ese código.
+**Cómo se arregla:** detén con `Ctrl+C` y ejecuta de nuevo. Los archivos de `wwwroot` son la excepción:
+se leen en cada petición y no piden reinicio.
 
-### El middleware tiene el método mal nombrado
+### /producto/tomate da 404 y no un error
 
-```text
-System.InvalidOperationException: No public 'Invoke' or 'InvokeAsync' method found for middleware of type 'MercadoCampesinoWeb.Middleware.RegistroPeticionesMiddleware'.
-```
+**Qué ves:** pediste `/producto/tomate`, `/producto/3.5` o `/sumar/3/x` y llegó un `404` vacío.
 
-El proyecto compila y falla al arrancar, en `UseMiddleware`. El método debe llamarse `Invoke` o
-`InvokeAsync`.
+**Por qué:** `{id:int}` es parte de la forma de la ruta. Un valor que no es entero hace que la ruta
+**no coincida**, y sin ruta que coincida el resultado es `404`. No hay mensaje que mostrar porque tu
+función nunca se ejecutó.
 
-### La vista no se encuentra
+**Cómo se arregla:** no hay nada que arreglar. Si quieres un mensaje, quita la restricción y valida
+dentro de la función.
 
-```text
-System.InvalidOperationException: The view 'Index' was not found. The following locations were searched:
-```
+### Mi index.html no aparece en /
 
-Le siguen `/Views/Catalogo/Index.cshtml` y `/Views/Shared/Index.cshtml`, con estado `500`. MVC busca
-`Views/<Controlador>/<Acción>.cshtml` y luego `Views/Shared/`. La carpeta debe llamarse como el
-controlador, sin el sufijo `Controller`. Una carpeta mal escrita da el mismo mensaje.
+**Qué ves:** creaste `wwwroot/index.html`, pero al abrir `/` ves un texto plano, sin página.
 
-### MapGet("/") tapa al catálogo
+**Por qué:** quedó un `app.MapGet("/", ...)` de una etapa anterior. Una ruta de `MapGet` gana sobre el
+archivo. En la prueba, con ese `MapGet` presente, `/` respondió `text/plain` y `/index.html` sí
+entregó el archivo.
 
-En `/` responde `Mercado Campesino Digital` en texto plano, sin error. Gana el `MapGet`. Quita
-`app.MapGet("/", ...)`.
+**Cómo se arregla:** borra el `MapGet("/")`, o abre `/index.html`.
 
-### La vista usa Producto sin using
+### /hora no muestra la hora de Colombia
 
-```text
-Views\Catalogo\Index.cshtml(1,13): error CS0246: El nombre del tipo o del espacio de nombres 'Producto' no se encontró (¿falta una directiva using o una referencia de ensamblado?)
-```
+**Qué ves:** la hora de `/hora` no coincide con la de tu reloj.
 
-Falla en `dotnet build`, no al ejecutar. Agrega `@using MercadoCampesinoWeb.Models` a la vista.
+**Por qué:** `DateTime.Now` es la hora **del computador donde corre el servidor**. En tu máquina
+coincide con la tuya. Un servidor en la nube normalmente corre en UTC y mostraría otra hora, aunque
+el código sea idéntico.
 
-### dotnet watch no aplica una ruta nueva
+**Cómo se arregla:** `DateTime.UtcNow` da siempre la hora UTC. Para mostrar la hora del usuario, el
+cálculo suele hacerse en el navegador.
 
-```text
-warning ENC0118: Es posible que el cambio de "código de nivel superior" no tenga efecto hasta que se reinicie la aplicación. Press "Ctrl + R" to restart.
-```
+### Las tildes llegan rotas con curl
 
-Reinicia como indica el mensaje, o detén y vuelve a ejecutar.
+**Qué ves:** enviaste `"mensaje":"¿Tienen aguacate?"` con `curl -d` y el servidor respondió `400`
+con `Cannot transcode invalid UTF-8 JSON text`.
 
-### Un servicio inyectado sin registrar
+**Por qué:** la terminal de Windows envió la `¿` en otra codificación, no en UTF-8. El servidor
+estaba bien: lo que llegó no era JSON válido.
 
-```text
-System.InvalidOperationException: Unable to resolve service for type 'MercadoCampesinoWeb.Services.ICatalogoService' while attempting to activate 'MercadoCampesinoWeb.Controllers.CatalogoController'.
-```
+**Cómo se arregla:** prueba las tildes con el formulario de la página, o guarda el JSON en un archivo
+UTF-8 y envíalo con `--data-binary @archivo.json`. De los dos modos, el servidor respondió `201`.
 
-Falta `builder.Services.AddSingleton<ICatalogoService, CatalogoEnMemoria>()`. Solo falla la petición
-que usa ese controlador.
+### Buscando: sale vacío, no "todo"
 
-### Un servicio Scoped dentro de un Singleton
+**Qué ves:** `/buscar?q=` responde `Buscando: ` y esperabas `Buscando: todo`.
 
-`Cannot consume scoped service '...' from singleton '...'`. En Development el contenedor lo rechaza
-al arrancar. En Production pasa sin aviso.
+**Por qué:** `q ?? "todo"` solo reemplaza cuando `q` **no viene**. En `?q=` sí viene, pero vacío.
 
-### Las tildes de los datos salen como entidades
+**Cómo se arregla:** usa `string.IsNullOrWhiteSpace(q) ? "todo" : q`, que cubre las dos situaciones.
 
-`Productor: L&#xE1;cteos El P&#xE1;ramo` en el HTML crudo. Razor codifica lo que no es ASCII básico
-en los valores dinámicos. El navegador lo muestra bien.
+### El puerto está ocupado
+
+**Qué ves:** al ejecutar, la consola dice `Failed to bind to address http://127.0.0.1:5100: address
+already in use` y el programa termina.
+
+**Por qué:** hay otro servidor encendido en ese puerto. Casi siempre es una terminal anterior con
+`dotnet run` que no detuviste.
+
+**Cómo se arregla:** ve a esa terminal y presiona `Ctrl+C`, o cierra la terminal.
+
+### Dos rutas iguales: el error llega tarde
+
+**Qué ves:** el servidor arranca bien, pero al pedir una ruta responde `500` con
+`AmbiguousMatchException: The request matched multiple endpoints`.
+
+**Por qué:** registraste la misma ruta dos veces. El servidor no se queja al arrancar. Se da cuenta
+cuando alguien la pide.
+
+**Cómo se arregla:** busca la ruta repetida en `Program.cs` y deja una sola.
+
+### Un 400 con una página llena de texto
+
+**Qué ves:** una petición mal armada responde `400` y un texto largo que empieza con
+`BadHttpRequestException`, con muchas líneas de traza.
+
+**Por qué:** el entorno es **Development** y el servidor muestra el detalle del error para ayudarte.
+En **Production** el mismo error llega con el cuerpo vacío. La línea `Hosting environment` de la
+consola te dice en cuál estás.
+
+**Cómo se arregla:** lee la primera línea, que dice qué falló. Casi siempre es un dato mal enviado.
 
 ## Lo que debes poder explicar
 
-1. Qué hace cada una de las cuatro líneas de `Program.cs` y qué cambia antes y después de `Build()`.
-2. Qué es el pipeline y por qué un middleware tiene un momento de ida y otro de vuelta.
-3. Qué pasa si un middleware no llama a `siguiente`, y qué pasa con un `app.Run` antes de las rutas.
-4. Qué recibe el framework en el constructor de un middleware y qué en `InvokeAsync`.
-5. Qué responsabilidad tiene el modelo, cuál la vista y cuál el controlador.
-6. Dónde busca MVC la vista de una acción.
-7. Cómo se lee la ruta `{controller=Catalogo}/{action=Index}/{id?}` y qué pasa si falta un segmento.
-8. Por qué la ruta propia va antes que la convencional.
-9. Por qué `/Catalogo/Detalle/999` y `/Otro` dan el mismo `404` por caminos distintos.
-10. Qué ganas al pedir una interfaz en el constructor en lugar de crear la clase con `new`.
-11. Qué diferencia hay entre Singleton, Scoped y Transient.
+1. Qué pasa, paso a paso, desde que escribes una URL hasta que ves la respuesta: cliente, petición,
+   servidor, ruta, estado y cuerpo.
+2. Qué hace `MapGet` y qué le entrega a la función.
+3. En qué se diferencia un parámetro de la ruta de un query string, y cuándo usarías cada uno.
+4. Por qué `/producto/tomate` da `404` cuando la ruta pide `{id:int}`.
+5. Qué es el tipo de contenido y qué cambia en el navegador entre `text/plain` y `text/html`.
+6. Para qué sirve `wwwroot` y por qué todo lo que hay ahí es público.
+7. Qué familia de estado usarías (2xx, 4xx o 5xx) y por qué: cuándo `200`, `201`, `400` y `404`.
 
 ## Trabajo independiente
 
-La semana pide dejar **el servidor de tu proyecto respondiendo a sus rutas base**. Esta semana no tiene
-porcentaje: es la base sobre la que se construye el resto del proyecto.
+La semana pide un **servidor del proyecto respondiendo a sus rutas base**. Aplica a tu proyecto lo que
+hiciste con Plaza. Esta semana no tiene porcentaje.
 
-Aplica a tu proyecto lo que hiciste con Mercado Campesino Digital:
+1. **Crea el servidor** de tu proyecto con `dotnet new web -n` y el nombre de tu proyecto.
+2. **Seis rutas propias** del tema de tu proyecto: dos de texto, dos con parámetro (una en la ruta y
+   una en el query string) y dos que respondan con estados distintos de `200`.
+3. **Un JSON de cinco elementos:** un `record` con tres campos como mínimo, una lista de cinco
+   elementos de tu tema y una ruta para la lista y otra por `id`.
+4. **Una página HTML en `wwwroot`** con su CSS, que muestre esa lista con `fetch`.
+5. **Una descarga:** un archivo de tu tema entregado con `Results.File`.
+6. **Un archivo `README.md`** con una tabla de tus rutas (ruta, qué responde, estado) y el comando
+   para ejecutar el servidor.
 
-1. En el repositorio de tu proyecto, crea el servidor con `dotnet new web`, con el nombre de tu
-   proyecto.
-2. Llega a las mismas etapas: middleware de registro como clase, y una ruta `/salud`.
-3. Define el modelo de la entidad principal de tu proyecto, un controlador con acción de listado y de
-   detalle, y las vistas. El detalle de un identificador que no existe debe responder `404`.
-4. Saca los datos del controlador a un servicio con su interfaz y regístralo en `Program.cs`.
-5. Verifica con `dotnet run` que cada ruta responde con el estado esperado, y anota en el README del
-   repositorio la tabla de rutas del servidor y los comandos para ejecutarlo.
-6. Trabaja con commits pequeños: uno por etapa, para que el historial cuente cómo creció el servidor.
-   Agrega un `.gitignore` antes del primer commit para que `bin/` y `obj/` no se versionen.
+Reparto sugerido de las unas 6 horas:
 
-Una nota: la plantilla `dotnet new gitignore` existe, pero no se ejecutó al preparar esta guía.
-Revisa el archivo que genera antes de confiar en él.
+| Parte | Tiempo aproximado |
+|---|---|
+| Servidor y seis rutas | 1 h 30 min |
+| JSON y rutas de datos | 1 h |
+| Página HTML con CSS y `fetch` | 1 h 30 min |
+| Descarga y estados | 1 h |
+| README y verificación de cada ruta | 1 h |
+
+**Entregable:** la carpeta del proyecto con el `README.md`. **Criterio:** cada ruta de la tabla
+responde con el estado que dice la tabla.
 
 ## Recursos
 
-- Microsoft Learn, middleware de ASP.NET Core: [learn.microsoft.com, Middleware](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/)
-- Microsoft Learn, controladores y vistas con MVC: [learn.microsoft.com, MVC](https://learn.microsoft.com/en-us/aspnet/core/mvc/overview)
-- Microsoft Learn, enrutamiento: [learn.microsoft.com, Routing](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing)
-- Microsoft Learn, inyección de dependencias: [learn.microsoft.com, Dependency injection](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)
-- Microsoft Learn, `dotnet watch`: [learn.microsoft.com, dotnet watch](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)
-- Presentación interactiva de las etapas 0 a 2: [Abrir la presentación del pipeline](presentacion-interactiva-pipeline.html){.btn-doc target="_blank"}
-- Presentación interactiva de las etapas 3 a 5: [Abrir la presentación de MVC](presentacion-interactiva-mvc.html){.btn-doc target="_blank"}
+- Microsoft Learn, aplicaciones web con ASP.NET Core Minimal APIs: [Minimal APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis)
+- Microsoft Learn, respuestas en Minimal APIs: [Create responses](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses)
+- Microsoft Learn, enrutamiento: [Routing](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing)
+- Microsoft Learn, archivos estáticos y `wwwroot`: [Static files](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files)
+- Microsoft Learn, `dotnet watch`: [dotnet watch](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)
+- Microsoft Learn, el tipo `record`: [Records](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record)
+- Microsoft Learn, cadenas interpoladas: [String interpolation](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/string-interpolation)
+- MDN, qué es una URL: [Qué es una URL](https://developer.mozilla.org/es/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL)
+- MDN, códigos de estado HTTP: [Códigos de estado](https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status)
+- MDN, tipos MIME: [Tipos MIME](https://developer.mozilla.org/es/docs/Web/HTTP/Guides/MIME_types)
+- MDN, `fetch`: [Fetch API](https://developer.mozilla.org/es/docs/Web/API/Fetch_API)
+- Presentación interactiva: [Abrir la presentación](presentacion-interactiva-rutas.html){.btn-doc target="_blank"}
 
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
