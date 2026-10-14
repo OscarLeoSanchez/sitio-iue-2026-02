@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="680" height="270" viewBox="0 0 680 270" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Anatomía del comando dotnet new web -n Plaza</title>
+<desc id="d">El comando dotnet new web -n Plaza dividido en cinco partes: dotnet es el programa del SDK, new es el subcomando que crea algo nuevo, web es la plantilla de servidor web vacío, -n es la opción para dar nombre y Plaza es el nombre del proyecto y de su carpeta.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker></defs>
+<rect x="0" y="0" width="680" height="270" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="84.6" y="94.0" width="99.2" height="38.0" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.4"/>
+<text x="134.2" y="119.0" font-size="22" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">dotnet</text>
+<path d="M 134.2 64.0 L 134.2 94.0" fill="none" stroke="#2f7bb8" stroke-width="1.2"/>
+<rect x="56.2" y="22.0" width="156.0" height="42.0" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="134.2" y="40.0" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">programa</text>
+<text x="134.2" y="56.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el programa del SDK</text>
+<rect x="223.8" y="94.0" width="59.6" height="38.0" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.4"/>
+<text x="253.6" y="119.0" font-size="22" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">new</text>
+<path d="M 253.6 132.0 L 253.6 168.0" fill="none" stroke="#2e7d5b" stroke-width="1.2"/>
+<rect x="171.6" y="168.0" width="164.0" height="42.0" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="253.6" y="186.0" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">subcomando</text>
+<text x="253.6" y="202.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">crear algo nuevo</text>
+<rect x="323.4" y="94.0" width="59.6" height="38.0" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.4"/>
+<text x="353.2" y="119.0" font-size="22" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">web</text>
+<path d="M 353.2 64.0 L 353.2 94.0" fill="none" stroke="#b7791f" stroke-width="1.2"/>
+<rect x="275.2" y="22.0" width="156.0" height="42.0" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="353.2" y="40.0" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">plantilla</text>
+<text x="353.2" y="56.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">servidor web vacío</text>
+<rect x="423.0" y="94.0" width="46.4" height="38.0" rx="4" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.4"/>
+<text x="446.2" y="119.0" font-size="22" fill="#0a6464" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">-n</text>
+<path d="M 446.2 132.0 L 446.2 168.0" fill="none" stroke="#0e8f8f" stroke-width="1.2"/>
+<rect x="364.2" y="168.0" width="164.0" height="42.0" rx="8" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="446.2" y="186.0" font-size="13" fill="#0a6464" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">opción</text>
+<text x="446.2" y="202.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">dale nombre al proyecto</text>
+<rect x="509.4" y="94.0" width="86.0" height="38.0" rx="4" fill="#f6f2fa" stroke="#7a4fa0" stroke-width="1.4"/>
+<text x="552.4" y="119.0" font-size="22" fill="#53307a" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Plaza</text>
+<path d="M 552.4 64.0 L 552.4 94.0" fill="none" stroke="#7a4fa0" stroke-width="1.2"/>
+<rect x="474.4" y="22.0" width="156.0" height="42.0" rx="8" fill="#f6f2fa" stroke="#7a4fa0" stroke-width="1.6"/>
+<text x="552.4" y="40.0" font-size="13" fill="#53307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nombre</text>
+<text x="552.4" y="56.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">del proyecto y su carpeta</text>
+<rect x="20.0" y="226.0" width="640.0" height="32.0" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="340.0" y="246.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Se escribe una sola vez, en la carpeta de trabajo y no dentro de Plaza.</text>
+</g>
+</svg>

@@ -1003,6 +1003,178 @@ iframe.resultado { padding: 0; }
   .anat-url { padding: 18px 14px 12px; }
 }
 
+/* 8. Sección "Crear el proyecto" */
+.dividido[data-proporcion="38/62"] { --cols: 38fr 62fr; }
+.dividido[data-proporcion="46/54"] { --cols: 46fr 54fr; }
+.dividido[data-proporcion="42/58"] { --cols: 42fr 58fr; }
+.term { background: #2A322D; color: #E8E4D8; border-radius: 16px; box-shadow: var(--sombra); overflow: hidden; font-family: var(--mono); font-size: 15px; display: flex; flex-direction: column; min-width: 0; }
+.term-barra { display: flex; align-items: center; gap: 12px; padding: 7px 14px; background: #343E38; color: #B9C2BA; font-family: var(--fuente); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.term-barra .luces { display: flex; gap: 6px; }
+.term-barra .luces i { width: 10px; height: 10px; border-radius: 50%; background: #58645C; }
+.term-cuerpo { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 3px; line-height: 1.5; min-height: 118px; font-variant-ligatures: none; }
+.term-l { display: block; white-space: pre-wrap; overflow-wrap: anywhere; }
+.term-l.nueva { animation: kitTexto .45s var(--curva) both; animation-delay: calc(var(--i, 0) * 320ms); }
+.term-l[hidden] { display: none; }
+.t-ruta { color: #8FD3A8; }
+.t-cmd { color: #FFE7A8; font-weight: 600; }
+.t-tn { color: #9FB0A5; }
+.t-ok { color: #A8DDB5; }
+.t-mal { color: #FFB49C; }
+.term-cursor { display: inline-block; width: 8px; height: 1.1em; background: #E8E4D8; vertical-align: -3px; animation: kitLatido 1s steps(2, start) infinite; }
+.term-ent { display: flex; align-items: center; gap: 8px; }
+.term-ent input { flex: 1; min-width: 0; background: transparent; border: 0; color: #FFE7A8; font: inherit; font-weight: 600; padding: 0; outline: none; caret-color: #E8E4D8; }
+
+/* Árbol de archivos tipo explorador */
+.arbol-arch { background: var(--blanco); border: 1px solid var(--linea); border-radius: 16px; box-shadow: var(--sombra); padding: 10px 8px 10px; font-family: var(--mono); font-size: 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.af-raiz { font-family: var(--fuente); font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-suave); padding: 4px 8px 6px; }
+.af { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 8px; border: 0; border-radius: 9px; background: none; text-align: left; color: var(--tinta); font: inherit; font-size: 14px; line-height: 1.3; font-variant-ligatures: none; }
+button.af:hover { background: var(--papel-2); }
+.af[aria-pressed="true"] { background: var(--maiz-claro); box-shadow: inset 3px 0 0 var(--maiz); }
+.af .ico { width: 17px; height: 17px; color: var(--tinta-suave); flex: none; }
+.af.n1 { padding-left: 28px; }
+.af.n2 { padding-left: 48px; font-size: 13px; color: var(--tinta-suave); }
+.af .af-txt { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.af.fantasma { opacity: .5; }
+.af.fantasma .af-txt { font-style: italic; }
+.af.nuevo { animation: kitFicha .55s var(--curva-rebote) both; }
+.af.sale { animation: kitSale .35s ease forwards; }
+.insignia { font-family: var(--fuente); font-size: 11.5px; font-weight: 750; padding: 2px 8px; border-radius: 999px; background: var(--tono-claro); color: var(--tono-osc); white-space: nowrap; flex: none; }
+.leyenda-af { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.exp-cabeza { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.exp-cabeza .exp-nombre { font-family: var(--mono); font-size: 20px; font-weight: 700; font-variant-ligatures: none; overflow-wrap: anywhere; }
+.exp-der .codigo { max-height: 258px; }
+.exp-texto { font-size: 18px; line-height: 1.45; }
+.exp-aviso { font-size: 15px; padding: 9px 14px; }
+
+/* Migas de pan (ruta de la carpeta) */
+.migas { display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: center; font-family: var(--mono); font-size: 16px; font-variant-ligatures: none; }
+.miga { background: var(--papel-2); border: 1px solid var(--linea); border-radius: 10px; padding: 4px 10px; }
+.miga.fin { background: var(--hoja-claro); border-color: var(--hoja); color: var(--hoja-osc); font-weight: 700; animation: kitFicha .6s var(--curva-rebote) both; animation-delay: .25s; }
+.miga-sep { color: var(--tinta-tenue); }
+.carp-res { display: flex; flex-direction: column; gap: 14px; }
+
+/* Línea de comando con piezas */
+.cmd-linea { display: flex; flex-wrap: wrap; gap: 10px 8px; align-items: center; padding: 20px 22px; font-family: var(--mono); font-size: 26px; }
+.cmd-prompt { color: var(--tinta-tenue); font-weight: 700; margin-right: 4px; }
+.cmd-linea .pieza { font-size: 26px; padding: 8px 14px; border-radius: 12px; }
+.cmd-linea .pieza[aria-pressed="true"] { transform: translateY(-3px); box-shadow: 0 8px 16px -10px var(--tono); }
+input.pieza-in { width: 9.5ch; min-width: 4ch; max-width: 22ch; outline: none; border-bottom-style: solid; }
+input.pieza-in:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--tono) 35%, transparent); }
+.nom-fila { display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: baseline; padding: 7px 0; border-top: 1px dashed var(--linea-2); }
+.nom-fila:first-of-type { border-top: 0; }
+.nom-fila code { font-size: 17px; overflow-wrap: anywhere; }
+.nom-aviso { margin-top: 6px; }
+
+/* Lista de lo que crea el comando */
+.carp-cont { background: var(--blanco); border: 1px solid var(--linea); border-radius: 18px; box-shadow: var(--sombra); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.carp-cont-cab { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.carp-cuenta { font-size: 15px; font-weight: 700; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.carp-vacia { border: 1.5px dashed var(--linea-2); border-radius: 12px; padding: 16px; color: var(--tinta-tenue); font-style: italic; text-align: center; }
+.carp-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.carp-lista li { display: flex; gap: 10px; align-items: center; padding: 6px 10px; border: 1px solid var(--linea); border-radius: 10px; background: var(--papel); font-family: var(--mono); font-size: 14.5px; font-variant-ligatures: none; animation: kitFicha .5s var(--curva-rebote) both; }
+.carp-lista li .ico { width: 17px; height: 17px; color: var(--tinta-suave); }
+.carp-lista li small { margin-left: auto; font-family: var(--fuente); font-size: 13px; color: var(--tinta-suave); }
+.carp-lista li.carpeta { background: var(--papel-2); }
+.carp-sub { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 2px 4px 4px 34px; }
+.carp-sub span { font-family: var(--mono); font-size: 12.5px; background: var(--blanco); border: 1px solid var(--linea); border-radius: 7px; padding: 1px 7px; animation: kitFicha .5s var(--curva-rebote) both; }
+
+/* Consola del flujo de creación */
+.term-fluj .term-cuerpo { min-height: 0; font-size: 14px; }
+.term-fluj .term-l { opacity: .18; transition: opacity .4s; }
+.term-fluj .term-l.vista { opacity: 1; }
+
+/* csproj: chips de versión */
+.tf-fila { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.tf-fila[hidden] { display: none; }
+
+/* appsettings: mensajes de consola simulados */
+.cfg-ctl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; align-items: center; }
+.cfg-ctl > span { font-size: 14px; font-weight: 700; color: var(--tinta-suave); }
+.cfg-msgs { display: grid; gap: 6px; }
+.cfg-ctl .chip { padding: 5px 11px; font-size: 14px; }
+.cfg-msg { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: baseline; padding: 4px 10px; border: 1px solid var(--linea); border-radius: 10px; background: var(--blanco); font-family: var(--mono); font-size: 13.5px; transition: opacity .3s, background .3s, border-color .3s; font-variant-ligatures: none; }
+.cfg-msg .cfg-nivel { font-family: var(--fuente); font-size: 12px; font-weight: 800; letter-spacing: .04em; padding: 1px 8px; border-radius: 999px; background: var(--tono-claro); color: var(--tono-osc); }
+.cfg-msg .cfg-cat { color: var(--tinta-tenue); font-size: 12px; overflow-wrap: anywhere; }
+.cfg-msg .cfg-txt { grid-column: 2; overflow-wrap: anywhere; }
+.cfg-msg.sale { background: var(--hoja-claro); border-color: color-mix(in srgb, var(--hoja) 45%, var(--linea)); }
+.cfg-msg.no-sale { opacity: .5; }
+.cfg-msg.no-sale .cfg-txt { text-decoration: line-through; }
+.cfg-res { font-size: 15px; line-height: 1.4; margin: 0; }
+
+/* launchSettings: resultado */
+.lau-res { padding: 10px 14px; gap: 6px; min-height: 0; }
+.lau-res .rp-fila { grid-template-columns: 96px 1fr; }
+.lau-slide .codigo { max-height: 262px; }
+#lau-claves .boton { padding: 4px 8px; font-size: 13px; }
+#lau-modo .chip { padding: 5px 9px; font-size: 13.5px; }
+.lau-con { background: #2A322D; color: #E8E4D8; border-radius: 10px; padding: 7px 10px; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; display: flex; flex-direction: column; min-width: 0; font-variant-ligatures: none; }
+.lau-con span { overflow-wrap: anywhere; }
+
+/* Árbol vivo de la línea de tiempo bin/obj */
+.bin-arbol { background: var(--blanco); border: 1px solid var(--linea); border-radius: 16px; box-shadow: var(--sombra); padding: 10px 8px; font-family: var(--mono); font-size: 13.5px; display: flex; flex-direction: column; gap: 2px; }
+.bin-arbol .af { cursor: default; padding: 2px 8px; font-size: 13.5px; }
+.bin-arbol .af.n3 { padding-left: 68px; font-size: 12.5px; color: var(--tinta-suave); }
+.bin-arbol .af.n1 { padding-left: 26px; }
+.bin-arbol .af.n2 { padding-left: 46px; font-size: 12.5px; }
+.bin-nota { font-size: 15.5px; }
+
+/* Reto: ¿qué archivo cambiarías? */
+.arch-pool { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.arch-ficha { font-family: var(--mono); font-size: 15px; font-weight: 600; padding: 7px 12px; border-radius: 10px; border: 1.5px solid var(--linea-2); background: var(--blanco); color: var(--tinta); cursor: grab; display: inline-flex; gap: 8px; align-items: center; transition: transform .2s var(--curva), border-color .2s, background .2s, box-shadow .2s; font-variant-ligatures: none; }
+.arch-ficha .ico { width: 16px; height: 16px; color: var(--tinta-suave); }
+.arch-ficha:hover { transform: translateY(-2px); border-color: var(--tono, var(--cielo)); }
+.arch-ficha[aria-pressed="true"] { background: var(--maiz-claro); border-color: var(--maiz); box-shadow: 0 6px 14px -8px var(--maiz); transform: translateY(-2px); }
+.arch-ficha.arrastrando { opacity: .5; }
+.tareas { display: grid; gap: 8px; }
+.tarea { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px); gap: 14px; align-items: center; padding: 6px 12px; border: 1px solid var(--linea); border-radius: 14px; background: var(--blanco); }
+.tarea-txt { font-size: 17.5px; line-height: 1.3; }
+.slot { min-height: 42px; border: 1.5px dashed var(--linea-2); border-radius: 11px; display: flex; align-items: center; gap: 8px; padding: 4px 10px; font-family: var(--mono); font-size: 14px; color: var(--tinta-tenue); background: var(--papel); transition: border-color .2s, background .2s, transform .2s; font-variant-ligatures: none; cursor: pointer; text-align: left; width: 100%; }
+.slot:hover, .slot.sobre { border-color: var(--cielo); background: var(--cielo-claro); }
+.slot.ok { border-style: solid; border-color: var(--hoja); background: var(--hoja-claro); color: var(--hoja-osc); font-weight: 700; }
+.slot.mal { border-style: solid; border-color: var(--tomate); background: var(--tomate-claro); color: var(--tomate-osc); font-weight: 700; animation: kitSacude .45s ease; }
+.slot .ico { width: 17px; height: 17px; flex: none; }
+.tarea-izq { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 4px 0; }
+.tarea-ayuda { font-size: 14px; line-height: 1.3; color: var(--tinta-suave); margin: 0; }
+.tarea-ayuda.ok { color: var(--hoja-osc); }
+.tarea-ayuda.mal { color: var(--tomate-osc); }
+
+/* Ventana de VS Code simulada */
+.vsc { background: var(--blanco); border: 1px solid var(--linea); border-radius: 16px; box-shadow: var(--sombra); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.vsc-cuerpo { display: grid; grid-template-columns: minmax(0, 215px) 1fr; min-height: 0; }
+.vsc-exp { background: var(--papel-2); border-right: 1px solid var(--linea); padding: 8px 6px; font-family: var(--mono); font-size: 13px; display: flex; flex-direction: column; gap: 1px; }
+.vsc-exp .af { padding: 3px 6px; font-size: 12.5px; cursor: default; }
+.vsc-exp .af .af-txt { overflow-wrap: normal; }
+.vsc-msgs { padding: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.vsc-msg { border: 1px solid var(--linea); border-radius: 12px; padding: 8px 10px; background: var(--blanco); font-size: 14.5px; line-height: 1.35; animation: kitEntra .45s var(--curva) both; }
+.vsc-msg b { display: block; font-size: 14.5px; }
+.vsc-msg small { display: block; color: var(--tinta-tenue); font-size: 12.5px; margin-top: 1px; }
+.vsc-bot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.vsc-bot .boton { padding: 5px 10px; font-size: 13.5px; }
+.vsc-msg.hecho { background: var(--hoja-claro); border-color: color-mix(in srgb, var(--hoja) 40%, var(--linea)); }
+.vsc-msg.rest { background: var(--maiz-claro); border-color: var(--maiz); }
+.vsc-ayuda { font-size: 14px; color: var(--tinta-suave); margin-top: 5px; }
+
+.errores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; align-items: start; }
+.auto-grid { grid-template-columns: 1fr 1fr; gap: 10px 16px; align-items: start; }
+.auto-grid .autoeval-resumen { grid-column: 1 / -1; }
+
+@media (max-width: 699px) {
+  .errores-grid, .auto-grid { grid-template-columns: 1fr; }
+  .pestanas-lista { max-width: 100%; flex-direction: column; align-self: stretch; }
+  .pestanas-indicador { display: none; }
+  .pestana { font-size: 14px; padding: 7px 10px; overflow-wrap: anywhere; text-align: left; }
+  .pestana[aria-selected="true"] { background: var(--blanco); box-shadow: 0 1px 3px rgba(60, 48, 20, .14); }
+  .cfg-ctl { grid-template-columns: 1fr; gap: 4px; }
+  .cfg-ctl .chips { margin-bottom: 6px; }
+  .cmd-linea, .cmd-linea .pieza { font-size: 18px; }
+  .nom-fila { grid-template-columns: 1fr; gap: 2px; }
+  .tarea { grid-template-columns: 1fr; }
+  .vsc-cuerpo { grid-template-columns: 1fr; }
+  .vsc-exp { border-right: 0; border-bottom: 1px solid var(--linea); }
+  .lau-res .rp-fila { grid-template-columns: 1fr; }
+  .exp-der .codigo { max-height: 260px; }
+}
+
 </style>
 </head>
 <body>
@@ -1046,6 +1218,8 @@ iframe.resultado { padding: 0; }
     <symbol id="i-experto" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7z"/></symbol>
     <symbol id="i-teclado" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M14 10h.01M17.5 10h.01M8 14.5h8"/></symbol>
     <symbol id="i-flecha-der" viewBox="0 0 24 24"><path d="M4 12h15M14 6.5l5.5 5.5-5.5 5.5"/></symbol>
+    <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2H9l2 2.5h7.5a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-archivo" viewBox="0 0 24 24"><path d="M6.5 3.5h7L18 8v11a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5V8H18"/></symbol>
 
     <!-- ===== Ilustraciones: viewBox 64, trazo tinta 2.5, rellenos pastel ===== -->
     <symbol id="ilu-tomate" viewBox="0 0 64 64">
@@ -1438,9 +1612,524 @@ app.Run();
       </template>
     </section>
 
-    <!-- 8. Sección 02 ==================================================== -->
-    <section class="diapo seccion-portada" data-seccion="Rutas de texto" data-acento="cielo" data-num="02" data-titulo="Rutas de texto">
+    <!-- 8. Sección 02: Crear el proyecto ================================= -->
+    <section class="diapo seccion-portada" data-seccion="Crear el proyecto" data-acento="maiz" data-num="02" data-titulo="Crear el proyecto">
       <span class="seccion-num">02</span>
+      <h2 class="seccion-titulo">Crear el proyecto</h2>
+      <p class="seccion-pregunta">¿Qué hace un solo comando y qué deja escrito en tu carpeta?</p>
+      <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
+      <svg class="seccion-ilu no-entra" viewBox="0 0 330 330" role="img">
+        <title>Una terminal con un comando y los archivos de un proyecto que salen de ella</title>
+        <circle cx="165" cy="165" r="150" fill="var(--maiz-claro)"/>
+        <rect x="30" y="62" width="196" height="132" rx="16" fill="#2A322D" stroke="var(--tinta)" stroke-width="3"/>
+        <circle cx="52" cy="83" r="5" fill="#F27A57"/><circle cx="70" cy="83" r="5" fill="#F2B33D"/><circle cx="88" cy="83" r="5" fill="#5CB77F"/>
+        <path d="M52 118l15 12-15 12" fill="none" stroke="#FFE7A8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M80 142h76" stroke="#E8E4D8" stroke-width="5" stroke-linecap="round"/>
+        <path d="M52 170h104" stroke="#9FB0A5" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/>
+        <use href="#ilu-documento" x="176" y="124" width="104" height="104"/>
+        <use href="#ilu-documento" x="214" y="188" width="84" height="84"/>
+        <use href="#ilu-engranaje" x="34" y="214" width="84" height="84"/>
+      </svg>
+    </section>
+
+    <!-- 9. Dónde estoy =================================================== -->
+    <section class="diapo" data-titulo="Dónde estoy: la terminal y la carpeta">
+      <div class="cabeza">
+        <p class="antetitulo">Antes del comando</p>
+        <h2 class="titulo">El proyecto se crea <em>donde estás</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="52/48">
+        <div class="columna estirar" style="gap: 12px">
+          <p class="carta-titulo" style="margin: 0">Elige la carpeta donde ejecutas el comando</p>
+          <div class="chips" id="carp-chips" aria-label="Carpeta de trabajo">
+            <button class="chip" data-valor="web" aria-checked="true">Documents\web</button>
+            <button class="chip" data-valor="personal" aria-checked="false">Carpeta personal</button>
+            <button class="chip" data-valor="escritorio" aria-checked="false">Desktop</button>
+            <button class="chip" data-valor="descargas" aria-checked="false">Downloads</button>
+          </div>
+          <div class="term" aria-live="polite">
+            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Terminal</div>
+            <div class="term-cuerpo" id="carp-term"></div>
+          </div>
+          <p class="nota" style="font-size: 16px">La <dfn data-def="terminal">terminal</dfn> siempre tiene una <dfn data-def="carpetatrabajo">carpeta de trabajo</dfn>: el comando actúa sobre ella.</p>
+        </div>
+        <div class="columna estirar" style="gap: 12px">
+          <p class="carta-titulo" style="margin: 0">Dónde quedaría la carpeta Plaza</p>
+          <div class="carta carp-res" aria-live="polite">
+            <div class="migas" id="carp-migas"></div>
+            <div id="carp-veredicto"></div>
+          </div>
+          <details class="profundiza compacta" data-grupo="carp" data-icono="consola">
+            <summary><span class="pf-titulo"><code>pwd</code> y <code>cd</code></span><span class="pf-sub">Ver dónde estás y moverte</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion"><code>pwd</code> escribe la carpeta actual. <code>cd Desktop</code> entra a una carpeta y <code>cd ..</code> sube un nivel.</div>
+              <div class="pf-bloque" data-tipo="errores">Ejecutar el comando sin mirar el prompt: el proyecto cae en la carpeta equivocada y después no lo encuentras.</div>
+            </div>
+          </details>
+          <details class="profundiza compacta" data-grupo="carp" data-icono="idea">
+            <summary><span class="pf-titulo">Terminal de VS Code</span><span class="pf-sub">Ya nace en la carpeta que abriste</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion">Si abres una carpeta en VS Code, el menú <strong>Terminal &gt; Nueva terminal</strong> empieza en esa carpeta.</div>
+              <div class="pf-bloque" data-tipo="nota">En el Explorador de Windows ves <em>Escritorio</em> y <em>Documentos</em>. En la terminal se llaman <code>Desktop</code> y <code>Documents</code>.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Terminal:</strong> ventana donde escribes comandos en lugar de hacer clic.</p>
+          <p><strong>Carpeta de trabajo:</strong> la carpeta en la que está parada la terminal. El prompt la muestra antes del signo <code>&gt;</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Es como pararte en una sala antes de colocar un mueble: el mueble queda donde estás parado, no donde pensabas.</p></section>
+        <section data-tipo="errores"><ul><li>Abrir la terminal desde el menú Inicio y crear el proyecto en tu carpeta personal sin darte cuenta.</li><li>Crear el proyecto dentro de otro proyecto: queda una carpeta dentro de otra.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>dotnet new</em>. En la documentación de VS Code busca <em>Integrated Terminal</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 10. Anatomía del comando ========================================= -->
+    <section class="diapo" data-titulo="Anatomía del comando">
+      <div class="cabeza">
+        <p class="antetitulo">Anatomía</p>
+        <h2 class="titulo">Cada pieza del <em>comando</em></h2>
+      </div>
+      <div class="carta cmd-linea" id="cmd-linea" role="group" aria-label="Piezas del comando">
+        <span class="cmd-prompt" aria-hidden="true">PS&gt;</span>
+        <button class="pieza" type="button" data-pieza="dotnet" data-tono="cielo" aria-pressed="false">dotnet</button>
+        <button class="pieza" type="button" data-pieza="new" data-tono="maiz" aria-pressed="false">new</button>
+        <button class="pieza" type="button" data-pieza="web" data-tono="uva" aria-pressed="false">web</button>
+        <button class="pieza" type="button" data-pieza="n" data-tono="tinta" aria-pressed="false">-n</button>
+        <input class="pieza pieza-in" id="cmd-nombre" data-pieza="nombre" data-tono="hoja" value="Plaza" maxlength="24" spellcheck="false" autocomplete="off" aria-label="Nombre del proyecto">
+      </div>
+      <div class="dividido" data-proporcion="50/50">
+        <div class="carta tenue" aria-live="polite" style="min-height: 190px">
+          <div id="cmd-explica"></div>
+        </div>
+        <div class="carta" style="min-height: 190px">
+          <p class="carta-titulo">Con el nombre que escribas se crea</p>
+          <div id="cmd-resultado" aria-live="polite"></div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Plantilla:</strong> un molde de proyecto. <code>web</code> es el molde de un servidor web vacío.</p>
+          <p><strong>Opción:</strong> una palabra con guion que ajusta el comando, como <code>-n</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Es un pedido en una panadería: "dotnet" es la panadería, "new" es pedir algo nuevo, "web" es el tipo de pan y "-n Plaza" es el nombre que va en la bolsa.</p></section>
+        <section data-tipo="errores"><ul><li>Olvidar <code>-n</code>: los archivos caen directo en la carpeta actual y toman su nombre.</li><li>Poner espacios o tildes en el nombre: funciona, pero da problemas después.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>dotnet new</em> y <em>Templates</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 11. Predice: cuántos archivos ==================================== -->
+    <section class="diapo" data-titulo="Cuántos archivos crea el comando">
+      <div class="cabeza">
+        <p class="antetitulo">Predice</p>
+        <h2 class="titulo">¿Cuántos archivos <em>aparecen</em>?</h2>
+      </div>
+      <div class="dividido" data-proporcion="58/42">
+        <div class="predice" id="pred-archivos" data-correcta="c" data-mal="Mira qué aparece">
+          <p class="pq-pregunta">Ejecutas <code>dotnet new web -n Plaza</code> en una carpeta vacía. ¿Qué hay dentro de <code>Plaza</code> cuando termina?</p>
+          <div class="opciones dos">
+            <button class="opcion" data-opcion="a"><span>Nada: solo la carpeta vacía</span></button>
+            <button class="opcion" data-opcion="b"><span>Solo el archivo <code>Program.cs</code></span></button>
+            <button class="opcion" data-opcion="c"><span>5 archivos y una carpeta <code>obj</code></span></button>
+            <button class="opcion" data-opcion="d"><span>Decenas de archivos, con <code>bin</code> y <code>obj</code></span></button>
+          </div>
+          <div class="predice-revelacion">
+            Son <strong>5 archivos</strong> que puedes abrir y la carpeta <code>obj</code>, que ya trae otros 5 de <dfn data-def="restauracion">restauración</dfn>. <code>bin</code> todavía no existe: aparece cuando <dfn data-def="compilar">compilas</dfn>.
+          </div>
+        </div>
+        <div class="carp-cont" aria-live="polite">
+          <div class="carp-cont-cab">
+            <p class="carta-titulo" style="margin: 0">Dentro de <code>Plaza/</code></p>
+            <span class="carp-cuenta" id="arch-cuenta">0 archivos</span>
+          </div>
+          <div class="carp-vacia" id="arch-vacio">Haz tu predicción y revela para ver qué escribe el comando.</div>
+          <ul class="carp-lista" id="arch-lista"></ul>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Archivos del proyecto:</strong> los 5 que escribe la plantilla.</p>
+          <p><strong>obj:</strong> carpeta que dotnet llena al restaurar el proyecto.</p>
+        </section>
+        <section data-tipo="analogia"><p>Es como armar un mueble de caja plana: abres la caja (5 piezas) y además queda una bolsa de herrajes (obj) que usa el armador.</p></section>
+        <section data-tipo="errores"><ul><li>Esperar <code>bin</code> desde el principio: todavía no hay nada compilado.</li></ul></section>
+      </template>
+    </section>
+
+    <!-- 12. Qué ocurre al ejecutar el comando =============================== -->
+    <section class="diapo" data-titulo="Lo que ocurre al ejecutar el comando">
+      <div class="cabeza">
+        <p class="antetitulo">Paso a paso</p>
+        <h2 class="titulo">Qué pasa cuando pulsas <em>Enter</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="62/38">
+        <div id="f-new"></div>
+        <div class="columna" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">Lo que escribe la terminal</p>
+          <div class="term term-fluj">
+            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Terminal</div>
+            <div class="term-cuerpo" id="new-term"></div>
+          </div>
+          <details class="profundiza compacta" data-grupo="nw" data-icono="idea">
+            <summary><span class="pf-titulo">Plantilla y restauración</span><span class="pf-sub">Las dos etapas del comando</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion">Primero escribe los archivos de la <dfn data-def="plantilla">plantilla</dfn>. Después ejecuta una acción posterior: la <dfn data-def="restauracion">restauración</dfn>, que prepara <code>obj</code>.</div>
+              <div class="pf-bloque" data-tipo="nota">Si tu Windows está en español, verás estos mensajes traducidos.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Acción posterior:</strong> algo que la plantilla ejecuta al terminar de escribir los archivos. Aquí, restaurar.</p>
+          <p><strong>Restaurar:</strong> reunir lo que el proyecto necesita y anotarlo en <code>obj</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Un pedido de cocina: primero se arma el plato con la receta (plantilla) y después se limpia y se ordena la mesa de trabajo (restauración).</p></section>
+        <section data-tipo="errores"><ul><li>Creer que ya se compiló. Hasta aquí solo hay archivos: nadie ha traducido el código.</li></ul></section>
+      </template>
+    </section>
+
+    <!-- 13. Explorador de archivos ======================================= -->
+    <section class="diapo" data-titulo="Qué es cada archivo">
+      <div class="cabeza">
+        <p class="antetitulo">Explorador</p>
+        <h2 class="titulo">Qué es <em>cada archivo</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="38/62">
+        <div class="columna estirar" style="gap: 10px">
+          <div class="leyenda-af">
+            <span class="etiqueta" data-tono="hoja">lo editas</span>
+            <span class="etiqueta" data-tono="tinta">no lo tocas</span>
+            <span class="etiqueta" data-tono="maiz">aparece al compilar</span>
+          </div>
+          <div class="arbol-arch" id="exp-arbol" role="group" aria-label="Archivos del proyecto Plaza"></div>
+          <button class="interruptor" type="button" id="exp-corrio" aria-checked="false" data-tono="maiz">Ya ejecuté <code>dotnet run</code></button>
+        </div>
+        <div class="columna exp-der" style="gap: 10px">
+          <div class="exp-cabeza" id="exp-cabeza"></div>
+          <div id="exp-codigo"></div>
+          <p class="exp-texto" id="exp-texto" aria-live="polite"></p>
+          <div class="callout exp-aviso" data-tipo="cuidado" id="exp-aviso" hidden></div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Program.cs:</strong> el código de tu servidor.</p>
+          <p><strong>.csproj:</strong> la ficha del proyecto.</p>
+          <p><strong>appsettings:</strong> valores de configuración.</p>
+          <p><strong>launchSettings:</strong> cómo arranca el proyecto en tu equipo.</p>
+        </section>
+        <section data-tipo="analogia"><p>Una casa: Program.cs es la sala donde ocurre todo, el .csproj es el plano, los appsettings son los interruptores de la luz y launchSettings es la llave con que entras.</p></section>
+        <section data-tipo="errores"><ul><li>Editar archivos de <code>obj</code> o <code>bin</code>: dotnet los reescribe y pierdes el cambio.</li><li>Subir <code>bin</code> y <code>obj</code> al repositorio: se pueden regenerar.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>.NET project SDKs</em> y <em>Configuration in ASP.NET Core</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 14. Plaza.csproj línea por línea ================================== -->
+    <section class="diapo" data-titulo="Plaza.csproj, línea por línea">
+      <div class="cabeza">
+        <p class="antetitulo">La ficha del proyecto</p>
+        <h2 class="titulo"><em>Plaza.csproj</em>, línea por línea</h2>
+      </div>
+      <div class="dividido" data-proporcion="46/54">
+        <div class="columna" style="gap: 12px">
+          <script type="text/plain" class="codigo" id="cod-csproj" data-lang="xml" data-titulo="Plaza.csproj" data-tam="15">
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+</script>
+          <details class="profundiza compacta" data-grupo="cs" data-icono="ojo-codigo">
+            <summary><span class="pf-titulo">Por qué no ves <code>using</code></span><span class="pf-sub">Lo que agrega ImplicitUsings</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion">Con <code>ImplicitUsings</code> en <code>enable</code>, dotnet escribe por ti una lista de <code>using</code> en un archivo de <code>obj</code>, como <code>System.Linq</code> y <code>Microsoft.AspNetCore.Builder</code>.</div>
+              <div class="pf-bloque" data-tipo="errores">Copiar código con <code>using</code> de otro proyecto y creer que hacen falta. Aquí ya vienen puestos.</div>
+            </div>
+          </details>
+        </div>
+        <div class="columna" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">Toca una pieza</p>
+          <div class="fila" style="gap: 8px; flex-wrap: wrap" id="csp-piezas" role="group" aria-label="Piezas del archivo">
+            <button class="boton suave mini" type="button" data-pieza="sdk" data-tono="uva" aria-pressed="false">Sdk</button>
+            <button class="boton suave mini" type="button" data-pieza="grupo" data-tono="tinta" aria-pressed="false">PropertyGroup</button>
+            <button class="boton suave mini" type="button" data-pieza="tf" data-tono="cielo" aria-pressed="false">TargetFramework</button>
+            <button class="boton suave mini" type="button" data-pieza="nullable" data-tono="tomate" aria-pressed="false">Nullable</button>
+            <button class="boton suave mini" type="button" data-pieza="usings" data-tono="hoja" aria-pressed="false">ImplicitUsings</button>
+          </div>
+          <div class="carta tenue" aria-live="polite" style="min-height: 150px"><p class="cuerpo" id="csp-explica" style="font-size: 19px"></p></div>
+          <div class="tf-fila" id="csp-versiones" hidden>
+            <span class="carta-titulo" style="margin: 0">Prueba otra versión</span>
+            <div class="chips" id="csp-chips" aria-label="Versión de .NET">
+              <button class="chip" data-valor="net8.0" aria-checked="false">net8.0</button>
+              <button class="chip" data-valor="net9.0" aria-checked="false">net9.0</button>
+              <button class="chip" data-valor="net10.0" aria-checked="true">net10.0</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>SDK:</strong> las herramientas con las que se construye el proyecto.</p>
+          <p><strong>Target framework:</strong> la versión de .NET para la que se compila.</p>
+          <p><strong>Nullable:</strong> avisos sobre valores que pueden estar vacíos.</p>
+        </section>
+        <section data-tipo="analogia"><p>La ficha técnica de un electrodoméstico: dice con qué corriente funciona (versión de .NET) y qué accesorios trae de fábrica (SDK).</p></section>
+        <section data-tipo="errores"><ul><li>Cambiar la versión sin tener esa versión de .NET instalada.</li><li>Quitar la línea de <code>Sdk</code>: sin ella el proyecto no sabe qué es.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>MSBuild properties for .NET SDK projects</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 15. appsettings ================================================== -->
+    <section class="diapo" data-titulo="appsettings.json y appsettings.Development.json">
+      <div class="cabeza">
+        <p class="antetitulo">Configuración</p>
+        <h2 class="titulo">Dos archivos de <em>configuración</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="46/54">
+        <div class="columna" style="gap: 12px">
+          <div>
+            <div data-pestana="appsettings.json">
+              <script type="text/plain" class="codigo" id="cod-set-base" data-lang="json" data-titulo="appsettings.json" data-tam="14">
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+</script>
+            </div>
+            <div data-pestana="appsettings.Development.json">
+              <script type="text/plain" class="codigo" id="cod-set-dev" data-lang="json" data-titulo="appsettings.Development.json" data-tam="14">
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
+</script>
+            </div>
+          </div>
+          <div class="callout" data-tipo="observa" style="font-size: 17px">Primero se lee <code>appsettings.json</code>. Si el <dfn data-def="ambiente">ambiente</dfn> es <code>Development</code>, se lee después <code>appsettings.Development.json</code> y sus valores ganan.</div>
+        </div>
+        <div class="columna" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">Cambia los niveles y mira qué mensajes salen</p>
+          <div class="cfg-ctl">
+            <span>Ambiente</span>
+            <div class="chips" id="cfg-amb" aria-label="Ambiente">
+              <button class="chip" data-valor="Development" aria-checked="true">Development</button>
+              <button class="chip" data-valor="Production" aria-checked="false">Production</button>
+            </div>
+            <span>Default en appsettings.json</span>
+            <div class="chips" id="cfg-base" aria-label="Nivel Default en appsettings.json">
+              <button class="chip" data-valor="1" aria-checked="true">Information</button>
+              <button class="chip" data-valor="2" aria-checked="false">Warning</button>
+              <button class="chip" data-valor="3" aria-checked="false">Error</button>
+            </div>
+            <span>Default en Development</span>
+            <div class="chips" id="cfg-dev" aria-label="Nivel Default en appsettings.Development.json">
+              <button class="chip" data-valor="0" aria-checked="false">Debug</button>
+              <button class="chip" data-valor="1" aria-checked="true">Information</button>
+              <button class="chip" data-valor="2" aria-checked="false">Warning</button>
+            </div>
+          </div>
+          <div class="cfg-msgs" id="cfg-msgs" aria-live="polite"></div>
+          <p class="cfg-res" id="cfg-res"></p>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Configuración:</strong> valores que el programa lee al arrancar, fuera del código.</p>
+          <p><strong>Logging:</strong> los mensajes que el programa escribe en la consola. El nivel decide cuáles salen.</p>
+          <p><strong>Ambiente:</strong> la etiqueta que dice en qué situación corre: Development en tu equipo.</p>
+        </section>
+        <section data-tipo="analogia"><p>El volumen de un radio: el programa es el mismo, pero un valor decide cuánto ruido hace. El archivo de Development es una perilla extra solo para cuando estás desarrollando.</p></section>
+        <section data-tipo="errores"><ul><li>Cambiar el archivo equivocado y no ver efecto: en Development gana <code>appsettings.Development.json</code>.</li><li>Guardar contraseñas en estos archivos: se publican con el proyecto.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Logging in .NET</em> y <em>Use multiple environments in ASP.NET Core</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 16. launchSettings =============================================== -->
+    <section class="diapo" data-titulo="launchSettings.json: cómo arranca">
+      <div class="cabeza">
+        <p class="antetitulo">Perfiles de lanzamiento</p>
+        <h2 class="titulo"><em>launchSettings.json</em>: cómo arranca</h2>
+      </div>
+      <div class="dividido lau-slide" data-proporcion="42/58">
+        <div class="columna" style="gap: 10px">
+          <script type="text/plain" class="codigo" id="cod-launch" data-lang="json" data-titulo="Properties/launchSettings.json" data-tam="12">
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5120",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7097;http://localhost:5120",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+</script>
+          <div class="fila" style="gap: 6px; flex-wrap: wrap" id="lau-claves" role="group" aria-label="Claves del archivo">
+            <button class="boton suave mini" type="button" data-clave="perfiles" data-tono="uva" aria-pressed="false">Perfiles</button>
+            <button class="boton suave mini" type="button" data-clave="url" data-tono="cielo" aria-pressed="false">applicationUrl</button>
+            <button class="boton suave mini" type="button" data-clave="nav" data-tono="maiz" aria-pressed="false">launchBrowser</button>
+            <button class="boton suave mini" type="button" data-clave="env" data-tono="hoja" aria-pressed="false">environmentVariables</button>
+          </div>
+          <p class="nota" id="lau-clave-txt" aria-live="polite" style="font-size: 16px; min-height: 44px"></p>
+        </div>
+        <div class="columna" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">Elige cómo ejecutas</p>
+          <div class="chips" id="lau-modo" aria-label="Forma de ejecutar">
+            <button class="chip" data-valor="run" aria-checked="true">dotnet run</button>
+            <button class="chip" data-valor="https" aria-checked="false">--launch-profile https</button>
+            <button class="chip" data-valor="urls" aria-checked="false">--urls</button>
+            <button class="chip" data-valor="sin" aria-checked="false">--no-launch-profile</button>
+            <button class="chip" data-valor="watch" aria-checked="false">dotnet watch</button>
+          </div>
+          <div class="resp-panel lau-res" id="lau-res" aria-live="polite"></div>
+          <div class="callout" data-tipo="cuidado" style="font-size: 15.5px; padding: 10px 14px">El puerto (<code>5120</code> y <code>7097</code>) lo elige dotnet al azar para cada proyecto. En tu equipo verás otros números.</div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Perfil de lanzamiento:</strong> un conjunto de ajustes de arranque con nombre, como <code>http</code> o <code>https</code>.</p>
+          <p><strong>applicationUrl:</strong> la dirección y el puerto con que arranca el servidor.</p>
+          <p><strong>launchBrowser:</strong> pide abrir el navegador. Lo atienden Visual Studio y <code>dotnet watch</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Las posiciones de la llave de un carro: cada perfil es una forma de encender. <code>--no-launch-profile</code> es arrancarlo sin ninguna de esas posiciones.</p></section>
+        <section data-tipo="errores"><ul><li>Esperar que <code>dotnet run</code> abra el navegador solo.</li><li>Copiar el puerto de un compañero: cada proyecto trae el suyo.</li><li>Creer que <code>--urls</code> cambia el archivo: solo manda sobre él en esa ejecución.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Use multiple environments in ASP.NET Core</em>, sección de launchSettings.json.</p></section>
+      </template>
+    </section>
+
+    <!-- 17. Cuándo aparece bin ============================================ -->
+    <section class="diapo" data-titulo="Cuándo aparece bin">
+      <div class="cabeza">
+        <p class="antetitulo">Línea de tiempo</p>
+        <h2 class="titulo">Cuándo aparece <em>bin</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="60/40">
+        <div id="f-bin"></div>
+        <div class="columna" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">La carpeta Plaza en este momento</p>
+          <div class="bin-arbol" id="bin-arbol" aria-live="polite"></div>
+          <div class="callout" data-tipo="idea" style="font-size: 15px; padding: 9px 14px"><code>bin</code> y <code>obj</code> se pueden borrar sin miedo: <code>dotnet run</code> los vuelve a crear.</div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>bin:</strong> el resultado de compilar: tu programa listo para ejecutarse.</p>
+          <p><strong>obj:</strong> el cuaderno de trabajo de dotnet mientras compila.</p>
+        </section>
+        <section data-tipo="analogia"><p>Una panadería: <code>obj</code> es la mesa con la masa y los moldes a medio hacer; <code>bin</code> es la vitrina con el pan terminado. Puedes limpiar las dos y volver a hornear.</p></section>
+        <section data-tipo="errores"><ul><li>Borrar <code>Program.cs</code> en vez de <code>bin</code>: el código es lo único que no se regenera.</li><li>Seguir viendo errores viejos: borra <code>bin</code> y <code>obj</code> y vuelve a compilar.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>dotnet build</em> y <em>dotnet clean</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 18. Reto: qué archivo cambiarías ================================= -->
+    <section class="diapo" data-titulo="Reto: qué archivo cambiarías">
+      <div class="cabeza-fila">
+        <div class="cabeza">
+          <p class="antetitulo">Reto</p>
+          <h2 class="titulo">¿Qué archivo <em>cambiarías</em>?</h2>
+        </div>
+        <span class="reto-estado" id="arch-estado" data-estado="pendiente">Pendiente</span>
+      </div>
+      <div class="columna crece" style="gap: 10px">
+        <p class="nota" style="font-size: 16px">Arrastra un archivo hasta cada tarea. También puedes tocar el archivo y luego la tarea.</p>
+        <div class="arch-pool" id="arch-pool" role="group" aria-label="Archivos del proyecto"></div>
+        <div class="tareas" id="arch-tareas"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Un archivo, una responsabilidad:</strong> el código va en Program.cs, la versión de .NET en el .csproj, el puerto en launchSettings y la configuración en appsettings.</p>
+        </section>
+        <section data-tipo="analogia"><p>Como una casa: la plomería, la electricidad y los muebles tienen cada una su plano. Cambiar el color de la sala no pide tocar el plano de la plomería.</p></section>
+        <section data-tipo="errores"><ul><li>Cambiar el puerto dentro de <code>Program.cs</code> sin necesidad: casi siempre es launchSettings o <code>--urls</code>.</li></ul></section>
+      </template>
+    </section>
+
+    <!-- 19. Abrir con VS Code ============================================ -->
+    <section class="diapo" data-titulo="Abrir el proyecto con VS Code">
+      <div class="cabeza">
+        <p class="antetitulo">Último paso</p>
+        <h2 class="titulo">Abre el proyecto con <em>VS Code</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="45/55">
+        <div class="columna estirar" style="gap: 10px">
+          <p class="carta-titulo" style="margin: 0">Escribe los dos comandos, uno por línea</p>
+          <div class="term">
+            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Terminal</div>
+            <div class="term-cuerpo" id="vsc-term" style="min-height: 150px; max-height: 200px; overflow-y: auto"></div>
+          </div>
+          <form class="fila" id="vsc-form" style="gap: 8px" autocomplete="off">
+            <input class="predice-apuesta" id="vsc-entrada" aria-label="Comando" placeholder="cd Plaza" spellcheck="false" style="font-size: 16px; padding: 8px 12px">
+            <button class="boton primario" type="submit">Enter</button>
+          </form>
+          <div class="fila" style="gap: 6px; flex-wrap: wrap">
+            <button class="boton suave mini" type="button" data-cmd="cd Plaza" data-tono="cielo">cd Plaza</button>
+            <button class="boton suave mini" type="button" data-cmd="code ." data-tono="uva">code .</button>
+            <button class="boton mini" type="button" id="vsc-reiniciar" data-ico="reiniciar">Empezar de nuevo</button>
+          </div>
+          <details class="profundiza compacta" data-grupo="vs" data-icono="cuidado" data-acento="tomate">
+            <summary><span class="pf-titulo"><code>code</code> no se reconoce</span><span class="pf-sub">Qué hacer si la terminal no lo encuentra</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion">Abre VS Code, pulsa <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> y ejecuta <strong>Shell Command: Install 'code' command in PATH</strong>. Después abre una terminal nueva.</div>
+              <div class="pf-bloque" data-tipo="nota">También puedes abrir VS Code desde el menú Inicio y usar <strong>Archivo &gt; Abrir carpeta</strong>.</div>
+            </div>
+          </details>
+        </div>
+        <div class="vsc estirar" aria-live="polite">
+          <div class="ventana-barra">
+            <span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="url" id="vsc-titulo">Visual Studio Code (cerrado)</span>
+          </div>
+          <div class="vsc-cuerpo">
+            <div class="vsc-exp" id="vsc-exp"><span class="rp-vacio" style="padding: 6px">Aún no abres nada.</span></div>
+            <div class="vsc-msgs" id="vsc-msgs"><p class="rp-vacio">Cuando ejecutes <code>code .</code> aparecerán aquí los mensajes de VS Code.</p></div>
+          </div>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>code .:</strong> abre en VS Code la carpeta actual. El punto significa "esta carpeta".</p>
+          <p><strong>Confiar en la carpeta:</strong> permitir que VS Code ejecute tareas y extensiones dentro de ella.</p>
+          <p><strong>Extensión de C#:</strong> agrega colores, ayudas y depuración para C#.</p>
+        </section>
+        <section data-tipo="analogia"><p>Es como pedirle al portero que abra la oficina: primero llegas a la puerta correcta (cd Plaza) y luego dices "ábrela" (code .).</p></section>
+        <section data-tipo="errores"><ul><li>Ejecutar <code>code .</code> antes del <code>cd</code>: abres la carpeta de afuera.</li><li>Elegir "No confío" en tu propio proyecto: VS Code queda en modo restringido.</li></ul></section>
+        <section data-tipo="mas"><p>En la documentación de VS Code busca <em>Workspace Trust</em> y <em>C# Dev Kit</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 20. Sección 02 ==================================================== -->
+    <section class="diapo seccion-portada" data-seccion="Rutas de texto" data-acento="cielo" data-num="03" data-titulo="Rutas de texto">
+      <span class="seccion-num">03</span>
       <h2 class="seccion-titulo">Rutas de texto</h2>
       <p class="seccion-pregunta">¿Cómo le dices a tu servidor qué responder en cada dirección?</p>
       <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
@@ -1460,7 +2149,7 @@ app.Run();
       </svg>
     </section>
 
-    <!-- 9. Anatomía de MapGet ============================================ -->
+    <!-- 21. Anatomía de MapGet ============================================ -->
     <section class="diapo" data-titulo="Una ruta une una dirección con una respuesta">
       <div class="cabeza">
         <p class="antetitulo">Etapa 1</p>
@@ -1502,7 +2191,7 @@ app.Run();
       </template>
     </section>
 
-    <!-- 10. Tablero de rutas ============================================= -->
+    <!-- 22. Tablero de rutas ============================================= -->
     <section class="diapo" data-titulo="Tablero de rutas">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -1548,7 +2237,7 @@ app.Run();
       </template>
     </section>
 
-    <!-- 11. Respuesta fija o calculada =================================== -->
+    <!-- 23. Respuesta fija o calculada =================================== -->
     <section class="diapo" data-titulo="La respuesta puede cambiar">
       <div class="cabeza">
         <p class="antetitulo">Etapa 1</p>
@@ -1589,7 +2278,7 @@ app.MapGet("/hora", () => $"Son las {DateTime.Now:HH:mm:ss}");
       </template>
     </section>
 
-    <!-- 12. Reto: tu propia ruta ========================================= -->
+    <!-- 24. Reto: tu propia ruta ========================================= -->
     <section class="diapo" data-titulo="Reto: escribe tu propia ruta">
       <div class="cabeza-fila">
         <div class="cabeza">
@@ -1634,9 +2323,9 @@ app.MapGet("/hora", () => $"Son las {DateTime.Now:HH:mm:ss}");
       </template>
     </section>
 
-    <!-- 13. Sección 03 =================================================== -->
-    <section class="diapo seccion-portada" data-seccion="Datos en la dirección" data-acento="maiz" data-num="03" data-titulo="Datos en la dirección">
-      <span class="seccion-num">03</span>
+    <!-- 25. Sección 03 =================================================== -->
+    <section class="diapo seccion-portada" data-seccion="Datos en la dirección" data-acento="maiz" data-num="04" data-titulo="Datos en la dirección">
+      <span class="seccion-num">04</span>
       <h2 class="seccion-titulo">Datos en la dirección</h2>
       <p class="seccion-pregunta">¿Cómo recibe tu servidor un dato que cambia en cada petición, como un nombre o el número de un producto?</p>
       <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
@@ -1652,7 +2341,7 @@ app.MapGet("/hora", () => $"Son las {DateTime.Now:HH:mm:ss}");
       </svg>
     </section>
 
-    <!-- 14. Parámetro en la ruta ========================================= -->
+    <!-- 26. Parámetro en la ruta ========================================= -->
     <section class="diapo" data-titulo="Un dato que viaja en la ruta">
       <div class="cabeza">
         <p class="antetitulo">Etapa 2</p>
@@ -1693,7 +2382,7 @@ app.MapGet("/saludo/{nombre}", (string nombre) => $"Hola, {nombre}. Bienvenido a
       </template>
     </section>
 
-    <!-- 15. Constructor de URL =========================================== -->
+    <!-- 27. Constructor de URL =========================================== -->
     <section class="diapo" data-titulo="Constructor de direcciones">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -1734,7 +2423,7 @@ app.MapGet("/saludo/{nombre}", (string nombre) => $"Hola, {nombre}. Bienvenido a
       </template>
     </section>
 
-    <!-- 16. Restricción :int ============================================= -->
+    <!-- 28. Restricción :int ============================================= -->
     <section class="diapo" data-titulo="Cuando el dato debe ser un número">
       <div class="cabeza">
         <p class="antetitulo">Etapa 2</p>
@@ -1769,7 +2458,7 @@ app.MapGet("/producto/{id:int}", (int id) => $"Producto número {id}");
       </template>
     </section>
 
-    <!-- 17. Query string ================================================= -->
+    <!-- 29. Query string ================================================= -->
     <section class="diapo" data-titulo="Datos extra después del signo de pregunta">
       <div class="cabeza">
         <p class="antetitulo">Etapa 2</p>
@@ -1810,7 +2499,7 @@ app.MapGet("/buscar", (string? q) => $"Buscando: {q ?? "todo"}");
       </template>
     </section>
 
-    <!-- 18. Resumen etapa 2 ============================================== -->
+    <!-- 30. Resumen etapa 2 ============================================== -->
     <section class="diapo" data-titulo="Lo que respondió el servidor en la etapa 2">
       <div class="cabeza">
         <p class="antetitulo">Resumen de la etapa 2</p>
@@ -1847,9 +2536,9 @@ app.MapGet("/buscar", (string? q) => $"Buscando: {q ?? "todo"}");
       </template>
     </section>
 
-    <!-- 19. Sección 04 =================================================== -->
-    <section class="diapo seccion-portada" data-seccion="Datos en JSON" data-acento="hoja" data-num="04" data-titulo="Datos en JSON">
-      <span class="seccion-num">04</span>
+    <!-- 31. Sección 04 =================================================== -->
+    <section class="diapo seccion-portada" data-seccion="Datos en JSON" data-acento="hoja" data-num="05" data-titulo="Datos en JSON">
+      <span class="seccion-num">05</span>
       <h2 class="seccion-titulo">Datos en JSON</h2>
       <p class="seccion-pregunta">¿Cómo le entregas datos con forma a otro programa, y ya no solo texto para leer?</p>
       <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
@@ -1863,7 +2552,7 @@ app.MapGet("/buscar", (string? q) => $"Buscando: {q ?? "todo"}");
       </svg>
     </section>
 
-    <!-- 20. Record a JSON ================================================ -->
+    <!-- 32. Record a JSON ================================================ -->
     <section class="diapo" data-titulo="El mismo producto en C# y en JSON">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -1919,7 +2608,7 @@ record Producto(int Id, string Nombre, decimal Precio);
       </template>
     </section>
 
-    <!-- 21. Lista a JSON ================================================= -->
+    <!-- 33. Lista a JSON ================================================= -->
     <section class="diapo" data-titulo="Devuelves una lista y sale JSON">
       <div class="cabeza">
         <p class="antetitulo">Etapa 3</p>
@@ -1959,7 +2648,7 @@ app.MapGet("/api/productos", () => productos);
       </template>
     </section>
 
-    <!-- 22. Un producto por id =========================================== -->
+    <!-- 34. Un producto por id =========================================== -->
     <section class="diapo" data-titulo="Un producto por su número">
       <div class="cabeza">
         <p class="antetitulo">Etapa 3</p>
@@ -2001,9 +2690,9 @@ app.MapGet("/api/productos/{id:int}", (int id) =>
       </template>
     </section>
 
-    <!-- 23. Sección 05 =================================================== -->
-    <section class="diapo seccion-portada" data-seccion="Páginas HTML" data-acento="cielo" data-num="05" data-titulo="Páginas HTML">
-      <span class="seccion-num">05</span>
+    <!-- 35. Sección 05 =================================================== -->
+    <section class="diapo seccion-portada" data-seccion="Páginas HTML" data-acento="cielo" data-num="06" data-titulo="Páginas HTML">
+      <span class="seccion-num">06</span>
       <h2 class="seccion-titulo">Páginas HTML</h2>
       <p class="seccion-pregunta">¿Cómo haces que el navegador dibuje una página en lugar de mostrar texto?</p>
       <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
@@ -2015,7 +2704,7 @@ app.MapGet("/api/productos/{id:int}", (int id) =>
       </svg>
     </section>
 
-    <!-- 24. Qué responde ================================================= -->
+    <!-- 36. Qué responde ================================================= -->
     <section class="diapo" data-titulo="El mismo cuerpo con tres tipos de contenido">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -2056,7 +2745,7 @@ app.MapGet("/api/productos/{id:int}", (int id) =>
       </template>
     </section>
 
-    <!-- 25. HTML en una cadena =========================================== -->
+    <!-- 37. HTML en una cadena =========================================== -->
     <section class="diapo" data-titulo="Una página escrita en una cadena">
       <div class="cabeza">
         <p class="antetitulo">Etapa 4</p>
@@ -2096,7 +2785,7 @@ app.MapGet("/pagina", () =>
       </template>
     </section>
 
-    <!-- 26. wwwroot ====================================================== -->
+    <!-- 38. wwwroot ====================================================== -->
     <section class="diapo" data-titulo="Una carpeta pública de archivos">
       <div class="cabeza">
         <p class="antetitulo">Etapa 4</p>
@@ -2139,7 +2828,7 @@ app.UseStaticFiles();
       </template>
     </section>
 
-    <!-- 27. La página pide sus datos con fetch ============================ -->
+    <!-- 39. La página pide sus datos con fetch ============================ -->
     <section class="diapo" data-titulo="La página pide sus propios datos">
       <div class="cabeza">
         <p class="antetitulo">Etapa 4</p>
@@ -2177,7 +2866,7 @@ fetch("/api/productos")
       </template>
     </section>
 
-    <!-- 28. El MapGet que tapa index.html ================================ -->
+    <!-- 40. El MapGet que tapa index.html ================================ -->
     <section class="diapo" data-titulo="Dos respuestas posibles para la misma dirección">
       <div class="cabeza">
         <p class="antetitulo">Etapa 4</p>
@@ -2207,9 +2896,9 @@ fetch("/api/productos")
       </template>
     </section>
 
-    <!-- 29. Sección 06 =================================================== -->
-    <section class="diapo seccion-portada" data-seccion="Estados, archivos y formularios" data-acento="tomate" data-num="06" data-titulo="Estados, archivos y formularios">
-      <span class="seccion-num">06</span>
+    <!-- 41. Sección 06 =================================================== -->
+    <section class="diapo seccion-portada" data-seccion="Estados, archivos y formularios" data-acento="tomate" data-num="07" data-titulo="Estados, archivos y formularios">
+      <span class="seccion-num">07</span>
       <h2 class="seccion-titulo">Estados, archivos y formularios</h2>
       <p class="seccion-pregunta">¿Cómo avisa el servidor si todo salió bien o si algo falló?</p>
       <div class="mapa-sesion" style="max-width: 900px; margin-top: 0"></div>
@@ -2225,7 +2914,7 @@ fetch("/api/productos")
       </svg>
     </section>
 
-    <!-- 30. Semáforo de estados ========================================== -->
+    <!-- 42. Semáforo de estados ========================================== -->
     <section class="diapo" data-titulo="El semáforo de los estados">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -2251,7 +2940,7 @@ fetch("/api/productos")
       </template>
     </section>
 
-    <!-- 31. 400 contra 404 =============================================== -->
+    <!-- 43. 400 contra 404 =============================================== -->
     <section class="diapo" data-titulo="Un dato inválido contra una ruta inexistente">
       <div class="cabeza">
         <p class="antetitulo">Etapa 5</p>
@@ -2285,7 +2974,7 @@ app.MapGet("/api/descuento/{porcentaje:int}", (int porcentaje) =>
       </template>
     </section>
 
-    <!-- 32. Mostrar o descargar ========================================== -->
+    <!-- 44. Mostrar o descargar ========================================== -->
     <section class="diapo" data-titulo="Mostrar en pantalla o descargar">
       <div class="cabeza">
         <p class="antetitulo">Etapa 5</p>
@@ -2316,7 +3005,7 @@ app.MapGet("/descargas/precios", () =>
       </template>
     </section>
 
-    <!-- 33. POST con formulario ========================================== -->
+    <!-- 45. POST con formulario ========================================== -->
     <section class="diapo" data-titulo="Enviar datos con un formulario">
       <div class="cabeza">
         <p class="antetitulo">Simulación</p>
@@ -2353,7 +3042,7 @@ app.MapGet("/descargas/precios", () =>
       </template>
     </section>
 
-    <!-- 34. El código del POST =========================================== -->
+    <!-- 46. El código del POST =========================================== -->
     <section class="diapo" data-titulo="El código que recibe el formulario">
       <div class="cabeza">
         <p class="antetitulo">Etapa 5</p>
@@ -2397,8 +3086,8 @@ app.MapPost("/api/contacto", (Contacto contacto) =>
       </template>
     </section>
 
-    <!-- 35. Mapa conceptual ============================================== -->
-    <section class="diapo" data-seccion="Cierre" data-acento="hoja" data-num="07" data-titulo="Cómo se conecta todo">
+    <!-- 47. Mapa conceptual ============================================== -->
+    <section class="diapo" data-seccion="Cierre" data-acento="hoja" data-num="08" data-titulo="Cómo se conecta todo">
       <div class="cabeza">
         <p class="antetitulo">Mapa conceptual</p>
         <h2 class="titulo">Cómo se conecta <em>todo</em></h2>
@@ -2406,15 +3095,21 @@ app.MapPost("/api/contacto", (Contacto contacto) =>
       <div id="mapa-conceptual" class="crece"></div>
     </section>
 
-    <!-- 36. Errores frecuentes y autoevaluación ========================== -->
-    <section class="diapo" data-titulo="Errores frecuentes y autoevaluación">
+    <!-- 48. Errores frecuentes ===================================== -->
+    <section class="diapo" data-titulo="Errores frecuentes">
       <div class="cabeza">
         <p class="antetitulo">Antes de seguir</p>
-        <h2 class="titulo">Revisa los errores y <em>evalúate</em></h2>
+        <h2 class="titulo">Errores <em>frecuentes</em></h2>
       </div>
-      <div class="dividido" data-proporcion="50/50">
-        <div class="columna" style="gap: 8px">
-          <p class="carta-titulo">Errores frecuentes</p>
+      <div class="errores-grid">
+          <details class="profundiza compacta" data-grupo="errores" data-icono="cuidado" data-acento="tomate">
+            <summary><span class="pf-titulo">Crear el proyecto en la carpeta equivocada</span><span class="pf-sub">Cae donde estaba parada la terminal</span></summary>
+            <div class="pf-cuerpo"><div class="pf-bloque" data-tipo="ejemplo" data-etiqueta="Corrección">Mira el prompt antes de ejecutar <code>dotnet new</code> y entra a tu carpeta de proyectos con <code>cd</code>.</div></div>
+          </details>
+          <details class="profundiza compacta" data-grupo="errores" data-icono="cuidado" data-acento="tomate">
+            <summary><span class="pf-titulo">Editar o subir <code>bin</code> y <code>obj</code></span><span class="pf-sub">Son temporales: dotnet las regenera</span></summary>
+            <div class="pf-cuerpo"><div class="pf-bloque" data-tipo="ejemplo" data-etiqueta="Corrección">No las edites ni las subas al repositorio. Si algo se ve raro, bórralas y vuelve a ejecutar.</div></div>
+          </details>
           <details class="profundiza compacta" data-grupo="errores" data-icono="cuidado" data-acento="tomate">
             <summary><span class="pf-titulo">Dejar un <code>MapGet("/")</code> y esperar el <code>index.html</code></span><span class="pf-sub">La ruta gana al archivo</span></summary>
             <div class="pf-cuerpo"><div class="pf-bloque" data-tipo="ejemplo" data-etiqueta="Corrección">Quita el <code>MapGet("/")</code> y deja que <code>UseDefaultFiles()</code> entregue la página.</div></div>
@@ -2435,17 +3130,24 @@ app.MapPost("/api/contacto", (Contacto contacto) =>
             <summary><span class="pf-titulo">Dos copias en el mismo puerto</span><span class="pf-sub">La segunda termina con <code>address already in use</code></span></summary>
             <div class="pf-cuerpo"><div class="pf-bloque" data-tipo="ejemplo" data-etiqueta="Corrección">Cierra la terminal anterior con <kbd>Ctrl</kbd> + <kbd>C</kbd> o arranca con otro puerto.</div></div>
           </details>
-        </div>
-        <div class="columna" style="gap: 10px">
-          <p class="carta-titulo">Autoevaluación: ¿qué tan seguro te sientes?</p>
-          <div class="autoeval" id="autoeval-rutas">
+      </div>
+    </section>
+
+    <!-- 49. Autoevaluación ====================================== -->
+    <section class="diapo" data-titulo="Autoevaluación">
+      <div class="cabeza">
+        <p class="antetitulo">Autoevaluación</p>
+        <h2 class="titulo">¿Qué tan <em>seguro</em> te sientes?</h2>
+      </div>
+      <div class="autoeval auto-grid" id="autoeval-rutas">
             <div class="autoeval-item" data-repaso="servidor">Explico qué hace un servidor y quién le pide.</div>
             <div class="autoeval-item" data-repaso="partes de la dirección">Señalo host, puerto, ruta y query string en una dirección.</div>
+            <div class="autoeval-item" data-repaso="crear el proyecto"><span>Explico qué hace <code>dotnet new web</code> y desde qué carpeta lo ejecuto.</span></div>
+            <div class="autoeval-item" data-repaso="archivos del proyecto"><span>Sé qué archivo cambio para un puerto, una versión o un texto.</span></div>
+            <div class="autoeval-item" data-repaso="bin y obj"><span>Sé cuándo aparecen <code>bin</code> y <code>obj</code> y que puedo borrarlas.</span></div>
             <div class="autoeval-item" data-repaso="MapGet y parámetros">Escribo una ruta que responde un texto o recibe un dato.</div>
             <div class="autoeval-item" data-repaso="tipos de contenido">Explico qué cambia entre texto, JSON y HTML.</div>
             <div class="autoeval-item" data-repaso="estados">Elijo entre 200, 400 y 404 según el caso.</div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -5269,8 +5971,12 @@ Kit.glosario({
     lang: 'texto',
   },
   plantilla: {
-    termino: 'Plantilla web',
-    corta: 'Proyecto base que crea <code>dotnet new web</code>: el servidor más pequeño posible.',
+    termino: 'Plantilla',
+    corta: 'Un molde de proyecto: una lista de archivos con huecos para el nombre. <code>web</code> es la plantilla del servidor web más pequeño posible.',
+    larga: 'Cada plantilla trae un nombre corto (<code>web</code>, <code>console</code>...). <code>dotnet new list</code> muestra las que tienes.',
+    analogia: 'Un molde de galletas: la forma es siempre la misma y tú pones el nombre.',
+    ejemplo: 'dotnet new web -n Plaza',
+    lang: 'texto',
   },
   kestrel: {
     termino: 'Kestrel',
@@ -5423,6 +6129,90 @@ Kit.glosario({
   decodificar: {
     termino: 'Codificación de la dirección',
     corta: 'Las direcciones solo admiten ciertos caracteres: el navegador cambia la tilde por un código, como <code>%C3%AD</code>, y el servidor la recupera.',
+  },
+  proyecto: {
+    termino: 'Proyecto',
+    corta: 'Una carpeta con todo lo que dotnet necesita para construir un programa: el código, la configuración y un archivo <code>.csproj</code> que lo describe.',
+    larga: 'Un proyecto es la unidad con la que trabaja dotnet. Lo creas con una plantilla y de él sale un programa.',
+    analogia: 'La carpeta de una obra: planos, lista de materiales y las instrucciones para armarla.',
+    ejemplo: 'Plaza/\n  Plaza.csproj\n  Program.cs',
+    lang: 'texto',
+  },
+  sdk: {
+    termino: 'SDK de .NET',
+    corta: 'El paquete de herramientas que instalas una vez: trae el comando <code>dotnet</code>, el compilador de C# y las plantillas para crear proyectos.',
+    ejemplo: 'dotnet --version',
+    lang: 'texto',
+    errores: 'Confundirlo con el runtime. El SDK sirve para crear y compilar; el runtime solo ejecuta.',
+  },
+  restauracion: {
+    termino: 'Restauración',
+    corta: 'Paso en el que dotnet lee el <code>.csproj</code>, reúne lo que el proyecto necesita y anota el resultado en la carpeta <code>obj</code>. Ocurre al crear el proyecto y antes de cada compilación.',
+    ejemplo: 'dotnet restore',
+    lang: 'texto',
+  },
+  csproj: {
+    termino: 'Archivo .csproj',
+    corta: 'El archivo que describe el proyecto: qué SDK usa y con qué versión de .NET se compila. Es XML y vive en la raíz de la carpeta.',
+    ejemplo: '<Project Sdk="Microsoft.NET.Sdk.Web">',
+    lang: 'xml',
+  },
+  configuracion: {
+    termino: 'Archivo de configuración',
+    corta: 'Un archivo con valores que el programa lee al arrancar, como cuántos mensajes escribe la consola. Cambiarlo no exige tocar el código.',
+    ejemplo: 'appsettings.json',
+    lang: 'texto',
+    errores: 'Guardar contraseñas ahí: el archivo se publica junto con el proyecto.',
+  },
+  compilar: {
+    termino: 'Compilar',
+    corta: 'Traducir tu código en C# a un programa que el computador puede ejecutar. Ocurre con <code>dotnet build</code> y también al hacer <code>dotnet run</code>.',
+    ejemplo: 'dotnet build',
+    lang: 'texto',
+  },
+  bin: {
+    termino: 'Carpeta bin',
+    corta: 'Carpeta donde queda el programa ya compilado: <code>Plaza.dll</code> y <code>Plaza.exe</code>. Aparece la primera vez que compilas y se puede borrar.',
+    ejemplo: 'bin/Debug/net10.0/Plaza.dll',
+    lang: 'texto',
+  },
+  obj: {
+    termino: 'Carpeta obj',
+    corta: 'Carpeta de trabajo de dotnet: guarda el resultado de la restauración y los archivos intermedios de cada compilación. Se crea sola y se puede borrar.',
+    ejemplo: 'obj/project.assets.json',
+    lang: 'texto',
+  },
+  perfillanzamiento: {
+    termino: 'Perfil de lanzamiento',
+    corta: 'Un conjunto de ajustes de arranque con nombre, guardado en <code>launchSettings.json</code>: la dirección, el ambiente y si se abre el navegador. Por ejemplo <code>http</code> y <code>https</code>.',
+    ejemplo: 'dotnet run --launch-profile https',
+    lang: 'texto',
+  },
+  ambiente: {
+    termino: 'Ambiente (Development, Production)',
+    corta: 'Una etiqueta que dice en qué situación corre el programa. En tu computador es <code>Development</code>; en un servidor de verdad suele ser <code>Production</code>. Cambia qué archivos de configuración se leen.',
+    ejemplo: '"ASPNETCORE_ENVIRONMENT": "Development"',
+    lang: 'json',
+  },
+  logging: {
+    termino: 'Logging',
+    corta: 'Los mensajes que el programa escribe en la consola mientras corre. El nivel (<code>Debug</code>, <code>Information</code>, <code>Warning</code>, <code>Error</code>) decide cuáles salen.',
+  },
+  terminal: {
+    termino: 'Terminal',
+    corta: 'Ventana donde escribes comandos en lugar de hacer clic. En Windows suele ser PowerShell; en VS Code está dentro del editor.',
+  },
+  carpetatrabajo: {
+    termino: 'Carpeta de trabajo',
+    corta: 'La carpeta en la que está parada la terminal. El prompt la muestra antes del signo <code>&gt;</code> y el comando actúa sobre ella.',
+    ejemplo: 'PS C:\\Users\\ana\\Documents\\web>',
+    lang: 'texto',
+  },
+  vscode: {
+    termino: 'Visual Studio Code',
+    corta: 'El editor de código que usas en clase. Abre una carpeta completa y trae una terminal integrada.',
+    ejemplo: 'code .',
+    lang: 'texto',
   },
 });
 
@@ -5621,7 +6411,7 @@ Kit.listo(() => {
     ],
   });
 
-  /* ---- Diapositiva 9: piezas de una ruta MapGet ---- */
+  /* ---- Diapositiva 21: piezas de una ruta MapGet ---- */
   (() => {
     const cod = Kit.codigo('cod-etapa1');
     const cont = $('#mapget-piezas');
@@ -5650,7 +6440,7 @@ Kit.listo(() => {
     elegir(0);
   })();
 
-  /* ---- Diapositiva 10: tablero de rutas ---- */
+  /* ---- Diapositiva 22: tablero de rutas ---- */
   (() => {
     const RUTAS = [
       { ruta: '/', texto: () => 'Bienvenido a la Plaza Campesina' },
@@ -5693,7 +6483,7 @@ Kit.listo(() => {
     pedir();
   })();
 
-  /* ---- Diapositiva 11: respuesta fija o calculada ---- */
+  /* ---- Diapositiva 23: respuesta fija o calculada ---- */
   (() => {
     const log = $('#hora-log');
     const previo = {};
@@ -5717,7 +6507,7 @@ Kit.listo(() => {
     pintar();
   })();
 
-  /* ---- Diapositiva 12: reto, escribe tu propia ruta ---- */
+  /* ---- Diapositiva 24: reto, escribe tu propia ruta ---- */
   (() => {
     const inRuta = $('#reto-ruta');
     const inTexto = $('#reto-texto');
@@ -5772,7 +6562,7 @@ Kit.listo(() => {
     inicio();
   })();
 
-  /* ---- Diapositiva 14: parámetro en la ruta ---- */
+  /* ---- Diapositiva 26: parámetro en la ruta ---- */
   Kit.flujo('#f-param', {
     titulo: 'Simulación: /saludo/{nombre}',
     icono: 'objetivo',
@@ -5800,7 +6590,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 15: constructor de direcciones ---- */
+  /* ---- Diapositiva 27: constructor de direcciones ---- */
   (() => {
     const RUTAS = [
       { plantilla: '/', partes: [], texto: () => 'Bienvenido a la Plaza Campesina' },
@@ -5881,7 +6671,7 @@ Kit.listo(() => {
     calcular();
   })();
 
-  /* ---- Diapositiva 16: restricción :int ---- */
+  /* ---- Diapositiva 28: restricción :int ---- */
   Kit.flujo('#f-int', {
     titulo: 'Simulación: /producto/{id:int}',
     icono: 'candado',
@@ -5912,7 +6702,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 17: query string ---- */
+  /* ---- Diapositiva 29: query string ---- */
   Kit.flujo('#f-query', {
     titulo: 'Simulación: /buscar?q=...',
     icono: 'buscar',
@@ -5948,7 +6738,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 20: del record al JSON ---- */
+  /* ---- Diapositiva 32: del record al JSON ---- */
   (() => {
     const cod = Kit.codigo('cod-json-vivo');
     const id = $('#json-id');
@@ -5964,7 +6754,7 @@ Kit.listo(() => {
     pintar();
   })();
 
-  /* ---- Diapositiva 21: de la lista al JSON ---- */
+  /* ---- Diapositiva 33: de la lista al JSON ---- */
   Kit.flujo('#f-lista', {
     titulo: 'Simulación: GET /api/productos',
     icono: 'cola',
@@ -5990,7 +6780,7 @@ Kit.listo(() => {
     ],
   });
 
-  /* ---- Diapositiva 22: un producto por su número ---- */
+  /* ---- Diapositiva 34: un producto por su número ---- */
   Kit.flujo('#f-porid', {
     titulo: 'Simulación: /api/productos/{id}',
     icono: 'buscar',
@@ -6025,7 +6815,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 24: el mismo cuerpo con tres tipos de contenido ---- */
+  /* ---- Diapositiva 36: el mismo cuerpo con tres tipos de contenido ---- */
   (() => {
     const CUERPOS = {
       texto: 'Hola, buenos días desde la plaza',
@@ -6071,7 +6861,7 @@ Kit.listo(() => {
     pintar();
   })();
 
-  /* ---- Diapositiva 25: una página escrita en una cadena ---- */
+  /* ---- Diapositiva 37: una página escrita en una cadena ---- */
   Kit.flujo('#f-pagina', {
     titulo: 'Simulación: GET /pagina',
     icono: 'libro',
@@ -6091,7 +6881,7 @@ Kit.listo(() => {
     ],
   });
 
-  /* ---- Diapositiva 26: la carpeta wwwroot ---- */
+  /* ---- Diapositiva 38: la carpeta wwwroot ---- */
   Kit.flujo('#f-www', {
     titulo: 'Simulación: archivos de wwwroot',
     icono: 'libro',
@@ -6124,7 +6914,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 27: la página pide sus datos ---- */
+  /* ---- Diapositiva 39: la página pide sus datos ---- */
   Kit.flujo('#f-fetchpag', {
     titulo: 'Simulación: la página y fetch',
     icono: 'red',
@@ -6159,7 +6949,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 28: dos respuestas para la misma dirección ---- */
+  /* ---- Diapositiva 40: dos respuestas para la misma dirección ---- */
   Kit.flujo('#f-tapa', {
     titulo: 'Simulación: GET /',
     icono: 'objetivo',
@@ -6194,7 +6984,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 30: semáforo de estados ---- */
+  /* ---- Diapositiva 42: semáforo de estados ---- */
   (() => {
     const ESTADOS = [
       { cod: 200, nom: 'OK', tono: 'hoja', fam: 'Salió bien (2xx)', cuando: 'La petición se atendió y hay contenido que entregar.', url: 'GET /api/productos', cuerpo: '[{"id":1,"nombre":"Tomate","precio":3500}, ...]', cs: 'app.MapGet("/api/productos", () => Results.Ok(productos));' },
@@ -6229,7 +7019,7 @@ Kit.listo(() => {
     pintar();
   })();
 
-  /* ---- Diapositiva 31: dato inválido o ruta inexistente ---- */
+  /* ---- Diapositiva 43: dato inválido o ruta inexistente ---- */
   Kit.flujo('#f-desc', {
     titulo: 'Simulación: /api/descuento/{porcentaje}',
     icono: 'objetivo',
@@ -6264,7 +7054,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 32: mostrar o descargar ---- */
+  /* ---- Diapositiva 44: mostrar o descargar ---- */
   Kit.flujo('#f-descarga', {
     titulo: 'Simulación: precios.txt',
     icono: 'libro',
@@ -6297,7 +7087,7 @@ Kit.listo(() => {
     },
   });
 
-  /* ---- Diapositiva 33: enviar un formulario con POST ---- */
+  /* ---- Diapositiva 45: enviar un formulario con POST ---- */
   (() => {
     const nombre = $('#post-nombre');
     const mensaje = $('#post-mensaje');
@@ -6322,7 +7112,7 @@ Kit.listo(() => {
     vacio();
   })();
 
-  /* ---- Diapositiva 34: el código del POST ---- */
+  /* ---- Diapositiva 46: el código del POST ---- */
   (() => {
     const cod = Kit.codigo('cod-post');
     const exp = $('#exp-post');
@@ -6345,36 +7135,755 @@ Kit.listo(() => {
     elegir(botones[0]);
   })();
 
-  /* ---- Diapositiva 35: mapa conceptual ---- */
+  /* ======================================================================
+     Sección 02: Crear el proyecto (diapositivas 9 a 19)
+     Todo es JavaScript del navegador: dotnet no corre aquí. Las salidas
+     de consola y el contenido de los archivos salen de un proyecto real
+     creado con "dotnet new web -n Plaza" (SDK 10.0.302).
+     ====================================================================== */
+  const REAL = {
+    program: 'var builder = WebApplication.CreateBuilder(args);\nvar app = builder.Build();\n\napp.MapGet("/", () => "Hello World!");\n\napp.Run();',
+    csproj: '<Project Sdk="Microsoft.NET.Sdk.Web">\n\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <Nullable>enable</Nullable>\n    <ImplicitUsings>enable</ImplicitUsings>\n  </PropertyGroup>\n\n</Project>',
+    base: '{\n  "Logging": {\n    "LogLevel": {\n      "Default": "Information",\n      "Microsoft.AspNetCore": "Warning"\n    }\n  },\n  "AllowedHosts": "*"\n}',
+    dev: '{\n  "Logging": {\n    "LogLevel": {\n      "Default": "Information",\n      "Microsoft.AspNetCore": "Warning"\n    }\n  }\n}',
+    launch: '{\n  "$schema": "https://json.schemastore.org/launchsettings.json",\n  "profiles": {\n    "http": {\n      "commandName": "Project",\n      "dotnetRunMessages": true,\n      "launchBrowser": true,\n      "applicationUrl": "http://localhost:5120",\n      "environmentVariables": {\n        "ASPNETCORE_ENVIRONMENT": "Development"\n      }\n    },\n    "https": {\n      "commandName": "Project",\n      "dotnetRunMessages": true,\n      "launchBrowser": true,\n      "applicationUrl": "https://localhost:7097;http://localhost:5120",\n      "environmentVariables": {\n        "ASPNETCORE_ENVIRONMENT": "Development"\n      }\n    }\n  }\n}',
+  };
+  const USU = 'C:\\Users\\ana';
+  const NIVELES = ['Debug', 'Information', 'Warning', 'Error'];
+  const TONO_NIVEL = ['cielo', 'hoja', 'maiz', 'tomate'];
+
+  /* ---- Diapositiva 9: dónde estoy ---- */
+  (() => {
+    const OPC = {
+      web: { cd: 'cd Documents\\web', dir: USU + '\\Documents\\web', tono: 'hoja', etq: 'La mejor opción', texto: 'Una carpeta propia para tus proyectos. Queda ordenada y la encuentras sin buscar.' },
+      personal: { cd: '', dir: USU, tono: 'maiz', etq: 'Funciona, pero desordena', texto: 'Aquí abre la terminal si no la llevaste a otra parte. Plaza quedaría mezclada con todo lo demás de tu usuario.' },
+      escritorio: { cd: 'cd Desktop', dir: USU + '\\Desktop', tono: 'maiz', etq: 'Funciona, pero se pierde', texto: 'Queda a la vista, pero el escritorio se llena rápido y es fácil mover o borrar el proyecto sin querer.' },
+      descargas: { cd: 'cd Downloads', dir: USU + '\\Downloads', tono: 'tomate', etq: 'Mala idea', texto: 'Es una carpeta pensada para lo que bajas de internet y se limpia a menudo. Podrías perder el proyecto.' },
+    };
+    const term = $('#carp-term');
+    const migas = $('#carp-migas');
+    const ver = $('#carp-veredicto');
+    const linea = (i, ...hijos) => h('span', { class: 'term-l nueva', style: '--i:' + i }, ...hijos);
+    const prompt = (dir) => h('span', { class: 't-ruta', text: 'PS ' + dir + '>' });
+    const pintar = (k) => {
+      const o = OPC[k];
+      const ls = [];
+      let i = 0;
+      if (o.cd) ls.push(linea(i++, prompt(USU), ' ', h('span', { class: 't-cmd', text: o.cd })));
+      ls.push(linea(i++, prompt(o.dir), ' ', h('span', { class: 't-cmd', text: 'dotnet new web -n Plaza' })));
+      ls.push(linea(i++, h('span', { class: 't-ok', text: 'La plantilla "ASP.NET Core vacío" se creó correctamente.' })));
+      ls.push(linea(i++, prompt(o.dir), ' ', h('span', { class: 'term-cursor' })));
+      term.replaceChildren(...ls);
+      const trozos = o.dir.split('\\').concat(['Plaza']);
+      const nodos = [];
+      trozos.forEach((t, j) => {
+        if (j) nodos.push(h('span', { class: 'miga-sep', text: '\\' }));
+        nodos.push(h('span', { class: 'miga' + (j === trozos.length - 1 ? ' fin' : ''), text: t }));
+      });
+      migas.replaceChildren(...nodos);
+      ver.innerHTML = '<span class="etiqueta" data-tono="' + o.tono + '">' + o.etq + '</span><p class="cuerpo" style="font-size: 19px; margin-top: 10px">' + o.texto + '</p>';
+    };
+    $('#carp-chips').addEventListener('kit:cambio', (e) => pintar(e.detail));
+    pintar('web');
+  })();
+
+  /* ---- Diapositiva 10: anatomía del comando ---- */
+  (() => {
+    const P = {
+      dotnet: { nombre: 'dotnet', tono: 'cielo', texto: 'El programa que ejecutas. Es la <dfn data-def="dotnet">herramienta de línea de comandos</dfn> de .NET: con ella creas, compilas y ejecutas proyectos.' },
+      new: { nombre: 'new', tono: 'maiz', texto: 'La acción: crear algo nuevo a partir de una plantilla. Otras acciones son <code>run</code>, para ejecutar, y <code>build</code>, para compilar.' },
+      web: { nombre: 'web', tono: 'uva', texto: 'El nombre corto de la <dfn data-def="plantilla">plantilla</dfn>: un proyecto web vacío, el servidor más pequeño posible. <code>dotnet new list</code> muestra todas las que tienes.' },
+      n: { nombre: '-n', tono: 'tinta', texto: 'Abreviatura de <code>--name</code>. Lo que escribas justo después es el nombre del proyecto. Sin <code>-n</code>, los archivos caen directo en la carpeta donde estás y toman su nombre.' },
+      nombre: { nombre: 'el nombre', tono: 'hoja', texto: 'Lo eliges tú. Da nombre a la carpeta y al archivo del proyecto. <strong>Cámbialo en la línea de arriba</strong> y mira cómo cambia lo de la derecha.' },
+    };
+    const cont = $('#cmd-linea');
+    const entrada = $('#cmd-nombre');
+    const exp = $('#cmd-explica');
+    const res = $('#cmd-resultado');
+    const botones = $$('[data-pieza]', cont);
+    const orden = ['dotnet', 'new', 'web', 'n', 'nombre'];
+    let k = 0;
+    let manual = false;
+    let reloj = null;
+    const mostrar = (clave) => {
+      const p = P[clave];
+      botones.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pieza === clave)));
+      exp.innerHTML = '<span class="etiqueta" data-tono="' + p.tono + '">' + p.nombre + '</span><p class="cuerpo" style="font-size: 20px; margin-top: 10px">' + p.texto + '</p>';
+      Kit.preparar(exp);
+    };
+    const fila = (etq, valor) => '<div class="nom-fila"><span class="rp-etq">' + etq + '</span><span>' + valor + '</span></div>';
+    const pintarRes = () => {
+      const n = entrada.value.trim();
+      entrada.style.width = Math.max(6, Math.min(22, entrada.value.length + 2)) + 'ch';
+      let html;
+      if (!n) {
+        html = fila('Carpeta nueva', '<em class="rp-vacio">ninguna: los archivos caen en la carpeta donde estás</em>') +
+          fila('Proyecto', '<code>(nombre de la carpeta actual).csproj</code>') +
+          '<p class="rp-nota nom-aviso">Sin <code>-n</code> no se crea una carpeta nueva.</p>';
+      } else {
+        const probs = [];
+        if (/[\\/:*?"<>|]/.test(n)) probs.push('Windows no permite <code>\\ / : * ? " &lt; &gt; |</code> en el nombre de una carpeta.');
+        else {
+          const raros = [];
+          if (/\s/.test(n)) raros.push('espacios');
+          if (/[^\x00-\x7F]/.test(n)) raros.push('tildes o eñes');
+          else if (/[^A-Za-z0-9_.-]/.test(n) && !/\s/.test(n)) raros.push('símbolos');
+          if (/^\d/.test(n)) raros.push('empezar con un número');
+          if (raros.length) probs.push('El comando puede funcionar, pero con ' + raros.join(' o ') + ' te dará problemas después. Usa letras sin tilde, números y guion bajo.');
+        }
+        html = fila('Carpeta', '<code>' + esc(n) + '/</code>') +
+          fila('Archivo de proyecto', '<code>' + esc(n) + '.csproj</code>') +
+          fila('Programa compilado', '<code>' + esc(n) + '.dll</code> <span class="nota" style="font-size: 15px">(aparece al compilar)</span>') +
+          (probs.length ? '<p class="rp-nota rp-mal nom-aviso">' + probs.join(' ') + '</p>' : '');
+      }
+      res.innerHTML = html;
+    };
+    const parar = () => { manual = true; clearInterval(reloj); reloj = null; };
+    const arrancar = () => {
+      if (manual || reloj || Kit.reducido()) return;
+      reloj = setInterval(() => { k = (k + 1) % orden.length; mostrar(orden[k]); }, 2800);
+    };
+    botones.forEach((b) => {
+      if (b === entrada) return;
+      b.addEventListener('click', () => { parar(); mostrar(b.dataset.pieza); });
+    });
+    entrada.addEventListener('focus', () => { parar(); mostrar('nombre'); });
+    entrada.addEventListener('input', () => { parar(); mostrar('nombre'); pintarRes(); });
+    const dia = cont.closest('.diapo');
+    dia.addEventListener('kit:salir', () => { clearInterval(reloj); reloj = null; });
+    dia.addEventListener('kit:entrar', arrancar);
+    mostrar('dotnet');
+    pintarRes();
+    if (dia.classList.contains('activa')) arrancar();
+  })();
+
+  /* ---- Diapositiva 11: predice, cuántos archivos ---- */
+  (() => {
+    const p = $('#pred-archivos');
+    const lista = $('#arch-lista');
+    const vacio = $('#arch-vacio');
+    const cuenta = $('#arch-cuenta');
+    const ITEMS = [
+      { n: 'Plaza.csproj', ico: 'archivo', nota: 'la ficha del proyecto' },
+      { n: 'Program.cs', ico: 'archivo', nota: 'tu código' },
+      { n: 'appsettings.json', ico: 'archivo', nota: 'configuración' },
+      { n: 'appsettings.Development.json', ico: 'archivo', nota: 'configuración de Development' },
+      { n: 'Properties/launchSettings.json', ico: 'archivo', nota: 'cómo arranca' },
+      { n: 'obj/', ico: 'carpeta', nota: 'restauración', carpeta: true },
+    ];
+    const OBJ = ['project.assets.json', 'project.nuget.cache', 'Plaza.csproj.nuget.dgspec.json', 'Plaza.csproj.nuget.g.props', 'Plaza.csproj.nuget.g.targets'];
+    let hecho = false;
+    p.addEventListener('kit:revelar', () => {
+      if (hecho) return;
+      hecho = true;
+      vacio.hidden = true;
+      const paso = Kit.reducido() ? 0 : 340;
+      ITEMS.forEach((it, i) => setTimeout(() => {
+        lista.append(h('li', { class: it.carpeta ? 'carpeta' : null }, Kit.ico(it.ico), it.n, h('small', { text: it.nota })));
+        if (!it.carpeta) cuenta.textContent = (i + 1) + (i === 0 ? ' archivo' : ' archivos');
+        else {
+          const sub = h('div', { class: 'carp-sub' });
+          lista.append(sub);
+          OBJ.forEach((o, j) => setTimeout(() => {
+            sub.append(h('span', { text: o }));
+            if (j === OBJ.length - 1) cuenta.textContent = '5 archivos y obj con 5 más';
+          }, Kit.reducido() ? 0 : j * 160));
+        }
+      }, i * paso));
+    });
+  })();
+
+  /* ---- Diapositiva 12: qué pasa al ejecutar el comando ---- */
+  (() => {
+    const termEl = $('#new-term');
+    let nombre = 'Plaza';
+    let ultimo = -1;
+    const lineas = () => [
+      { desde: 0, partes: [['t-ruta', 'PS ...\\web>'], [null, ' '], ['t-cmd', 'dotnet new web -n ' + nombre]] },
+      { desde: 4, partes: [['t-ok', 'La plantilla "ASP.NET Core vacío" se creó correctamente.']] },
+      { desde: 6, partes: [['t-tn', 'Procesando acciones posteriores a la creación...']] },
+      { desde: 6, partes: [['t-tn', 'Restaurando ...\\' + nombre + '\\' + nombre + '.csproj:']] },
+      { desde: 6, partes: [['t-tn', '  Determinando los proyectos que se van a restaurar...']] },
+      { desde: 7, partes: [['t-tn', '  Se ha restaurado ...\\' + nombre + '\\' + nombre + '.csproj (en 109 ms).']] },
+      { desde: 8, partes: [['t-ok', 'Restauración realizada correctamente.']] },
+    ];
+    const pintarTerm = () => {
+      termEl.replaceChildren(...lineas().map((l) => {
+        const el = h('span', { class: 'term-l' }, l.partes.map(([c, t]) => (c ? h('span', { class: c, text: t }) : t)));
+        el._desde = l.desde;
+        return el;
+      }));
+      aplicar(ultimo);
+    };
+    const aplicar = (i) => {
+      ultimo = i;
+      $$('.term-l', termEl).forEach((el) => el.classList.toggle('vista', i >= el._desde));
+    };
+    Kit.flujo('#f-new', {
+      titulo: 'Simulación: dotnet new web',
+      icono: 'consola',
+      vista: [640, 262],
+      nodos: [
+        { id: 'term', x: 78, y: 112, icono: 'engranaje', etiqueta: 'dotnet', sub: 'tu comando', tono: 'cielo', ancho: 130 },
+        { id: 'plan', x: 234, y: 112, icono: 'paquete', etiqueta: 'Plantilla', sub: 'web', tono: 'maiz', ancho: 130 },
+        { id: 'carp', x: 390, y: 112, icono: 'documento', etiqueta: 'Carpeta', sub: 'el proyecto', tono: 'hoja', ancho: 130 },
+        { id: 'rest', x: 546, y: 112, icono: 'nube', etiqueta: 'Restaurar', sub: 'obj', tono: 'uva', ancho: 130 },
+      ],
+      conectores: [
+        { desde: 'term', hasta: 'plan', curva: -30 },
+        { desde: 'plan', hasta: 'carp', curva: -30 },
+        { desde: 'carp', hasta: 'rest', curva: -30 },
+      ],
+      parametros: [
+        { id: 'nombre', tipo: 'opciones', etiqueta: 'Nombre del proyecto', opciones: [{ valor: 'Plaza', etiqueta: 'Plaza' }, { valor: 'MiTienda', etiqueta: 'MiTienda' }], valor: 'Plaza' },
+      ],
+      intro: 'Mira lo que hace el comando y qué va escribiendo la terminal. Cambia el nombre del proyecto para ver dónde aparece.',
+      pasos: (v) => {
+        const n = v.nombre;
+        return [
+          { nodo: 'term', duracion: 2800, texto: 'Escribes <code>dotnet new web -n ' + n + '</code> y pulsas Enter. <code>dotnet</code> recibe tres datos: la plantilla (<code>web</code>), el nombre (<code>' + n + '</code>) y la carpeta donde estás.', estado: { term: { texto: 'dotnet new', tono: 'cielo' } } },
+          { desde: 'term', hasta: 'plan', paquete: 'web', tono: 'maiz', duracion: 1300, texto: 'dotnet busca, entre las plantillas que trae el SDK, la que se llama <code>web</code>.' },
+          { nodo: 'plan', duracion: 2800, texto: 'La plantilla es un molde: una lista de archivos con huecos para el nombre. Donde corresponde, dotnet escribe <code>' + n + '</code>.', estado: { plan: { texto: 'molde', tono: 'maiz' } } },
+          { desde: 'plan', hasta: 'carp', paquete: '5 archivos', tono: 'hoja', duracion: 1500, texto: 'dotnet crea la carpeta <code>' + n + '</code> y escribe dentro los archivos de la plantilla.', estado: { plan: null } },
+          { nodo: 'carp', duracion: 3400, texto: 'Aparecen <code>' + n + '.csproj</code>, <code>Program.cs</code>, <code>appsettings.json</code>, <code>appsettings.Development.json</code> y <code>Properties/launchSettings.json</code>.', estado: { carp: { texto: '5 archivos', tono: 'hoja' } } },
+          { desde: 'carp', hasta: 'rest', paquete: 'restaurar', tono: 'uva', duracion: 1400, texto: 'Al terminar de escribir, la plantilla pide una acción posterior: restaurar el proyecto.' },
+          { nodo: 'rest', duracion: 3200, texto: 'La <strong>restauración</strong> lee <code>' + n + '.csproj</code>, reúne lo que el proyecto necesita y lo anota en una carpeta nueva: <code>obj</code>.', estado: { rest: { texto: 'lee el csproj', tono: 'uva' } } },
+          { desde: 'rest', hasta: 'carp', paquete: 'obj', tono: 'uva', duracion: 1400, texto: 'Quedan 5 archivos de restauración dentro de <code>obj</code>.', estado: { rest: { texto: 'obj creada', tono: 'hoja' }, carp: { texto: '5 archivos + obj', tono: 'hoja' } } },
+          { nodo: 'term', duracion: 3400, texto: 'La terminal confirma que terminó. Todavía no se compiló nada: <code>bin</code> no existe y tu código sigue sin traducirse.', estado: { term: { texto: 'listo', tono: 'hoja' } } },
+        ];
+      },
+      alPaso: (i) => aplicar(i),
+      alRecalcular: (v) => { nombre = v.nombre; pintarTerm(); },
+    });
+    pintarTerm();
+  })();
+
+  /* ---- Diapositiva 13: explorador de archivos ---- */
+  (() => {
+    const CAT = {
+      edita: { tono: 'hoja', corta: 'lo editas', larga: 'Lo editas' },
+      no: { tono: 'tinta', corta: 'no lo tocas', larga: 'No lo tocas hoy' },
+      compilar: { tono: 'maiz', corta: 'al compilar', larga: 'Aparece al compilar' },
+    };
+    const LISTA_BIN = 'bin/Debug/net10.0/\n  Plaza.dll\n  Plaza.exe\n  Plaza.pdb\n  Plaza.deps.json\n  Plaza.runtimeconfig.json\n  Plaza.staticwebassets.endpoints.json\n  appsettings.json\n  appsettings.Development.json';
+    const DET = {
+      bin: { ruta: 'bin/', lang: 'texto', texto: LISTA_BIN, cat: 'compilar', explica: 'Aparece la primera vez que compilas o ejecutas. Aquí queda tu programa terminado: <code>Plaza.dll</code> es el programa y <code>Plaza.exe</code> es el lanzador en Windows. Se puede borrar: dotnet lo vuelve a crear.' },
+      obj: { ruta: 'obj/', lang: 'texto', texto: 'obj/\n  project.assets.json\n  project.nuget.cache\n  Plaza.csproj.nuget.dgspec.json\n  Plaza.csproj.nuget.g.props\n  Plaza.csproj.nuget.g.targets', cat: 'no', explica: 'La carpeta de trabajo de dotnet. Nace al restaurar el proyecto con estos 5 archivos y crece cada vez que compilas. No la edites: dotnet la reescribe.' },
+      launch: { ruta: 'Properties/launchSettings.json', lang: 'json', texto: REAL.launch, cat: 'no', explica: 'Dice cómo arranca el proyecto en tu equipo: dirección, puerto y ambiente. Trae dos perfiles, <code>http</code> y <code>https</code>. Las diapositivas siguientes lo leen por dentro.', aviso: 'El puerto (<code>5120</code> y <code>7097</code> aquí) lo elige dotnet al azar para cada proyecto. En tu equipo verás otros números.' },
+      dev: { ruta: 'appsettings.Development.json', lang: 'json', texto: REAL.dev, cat: 'no', explica: 'Ajustes que solo se aplican cuando el ambiente es <code>Development</code>. Se leen después del archivo base y ganan sobre él.' },
+      base: { ruta: 'appsettings.json', lang: 'json', texto: REAL.base, cat: 'no', explica: 'Configuración que el programa lee al arrancar: qué tantos mensajes escribe la consola (<code>Logging</code>) y qué hosts aceptan peticiones (<code>AllowedHosts</code>).' },
+      csproj: { ruta: 'Plaza.csproj', lang: 'xml', texto: REAL.csproj, cat: 'no', explica: 'La ficha del proyecto: qué SDK usa y con qué versión de .NET se compila. Lo abrirás pocas veces. Cambia aquí la versión de .NET.' },
+      prog: { ruta: 'Program.cs', lang: 'csharp', texto: REAL.program, cat: 'edita', explica: 'Aquí vive tu servidor. <code>MapGet</code> une una dirección con una respuesta. Es el único archivo que escribes en esta sesión.' },
+    };
+    const FILAS = [
+      { id: 'bin', nombre: 'bin', ico: 'carpeta', n: 0 },
+      { id: 'obj', nombre: 'obj', ico: 'carpeta', n: 0 },
+      { id: 'props', nombre: 'Properties', ico: 'carpeta', n: 0, solo: true },
+      { id: 'launch', nombre: 'launchSettings.json', ico: 'archivo', n: 1 },
+      { id: 'dev', nombre: 'appsettings.Development.json', ico: 'archivo', n: 0 },
+      { id: 'base', nombre: 'appsettings.json', ico: 'archivo', n: 0 },
+      { id: 'csproj', nombre: 'Plaza.csproj', ico: 'archivo', n: 0 },
+      { id: 'prog', nombre: 'Program.cs', ico: 'archivo', n: 0 },
+    ];
+    const arbol = $('#exp-arbol');
+    const cab = $('#exp-cabeza');
+    const txt = $('#exp-texto');
+    const aviso = $('#exp-aviso');
+    const avisoTxt = $('.callout-txt', aviso);
+    const cont = $('#exp-codigo');
+    const codigos = {};
+    Object.entries(DET).forEach(([id, d]) => {
+      const pre = h('pre');
+      cont.append(pre);
+      const c = Kit.crearCodigo(pre, { texto: d.texto, lang: d.lang, titulo: d.ruta, tam: 13, id: 'cod-exp-' + id });
+      c.el.hidden = true;
+      codigos[id] = c;
+    });
+    let corrio = false;
+    let sel = 'prog';
+    const filas = {};
+    arbol.append(h('div', { class: 'af-raiz', text: 'Plaza' }));
+    FILAS.forEach((f) => {
+      let el;
+      if (f.solo) el = h('div', { class: 'af' }, Kit.ico(f.ico), h('span', { class: 'af-txt', text: f.nombre }));
+      else {
+        const c = CAT[DET[f.id].cat];
+        el = h('button', { class: 'af' + (f.n ? ' n1' : ''), type: 'button', 'aria-pressed': 'false' },
+          Kit.ico(f.ico), h('span', { class: 'af-txt', text: f.nombre }),
+          h('span', { class: 'insignia', 'data-tono': c.tono, text: c.corta }));
+        el.addEventListener('click', () => elegir(f.id));
+      }
+      filas[f.id] = el;
+      arbol.append(el);
+    });
+    const sub = h('div', { class: 'af n2', hidden: true }, h('span', { class: 'af-txt', text: 'Debug/net10.0/ ... decenas de archivos' }));
+    filas.obj.after(sub);
+    const actualizarBin = () => {
+      filas.bin.classList.toggle('fantasma', !corrio);
+      $('.af-txt', filas.bin).textContent = corrio ? 'bin' : 'bin (todavía no existe)';
+      sub.hidden = !corrio;
+      if (corrio) { filas.bin.classList.remove('nuevo'); void filas.bin.offsetWidth; filas.bin.classList.add('nuevo'); }
+    };
+    const elegir = (id) => {
+      sel = id;
+      const d = DET[id];
+      const c = CAT[d.cat];
+      Object.entries(filas).forEach(([k, el]) => { if (el.tagName === 'BUTTON') el.setAttribute('aria-pressed', String(k === id)); });
+      Object.entries(codigos).forEach(([k, cd]) => { cd.el.hidden = k !== id; });
+      cab.replaceChildren(
+        Kit.ico(id === 'bin' || id === 'obj' ? 'carpeta' : 'archivo'),
+        h('span', { class: 'exp-nombre', text: d.ruta }),
+        h('span', { class: 'etiqueta', 'data-tono': c.tono, text: c.larga }));
+      let t = d.explica;
+      if (id === 'bin' && !corrio) t = 'Todavía no existe. Aparece la primera vez que compilas o ejecutas; mira la lista de abajo y activa <strong>Ya ejecuté dotnet run</strong>. Después de compilar, aquí quedará tu programa: <code>Plaza.dll</code> y <code>Plaza.exe</code>.';
+      if (id === 'obj' && corrio) t = 'La carpeta de trabajo de dotnet. Nació con 5 archivos al crear el proyecto y, después de compilar, creció con una carpeta <code>Debug</code> llena de piezas intermedias. No la edites: dotnet la reescribe.';
+      txt.innerHTML = t;
+      aviso.hidden = !d.aviso;
+      if (d.aviso) avisoTxt.innerHTML = d.aviso;
+    };
+    $('#exp-corrio').addEventListener('kit:cambio', (e) => { corrio = !!e.detail; actualizarBin(); elegir(sel); });
+    actualizarBin();
+    elegir('prog');
+  })();
+
+  /* ---- Diapositiva 14: Plaza.csproj línea por línea ---- */
+  (() => {
+    const cod = Kit.codigo('cod-csproj');
+    const exp = $('#csp-explica');
+    const botones = $$('#csp-piezas [data-pieza]');
+    const fila = $('#csp-versiones');
+    let version = 'net10.0';
+    let actual = 'sdk';
+    const PIEZAS = {
+      sdk: { lineas: [1], nota: 'El kit de herramientas', texto: '<strong>Sdk.</strong> <code>Microsoft.NET.Sdk.Web</code> le dice a dotnet que esto es un proyecto web de ASP.NET Core: trae el compilador de C# y el servidor <dfn data-def="kestrel">Kestrel</dfn> listo para usar. Sin esta línea, <code>WebApplication</code> no existe y el proyecto no compila.' },
+      grupo: { lineas: [3, 7], nota: 'Un grupo de ajustes', texto: '<strong>PropertyGroup.</strong> Agrupa los ajustes del proyecto. Cada uno va entre etiquetas, como <code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code>. El archivo es XML.' },
+      tf: { lineas: [4], nota: 'Versión de .NET', texto: '<strong>TargetFramework.</strong> La versión de .NET con la que se compila y se ejecuta el proyecto. Debe existir en tu equipo: <code>dotnet --version</code> te dice cuál tienes.' },
+      nullable: { lineas: [5], nota: 'Avisos de valores vacíos', texto: '<strong>Nullable.</strong> Con <code>enable</code>, el compilador te avisa cuando un valor podría estar vacío (<code>null</code>). Por eso más adelante verás <code>string? q</code>: el signo de pregunta dice que ese texto puede no venir.' },
+      usings: { lineas: [6], nota: 'using automáticos', texto: '<strong>ImplicitUsings.</strong> Con <code>enable</code>, dotnet agrega por ti los <code>using</code> más comunes. Por eso <code>Program.cs</code> empieza directo con código, sin lista de <code>using</code>.' },
+    };
+    const textoVersion = (v) => REAL.csproj.replace('net10.0', v);
+    const NOTA_V = {
+      'net8.0': 'Compilaría para .NET 8: necesitas esa versión instalada para ejecutarlo.',
+      'net9.0': 'Compilaría para .NET 9: necesitas esa versión instalada para ejecutarlo.',
+      'net10.0': 'La versión con que dotnet creó este proyecto.',
+    };
+    const elegir = (clave) => {
+      actual = clave;
+      const p = PIEZAS[clave];
+      botones.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pieza === clave)));
+      exp.innerHTML = p.texto;
+      Kit.preparar(exp);
+      fila.hidden = clave !== 'tf';
+      cod.resaltar(p.lineas, clave === 'tf' ? NOTA_V[version] : p.nota);
+    };
+    botones.forEach((b) => b.addEventListener('click', () => elegir(b.dataset.pieza)));
+    $('#csp-chips').addEventListener('kit:cambio', (e) => {
+      version = e.detail;
+      cod.fijarTexto(textoVersion(version));
+      elegir('tf');
+    });
+    elegir('sdk');
+  })();
+
+  /* ---- Diapositiva 15: appsettings ---- */
+  (() => {
+    const MSG = [
+      { cat: 'Microsoft.Extensions.Hosting.Internal.Host', niv: 0, txt: 'Hosting starting' },
+      { cat: 'Microsoft.Hosting.Lifetime', niv: 1, txt: 'Now listening on: http://localhost:5100' },
+      { cat: 'Microsoft.AspNetCore.Hosting.Diagnostics', niv: 1, txt: 'Request starting HTTP/1.1 GET http://localhost:5100/' },
+      { cat: 'Microsoft.AspNetCore.Server.Kestrel', niv: 3, txt: 'An unhandled exception was thrown by the application.' },
+    ];
+    const lista = $('#cfg-msgs');
+    const res = $('#cfg-res');
+    const v = { amb: 'Development', base: 1, dev: 1 };
+    const filas = MSG.map((m) => {
+      const el = h('div', { class: 'cfg-msg' },
+        h('span', { class: 'cfg-nivel', 'data-tono': TONO_NIVEL[m.niv], text: NIVELES[m.niv] }),
+        h('span', { class: 'cfg-cat', text: m.cat }),
+        h('span', { class: 'cfg-txt', text: m.txt }));
+      lista.append(el);
+      return el;
+    });
+    const pintar = () => {
+      const dev = v.amb === 'Development';
+      const efectivo = dev ? v.dev : v.base;
+      MSG.forEach((m, i) => {
+        const umbral = m.cat.startsWith('Microsoft.AspNetCore') ? 2 : efectivo;
+        const sale = m.niv >= umbral;
+        filas[i].classList.toggle('sale', sale);
+        filas[i].classList.toggle('no-sale', !sale);
+      });
+      const quien = dev ? 'gana <code>appsettings.Development.json</code>' : 'solo se lee <code>appsettings.json</code>';
+      res.innerHTML = '<code>Default</code> efectivo: <strong>' + NIVELES[efectivo] + '</strong> (' + quien + '). <code>Microsoft.AspNetCore</code> sigue en <strong>Warning</strong>.';
+    };
+    $('#cfg-amb').addEventListener('kit:cambio', (e) => { v.amb = e.detail; pintar(); });
+    $('#cfg-base').addEventListener('kit:cambio', (e) => { v.base = Number(e.detail); pintar(); });
+    $('#cfg-dev').addEventListener('kit:cambio', (e) => { v.dev = Number(e.detail); pintar(); });
+    pintar();
+  })();
+
+  /* ---- Diapositiva 16: launchSettings ---- */
+  (() => {
+    const cod = Kit.codigo('cod-launch');
+    const txt = $('#lau-clave-txt');
+    const res = $('#lau-res');
+    const botones = $$('#lau-claves [data-clave]');
+    const CLAVES = {
+      perfiles: { lineas: [4, 13], nota: 'Dos perfiles: http y https', texto: 'Un <strong>perfil</strong> es un conjunto de ajustes con nombre. <code>dotnet run</code> usa el primero de tipo <code>Project</code> (aquí <code>http</code>). Con <code>--launch-profile https</code> eliges el otro.' },
+      url: { lineas: [8, 17], nota: 'Dirección y puerto', texto: '<code>applicationUrl</code> es la dirección y el puerto con que arranca el servidor. Si hay varias, van separadas por punto y coma, como en <code>https</code>.' },
+      nav: { lineas: [7, 16], nota: 'Pide abrir el navegador', texto: '<code>launchBrowser</code> pide abrir el navegador al arrancar. Visual Studio y <code>dotnet watch</code> lo respetan. <code>dotnet run</code> no abre nada.' },
+      env: { lineas: [10, 19], nota: 'El ambiente', texto: '<code>ASPNETCORE_ENVIRONMENT</code> fija el <dfn data-def="ambiente">ambiente</dfn>. Con <code>Development</code> se lee <code>appsettings.Development.json</code>.' },
+    };
+    const MODOS = {
+      run: { perfil: 'http, el primer perfil de tipo Project', url: 'http://localhost:5120', amb: 'Development', nav: false, consola: ['Using launch settings from ...\launchSettings.json...', 'Building...', 'Now listening on: http://localhost:5120'], lineas: [4, 11], nota: 'Aplica el perfil <code>http</code>. <code>launchBrowser</code> está en <code>true</code>, pero <code>dotnet run</code> no abre el navegador.' },
+      https: { perfil: 'https', url: 'https://localhost:7097 y http://localhost:5120', amb: 'Development', nav: false, consola: ['Using launch settings from ...\launchSettings.json...', 'Building...', 'Now listening on: https://localhost:7097', 'Now listening on: http://localhost:5120'], lineas: [13, 21], nota: 'Atiende por dos puertos. Si el certificado de desarrollo no es de confianza, la consola agrega una advertencia.' },
+      urls: { perfil: 'http para el ambiente; la dirección la manda --urls', url: 'http://localhost:5100', amb: 'Development', nav: false, consola: ['Using launch settings from ...\launchSettings.json...', 'Building...', 'Now listening on: http://localhost:5100'], lineas: [4, 11], nota: '<code>--urls</code> gana sobre <code>applicationUrl</code> solo en esta ejecución. El archivo no cambia.' },
+      sin: { perfil: 'ninguno: se ignora el archivo', url: 'http://localhost:5000, la dirección por defecto', amb: 'Production', nav: false, consola: ['Now listening on: http://localhost:5000'], lineas: [], nota: 'Sin perfil no hay <code>ASPNETCORE_ENVIRONMENT</code>: el ambiente queda en <code>Production</code> y no se lee <code>appsettings.Development.json</code>. Tampoco salen los mensajes <code>Using launch settings</code> y <code>Building...</code>.' },
+      watch: { perfil: 'http, el primer perfil de tipo Project', url: 'http://localhost:5120', amb: 'Development', nav: true, consola: ['Using launch settings from ...\launchSettings.json...', 'Now listening on: http://localhost:5120'], lineas: [4, 11], nota: '<code>dotnet watch</code> sí respeta <code>launchBrowser</code>: abre el navegador y vuelve a compilar cuando guardas un archivo.' },
+    };
+    const claveActiva = (c) => {
+      botones.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.clave === c)));
+      const k = CLAVES[c];
+      txt.innerHTML = k.texto;
+      Kit.preparar(txt);
+      cod.resaltar(k.lineas, k.nota);
+    };
+    botones.forEach((b) => b.addEventListener('click', () => claveActiva(b.dataset.clave)));
+    const pintar = (clave) => {
+      const m = MODOS[clave];
+      const dev = m.amb === 'Development';
+      res.innerHTML =
+        '<div class="rp-fila"><span class="rp-etq">Perfil</span><span>' + m.perfil + '</span></div>' +
+        '<div class="rp-fila"><span class="rp-etq">Dirección</span><code class="rp-mono">' + esc(m.url) + '</code></div>' +
+        '<div class="rp-fila"><span class="rp-etq">Ambiente</span><span><span class="etiqueta" data-tono="' + (dev ? 'hoja' : 'maiz') + '">' + m.amb + '</span> <span class="nota" style="font-size: 14.5px">' + (dev ? 'lee appsettings.Development.json' : 'no lee appsettings.Development.json') + '</span></span></div>' +
+        '<div class="rp-fila"><span class="rp-etq">Navegador</span><span><span class="etiqueta" data-tono="' + (m.nav ? 'hoja' : 'tinta') + '">' + (m.nav ? 'se abre solo' : 'no se abre') + '</span></span></div>' +
+        '<div class="rp-fila"><span class="rp-etq">Consola</span><div class="lau-con">' + m.consola.map((l) => '<span>' + esc(l) + '</span>').join('') + '</div></div>' +
+        '<p class="rp-nota" style="font-size: 15px">' + m.nota + '</p>';
+      res.classList.remove('rp-nuevo');
+      void res.offsetWidth;
+      res.classList.add('rp-nuevo');
+      botones.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      if (m.lineas.length) cod.resaltar(m.lineas, 'Perfil que se aplica'); else cod.limpiar();
+    };
+    $('#lau-modo').addEventListener('kit:cambio', (e) => pintar(e.detail));
+    pintar('run');
+    claveActiva('perfiles');
+  })();
+
+  /* ---- Diapositiva 17: cuándo aparece bin ---- */
+  (() => {
+    const cont = $('#bin-arbol');
+    let previo = new Set();
+    const FILES = [
+      { id: 'csproj', t: 'Plaza.csproj', n: 0, ico: 'archivo' },
+      { id: 'prog', t: 'Program.cs', n: 0, ico: 'archivo' },
+      { id: 'base', t: 'appsettings.json', n: 0, ico: 'archivo' },
+      { id: 'dev', t: 'appsettings.Development.json', n: 0, ico: 'archivo' },
+      { id: 'props', t: 'Properties/launchSettings.json', n: 0, ico: 'archivo' },
+    ];
+    /* estado según el paso del flujo y la opción de borrar */
+    const estado = (i, borrar) => {
+      const filas = [];
+      if (i < 1) return { nada: true, filas };
+      if (i >= 1) FILES.forEach((f) => filas.push(f));
+      let obj = i >= 1;
+      let objTxt = '5 archivos de restauración';
+      let bin = false;
+      if (i >= 5) objTxt = 'ahora con decenas de archivos';
+      if (i >= 6) bin = true;
+      if (borrar && i >= 10 && i < 12) { obj = false; bin = false; }
+      if (borrar && i >= 12) { obj = true; bin = true; objTxt = 'restaurada y compilada de nuevo'; }
+      if (obj) filas.push({ id: 'obj', t: 'obj/', n: 0, ico: 'carpeta', extra: objTxt });
+      if (bin) {
+        filas.push({ id: 'bin', t: 'bin/Debug/net10.0/', n: 0, ico: 'carpeta', extra: '' });
+        filas.push({ id: 'dll', t: 'Plaza.dll', n: 1, ico: 'archivo', extra: 'tu programa' });
+        filas.push({ id: 'exe', t: 'Plaza.exe', n: 1, ico: 'archivo', extra: 'el lanzador' });
+        filas.push({ id: 'otros', t: 'otros 6 archivos', n: 1, ico: 'archivo', extra: '' });
+      }
+      return { nada: false, filas };
+    };
+    const pintar = (i, borrar) => {
+      const e = estado(i, borrar);
+      const ahora = new Set(e.filas.map((f) => f.id));
+      if (e.nada) {
+        cont.replaceChildren(h('div', { class: 'af-raiz', text: 'La carpeta Plaza todavía no existe' }));
+      } else {
+        cont.replaceChildren(h('div', { class: 'af-raiz', text: 'Plaza' }), ...e.filas.map((f) => {
+          const el = h('div', { class: 'af' + (f.n ? ' n1' : '') + (previo.has(f.id) ? '' : ' nuevo') },
+            Kit.ico(f.ico), h('span', { class: 'af-txt', text: f.t }));
+          if (f.extra) el.append(h('span', { class: 'insignia', 'data-tono': f.n ? 'maiz' : 'tinta', text: f.extra }));
+          if (f.id === 'bin') el.append(h('span', { class: 'insignia', 'data-tono': 'maiz', text: 'aparece al compilar' }));
+          return el;
+        }));
+      }
+      previo = ahora;
+    };
+    let borrar = false;
+    let paso = -1;
+    Kit.flujo('#f-bin', {
+      titulo: 'Simulación: cuándo se crea cada carpeta',
+      icono: 'reloj',
+      vista: [640, 262],
+      nodos: [
+        { id: 'term', x: 78, y: 112, icono: 'engranaje', etiqueta: 'Terminal', sub: 'tus comandos', tono: 'cielo', ancho: 130 },
+        { id: 'carp', x: 234, y: 112, icono: 'documento', etiqueta: 'Plaza', sub: 'la carpeta', tono: 'hoja', ancho: 130 },
+        { id: 'comp', x: 390, y: 112, icono: 'paquete', etiqueta: 'Compilar', sub: 'dotnet run', tono: 'maiz', ancho: 130 },
+        { id: 'srv', x: 546, y: 112, icono: 'servidor', etiqueta: 'Servidor', sub: 'escuchando', tono: 'uva', ancho: 130 },
+      ],
+      conectores: [
+        { desde: 'term', hasta: 'carp', curva: -26 },
+        { desde: 'term', hasta: 'comp', curva: -96 },
+        { desde: 'comp', hasta: 'carp', curva: -26 },
+        { desde: 'comp', hasta: 'srv', curva: -26 },
+      ],
+      parametros: [{ id: 'borrar', tipo: 'interruptor', etiqueta: 'Borro bin y obj y vuelvo a ejecutar', valor: false, tono: 'tomate' }],
+      intro: 'Sigue el orden: primero se crea el proyecto, y solo al ejecutar aparece <code>bin</code>. Activa el interruptor para ver qué pasa si borras <code>bin</code> y <code>obj</code>.',
+      pasos: (v) => {
+        const base = [
+          { nodo: 'term', duracion: 2600, texto: '<strong>1.</strong> Creas el proyecto: <code>dotnet new web -n Plaza</code>.', estado: { term: { texto: 'dotnet new', tono: 'cielo' } } },
+          { desde: 'term', hasta: 'carp', paquete: '5 + obj', tono: 'hoja', duracion: 1500, texto: 'La plantilla escribe 5 archivos y la restauración deja <code>obj</code>.' },
+          { nodo: 'carp', duracion: 3000, texto: 'La carpeta tiene lo básico. <strong><code>bin</code> todavía no existe</strong>: nadie ha compilado.', estado: { carp: { texto: 'sin bin', tono: 'maiz' } } },
+          { nodo: 'term', duracion: 2400, texto: '<strong>2.</strong> Dentro de <code>Plaza</code> ejecutas <code>dotnet run</code>.', estado: { term: { texto: 'dotnet run', tono: 'cielo' } } },
+          { desde: 'term', hasta: 'comp', paquete: 'dotnet run', tono: 'maiz', duracion: 1500, texto: 'La terminal le pide a dotnet que compile y arranque.' },
+          { nodo: 'comp', duracion: 3000, texto: 'Compilar es traducir <code>Program.cs</code> a un programa. En <code>obj</code> quedan las piezas intermedias.', estado: { comp: { texto: 'compilando', tono: 'maiz' } } },
+          { desde: 'comp', hasta: 'carp', paquete: 'Plaza.dll', tono: 'hoja', duracion: 1500, texto: 'El resultado va a <code>bin/Debug/net10.0</code>: <code>Plaza.dll</code>, <code>Plaza.exe</code> y los <code>appsettings</code>. <strong>Ahora sí aparece <code>bin</code>.</strong>', estado: { comp: null, carp: { texto: 'con bin', tono: 'hoja' } } },
+          { desde: 'comp', hasta: 'srv', paquete: 'arrancar', tono: 'uva', duracion: 1400, texto: 'Con todo listo, <code>dotnet run</code> arranca <code>Plaza.dll</code>.' },
+          { nodo: 'srv', duracion: 2600, texto: 'La consola dice <code>Now listening on: http://localhost:5120</code>. El servidor está escuchando.', estado: { srv: { texto: 'escuchando', tono: 'hoja' } } },
+          { nodo: 'term', duracion: 3000, texto: '<strong>3.</strong> Pulsas <kbd>Ctrl</kbd> + <kbd>C</kbd>: el servidor se detiene. <code>bin</code> y <code>obj</code> se quedan en la carpeta.', estado: { srv: { texto: 'detenido', tono: 'cielo' }, term: { texto: 'Ctrl + C', tono: 'cielo' } } },
+        ];
+        if (v.borrar) {
+          base.push(
+            { nodo: 'carp', duracion: 3000, texto: '<strong>4.</strong> Borras <code>bin</code> y <code>obj</code>. Son temporales: no guardan nada tuyo.', estado: { carp: { texto: 'sin bin ni obj', tono: 'tomate' } } },
+            { desde: 'term', hasta: 'comp', paquete: 'dotnet run', tono: 'maiz', duracion: 1500, texto: 'Vuelves a ejecutar <code>dotnet run</code>.', estado: { srv: null } },
+            { nodo: 'comp', duracion: 3200, texto: 'dotnet restaura y compila otra vez: <code>obj</code> y <code>bin</code> reaparecen solas.', estado: { comp: { texto: 'regenera', tono: 'hoja' }, carp: { texto: 'bin y obj otra vez', tono: 'hoja' } } },
+          );
+        }
+        return base;
+      },
+      alPaso: (i) => { paso = i; pintar(i, borrar); },
+      alRecalcular: (v) => { borrar = !!v.borrar; pintar(paso, borrar); },
+    });
+  })();
+
+  /* ---- Diapositiva 18: reto, qué archivo cambiarías ---- */
+  (() => {
+    const FILES = ['Program.cs', 'Plaza.csproj', 'launchSettings.json', 'appsettings.json', 'appsettings.Development.json'];
+    const QUE_ES = {
+      'Program.cs': 'guarda el código del servidor y sus rutas',
+      'Plaza.csproj': 'guarda el SDK y la versión de .NET',
+      'launchSettings.json': 'guarda cómo arranca: dirección, puerto y ambiente',
+      'appsettings.json': 'guarda la configuración para todos los ambientes',
+      'appsettings.Development.json': 'guarda la configuración que solo aplica en Development',
+    };
+    const TAREAS = [
+      { t: 'Cambiar el texto que responde la ruta <code>/</code>', ok: 'Program.cs', porque: 'Ahí está el <code>MapGet("/", ...)</code> con el texto.' },
+      { t: 'Cambiar la versión de .NET con la que se compila', ok: 'Plaza.csproj', porque: '<code>TargetFramework</code> vive en la ficha del proyecto.' },
+      { t: 'Cambiar el puerto con que arranca <code>dotnet run</code>', ok: 'launchSettings.json', porque: '<code>applicationUrl</code> guarda la dirección y el puerto.' },
+      { t: 'Mostrar más detalle en la consola solo mientras desarrollas', ok: 'appsettings.Development.json', porque: 'Ese archivo solo se lee en el ambiente <code>Development</code>.' },
+      { t: 'Bajar los mensajes de la consola en todos los ambientes', ok: 'appsettings.json', porque: 'El archivo base vale para todos los ambientes.' },
+    ];
+    const pool = $('#arch-pool');
+    const lista = $('#arch-tareas');
+    const estado = $('#arch-estado');
+    const ponEstado = (e, t) => { estado.dataset.estado = e; estado.textContent = t; };
+    let tomado = null;
+    const chips = FILES.map((f) => {
+      const b = h('button', { class: 'arch-ficha', type: 'button', draggable: 'true', 'aria-pressed': 'false', 'data-archivo': f }, Kit.ico('archivo'), f);
+      b.addEventListener('click', () => {
+        tomado = tomado === f ? null : f;
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.archivo === tomado)));
+      });
+      b.addEventListener('dragstart', (e) => { b.classList.add('arrastrando'); e.dataTransfer.setData('text/plain', f); e.dataTransfer.effectAllowed = 'copy'; });
+      b.addEventListener('dragend', () => b.classList.remove('arrastrando'));
+      pool.append(b);
+      return b;
+    });
+    const hechas = new Set();
+    const tareas = TAREAS.map((t, i) => {
+      const slot = h('button', { class: 'slot', type: 'button', 'aria-label': 'Soltar el archivo para la tarea ' + (i + 1) }, 'suelta aquí un archivo');
+      const ayuda = h('p', { class: 'tarea-ayuda', hidden: true, 'aria-live': 'polite' });
+      const fila = h('div', { class: 'tarea' }, h('div', { class: 'tarea-izq' }, h('span', { class: 'tarea-txt', html: (i + 1) + '. ' + t.t }), ayuda), slot);
+      lista.append(fila);
+      const poner = (f) => {
+        if (hechas.has(i)) return;
+        const bien = f === t.ok;
+        slot.replaceChildren(Kit.ico(bien ? 'check' : 'cerrar'), f);
+        slot.classList.remove('ok', 'mal');
+        void slot.offsetWidth;
+        slot.classList.add(bien ? 'ok' : 'mal');
+        ayuda.hidden = false;
+        ayuda.className = 'tarea-ayuda ' + (bien ? 'ok' : 'mal');
+        ayuda.innerHTML = bien ? 'Correcto. ' + t.porque : '<code>' + esc(f) + '</code> ' + QUE_ES[f] + '. Prueba con otro.';
+        if (bien) {
+          hechas.add(i);
+          slot.disabled = true;
+          if (hechas.size === TAREAS.length) ponEstado('logrado', 'Logrado');
+          else ponEstado('verificando', hechas.size + ' de ' + TAREAS.length);
+        } else ponEstado('revisa', 'Revisa');
+      };
+      slot.addEventListener('click', () => { if (tomado) poner(tomado); });
+      slot.addEventListener('dragover', (e) => { e.preventDefault(); slot.classList.add('sobre'); });
+      slot.addEventListener('dragleave', () => slot.classList.remove('sobre'));
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        slot.classList.remove('sobre');
+        const f = e.dataTransfer.getData('text/plain');
+        if (FILES.includes(f)) poner(f);
+      });
+      return fila;
+    });
+  })();
+
+  /* ---- Diapositiva 19: abrir con VS Code ---- */
+  (() => {
+    const term = $('#vsc-term');
+    const entrada = $('#vsc-entrada');
+    const exp = $('#vsc-exp');
+    const msgs = $('#vsc-msgs');
+    const titulo = $('#vsc-titulo');
+    const base = USU + '\\Documents\\web';
+    let dir = 'web';
+    let salida = [];
+    const ruta = () => base + (dir === 'plaza' ? '\\Plaza' : '');
+    const pintarTerm = () => {
+      const nodos = salida.map((l) => h('span', { class: 'term-l' }, l.map(([c, t]) => (c ? h('span', { class: c, text: t }) : t))));
+      nodos.push(h('span', { class: 'term-l' }, h('span', { class: 't-ruta', text: 'PS ' + ruta() + '>' }), ' ', h('span', { class: 'term-cursor' })));
+      term.replaceChildren(...nodos);
+      term.scrollTop = term.scrollHeight;
+    };
+    const eco = (cmd) => [['t-ruta', 'PS ' + ruta() + '>'], [null, ' '], ['t-cmd', cmd]];
+    const MSGS = [
+      {
+        t: '¿Confías en los autores de los archivos de esta carpeta?', en: 'Do you trust the authors of the files in this folder?',
+        op: [
+          { b: 'Sí, confío en los autores', rec: true, r: 'Correcto. El proyecto lo creaste tú, así que puedes confiar. VS Code habilita las tareas y las extensiones completas.' },
+          { b: 'No, no confío', r: 'VS Code abre la carpeta en modo restringido: limita las tareas, la depuración y varias extensiones. Puedes cambiarlo después desde el aviso amarillo de la parte superior.' },
+        ],
+      },
+      {
+        t: 'VS Code recomienda extensiones para C#', en: 'Do you want to install the recommended extensions for C#?',
+        op: [
+          { b: 'Instalar', rec: true, r: 'Correcto. Sin la extensión de C# no hay colores, ayudas ni depuración. La instalación tarda un momento.' },
+          { b: 'Ahora no', r: 'Puedes instalarla después desde la barra lateral de extensiones. Mientras tanto el código se ve sin ayudas.' },
+        ],
+      },
+      {
+        t: 'Faltan recursos para compilar y depurar en "Plaza". ¿Agregarlos?', en: 'Required assets to build and debug are missing from "Plaza". Add them?',
+        op: [
+          { b: 'Sí', rec: true, r: 'Correcto. VS Code crea una carpeta <code>.vscode</code> con la configuración para ejecutar y depurar el proyecto.' },
+          { b: 'Ahora no', r: 'Podrás ejecutar el proyecto desde la terminal con <code>dotnet run</code>, pero no depurarlo desde el editor hasta que los agregues.' },
+        ],
+      },
+    ];
+    let contestadas = 0;
+    const abrir = (afuera) => {
+      titulo.textContent = (afuera ? 'web' : 'Plaza') + ' - Visual Studio Code';
+      exp.replaceChildren(h('div', { class: 'af-raiz', text: afuera ? 'web' : 'Plaza' }),
+        ...(afuera
+          ? [h('div', { class: 'af' }, Kit.ico('carpeta'), h('span', { class: 'af-txt', text: 'Plaza' }))]
+          : [['obj', 'carpeta'], ['Properties', 'carpeta'], ['appsettings.Development.json', 'archivo'], ['appsettings.json', 'archivo'], ['Plaza.csproj', 'archivo'], ['Program.cs', 'archivo']].map(([n, i]) => h('div', { class: 'af' }, Kit.ico(i), h('span', { class: 'af-txt', text: n })))));
+      msgs.replaceChildren();
+      contestadas = 0;
+      if (afuera) {
+        msgs.append(h('div', { class: 'vsc-msg rest' },
+          h('b', { text: 'Abriste la carpeta de afuera' }),
+          h('span', { html: 'En el explorador ves <code>Plaza</code> como una subcarpeta, no sus archivos. Cierra VS Code, escribe <code>cd Plaza</code> y vuelve a ejecutar <code>code .</code>.' })));
+        return;
+      }
+      MSGS.forEach((m, i) => {
+        const bots = h('div', { class: 'vsc-bot' });
+        const ayuda = h('p', { class: 'vsc-ayuda', hidden: true });
+        const card = h('div', { class: 'vsc-msg', style: 'animation-delay:' + i * 420 + 'ms' },
+          h('b', { text: m.t }), h('small', { text: m.en }), bots, ayuda);
+        m.op.forEach((o) => {
+          const b = h('button', { class: 'boton mini' + (o.rec ? '' : ''), type: 'button', text: o.b });
+          b.addEventListener('click', () => {
+            $$('button', bots).forEach((x) => { x.disabled = true; });
+            ayuda.hidden = false;
+            ayuda.innerHTML = (o.rec ? '' : 'Respuesta recomendada: <strong>' + esc(m.op.find((q) => q.rec).b) + '</strong>. ') + o.r;
+            card.classList.add(o.rec ? 'hecho' : 'rest');
+            contestadas++;
+            if (contestadas === MSGS.length) msgs.append(h('p', { class: 'vsc-ayuda', html: 'Listo: el proyecto está abierto. El texto exacto de los avisos cambia con la versión de VS Code; responde según su sentido.' }));
+          });
+          bots.append(b);
+        });
+        msgs.append(card);
+      });
+    };
+    const reiniciar = () => {
+      dir = 'web';
+      salida = [];
+      titulo.textContent = 'Visual Studio Code (cerrado)';
+      exp.replaceChildren(h('span', { class: 'rp-vacio', style: 'padding: 6px', text: 'Aún no abres nada.' }));
+      msgs.replaceChildren(h('p', { class: 'rp-vacio', html: 'Cuando ejecutes <code>code .</code> aparecerán aquí los mensajes de VS Code.' }));
+      pintarTerm();
+    };
+    const ejecutar = (crudo) => {
+      const cmd = crudo.trim().replace(/\s+/g, ' ');
+      if (!cmd) return;
+      salida.push(eco(cmd));
+      const k = cmd.toLowerCase();
+      if (k === 'cd plaza' || k === 'cd .\\plaza' || k === 'cd plaza\\') {
+        if (dir === 'web') dir = 'plaza';
+        else salida.push([['t-mal', "cd : No se encuentra la ruta de acceso '" + base + "\\Plaza\\Plaza' porque no existe."]]);
+      } else if (k === 'cd ..') {
+        dir = 'web';
+      } else if (k === 'pwd') {
+        salida.push([['t-tn', ruta()]]);
+      } else if (k === 'code .') {
+        abrir(dir === 'web');
+      } else {
+        salida.push([['t-mal', "El término '" + cmd.split(' ')[0] + "' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable."]]);
+      }
+      pintarTerm();
+    };
+    $('#vsc-form').addEventListener('submit', (e) => { e.preventDefault(); ejecutar(entrada.value); entrada.value = ''; });
+    $$('#vsc-form ~ div [data-cmd]').forEach((b) => b.addEventListener('click', () => ejecutar(b.dataset.cmd)));
+    $('#vsc-reiniciar').addEventListener('click', reiniciar);
+    reiniciar();
+  })();
+
+  /* ---- Diapositiva 47: mapa conceptual ---- */
   Kit.diagrama('#mapa-conceptual', {
-    tituloSvg: 'Mapa conceptual: petición, servidor, ruta, respuesta, tipos de contenido, estados, archivos y POST',
-    vista: [1120, 430],
+    tituloSvg: 'Mapa conceptual: crear el proyecto, sus archivos, petición, servidor, ruta, respuesta, tipos de contenido, estados, archivos y POST',
+    vista: [1120, 470],
     nodos: [
-      { id: 'pet', x: 105, y: 55, etiqueta: 'Petición', sub: 'GET /saludo', tono: 'cielo', ancho: 170, paso: 1 },
-      { id: 'srv', x: 385, y: 55, etiqueta: 'Servidor', sub: 'espera y responde', tono: 'uva', ancho: 190, paso: 1 },
-      { id: 'rut', x: 690, y: 55, etiqueta: 'Ruta', sub: 'MapGet', tono: 'hoja', ancho: 170, paso: 2 },
-      { id: 'res', x: 1000, y: 55, etiqueta: 'Respuesta', sub: 'estado, tipo y cuerpo', tono: 'maiz', ancho: 200, paso: 2 },
-      { id: 'arc', x: 105, y: 215, etiqueta: 'Archivos', sub: 'wwwroot', tono: 'cielo', ancho: 170, paso: 3 },
-      { id: 'pos', x: 385, y: 215, etiqueta: 'POST', sub: 'formulario', tono: 'uva', ancho: 170, paso: 3 },
-      { id: 'dat', x: 690, y: 215, etiqueta: 'Datos', sub: 'en la ruta y en el query', tono: 'maiz', ancho: 190, paso: 4 },
-      { id: 'est', x: 865, y: 215, etiqueta: 'Estado', sub: '200, 400, 404', tono: 'tomate', ancho: 130, paso: 5 },
-      { id: 'tip', x: 1030, y: 215, etiqueta: 'Tipo de contenido', sub: 'cómo se muestra', tono: 'uva', ancho: 170, paso: 5 },
-      { id: 'jso', x: 930, y: 360, etiqueta: 'JSON', sub: 'datos', tono: 'hoja', ancho: 120, paso: 6 },
-      { id: 'htm', x: 1060, y: 360, etiqueta: 'HTML', sub: 'página', tono: 'cielo', ancho: 120, paso: 6 },
+      { id: 'cmd', x: 95, y: 45, etiqueta: 'dotnet new web', sub: 'plantilla web', tono: 'maiz', ancho: 180, paso: 1 },
+      { id: 'proy', x: 330, y: 45, etiqueta: 'Proyecto', sub: 'carpeta con archivos', tono: 'cielo', ancho: 190, paso: 1 },
+      { id: 'cfg', x: 565, y: 45, etiqueta: 'Configuración', sub: 'appsettings y launch', tono: 'hoja', ancho: 190, paso: 2 },
+      { id: 'prg', x: 800, y: 45, etiqueta: 'Program.cs', sub: 'tu servidor', tono: 'uva', ancho: 170, paso: 2 },
+      { id: 'gen', x: 1030, y: 45, etiqueta: 'bin y obj', sub: 'los crea dotnet', tono: 'maiz', ancho: 170, paso: 3 },
+      { id: 'pet', x: 105, y: 170, etiqueta: 'Petición', sub: 'GET /saludo', tono: 'cielo', ancho: 170, paso: 4 },
+      { id: 'srv', x: 385, y: 170, etiqueta: 'Servidor', sub: 'espera y responde', tono: 'uva', ancho: 190, paso: 4 },
+      { id: 'rut', x: 690, y: 170, etiqueta: 'Ruta', sub: 'MapGet', tono: 'hoja', ancho: 170, paso: 5 },
+      { id: 'res', x: 1000, y: 170, etiqueta: 'Respuesta', sub: 'estado, tipo y cuerpo', tono: 'maiz', ancho: 200, paso: 5 },
+      { id: 'arc', x: 105, y: 300, etiqueta: 'Archivos', sub: 'wwwroot', tono: 'cielo', ancho: 170, paso: 6 },
+      { id: 'pos', x: 385, y: 300, etiqueta: 'POST', sub: 'formulario', tono: 'uva', ancho: 170, paso: 6 },
+      { id: 'dat', x: 690, y: 300, etiqueta: 'Datos', sub: 'en la ruta y en el query', tono: 'maiz', ancho: 190, paso: 7 },
+      { id: 'est', x: 865, y: 300, etiqueta: 'Estado', sub: '200, 400, 404', tono: 'tomate', ancho: 130, paso: 8 },
+      { id: 'tip', x: 1030, y: 300, etiqueta: 'Tipo de contenido', sub: 'cómo se muestra', tono: 'uva', ancho: 170, paso: 8 },
+      { id: 'jso', x: 930, y: 425, etiqueta: 'JSON', sub: 'datos', tono: 'hoja', ancho: 120, paso: 9 },
+      { id: 'htm', x: 1060, y: 425, etiqueta: 'HTML', sub: 'página', tono: 'cielo', ancho: 120, paso: 9 },
     ],
     conectores: [
-      { desde: 'pet', hasta: 'srv', etiqueta: 'llega a', flecha: true, paso: 1 },
-      { desde: 'srv', hasta: 'rut', etiqueta: 'busca', flecha: true, paso: 2 },
-      { desde: 'rut', hasta: 'res', etiqueta: 'produce', flecha: true, paso: 2 },
-      { desde: 'arc', hasta: 'srv', etiqueta: 'entrega', flecha: true, paso: 3 },
-      { desde: 'pos', hasta: 'rut', etiqueta: 'envía datos', flecha: true, paso: 3 },
-      { desde: 'dat', hasta: 'rut', etiqueta: 'llegan a', flecha: true, paso: 4 },
-      { desde: 'res', hasta: 'est', etiqueta: 'lleva', flecha: true, paso: 5 },
-      { desde: 'res', hasta: 'tip', etiqueta: 'declara', flecha: true, paso: 5 },
-      { desde: 'tip', hasta: 'jso', etiqueta: 'datos', flecha: true, paso: 6 },
-      { desde: 'tip', hasta: 'htm', etiqueta: 'página', flecha: true, paso: 6 },
+      { desde: 'cmd', hasta: 'proy', etiqueta: 'crea', flecha: true, paso: 1 },
+      { desde: 'proy', hasta: 'cfg', etiqueta: 'trae', flecha: true, paso: 2 },
+      { desde: 'prg', hasta: 'cfg', etiqueta: 'lee', flecha: true, paso: 2 },
+      { desde: 'prg', hasta: 'gen', etiqueta: 'genera', flecha: true, paso: 3 },
+      { desde: 'prg', hasta: 'rut', etiqueta: 'registra', flecha: true, paso: 5 },
+      { desde: 'pet', hasta: 'srv', etiqueta: 'llega a', flecha: true, paso: 4 },
+      { desde: 'srv', hasta: 'rut', etiqueta: 'busca', flecha: true, paso: 5 },
+      { desde: 'rut', hasta: 'res', etiqueta: 'produce', flecha: true, paso: 5 },
+      { desde: 'arc', hasta: 'srv', etiqueta: 'entrega', flecha: true, paso: 6 },
+      { desde: 'pos', hasta: 'rut', etiqueta: 'envía datos', flecha: true, paso: 6 },
+      { desde: 'dat', hasta: 'rut', etiqueta: 'llegan a', flecha: true, paso: 7 },
+      { desde: 'res', hasta: 'est', etiqueta: 'lleva', flecha: true, paso: 8 },
+      { desde: 'res', hasta: 'tip', etiqueta: 'declara', flecha: true, paso: 8 },
+      { desde: 'tip', hasta: 'jso', etiqueta: 'datos', flecha: true, paso: 9 },
+      { desde: 'tip', hasta: 'htm', etiqueta: 'página', flecha: true, paso: 9 },
     ],
   });
+
 });
 
 </script>

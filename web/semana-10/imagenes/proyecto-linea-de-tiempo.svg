@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="680" height="338" viewBox="0 0 680 338" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Línea de tiempo de un proyecto web</title>
+<desc id="d">Tres momentos. Primero dotnet new web -n Plaza, una sola vez: genera cinco archivos y la carpeta obj. Después dotnet run, cada vez que pruebas: restaura si hace falta, compila a la carpeta bin y arranca el servidor. Al final Ctrl+C detiene el servidor y bin y obj se quedan en el disco.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker></defs>
+<rect x="0" y="0" width="680" height="338" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="120.0" y="24.0" font-size="12" fill="#5b6876" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Una sola vez, al inicio</text>
+<rect x="20.0" y="36.0" width="200.0" height="40.0" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="120.0" y="61.0" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">dotnet new web -n Plaza</text>
+<path d="M 120.0 76.0 L 120.0 96.0" fill="none" stroke="#2f7bb8" stroke-width="1.2"/>
+<rect x="20.0" y="96.0" width="200.0" height="92.0" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.4"/>
+<text x="120.0" y="114.0" font-size="11" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Qué pasa</text>
+<text x="120.0" y="134.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Genera 5 archivos desde</text>
+<text x="120.0" y="152.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">la plantilla web.</text>
+<text x="120.0" y="170.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Restaura: crea la carpeta obj.</text>
+<path d="M 120.0 188.0 L 120.0 204.0" fill="none" stroke="#2f7bb8" stroke-width="1.2"/>
+<rect x="20.0" y="204.0" width="200.0" height="82.0" rx="8" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.4"/>
+<text x="120.0" y="222.0" font-size="11" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La carpeta queda así</text>
+<text x="120.0" y="240.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Program.cs, Plaza.csproj,</text>
+<text x="120.0" y="257.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">appsettings (2), Properties</text>
+<text x="120.0" y="274.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y obj</text>
+<text x="340.0" y="24.0" font-size="12" fill="#5b6876" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cada vez que pruebas</text>
+<rect x="240.0" y="36.0" width="200.0" height="40.0" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="340.0" y="61.0" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">dotnet run</text>
+<path d="M 340.0 76.0 L 340.0 96.0" fill="none" stroke="#2e7d5b" stroke-width="1.2"/>
+<rect x="240.0" y="96.0" width="200.0" height="92.0" rx="8" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.4"/>
+<text x="340.0" y="114.0" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Qué pasa</text>
+<text x="340.0" y="134.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Restaura si falta algo.</text>
+<text x="340.0" y="152.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Compila y deja Plaza.dll</text>
+<text x="340.0" y="170.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en bin. Arranca el servidor.</text>
+<path d="M 340.0 188.0 L 340.0 204.0" fill="none" stroke="#2e7d5b" stroke-width="1.2"/>
+<rect x="240.0" y="204.0" width="200.0" height="82.0" rx="8" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.4"/>
+<text x="340.0" y="222.0" font-size="11" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La carpeta queda así</text>
+<text x="340.0" y="240.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Lo anterior y la carpeta bin</text>
+<text x="340.0" y="257.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">(Plaza.dll, Plaza.exe).</text>
+<text x="340.0" y="274.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El servidor atiende peticiones.</text>
+<text x="560.0" y="24.0" font-size="12" fill="#5b6876" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Al terminar de probar</text>
+<rect x="460.0" y="36.0" width="200.0" height="40.0" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6"/>
+<text x="560.0" y="61.0" font-size="13" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Ctrl+C</text>
+<path d="M 560.0 76.0 L 560.0 96.0" fill="none" stroke="#a32d22" stroke-width="1.2"/>
+<rect x="460.0" y="96.0" width="200.0" height="92.0" rx="8" fill="#ffffff" stroke="#a32d22" stroke-width="1.4"/>
+<text x="560.0" y="114.0" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Qué pasa</text>
+<text x="560.0" y="134.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Detiene el servidor.</text>
+<text x="560.0" y="152.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">bin y obj se quedan en</text>
+<text x="560.0" y="170.0" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el disco. No se borra nada.</text>
+<path d="M 560.0 188.0 L 560.0 204.0" fill="none" stroke="#a32d22" stroke-width="1.2"/>
+<rect x="460.0" y="204.0" width="200.0" height="82.0" rx="8" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.4"/>
+<text x="560.0" y="222.0" font-size="11" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La carpeta queda así</text>
+<text x="560.0" y="240.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Igual que antes.</text>
+<text x="560.0" y="257.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El servidor ya no atiende</text>
+<text x="560.0" y="274.0" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el puerto.</text>
+<path d="M 220.0 56.0 L 240.0 56.0" fill="none" stroke="#8795a3" stroke-width="1.4" marker-end="url(#f-gris)"/>
+<path d="M 440.0 56.0 L 460.0 56.0" fill="none" stroke="#8795a3" stroke-width="1.4" marker-end="url(#f-gris)"/>
+<rect x="20.0" y="302.0" width="640.0" height="28.0" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="340.0" y="320.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cambiaste Program.cs: Ctrl+C y vuelves a dotnet run. El primer paso no se repite.</text>
+</g>
+</svg>

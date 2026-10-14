@@ -27,7 +27,8 @@ Presentación interactiva: el recorrido de una petición, con predicciones y ret
 
 Si el tiempo de la clase no alcanza, este es el orden de prioridad:
 
-- **Esencial en la hora de clase:** etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto.
+- **Esencial en la hora de clase:** etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto
+  (en la etapa 0, el Reto 0).
 - **Para terminar en casa:** etapas 4 y 5, y el segundo reto de cada etapa.
 - **Opcional siempre:** los recuadros "Profundiza" y las pruebas con `curl`. Puedes saltarlos y la
   guía sigue funcionando.
@@ -55,7 +56,7 @@ Cada etapa agrega una sola idea y termina con algo que ejecutas y ves en el nave
 
 | Etapa | Mi servidor responde... | Qué aprendes |
 |---|---|---|
-| 0 | `Hello World!` | Qué trae un proyecto vacío y cómo ejecutarlo |
+| 0 | `Hello World!` | Cómo se crea un proyecto, qué es cada uno de sus archivos y cómo ejecutarlo |
 | 1 | Varias rutas de texto | Qué es una ruta y cómo se registra con `MapGet` |
 | 2 | Lo que le pides en la URL | Parámetros en la ruta y en el query string |
 | 3 | Datos en JSON | Un `record`, una lista y `Results.Json` |
@@ -64,7 +65,8 @@ Cada etapa agrega una sola idea y termina con algo que ejecutas y ves en el nave
 
 Al terminar sabes:
 
-1. Crear un servidor con `dotnet new web` y leer cada línea de su `Program.cs`.
+1. Crear un servidor con `dotnet new web`, saber para qué sirve cada archivo que genera y leer cada
+   línea de su `Program.cs`.
 2. Registrar rutas que devuelven texto, JSON, HTML y archivos.
 3. Leer datos de la ruta y del query string.
 4. Elegir el estado HTTP correcto para cada respuesta.
@@ -101,27 +103,101 @@ Cada parte de una URL responde una pregunta distinta.
 
 ## Preparación del entorno
 
-::: {.callout-note}
-## Antes de empezar
+Antes de escribir una línea de código necesitas tres cosas: el **.NET SDK 10** instalado, un editor
+(VS Code) y una carpeta donde guardar tus proyectos. Esta sección cubre los pasos 1 a 3. Los pasos 4 a
+6, que crean y abren el proyecto, están en la etapa 0.
 
-Necesitas una terminal, un editor y el **.NET SDK 10**. Comprueba que está instalado:
+### Paso 1. Comprueba que .NET está instalado
+
+Abre una terminal y escribe:
 
 ```text
 dotnet --version
 ```
 
-La guía se escribió y se probó con la versión `10.0.302`. Los mensajes de `dotnet` salen en el
-idioma de tu sistema: aquí aparecen en español porque así salieron en la prueba.
-:::
+**Qué verás:** un número de versión, por ejemplo `10.0.302`. Si empieza por `10`, estás listo. La guía
+se escribió y se probó con la versión `10.0.302`. Los mensajes de `dotnet` salen en el idioma de tu
+sistema: aquí aparecen en español porque así salieron en la prueba.
 
-1. Crea una carpeta para tus proyectos de la clase y ábrela en VS Code.
-2. Abre la terminal integrada de VS Code (menú Terminal). Queda ubicada en la carpeta abierta.
-3. Opcional: instala la extensión de C# de Microsoft. Da colores y ayudas al escribir. El código se
-   compila y se ejecuta sin ella.
+**Si la terminal dice que `dotnet` no se reconoce,** el SDK no está instalado. Descarga el SDK 10 de
+`dotnet.microsoft.com/download`, instálalo, **cierra la terminal y ábrela de nuevo**, y repite el
+comando. Una terminal que estaba abierta durante la instalación no se entera de que `dotnet` ya existe.
+
+### Paso 2. Crea la carpeta de trabajo
+
+La **carpeta de trabajo** es la carpeta donde viven todos tus proyectos de la clase. `Plaza` será una
+subcarpeta de ella. La creas una sola vez para todo el curso. Llámala `Clases-Web`: sin espacios y sin
+tildes, porque los comandos son más cómodos así.
+
+Tienes dos caminos con el mismo resultado:
+
+- **Con el Explorador de archivos.** Entra a Documentos, haz clic derecho, elige Nuevo y Carpeta, y
+  escribe `Clases-Web`.
+- **Con la terminal.** Escribe estos tres comandos, uno por línea:
+
+  ```text
+  cd ~/Documents
+  mkdir Clases-Web
+  cd Clases-Web
+  ```
+
+  - `cd ~/Documents` entra a la carpeta Documentos de tu usuario. En el Explorador se ve
+    **Documentos**, pero en el disco se llama `Documents`.
+  - `mkdir Clases-Web` crea la carpeta (`mkdir` viene de *make directory*, "hacer directorio").
+  - `cd Clases-Web` entra a ella.
+
+  Después de `mkdir`, PowerShell muestra una tabla con la carpeta recién creada:
+
+  ```text
+      Directorio: C:\Users\tu-usuario\Documents
+
+  Mode                 LastWriteTime         Length Name
+  ----                 -------------         ------ ----
+  d-----      13/10/2026   8:58 p. m.                Clases-Web
+  ```
+
+  Tu ruta y tu fecha serán otras. Lo que importa es la letra `d` de `Mode` y el nombre `Clases-Web`.
+
+Los comandos de arriba funcionan en PowerShell, la terminal que VS Code abre por defecto en Windows, y
+en Git Bash. En `cmd`, el primero cambia a `cd %USERPROFILE%\Documents`. Si tu carpeta Documentos está
+sincronizada con OneDrive, la ruta real es otra: usa el Explorador.
+
+### Paso 3. Abre la terminal en esa carpeta y comprueba dónde estás
+
+1. Abre la carpeta `Clases-Web` en VS Code. Si la creaste con el Explorador, usa el menú **Archivo** y
+   **Abrir carpeta**. Si la creaste con la terminal, escribe `code .` estando dentro de ella: `code`
+   abre VS Code y el punto significa "esta carpeta".
+2. En VS Code, abre el menú **Terminal** y elige **Nueva terminal**. Aparece un panel inferior con una
+   terminal que ya está ubicada en la carpeta abierta.
+3. Comprueba la ubicación con `pwd` (*print working directory*, "mostrar el directorio de trabajo"):
+
+   ```text
+   pwd
+   ```
+
+   **Qué verás:** una ruta que termina en `Clases-Web`.
+
+   ```text
+   Path
+   ----
+   C:\Users\tu-usuario\Documents\Clases-Web
+   ```
+
+   En `cmd` el mismo dato lo da el comando `cd` sin nada más.
+
+**Por qué importa dónde estás.** Todos los comandos de `dotnet` trabajan sobre la carpeta en que estés
+parado:
+
+- `dotnet new` crea los archivos **en esa carpeta**.
+- `dotnet run` busca un archivo `.csproj` **en esa carpeta**.
+
+Si estás en otra, el proyecto aparece en un lugar que no esperabas, o `dotnet run` no lo encuentra.
+Antes de un comando de `dotnet`, mira la ruta que muestra tu terminal (en PowerShell, el texto que
+termina en `>`, como `PS C:\...\Clases-Web>`) o escribe `pwd`.
 
 ### Cómo se ejecuta cada etapa
 
-En todas las etapas usarás el mismo comando, desde la carpeta del proyecto:
+Una vez creado el proyecto, en todas las etapas usarás el mismo comando, desde la carpeta del proyecto:
 
 ```text
 dotnet run --no-launch-profile --urls http://localhost:5100
@@ -130,8 +206,9 @@ dotnet run --no-launch-profile --urls http://localhost:5100
 - `dotnet run` compila el proyecto y lo ejecuta.
 - `--urls http://localhost:5100` fija en qué dirección y en qué puerto atiende el servidor. Así todos
   los equipos usan la misma.
-- `--no-launch-profile` evita que `dotnet` aplique el archivo `launchSettings.json`, que abriría el
-  navegador por su cuenta.
+- `--no-launch-profile` evita que `dotnet` lea el archivo `Properties/launchSettings.json`. Ese archivo
+  trae un puerto distinto para cada proyecto y un nombre de entorno propio, y aquí queremos que todos
+  usen lo mismo.
 
 Para detener el servidor, presiona `Ctrl+C` en la terminal. **Cada vez que cambies el código, detén
 el servidor y vuelve a ejecutar el comando.**
@@ -157,16 +234,21 @@ En Windows PowerShell `curl` es un alias de otro comando. Si te da un error raro
 
 Los comandos y las salidas de esta guía se ejecutaron en una máquina con Windows 11 y el SDK
 `10.0.302`, con `curl 8.14.1` desde Git Bash. Las páginas HTML se abrieron en un navegador sin
-errores propios en la consola. No se probaron otros sistemas operativos, la vista en un teléfono, ni
-el arranque con el perfil de `launchSettings.json`. Cuando algo no se probó, la guía lo dice.
+errores propios en la consola. Se comprobó que `dotnet new web -n Plaza` crea los archivos y las
+carpetas de la etapa 0, que `bin` y `obj` se regeneran al borrarlos, y que `dotnet run` sin opciones
+usa el perfil `http` de `launchSettings.json`. No se probaron otros sistemas operativos, la vista en
+un teléfono, el perfil `https`, el botón de ejecutar de Visual Studio, ni los mensajes de VS Code del
+paso 6: su texto exacto depende de la versión del editor y de la extensión. Cuando algo no se probó,
+la guía lo dice.
 :::
 
 ## Etapa 0. Hola mundo
 
 ### Qué vas a lograr
 
-Crear un servidor, encenderlo y ver que responde. Al terminar tienes un programa de cuatro instrucciones
-escuchando en tu computador.
+Crear un proyecto desde cero, entender para qué sirve cada archivo que aparece en su carpeta,
+encenderlo y ver que responde. Al terminar tienes un programa de cuatro instrucciones escuchando en
+tu computador.
 
 ::: {.callout-tip}
 ## Predice antes de seguir
@@ -183,16 +265,49 @@ Un **404**, con el cuerpo vacío. El servidor solo sabe responder las rutas que 
 cualquier otra dice "no tengo eso".
 :::
 
-### Crear el proyecto
+### Paso 4. Crea el proyecto
 
-En la terminal, dentro de la carpeta donde guardas tus proyectos:
+::: {.callout-tip}
+## Predice antes de crearlo
+
+El comando de abajo genera un servidor web completo. ¿Cuántos archivos crees que crea: uno, cinco o
+cincuenta?
+:::
+
+::: {.callout-note collapse="true"}
+## Respuesta
+
+**Cinco archivos tuyos**, repartidos en una carpeta nueva (`Plaza`) y una subcarpeta (`Properties`), y
+**otros cinco** dentro de una carpeta `obj`. Son diez en total. Un servidor web completo cabe en cinco
+archivos pequeños. La carpeta `bin` todavía no existe: aparece cuando compilas.
+:::
+
+Con la terminal ubicada en `Clases-Web` (lo comprobaste con `pwd` en el paso 3), escribe:
 
 ```text
 dotnet new web -n Plaza
 ```
 
-`dotnet new web` pide al SDK una plantilla de **proyecto web vacío**. La opción `-n Plaza` le da
-nombre al proyecto. La salida fue:
+::: {.diagrama}
+![](imagenes/dotnet-new-anatomia.svg){fig-alt="El comando dotnet new web -n Plaza dividido en cinco partes. dotnet es el programa del SDK, new es el subcomando que crea algo nuevo, web es la plantilla de servidor web vacío, -n es la opción para dar nombre al proyecto y Plaza es el nombre del proyecto y de su carpeta. Se escribe una sola vez, en la carpeta de trabajo y no dentro de Plaza."}
+
+Cada palabra del comando cumple un oficio distinto.
+:::
+
+| Parte | Qué significa |
+|---|---|
+| `dotnet` | El programa que instalaste con el SDK. Todo comando de .NET empieza por él. |
+| `new` | "Crea algo nuevo a partir de una plantilla". |
+| `web` | El nombre de la **plantilla**. Una plantilla es un molde: una lista de archivos ya escritos. `web` es el molde más pequeño de un servidor web, casi vacío. Existen moldes más grandes con más archivos de ejemplo. |
+| `-n` | Una **opción** del comando. Significa *name*, "nombre", y va seguida del nombre elegido. |
+| `Plaza` | El nombre del proyecto. Con él se nombra la carpeta nueva y el archivo `Plaza.csproj`. |
+
+**Qué hace, en palabras simples.** `dotnet new` toma la plantilla `web` y la convierte en archivos
+reales dentro de una carpeta nueva llamada `Plaza`. Al final hace una **restauración** (*restore*):
+revisa qué bibliotecas necesita el proyecto, las deja listas y guarda esa información en una carpeta
+llamada `obj`. Por eso, después del comando, tienes cinco archivos tuyos y la carpeta `obj`.
+
+La salida fue:
 
 ```text
 La plantilla "ASP.NET Core vacío" se creó correctamente.
@@ -204,14 +319,55 @@ Restaurando ...\Plaza\Plaza.csproj:
 Restauración realizada correctamente.
 ```
 
-Entra a la carpeta y ábrela en el editor:
+- `La plantilla ... se creó correctamente` significa que los cinco archivos ya existen.
+- `Restaurando` y `Se ha restaurado` son la restauración: aquí se crea `obj`.
+
+::: {.callout-note}
+## Dónde y cuándo se ejecuta
+
+- **Dónde:** en la carpeta de trabajo (`Clases-Web`), **fuera** de cualquier proyecto. El comando crea
+  la carpeta `Plaza` por ti: no la crees antes.
+- **Cuándo:** **una sola vez por proyecto**, al inicio. Las etapas 1 a 5 no lo repiten. Trabajan sobre
+  este mismo proyecto y solo reemplazan el contenido de `Program.cs`.
+- **Sin `-n`:** si lo omites, `dotnet new web` crea los archivos directamente en la carpeta donde estás
+  y usa el nombre de esa carpeta como nombre del proyecto. En esta guía siempre se usa `-n`.
+:::
+
+### Paso 5. Entra a la carpeta y ábrela en VS Code
 
 ```text
 cd Plaza
 code .
 ```
 
-La plantilla crea estos archivos:
+- **`cd Plaza`** (*change directory*, "cambiar de directorio") entra a la carpeta `Plaza`. Ahora `pwd`
+  termina en `...\Clases-Web\Plaza`. Para volver a la carpeta anterior se escribe `cd ..`.
+- **`code .`** abre VS Code en la carpeta donde estás. Abre `Plaza`, no `Clases-Web`: así el archivo
+  `Program.cs` queda a la vista y la terminal integrada nace ubicada en el proyecto.
+
+Si la terminal dice que `code` no se reconoce, usa el menú de VS Code: **Archivo**, **Abrir carpeta** y
+elige `Plaza`.
+
+**Qué verás:** una ventana de VS Code con el panel **Explorador** a la izquierda, que lista los
+archivos del proyecto. Abre una terminal con el menú **Terminal** y **Nueva terminal**, y escribe
+`pwd`: la ruta termina en `Plaza`. Desde aquí, todos los comandos de la clase se escriben en esa
+terminal.
+
+### Paso 6. Los mensajes que puede mostrar VS Code
+
+Al abrir un proyecto por primera vez, VS Code muestra ventanas emergentes. Estas son las tres más
+comunes. El texto exacto cambia según la versión y el idioma del editor.
+
+| Mensaje | Qué significa | Qué responder |
+|---|---|---|
+| Pregunta si confías en los autores de los archivos de la carpeta | VS Code abre las carpetas desconocidas en un modo restringido, que desactiva extensiones y tareas | **Sí, confío en los autores.** La carpeta la creaste tú |
+| Recomienda instalar la extensión de C# | La extensión de Microsoft da colores y ayudas al escribir | **Instalar.** El código se compila y se ejecuta también sin ella |
+| Dice que faltan los "assets" requeridos para compilar y depurar `Plaza` y pregunta si quieres agregarlos | Ofrece crear una carpeta `.vscode` con la configuración del depurador | **Sí** o **Ahora no**: esta guía no usa el depurador. Si aceptas, aparece `.vscode` y tampoco la tocas |
+
+### Qué creó el comando
+
+Cuando termina `dotnet new web -n Plaza`, la carpeta tiene estos diez archivos. Los cinco primeros son
+tuyos. Los de `obj` los crea la restauración:
 
 ```text
 Plaza/
@@ -219,12 +375,219 @@ Plaza/
   Program.cs
   appsettings.json
   appsettings.Development.json
-  Properties/launchSettings.json
+  Properties/
+    launchSettings.json
+  obj/
+    Plaza.csproj.nuget.dgspec.json
+    Plaza.csproj.nuget.g.props
+    Plaza.csproj.nuget.g.targets
+    project.assets.json
+    project.nuget.cache
 ```
 
-Hoy solo editas uno: **`Program.cs`**. `Plaza.csproj` dice qué tipo de proyecto es y con qué versión
-de .NET se compila. Los `appsettings` guardan configuración y `launchSettings.json` guarda cómo
-arranca el proyecto desde el editor. No los vas a tocar.
+::: {.diagrama}
+![](imagenes/proyecto-arbol-archivos.svg){fig-alt="Árbol de la carpeta Plaza. Program.cs es el archivo que editas, y desde la etapa 4 la carpeta wwwroot que creas tú. Plaza.csproj, appsettings.json, appsettings.Development.json y Properties/launchSettings.json no se tocan. La carpeta obj aparece al crear el proyecto y la carpeta bin aparece al compilar; ninguna de las dos se edita."}
+
+Un solo archivo para editar. La carpeta `bin` no existe hasta que compilas por primera vez.
+:::
+
+| Archivo o carpeta | Para qué sirve | ¿Lo editas? |
+|---|---|---|
+| `Plaza.csproj` | Dice qué tipo de proyecto es y con qué versión de .NET se compila | No |
+| `Program.cs` | El código de tu servidor | **Sí**, en todas las etapas |
+| `appsettings.json` | Configuración general que el programa lee al arrancar | No |
+| `appsettings.Development.json` | Configuración extra que solo se lee cuando desarrollas | No |
+| `Properties/launchSettings.json` | Cómo arranca el proyecto desde el editor: puerto y entorno | No |
+| `wwwroot/` | Páginas y archivos públicos. No existe todavía: la creas en la etapa 4 | **Sí**, desde la etapa 4 |
+| `obj/` | Archivos de restauración. Aparece al crear el proyecto | **Nunca** |
+| `bin/` | El programa compilado. Aparece al compilar o ejecutar | **Nunca** |
+
+#### Plaza.csproj
+
+`.csproj` abrevia *C# project*, "proyecto de C#". Es un archivo de texto en formato **XML**: etiquetas
+que se abren y se cierran, como en HTML. Este es su contenido completo:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+```
+
+| Línea | Qué dice, en palabras simples |
+|---|---|
+| `<Project Sdk="Microsoft.NET.Sdk.Web">` | "Este proyecto usa las herramientas del SDK para aplicaciones web". Con esa palabra `Web`, `dotnet run` sabe que debe arrancar un servidor |
+| `<PropertyGroup>` | Abre un grupo de ajustes del proyecto |
+| `<TargetFramework>net10.0</TargetFramework>` | La versión de .NET con la que se compila y se ejecuta: **.NET 10** |
+| `<Nullable>enable</Nullable>` | C# te avisa cuando un valor puede venir vacío (`null`). Por eso más adelante escribirás `string? q` |
+| `<ImplicitUsings>enable</ImplicitUsings>` | C# agrega por ti las referencias a las bibliotecas más comunes. Por eso `Program.cs` no empieza con una lista de `using` |
+
+`dotnet run` busca este archivo en la carpeta donde estés. Si no hay ningún `.csproj`, no sabe qué
+ejecutar.
+
+#### Program.cs
+
+Es el código del servidor y el único archivo que editas. El comando lo crea con las mismas cuatro
+instrucciones que ves en la sección "El código", más abajo: `CreateBuilder`, `Build`, un `MapGet` y
+`Run`. La única diferencia es la primera línea, un comentario con `//` que agregó esta guía.
+
+#### appsettings.json
+
+Una **configuración** es un valor que el programa lee al arrancar y que puedes cambiar sin tocar el
+código C#. Está escrita en JSON, el mismo formato que usaste en la Semana 8:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
+
+- **`Logging`** controla los mensajes que el servidor escribe en la consola, los que empiezan por
+  `info:` cuando lo enciendes.
+- **`LogLevel`** fija cuánto detalle mostrar. Los niveles van de menos serio a más serio:
+  `Trace`, `Debug`, `Information`, `Warning`, `Error` y `Critical`.
+- **`"Default": "Information"`** significa "muestra los mensajes informativos y los más serios".
+- **`"Microsoft.AspNetCore": "Warning"`** dice que los mensajes internos del framework solo se muestran
+  si son advertencias o errores. Por eso no ves una línea en la consola por cada petición.
+- **`AllowedHosts`** es la lista de nombres de sitio que el servidor acepta en una petición. `"*"`
+  significa "cualquiera".
+
+#### appsettings.Development.json
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
+```
+
+**Por qué hay dos.** `appsettings.json` se lee **siempre**. `appsettings.Development.json` se lee
+**además** cuando el entorno se llama `Development` (desarrollo) y sus valores ganan sobre los del
+primero. Es el lugar para ajustes que solo valen mientras programas.
+
+**Cuál se usa cuándo.** El nombre del entorno sale de `launchSettings.json`, que dice `Development`.
+Con `dotnet run` a secas, el entorno es `Development` y se leen los dos archivos. Con el comando de la
+clase, que lleva `--no-launch-profile`, `dotnet` no lee `launchSettings.json`, el nombre del entorno
+queda en su valor por defecto, `Production`, y solo se lee `appsettings.json`. En la prueba, la línea
+`Hosting environment` de la consola dijo `Production`. En este proyecto los dos archivos dicen lo mismo
+en `Logging`, así que no notas ninguna diferencia.
+
+#### Properties/launchSettings.json
+
+El contenido de tu archivo se ve así. **Los números de puerto serán otros:** `dotnet new` elige un
+puerto al azar para cada proyecto, y por eso el tuyo no dirá `5120` ni `7097`.
+
+```json
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5120",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7097;http://localhost:5120",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+```
+
+| Campo | Qué significa |
+|---|---|
+| `$schema` | Un enlace que el editor usa para ayudarte a escribir el archivo. No cambia el programa |
+| `profiles` | La lista de formas de arrancar el proyecto. Cada una es un **perfil** con su nombre: aquí `http` y `https` |
+| `commandName: "Project"` | Arranca el proyecto como un programa propio |
+| `dotnetRunMessages` | Muestra mensajes de progreso de `dotnet run`, como `Compilando...` |
+| `launchBrowser` | Pide al editor que abra el navegador al arrancar. Visual Studio lo usa. `dotnet run` no lo hace: en la prueba no abrió el navegador |
+| `applicationUrl` | La dirección y el puerto en que atiende el servidor. El perfil `https` lista dos, separadas por `;` |
+| `ASPNETCORE_ENVIRONMENT` | El nombre del entorno. `Development` activa `appsettings.Development.json` |
+
+**Quién lo usa.** Lo usa `dotnet run` cuando **no** lleva `--no-launch-profile`, que toma el primer
+perfil (`http`), y lo usa el botón de ejecutar de Visual Studio. El comando de la clase lo ignora a
+propósito. La guía no usa el perfil `https`.
+
+::: {.callout-note collapse="true"}
+## Profundiza (opcional): dotnet run sin opciones
+
+Si ejecutas `dotnet run` sin ninguna opción, `dotnet` avisa que usa el archivo y atiende en el puerto
+de tu `applicationUrl`. En la prueba, con un proyecto cuyo puerto era `5239`, salió:
+
+```text
+Usando la configuración de inicio de ...\Plaza\Properties\launchSettings.json...
+Compilando...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5239
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+```
+
+Si además agregas `--urls`, el puerto de `--urls` gana sobre el del archivo. El entorno sigue siendo
+`Development`, porque eso sale del perfil.
+:::
+
+#### La carpeta obj
+
+`obj` guarda el resultado de la **restauración**: la lista de lo que el proyecto necesita para
+compilarse. Los archivos `Plaza.csproj.nuget.*`, `project.assets.json` y `project.nuget.cache` son
+anotaciones de **NuGet**, el sistema que .NET usa para traer paquetes. El proyecto vacío no necesita
+paquetes extra, así que la lista de `project.assets.json` queda sin bibliotecas. Cuando compilas,
+`obj` se llena además de archivos intermedios, hasta unos 27 archivos en la prueba. No los abres.
+
+#### La carpeta bin
+
+`bin` (de *binarios*) aparece cuando **compilas**, por ejemplo con tu primer `dotnet run`. Compilar es
+convertir tu `Program.cs` en un programa que el computador sabe ejecutar. Dentro, en
+`bin/Debug/net10.0/`, quedan estos archivos:
+
+| Archivo | Qué es |
+|---|---|
+| `Plaza.dll` | Tu código ya compilado. Es el programa |
+| `Plaza.exe` | El ejecutable de Windows que arranca ese programa |
+| `Plaza.pdb` | Información extra para depurar |
+| `Plaza.deps.json` y `Plaza.runtimeconfig.json` | Qué bibliotecas y qué versión de .NET necesita el programa |
+| `appsettings.json` y `appsettings.Development.json` | Copias de tus archivos de configuración |
+
+`Debug` es el modo de compilación por defecto, pensado para programar. `net10.0` es la versión de .NET
+del `Plaza.csproj`.
+
+#### Qué editas y qué no tocas nunca
+
+- **Editas** `Program.cs` en todas las etapas y, desde la etapa 4, los archivos de `wwwroot`.
+- **No tocas nunca** `bin` ni `obj`. Los genera `dotnet`.
+- **No tocas hoy** `Plaza.csproj`, `appsettings` ni `launchSettings.json`. Existen y el proyecto los
+  necesita, pero ninguna etapa de esta guía los cambia.
+
+`bin` y `obj` se pueden **borrar** sin riesgo. Cada `dotnet run` los regenera. En la prueba, se borraron
+las dos carpetas, se ejecutó `dotnet build` (compila sin arrancar) y volvieron a aparecer. Lo que no
+puedes borrar son los cinco archivos de la primera columna.
 
 ### El código
 
@@ -266,6 +629,9 @@ Línea por línea, con lo que significa cada palabra:
 
 ### Ejecutarlo
 
+En la terminal de VS Code, ubicada en `Plaza`, escribe el comando de la sección "Cómo se ejecuta cada
+etapa":
+
 ```text
 dotnet run --no-launch-profile --urls http://localhost:5100
 ```
@@ -278,14 +644,39 @@ info: Microsoft.Hosting.Lifetime[14]
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Development
+      Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: ...\Plaza
 ```
 
-`Now listening on: http://localhost:5100` es el servidor avisando por qué ventanilla atiende. Si en
-tu pantalla la línea `Hosting environment` dice `Production`, es normal con este comando y no cambia
-nada de lo que haces hoy.
+`Now listening on: http://localhost:5100` es el servidor avisando por qué ventanilla atiende. La línea
+`Hosting environment` dice `Production` porque este comando no lee `launchSettings.json`, donde está el
+nombre `Development`. No cambia nada de lo que haces hoy.
+
+::: {.callout-note}
+## Qué hace dotnet run por dentro
+
+Cuando escribes `dotnet run`, `dotnet` hace cuatro cosas, siempre en este orden:
+
+1. **Busca el proyecto.** Mira la carpeta actual en busca de un archivo `.csproj`. Si no hay ninguno,
+   se detiene con un mensaje.
+2. **Restaura si hace falta.** Si falta la carpeta `obj` o cambió lo que el proyecto necesita, repite
+   la restauración. La primera vez no hace falta, porque `dotnet new` ya la hizo.
+3. **Compila.** Convierte `Program.cs` en `Plaza.dll` dentro de `bin/Debug/net10.0/`. Si nada cambió
+   desde la última vez, reutiliza lo compilado.
+4. **Arranca.** Ejecuta el programa compilado, lee los `appsettings`, abre el puerto y se queda
+   esperando peticiones hasta que presionas `Ctrl+C`.
+
+**Si cambias `Program.cs` y no reinicias**, el servidor sigue ejecutando el `Plaza.dll` de la vez
+anterior. Guardar el archivo no vuelve a compilar nada, así que el servidor responde lo de antes. Para
+ver el cambio: `Ctrl+C` y `dotnet run` otra vez.
+:::
+
+::: {.diagrama}
+![](imagenes/proyecto-linea-de-tiempo.svg){fig-alt="Tres momentos de un proyecto. Primero dotnet new web -n Plaza, una sola vez al inicio: genera cinco archivos y la carpeta obj. Después dotnet run, cada vez que pruebas: restaura si hace falta, compila a la carpeta bin y arranca el servidor. Al final Ctrl+C detiene el servidor y bin y obj se quedan en el disco."}
+
+El primer comando se ejecuta una vez. Los otros dos se repiten en cada prueba.
+:::
 
 Abre `http://localhost:5100/` en el navegador. Esto responde el servidor:
 
@@ -317,6 +708,33 @@ Presiona `Ctrl+C` para detener el servidor.
 7. El navegador vio `text/plain` y mostró el texto tal cual.
 
 ### Retos de la etapa 0
+
+::: {.callout-tip}
+## Reto 0. Explora tu proyecto
+
+Abre cada archivo del proyecto en VS Code, sin ejecutar nada, y responde: **¿qué archivo cambiarías
+para...**
+
+a. cambiar el puerto en que atiende el servidor,
+b. cambiar la versión de .NET con que se compila,
+c. cambiar el texto que responde la ruta `/`?
+
+Escribe el nombre del archivo y la línea que tocarías.
+:::
+
+::: {.callout-note collapse="true"}
+## Solución del Reto 0
+
+a. **`Properties/launchSettings.json`**, la línea `"applicationUrl": "http://localhost:5120"` de un
+   perfil (el número será el de tu proyecto). Con el comando de la clase, que lleva `--no-launch-profile`
+   y `--urls`, ese archivo no se lee: ahí el puerto se cambia en `--urls http://localhost:5100`.
+   `appsettings.json` no tiene nada que ver con el puerto.
+b. **`Plaza.csproj`**, la línea `<TargetFramework>net10.0</TargetFramework>`. En la clase déjala como
+   está: otra versión te obligaría a tener esa versión de .NET instalada y tu proyecto dejaría de
+   parecerse al de tus compañeros.
+c. **`Program.cs`**, la línea `app.MapGet("/", () => "Hello World!");`. El texto está entre comillas, a
+   la derecha de `=>`. Es el único archivo que editas en esta etapa.
+:::
 
 ::: {.callout-tip}
 ## Reto 1. Dile tu nombre
@@ -357,9 +775,11 @@ direcciones existen.
 
 ### Cierre de la etapa 0
 
-- **Qué cambió:** el proyecto nace. Hay un servidor con una sola ruta.
+- **Qué cambió:** el proyecto nace. Hay una carpeta `Plaza` con cinco archivos, una carpeta `obj` y un
+  servidor con una sola ruta.
 - **Cómo verificarlo:** ejecuta el comando y abre `http://localhost:5100/`.
-- **Qué debes ver:** `Hello World!`, un `404` en `/otra` y, en la consola, `Now listening on`.
+- **Qué debes ver:** `Hello World!`, un `404` en `/otra` y, en la consola, `Now listening on`. Después
+  de ejecutar, la carpeta `bin` aparece junto a `obj`.
 
 ## Etapa 1. Varias rutas
 
@@ -1770,6 +2190,31 @@ already in use` y el programa termina.
 
 **Cómo se arregla:** ve a esa terminal y presiona `Ctrl+C`, o cierra la terminal.
 
+### dotnet run dice que no encuentra un proyecto
+
+**Qué ves:** al ejecutar, la consola responde `No se ha podido encontrar un proyecto para ejecutar.
+Asegúrese de que exista uno en ...` y el programa termina.
+
+**Por qué:** `dotnet run` busca un archivo `.csproj` en la carpeta donde estás. Estás una carpeta
+arriba, en `Clases-Web`, o en otro lugar. En la prueba, ejecutarlo desde la carpeta de trabajo dio
+exactamente este error.
+
+**Cómo se arregla:** escribe `pwd`, comprueba que la ruta termina en `Plaza` y entra con `cd Plaza` si
+hace falta. Después repite el comando.
+
+### dotnet new dice que va a sobrescribir archivos, o quedó Plaza dentro de Plaza
+
+**Qué ves:** al repetir `dotnet new web -n Plaza`, la consola lista `Sobrescribir ./Program.cs` y los
+demás archivos, no crea nada y sugiere la opción `--force`. Si lo ejecutaste dentro de la carpeta
+`Plaza`, en cambio, se creó una segunda carpeta `Plaza/Plaza`.
+
+**Por qué:** el comando se escribe **una sola vez** y **fuera** del proyecto. Repetirlo en la misma
+carpeta choca con los archivos que ya existen. Ejecutarlo dentro de `Plaza` crea un proyecto nuevo
+anidado, porque `-n Plaza` siempre crea su propia carpeta.
+
+**Cómo se arregla:** no uses `--force`: borraría tus cambios en `Program.cs`. Si creaste una carpeta
+anidada por error, bórrala (`Plaza/Plaza`) y sigue con el proyecto original.
+
 ### Dos rutas iguales: el error llega tarde
 
 **Qué ves:** el servidor arranca bien, pero al pedir una ruta responde `500` con
@@ -1801,13 +2246,17 @@ consola te dice en cuál estás.
 5. Qué es el tipo de contenido y qué cambia en el navegador entre `text/plain` y `text/html`.
 6. Para qué sirve `wwwroot` y por qué todo lo que hay ahí es público.
 7. Qué familia de estado usarías (2xx, 4xx o 5xx) y por qué: cuándo `200`, `201`, `400` y `404`.
+8. Qué hace `dotnet new web -n Plaza`, en qué carpeta y cuántas veces se ejecuta, qué archivos crea y
+   cuáles de ellos editas.
+9. Qué hace `dotnet run` por dentro, y por qué `bin` y `obj` se pueden borrar.
 
 ## Trabajo independiente
 
 La semana pide un **servidor del proyecto respondiendo a sus rutas base**. Aplica a tu proyecto lo que
 hiciste con Plaza. Esta semana no tiene porcentaje.
 
-1. **Crea el servidor** de tu proyecto con `dotnet new web -n` y el nombre de tu proyecto.
+1. **Crea el servidor** de tu proyecto con `dotnet new web -n` y el nombre de tu proyecto, desde tu
+   carpeta de trabajo y no dentro de otro proyecto.
 2. **Seis rutas propias** del tema de tu proyecto: dos de texto, dos con parámetro (una en la ruta y
    una en el query string) y dos que respondan con estados distintos de `200`.
 3. **Un JSON de cinco elementos:** un `record` con tres campos como mínimo, una lista de cinco
