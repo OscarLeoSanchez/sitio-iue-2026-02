@@ -18,6 +18,7 @@ project:
     - web/semana-10/presentacion-interactiva-rutas.html
     # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
     - movil/semana-07/presentacion-interactiva.html
+    - movil/semana-07/presentacion-statefulwidget.html
     - movil/semana-08/presentacion-interactiva.html
 
 lang: es
