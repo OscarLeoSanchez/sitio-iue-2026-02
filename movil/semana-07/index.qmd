@@ -504,7 +504,7 @@ explican desde cero, con un ejemplo mínimo. Tómate el tiempo: todo lo que sigu
 
 ::: {.acceso}
 ::: {.acceso-item}
-Presentación interactiva de esta parte: StatefulWidget desde cero
+Presentación interactiva de esta parte: StatefulWidget y setState
 
 [Abrir la presentación de StatefulWidget](presentacion-statefulwidget.html){.btn-doc target="_blank"}
 :::
