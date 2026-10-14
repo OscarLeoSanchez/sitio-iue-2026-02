@@ -34,6 +34,124 @@ Si el tiempo de la clase no alcanza, este es el orden de prioridad:
   guía sigue funcionando.
 :::
 
+## Herramientas que necesitas
+
+Antes de la clase instala tres herramientas. Cada descarga pesa unos 200 MB, así que hazlo con buena
+conexión y un día antes, no en el salón.
+
+| Herramienta | Para qué sirve | Dónde se descarga |
+|---|---|---|
+| **.NET SDK 10** | Trae el comando `dotnet`, el compilador de C# y las plantillas para crear proyectos | `dotnet.microsoft.com/download/dotnet/10.0` |
+| **Visual Studio Code** | El editor donde escribes el código y abres la terminal | `code.visualstudio.com/download` |
+| **Extensión de C#** | Colores y ayudas al escribir C#. Es opcional: el código compila sin ella | Dentro de VS Code |
+
+### 1. Instala el .NET SDK 10
+
+Descarga el **SDK**, no el *Runtime*. El Runtime solo ejecuta programas ya hechos y no puede crear
+proyectos. El SDK ya incluye el Runtime.
+
+**Windows**
+
+1. Abre `https://dotnet.microsoft.com/download/dotnet/10.0` en el navegador.
+2. Busca el bloque **SDK 10.0.x** (el primero de la página). En la fila **Windows**, columna
+   **Installers**, haz clic en **x64**. Se descarga un archivo `.exe`.
+   - Si tu portátil tiene procesador ARM (por ejemplo Snapdragon), elige **Arm64**.
+   - Para saber cuál tienes: Configuración, Sistema, Acerca de, "Tipo de sistema".
+3. Ejecuta el `.exe`, acepta el permiso de administrador y pulsa **Install**. Espera a que termine.
+4. **Cierra todas las terminales y VS Code** y abre una terminal nueva. Una terminal que estaba abierta
+   durante la instalación no se entera de que `dotnet` ya existe.
+
+Alternativa por terminal, si el instalador gráfico te da problemas:
+
+```text
+winget install Microsoft.DotNet.SDK.10
+```
+
+**Mac**
+
+1. En la misma página, fila **macOS**, columna **Installers**:
+   - **Arm64** si tu Mac tiene chip Apple (M1, M2, M3 y siguientes).
+   - **x64** si tiene procesador Intel.
+   - Para saberlo: menú Apple, "Acerca de este Mac", y mira "Chip" o "Procesador".
+2. Abre el archivo `.pkg` descargado y sigue "Continuar" hasta el final. Pide la contraseña del Mac.
+3. Abre una terminal nueva.
+
+**Comprueba la instalación.** En una terminal nueva escribe:
+
+```text
+dotnet --version
+```
+
+Debe mostrar un número que empiece por `10.`, por ejemplo `10.0.302` o `10.0.402`. Cualquier `10.0.x`
+sirve. Si la terminal dice que `dotnet` no se reconoce, cierra la terminal y ábrela de nuevo. Si sigue
+igual, reinicia el computador y repite el comando.
+
+### 2. Instala Visual Studio Code
+
+**Windows**
+
+1. Entra a `https://code.visualstudio.com/download` y descarga el instalador de **Windows** (el
+   **User Installer x64** no pide permisos de administrador).
+2. Ejecútalo. En la pantalla de tareas adicionales deja marcada la opción **Agregar a PATH** (*Add to
+   PATH*). Gracias a ella podrás escribir `code .` en la terminal para abrir una carpeta en VS Code.
+3. Termina la instalación y abre VS Code desde el menú Inicio.
+
+**Mac**
+
+1. En la misma página descarga el zip **Universal** (sirve para chip Apple e Intel).
+2. Descomprímelo y arrastra **Visual Studio Code** a la carpeta Aplicaciones.
+3. Abre VS Code, presiona `Cmd+Shift+P` y ejecuta **Shell Command: Install 'code' command in PATH**.
+   Eso habilita `code .` en la terminal.
+
+**Comprueba la instalación.** En una terminal nueva escribe:
+
+```text
+code --version
+```
+
+Debe mostrar un número de versión. Si dice que `code` no se reconoce, cierra y abre la terminal; en Mac
+repite el comando de la paleta del paso 3.
+
+### 3. Instala la extensión de C\#
+
+1. En VS Code abre el panel de **Extensiones**: el icono de cuadritos de la barra izquierda, o
+   `Ctrl+Shift+X`.
+2. Busca **C# Dev Kit** y confirma que el publicador sea **Microsoft**.
+3. Pulsa **Install**. Trae consigo la extensión **C#**, que es la que da colores y ayudas al escribir.
+
+Dos cosas que debes saber:
+
+- **C# Dev Kit puede pedirte iniciar sesión** con una cuenta de Microsoft o de GitHub. Si no quieres,
+  busca e instala solo la extensión **C#** (publicada por Microsoft).
+- **Esta extensión es opcional.** El código de la clase se compila y se ejecuta sin ella. Si no la
+  instalas, solo pierdes los colores y las sugerencias.
+
+Para ver qué extensiones tienes, escribe en la terminal:
+
+```text
+code --list-extensions
+```
+
+### 4. Comprobación final
+
+Con una terminal nueva, estos dos comandos deben responder con un número de versión:
+
+```text
+dotnet --version
+code --version
+```
+
+Si ambos responden, tienes todo lo necesario. Sigue con "Preparación del entorno" más abajo, donde
+creas la carpeta de trabajo y abres la terminal en ella.
+
+::: {.callout-warning}
+## Qué se probó y qué no
+
+Los pasos de Windows se siguieron con el SDK `10.0.302`. Las direcciones de descarga se comprobaron en
+octubre de 2026 y responden. No se probaron en un Mac la instalación del `.pkg` ni la de VS Code, y
+el texto de los instaladores y de los avisos de VS Code cambia con la versión: guíate por el sentido.
+:::
+
 ## Lo que vas a lograr
 
 Hasta la Semana 8 tu página pedía datos a un servidor que escribió otra persona. Hoy escribes tú el
@@ -119,9 +237,9 @@ dotnet --version
 se escribió y se probó con la versión `10.0.302`. Los mensajes de `dotnet` salen en el idioma de tu
 sistema: aquí aparecen en español porque así salieron en la prueba.
 
-**Si la terminal dice que `dotnet` no se reconoce,** el SDK no está instalado. Descarga el SDK 10 de
-`dotnet.microsoft.com/download`, instálalo, **cierra la terminal y ábrela de nuevo**, y repite el
-comando. Una terminal que estaba abierta durante la instalación no se entera de que `dotnet` ya existe.
+**Si la terminal dice que `dotnet` no se reconoce,** el SDK no está instalado o la terminal no se
+enteró. Revisa la sección "Herramientas que necesitas" al inicio de esta guía, instala el SDK,
+**cierra la terminal y ábrela de nuevo**, y repite el comando.
 
 ### Paso 2. Crea la carpeta de trabajo
 
