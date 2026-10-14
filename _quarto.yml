@@ -101,7 +101,7 @@ website:
               href: web/semana-08/index.qmd
         - section: "Unidad 3. Backend con ASP.NET Core"
           contents:
-            - text: "Semana 10. Servidor propio con ASP.NET Core MVC"
+            - text: "Semana 10. Mi servidor responde: rutas y respuestas"
               href: web/semana-10/index.qmd
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
