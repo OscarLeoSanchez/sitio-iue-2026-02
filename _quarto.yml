@@ -15,6 +15,7 @@ project:
     # Presentaciones interactivas de Web (Semana 10), mismo motivo.
     - web/semana-10/presentacion-interactiva-pipeline.html
     - web/semana-10/presentacion-interactiva-mvc.html
+    - web/semana-10/presentacion-interactiva-rutas.html
     # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
     - movil/semana-07/presentacion-interactiva.html
     - movil/semana-08/presentacion-interactiva.html
