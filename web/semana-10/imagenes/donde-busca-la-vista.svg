@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="640" height="270" viewBox="0 0 640 270" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<svg width="560" height="330" viewBox="0 0 560 330" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
 <title id="t">Dónde busca MVC la vista</title>
-<desc id="d">Cuando una acción llama View, MVC busca primero Views/Controlador/Acción.cshtml, luego Views/Shared/Acción.cshtml; si no encuentra ninguna, responde 500 con el mensaje The view was not found.</desc>
-<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker></defs>
-<rect x="0" y="0" width="640" height="270" fill="#ffffff"/>
+<desc id="d">Cuando CatalogoController.Index ejecuta return View con el modelo, MVC busca primero Views/Catalogo/Index.cshtml: la carpeta lleva el nombre del controlador y el archivo el nombre del método. Si no existe, busca Views/Shared/Index.cshtml. Si tampoco existe, la respuesta es 500 con el mensaje The view Index was not found.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="560" height="330" fill="#ffffff"/>
 <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
-<rect x="20" y="20" width="600" height="46" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
-<text x="320" y="49" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">CatalogoController.Index()  -&gt;  return View(productos);</text>
-<rect x="20" y="100" width="600" height="40" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
-<text x="40" y="125" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1.</text>
-<text x="70" y="125" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/Views/Catalogo/Index.cshtml</text>
-<text x="430" y="125" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">carpeta del controlador</text>
-<rect x="20" y="156" width="600" height="40" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
-<text x="40" y="181" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2.</text>
-<text x="70" y="181" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/Views/Shared/Index.cshtml</text>
-<text x="430" y="181" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si no está la anterior</text>
-<rect x="20" y="212" width="600" height="40" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6"/>
-<text x="40" y="237" font-size="12.5" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3.</text>
-<text x="70" y="237" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">500: The view 'Index' was not found.</text>
-<path d="M 320 68 L 320 98" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<rect x="14" y="12" width="532" height="50" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="280.0" y="34.0" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">CatalogoController.Index()</text>
+<text x="280.0" y="52.0" font-size="12" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">return View(modelo);</text>
+<path d="M 280 62 L 280 84" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<rect x="14" y="84" width="532" height="56" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="30" y="108" font-size="14" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1.</text>
+<text x="52" y="108" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/Views/Catalogo/Index.cshtml</text>
+<text x="52" y="128" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Carpeta: el nombre del controlador sin la palabra Controller. Archivo: el nombre del método.</text>
+<text x="292" y="162" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si no existe</text>
+<path d="M 280 144 L 280 172" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<rect x="14" y="174" width="532" height="50" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="30" y="197" font-size="14" fill="#8a5a12" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2.</text>
+<text x="52" y="197" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/Views/Shared/Index.cshtml</text>
+<text x="52" y="214" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La carpeta común a todos los controladores.</text>
+<text x="292" y="248" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si tampoco existe</text>
+<path d="M 280 228 L 280 258" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<rect x="14" y="260" width="532" height="56" rx="8" fill="#fbf1f0" stroke="#a32d22" stroke-width="1.6"/>
+<text x="30" y="284" font-size="14" fill="#7d1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3.</text>
+<text x="52" y="284" font-size="14" fill="#7d1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">500</text>
+<text x="52" y="304" font-size="12" fill="#7d1f17" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">InvalidOperationException: The view 'Index' was not found.</text>
 </g>
 </svg>

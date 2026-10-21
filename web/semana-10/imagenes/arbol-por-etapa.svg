@@ -1,108 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="640" height="578" viewBox="0 0 640 578" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
-<title id="t">El árbol de carpetas crece etapa por etapa</title>
-<desc id="d">Matriz de archivos del proyecto por etapa, de la 0 a la 5. Un punto verde marca el archivo que aparece, uno ámbar marca el que cambia y uno gris el que sigue igual.</desc>
-<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker></defs>
-<rect x="0" y="0" width="640" height="578" fill="#ffffff"/>
+<svg width="560" height="620" viewBox="0 0 560 620" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Qué archivos aparecen o cambian en cada etapa</title>
+<desc id="d">Tabla de las etapas 6 a 10. Program.cs aparece en la etapa 6 y cambia en todas las demás. Models, ProductosController y PedidosController aparecen en la etapa 7. CatalogoController, las vistas Razor y _ViewImports aparecen en la etapa 8. Los servicios con interfaz, CiclosDeVida y DiagnosticoController aparecen en la etapa 9. AdminController y las clases de Middleware aparecen en la etapa 10.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="560" height="620" fill="#ffffff"/>
 <g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
-<text x="20" y="24" font-size="12" fill="#5b6876" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Archivo</text>
-<text x="340" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 0</text>
-<text x="340" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vacío</text>
-<text x="386" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 1</text>
-<text x="386" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">pipeline</text>
-<text x="432" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 2</text>
-<text x="432" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">clase</text>
-<text x="478" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 3</text>
-<text x="478" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">MVC</text>
-<text x="524" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 4</text>
-<text x="524" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">rutas</text>
-<text x="570" y="22" font-size="10.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa 5</text>
-<text x="570" y="38" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">DI</text>
-<path d="M 10 46 L 630 46" fill="none" stroke="#8795a3" stroke-width="1.2"/>
-<text x="20" y="63" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">MercadoCampesinoWeb/</text>
-<rect x="10" y="70" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="40" y="86" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">MercadoCampesinoWeb.csproj</text>
-<circle cx="340" cy="82" r="6" fill="#2e7d5b"/>
-<circle cx="386" cy="82" r="3" fill="#8795a3"/>
-<circle cx="432" cy="82" r="3" fill="#8795a3"/>
-<circle cx="478" cy="82" r="3" fill="#8795a3"/>
-<circle cx="524" cy="82" r="3" fill="#8795a3"/>
-<circle cx="570" cy="82" r="3" fill="#8795a3"/>
-<text x="40" y="109" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Program.cs</text>
-<circle cx="340" cy="105" r="6" fill="#2e7d5b"/>
-<circle cx="386" cy="105" r="6" fill="#b7791f"/>
-<circle cx="432" cy="105" r="6" fill="#b7791f"/>
-<circle cx="478" cy="105" r="6" fill="#b7791f"/>
-<circle cx="524" cy="105" r="6" fill="#b7791f"/>
-<circle cx="570" cy="105" r="6" fill="#b7791f"/>
-<rect x="10" y="116" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="40" y="132" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">appsettings.json</text>
-<circle cx="340" cy="128" r="6" fill="#2e7d5b"/>
-<circle cx="386" cy="128" r="3" fill="#8795a3"/>
-<circle cx="432" cy="128" r="3" fill="#8795a3"/>
-<circle cx="478" cy="128" r="3" fill="#8795a3"/>
-<circle cx="524" cy="128" r="3" fill="#8795a3"/>
-<circle cx="570" cy="128" r="3" fill="#8795a3"/>
-<text x="40" y="155" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">appsettings.Development.json</text>
-<circle cx="340" cy="151" r="6" fill="#2e7d5b"/>
-<circle cx="386" cy="151" r="3" fill="#8795a3"/>
-<circle cx="432" cy="151" r="3" fill="#8795a3"/>
-<circle cx="478" cy="151" r="3" fill="#8795a3"/>
-<circle cx="524" cy="151" r="3" fill="#8795a3"/>
-<circle cx="570" cy="151" r="3" fill="#8795a3"/>
-<rect x="10" y="162" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="40" y="178" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Properties/launchSettings.json</text>
-<circle cx="340" cy="174" r="6" fill="#2e7d5b"/>
-<circle cx="386" cy="174" r="3" fill="#8795a3"/>
-<circle cx="432" cy="174" r="3" fill="#8795a3"/>
-<circle cx="478" cy="174" r="3" fill="#8795a3"/>
-<circle cx="524" cy="174" r="3" fill="#8795a3"/>
-<circle cx="570" cy="174" r="3" fill="#8795a3"/>
-<text x="40" y="201" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Middleware/</text>
-<rect x="10" y="208" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="224" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">RegistroPeticionesMiddleware.cs</text>
-<circle cx="432" cy="220" r="6" fill="#2e7d5b"/>
-<circle cx="478" cy="220" r="3" fill="#8795a3"/>
-<circle cx="524" cy="220" r="3" fill="#8795a3"/>
-<circle cx="570" cy="220" r="3" fill="#8795a3"/>
-<text x="40" y="247" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Models/</text>
-<rect x="10" y="254" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="270" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Producto.cs</text>
-<circle cx="478" cy="266" r="6" fill="#2e7d5b"/>
-<circle cx="524" cy="266" r="3" fill="#8795a3"/>
-<circle cx="570" cy="266" r="3" fill="#8795a3"/>
-<text x="40" y="293" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Controllers/</text>
-<rect x="10" y="300" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="316" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">CatalogoController.cs</text>
-<circle cx="478" cy="312" r="6" fill="#2e7d5b"/>
-<circle cx="524" cy="312" r="6" fill="#b7791f"/>
-<circle cx="570" cy="312" r="6" fill="#b7791f"/>
-<text x="60" y="339" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">DiagnosticoController.cs</text>
-<circle cx="570" cy="335" r="6" fill="#2e7d5b"/>
-<rect x="10" y="346" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="40" y="362" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Views/Catalogo/</text>
-<text x="60" y="385" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Index.cshtml</text>
-<circle cx="478" cy="381" r="6" fill="#2e7d5b"/>
-<circle cx="524" cy="381" r="6" fill="#b7791f"/>
-<circle cx="570" cy="381" r="6" fill="#b7791f"/>
-<rect x="10" y="392" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="408" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Detalle.cshtml</text>
-<circle cx="524" cy="404" r="6" fill="#2e7d5b"/>
-<circle cx="570" cy="404" r="3" fill="#8795a3"/>
-<text x="40" y="431" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Services/</text>
-<rect x="10" y="438" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="454" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">ICatalogoService.cs</text>
-<circle cx="570" cy="450" r="6" fill="#2e7d5b"/>
-<text x="60" y="477" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">CatalogoEnMemoria.cs</text>
-<circle cx="570" cy="473" r="6" fill="#2e7d5b"/>
-<rect x="10" y="484" width="620" height="23" rx="0" fill="#f6f8fa" stroke="#8795a3" stroke-width="0"/>
-<text x="60" y="500" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">ServiciosDeCicloDeVida.cs</text>
-<circle cx="570" cy="496" r="6" fill="#2e7d5b"/>
-<circle cx="60" cy="548" r="6" fill="#2e7d5b"/>
-<text x="72" y="552" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">aparece en esta etapa</text>
-<circle cx="250" cy="548" r="6" fill="#b7791f"/>
-<text x="262" y="552" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
-<circle cx="340" cy="548" r="3" fill="#8795a3"/>
-<text x="350" y="552" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">sigue igual</text>
+<text x="270" y="18" font-size="12" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Etapa</text>
+<text x="303.0" y="18" font-size="14" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">6</text>
+<text x="303.0" y="34" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">formul.</text>
+<text x="357.0" y="18" font-size="14" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">7</text>
+<text x="357.0" y="34" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">contr.</text>
+<text x="411.0" y="18" font-size="14" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">8</text>
+<text x="411.0" y="34" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vistas</text>
+<text x="465.0" y="18" font-size="14" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">9</text>
+<text x="465.0" y="34" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">inyec.</text>
+<text x="519.0" y="18" font-size="14" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">10</text>
+<text x="519.0" y="34" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">middl.</text>
+<text x="14" y="44" font-size="12.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Plaza/</text>
+<rect x="8" y="59" width="544" height="25" fill="#f6f8fa"/>
+<text x="14" y="76" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Program.cs</text>
+<rect x="279" y="62" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="303.0" y="75" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="333" y="62" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="357.0" y="75" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="387" y="62" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="411.0" y="75" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="441" y="62" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="465.0" y="75" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="495" y="62" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="519.0" y="75" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<text x="14" y="101" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Models/ (3 archivos)</text>
+<rect x="333" y="87" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="357.0" y="100" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="387" y="87" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="411.0" y="100" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="441" y="87" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="465.0" y="100" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="495" y="87" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="100" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="109" width="544" height="25" fill="#f6f8fa"/>
+<text x="14" y="126" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Controllers/</text>
+<text x="32" y="151" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">ProductosController.cs</text>
+<rect x="333" y="137" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="357.0" y="150" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="387" y="137" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="411.0" y="150" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="441" y="137" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="465.0" y="150" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="495" y="137" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="150" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="159" width="544" height="25" fill="#f6f8fa"/>
+<text x="32" y="176" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">PedidosController.cs</text>
+<rect x="333" y="162" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="357.0" y="175" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="387" y="162" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="411.0" y="175" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="441" y="162" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="465.0" y="175" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="495" y="162" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="175" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="32" y="201" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">CatalogoController.cs</text>
+<rect x="387" y="187" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="411.0" y="200" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="441" y="187" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="465.0" y="200" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="495" y="187" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="200" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="209" width="544" height="25" fill="#f6f8fa"/>
+<text x="32" y="226" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">DiagnosticoController.cs</text>
+<rect x="441" y="212" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="465.0" y="225" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="495" y="212" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="225" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="32" y="251" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">AdminController.cs</text>
+<rect x="495" y="237" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="519.0" y="250" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="8" y="259" width="544" height="25" fill="#f6f8fa"/>
+<text x="14" y="276" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Services/</text>
+<text x="32" y="301" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">ICatalogo, CatalogoEnMemoria</text>
+<rect x="441" y="287" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="465.0" y="300" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="495" y="287" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="300" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="309" width="544" height="25" fill="#f6f8fa"/>
+<text x="32" y="326" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">IPedidos, PedidosEnMemoria</text>
+<rect x="441" y="312" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="465.0" y="325" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="495" y="312" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="325" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="32" y="351" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">CiclosDeVida.cs</text>
+<rect x="441" y="337" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="465.0" y="350" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="495" y="337" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="350" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="359" width="544" height="25" fill="#f6f8fa"/>
+<text x="14" y="376" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Views/</text>
+<text x="32" y="401" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">_ViewImports.cshtml</text>
+<rect x="387" y="387" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="411.0" y="400" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="441" y="387" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="465.0" y="400" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="495" y="387" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="400" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="8" y="409" width="544" height="25" fill="#f6f8fa"/>
+<text x="32" y="426" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Catalogo/ (4 vistas)</text>
+<rect x="387" y="412" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="411.0" y="425" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="441" y="412" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="465.0" y="425" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="495" y="412" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="425" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="14" y="451" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">Middleware/ (2 clases)</text>
+<rect x="495" y="437" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="519.0" y="450" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="8" y="459" width="544" height="25" fill="#f6f8fa"/>
+<text x="14" y="476" font-size="11.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">wwwroot/</text>
+<text x="32" y="501" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">index.html</text>
+<rect x="279" y="487" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="303.0" y="500" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="333" y="487" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="357.0" y="500" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="387" y="487" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="411.0" y="500" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="441" y="487" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="465.0" y="500" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="495" y="487" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="519.0" y="500" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="8" y="509" width="544" height="25" fill="#f6f8fa"/>
+<text x="32" y="526" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">4 páginas .html</text>
+<rect x="279" y="512" width="48" height="18" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="303.0" y="525" font-size="10.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nuevo</text>
+<rect x="333" y="512" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="357.0" y="525" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="387" y="512" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="411.0" y="525" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="441" y="512" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="465.0" y="525" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="495" y="512" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="525" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="32" y="551" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">estilos.css</text>
+<rect x="279" y="537" width="48" height="18" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="303.0" y="550" font-size="10.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia</text>
+<rect x="333" y="537" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="357.0" y="550" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="387" y="537" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="411.0" y="550" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="441" y="537" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="465.0" y="550" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<rect x="495" y="537" width="48" height="18" rx="4" fill="#ffffff" stroke="#cfd8e3" stroke-width="1"/>
+<text x="519.0" y="550" font-size="10.5" fill="#8795a3" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">igual</text>
+<text x="14" y="588" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Nuevo y cambia: los archivos que escribes o editas en esa etapa. Igual: no los tocas.</text>
+<text x="14" y="606" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">En la etapa 10, la parte A cambia Program.cs y la parte B agrega Middleware/.</text>
 </g>
 </svg>

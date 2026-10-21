@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="560" height="350" viewBox="0 0 560 350" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">GET frente a POST: dónde viaja el dato</title>
+<desc id="d">Dos columnas. GET: la línea de la petición es GET /buscar?q=tomate, el dato va dentro de la dirección y el cuerpo está vacío. POST: la línea de la petición es POST /pedidos/formulario, la dirección queda limpia y el dato viaja en el cuerpo como cliente=Ana&amp;producto=Tomate&amp;cantidad=2.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="560" height="350" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="14" y="14" width="252" height="322" rx="8" fill="#ffffff" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="140" y="40" font-size="14" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">GET: el pedido en voz alta</text>
+<text x="26" y="68" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Línea de la petición</text>
+<rect x="26" y="76" width="39" height="28" rx="4" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.2"/>
+<text x="45.5" y="94.2" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">GET</text>
+<rect x="69" y="76" width="70" height="28" rx="4" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.2"/>
+<text x="104.0" y="94.2" font-size="13" fill="#5b6876" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/buscar</text>
+<rect x="143" y="76" width="86" height="28" rx="4" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.2"/>
+<text x="186.0" y="94.2" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">?q=tomate</text>
+<text x="26" y="128" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cuerpo</text>
+<rect x="26" y="136" width="228" height="66" rx="8" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="140" y="174" font-size="13" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">(vacío)</text>
+<text x="26" y="232" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El dato viaja en la dirección.</text>
+<text x="26" y="252" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Se ve en la barra de direcciones.</text>
+<text x="26" y="272" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sirve para pedir: no cambia nada</text>
+<text x="26" y="290" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en el servidor.</text>
+<text x="26" y="316" font-size="12" fill="#17456f" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">&lt;form method="get"&gt;</text>
+<rect x="294" y="14" width="252" height="322" rx="8" fill="#ffffff" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="420" y="40" font-size="14" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">POST: el sobre cerrado</text>
+<text x="306" y="68" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Línea de la petición</text>
+<rect x="306" y="76" width="43" height="28" rx="4" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.2"/>
+<text x="327.5" y="94.2" font-size="11.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">POST</text>
+<rect x="353" y="76" width="147" height="28" rx="4" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.2"/>
+<text x="426.5" y="94.2" font-size="11.5" fill="#5b6876" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">/pedidos/formulario</text>
+<text x="306" y="128" font-size="12" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cuerpo</text>
+<rect x="306" y="136" width="228" height="66" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.4"/>
+<text x="420" y="156" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">cliente=Ana&amp;</text>
+<text x="420" y="173" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">producto=Tomate&amp;</text>
+<text x="420" y="190" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">cantidad=2</text>
+<text x="306" y="232" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El dato viaja en el cuerpo.</text>
+<text x="306" y="252" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La dirección queda limpia.</text>
+<text x="306" y="272" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sirve para enviar: cambia algo</text>
+<text x="306" y="290" font-size="12.5" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en el servidor.</text>
+<text x="306" y="316" font-size="12" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">&lt;form method="post"&gt;</text>
+</g>
+</svg>
