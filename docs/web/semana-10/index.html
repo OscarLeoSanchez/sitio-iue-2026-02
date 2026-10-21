@@ -230,6 +230,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Semana 10. Mi servidor responde: rutas y respuestas</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-10/mvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 10. POST, MVC, inyección y middleware</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -376,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">13 de octubre de 2026</p>
+      <p class="date">20 de octubre de 2026</p>
     </div>
   </div>
   
@@ -401,15 +407,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Prerrequisitos</td>
-<td>Semana 8: peticiones HTTP, JSON y DevTools</td>
+<td>Peticiones HTTP, JSON y DevTools</td>
 </tr>
 <tr class="odd">
 <td>Herramientas</td>
 <td>.NET SDK 10, VS Code y una terminal</td>
-</tr>
-<tr class="even">
-<td>Tiempo</td>
-<td>1 h con el docente (etapas 0 a 3) y el resto en casa</td>
 </tr>
 </tbody>
 </table>
@@ -418,6 +420,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="acceso-item">
 <p>Presentación interactiva: el recorrido de una petición, con predicciones y retos</p>
 <p><a href="presentacion-interactiva-rutas.html" class="btn-doc" target="_blank">Abrir la presentación</a></p>
+</div>
+<div class="acceso-item">
+<p>Guía de MVC: POST y formularios, controladores y vistas, inyección de dependencias y middleware, sobre este mismo proyecto</p>
+<p><a href="../../web/semana-10/mvc.html" class="btn-doc">Abrir la guía de MVC</a></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -430,17 +436,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si el tiempo de la clase no alcanza, este es el orden de prioridad:</p>
+<p>Este es el orden de prioridad por contenido:</p>
 <ul>
-<li><strong>Esencial en la hora de clase:</strong> etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto (en la etapa 0, el Reto 0).</li>
-<li><strong>Para terminar en casa:</strong> etapas 4 y 5, y el segundo reto de cada etapa.</li>
+<li><strong>Esencial:</strong> etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto (en la etapa 0, el Reto 0).</li>
+<li><strong>Para completar:</strong> etapas 4 y 5, y el segundo reto de cada etapa.</li>
 <li><strong>Opcional siempre:</strong> los recuadros “Profundiza” y las pruebas con <code>curl</code>. Puedes saltarlos y la guía sigue funcionando.</li>
 </ul>
 </div>
 </div>
 <section id="herramientas-que-necesitas" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="herramientas-que-necesitas"><span class="header-section-number">1</span> Herramientas que necesitas</h2>
-<p>Antes de la clase instala tres herramientas. Cada descarga pesa unos 200 MB, así que hazlo con buena conexión y un día antes, no en el salón.</p>
+<p>Antes de empezar las etapas instala tres herramientas. Cada descarga pesa unos 200 MB, así que hazlo con buena conexión.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -531,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dos cosas que debes saber:</p>
 <ul>
 <li><strong>C# Dev Kit puede pedirte iniciar sesión</strong> con una cuenta de Microsoft o de GitHub. Si no quieres, busca e instala solo la extensión <strong>C#</strong> (publicada por Microsoft).</li>
-<li><strong>Esta extensión es opcional.</strong> El código de la clase se compila y se ejecuta sin ella. Si no la instalas, solo pierdes los colores y las sugerencias.</li>
+<li><strong>Esta extensión es opcional.</strong> El código de esta guía se compila y se ejecuta sin ella. Si no la instalas, solo pierdes los colores y las sugerencias.</li>
 </ul>
 <p>Para ver qué extensiones tienes, escribe en la terminal:</p>
 <pre class="text"><code>code --list-extensions</code></pre>
@@ -552,18 +558,18 @@ code --version</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Los pasos de Windows se siguieron con el SDK <code>10.0.302</code>. Las direcciones de descarga se comprobaron en octubre de 2026 y responden. No se probaron en un Mac la instalación del <code>.pkg</code> ni la de VS Code, y el texto de los instaladores y de los avisos de VS Code cambia con la versión: guíate por el sentido.</p>
+<p>Los pasos de Windows se siguieron con el SDK <code>10.0.302</code>. Las direcciones de descarga se comprobaron y responden. No se probaron en un Mac la instalación del <code>.pkg</code> ni la de VS Code, y el texto de los instaladores y de los avisos de VS Code cambia con la versión: guíate por el sentido.</p>
 </div>
 </div>
 </section>
 </section>
 <section id="lo-que-vas-a-lograr" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="lo-que-vas-a-lograr"><span class="header-section-number">2</span> Lo que vas a lograr</h2>
-<p>Hasta la Semana 8 tu página pedía datos a un servidor que escribió otra persona. Hoy escribes tú el servidor. Partes de un proyecto vacío y, en seis etapas, lo haces responder cosas cada vez más interesantes: un texto, un dato en JSON, una página HTML y un archivo para descargar. La clase es un juego de crear rutas y mirar qué responde el servidor cuando le pides cosas distintas.</p>
+<p>Tu página pedía datos a un servidor que escribió otra persona. Aquí escribes tú el servidor. Partes de un proyecto vacío y, en seis etapas, lo haces responder cosas cada vez más interesantes: un texto, un dato en JSON, una página HTML y un archivo para descargar. Esta guía es un juego de crear rutas y mirar qué responde el servidor cuando le pides cosas distintas.</p>
 <p>El proyecto se llama <strong>Plaza</strong> y vende productos campesinos. Todo se hace con un editor y la terminal: cada archivo lo escribes tú, lo ejecutas y ves qué cambió.</p>
 <div class="diagrama">
 <p><img src="imagenes/peticion-respuesta.svg" class="img-fluid" alt="El navegador envía la petición GET /api/productos al servidor Plaza, que escucha en localhost puerto 5100. El servidor responde con tres partes: el estado 200 OK, el tipo de contenido application/json y el cuerpo con la lista de productos."></p>
-<p>El cliente pide y el servidor responde. Esa conversación es todo lo que ocurre hoy.</p>
+<p>El cliente pide y el servidor responde. Esa conversación es todo lo que ocurre en esta guía.</p>
 </div>
 <section id="las-seis-etapas" class="level3">
 <h3 class="anchored" data-anchor-id="las-seis-etapas">Las seis etapas</h3>
@@ -712,7 +718,7 @@ code --version</code></pre>
 </section>
 <section id="paso-2.-crea-la-carpeta-de-trabajo" class="level3">
 <h3 class="anchored" data-anchor-id="paso-2.-crea-la-carpeta-de-trabajo">Paso 2. Crea la carpeta de trabajo</h3>
-<p>La <strong>carpeta de trabajo</strong> es la carpeta donde viven todos tus proyectos de la clase. <code>Plaza</code> será una subcarpeta de ella. La creas una sola vez para todo el curso. Llámala <code>Clases-Web</code>: sin espacios y sin tildes, porque los comandos son más cómodos así.</p>
+<p>La <strong>carpeta de trabajo</strong> es la carpeta donde viven todos tus proyectos del curso. <code>Plaza</code> será una subcarpeta de ella. La creas una sola vez para todo el curso. Llámala <code>Clases-Web</code>: sin espacios y sin tildes, porque los comandos son más cómodos así.</p>
 <p>Tienes dos caminos con el mismo resultado:</p>
 <ul>
 <li><p><strong>Con el Explorador de archivos.</strong> Entra a Documentos, haz clic derecho, elige Nuevo y Carpeta, y escribe <code>Clases-Web</code>.</p></li>
@@ -770,7 +776,7 @@ C:\Users\tu-usuario\Documents\Clases-Web</code></pre>
 <h3 class="anchored" data-anchor-id="mirar-la-respuesta-completa">Mirar la respuesta completa</h3>
 <p>El navegador solo muestra el cuerpo. Para ver también el estado y el tipo de contenido tienes dos caminos:</p>
 <ul>
-<li>La pestaña <strong>Red</strong> (Network) de DevTools, como en la Semana 8.</li>
+<li>La pestaña <strong>Red</strong> (Network) de DevTools, la que usaste con las peticiones HTTP.</li>
 <li><code>curl</code>, una herramienta de terminal que pide una URL y escribe la respuesta. La opción <code>-i</code> agrega el estado y los encabezados:</li>
 </ul>
 <pre class="text"><code>curl -i http://localhost:5100/</code></pre>
@@ -936,7 +942,7 @@ code .</code></pre>
 <li><strong><code>code .</code></strong> abre VS Code en la carpeta donde estás. Abre <code>Plaza</code>, no <code>Clases-Web</code>: así el archivo <code>Program.cs</code> queda a la vista y la terminal integrada nace ubicada en el proyecto.</li>
 </ul>
 <p>Si la terminal dice que <code>code</code> no se reconoce, usa el menú de VS Code: <strong>Archivo</strong>, <strong>Abrir carpeta</strong> y elige <code>Plaza</code>.</p>
-<p><strong>Qué verás:</strong> una ventana de VS Code con el panel <strong>Explorador</strong> a la izquierda, que lista los archivos del proyecto. Abre una terminal con el menú <strong>Terminal</strong> y <strong>Nueva terminal</strong>, y escribe <code>pwd</code>: la ruta termina en <code>Plaza</code>. Desde aquí, todos los comandos de la clase se escriben en esa terminal.</p>
+<p><strong>Qué verás:</strong> una ventana de VS Code con el panel <strong>Explorador</strong> a la izquierda, que lista los archivos del proyecto. Abre una terminal con el menú <strong>Terminal</strong> y <strong>Nueva terminal</strong>, y escribe <code>pwd</code>: la ruta termina en <code>Plaza</code>. Desde aquí, todos los comandos de esta guía se escriben en esa terminal.</p>
 </section>
 <section id="paso-6.-los-mensajes-que-puede-mostrar-vs-code" class="level3">
 <h3 class="anchored" data-anchor-id="paso-6.-los-mensajes-que-puede-mostrar-vs-code">Paso 6. Los mensajes que puede mostrar VS Code</h3>
@@ -1103,7 +1109,7 @@ code .</code></pre>
 </section>
 <section id="appsettings.json" class="level4">
 <h4 class="anchored" data-anchor-id="appsettings.json">appsettings.json</h4>
-<p>Una <strong>configuración</strong> es un valor que el programa lee al arrancar y que puedes cambiar sin tocar el código C#. Está escrita en JSON, el mismo formato que usaste en la Semana 8:</p>
+<p>Una <strong>configuración</strong> es un valor que el programa lee al arrancar y que puedes cambiar sin tocar el código C#. Está escrita en JSON, el mismo formato que usaste al pedir datos con <code>fetch</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"Logging"</span><span class="fu">:</span> <span class="fu">{</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"LogLevel"</span><span class="fu">:</span> <span class="fu">{</span></span>
@@ -1132,7 +1138,7 @@ code .</code></pre>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Por qué hay dos.</strong> <code>appsettings.json</code> se lee <strong>siempre</strong>. <code>appsettings.Development.json</code> se lee <strong>además</strong> cuando el entorno se llama <code>Development</code> (desarrollo) y sus valores ganan sobre los del primero. Es el lugar para ajustes que solo valen mientras programas.</p>
-<p><strong>Cuál se usa cuándo.</strong> El nombre del entorno sale de <code>launchSettings.json</code>, que dice <code>Development</code>. Con <code>dotnet run</code> a secas, el entorno es <code>Development</code> y se leen los dos archivos. Con el comando de la clase, que lleva <code>--no-launch-profile</code>, <code>dotnet</code> no lee <code>launchSettings.json</code>, el nombre del entorno queda en su valor por defecto, <code>Production</code>, y solo se lee <code>appsettings.json</code>. En la prueba, la línea <code>Hosting environment</code> de la consola dijo <code>Production</code>. En este proyecto los dos archivos dicen lo mismo en <code>Logging</code>, así que no notas ninguna diferencia.</p>
+<p><strong>Cuál se usa cuándo.</strong> El nombre del entorno sale de <code>launchSettings.json</code>, que dice <code>Development</code>. Con <code>dotnet run</code> a secas, el entorno es <code>Development</code> y se leen los dos archivos. Con el comando de esta guía, que lleva <code>--no-launch-profile</code>, <code>dotnet</code> no lee <code>launchSettings.json</code>, el nombre del entorno queda en su valor por defecto, <code>Production</code>, y solo se lee <code>appsettings.json</code>. En la prueba, la línea <code>Hosting environment</code> de la consola dijo <code>Production</code>. En este proyecto los dos archivos dicen lo mismo en <code>Logging</code>, así que no notas ninguna diferencia.</p>
 </section>
 <section id="propertieslaunchsettings.json" class="level4">
 <h4 class="anchored" data-anchor-id="propertieslaunchsettings.json">Properties/launchSettings.json</h4>
@@ -1202,7 +1208,7 @@ code .</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>Quién lo usa.</strong> Lo usa <code>dotnet run</code> cuando <strong>no</strong> lleva <code>--no-launch-profile</code>, que toma el primer perfil (<code>http</code>), y lo usa el botón de ejecutar de Visual Studio. El comando de la clase lo ignora a propósito. La guía no usa el perfil <code>https</code>.</p>
+<p><strong>Quién lo usa.</strong> Lo usa <code>dotnet run</code> cuando <strong>no</strong> lleva <code>--no-launch-profile</code>, que toma el primer perfil (<code>http</code>), y lo usa el botón de ejecutar de Visual Studio. El comando de esta guía lo ignora a propósito. La guía no usa el perfil <code>https</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1277,7 +1283,7 @@ info: Microsoft.Hosting.Lifetime[0]
 <ul>
 <li><strong>Editas</strong> <code>Program.cs</code> en todas las etapas y, desde la etapa 4, los archivos de <code>wwwroot</code>.</li>
 <li><strong>No tocas nunca</strong> <code>bin</code> ni <code>obj</code>. Los genera <code>dotnet</code>.</li>
-<li><strong>No tocas hoy</strong> <code>Plaza.csproj</code>, <code>appsettings</code> ni <code>launchSettings.json</code>. Existen y el proyecto los necesita, pero ninguna etapa de esta guía los cambia.</li>
+<li><strong>No tocas en esta guía</strong> <code>Plaza.csproj</code>, <code>appsettings</code> ni <code>launchSettings.json</code>. Existen y el proyecto los necesita, pero ninguna etapa de esta guía los cambia.</li>
 </ul>
 <p><code>bin</code> y <code>obj</code> se pueden <strong>borrar</strong> sin riesgo. Cada <code>dotnet run</code> los regenera. En la prueba, se borraron las dos carpetas, se ejecutó <code>dotnet build</code> (compila sin arrancar) y volvieron a aparecer. Lo que no puedes borrar son los cinco archivos de la primera columna.</p>
 </section>
@@ -1332,7 +1338,7 @@ info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: ...\Plaza</code></pre>
-<p><code>Now listening on: http://localhost:5100</code> es el servidor avisando por qué ventanilla atiende. La línea <code>Hosting environment</code> dice <code>Production</code> porque este comando no lee <code>launchSettings.json</code>, donde está el nombre <code>Development</code>. No cambia nada de lo que haces hoy.</p>
+<p><code>Now listening on: http://localhost:5100</code> es el servidor avisando por qué ventanilla atiende. La línea <code>Hosting environment</code> dice <code>Production</code> porque este comando no lee <code>launchSettings.json</code>, donde está el nombre <code>Development</code>. No cambia nada de lo que haces en esta guía.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1436,8 +1442,8 @@ Hello World!</code></pre>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><strong><code>Properties/launchSettings.json</code></strong>, la línea <code>"applicationUrl": "http://localhost:5120"</code> de un perfil (el número será el de tu proyecto). Con el comando de la clase, que lleva <code>--no-launch-profile</code> y <code>--urls</code>, ese archivo no se lee: ahí el puerto se cambia en <code>--urls http://localhost:5100</code>. <code>appsettings.json</code> no tiene nada que ver con el puerto.</li>
-<li><strong><code>Plaza.csproj</code></strong>, la línea <code>&lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;</code>. En la clase déjala como está: otra versión te obligaría a tener esa versión de .NET instalada y tu proyecto dejaría de parecerse al de tus compañeros.</li>
+<li><strong><code>Properties/launchSettings.json</code></strong>, la línea <code>"applicationUrl": "http://localhost:5120"</code> de un perfil (el número será el de tu proyecto). Con el comando de esta guía, que lleva <code>--no-launch-profile</code> y <code>--urls</code>, ese archivo no se lee: ahí el puerto se cambia en <code>--urls http://localhost:5100</code>. <code>appsettings.json</code> no tiene nada que ver con el puerto.</li>
+<li><strong><code>Plaza.csproj</code></strong>, la línea <code>&lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;</code>. En esta guía déjala como está: otra versión te obligaría a tener esa versión de .NET instalada y tu proyecto dejaría de parecerse al de tus compañeros.</li>
 <li><strong><code>Program.cs</code></strong>, la línea <code>app.MapGet("/", () =&gt; "Hello World!");</code>. El texto está entre comillas, a la derecha de <code>=&gt;</code>. Es el único archivo que editas en esta etapa.</li>
 </ol>
 </div>
@@ -2034,7 +2040,7 @@ Content-Length: 0
 </section>
 <section id="la-idea-una-ficha-de-producto" class="level3">
 <h3 class="anchored" data-anchor-id="la-idea-una-ficha-de-producto">La idea: una ficha de producto</h3>
-<p><strong>JSON</strong> es un formato de texto para datos. Un objeto se escribe entre llaves, con pares <code>"clave": valor</code>. Una lista va entre corchetes. Es el formato que usaste con <code>fetch</code> en la Semana 8:</p>
+<p><strong>JSON</strong> es un formato de texto para datos. Un objeto se escribe entre llaves, con pares <code>"clave": valor</code>. Una lista va entre corchetes. Es el formato que usaste con <code>fetch</code> al pedir datos a una API:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"nombre"</span><span class="fu">:</span> <span class="st">"Tomate"</span><span class="fu">,</span> <span class="dt">"precio"</span><span class="fu">:</span> <span class="dv">3500</span><span class="fu">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para que el servidor arme ese texto, primero necesita saber qué forma tiene un producto. En C# eso se define con un <strong>record</strong>: una ficha con campos fijos, de solo datos.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>record <span class="fu">Producto</span><span class="op">(</span><span class="dt">int</span> Id<span class="op">,</span> <span class="dt">string</span> Nombre<span class="op">,</span> <span class="dt">decimal</span> Precio<span class="op">);</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2530,7 +2536,7 @@ Content-Length: 0
 </ul>
 </div>
 </div>
-<p>La página <code>index.html</code> pide los datos a tu propia ruta con <code>fetch</code>, igual que en la Semana 8: pide <code>/api/productos</code>, recibe el JSON y dibuja una lista. Para el navegador, tu servidor es una API más.</p>
+<p>La página <code>index.html</code> pide los datos a tu propia ruta con <code>fetch</code>, igual que cuando pedías datos a una API: pide <code>/api/productos</code>, recibe el JSON y dibuja una lista. Para el navegador, tu servidor es una API más.</p>
 </section>
 <section id="ejecutarlo-4" class="level3">
 <h3 class="anchored" data-anchor-id="ejecutarlo-4">Ejecutarlo</h3>
@@ -2748,11 +2754,11 @@ Content-Type: text/html</code></pre>
 <h2 data-number="10" class="anchored" data-anchor-id="etapa-5.-estados-y-archivos"><span class="header-section-number">10</span> Etapa 5. Estados y archivos</h2>
 <section id="qué-vas-a-lograr-5" class="level3">
 <h3 class="anchored" data-anchor-id="qué-vas-a-lograr-5">Qué vas a lograr</h3>
-<p>Que el servidor use el <strong>estado correcto</strong> en cada caso, entregue archivos para <strong>descargar</strong> y reciba datos de un formulario con <strong>POST</strong>.</p>
+<p>Que el servidor use el <strong>estado correcto</strong> en cada caso, entregue archivos para <strong>descargar</strong> y reciba datos de un formulario con <strong>POST</strong>. Aquí ves el POST funcionando. En la etapa 6 de la <a href="../../web/semana-10/mvc.html">guía de MVC</a> aprendes cómo viaja ese dato y por qué.</p>
 </section>
 <section id="la-idea-la-cara-del-vendedor" class="level3">
 <h3 class="anchored" data-anchor-id="la-idea-la-cara-del-vendedor">La idea: la cara del vendedor</h3>
-<p>Hasta ahora casi todo fue <code>200</code> o <code>404</code>. El estado es la forma en que el servidor resume cómo le fue, y se agrupa por la primera cifra:</p>
+<p>En las etapas anteriores casi todo fue <code>200</code> o <code>404</code>. El estado es la forma en que el servidor resume cómo le fue, y se agrupa por la primera cifra:</p>
 <ul>
 <li><strong>2xx:</strong> salió bien.</li>
 <li><strong>4xx:</strong> el problema está en lo que pidió el cliente.</li>
@@ -3267,6 +3273,7 @@ Location: /api/contacto
 <li><strong>Qué cambió:</strong> las rutas eligen su estado, hay descargas con <code>Results.File</code> y una ruta <code>MapPost</code> que recibe un formulario.</li>
 <li><strong>Cómo verificarlo:</strong> pide <code>/api/descuento/20</code>, <code>/api/descuento/150</code>, <code>/api/tetera</code> y <code>/descargas/precios</code>, y envía el formulario de <code>/</code>.</li>
 <li><strong>Qué debes ver:</strong> <code>200</code>, <code>400</code> con mensaje, <code>418</code>, una descarga y el mensaje <code>Recibido (201)</code>.</li>
+<li><strong>Qué sigue:</strong> continúas con este mismo proyecto en la <a href="../../web/semana-10/mvc.html">guía de MVC</a>: etapa 6 (POST y formularios), 7 (controladores y modelos), 8 (vistas), 9 (inyección de dependencias) y 10 (middleware).</li>
 </ul>
 </section>
 </section>
@@ -3356,47 +3363,15 @@ Location: /api/contacto
 </section>
 <section id="trabajo-independiente" class="level2" data-number="13">
 <h2 data-number="13" class="anchored" data-anchor-id="trabajo-independiente"><span class="header-section-number">13</span> Trabajo independiente</h2>
-<p>La semana pide un <strong>servidor del proyecto respondiendo a sus rutas base</strong>. Aplica a tu proyecto lo que hiciste con Plaza. Esta semana no tiene porcentaje.</p>
+<p>El trabajo independiente pide un <strong>servidor del proyecto respondiendo a sus rutas base</strong>. Aplica a tu proyecto lo que hiciste con Plaza. Este trabajo no tiene porcentaje. Tiene dos partes: la parte 1, rutas y respuestas, es la de esta guía, y la parte 2, sobre el mismo proyecto, está en la <a href="../../web/semana-10/mvc.html">guía de MVC</a>.</p>
 <ol type="1">
 <li><strong>Crea el servidor</strong> de tu proyecto con <code>dotnet new web -n</code> y el nombre de tu proyecto, desde tu carpeta de trabajo y no dentro de otro proyecto.</li>
 <li><strong>Seis rutas propias</strong> del tema de tu proyecto: dos de texto, dos con parámetro (una en la ruta y una en el query string) y dos que respondan con estados distintos de <code>200</code>.</li>
 <li><strong>Un JSON de cinco elementos:</strong> un <code>record</code> con tres campos como mínimo, una lista de cinco elementos de tu tema y una ruta para la lista y otra por <code>id</code>.</li>
 <li><strong>Una página HTML en <code>wwwroot</code></strong> con su CSS, que muestre esa lista con <code>fetch</code>.</li>
 <li><strong>Una descarga:</strong> un archivo de tu tema entregado con <code>Results.File</code>.</li>
-<li><strong>Un archivo <code>README.md</code></strong> con una tabla de tus rutas (ruta, qué responde, estado) y el comando para ejecutar el servidor.</li>
 </ol>
-<p>Reparto sugerido de las unas 6 horas:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Parte</th>
-<th>Tiempo aproximado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Servidor y seis rutas</td>
-<td>1 h 30 min</td>
-</tr>
-<tr class="even">
-<td>JSON y rutas de datos</td>
-<td>1 h</td>
-</tr>
-<tr class="odd">
-<td>Página HTML con CSS y <code>fetch</code></td>
-<td>1 h 30 min</td>
-</tr>
-<tr class="even">
-<td>Descarga y estados</td>
-<td>1 h</td>
-</tr>
-<tr class="odd">
-<td>README y verificación de cada ruta</td>
-<td>1 h</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Entregable:</strong> la carpeta del proyecto con el <code>README.md</code>. <strong>Criterio:</strong> cada ruta de la tabla responde con el estado que dice la tabla.</p>
+<p><strong>Entregable de la parte 1:</strong> la carpeta del proyecto con sus rutas funcionando y el historial en Git. <strong>Criterio:</strong> cada ruta responde con el estado que esperas. El <code>README.md</code> con la tabla de rutas queda en la parte 2, en la <a href="../../web/semana-10/mvc.html">guía de MVC</a>.</p>
 </section>
 <section id="recursos" class="level2" data-number="14">
 <h2 data-number="14" class="anchored" data-anchor-id="recursos"><span class="header-section-number">14</span> Recursos</h2>
@@ -3413,6 +3388,7 @@ Location: /api/contacto
 <li>MDN, tipos MIME: <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Guides/MIME_types">Tipos MIME</a></li>
 <li>MDN, <code>fetch</code>: <a href="https://developer.mozilla.org/es/docs/Web/API/Fetch_API">Fetch API</a></li>
 <li>Presentación interactiva: <a href="presentacion-interactiva-rutas.html" class="btn-doc" target="_blank">Abrir la presentación</a></li>
+<li>Guía de MVC, que continúa este proyecto: <a href="../../web/semana-10/mvc.html">POST, controladores, vistas, inyección y middleware</a></li>
 </ul>
 <div class="pie-doc">
 <p>Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.</p>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="560" height="500" viewBox="0 0 560 500" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">El pipeline: la petición entra y la respuesta vuelve por el mismo camino</title>
+<desc id="d">De arriba abajo: navegador, middleware de registro, middleware puerta de admin, UseDefaultFiles y UseStaticFiles, y los controladores de MapControllers. La petición baja pasando por cada pieza. La respuesta sube por las mismas piezas. El registro anota la línea de ida y, al volver, la línea con el estado y los milisegundos.</desc>
+<defs><marker id="f-azul" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-verde" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-ambar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-teal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#0e8f8f"/></marker><marker id="f-viol" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-rojo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker></defs>
+<rect x="0" y="0" width="560" height="500" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="14" y="14" width="250" height="52" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6"/>
+<text x="139.0" y="37.0" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Navegador</text>
+<text x="139.0" y="55.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">GET /api/productos</text>
+<rect x="14" y="104" width="250" height="52" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="139.0" y="127.0" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1. Registro</text>
+<text x="139.0" y="145.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">app.UseMiddleware&lt;Registro...&gt;</text>
+<text x="284" y="126" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ida: anota GET y arranca el reloj.</text>
+<text x="284" y="142" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Vuelta: imprime el estado y los ms.</text>
+<rect x="14" y="194" width="250" height="52" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="139.0" y="217.0" font-size="13" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2. Puerta de /admin</text>
+<text x="139.0" y="235.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">UseMiddleware&lt;PuertaAdmin...&gt;</text>
+<text x="284" y="216" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ida: si es /admin sin clave, responde 401</text>
+<text x="284" y="232" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y corta aquí. Si no, sigue.</text>
+<rect x="14" y="284" width="250" height="52" rx="8" fill="#f0f9f9" stroke="#0e8f8f" stroke-width="1.6"/>
+<text x="139.0" y="307.0" font-size="13" fill="#0a6464" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3. Archivos</text>
+<text x="139.0" y="325.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">UseDefaultFiles, UseStaticFiles</text>
+<text x="284" y="306" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ida: si pide un archivo de wwwroot,</text>
+<text x="284" y="322" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">lo entrega. Si no, sigue.</text>
+<rect x="14" y="374" width="250" height="52" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6"/>
+<text x="139.0" y="397.0" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">4. Controladores</text>
+<text x="139.0" y="415.0" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace" xml:space="preserve">MapControllers()</text>
+<text x="284" y="396" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Busca la ruta, crea el controlador</text>
+<text x="284" y="412" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">(con sus servicios) y arma la respuesta.</text>
+<path d="M 84 68 L 84 102" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 194 102 L 194 68" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="76" y="90" font-size="11" fill="#17456f" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ida</text>
+<text x="202" y="90" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vuelta</text>
+<path d="M 84 158 L 84 192" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 194 192 L 194 158" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="76" y="180" font-size="11" fill="#17456f" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ida</text>
+<text x="202" y="180" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vuelta</text>
+<path d="M 84 248 L 84 282" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 194 282 L 194 248" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="76" y="270" font-size="11" fill="#17456f" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ida</text>
+<text x="202" y="270" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vuelta</text>
+<path d="M 84 338 L 84 372" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-azul)"/>
+<path d="M 194 372 L 194 338" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-verde)"/>
+<text x="76" y="360" font-size="11" fill="#17456f" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ida</text>
+<text x="202" y="360" font-size="11" fill="#1f5c42" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">vuelta</text>
+<rect x="14" y="442" width="532" height="34" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="280.0" y="463.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cada pieza llama a la siguiente con next. Lo que escribe después de next corre a la vuelta.</text>
+</g>
+</svg>
