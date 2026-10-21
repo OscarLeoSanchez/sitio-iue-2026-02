@@ -59,7 +59,7 @@ calendario completo para que planees tu trabajo.
 ::: {.calendario}
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
-| **[10](semana-10/index.qmd)** | Arquitectura MVC: modelos, vistas y controladores | Servidor del proyecto respondiendo a sus rutas base | - |
+| **[10](semana-10/index.qmd)** | Arquitectura MVC: modelos, vistas y controladores. [POST, MVC, inyección y middleware](semana-10/mvc.qmd) | Servidor del proyecto respondiendo a sus rutas base | - |
 | 11 | Razor y layouts | Interfaz de la unidad 2 migrada al proyecto de servidor | **10%** |
 | 12 | Routing y validaciones | Formulario con rutas propias y validación en cliente y servidor | - |
 | 13 | Bases de datos, SQL Server y Entity Framework Core | CRUD del proyecto persistido en base de datos | **10%** |
