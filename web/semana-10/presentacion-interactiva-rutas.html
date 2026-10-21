@@ -1428,13 +1428,13 @@ input.pieza-in:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--tono) 35%,
         <div class="columna" style="gap: 16px">
           <p class="lead">Cuando abres una página, alguien tiene que entregártela.</p>
           <p class="cuerpo">Tu <dfn data-def="navegador">navegador</dfn> es el <dfn data-def="cliente">cliente</dfn>: el que pide. Un <dfn data-def="servidor">servidor</dfn> es un programa que se queda esperando y contesta lo que le piden.</p>
-          <div class="callout" data-tipo="idea">Hoy escribes ese programa. Tu servidor va a responder texto, datos, páginas y archivos.</div>
+          <div class="callout" data-tipo="idea">Tú escribes ese programa. Tu servidor va a responder texto, datos, páginas y archivos.</div>
         </div>
         <div id="diag-problema"></div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
-          <p><strong>Cliente:</strong> el programa que pide. En esta sesión es el navegador.</p>
+          <p><strong>Cliente:</strong> el programa que pide. Aquí es el navegador.</p>
           <p><strong>Servidor:</strong> el programa que espera peticiones y las responde.</p>
         </section>
         <section data-tipo="analogia"><p>Un restaurante: tú pides en la mesa (cliente) y la cocina prepara y entrega (servidor). La cocina no empieza sola: espera un pedido.</p></section>
@@ -5335,7 +5335,7 @@ app.MapPost("/api/contacto", (Contacto contacto) =>
       });
       m.replaceChildren(...m._items);
       m.setAttribute('role', 'navigation');
-      m.setAttribute('aria-label', 'Mapa de la sesión');
+      m.setAttribute('aria-label', 'Mapa de las secciones');
     }
     m._items.forEach((b) => {
       const sec = b._sec;
@@ -5811,8 +5811,8 @@ app.MapPost("/api/contacto", (Contacto contacto) =>
 <script>
 
 /* ==========================================================================
-   CONTENIDO: sesión del miércoles "Mi servidor responde cosas" (etapas 0 a 5).
-   Todo el código de C# y toda salida de servidor salen de SALIDAS-MIERCOLES.md
+   CONTENIDO: guía de rutas "Mi servidor responde cosas" (etapas 0 a 5).
+   Todo el código de C# y toda salida de servidor salen de SALIDAS-RUTAS.md
    y de las carpetas etapa-0-vacio a etapa-5-estados-y-archivos.
    Las animaciones y simulaciones son JavaScript: C# no corre en el navegador.
    ========================================================================== */
@@ -5824,7 +5824,7 @@ Kit.glosario({
   },
   cliente: {
     termino: 'Cliente',
-    corta: 'Quien pide. En esta sesión, el navegador.',
+    corta: 'Quien pide. Aquí, el navegador.',
     larga: 'El cliente siempre empieza la conversación. El servidor solo responde.',
   },
   navegador: {
@@ -5877,7 +5877,7 @@ Kit.glosario({
   },
   puerto: {
     termino: 'Puerto',
-    corta: 'Número que identifica la puerta por la que atiende un programa. En esta sesión, <code>5100</code> a <code>5105</code>.',
+    corta: 'Número que identifica la puerta por la que atiende un programa. En estas etapas, <code>5100</code> a <code>5105</code>.',
     larga: 'La consola lo avisa al arrancar con <code>Now listening on: http://localhost:5100</code>.',
     analogia: 'El número del local en un centro comercial.',
   },
@@ -6210,7 +6210,7 @@ Kit.glosario({
   },
   vscode: {
     termino: 'Visual Studio Code',
-    corta: 'El editor de código que usas en clase. Abre una carpeta completa y trae una terminal integrada.',
+    corta: 'El editor de código que usas en este curso. Abre una carpeta completa y trae una terminal integrada.',
     ejemplo: 'code .',
     lang: 'texto',
   },
@@ -7362,7 +7362,7 @@ Kit.listo(() => {
   (() => {
     const CAT = {
       edita: { tono: 'hoja', corta: 'lo editas', larga: 'Lo editas' },
-      no: { tono: 'tinta', corta: 'no lo tocas', larga: 'No lo tocas hoy' },
+      no: { tono: 'tinta', corta: 'no lo tocas', larga: 'No lo tocas' },
       compilar: { tono: 'maiz', corta: 'al compilar', larga: 'Aparece al compilar' },
     };
     const LISTA_BIN = 'bin/Debug/net10.0/\n  Plaza.dll\n  Plaza.exe\n  Plaza.pdb\n  Plaza.deps.json\n  Plaza.runtimeconfig.json\n  Plaza.staticwebassets.endpoints.json\n  appsettings.json\n  appsettings.Development.json';
@@ -7373,7 +7373,7 @@ Kit.listo(() => {
       dev: { ruta: 'appsettings.Development.json', lang: 'json', texto: REAL.dev, cat: 'no', explica: 'Ajustes que solo se aplican cuando el ambiente es <code>Development</code>. Se leen después del archivo base y ganan sobre él.' },
       base: { ruta: 'appsettings.json', lang: 'json', texto: REAL.base, cat: 'no', explica: 'Configuración que el programa lee al arrancar: qué tantos mensajes escribe la consola (<code>Logging</code>) y qué hosts aceptan peticiones (<code>AllowedHosts</code>).' },
       csproj: { ruta: 'Plaza.csproj', lang: 'xml', texto: REAL.csproj, cat: 'no', explica: 'La ficha del proyecto: qué SDK usa y con qué versión de .NET se compila. Lo abrirás pocas veces. Cambia aquí la versión de .NET.' },
-      prog: { ruta: 'Program.cs', lang: 'csharp', texto: REAL.program, cat: 'edita', explica: 'Aquí vive tu servidor. <code>MapGet</code> une una dirección con una respuesta. Es el único archivo que escribes en esta sesión.' },
+      prog: { ruta: 'Program.cs', lang: 'csharp', texto: REAL.program, cat: 'edita', explica: 'Aquí vive tu servidor. <code>MapGet</code> une una dirección con una respuesta. Es el único archivo de C# que escribes en estas etapas.' },
     };
     const FILAS = [
       { id: 'bin', nombre: 'bin', ico: 'carpeta', n: 0 },
@@ -7458,7 +7458,7 @@ Kit.listo(() => {
       sdk: { lineas: [1], nota: 'El kit de herramientas', texto: '<strong>Sdk.</strong> <code>Microsoft.NET.Sdk.Web</code> le dice a dotnet que esto es un proyecto web de ASP.NET Core: trae el compilador de C# y el servidor <dfn data-def="kestrel">Kestrel</dfn> listo para usar. Sin esta línea, <code>WebApplication</code> no existe y el proyecto no compila.' },
       grupo: { lineas: [3, 7], nota: 'Un grupo de ajustes', texto: '<strong>PropertyGroup.</strong> Agrupa los ajustes del proyecto. Cada uno va entre etiquetas, como <code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code>. El archivo es XML.' },
       tf: { lineas: [4], nota: 'Versión de .NET', texto: '<strong>TargetFramework.</strong> La versión de .NET con la que se compila y se ejecuta el proyecto. Debe existir en tu equipo: <code>dotnet --version</code> te dice cuál tienes.' },
-      nullable: { lineas: [5], nota: 'Avisos de valores vacíos', texto: '<strong>Nullable.</strong> Con <code>enable</code>, el compilador te avisa cuando un valor podría estar vacío (<code>null</code>). Por eso más adelante verás <code>string? q</code>: el signo de pregunta dice que ese texto puede no venir.' },
+      nullable: { lineas: [5], nota: 'Avisos de valores vacíos', texto: '<strong>Nullable.</strong> Con <code>enable</code>, el compilador te avisa cuando un valor podría estar vacío (<code>null</code>). Por eso verás <code>string? q</code>: el signo de pregunta dice que ese texto puede no venir.' },
       usings: { lineas: [6], nota: 'using automáticos', texto: '<strong>ImplicitUsings.</strong> Con <code>enable</code>, dotnet agrega por ti los <code>using</code> más comunes. Por eso <code>Program.cs</code> empieza directo con código, sin lista de <code>using</code>.' },
     };
     const textoVersion = (v) => REAL.csproj.replace('net10.0', v);

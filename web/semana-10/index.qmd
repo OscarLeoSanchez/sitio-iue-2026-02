@@ -9,9 +9,8 @@ date-format: "D [de] MMMM [de] YYYY"
 |                 |                                                                                     |
 |-----------------|-------------------------------------------------------------------------------------|
 | Qué construyes  | Un servidor propio, llamado Plaza, que responde texto, JSON, páginas HTML y archivos en las rutas que tú inventas |
-| Prerrequisitos  | Semana 8: peticiones HTTP, JSON y DevTools                                          |
+| Prerrequisitos  | Peticiones HTTP, JSON y DevTools                                                    |
 | Herramientas    | .NET SDK 10, VS Code y una terminal                                                 |
-| Tiempo          | 1 h con el docente (etapas 0 a 3) y el resto en casa                                |
 :::
 
 ::: {.acceso}
@@ -20,24 +19,29 @@ Presentación interactiva: el recorrido de una petición, con predicciones y ret
 
 [Abrir la presentación](presentacion-interactiva-rutas.html){.btn-doc target="_blank"}
 :::
+::: {.acceso-item}
+Guía de MVC: POST y formularios, controladores y vistas, inyección de dependencias y middleware, sobre este mismo proyecto
+
+[Abrir la guía de MVC](mvc.qmd){.btn-doc}
+:::
 :::
 
 ::: {.callout-note}
 ## Qué es esencial y qué es opcional
 
-Si el tiempo de la clase no alcanza, este es el orden de prioridad:
+Este es el orden de prioridad por contenido:
 
-- **Esencial en la hora de clase:** etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto
+- **Esencial:** etapas 0, 1, 2 y 3, cada una con su predicción y su primer reto
   (en la etapa 0, el Reto 0).
-- **Para terminar en casa:** etapas 4 y 5, y el segundo reto de cada etapa.
+- **Para completar:** etapas 4 y 5, y el segundo reto de cada etapa.
 - **Opcional siempre:** los recuadros "Profundiza" y las pruebas con `curl`. Puedes saltarlos y la
   guía sigue funcionando.
 :::
 
 ## Herramientas que necesitas
 
-Antes de la clase instala tres herramientas. Cada descarga pesa unos 200 MB, así que hazlo con buena
-conexión y un día antes, no en el salón.
+Antes de empezar las etapas instala tres herramientas. Cada descarga pesa unos 200 MB, así que hazlo con buena
+conexión.
 
 | Herramienta | Para qué sirve | Dónde se descarga |
 |---|---|---|
@@ -123,7 +127,7 @@ Dos cosas que debes saber:
 
 - **C# Dev Kit puede pedirte iniciar sesión** con una cuenta de Microsoft o de GitHub. Si no quieres,
   busca e instala solo la extensión **C#** (publicada por Microsoft).
-- **Esta extensión es opcional.** El código de la clase se compila y se ejecuta sin ella. Si no la
+- **Esta extensión es opcional.** El código de esta guía se compila y se ejecuta sin ella. Si no la
   instalas, solo pierdes los colores y las sugerencias.
 
 Para ver qué extensiones tienes, escribe en la terminal:
@@ -147,16 +151,16 @@ creas la carpeta de trabajo y abres la terminal en ella.
 ::: {.callout-warning}
 ## Qué se probó y qué no
 
-Los pasos de Windows se siguieron con el SDK `10.0.302`. Las direcciones de descarga se comprobaron en
-octubre de 2026 y responden. No se probaron en un Mac la instalación del `.pkg` ni la de VS Code, y
+Los pasos de Windows se siguieron con el SDK `10.0.302`. Las direcciones de descarga se comprobaron y
+responden. No se probaron en un Mac la instalación del `.pkg` ni la de VS Code, y
 el texto de los instaladores y de los avisos de VS Code cambia con la versión: guíate por el sentido.
 :::
 
 ## Lo que vas a lograr
 
-Hasta la Semana 8 tu página pedía datos a un servidor que escribió otra persona. Hoy escribes tú el
+Tu página pedía datos a un servidor que escribió otra persona. Aquí escribes tú el
 servidor. Partes de un proyecto vacío y, en seis etapas, lo haces responder cosas cada vez más
-interesantes: un texto, un dato en JSON, una página HTML y un archivo para descargar. La clase es un
+interesantes: un texto, un dato en JSON, una página HTML y un archivo para descargar. Esta guía es un
 juego de crear rutas y mirar qué responde el servidor cuando le pides cosas distintas.
 
 El proyecto se llama **Plaza** y vende productos campesinos. Todo se hace con un editor y la
@@ -165,7 +169,7 @@ terminal: cada archivo lo escribes tú, lo ejecutas y ves qué cambió.
 ::: {.diagrama}
 ![](imagenes/peticion-respuesta.svg){fig-alt="El navegador envía la petición GET /api/productos al servidor Plaza, que escucha en localhost puerto 5100. El servidor responde con tres partes: el estado 200 OK, el tipo de contenido application/json y el cuerpo con la lista de productos."}
 
-El cliente pide y el servidor responde. Esa conversación es todo lo que ocurre hoy.
+El cliente pide y el servidor responde. Esa conversación es todo lo que ocurre en esta guía.
 :::
 
 ### Las seis etapas
@@ -243,7 +247,7 @@ enteró. Revisa la sección "Herramientas que necesitas" al inicio de esta guía
 
 ### Paso 2. Crea la carpeta de trabajo
 
-La **carpeta de trabajo** es la carpeta donde viven todos tus proyectos de la clase. `Plaza` será una
+La **carpeta de trabajo** es la carpeta donde viven todos tus proyectos del curso. `Plaza` será una
 subcarpeta de ella. La creas una sola vez para todo el curso. Llámala `Clases-Web`: sin espacios y sin
 tildes, porque los comandos son más cómodos así.
 
@@ -336,7 +340,7 @@ el servidor y vuelve a ejecutar el comando.**
 El navegador solo muestra el cuerpo. Para ver también el estado y el tipo de contenido tienes dos
 caminos:
 
-- La pestaña **Red** (Network) de DevTools, como en la Semana 8.
+- La pestaña **Red** (Network) de DevTools, la que usaste con las peticiones HTTP.
 - `curl`, una herramienta de terminal que pide una URL y escribe la respuesta. La opción `-i` agrega
   el estado y los encabezados:
 
@@ -468,7 +472,7 @@ elige `Plaza`.
 
 **Qué verás:** una ventana de VS Code con el panel **Explorador** a la izquierda, que lista los
 archivos del proyecto. Abre una terminal con el menú **Terminal** y **Nueva terminal**, y escribe
-`pwd`: la ruta termina en `Plaza`. Desde aquí, todos los comandos de la clase se escriben en esa
+`pwd`: la ruta termina en `Plaza`. Desde aquí, todos los comandos de esta guía se escriben en esa
 terminal.
 
 ### Paso 6. Los mensajes que puede mostrar VS Code
@@ -557,7 +561,7 @@ instrucciones que ves en la sección "El código", más abajo: `CreateBuilder`, 
 #### appsettings.json
 
 Una **configuración** es un valor que el programa lee al arrancar y que puedes cambiar sin tocar el
-código C#. Está escrita en JSON, el mismo formato que usaste en la Semana 8:
+código C#. Está escrita en JSON, el mismo formato que usaste al pedir datos con `fetch`:
 
 ```json
 {
@@ -599,8 +603,8 @@ código C#. Está escrita en JSON, el mismo formato que usaste en la Semana 8:
 primero. Es el lugar para ajustes que solo valen mientras programas.
 
 **Cuál se usa cuándo.** El nombre del entorno sale de `launchSettings.json`, que dice `Development`.
-Con `dotnet run` a secas, el entorno es `Development` y se leen los dos archivos. Con el comando de la
-clase, que lleva `--no-launch-profile`, `dotnet` no lee `launchSettings.json`, el nombre del entorno
+Con `dotnet run` a secas, el entorno es `Development` y se leen los dos archivos. Con el comando de esta
+guía, que lleva `--no-launch-profile`, `dotnet` no lee `launchSettings.json`, el nombre del entorno
 queda en su valor por defecto, `Production`, y solo se lee `appsettings.json`. En la prueba, la línea
 `Hosting environment` de la consola dijo `Production`. En este proyecto los dos archivos dicen lo mismo
 en `Logging`, así que no notas ninguna diferencia.
@@ -647,7 +651,7 @@ puerto al azar para cada proyecto, y por eso el tuyo no dirá `5120` ni `7097`.
 | `ASPNETCORE_ENVIRONMENT` | El nombre del entorno. `Development` activa `appsettings.Development.json` |
 
 **Quién lo usa.** Lo usa `dotnet run` cuando **no** lleva `--no-launch-profile`, que toma el primer
-perfil (`http`), y lo usa el botón de ejecutar de Visual Studio. El comando de la clase lo ignora a
+perfil (`http`), y lo usa el botón de ejecutar de Visual Studio. El comando de esta guía lo ignora a
 propósito. La guía no usa el perfil `https`.
 
 ::: {.callout-note collapse="true"}
@@ -700,7 +704,7 @@ del `Plaza.csproj`.
 
 - **Editas** `Program.cs` en todas las etapas y, desde la etapa 4, los archivos de `wwwroot`.
 - **No tocas nunca** `bin` ni `obj`. Los genera `dotnet`.
-- **No tocas hoy** `Plaza.csproj`, `appsettings` ni `launchSettings.json`. Existen y el proyecto los
+- **No tocas en esta guía** `Plaza.csproj`, `appsettings` ni `launchSettings.json`. Existen y el proyecto los
   necesita, pero ninguna etapa de esta guía los cambia.
 
 `bin` y `obj` se pueden **borrar** sin riesgo. Cada `dotnet run` los regenera. En la prueba, se borraron
@@ -769,7 +773,7 @@ info: Microsoft.Hosting.Lifetime[0]
 
 `Now listening on: http://localhost:5100` es el servidor avisando por qué ventanilla atiende. La línea
 `Hosting environment` dice `Production` porque este comando no lee `launchSettings.json`, donde está el
-nombre `Development`. No cambia nada de lo que haces hoy.
+nombre `Development`. No cambia nada de lo que haces en esta guía.
 
 ::: {.callout-note}
 ## Qué hace dotnet run por dentro
@@ -844,10 +848,10 @@ Escribe el nombre del archivo y la línea que tocarías.
 ## Solución del Reto 0
 
 a. **`Properties/launchSettings.json`**, la línea `"applicationUrl": "http://localhost:5120"` de un
-   perfil (el número será el de tu proyecto). Con el comando de la clase, que lleva `--no-launch-profile`
+   perfil (el número será el de tu proyecto). Con el comando de esta guía, que lleva `--no-launch-profile`
    y `--urls`, ese archivo no se lee: ahí el puerto se cambia en `--urls http://localhost:5100`.
    `appsettings.json` no tiene nada que ver con el puerto.
-b. **`Plaza.csproj`**, la línea `<TargetFramework>net10.0</TargetFramework>`. En la clase déjala como
+b. **`Plaza.csproj`**, la línea `<TargetFramework>net10.0</TargetFramework>`. En esta guía déjala como
    está: otra versión te obligaría a tener esa versión de .NET instalada y tu proyecto dejaría de
    parecerse al de tus compañeros.
 c. **`Program.cs`**, la línea `app.MapGet("/", () => "Hello World!");`. El texto está entre comillas, a
@@ -1248,7 +1252,7 @@ que cualquier programa puede leer.
 ### La idea: una ficha de producto
 
 **JSON** es un formato de texto para datos. Un objeto se escribe entre llaves, con pares
-`"clave": valor`. Una lista va entre corchetes. Es el formato que usaste con `fetch` en la Semana 8:
+`"clave": valor`. Una lista va entre corchetes. Es el formato que usaste con `fetch` al pedir datos a una API:
 
 ```json
 {"id": 1, "nombre": "Tomate", "precio": 3500}
@@ -1649,7 +1653,7 @@ está el caso completo.
   guarda tal cual, con sus saltos de línea.
 :::
 
-La página `index.html` pide los datos a tu propia ruta con `fetch`, igual que en la Semana 8: pide
+La página `index.html` pide los datos a tu propia ruta con `fetch`, igual que cuando pedías datos a una API: pide
 `/api/productos`, recibe el JSON y dibuja una lista. Para el navegador, tu servidor es una API más.
 
 ### Ejecutarlo
@@ -1806,11 +1810,12 @@ cuando cambia el código de `Program.cs`.
 ### Qué vas a lograr
 
 Que el servidor use el **estado correcto** en cada caso, entregue archivos para **descargar** y reciba
-datos de un formulario con **POST**.
+datos de un formulario con **POST**. Aquí ves el POST funcionando. En la etapa 6 de la
+[guía de MVC](mvc.qmd) aprendes cómo viaja ese dato y por qué.
 
 ### La idea: la cara del vendedor
 
-Hasta ahora casi todo fue `200` o `404`. El estado es la forma en que el servidor resume cómo le
+En las etapas anteriores casi todo fue `200` o `404`. El estado es la forma en que el servidor resume cómo le
 fue, y se agrupa por la primera cifra:
 
 - **2xx:** salió bien.
@@ -2230,6 +2235,9 @@ fuera de `wwwroot`.
 - **Cómo verificarlo:** pide `/api/descuento/20`, `/api/descuento/150`, `/api/tetera` y
   `/descargas/precios`, y envía el formulario de `/`.
 - **Qué debes ver:** `200`, `400` con mensaje, `418`, una descarga y el mensaje `Recibido (201)`.
+- **Qué sigue:** continúas con este mismo proyecto en la [guía de MVC](mvc.qmd): etapa 6
+  (POST y formularios), 7 (controladores y modelos), 8 (vistas), 9 (inyección de dependencias) y 10
+  (middleware).
 
 ## Errores que te van a pasar
 
@@ -2370,8 +2378,7 @@ consola te dice en cuál estás.
 
 ## Trabajo independiente
 
-La semana pide un **servidor del proyecto respondiendo a sus rutas base**. Aplica a tu proyecto lo que
-hiciste con Plaza. Esta semana no tiene porcentaje.
+El trabajo independiente pide un **servidor del proyecto respondiendo a sus rutas base**. Aplica a tu proyecto lo que hiciste con Plaza. Este trabajo no tiene porcentaje. Tiene dos partes: la parte 1, rutas y respuestas, es la de esta guía, y la parte 2, sobre el mismo proyecto, está en la [guía de MVC](mvc.qmd).
 
 1. **Crea el servidor** de tu proyecto con `dotnet new web -n` y el nombre de tu proyecto, desde tu
    carpeta de trabajo y no dentro de otro proyecto.
@@ -2381,21 +2388,10 @@ hiciste con Plaza. Esta semana no tiene porcentaje.
    elementos de tu tema y una ruta para la lista y otra por `id`.
 4. **Una página HTML en `wwwroot`** con su CSS, que muestre esa lista con `fetch`.
 5. **Una descarga:** un archivo de tu tema entregado con `Results.File`.
-6. **Un archivo `README.md`** con una tabla de tus rutas (ruta, qué responde, estado) y el comando
-   para ejecutar el servidor.
 
-Reparto sugerido de las unas 6 horas:
-
-| Parte | Tiempo aproximado |
-|---|---|
-| Servidor y seis rutas | 1 h 30 min |
-| JSON y rutas de datos | 1 h |
-| Página HTML con CSS y `fetch` | 1 h 30 min |
-| Descarga y estados | 1 h |
-| README y verificación de cada ruta | 1 h |
-
-**Entregable:** la carpeta del proyecto con el `README.md`. **Criterio:** cada ruta de la tabla
-responde con el estado que dice la tabla.
+**Entregable de la parte 1:** la carpeta del proyecto con sus rutas funcionando y el historial en Git.
+**Criterio:** cada ruta responde con el estado que esperas. El `README.md` con la tabla de rutas queda
+en la parte 2, en la [guía de MVC](mvc.qmd).
 
 ## Recursos
 
@@ -2411,6 +2407,7 @@ responde con el estado que dice la tabla.
 - MDN, tipos MIME: [Tipos MIME](https://developer.mozilla.org/es/docs/Web/HTTP/Guides/MIME_types)
 - MDN, `fetch`: [Fetch API](https://developer.mozilla.org/es/docs/Web/API/Fetch_API)
 - Presentación interactiva: [Abrir la presentación](presentacion-interactiva-rutas.html){.btn-doc target="_blank"}
+- Guía de MVC, que continúa este proyecto: [POST, controladores, vistas, inyección y middleware](mvc.qmd)
 
 ::: {.pie-doc}
 Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías.
