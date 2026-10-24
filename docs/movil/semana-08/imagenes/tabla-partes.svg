@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="760" height="400" fill="#ffffff"/>
+<g data-node="tabla"><rect x="70" y="100" width="80" height="60" fill="#c9e8d2" stroke="#2e8b57" stroke-width="2"/>
+<text x="110" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">id</text>
+<text x="110" y="146" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">INTEGER</text>
+<rect x="150" y="100" width="170" height="60" fill="#c9e8d2" stroke="#2e8b57" stroke-width="2"/>
+<text x="235" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">nombre</text>
+<text x="235" y="146" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">TEXT</text>
+<rect x="320" y="100" width="110" height="60" fill="#c9e8d2" stroke="#2e8b57" stroke-width="2"/>
+<text x="375" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">precio</text>
+<text x="375" y="146" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">INTEGER</text>
+<rect x="430" y="100" width="130" height="60" fill="#c9e8d2" stroke="#2e8b57" stroke-width="2"/>
+<text x="495" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">disponible</text>
+<text x="495" y="146" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">INTEGER</text>
+<rect x="70" y="160" width="80" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="110" y="188" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">1</text>
+<rect x="150" y="160" width="170" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="235" y="188" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">Papa criolla</text>
+<rect x="320" y="160" width="110" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="375" y="188" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">2800</text>
+<rect x="430" y="160" width="130" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="495" y="188" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">1</text>
+<rect x="70" y="204" width="80" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="110" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">2</text>
+<rect x="150" y="204" width="170" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="235" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">Panela</text>
+<rect x="320" y="204" width="110" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="375" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">4500</text>
+<rect x="430" y="204" width="130" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="495" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">1</text>
+<rect x="70" y="248" width="80" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="110" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">3</text>
+<rect x="150" y="248" width="170" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="235" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">Aguacate hass</text>
+<rect x="320" y="248" width="110" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="375" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">6500</text>
+<rect x="430" y="248" width="130" height="44" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2"/>
+<text x="495" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">0</text></g>
+<g data-node="col">
+<rect x="175" y="20" width="140" height="46" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="245" y="48" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">columna</text>
+</g>
+<g data-node="fila">
+<rect x="630" y="203.0" width="100" height="46" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="680" y="231" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">fila</text>
+</g>
+<g data-node="pk">
+<rect x="20" y="330" width="180" height="46" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="110" y="358" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">clave primaria</text>
+</g>
+<path d="M235,66 L235,100" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M630,226 L560,226" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M110,330 L110,292" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+</svg>

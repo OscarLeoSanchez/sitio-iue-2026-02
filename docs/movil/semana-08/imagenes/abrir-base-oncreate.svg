@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 296" width="760" height="296">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="760" height="296" fill="#ffffff"/>
+<g data-node="s">
+<rect x="30" y="108" width="160" height="80" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="110" y="142" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">openDatabase</text>
+<text x="110" y="164" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">ruta y version: 1</text>
+</g>
+<g data-node="q">
+<rect x="290" y="108" width="170" height="80" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="375" y="142" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">¿Existe el archivo?</text>
+<text x="375" y="164" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">favoritos.db</text>
+</g>
+<g data-node="si">
+<rect x="540" y="24" width="190" height="80" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="635" y="58" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Sí: solo lo abre</text>
+<text x="635" y="80" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">tus datos siguen ahí</text>
+</g>
+<g data-node="no">
+<rect x="540" y="192" width="190" height="80" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="635" y="226" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">No: crea el archivo</text>
+<text x="635" y="248" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">y corre onCreate</text>
+</g>
+<path d="M190,148 L290,148" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M460,148 L478,148 Q490,148 490,136 L490,76 Q490,64 502,64 L540,64" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M460,148 L478,148 Q490,148 490,160 L490,220 Q490,232 502,232 L540,232" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-label="abre"><rect x="216.6" y="135" width="46.8" height="26" rx="5" fill="#ffffff"/><text x="240" y="153" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">abre</text></g>
+<g data-label="sí"><rect x="474.3" y="93" width="31.4" height="26" rx="5" fill="#ffffff"/><text x="490" y="111" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sí</text></g>
+<g data-label="no"><rect x="474.3" y="177" width="31.4" height="26" rx="5" fill="#ffffff"/><text x="490" y="195" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">no</text></g>
+</svg>
