@@ -876,6 +876,8 @@ iframe.resultado { padding: 0; }
 
 
 .ruta-card { padding: 14px 16px; }
+.dividido > .codigo.alta { align-self: stretch; }
+.columna > .codigo.alta { flex: 1 1 0; min-height: 0; }
 .dividido[data-proporcion="58/42"] { --cols: 58fr 42fr; }
 .dividido[data-proporcion="62/38"] { --cols: 62fr 38fr; }
 .dividido[data-proporcion="52/48"] { --cols: 52fr 48fr; }
@@ -1352,7 +1354,7 @@ a.boton { text-decoration: none; }
     <section class="diapo seccion-portada" data-seccion="POST y formularios" data-acento="maiz" data-num="02" data-titulo="POST y formularios">
       <span class="seccion-num">02</span>
       <h2 class="seccion-titulo">POST y formularios</h2>
-      <p class="seccion-pregunta">¿Cómo llega a tu servidor un pedido completo y qué hace él con lo que recibe?</p>
+      <p class="seccion-pregunta">¿De dónde lee C# cada dato que le envías con un POST?</p>
       <div class="mapa-sesion" style="max-width: 980px; margin-top: 0"></div>
       <svg class="seccion-ilu no-entra" viewBox="0 0 330 330" role="img">
         <title>Un formulario con campos y un sobre cerrado que viaja hacia un servidor</title>
@@ -1363,342 +1365,535 @@ a.boton { text-decoration: none; }
       </svg>
     </section>
 
-    <!-- 6. GET frente a POST ============================================= -->
-    <section class="diapo" data-titulo="GET en voz alta, POST en un sobre">
+    <!-- 6. Paso 0: punto de partida ====================================== -->
+    <section class="diapo" data-titulo="Un punto de partida que compila">
       <div class="cabeza">
-        <p class="antetitulo">Etapa 6: El problema</p>
-        <h2 class="titulo">GET en voz alta, POST en un <em>sobre</em></h2>
+        <p class="antetitulo">¿Qué necesita Program.cs antes del primer POST?</p>
+        <h2 class="titulo">Un punto de partida que <em>compila</em></h2>
       </div>
-      <div class="dividido" data-proporcion="42/58">
-        <div class="columna" style="gap: 14px">
-          <div class="predice" data-correcta="a" data-mal="Mira dónde van los datos">
-            <p class="pq-pregunta">Cambias <code>method="get"</code> por <code>method="post"</code>. ¿Qué cambia en la barra de direcciones?</p>
-            <div class="opciones">
-              <button class="opcion" data-opcion="a">Queda limpia: los datos ya no van ahí</button>
-              <button class="opcion" data-opcion="b">Se llena con más datos</button>
+      <div class="dividido" data-proporcion="46/54">
+        <div class="columna estirar" style="gap: 10px">
+          <pre class="codigo" id="cod-p0" data-lang="csharp" data-titulo="Program.cs (punto de partida)" data-tam="11">var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; "Hello World!");
+
+app.MapGet("/saludar/{a}/{b}", (int a, int b) =&gt; $"Hola, buenos días {a + b}");
+
+app.MapGet("/sumar/{a}/{b}", (String a, String b) =&gt;
+{
+    if (int.TryParse(a, out int numero1) &amp;&amp; int.TryParse(b, out int numero2))
+    {
+        return Results.Ok($"{numero1 + numero2}");
+    }
+    return Results.Ok("Numeros no validos");
+});
+
+app.MapGet("/buscar", (String? query) =&gt; $"Valor buscado: {query ?? "No especificó"}");
+
+var productos = new List&lt;Producto&gt;{
+  new Producto(1, "Papa", 2500),
+  new Producto(2, "Tomate", 3500),
+  new Producto(3, "Zanahoria", 4500),
+};
+
+app.MapGet("/productos", () =&gt; productos);
+
+app.Run();
+
+record Producto(int Id, string Nombre, decimal Precio);</pre>
+          <details class="profundiza compacta" data-grupo="p0" data-icono="cuidado" data-acento="tomate">
+            <summary><span class="pf-titulo">Cuatro tropiezos al empezar</span><span class="pf-sub">Revísalos si no compila</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="errores" data-etiqueta="Qué revisar">
+                <ul>
+                  <li>Una línea incompleta, como <code>app.MapGet("Productos/{id}");</code> sin función, impide compilar. Complétala o bórrala.</li>
+                  <li>Sin <code>app.Run();</code> el programa arranca y se cierra al instante, sin error.</li>
+                  <li>Una palabra suelta fuera de un comentario <code>//</code> es un error de compilación.</li>
+                  <li>Una llave de API no se escribe en el código ni en un comentario: se revoca. Va en variables de entorno o en <code>dotnet user-secrets</code>.</li>
+                </ul>
+              </div>
             </div>
-            <div class="predice-revelacion">
-              Los datos pasan al <dfn data-def="cuerpo">cuerpo</dfn> de la petición y la dirección queda sin <code>?</code>. Por eso un pedido, que se guarda y no debería quedar en el historial, se envía con <dfn data-def="post">POST</dfn>.
-            </div>
-          </div>
-          <div class="callout" data-tipo="analogia" data-menos>GET es decir el pedido en voz alta; POST es entregar un sobre cerrado en el mostrador.</div>
+          </details>
         </div>
-        <div id="f-getpost"></div>
+        <div id="f-p0"></div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
-          <p><strong>GET:</strong> pide algo. Sus datos van en la dirección (<dfn data-def="querystring">query string</dfn>).</p>
-          <p><strong>POST:</strong> envía datos para crear algo. Van en el cuerpo.</p>
+          <p><strong>dotnet build:</strong> compila el proyecto. Debe mostrar <code>0 Advertencia(s)</code> y <code>0 Errores</code>.</p>
+          <p><strong>dotnet run:</strong> arranca el servidor. Muestra <code>Now listening on: http://localhost:5056</code>.</p>
         </section>
-        <section data-tipo="analogia"><p>Decir el pedido en voz alta frente a la plaza (GET) o entregar un sobre cerrado en el mostrador (POST).</p></section>
-        <section data-tipo="errores"><ul><li>Creer que POST cifra los datos: solo los saca de la dirección.</li><li>Usar GET para guardar algo: recargar la página lo repite.</li></ul></section>
-        <section data-tipo="mas"><p>En MDN busca <em>GET</em> y <em>POST</em> en Métodos de petición HTTP.</p></section>
+        <section data-tipo="analogia"><p>Antes de recibir pedidos, la plaza tiene que estar abierta: el puesto armado, la puerta sin llave y alguien atendiendo.</p></section>
+        <section data-tipo="errores"><ul><li>Borrar líneas rotas y llevarse por delante <code>app.Run();</code>.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Minimal APIs quick reference</em>.</p></section>
       </template>
     </section>
 
-    <!-- 7. El mismo formulario con GET y con POST ======================== -->
-    <section class="diapo" data-titulo="El mismo formulario, dos métodos">
+    <!-- 7. Paso 1: primer POST sin datos ================================= -->
+    <section class="diapo" data-titulo="Una ruta que solo acepta POST">
       <div class="cabeza">
-        <p class="antetitulo">Simulación</p>
-        <h2 class="titulo">El mismo formulario, dos <em>métodos</em></h2>
+        <p class="antetitulo">¿Qué pasa si pides con GET una ruta hecha para POST?</p>
+        <h2 class="titulo">Una ruta que solo acepta <em>POST</em></h2>
       </div>
-      <div class="dividido" data-proporcion="40/60">
+      <div class="dividido" data-proporcion="42/58">
+        <div class="columna" style="gap: 12px">
+          <pre class="codigo" id="cod-p1" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="15">app.MapPost("/reiniciar", () =&gt; "Reiniciando.....");</pre>
+          <div class="callout" data-tipo="idea">El verbo es parte de la ruta: la misma dirección puede tener un <code>GET</code> y un <code>POST</code> distintos.</div>
+          <div class="callout" data-tipo="cuidado" data-menos>Con <code>dotnet watch</code>, una ruta nueva exige <kbd>Ctrl</kbd> + <kbd>R</kbd>. Si responde <code>404</code>, reinicia.</div>
+        </div>
+        <div id="f-p1"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>GET:</strong> dame algo. Lee y no cambia nada.</p>
+          <p><strong>POST:</strong> toma esto y haz algo con ello. Envía datos para crear o cambiar algo.</p>
+        </section>
+        <section data-tipo="analogia"><p>La puerta del mostrador solo se abre con el sello de POST. Con otro sello, el vendedor dice que esa puerta existe pero no es para eso.</p></section>
+        <section data-tipo="errores"><ul><li>Probar un POST escribiendo la dirección en el navegador: la barra solo hace GET y responde <code>405</code>.</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>Métodos de petición HTTP</em> y <em>405 Method Not Allowed</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 8. Paso 2: POST con JSON, el código ============================== -->
+    <section class="diapo" data-titulo="El JSON llega como un Producto">
+      <div class="cabeza">
+        <p class="antetitulo">¿De dónde sale el objeto que recibe la función?</p>
+        <h2 class="titulo">El JSON llega como un <em>Producto</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="50/50">
+        <pre class="codigo" id="cod-p2" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="12">app.MapPost("/productos", (Producto nuevo) =&gt;
+{
+    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio &lt;= 0)
+    {
+        return Results.BadRequest(new { error = "Nombre obligatorio y precio mayor que 0" });
+    }
+
+    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);
+    productos.Add(producto);
+
+    return Results.Created($"/productos/{producto.Id}", producto);
+});</pre>
+        <div id="f-p2"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Results.BadRequest:</strong> responde <code>400</code>, lo que enviaste está mal. El objeto anónimo sale como JSON.</p>
+          <p><strong>Results.Created:</strong> responde <code>201</code> con el producto y un <code>Location</code> con su dirección.</p>
+        </section>
+        <section data-tipo="analogia"><p>El mostrador abre el sobre, revisa que traiga lo necesario y, solo si está bien, anota el producto en el cuaderno.</p></section>
+        <section data-tipo="errores"><ul><li>Esperar que el cliente decida el <code>Id</code>: lo asigna el servidor y el que llegue se ignora.</li><li>Olvidar que la lista vive en memoria: al reiniciar el servidor se pierde.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Minimal APIs: parameter binding</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 9. Paso 2: probar el JSON ======================================== -->
+    <section class="diapo" data-titulo="Cada cuerpo, una respuesta">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué responde /productos a cada cuerpo JSON?</p>
+        <h2 class="titulo">Cada cuerpo, una <em>respuesta</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="46/54">
         <div class="carta" style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px">
-          <p class="carta-titulo" style="margin: 0">formulario.html</p>
-          <div class="chips" id="sim-metodo" aria-label="Método del formulario">
-            <button class="chip" data-valor="get" aria-checked="false">method="get"</button>
-            <button class="chip" data-valor="post" aria-checked="true">method="post"</button>
+          <p class="carta-titulo" style="margin: 0">Thunder Client: <code>POST /productos</code></p>
+          <div class="campo-demo">Content-Type
+            <div class="chips" id="pj-ct" aria-label="Content-Type">
+              <button class="chip" data-valor="json" aria-checked="true">application/json</button>
+              <button class="chip" data-valor="ninguno" aria-checked="false">Ninguno</button>
+            </div>
           </div>
-          <label class="campo-demo">Cliente
-            <input id="sim-cliente" class="predice-apuesta" value="Ana" spellcheck="false" autocomplete="off">
+          <label class="campo-demo">Body
+            <input id="pj-body" class="predice-apuesta" value='{"nombre":"Mango","precio":3000}' spellcheck="false" autocomplete="off" style="font-family: var(--mono); font-size: 15px">
           </label>
-          <div class="fila" style="gap: 12px">
-            <label class="campo-demo crece">Producto
-              <input id="sim-producto" class="predice-apuesta" value="Tomate" spellcheck="false" autocomplete="off">
-            </label>
-            <label class="campo-demo" style="width: 110px">Cantidad
-              <input id="sim-cantidad" class="predice-apuesta" value="2" spellcheck="false" autocomplete="off">
-            </label>
+          <div class="fila" style="gap: 6px; flex-wrap: wrap">
+            <button class="boton suave mini" type="button" data-pj='{"precio":3000}' data-tono="tomate">Sin nombre</button>
+            <button class="boton suave mini" type="button" data-pj='{"nombre":"Mango","precio":0}' data-tono="tomate">Precio 0</button>
+            <button class="boton suave mini" type="button" data-pj='{"nombre":"Mango","precio":"abc"}' data-tono="tomate">Precio "abc"</button>
+            <button class="boton suave mini" type="button" data-pj='{"nombre":' data-tono="tomate">JSON roto</button>
+            <button class="boton suave mini" type="button" data-pj='{"nombre":"Mango","precio":00}' data-tono="tomate">Precio 00</button>
+            <button class="boton suave mini" type="button" data-pj='{"id":99,"nombre":"Kiwi","precio":2000}' data-tono="hoja">Con id 99</button>
           </div>
-          <button class="interruptor" type="button" id="sim-sinname" aria-checked="false" data-tono="tomate">Quitar el <code>name</code> de cantidad</button>
+          <div class="fila" style="gap: 8px; flex-wrap: wrap">
+            <button class="boton primario" type="button" id="pj-enviar" data-ico="siguiente">Send</button>
+            <button class="boton suave mini" type="button" id="pj-lista" data-tono="cielo">GET /productos</button>
+          </div>
         </div>
         <div class="columna estirar" style="gap: 10px">
-          <div class="ventana">
-            <div class="ventana-barra"><span class="luces"><i></i><i></i><i></i></span><span class="url" id="sim-url"></span></div>
-          </div>
-          <div class="term" aria-live="polite">
-            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Lo que sale del navegador</div>
-            <div class="term-cuerpo" id="sim-msg"></div>
-          </div>
-          <div class="resp-panel" id="sim-resp" aria-live="polite" style="padding: 10px 14px"></div>
+          <p class="carta-titulo" style="margin: 0">Respuesta del servidor</p>
+          <div class="resp-panel" id="pj-resp" aria-live="polite"></div>
+          <div class="callout" data-tipo="observa" data-menos>Un <code>400</code> con mensaje salió de tu <code>if</code>. Un <code>400</code> vacío es C# rechazando la petición antes de ejecutar tu función.</div>
         </div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
-          <p><strong>Encabezado Content-Type:</strong> dice cómo está escrito el cuerpo. Un formulario usa <dfn data-def="urlencoded">application/x-www-form-urlencoded</dfn>.</p>
-          <p><strong>Atributo name:</strong> el nombre con que viaja el campo.</p>
+          <p><strong>400 con mensaje:</strong> el JSON se leyó y tu <code>if</code> lo rechazó.</p>
+          <p><strong>400 vacío:</strong> C# no pudo convertir el cuerpo en un <code>Producto</code>.</p>
+          <p><strong>415:</strong> el cuerpo no llegó con <code>Content-Type: application/json</code>.</p>
         </section>
-        <section data-tipo="analogia"><p>Con GET el pedido va escrito en el sobre por fuera. Con POST va dentro y por fuera solo está la dirección del mostrador.</p></section>
-        <section data-tipo="errores"><ul><li>Un campo sin <code>name</code> no se envía, aunque tenga <code>id</code>.</li><li>Pedir con GET una ruta que solo acepta POST: responde <code>405</code>.</li></ul></section>
+        <section data-tipo="analogia"><p>Dos clases de rechazo: el sobre llegó roto y ni se abre (400 vacío), o se abre y el pedido no tiene sentido (400 con el motivo).</p></section>
+        <section data-tipo="errores"><ul><li>En JSON un número no puede empezar con un cero extra: <code>00</code> no es válido. Escribe <code>0</code> o <code>1500</code>.</li><li>Con JSON, un campo ausente (como <code>id</code>) queda en <code>0</code> y no da error.</li></ul></section>
+        <section data-tipo="mas"><p>Aquí el servidor es una simulación en el navegador. El de C# corre en tu terminal y responde igual.</p></section>
+      </template>
+    </section>
+
+    <!-- 10. Paso 3: la regla de los tres lugares ========================= -->
+    <section class="diapo" data-titulo="Tres lugares para leer un parámetro">
+      <div class="cabeza">
+        <p class="antetitulo">¿De dónde lee C# cada parámetro de la función?</p>
+        <h2 class="titulo">C# lee cada parámetro de <em>tres lugares</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="50/50">
+        <pre class="codigo" id="cod-p3a" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="11">app.MapPost("/productos/{id:int}/comprar", (int id, int cantidad = 1) =&gt;
+{
+    var producto = productos.FirstOrDefault(p =&gt; p.Id == id);
+
+    if (producto is null)
+    {
+        return Results.NotFound(new { error = $"No existe el producto {id}" });
+    }
+
+    if (cantidad &lt; 1)
+    {
+        return Results.BadRequest(new { error = "La cantidad debe ser al menos 1" });
+    }
+
+    var total = producto.Precio * cantidad;
+    return Results.Ok(new { producto = producto.Nombre, cantidad, total });
+});</pre>
+        <div id="f-p3a"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Ruta:</strong> el nombre entre llaves en la dirección, como <code>{id:int}</code>.</p>
+          <p><strong><dfn data-def="querystring">Query string</dfn>:</strong> lo que va después del <code>?</code>.</p>
+          <p><strong>Cuerpo:</strong> lo que viaja dentro de la petición.</p>
+        </section>
+        <section data-tipo="analogia"><p>Un pedido tiene tres sitios donde escribir: el sobre por fuera (ruta), una nota pegada (query) y la carta adentro (cuerpo).</p></section>
+        <section data-tipo="errores"><ul><li>Esperar que un objeto salga de la dirección: un objeto como <code>Producto</code> siempre se busca en el cuerpo.</li><li>Sin el <code>= 1</code>, una <code>cantidad</code> ausente daría <code>400</code>.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Minimal APIs: parameter binding</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 11. Paso 3: comprar =============================================== -->
+    <section class="diapo" data-titulo="Una dirección, varias respuestas">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué responde comprar a cada dirección?</p>
+        <h2 class="titulo">Una dirección, varias <em>respuestas</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="48/52">
+        <pre class="codigo" id="cod-p3b" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="11">app.MapPost("/productos/{id:int}/comprar", (int id, int cantidad = 1) =&gt;
+{
+    var producto = productos.FirstOrDefault(p =&gt; p.Id == id);
+
+    if (producto is null)
+    {
+        return Results.NotFound(new { error = $"No existe el producto {id}" });
+    }
+
+    if (cantidad &lt; 1)
+    {
+        return Results.BadRequest(new { error = "La cantidad debe ser al menos 1" });
+    }
+
+    var total = producto.Precio * cantidad;
+    return Results.Ok(new { producto = producto.Nombre, cantidad, total });
+});</pre>
+        <div id="f-p3b"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>FirstOrDefault:</strong> devuelve el primer elemento que cumple la condición, o <code>null</code> si no hay ninguno.</p>
+          <p><strong>Results.NotFound:</strong> responde <code>404</code>, eso que pides no existe.</p>
+        </section>
+        <section data-tipo="analogia"><p>Preguntas por el puesto 99: la plaza existe, pero ese puesto no (404 con motivo). Preguntas por el puesto "abc": ni siquiera es una dirección de la plaza (404 vacío).</p></section>
+        <section data-tipo="errores"><ul><li>Confundir <code>/productos/abc/comprar</code> (404, ninguna ruta coincide) con <code>?cantidad=abc</code> (400, la ruta existe pero el dato no se convierte).</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>404 Not Found</em> y <em>400 Bad Request</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 12. Paso 4: cómo viaja un formulario ============================= -->
+    <section class="diapo" data-titulo="Un formulario viaja como clave=valor">
+      <div class="cabeza">
+        <p class="antetitulo">¿En qué se diferencia el cuerpo de un formulario?</p>
+        <h2 class="titulo">Un formulario viaja como <em>clave=valor</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="46/54">
+        <div class="columna" style="gap: 12px">
+          <pre class="codigo" id="cod-p4a" data-lang="texto" data-titulo="Petición de Thunder Client (solo para ver)" data-tam="14">POST /productos/formulario HTTP/1.1
+Host: localhost:5056
+Content-Type: application/x-www-form-urlencoded
+
+id=0&amp;nombre=Uva&amp;precio=1500</pre>
+          <div class="callout" data-tipo="idea">Con este <code>Content-Type</code>, C# necesita que le digas que lea de ahí: por eso existe <code>[FromForm]</code>.</div>
+        </div>
+        <div id="f-p4a"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong><dfn data-def="urlencoded">application/x-www-form-urlencoded</dfn>:</strong> el cuerpo de un formulario clásico, <code>clave=valor</code> unido por <code>&amp;</code>.</p>
+          <p><strong>Form-encode:</strong> la opción de Thunder Client que envía ese formato.</p>
+        </section>
+        <section data-tipo="analogia"><p>JSON es una carta con estructura; el formulario es una lista de renglones "campo=respuesta" pegados con un símbolo.</p></section>
+        <section data-tipo="errores"><ul><li>Mandar JSON a una ruta de formulario (o al revés): responde <code>415</code>.</li></ul></section>
         <section data-tipo="mas"><p>En MDN busca <em>Enviar datos de formulario</em>.</p></section>
       </template>
     </section>
 
-    <!-- 8. El atributo name y el cuerpo codificado ======================= -->
-    <section class="diapo" data-titulo="El atributo name decide qué viaja">
+    <!-- 13. Paso 4: el código del formulario ============================= -->
+    <section class="diapo" data-titulo="Lo nuevo del formulario clásico">
       <div class="cabeza">
-        <p class="antetitulo">Etapa 6: formulario.html</p>
-        <h2 class="titulo">El atributo <em>name</em> decide qué viaja</h2>
+        <p class="antetitulo">¿Qué le dice a C# que lea un formulario?</p>
+        <h2 class="titulo">Lo nuevo del formulario <em>clásico</em></h2>
       </div>
       <div class="dividido" data-proporcion="52/48">
-        <script type="text/plain" class="codigo" id="cod-form-html" data-lang="html" data-titulo="formulario.html" data-tam="12" data-resaltar="1">
-<form method="post" action="/pedidos/formulario">
-    <label>
-        Cliente
-        <input type="text" name="cliente">
-    </label>
-    <label>
-        Producto
-        <select name="producto">
-            <option>Tomate</option>
-            <option>Aguacate</option>
-            <option>Papa</option>
-            <option>Panela</option>
-        </select>
-    </label>
-    <label>
-        Cantidad
-        <input type="number" name="cantidad" value="1">
-    </label>
-    <button type="submit">Enviar pedido</button>
-</form>
-</script>
         <div class="columna" style="gap: 10px">
-          <p class="carta-titulo" style="margin: 0">Escribe y mira el cuerpo</p>
-          <div class="enc-campos">
-            <label class="enc-fila"><span>cliente</span><input id="enc-cliente" class="predice-apuesta" value="José María" spellcheck="false" autocomplete="off"></label>
-            <label class="enc-fila"><span>producto</span><input id="enc-producto" class="predice-apuesta" value="Tomate" spellcheck="false" autocomplete="off"></label>
-            <label class="enc-fila"><span>cantidad</span><input id="enc-cantidad" class="predice-apuesta" value="2" spellcheck="false" autocomplete="off"></label>
-          </div>
-          <div class="term" aria-live="polite">
-            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Cuerpo de la petición</div>
-            <div class="term-cuerpo" id="enc-cuerpo" style="min-height: 76px"></div>
-          </div>
-          <details class="profundiza compacta" data-grupo="enc" data-icono="idea">
-            <summary><span class="pf-titulo">Por qué aparece <code>%C3%A9</code></span><span class="pf-sub">El navegador codifica lo que no es ASCII</span></summary>
-            <div class="pf-cuerpo">
-              <div class="pf-bloque" data-tipo="definicion">Un formulario escribe su cuerpo como <code>clave=valor</code> unidos con <code>&amp;</code>. Los espacios pasan a <code>+</code> y las tildes a <code>%C3%A9</code>. ASP.NET Core lo decodifica antes de entregarte el valor.</div>
-              <div class="pf-bloque" data-tipo="errores">Buscar en el servidor <code>Jos%C3%A9</code>: llega ya decodificado, como <code>José</code>.</div>
-            </div>
-          </details>
-        </div>
-      </div>
-      <template class="apoyo">
-        <section data-tipo="definiciones">
-          <p><strong>name:</strong> el nombre del campo en el cuerpo. El servidor empareja por ese nombre.</p>
-          <p><strong>Codificación de formulario:</strong> <code>clave=valor</code> separados por <code>&amp;</code>.</p>
-        </section>
-        <section data-tipo="analogia"><p>Cada campo del sobre lleva una etiqueta con su nombre. Sin etiqueta, el vendedor no sabe qué es.</p></section>
-        <section data-tipo="errores"><ul><li>Dejar solo <code>id</code> en el campo y esperar que llegue.</li><li>Escribir el <code>name</code> distinto de lo que espera el modelo: el valor llega vacío o la petición falla.</li></ul></section>
-        <section data-tipo="mas"><p>En MDN busca <em>HTMLInputElement: name</em> y <em>URLSearchParams</em>.</p></section>
-      </template>
-    </section>
-
-    <!-- 9. El código que recibe el formulario ============================ -->
-    <section class="diapo" data-titulo="El código que recibe el formulario">
-      <div class="cabeza">
-        <p class="antetitulo">Etapa 6: Program.cs</p>
-        <h2 class="titulo">El código que recibe el <em>formulario</em></h2>
-      </div>
-      <div class="dividido" data-proporcion="58/42">
-        <script type="text/plain" class="codigo" id="cod-mappost" data-lang="csharp" data-titulo="Program.cs (etapa 6)" data-tam="14">
-app.MapPost("/pedidos/formulario", ([FromForm] NuevoPedido nuevo) =>
+          <pre class="codigo" id="cod-p4u" data-lang="csharp" data-titulo="Program.cs, al principio del archivo" data-tam="14">using Microsoft.AspNetCore.Mvc;</pre>
+          <pre class="codigo" id="cod-p4b" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="12">app.MapPost("/productos/formulario", ([FromForm] Producto nuevo) =&gt;
 {
-    var error = Validar(nuevo, productos);
-    if (error is not null)
+    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio &lt;= 0)
     {
-        return Results.BadRequest(new { error });
+        return Results.BadRequest(new { error = "Nombre obligatorio y precio mayor que 0" });
     }
 
-    pedidos.Add(Crear(nuevo, pedidos));
+    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);
+    productos.Add(producto);
 
-    // Post/Redirect/Get: el navegador pasa a pedir con GET.
-    return Results.Redirect("/pedidos.html");
-}).DisableAntiforgery();
-</script>
-        <div class="columna" style="gap: 10px">
-          <p class="carta-titulo" style="margin: 0">Toca una pieza</p>
-          <div class="fila ops-pieza" id="piezas-post" style="gap: 8px; flex-wrap: wrap">
-            <button class="boton suave mini" type="button" data-pieza="0" data-tono="cielo">MapPost</button>
-            <button class="boton suave mini" type="button" data-pieza="1" data-tono="uva">[FromForm]</button>
-            <button class="boton suave mini" type="button" data-pieza="2" data-tono="maiz">Validar</button>
-            <button class="boton suave mini" type="button" data-pieza="3" data-tono="tomate">400</button>
-            <button class="boton suave mini" type="button" data-pieza="4" data-tono="hoja">Guardar</button>
-            <button class="boton suave mini" type="button" data-pieza="5" data-tono="cielo">Redirect</button>
-            <button class="boton suave mini" type="button" data-pieza="6" data-tono="tomate">DisableAntiforgery</button>
-          </div>
-          <div class="carta tenue" aria-live="polite" style="min-height: 150px"><p class="cuerpo" id="exp-mappost" style="font-size: 18px"></p></div>
+    return Results.Created($"/productos/{producto.Id}", producto);
+}).DisableAntiforgery();</pre>
         </div>
+        <div id="f-p4b"></div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
-          <p><strong>MapPost:</strong> une una dirección con la función que atiende peticiones POST.</p>
-          <p><strong><dfn data-def="fromform">[FromForm]</dfn>:</strong> arma el objeto con los campos del formulario.</p>
-          <p><strong><dfn data-def="validacion">Validación manual</dfn>:</strong> revisar con <code>if</code> antes de guardar.</p>
+          <p><strong><dfn data-def="fromform">[FromForm]</dfn>:</strong> arma el objeto con los campos del formulario, emparejados por nombre.</p>
+          <p><strong><dfn data-def="disableantiforgery">DisableAntiforgery</dfn>:</strong> quita la comprobación del token de la ruta.</p>
         </section>
-        <section data-tipo="analogia"><p>El mostrador abre el sobre, revisa que traiga lo necesario, lo guarda y te manda a ver la lista.</p></section>
-        <section data-tipo="errores"><ul><li>Guardar sin revisar: siempre valida lo que llega.</li><li>Olvidar que un campo faltante en un formulario hace fallar la lectura: responde <code>400</code> sin cuerpo.</li></ul></section>
+        <section data-tipo="analogia"><p>El sello del mostrador: Thunder Client no lo trae, así que en esta etapa se apaga la comprobación.</p></section>
+        <section data-tipo="errores"><ul><li>La ruta tiene otro nombre (<code>/productos/formulario</code>) para no chocar con el <code>POST /productos</code> de JSON.</li></ul></section>
         <section data-tipo="mas"><p>En Microsoft Learn busca <em>Minimal APIs quick reference</em>, sección Form binding.</p></section>
       </template>
     </section>
 
-    <!-- 10. Post/Redirect/Get ============================================ -->
-    <section class="diapo" data-titulo="Post/Redirect/Get">
+    <!-- 14. Paso 4: para qué sirve DisableAntiforgery ===================== -->
+    <section class="diapo" data-titulo="Para qué sirve DisableAntiforgery">
       <div class="cabeza">
-        <p class="antetitulo">Modelo mental</p>
-        <h2 class="titulo">Después del POST, el navegador <em>pide</em> con GET</h2>
-      </div>
-      <div class="dividido" data-proporcion="62/38">
-        <div id="f-prg"></div>
-        <div class="columna" style="gap: 10px">
-          <div class="callout" data-tipo="idea">Tras guardar, el servidor no devuelve una página: devuelve un <dfn data-def="estado302">302</dfn> con la dirección a la que ir. Se llama <dfn data-def="prg">Post/Redirect/Get</dfn>.</div>
-          <details class="profundiza compacta" data-grupo="prg" data-icono="red">
-            <summary><span class="pf-titulo"><code>Location</code></span><span class="pf-sub">La dirección a la que ir</span></summary>
-            <div class="pf-cuerpo">
-              <div class="pf-bloque" data-tipo="definicion">Encabezado de la respuesta <code>302</code>. El navegador lo lee y pide esa dirección sin que tú hagas nada.</div>
-              <div class="pf-bloque" data-tipo="ejemplo"><code>Location: /pedidos.html</code></div>
-            </div>
-          </details>
-          <details class="profundiza compacta" data-grupo="prg" data-icono="cuidado" data-acento="tomate">
-            <summary><span class="pf-titulo">Por qué no responder una página</span><span class="pf-sub">Recargar repetiría el envío</span></summary>
-            <div class="pf-cuerpo">
-              <div class="pf-bloque" data-tipo="definicion">Si la respuesta al POST fuera la página, el navegador pregunta al recargar si quiere reenviar el formulario. Un pedido podría quedar duplicado.</div>
-            </div>
-          </details>
-        </div>
-      </div>
-      <template class="apoyo">
-        <section data-tipo="definiciones">
-          <p><strong>302 Found:</strong> redirección. La respuesta lleva <code>Location</code>.</p>
-          <p><strong>Post/Redirect/Get:</strong> POST que guarda, redirección, GET que muestra.</p>
-        </section>
-        <section data-tipo="analogia"><p>Dejas el sobre en el mostrador y te mandan a la sala de espera a ver la lista. Si vuelves a la sala, no dejas otro sobre.</p></section>
-        <section data-tipo="errores"><ul><li>Creer que el navegador repite el POST al recargar después de una redirección: repite el último GET.</li></ul></section>
-        <section data-tipo="mas"><p>En MDN busca <em>Redirecciones en HTTP</em>.</p></section>
-      </template>
-    </section>
-
-    <!-- 11. Probar el servidor =========================================== -->
-    <section class="diapo" data-titulo="Qué responde el servidor">
-      <div class="cabeza">
-        <p class="antetitulo">Simulación: reglas de la etapa 6</p>
-        <h2 class="titulo">Qué responde el <em>servidor</em></h2>
+        <p class="antetitulo">¿Para qué sirve DisableAntiforgery y qué pasa sin ella?</p>
+        <h2 class="titulo">Para qué sirve <em>DisableAntiforgery</em></h2>
       </div>
       <div class="dividido" data-proporcion="42/58">
-        <div class="carta" style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px">
-          <p class="carta-titulo" style="margin: 0">Formulario de prueba</p>
-          <label class="campo-demo">Cliente
-            <input id="pr-cliente" class="predice-apuesta" value="Ana" spellcheck="false" autocomplete="off">
-          </label>
-          <div class="fila" style="gap: 12px">
-            <div class="campo-demo crece">Producto
-              <div class="chips" id="pr-producto" aria-label="Producto" style="flex-wrap: wrap">
-                <button class="chip" data-valor="Tomate" aria-checked="true">Tomate</button>
-                <button class="chip" data-valor="Aguacate" aria-checked="false">Aguacate</button>
-                <button class="chip" data-valor="Mango" aria-checked="false">Mango</button>
-              </div>
-            </div>
-            <label class="campo-demo" style="width: 110px">Cantidad
-              <input id="pr-cantidad" class="predice-apuesta" value="2" spellcheck="false" autocomplete="off">
-            </label>
-          </div>
-          <div class="fila" style="gap: 8px; flex-wrap: wrap">
-            <button class="boton primario" type="button" id="pr-enviar" data-ico="siguiente">Enviar con POST</button>
-            <button class="boton suave mini" type="button" id="pr-ejemplo" data-tono="tomate">Prueba un 400 sin cuerpo</button>
-          </div>
-          <p class="nota" id="pr-contador" style="margin: 0; font-size: 15px"></p>
-        </div>
-        <div class="columna estirar" style="gap: 10px">
-          <p class="carta-titulo" style="margin: 0">Respuesta de la ruta <code>/pedidos/formulario</code></p>
-          <div class="resp-panel" id="pr-resp" aria-live="polite"></div>
-          <div class="callout" data-tipo="observa" data-menos>Aquí <code>Validar</code> revisa a mano. Las validaciones con atributos y los mensajes en el formulario se ven en el tema de validaciones.</div>
-        </div>
-      </div>
-      <template class="apoyo">
-        <section data-tipo="definiciones">
-          <p><strong>400 con cuerpo:</strong> el formulario se leyó, pero <code>Validar</code> rechazó un dato.</p>
-          <p><strong>400 sin cuerpo:</strong> el formulario ni siquiera se pudo leer.</p>
-        </section>
-        <section data-tipo="analogia"><p>El mostrador distingue dos fallas: el sobre llegó roto (400 vacío) o llegó bien pero con un pedido imposible (400 con el motivo).</p></section>
-        <section data-tipo="errores"><ul><li>Esperar un mensaje cuando falta un campo en el formulario: el cuerpo viene vacío porque la lectura falla antes de <code>Validar</code>.</li></ul></section>
-        <section data-tipo="mas"><p>En MDN busca <em>400 Bad Request</em>.</p></section>
-      </template>
-    </section>
-
-    <!-- 12. Falla provocada: DisableAntiforgery ========================== -->
-    <section class="diapo" data-titulo="Falla provocada: sin DisableAntiforgery">
-      <div class="cabeza">
-        <p class="antetitulo">Falla provocada</p>
-        <h2 class="titulo">Quitas <em>DisableAntiforgery</em></h2>
-      </div>
-      <div class="dividido" data-proporcion="50/50">
         <div class="columna" style="gap: 12px">
-          <script type="text/plain" class="codigo" id="cod-af" data-lang="csharp" data-titulo="Program.cs (etapa 6)" data-tam="12" data-sin-barra>
-app.MapPost("/pedidos/formulario", ([FromForm] NuevoPedido nuevo) =>
-{
-    // ...
-}).DisableAntiforgery();
-</script>
-          <div class="predice" data-correcta="b" data-mal="Mira cuándo falla">
-            <p class="pq-pregunta">Borras la última llamada y ejecutas. ¿Qué pasa?</p>
-            <div class="opciones">
-              <button class="opcion" data-opcion="a">No compila</button>
-              <button class="opcion" data-opcion="b">Arranca, y el primer POST responde 500</button>
-              <button class="opcion" data-opcion="c">Todo sigue igual</button>
-            </div>
-            <div class="predice-revelacion">
-              Compila y arranca sin quejas. El error aparece al enviar el formulario. Pruébalo a la derecha.
-            </div>
-          </div>
+          <pre class="codigo" id="cod-af" data-lang="csharp" data-titulo="Última línea de la ruta del formulario" data-tam="16">}).DisableAntiforgery();</pre>
+          <div class="callout" data-tipo="idea">No habilitaste nada antes: con esta línea la ruta funciona desde Thunder Client. Sin ella, <code>[FromForm]</code> hace que .NET exija un <dfn data-def="antiforgery">token antifalsificación</dfn>.</div>
+          <div class="callout" data-tipo="cuidado" data-menos>Solo para probar con Thunder Client. En una página real con Razor el token se agrega solo y esta línea se quita.</div>
         </div>
-        <div class="columna estirar" style="gap: 10px">
-          <div class="fila" style="gap: 10px; flex-wrap: wrap; align-items: center">
-            <button class="interruptor" type="button" id="af-quitar" aria-checked="false" data-tono="tomate">Quitar <code>.DisableAntiforgery()</code></button>
-            <button class="boton primario mini" type="button" id="af-enviar" data-ico="siguiente">Enviar el formulario</button>
-          </div>
-          <div class="resp-panel" id="af-resp" aria-live="polite" style="padding: 10px 14px"></div>
-          <div class="term" aria-live="polite">
-            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Consola del servidor</div>
-            <div class="term-cuerpo" id="af-term" style="min-height: 92px"></div>
-          </div>
-        </div>
+        <div id="f-af"></div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
-          <p><strong><dfn data-def="antiforgery">Token antifalsificación</dfn>:</strong> valor secreto que prueba que el formulario salió de tu propia página.</p>
-          <p><strong><dfn data-def="csrf">CSRF</dfn>:</strong> ataque que usa tu sesión para enviar un formulario sin que lo sepas.</p>
+          <p><strong><dfn data-def="antiforgery">Token antifalsificación</dfn>:</strong> valor secreto que el servidor pone en el formulario y espera de vuelta. Prueba que el envío salió de tu propia página.</p>
+          <p><strong><dfn data-def="csrf">CSRF</dfn>:</strong> ataque en que otra página hace que tu navegador envíe un formulario sin que lo sepas. El token lo frena.</p>
+          <p><strong>DisableAntiforgery:</strong> exime a esa ruta de la comprobación del token.</p>
         </section>
-        <section data-tipo="analogia"><p>El sello del mostrador: un formulario estático no puede traer el sello, así que en esta etapa se apaga la comprobación.</p></section>
-        <section data-tipo="errores"><ul><li>Dejarlo apagado para siempre. Es solo para la etapa 6: en la etapa 8 Razor agrega el token y la protección vuelve.</li></ul></section>
+        <section data-tipo="analogia"><p>El sello del mostrador: un sobre que salió de tu propia página lo trae. Thunder Client no tiene sello, así que a esta ruta se le dice que no lo pida.</p></section>
+        <section data-tipo="errores"><ul><li>Dejarlo apagado para siempre. Es normal desactivarlo para probar una API; en una página real con Razor, el token se agrega solo.</li><li>Las rutas con JSON (sin <code>[FromForm]</code>) no necesitan esta línea.</li></ul></section>
         <section data-tipo="mas"><p>En Microsoft Learn busca <em>Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks in ASP.NET Core</em>.</p></section>
       </template>
     </section>
 
-    <!-- 13. JSON con fetch ============================================== -->
-    <section class="diapo" data-titulo="JSON con fetch">
+    <!-- 15. Paso 4: el formulario es estricto ============================ -->
+    <section class="diapo" data-titulo="El formulario es más estricto">
       <div class="cabeza">
-        <p class="antetitulo">Etapa 6: Reto</p>
-        <h2 class="titulo">La otra puerta: JSON con <em>fetch</em></h2>
+        <p class="antetitulo">¿Qué pasa si el formulario no trae todos los campos?</p>
+        <h2 class="titulo">El formulario es más <em>estricto</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="44/56">
+        <div class="carta" style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px">
+          <p class="carta-titulo" style="margin: 0">Form-encode: <code>POST /productos/formulario</code></p>
+          <button class="interruptor" type="button" id="pe-sinid" aria-checked="false" data-tono="tomate">Quitar el campo <code>id</code></button>
+          <label class="campo-demo">nombre
+            <input id="pe-nombre" class="predice-apuesta" value="Uva" spellcheck="false" autocomplete="off">
+          </label>
+          <div class="campo-demo">precio
+            <div class="chips" id="pe-precio" aria-label="Precio">
+              <button class="chip" data-valor="3500.50" aria-checked="true">3500.50</button>
+              <button class="chip" data-valor="3500,50" aria-checked="false">3500,50</button>
+            </div>
+          </div>
+          <button class="boton primario" type="button" id="pe-enviar" data-ico="siguiente">Send</button>
+        </div>
+        <div class="columna estirar" style="gap: 10px">
+          <div class="resp-panel" id="pe-resp" aria-live="polite" style="padding: 10px 14px"></div>
+          <div class="term" aria-live="polite">
+            <div class="term-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span>Consola del servidor</div>
+            <div class="term-cuerpo" id="pe-term" style="min-height: 76px"></div>
+          </div>
+          <details class="profundiza compacta" data-grupo="pe" data-icono="idea">
+            <summary><span class="pf-titulo">Dos caminos para el <code>Id</code></span><span class="pf-sub">Producto o un record sin Id</span></summary>
+            <div class="pf-cuerpo">
+              <div class="pf-bloque" data-tipo="definicion">Dejar <code>Producto</code>: envías un <code>id</code> cualquiera y el servidor lo ignora (guarda <code>productos.Count + 1</code>).</div>
+              <div class="pf-bloque" data-tipo="ejemplo"><code>record NuevoProducto(string Nombre, decimal Precio);</code> y úsalo como tipo del parámetro: el formulario pide solo lo que se usa.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Constructor del record:</strong> <code>Producto</code> pide tres valores para construirse: <code>Id</code>, <code>Nombre</code> y <code>Precio</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Un formulario es un sobre con casillas obligatorias: si falta una, el mostrador ni lo abre. Una carta en JSON, en cambio, tolera huecos.</p></section>
+        <section data-tipo="errores"><ul><li>Con coma decimal no hay error: C# la toma como separador de miles y guarda <code>350050</code>. En formularios reales usa el punto.</li></ul></section>
+        <section data-tipo="mas"><p>Con JSON, un campo ausente queda en <code>0</code>. El formulario es más estricto.</p></section>
+      </template>
+    </section>
+
+    <!-- 16. Paso 5: que el servidor entregue archivos ================== -->
+    <section class="diapo" data-titulo="Plaza entrega los archivos de wwwroot">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué necesita Plaza para entregar una página?</p>
+        <h2 class="titulo">Plaza entrega los archivos de <em>wwwroot</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="44/56">
+        <div class="columna" style="gap: 12px">
+          <pre class="codigo" id="cod-p5a" data-lang="csharp" data-titulo="Program.cs, justo después de Build()" data-tam="14">app.UseDefaultFiles();
+app.UseStaticFiles();</pre>
+          <div class="callout" data-tipo="idea">Se sirve la página desde el mismo servidor: con doble clic sobre el <code>.html</code> la página queda en <code>file://</code> y los envíos con <code>fetch</code> dan problemas de CORS.</div>
+        </div>
+        <div id="f-p5s"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong><dfn data-def="staticfiles">UseStaticFiles</dfn>:</strong> entrega los archivos de la carpeta <code>wwwroot</code>.</p>
+          <p><strong><dfn data-def="defaultfiles">UseDefaultFiles</dfn>:</strong> hace que <code>/</code> entregue <code>index.html</code> si existe.</p>
+        </section>
+        <section data-tipo="analogia"><p>Un puesto de la plaza que reparte folletos: todo lo que dejas en la carpeta <code>wwwroot</code> queda disponible para quien pase.</p></section>
+        <section data-tipo="errores"><ul><li>Son líneas nuevas al arranque: con <code>dotnet watch</code> necesitas <kbd>Ctrl</kbd> + <kbd>R</kbd>.</li><li>Crea <code>wwwroot</code> al lado de <code>Program.cs</code>, no dentro de otra carpeta.</li></ul></section>
+        <section data-tipo="mas"><p>En Microsoft Learn busca <em>Static files in ASP.NET Core</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 16b. Paso 5: formulario.html ====================================== -->
+    <section class="diapo" data-titulo="Una página en wwwroot envía el POST">
+      <div class="cabeza">
+        <p class="antetitulo">¿Cómo envía el POST una página servida por Plaza?</p>
+        <h2 class="titulo">Una página en <em>wwwroot</em> envía el POST</h2>
+      </div>
+      <div class="dividido" data-proporcion="46/54">
+        <pre class="codigo" id="cod-p5b" data-lang="html" data-titulo="wwwroot/formulario.html" data-tam="11">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Nuevo producto&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Nuevo producto&lt;/h1&gt;
+
+    &lt;form method="post" action="/productos/formulario"&gt;
+        &lt;input type="hidden" name="id" value="0"&gt;
+
+        &lt;label&gt;Nombre &lt;input type="text" name="nombre"&gt;&lt;/label&gt;
+        &lt;label&gt;Precio &lt;input type="number" name="precio"&gt;&lt;/label&gt;
+
+        &lt;button type="submit"&gt;Guardar&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div id="f-p5"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong><dfn data-def="name">name</dfn>:</strong> el nombre con que viaja el campo.</p>
+          <p><strong>method y action:</strong> el verbo y la ruta a la que el navegador envía el formulario.</p>
+        </section>
+        <section data-tipo="analogia"><p>Cada casilla del formulario lleva una etiqueta con su nombre. Sin etiqueta, el vendedor no sabe qué es.</p></section>
+        <section data-tipo="errores"><ul><li>Un campo sin <code>name</code> no se envía, aunque se vea en pantalla.</li><li>El campo oculto <code>id</code> hace falta porque <code>Producto</code> exige <code>Id</code>.</li></ul></section>
+        <section data-tipo="mas"><p>Lo habitual después de guardar es redirigir a una lista con GET. La diapositiva de Post/Redirect/Get lo muestra.</p></section>
+      </template>
+    </section>
+
+    <!-- 17. Paso 6: fetch ================================================= -->
+    <section class="diapo" data-titulo="Con fetch armas el envío tú mismo">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué cambia cuando JavaScript arma el envío?</p>
+        <h2 class="titulo">Con <em>fetch</em> armas el envío tú mismo</h2>
+      </div>
+      <div class="dividido" data-proporcion="50/50">
+        <pre class="codigo" id="cod-p6" data-lang="html" data-titulo="wwwroot/fetch.html" data-tam="11">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Nuevo producto con fetch&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Nuevo producto con fetch&lt;/h1&gt;
+
+    &lt;form id="formulario"&gt;
+        &lt;label&gt;Nombre &lt;input type="text" id="nombre"&gt;&lt;/label&gt;
+        &lt;label&gt;Precio &lt;input type="number" id="precio"&gt;&lt;/label&gt;
+        &lt;button type="submit"&gt;Guardar&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;p id="resultado"&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        const formulario = document.getElementById("formulario");
+        const resultado = document.getElementById("resultado");
+
+        formulario.addEventListener("submit", async evento =&gt; {
+            evento.preventDefault();
+
+            const datos = {
+                id: 0,
+                nombre: document.getElementById("nombre").value,
+                precio: Number(document.getElementById("precio").value)
+            };
+
+            const respuesta = await fetch("/productos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            });
+
+            const cuerpo = await respuesta.json();
+
+            if (respuesta.status === 201) {
+                resultado.textContent = "Guardado: " + cuerpo.nombre + " con id " + cuerpo.id;
+                formulario.reset();
+            } else {
+                resultado.textContent = "Error " + respuesta.status + ": " + cuerpo.error;
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div id="f-p6"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>preventDefault:</strong> evita que el navegador haga su envío normal y recargue la página.</p>
+          <p><strong>JSON.stringify:</strong> convierte el objeto de JavaScript en el texto JSON que viaja en el cuerpo.</p>
+          <p><strong>await:</strong> espera la respuesta antes de seguir. Por eso la función es <code>async</code>.</p>
+          <p><strong>respuesta.status:</strong> el código que devolvió el servidor, como <code>201</code> o <code>400</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Con el formulario clásico el navegador arma y entrega el sobre. Con fetch eres tú quien lo arma, lo entrega y lee el recibo sin salir de la página.</p></section>
+        <section data-tipo="errores"><ul><li>Olvidar <code>Content-Type: application/json</code>: el servidor responde <code>415</code>.</li><li>En la consola del navegador aparece una línea roja <code>Failed to load resource ... 400</code> en los casos de error: el navegador registra toda respuesta de error. No es un fallo de tu código.</li></ul></section>
+        <section data-tipo="mas"><p>Con F12, pestaña Network, envía el formulario y pulsa la petición para ver el <code>Content-Type</code> y el cuerpo. En MDN busca <em>Usando Fetch</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 19. Paso 6: reto con fetch ======================================= -->
+    <section class="diapo" data-titulo="Reto: el encabezado que falta">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué le falta a este fetch para recibir un 201?</p>
+        <h2 class="titulo">El encabezado que <em>falta</em></h2>
       </div>
       <div class="dividido" data-proporcion="58/42">
         <div class="ejecutor" id="ej-fetch" data-api="plaza">
           <script type="text/plain" data-archivo="app.js">
 async function enviar() {
-  const pedido = { cliente: 'Luis', producto: 'Papa', cantidad: 3 };
+  const producto = { nombre: 'Mango', precio: 3000 };
 
-  const respuesta = await fetch('/api/pedidos', {
+  const respuesta = await fetch('/productos', {
     method: 'POST',
-    body: JSON.stringify(pedido)
+    body: JSON.stringify(producto)
   });
 
   console.log('Estado:', respuesta.status);
@@ -1709,7 +1904,7 @@ enviar();
           </script>
         </div>
         <div class="columna" style="gap: 10px">
-          <div class="reto" data-ejecutor="#ej-fetch" data-espera="Estado: 201|Location: /api/pedidos/1" data-ok="201 Created con su Location. Ahora el servidor sabe que el cuerpo es JSON.">
+          <div class="reto" data-ejecutor="#ej-fetch" data-espera="Estado: 201|Location: /productos/4" data-ok="201 Created con su Location. Ahora el servidor sabe que el cuerpo es JSON.">
             <p class="reto-instruccion">Ejecuta con <kbd>Ctrl</kbd> + <kbd>Enter</kbd>: responde <code>415</code>. Agrega el encabezado que dice que el cuerpo es JSON y consigue un <code>201</code>.</p>
           </div>
           <div class="term" aria-live="polite">
@@ -1728,59 +1923,364 @@ enviar();
       <template class="apoyo">
         <section data-tipo="definiciones">
           <p><strong><dfn data-def="fetch">fetch</dfn>:</strong> hace una petición desde JavaScript, sin recargar la página.</p>
-          <p><strong>JSON.stringify:</strong> convierte un objeto en texto JSON.</p>
           <p><strong>415:</strong> el servidor no entiende el formato del cuerpo.</p>
         </section>
         <section data-tipo="analogia"><p>Mandas un sobre y, por fuera, escribes en qué idioma está la carta. Sin esa nota, el mostrador no la abre.</p></section>
-        <section data-tipo="errores"><ul><li>Olvidar <code>Content-Type</code>: responde 415.</li><li>Enviar el objeto sin <code>JSON.stringify</code>: el cuerpo sería <code>[object Object]</code>.</li></ul></section>
+        <section data-tipo="errores"><ul><li>Enviar el objeto sin <code>JSON.stringify</code>: el cuerpo sería <code>[object Object]</code>.</li></ul></section>
         <section data-tipo="mas"><p>En MDN busca <em>Usando Fetch</em>. Aquí el servidor es simulado en el navegador: el de C# corre en tu terminal.</p></section>
       </template>
     </section>
 
-    <!-- 14. Dos puertas, un mismo pedido ================================= -->
-    <section class="diapo" data-titulo="Dos puertas, un mismo pedido">
+    <!-- 20. Formulario clásico frente a fetch ============================ -->
+    <section class="diapo" data-titulo="Dos puertas, un mismo producto">
       <div class="cabeza">
-        <p class="antetitulo">Etapa 6: Comparación</p>
-        <h2 class="titulo">Dos puertas, un mismo <em>pedido</em></h2>
+        <p class="antetitulo">¿En qué se diferencian el formulario y fetch?</p>
+        <h2 class="titulo">Dos puertas, un mismo <em>producto</em></h2>
       </div>
-      <div class="dividido" data-proporcion="58/42">
+      <div class="columna" style="gap: 12px">
         <table class="tabla-kit">
-          <thead><tr><th scope="col"></th><th scope="col">Formulario HTML</th><th scope="col">fetch con JSON</th></tr></thead>
+          <thead><tr><th scope="col"></th><th scope="col">Formulario clásico</th><th scope="col">fetch con JSON</th></tr></thead>
           <tbody>
-            <tr data-paso><th scope="row">Quién envía</th><td>El navegador, al enviar el <code>&lt;form&gt;</code></td><td>Tu JavaScript</td></tr>
+            <tr data-paso><th scope="row">Quién arma el envío</th><td>El navegador, al enviar el <code>&lt;form&gt;</code></td><td>Tu JavaScript</td></tr>
             <tr data-paso><th scope="row"><dfn data-def="contenttype">Content-Type</dfn></th><td><code>application/x-www-form-urlencoded</code></td><td><code>application/json</code></td></tr>
-            <tr data-paso><th scope="row">Ruta</th><td><code>POST /pedidos/formulario</code></td><td><code>POST /api/pedidos</code></td></tr>
-            <tr data-paso><th scope="row">Todo bien</th><td><code>302</code> a <code>/pedidos.html</code></td><td><code>201 Created</code> con el pedido</td></tr>
-            <tr data-paso><th scope="row">Dato inválido</th><td><code>400</code> con <code>{"error": ...}</code></td><td><code>400</code> con <code>{"error": ...}</code></td></tr>
-            <tr data-paso><th scope="row">Sin Content-Type</th><td>No aplica: el navegador lo pone</td><td><code>415</code></td></tr>
+            <tr data-paso><th scope="row">Ruta</th><td><code>POST /productos/formulario</code></td><td><code>POST /productos</code></td></tr>
+            <tr data-paso><th scope="row">Parámetro en C#</th><td><code>[FromForm] Producto nuevo</code></td><td><code>Producto nuevo</code></td></tr>
+            <tr data-paso><th scope="row">Qué ve el usuario</th><td>La página cambia y muestra el JSON</td><td>La página sigue y muestra un mensaje</td></tr>
+            <tr data-paso><th scope="row">Contenido equivocado</th><td><code>415</code></td><td><code>415</code></td></tr>
           </tbody>
         </table>
-        <div class="columna" style="gap: 10px">
-          <script type="text/plain" class="codigo" id="cod-json-post" data-lang="csharp" data-titulo="Program.cs (etapa 6)" data-tam="13" data-resaltar="1,9,10">
-app.MapPost("/api/pedidos", (NuevoPedido nuevo) =>
-{
-    var error = Validar(nuevo, productos);
-    if (error is not null)
-    {
-        return Results.BadRequest(new { error });
-    }
-
-    var pedido = Crear(nuevo, pedidos);
-    pedidos.Add(pedido);
-    return Results.Created($"/api/pedidos/{pedido.Id}", pedido);
-});
-</script>
-          <div class="callout" data-tipo="idea" data-menos>Las dos puertas comparten <code>Validar</code> y la lista de pedidos: las reglas son las mismas.</div>
-        </div>
+        <div class="callout" data-tipo="idea">Las dos rutas validan igual, guardan en la misma lista y responden <code>201</code>.</div>
       </div>
       <template class="apoyo">
         <section data-tipo="definiciones">
           <p><strong>201 Created:</strong> algo nuevo quedó registrado; el servidor devuelve lo creado.</p>
-          <p><strong>Results.Created:</strong> arma esa respuesta con el <code>Location</code> del recurso.</p>
         </section>
         <section data-tipo="analogia"><p>Dos puertas al mismo mostrador: una para quien llega con el formulario de papel, otra para quien manda el pedido por mensajería.</p></section>
-        <section data-tipo="errores"><ul><li>Confundir 201 con 302: el primero dice "se creó"; el segundo dice "ve a otra dirección".</li></ul></section>
-        <section data-tipo="mas"><p>En MDN busca <em>201 Created</em> y <em>302 Found</em>.</p></section>
+        <section data-tipo="errores"><ul><li>Mandar un cuerpo JSON a la ruta de formulario: <code>415</code>.</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>201 Created</em> y <em>415 Unsupported Media Type</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 21. Paso 7: CORS ================================================= -->
+    <section class="diapo" data-titulo="Dos puertos son dos orígenes">
+      <div class="cabeza">
+        <p class="antetitulo">¿Por qué el navegador bloquea un fetch a otro puerto?</p>
+        <h2 class="titulo">Dos puertos son dos <em>orígenes</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="44/56">
+        <div class="columna" style="gap: 10px">
+          <pre class="codigo" id="cod-p7" data-lang="csharp" data-titulo="Program.cs, antes de builder.Build()" data-tam="12">builder.Services.AddCors(opciones =&gt;
+{
+    opciones.AddPolicy("MiPagina", politica =&gt;
+    {
+        politica.WithOrigins("http://localhost:5300")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});</pre>
+          <pre class="codigo" id="cod-p7u" data-lang="csharp" data-titulo="Program.cs, justo después de Build()" data-tam="14">app.UseCors("MiPagina");</pre>
+        </div>
+        <div id="f-p7"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong><dfn data-def="origen">Origen</dfn>:</strong> protocolo, nombre y puerto. <code>:5056</code> y <code>:5300</code> son orígenes distintos.</p>
+          <p><strong><dfn data-def="preflight">Preflight</dfn>:</strong> la pregunta previa (<code>OPTIONS</code>) que el navegador envía antes de un POST con JSON.</p>
+        </section>
+        <section data-tipo="analogia"><p>El vigilante de otra plaza deja pasar tu carta, pero no deja que leas la respuesta si el dueño del mostrador no firmó un permiso.</p></section>
+        <section data-tipo="errores"><ul><li>Pensar que CORS protege la API: un formulario enviado desde otro origen se ejecuta igual en el servidor.</li><li>Un servidor C# que llama a otra API externa no usa CORS: usa <code>HttpClient</code>.</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>Control de acceso HTTP (CORS)</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 22. Paso 7: qué orígenes deja pasar ============================== -->
+    <section class="diapo" data-titulo="La lista de orígenes es texto exacto">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué orígenes deja pasar la política MiPagina?</p>
+        <h2 class="titulo">La lista de orígenes es texto <em>exacto</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="40/60">
+        <div class="columna" style="gap: 12px">
+          <pre class="codigo" id="cod-p7b" data-lang="csharp" data-titulo="Program.cs, antes de builder.Build()" data-tam="14">builder.Services.AddCors(opciones =&gt;
+{
+    opciones.AddPolicy("MiPagina", politica =&gt;
+    {
+        politica.WithOrigins("http://localhost:5300")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});</pre>
+          <div class="callout" data-tipo="cuidado" data-menos><code>AllowAnyOrigin()</code> permite cualquier página. Sirve para desarrollar; en un servidor real expone la API a páginas que no controlas.</div>
+        </div>
+        <div id="f-p7b"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>WithOrigins:</strong> la lista de orígenes permitidos, con protocolo y puerto, sin barra final.</p>
+          <p><strong>AllowAnyHeader:</strong> permite encabezados como <code>Content-Type: application/json</code>. Sin él, el preflight del JSON se rechaza.</p>
+        </section>
+        <section data-tipo="analogia"><p>La lista de invitados compara el nombre letra por letra: "localhost" y "127.0.0.1" son la misma casa, pero distinto nombre.</p></section>
+        <section data-tipo="errores"><ul><li>Escribir <code>127.0.0.1</code> en la barra y haber permitido solo <code>localhost</code>: sigue bloqueado.</li></ul></section>
+        <section data-tipo="mas"><p>Thunder Client y <code>curl</code> no se ven afectados: CORS es una regla del navegador.</p></section>
+      </template>
+    </section>
+
+    <!-- 22c. Paso 7: probar CORS desde otro puerto ======================= -->
+    <section class="diapo" data-titulo="Prueba CORS desde otro puerto">
+      <div class="cabeza">
+        <p class="antetitulo">¿Cómo compruebas CORS con dos puertos reales?</p>
+        <h2 class="titulo">Pruébalo con dos <em>puertos</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="48/52">
+        <div class="columna estirar" style="gap: 10px">
+          <pre class="codigo" id="cod-p7c" data-lang="html" data-titulo="prueba-cors.html" data-tam="11">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Prueba de CORS&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Prueba de CORS&lt;/h1&gt;
+    &lt;button id="enviar"&gt;Enviar a Plaza&lt;/button&gt;
+    &lt;p id="resultado"&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        document.getElementById("enviar").addEventListener("click", async () =&gt; {
+            try {
+                const respuesta = await fetch("http://localhost:5056/productos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nombre: "Mango", precio: 3000 })
+                });
+                const cuerpo = await respuesta.json();
+                document.getElementById("resultado").textContent = "Respondió " + respuesta.status + ": " + cuerpo.nombre;
+            } catch (error) {
+                document.getElementById("resultado").textContent = "Bloqueado: " + error.message;
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+          <pre class="codigo" id="cod-p7cmd" data-lang="texto" data-titulo="Terminal, en la carpeta de prueba-cors.html" data-tam="14">python -m http.server 5300</pre>
+        </div>
+        <div id="f-p7c"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>python -m http.server 5300:</strong> sirve la carpeta actual en el puerto 5300. Es el segundo origen de la prueba.</p>
+        </section>
+        <section data-tipo="analogia"><p>Dos plazas vecinas con puertas distintas: la página vive en una y el mostrador en la otra.</p></section>
+        <section data-tipo="errores"><ul><li>Abrir <code>prueba-cors.html</code> con doble clic: queda en <code>file://</code>, otro origen que la política no incluye.</li><li>Cambiar el puerto de la página y olvidar actualizar <code>WithOrigins</code>.</li></ul></section>
+        <section data-tipo="mas"><p>Mira la consola del navegador (F12) antes y después de agregar la política.</p></section>
+      </template>
+    </section>
+
+    <!-- 23. Paso 8: los demás tipos de POST ============================== -->
+    <section class="diapo" data-titulo="Otras formas de recibir un POST">
+      <div class="cabeza">
+        <p class="antetitulo">¿Cómo lee C# un texto, un archivo o un encabezado?</p>
+        <h2 class="titulo">Otras formas de recibir un <em>POST</em></h2>
+      </div>
+      <div class="dividido" data-proporcion="52/48">
+        <pre class="codigo" id="cod-p8" data-lang="csharp" data-titulo="Program.cs, antes de app.Run();" data-tam="13">app.MapPost("/texto", async (HttpRequest request) =&gt;
+{
+    using var lector = new StreamReader(request.Body);
+    var texto = await lector.ReadToEndAsync();
+    return $"Llegaron {texto.Length} caracteres: {texto}";
+});</pre>
+        <div id="f-p8"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>HttpRequest:</strong> la petición completa. <code>request.Body</code> es el cuerpo como flujo de bytes.</p>
+          <p><strong>IFormFile:</strong> un archivo enviado en un formulario <code>multipart/form-data</code>.</p>
+          <p><strong>FromHeader:</strong> lee un dato de un encabezado de la petición.</p>
+        </section>
+        <section data-tipo="analogia"><p>Además de la carta, un sobre puede traer un paquete (archivo) o una nota pegada por fuera (encabezado).</p></section>
+        <section data-tipo="errores"><ul><li>Olvidar <code>.DisableAntiforgery()</code> en la ruta del archivo: es un formulario y responde <code>500</code>.</li></ul></section>
+        <section data-tipo="mas"><p>Estas rutas se probaron con <code>curl</code> y <code>Invoke-RestMethod</code>.</p></section>
+      </template>
+    </section>
+
+    <!-- 24. Post/Redirect/Get ============================================ -->
+    <section class="diapo" data-titulo="Post/Redirect/Get">
+      <div class="cabeza">
+        <p class="antetitulo">¿Cómo evita una redirección el envío duplicado?</p>
+        <h2 class="titulo">Después del POST, el navegador <em>pide</em> con GET</h2>
+      </div>
+      <div class="dividido" data-proporcion="40/60">
+        <div class="columna" style="gap: 12px">
+          <pre class="codigo" id="cod-prg" data-lang="csharp" data-titulo="Program.cs, reemplaza la ruta del formulario" data-tam="11">app.MapPost("/productos/formulario", ([FromForm] Producto nuevo) =&gt;
+{
+    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio &lt;= 0)
+    {
+        return Results.BadRequest(new { error = "Nombre obligatorio y precio mayor que 0" });
+    }
+
+    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);
+    productos.Add(producto);
+
+    return Results.Redirect("/productos");
+}).DisableAntiforgery();</pre>
+          <div class="callout" data-tipo="idea" data-menos>Tras guardar, el servidor devuelve un <dfn data-def="estado302">302</dfn> con la dirección a la que ir, aquí <code>/productos</code>. Es <dfn data-def="prg">Post/Redirect/Get</dfn>.</div>
+        </div>
+        <div id="f-prg"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>302 Found:</strong> redirección. La respuesta lleva <code>Location</code>.</p>
+          <p><strong>Post/Redirect/Get:</strong> POST que guarda, redirección, GET que muestra.</p>
+        </section>
+        <section data-tipo="analogia"><p>Dejas el sobre en el mostrador y te mandan a la sala de espera a ver la lista. Si vuelves a la sala, no dejas otro sobre.</p></section>
+        <section data-tipo="errores"><ul><li>Creer que el navegador repite el POST al recargar después de una redirección: repite el último GET.</li><li>Lo habitual es redirigir a una página que lista los datos. Aquí se redirige a <code>/productos</code>, que ya existe y devuelve la lista en JSON.</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>Redirecciones en HTTP</em>.</p></section>
+      </template>
+    </section>
+
+    <!-- 24c. Program.cs completo ========================================= -->
+    <section class="diapo" data-titulo="El Program.cs completo">
+      <div class="cabeza">
+        <p class="antetitulo">¿Cómo queda Program.cs al terminar el paso 7?</p>
+        <h2 class="titulo">El <em>Program.cs</em> completo</h2>
+      </div>
+      <div class="dividido" data-proporcion="52/48">
+        <pre class="codigo" id="cod-completo" data-lang="csharp" data-titulo="Program.cs completo (paso 7)" data-tam="11">using Microsoft.AspNetCore.Mvc;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// CORS: permite que una pagina servida desde OTRO origen lea las respuestas de esta API.
+builder.Services.AddCors(opciones =&gt;
+{
+    opciones.AddPolicy("MiPagina", politica =&gt;
+    {
+        politica.WithOrigins("http://localhost:5300")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
+var app = builder.Build();
+
+app.UseCors("MiPagina");
+
+// Entrega los archivos de la carpeta wwwroot.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.MapGet("/", () =&gt; "Hello World!");
+
+app.MapGet("/saludar/{a}/{b}", (int a, int b) =&gt; $"Hola, buenos días {a + b}");
+
+app.MapGet("/sumar/{a}/{b}", (String a, String b) =&gt;
+{
+    if (int.TryParse(a, out int numero1) &amp;&amp; int.TryParse(b, out int numero2))
+    {
+        return Results.Ok($"{numero1 + numero2}");
+    }
+    return Results.Ok("Numeros no validos");
+});
+
+app.MapGet("/buscar", (String? query) =&gt; $"Valor buscado: {query ?? "No especificó"}");
+
+var productos = new List&lt;Producto&gt;{
+  new Producto(1, "Papa", 2500),
+  new Producto(2, "Tomate", 3500),
+  new Producto(3, "Zanahoria", 4500),
+};
+
+app.MapGet("/productos", () =&gt; productos);
+
+// Paso 1. POST sin datos.
+app.MapPost("/reiniciar", () =&gt; "Reiniciando.....");
+
+// Paso 2. POST con JSON en el cuerpo.
+app.MapPost("/productos", (Producto nuevo) =&gt;
+{
+    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio &lt;= 0)
+    {
+        return Results.BadRequest(new { error = "Nombre obligatorio y precio mayor que 0" });
+    }
+
+    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);
+    productos.Add(producto);
+
+    return Results.Created($"/productos/{producto.Id}", producto);
+});
+
+// Paso 3. POST con el dato en la ruta y en el query string.
+app.MapPost("/productos/{id:int}/comprar", (int id, int cantidad = 1) =&gt;
+{
+    var producto = productos.FirstOrDefault(p =&gt; p.Id == id);
+
+    if (producto is null)
+    {
+        return Results.NotFound(new { error = $"No existe el producto {id}" });
+    }
+
+    if (cantidad &lt; 1)
+    {
+        return Results.BadRequest(new { error = "La cantidad debe ser al menos 1" });
+    }
+
+    var total = producto.Precio * cantidad;
+    return Results.Ok(new { producto = producto.Nombre, cantidad, total });
+});
+
+// Paso 4. POST con formulario clasico (clave=valor&amp;clave=valor).
+app.MapPost("/productos/formulario", ([FromForm] Producto nuevo) =&gt;
+{
+    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio &lt;= 0)
+    {
+        return Results.BadRequest(new { error = "Nombre obligatorio y precio mayor que 0" });
+    }
+
+    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);
+    productos.Add(producto);
+
+    return Results.Created($"/productos/{producto.Id}", producto);
+}).DisableAntiforgery();
+
+app.Run();
+
+record Producto(int Id, string Nombre, decimal Precio);</pre>
+        <div id="f-completo"></div>
+      </div>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Orden de Program.cs:</strong> primero los <code>using</code>, luego lo que va antes de <code>Build()</code>, después lo que va justo después, las rutas, <code>app.Run()</code> y al final los tipos como <code>record</code>.</p>
+        </section>
+        <section data-tipo="analogia"><p>Un plano de la plaza completa: cada letrero del recorrido tiene su lugar en el plano.</p></section>
+        <section data-tipo="errores"><ul><li>Poner un <code>record</code> antes de <code>app.Run()</code>: los tipos van al final del archivo.</li><li>Duplicar <code>var app = builder.Build();</code> al pegar un bloque.</li></ul></section>
+        <section data-tipo="mas"><p>El Copiar del bloque copia el archivo entero. Este Program.cs se compiló sin advertencias ni errores y se probó.</p></section>
+      </template>
+    </section>
+
+    <!-- 25. Errores del POST ============================================= -->
+    <section class="diapo" data-titulo="Cada error tiene una causa">
+      <div class="cabeza">
+        <p class="antetitulo">¿Qué dice cada error al enviar un POST?</p>
+        <h2 class="titulo">Cada error tiene una <em>causa</em></h2>
+      </div>
+      <table class="tabla-kit" style="font-size: 15px">
+        <thead><tr><th scope="col">Error</th><th scope="col">Causa</th><th scope="col">Arreglo</th></tr></thead>
+        <tbody>
+          <tr data-paso><td><strong></strong></td><td>Falta <code>app.Run();</code></td><td>Agregarlo antes del <code>record</code></td></tr>
+          <tr data-paso><td><strong></strong></td><td>Un número JSON como <code>00</code></td><td>Escribir <code>0</code> o <code>1500</code></td></tr>
+          <tr data-paso><td><strong></strong></td><td>El formulario no envía <code>id</code></td><td>Enviar el campo, o un record sin <code>Id</code></td></tr>
+          <tr data-paso><td><strong></strong></td><td>El <code>Content-Type</code> no es el que espera la ruta</td><td>JSON: <code>application/json</code>. Formulario: <code>x-www-form-urlencoded</code></td></tr>
+          <tr data-paso><td><strong></strong></td><td>Falta <code>.DisableAntiforgery()</code> con <code>[FromForm]</code></td><td>Agregarlo al cierre de la ruta</td></tr>
+          <tr data-paso><td><strong></strong></td><td>Verbo distinto del que acepta la ruta</td><td>Usar el verbo correcto</td></tr>
+          <tr data-paso><td><strong></strong></td><td>Con <code>dotnet watch</code>, la ruta nueva no se registra hasta reiniciar</td><td><kbd>Ctrl</kbd> + <kbd>R</kbd></td></tr>
+          <tr data-paso><td><strong></strong></td><td>La página y la API están en orígenes distintos y falta la política</td><td>El paso de CORS</td></tr>
+        </tbody>
+      </table>
+      <template class="apoyo">
+        <section data-tipo="definiciones">
+          <p><strong>Líneas de rutas y dotnet watch:</strong> se ejecutan una sola vez, al arrancar el servidor, y arman la tabla de rutas. Cambiar algo dentro de una ruta se aplica al guardar; agregar una línea <code>app.MapPost(...)</code> pide reinicio.</p>
+        </section>
+        <section data-tipo="analogia"><p>Cada código de estado es una luz del mostrador: el color dice si el problema fue tu sobre, el sello o el mostrador mismo.</p></section>
+        <section data-tipo="errores"><ul><li>Si agregas varias rutas, escríbelas todas y haz un solo <kbd>Ctrl</kbd> + <kbd>R</kbd> al final.</li></ul></section>
+        <section data-tipo="mas"><p>En MDN busca <em>Códigos de estado de respuesta HTTP</em>.</p></section>
       </template>
     </section>
 
@@ -4463,28 +4963,22 @@ app.MapControllers();
       window.__kitApi = API;
       window.__kitLlamadas = [];
       var TXT = { 200: 'OK', 201: 'Created', 204: 'No Content', 301: 'Moved Permanently', 304: 'Not Modified', 400: 'Bad Request', 401: 'Unauthorized', 403: 'Forbidden', 404: 'Not Found', 405: 'Method Not Allowed', 500: 'Internal Server Error', 503: 'Service Unavailable' };
-      var PEDIDOS = [];
-      var PRODUCTOS_PLAZA = ['Tomate', 'Aguacate', 'Papa', 'Panela'];
-      var reglasPedido = function (metodo, hs, texto) {
-        if (metodo === 'GET') return { estado: 200, cuerpo: PEDIDOS.slice(), demora: 300 };
+      var PRODUCTOS = [{ id: 1, nombre: 'Papa', precio: 2500 }, { id: 2, nombre: 'Tomate', precio: 3500 }, { id: 3, nombre: 'Zanahoria', precio: 4500 }];
+      var reglasProducto = function (metodo, hs, texto) {
+        if (metodo === 'GET') return { estado: 200, cuerpo: PRODUCTOS.slice(), demora: 300 };
         if (metodo !== 'POST') return { estado: 405, sinCuerpo: true, demora: 300 };
         if ((hs['content-type'] || '').indexOf('application/json') < 0) return { estado: 415, sinCuerpo: true, demora: 300 };
         var n;
         try { n = JSON.parse(texto); } catch (e) { return { estado: 400, sinCuerpo: true, demora: 300 }; }
         if (n === null || typeof n !== 'object' || Array.isArray(n)) return { estado: 400, sinCuerpo: true, demora: 300 };
-        var cant = n.cantidad === undefined || n.cantidad === null ? 0 : n.cantidad;
-        if (typeof cant === 'string' && /^-?\d+$/.test(cant.trim())) cant = Number(cant);
-        if (typeof cant !== 'number' || cant % 1 !== 0) return { estado: 400, sinCuerpo: true, demora: 300 };
-        var cliente = n.cliente == null ? '' : String(n.cliente);
-        var producto = n.producto == null ? '' : String(n.producto);
-        var error = null;
-        if (!cliente.trim()) error = 'El nombre del cliente es obligatorio';
-        else if (PRODUCTOS_PLAZA.indexOf(producto) < 0) error = 'No vendemos ' + producto;
-        else if (cant < 1 || cant > 100) error = 'La cantidad debe estar entre 1 y 100';
-        if (error) return { estado: 400, cuerpo: { error: error }, demora: 300 };
-        var pedido = { id: PEDIDOS.length + 1, cliente: cliente, producto: producto, cantidad: cant };
-        PEDIDOS.push(pedido);
-        return { estado: 201, cuerpo: pedido, encabezados: { Location: '/api/pedidos/' + pedido.id }, demora: 300 };
+        var nombre = n.nombre == null ? '' : n.nombre;
+        var precio = n.precio === undefined ? 0 : n.precio;
+        if (typeof precio === 'string' && /^-?\d+(\.\d+)?$/.test(precio.trim())) precio = Number(precio);
+        if (typeof nombre !== 'string' || typeof precio !== 'number') return { estado: 400, sinCuerpo: true, demora: 300 };
+        if (!nombre.trim() || precio <= 0) return { estado: 400, cuerpo: { error: 'Nombre obligatorio y precio mayor que 0' }, demora: 300 };
+        var producto = { id: PRODUCTOS.length + 1, nombre: nombre, precio: precio };
+        PRODUCTOS.push(producto);
+        return { estado: 201, cuerpo: producto, encabezados: { Location: '/productos/' + producto.id }, demora: 300 };
       };
       var ruta = function (u) { try { var x = new URL(u, 'https://mercado.local'); return { r: x.pathname + x.search, p: x.pathname }; } catch (e) { return { r: String(u), p: String(u) }; } };
       window.fetch = function (url, op) {
@@ -4502,7 +4996,7 @@ app.MapControllers();
           if (!def) def = { estado: 405, cuerpo: { message: 'Method Not Allowed' }, encabezados: { Allow: Object.keys(base.metodos).join(', ') } };
         }
         var cuerpoTxt = op.body == null ? null : String(op.body);
-        if (def && def.reglas === 'pedido') def = reglasPedido(metodo, hs, cuerpoTxt);
+        if (def && def.reglas === 'producto') def = reglasProducto(metodo, hs, cuerpoTxt);
         var demora = def && def.demora != null ? def.demora : 400;
         window.__kitLlamadas.push({ metodo: metodo, ruta: u.r });
         enviar({ t: 'red', texto: metodo + ' ' + u.r + (def ? ' (' + demora + ' ms)' : ' (sin ruta simulada)'), metodo: metodo, ruta: u.r, encabezados: hs, cuerpo: cuerpoTxt });
@@ -5871,7 +6365,7 @@ Kit.glosario({
     termino: 'POST',
     corta: 'Método para enviar datos al servidor dentro del cuerpo de la petición. No se ven en la dirección.',
     analogia: 'Entregar un sobre cerrado en el mostrador.',
-    ejemplo: 'POST /pedidos/formulario\n\ncliente=Ana&producto=Tomate&cantidad=2',
+    ejemplo: 'POST /productos/formulario\n\nid=0&nombre=Uva&precio=1500',
     lang: 'texto',
     errores: 'Pensar que POST cifra los datos: solo los saca de la dirección. Para protegerlos hace falta HTTPS.',
   },
@@ -5899,7 +6393,7 @@ Kit.glosario({
   urlencoded: {
     termino: 'application/x-www-form-urlencoded',
     corta: 'El formato en que un formulario HTML escribe su cuerpo: <code>clave=valor</code> unidos con <code>&amp;</code>, con los caracteres especiales codificados.',
-    ejemplo: 'cliente=Jos%C3%A9+Mar%C3%ADa&cantidad=2',
+    ejemplo: 'id=0&nombre=Uva&precio=1500',
     lang: 'texto',
   },
   formulario: {
@@ -5910,7 +6404,7 @@ Kit.glosario({
   name: {
     termino: 'Atributo name',
     corta: 'El nombre con que viaja cada campo de un formulario. Un campo sin <code>name</code> no se envía; el <code>id</code> no sirve para eso.',
-    ejemplo: '<input type="number" name="cantidad">',
+    ejemplo: '<input type="number" name="precio">',
     lang: 'html',
     errores: 'Poner solo <code>id</code> y preguntarse por qué el servidor no recibe el campo.',
   },
@@ -5922,7 +6416,7 @@ Kit.glosario({
   json: {
     termino: 'JSON',
     corta: 'Texto con la estructura de objetos y listas de JavaScript. Es el formato habitual para que un programa envíe datos a otro.',
-    ejemplo: '{"cliente":"Luis","producto":"Papa","cantidad":3}',
+    ejemplo: '{"nombre":"Mango","precio":3000}',
     lang: 'json',
   },
   prg: {
@@ -5994,7 +6488,7 @@ Kit.glosario({
   fromform: {
     termino: '[FromForm]',
     corta: 'Atributo que le pide a ASP.NET Core armar el parámetro con los campos del formulario, emparejados por el nombre.',
-    ejemplo: 'app.MapPost("/pedidos/formulario", ([FromForm] NuevoPedido nuevo) => ...)',
+    ejemplo: 'app.MapPost("/productos/formulario", ([FromForm] Producto nuevo) => ...)',
     lang: 'csharp',
   },
   enlace: {
@@ -6017,6 +6511,20 @@ Kit.glosario({
     corta: 'Quita la comprobación del token en una ruta mínima. En la etapa 6 hace falta porque un formulario de <code>wwwroot</code> no puede traer el token.',
     ejemplo: '}).DisableAntiforgery();',
     lang: 'csharp',
+  },
+  cors: {
+    termino: 'CORS',
+    corta: 'Autorización que el servidor da para que páginas de otros orígenes lean sus respuestas desde un navegador. No protege el servidor.',
+    errores: 'Pensar que CORS bloquea las peticiones: un formulario enviado desde otro origen se ejecuta igual, solo se esconde la respuesta.',
+    mdn: 'MDN: Control de acceso HTTP (CORS)',
+  },
+  origen: {
+    termino: 'Origen',
+    corta: 'La combinación de protocolo, nombre y puerto. <code>http://localhost:5056</code> y <code>http://localhost:5300</code> son orígenes distintos solo por el puerto.',
+  },
+  preflight: {
+    termino: 'Preflight',
+    corta: 'La pregunta previa (<code>OPTIONS</code>) que el navegador envía antes de un POST con JSON a otro origen. Si el servidor no la aprueba, el POST no se envía.',
   },
 
   /* ---------- MVC ---------- */
@@ -6313,7 +6821,6 @@ Kit.listo(() => {
   const esc = Kit.esc;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const bytes = (t) => new TextEncoder().encode(t).length;
 
   /* Panel de respuesta compartido por las simulaciones. */
   const pintarResp = (panel, o) => {
@@ -6348,16 +6855,10 @@ Kit.listo(() => {
     { id: 3, nombre: 'Papa', precio: 2800 },
     { id: 4, nombre: 'Panela', precio: 4500 },
   ];
-  const validarPedido = (n) => {
-    if (!n.cliente || !n.cliente.trim()) return 'El nombre del cliente es obligatorio';
-    if (!PRODUCTOS.some((p) => p.nombre === n.producto)) return 'No vendemos ' + n.producto;
-    if (n.cantidad < 1 || n.cantidad > 100) return 'La cantidad debe estar entre 1 y 100';
-    return null;
-  };
   const jsonCorto = (o) => JSON.stringify(o);
 
-  /* Servidor simulado para el Ejecutor: imita POST y GET de /api/pedidos de la etapa 6 (reglas dentro del iframe). */
-  Kit.apis.plaza = { '/api/pedidos': { reglas: 'pedido' } };
+  /* Servidor simulado para el Ejecutor: imita POST y GET de /productos del paso 6 (reglas dentro del iframe). */
+  Kit.apis.plaza = { '/productos': { reglas: 'producto' } };
 
 
   /* ====== Diapositiva 3: lo que Plaza ya hace (diagrama por fragmentos) ====== */
@@ -6413,239 +6914,456 @@ Kit.listo(() => {
   });
 
 
-  /* ====== Diapositiva 6: viaje de una petición GET frente a POST ====== */
-  Kit.flujo('#f-getpost', {
-    titulo: 'Simulación: el mismo formulario',
-    icono: 'red',
+  /* ====== Sección 02: POST y formularios (pasos 0 a 8 del tutorial de Plaza) ====== */
+  /* Piezas reutilizables de los flujos: cliente, servidor y los pasos más comunes. */
+  const CL = (o) => Object.assign({ id: 'nav', x: 100, y: 112, icono: 'navegador', etiqueta: 'Thunder Client', sub: 'el cliente', tono: 'cielo', ancho: 150 }, o);
+  const SV = (o) => Object.assign({ id: 'srv', x: 570, y: 112, icono: 'servidor', etiqueta: 'Tu servidor', sub: 'localhost:5056', tono: 'uva', ancho: 150 }, o);
+  const IDA_VUELTA = [{ desde: 'nav', hasta: 'srv', curva: -40 }, { desde: 'srv', hasta: 'nav', curva: -40 }];
+  const yo = (texto, extra) => Object.assign({ nodo: 'nav', duracion: 2500, texto }, extra);
+  const va = (paquete, texto, extra) => Object.assign({ desde: 'nav', hasta: 'srv', paquete, tono: 'uva', duracion: 1600, texto }, extra);
+  const vuelve = (paquete, texto, tono, extra) => Object.assign({ desde: 'srv', hasta: 'nav', paquete, tono, duracion: 1500, texto }, extra);
+  const ser = (texto, extra) => Object.assign({ nodo: 'srv', duracion: 2700, texto }, extra);
+  const cd = (id, lineas, nota) => ({ id, lineas, nota });
+
+  /* Textos de los bloques de código que cambian al elegir una opción: son los mismos de las diapositivas. */
+  const BLOQUES = {"texto": "app.MapPost(\"/texto\", async (HttpRequest request) =>\n{\n    using var lector = new StreamReader(request.Body);\n    var texto = await lector.ReadToEndAsync();\n    return $\"Llegaron {texto.Length} caracteres: {texto}\";\n});\n", "archivo": "app.MapPost(\"/archivo\", async (IFormFile archivo) =>\n{\n    using var lector = new StreamReader(archivo.OpenReadStream());\n    var contenido = await lector.ReadToEndAsync();\n    return Results.Ok(new { nombre = archivo.FileName, bytes = archivo.Length, contenido });\n}).DisableAntiforgery();\n", "encabezado": "app.MapPost(\"/encabezado\", ([FromHeader(Name = \"X-Clave\")] string clave) => $\"Clave recibida: {clave}\");\n", "mezcla_dos": "// 1. Antes de app.Run();\napp.MapPost(\"/personas/{id:int}\", (int id, Persona p) => Results.Ok(new { id, p.Nombre, p.Edad }));\n\n// 2. Al final del archivo, junto al record Producto\nrecord Persona(string Nombre, int Edad);\n", "p4": "app.MapPost(\"/productos/formulario\", ([FromForm] Producto nuevo) =>\n{\n    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio <= 0)\n    {\n        return Results.BadRequest(new { error = \"Nombre obligatorio y precio mayor que 0\" });\n    }\n\n    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);\n    productos.Add(producto);\n\n    return Results.Created($\"/productos/{producto.Id}\", producto);\n}).DisableAntiforgery();\n", "p4_sin": "app.MapPost(\"/productos/formulario\", ([FromForm] Producto nuevo) =>\n{\n    if (string.IsNullOrWhiteSpace(nuevo.Nombre) || nuevo.Precio <= 0)\n    {\n        return Results.BadRequest(new { error = \"Nombre obligatorio y precio mayor que 0\" });\n    }\n\n    var producto = new Producto(productos.Count + 1, nuevo.Nombre, nuevo.Precio);\n    productos.Add(producto);\n\n    return Results.Created($\"/productos/{producto.Id}\", producto);\n});\n", "peticion_form": "POST /productos/formulario HTTP/1.1\nHost: localhost:5056\nContent-Type: application/x-www-form-urlencoded\n\nid=0&nombre=Uva&precio=1500\n", "peticion_json": "POST /productos HTTP/1.1\nHost: localhost:5056\nContent-Type: application/json\n\n{\"nombre\":\"Uva\",\"precio\":1500}\n", "af_linea": "}).DisableAntiforgery();", "af_sin": "});"};
+  /* Los bloques largos ocupan el alto disponible y se desplazan por dentro. */
+  ['cod-p0', 'cod-p6', 'cod-p7c', 'cod-completo'].forEach((id) => { const c = Kit.codigo(id); if (c && c.el) c.el.classList.add('alta'); });
+
+  /* ----- Paso 0: un punto de partida que compila ----- */
+  Kit.flujo('#f-p0', {
+    titulo: 'Simulación: arrancar Plaza',
+    icono: 'engranaje',
     vista: [670, 262],
     nodos: [
-      { id: 'nav', x: 100, y: 112, icono: 'navegador', etiqueta: 'Navegador', sub: 'el cliente', tono: 'cielo', ancho: 150 },
-      { id: 'srv', x: 570, y: 112, icono: 'servidor', etiqueta: 'Tu servidor', sub: 'localhost:5100', tono: 'uva', ancho: 150 },
+      { id: 'prog', x: 95, y: 112, icono: 'documento', etiqueta: 'Program.cs', sub: 'tu código', tono: 'maiz', ancho: 150 },
+      SV({ x: 335 }),
+      CL({ x: 575, etiqueta: 'Navegador' }),
     ],
-    conectores: [{ desde: 'nav', hasta: 'srv', curva: -40 }, { desde: 'srv', hasta: 'nav', curva: -40 }],
+    conectores: [
+      { desde: 'prog', hasta: 'srv', curva: -34 },
+      { desde: 'nav', hasta: 'srv', curva: -40 },
+      { desde: 'srv', hasta: 'nav', curva: -40 },
+    ],
+    intro: 'Sigue el código línea por línea y mira cuándo queda escuchando el servidor.',
+    pasos: () => [
+      { nodo: 'prog', duracion: 2300, texto: 'Las dos primeras líneas crean y construyen la aplicación.', codigo: cd('cod-p0', [1, 2], 'Crear y construir') },
+      { nodo: 'prog', duracion: 2500, texto: 'Cada <code>MapGet</code> une una dirección con una función. Ya tenías estas rutas.', codigo: cd('cod-p0', [4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17], 'Rutas GET') },
+      { nodo: 'prog', duracion: 2500, texto: 'La lista guarda objetos <code>Producto</code>: un record con Id, Nombre y Precio. Vive en memoria.', codigo: cd('cod-p0', [19, 20, 21, 22, 23, 29], 'La lista de productos') },
+      { nodo: 'prog', duracion: 2300, texto: '<code>GET /productos</code> devuelve esa lista como JSON.', codigo: cd('cod-p0', [25], 'GET /productos') },
+      { nodo: 'prog', duracion: 3000, texto: '<code>app.Run()</code> arranca el servidor y lo deja escuchando. Sin esta línea el programa arranca y se cierra al instante, sin error.', codigo: cd('cod-p0', [27], 'Va después de todas las rutas'), estado: { prog: { texto: '0 errores', tono: 'hoja' } } },
+      { desde: 'prog', hasta: 'srv', paquete: 'dotnet run', tono: 'maiz', duracion: 1600, texto: '<code>dotnet build</code> muestra <code>0 Errores</code>. Luego <code>dotnet run</code> arranca el servidor.', estado: { srv: { texto: ':5056 escuchando', tono: 'hoja' } } },
+      { desde: 'nav', hasta: 'srv', paquete: 'GET /productos', tono: 'uva', duracion: 1500, texto: 'En el navegador abres <code>http://localhost:5056/productos</code>.', codigo: cd('cod-p0', [25], 'GET /productos') },
+      { desde: 'srv', hasta: 'nav', paquete: '200 + JSON', tono: 'hoja', duracion: 1500, texto: 'Aparece la lista de tres productos en JSON. Ya puedes agregar un POST.', estado: { nav: { texto: '3 productos', tono: 'hoja' } } },
+    ],
+  });
+
+  /* ----- Paso 1: un POST sin datos ----- */
+  Kit.flujo('#f-p1', {
+    titulo: 'Simulación: POST y GET a /reiniciar',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL(), SV()],
+    conectores: IDA_VUELTA,
     parametros: [
-      { id: 'metodo', tipo: 'opciones', etiqueta: 'method del formulario', opciones: [{ valor: 'get', etiqueta: 'get' }, { valor: 'post', etiqueta: 'post' }], valor: 'get' },
+      { id: 'verbo', tipo: 'opciones', etiqueta: 'Método de la petición', opciones: [{ valor: 'post', etiqueta: 'POST' }, { valor: 'get', etiqueta: 'GET' }], valor: 'post' },
     ],
-    intro: 'Elige el método del formulario y mira por dónde viajan los datos. Es un dibujo hecho con JavaScript: tu servidor real corre en C#.',
+    intro: 'Elige el método y mira si la ruta <code>/reiniciar</code> responde.',
     pasos: (v) => {
-      if (v.metodo === 'get') {
+      if (v.verbo === 'get') {
         return [
-          { nodo: 'nav', duracion: 2400, texto: 'Escribes <code>to</code> en el campo y pulsas Buscar. El formulario tiene <code>method="get"</code>.', estado: { nav: { texto: 'q = to', tono: 'cielo' } } },
-          { desde: 'nav', hasta: 'srv', paquete: 'GET /buscar?q=to', tono: 'uva', duracion: 1500, texto: 'Los datos van pegados a la dirección. Cualquiera que mire la barra los lee y quedan en el historial.' },
-          { nodo: 'srv', duracion: 2000, texto: 'La ruta <code>/buscar</code> lee <code>q</code> y filtra los productos.', estado: { srv: { texto: 'q = to', tono: 'uva' } } },
-          { desde: 'srv', hasta: 'nav', paquete: '200 + JSON', tono: 'hoja', duracion: 1400, texto: 'Responde la lista de productos que contienen <code>to</code>.', estado: { srv: null } },
-          { nodo: 'nav', duracion: 2400, texto: 'La dirección con <code>q=to</code> se puede copiar, guardar o compartir. Para buscar sirve; para un pedido, no.', estado: { nav: { texto: 'lista', tono: 'hoja' } } },
+          yo('Escribes <code>/reiniciar</code> en la barra del navegador. La barra solo hace GET.', { estado: { nav: { texto: 'GET', tono: 'cielo' } } }),
+          va('GET /reiniciar', 'Viaja la petición con el verbo GET.'),
+          ser('La ruta existe, pero <code>MapPost</code> solo acepta POST.', { estado: { srv: { texto: 'ruta solo POST', tono: 'tomate' } }, codigo: cd('cod-p1', [1], 'Solo POST') }),
+          vuelve('405', 'Responde <code>405 Method Not Allowed</code>: la ruta es correcta, el verbo no.', 'tomate', { estado: { srv: null } }),
         ];
       }
       return [
-        { nodo: 'nav', duracion: 2400, texto: 'Llenas el pedido y pulsas Enviar. El formulario tiene <code>method="post"</code>.', estado: { nav: { texto: 'un sobre', tono: 'maiz' } } },
-        { desde: 'nav', hasta: 'srv', paquete: 'POST /pedidos/formulario', tono: 'uva', duracion: 1700, texto: 'La dirección va limpia. Los datos viajan en el cuerpo, como un sobre cerrado.' },
-        { nodo: 'srv', duracion: 2400, texto: 'La ruta lee el cuerpo, valida y guarda el pedido en la lista.', estado: { srv: { texto: 'pedido guardado', tono: 'hoja' } } },
-        { desde: 'srv', hasta: 'nav', paquete: '302 Found', tono: 'hoja', duracion: 1400, texto: 'Responde con una redirección a otra página. Tres diapositivas más adelante se explica paso a paso (Post/Redirect/Get).', estado: { srv: null } },
+        yo('En Thunder Client eliges el método <strong>POST</strong> y escribes <code>/reiniciar</code>.', { estado: { nav: { texto: 'POST', tono: 'maiz' } } }),
+        va('POST /reiniciar', 'Viaja la petición. No lleva datos: este POST solo dice "haz esto".'),
+        ser('<code>MapPost</code> registra una ruta que acepta únicamente POST. La función no recibe parámetros.', { estado: { srv: { texto: 'ruta POST', tono: 'uva' } }, codigo: cd('cod-p1', [1], 'Solo el verbo POST') }),
+        vuelve('200 Reiniciando', 'Responde <code>200</code> con el texto de la función.', 'hoja', { estado: { srv: null }, codigo: cd('cod-p1', [1], 'La respuesta') }),
       ];
     },
   });
 
-  /* ====== Diapositiva 7: el mismo formulario con GET y con POST ====== */
-  (() => {
-    const url = $('#sim-url');
-    const msg = $('#sim-msg');
-    const resp = $('#sim-resp');
-    let metodo = 'post';
-    const pintar = () => {
-      const cliente = $('#sim-cliente').value;
-      const producto = $('#sim-producto').value;
-      const cantidad = $('#sim-cantidad').value;
-      const sinName = $('#sim-sinname').getAttribute('aria-checked') === 'true';
-      const pares = [['cliente', cliente], ['producto', producto]];
-      if (!sinName) pares.push(['cantidad', cantidad]);
-      const qs = new URLSearchParams(pares).toString();
-      if (metodo === 'get') {
-        url.textContent = 'localhost:5100/pedidos/formulario?' + qs;
-        pintarTerm(msg, [
-          [['t-cmd', 'GET /pedidos/formulario?' + qs + ' HTTP/1.1']],
-          [['t-enc', 'Host: localhost:5100']],
-          [['t-etq', 'sin cuerpo']],
-        ], false);
-        pintarResp(resp, { estado: '405 Method Not Allowed', tono: 'tomate', cuerpo: '', nota: 'La ruta <code>/pedidos/formulario</code> solo acepta POST. Los datos viajaron a la vista en la dirección y nadie los lee.', notaMal: true });
-      } else {
-        url.textContent = 'localhost:5100/formulario.html';
-        pintarTerm(msg, [
-          [['t-cmd', 'POST /pedidos/formulario HTTP/1.1']],
-          [['t-enc', 'Host: localhost:5100']],
-          [['t-enc', 'Content-Type: application/x-www-form-urlencoded']],
-          [['t-enc', 'Content-Length: ' + bytes(qs)]],
-          [['t-enc', '\u00A0']],
-          [['t-body', qs]],
-        ], false);
-        const cantOk = !sinName && /^-?\d+$/.test(cantidad.trim());
-        if (!cantOk) {
-          pintarResp(resp, { estado: '400 Bad Request', tono: 'tomate', cuerpo: '', nota: sinName ? 'Sin <code>name</code> el campo no viaja. El servidor no puede armar el pedido y responde 400 sin cuerpo.' : 'La cantidad no es un entero: el servidor no puede leer el formulario y responde 400 sin cuerpo.', notaMal: true });
-        } else {
-          const error = validarPedido({ cliente, producto, cantidad: Number(cantidad) });
-          if (error) pintarResp(resp, { estado: '400 Bad Request', tono: 'tomate', cuerpo: jsonCorto({ error }), notaMal: true });
-          else pintarResp(resp, { estado: '302 Found', cabeceras: ['Location: /pedidos.html'], cuerpo: '', nota: 'La dirección de la barra no cambió con los datos: el POST no los puso ahí.' });
-        }
-      }
-    };
-    $('#sim-metodo').addEventListener('kit:cambio', (e) => { metodo = e.detail; pintar(); });
-    $('#sim-sinname').addEventListener('kit:cambio', pintar);
-    ['#sim-cliente', '#sim-producto', '#sim-cantidad'].forEach((s) => $(s).addEventListener('input', pintar));
-    pintar();
-  })();
-
-  /* ====== Diapositiva 8: el atributo name y el cuerpo codificado ====== */
-  (() => {
-    const cod = Kit.codigo('cod-form-html');
-    const cuerpo = $('#enc-cuerpo');
-    const campos = [
-      { id: '#enc-cliente', clave: 'cliente', linea: 4 },
-      { id: '#enc-producto', clave: 'producto', linea: 8 },
-      { id: '#enc-cantidad', clave: 'cantidad', linea: 15 },
-    ];
-    const codif = (v) => new URLSearchParams([['x', v]]).toString().slice(2);
-    const pintar = () => {
-      const segs = [];
-      campos.forEach((c, i) => {
-        if (i) segs.push(['t-tn', '&']);
-        segs.push(['t-cmd', c.clave], ['t-tn', '='], ['t-ok', codif($(c.id).value)]);
-      });
-      pintarTerm(cuerpo, [segs], false);
-    };
-    campos.forEach((c) => {
-      $(c.id).addEventListener('input', pintar);
-      $(c.id).addEventListener('focus', () => cod.resaltar([c.linea], 'Este <code>name</code> es la clave <code>' + c.clave + '</code>'));
-    });
-    pintar();
-  })();
-
-  /* ====== Diapositiva 9: piezas del código que recibe el formulario ====== */
-  (() => {
-    const cod = Kit.codigo('cod-mappost');
-    const exp = $('#exp-mappost');
-    const piezas = [
-      { lineas: [1], nota: 'Solo peticiones POST', texto: '<strong><code>MapPost</code></strong> registra una ruta para peticiones <code>POST</code>. Si alguien pide esa dirección con GET, el servidor responde <code>405</code>.' },
-      { lineas: [1], nota: 'El objeto sale del formulario', texto: '<strong><code>[FromForm]</code></strong> le pide a ASP.NET Core armar <code>NuevoPedido</code> con los campos del formulario, emparejados por nombre. Si falta un campo o no se puede convertir, el método ni se ejecuta y responde <code>400</code> sin cuerpo.' },
-      { lineas: [3], nota: 'Validación a mano', texto: '<strong><code>Validar</code></strong> revisa tres cosas: cliente obligatorio, producto que vendemos y cantidad de 1 a 100. Devuelve el mensaje de error o <code>null</code>. Las validaciones con atributos se ven en el tema de validaciones.' },
-      { lineas: [4, 5, 6, 7], nota: 'El cliente supo qué falló', texto: '<strong><code>Results.BadRequest</code></strong> responde <code>400</code> con un cuerpo <code>{"error": "..."}</code>: dice qué dato estaba mal.' },
-      { lineas: [9], nota: 'Se guarda en memoria', texto: '<strong>Guardar</strong> agrega el pedido a la lista. Vive en memoria: al detener el servidor se pierde. La base de datos llega con el tema de Entity Framework Core.' },
-      { lineas: [11, 12], nota: '302 con Location', texto: '<strong><code>Results.Redirect</code></strong> responde <code>302</code> con <code>Location: /pedidos.html</code>. Es el Post/Redirect/Get que la siguiente diapositiva muestra paso a paso.' },
-      { lineas: [13], nota: 'Solo para esta etapa', texto: '<strong><code>DisableAntiforgery</code></strong>: un formulario de <code>wwwroot</code> no puede traer el token antifalsificación. Sin esta llamada, el primer POST responde <code>500</code>. La falla provocada lo muestra y la etapa 8 recupera la protección.' },
-    ];
-    const botones = $$('#piezas-post [data-pieza]');
-    const elegir = (i) => {
-      botones.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
-      cod.resaltar(piezas[i].lineas, piezas[i].nota);
-      exp.innerHTML = piezas[i].texto;
-    };
-    botones.forEach((b) => b.addEventListener('click', () => elegir(Number(b.dataset.pieza))));
-    elegir(0);
-  })();
-
-  /* ====== Diapositiva 10: Post/Redirect/Get ====== */
-  Kit.flujo('#f-prg', {
-    titulo: 'Simulación: POST, redirección y GET',
+  /* ----- Paso 2: POST con JSON, el código ----- */
+  Kit.flujo('#f-p2', {
+    titulo: 'Simulación: de qué JSON se trata',
     icono: 'red',
-    vista: [700, 262],
-    nodos: [
-      { id: 'nav', x: 105, y: 112, icono: 'navegador', etiqueta: 'Navegador', sub: 'el cliente', tono: 'cielo', ancho: 150 },
-      { id: 'srv', x: 595, y: 112, icono: 'servidor', etiqueta: 'Tu servidor', sub: 'etapa 6', tono: 'uva', ancho: 150 },
-    ],
-    conectores: [{ desde: 'nav', hasta: 'srv', curva: -40 }, { desde: 'srv', hasta: 'nav', curva: -40 }],
+    vista: [670, 262],
+    nodos: [CL(), SV()],
+    conectores: IDA_VUELTA,
     parametros: [
-      { id: 'invalido', tipo: 'interruptor', etiqueta: 'Cliente vacío', valor: false, tono: 'tomate' },
-      { id: 'recarga', tipo: 'interruptor', etiqueta: 'Recargar con F5 al final', valor: false, tono: 'maiz' },
+      { id: 'caso', tipo: 'opciones', etiqueta: 'Qué envías', opciones: [{ valor: 'ok', etiqueta: 'Válido' }, { valor: 'nombre', etiqueta: 'Sin nombre' }, { valor: 'precio', etiqueta: 'Precio -5' }, { valor: 'roto', etiqueta: 'JSON roto' }], valor: 'ok' },
     ],
-    intro: 'Mira qué pide el navegador después del POST. Activa "Cliente vacío" para ver el caso inválido.',
+    intro: 'Elige qué JSON envías y mira hasta dónde llega dentro de la función.',
     pasos: (v) => {
+      const envio = {
+        ok: 'Envías <code>{"nombre":"Mango","precio":3000}</code> con Body JSON.',
+        nombre: 'Envías <code>{"precio":3000}</code>, sin nombre.',
+        precio: 'Envías <code>{"nombre":"Mango","precio":-5}</code>.',
+        roto: 'Envías un JSON incompleto: <code>{"nombre":</code>.',
+      }[v.caso];
       const base = [
-        { nodo: 'nav', duracion: 2000, texto: 'Pulsas Enviar pedido en <code>formulario.html</code>.', estado: { nav: { texto: 'formulario', tono: 'maiz' } } },
-        { desde: 'nav', hasta: 'srv', paquete: 'POST /pedidos/formulario', tono: 'uva', duracion: 1700, texto: 'El formulario viaja con POST y su cuerpo.' },
+        yo(envio, { estado: { nav: { texto: 'Body JSON', tono: 'maiz' } } }),
+        va('POST /productos', 'Viaja con <code>Content-Type: application/json</code>.'),
       ];
-      if (v.invalido) {
+      if (v.caso === 'roto') {
         base.push(
-          { nodo: 'srv', duracion: 2400, texto: '<code>Validar</code> devuelve <em>El nombre del cliente es obligatorio</em>. No se guarda nada.', estado: { srv: { texto: 'cliente vacío', tono: 'tomate' } } },
-          { desde: 'srv', hasta: 'nav', paquete: '400 + JSON', tono: 'tomate', duracion: 1400, texto: 'Responde <code>400</code> con el mensaje. No hay redirección.', estado: { srv: null } },
-          { nodo: 'nav', duracion: 3000, texto: 'El navegador muestra el JSON tal cual: <code>{"error":"El nombre del cliente es obligatorio"}</code>. Si recargas, pregunta si quieres reenviar el formulario.', estado: { nav: { texto: 'JSON del error', tono: 'tomate' } } },
+          ser('C# no puede convertir el cuerpo en un <code>Producto</code> y rechaza la petición antes de ejecutar tu función.', { estado: { srv: { texto: 'la función no corre', tono: 'tomate' } } }),
+          vuelve('400 vacío', 'Responde <code>400</code> con el cuerpo vacío: el mensaje no sale de tu <code>if</code>.', 'tomate', { estado: { srv: null } }),
         );
         return base;
       }
       base.push(
-        { nodo: 'srv', duracion: 2200, texto: '<code>Validar</code> acepta el pedido y lo agrega a la lista, en memoria.', estado: { srv: { texto: 'pedido 1', tono: 'hoja' } } },
-        { desde: 'srv', hasta: 'nav', paquete: '302 /pedidos.html', tono: 'hoja', duracion: 1500, texto: 'La respuesta no trae una página: trae <code>Location: /pedidos.html</code>.', estado: { srv: null } },
-        { desde: 'nav', hasta: 'srv', paquete: 'GET /pedidos.html', tono: 'uva', duracion: 1500, texto: 'El navegador sigue la redirección solo y pide esa dirección con <strong>GET</strong>.' },
-        { desde: 'srv', hasta: 'nav', paquete: '200 + HTML', tono: 'hoja', duracion: 1400, texto: 'Llega la página con la tabla de pedidos.' },
-        { nodo: 'nav', duracion: 2600, texto: 'Ves la lista. La barra dice <code>/pedidos.html</code>, no la ruta del POST.', estado: { nav: { texto: '/pedidos.html', tono: 'hoja' } } },
+        ser('El parámetro <code>(Producto nuevo)</code> es el JSON: C# lo lee y arma un <code>Producto</code>. Un campo ausente queda en 0 o vacío.', { estado: { srv: { texto: 'Producto armado', tono: 'uva' } }, codigo: cd('cod-p2', [1], 'El cuerpo es el parámetro') }),
+        ser('El <code>if</code> valida antes de guardar: un nombre vacío o un precio menor o igual que 0 es inválido.', { codigo: cd('cod-p2', [3], 'Validar antes de guardar') }),
       );
-      if (v.recarga) {
+      if (v.caso === 'ok') {
         base.push(
-          { desde: 'nav', hasta: 'srv', paquete: 'GET /pedidos.html', tono: 'uva', duracion: 1500, texto: 'Pulsas F5: el navegador repite el último GET, no el POST.' },
-          { desde: 'srv', hasta: 'nav', paquete: '200 + HTML', tono: 'hoja', duracion: 1400, texto: 'Misma página.' },
-          { nodo: 'nav', duracion: 2800, texto: 'La lista sigue con un solo pedido: recargar no creó otro.', estado: { nav: { texto: 'sin duplicados', tono: 'hoja' } } },
+          ser('Crea el producto con el siguiente <code>Id</code> y lo guarda. El <code>Id</code> lo decide el servidor; si el cliente envía uno, se ignora.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } }, codigo: cd('cod-p2', [8, 9], 'El servidor asigna el Id') }),
+          vuelve('201 Created', 'Responde <code>201</code> con el producto y el encabezado <code>Location: /productos/4</code>.', 'hoja', { estado: { srv: null }, codigo: cd('cod-p2', [11], 'Creado') }),
+        );
+      } else {
+        base.push(
+          ser('La validación falla: no se guarda nada.', { estado: { srv: { texto: 'inválido', tono: 'tomate' } }, codigo: cd('cod-p2', [4, 5, 6], 'Rechaza el dato') }),
+          vuelve('400 + error', 'Responde <code>400</code> con <code>{"error":"Nombre obligatorio y precio mayor que 0"}</code>. Este mensaje sí sale de tu <code>if</code>.', 'tomate', { estado: { srv: null }, codigo: cd('cod-p2', [5], 'El mensaje') }),
         );
       }
       return base;
     },
   });
 
-  /* ====== Diapositiva 11: qué responde el servidor ====== */
+  /* ----- Paso 2: probar el JSON ----- */
   (() => {
-    const resp = $('#pr-resp');
-    const nota = $('#pr-contador');
-    let guardados = 0;
-    let producto = 'Tomate';
-    let logrado = false;
-    const pistas = () => { nota.textContent = guardados ? 'Pedidos guardados en memoria: ' + guardados + '.' : 'Todavía no hay pedidos guardados.'; };
-    resp.innerHTML = '<p class="rp-nota" style="border: 0; padding: 0">Envía el formulario para ver qué responde la ruta. Cambia la cantidad por <code>abc</code> o deja el cliente vacío.</p>';
-    pistas();
-    $('#pr-producto').addEventListener('kit:cambio', (e) => { producto = e.detail; });
+    const resp = $('#pj-resp');
+    const lista = [{ id: 1, nombre: 'Papa', precio: 2500 }, { id: 2, nombre: 'Tomate', precio: 3500 }, { id: 3, nombre: 'Zanahoria', precio: 4500 }];
+    let ct = 'json';
+    const vacio = (estado, tono, nota) => ({ estado, tono, cuerpo: '', nota, notaMal: true });
+    /* Imita las reglas de Program.cs (paso 2). Las respuestas salen del servidor real. */
+    const recibir = (texto) => {
+      if (ct !== 'json') return vacio('415 Unsupported Media Type', 'tomate', 'Sin <code>Content-Type: application/json</code> la ruta no sabe leer el cuerpo y responde <code>415</code> antes de ejecutar tu función.');
+      let d;
+      try { d = JSON.parse(texto); } catch (e) {
+        const z = /"([^"]+)"\s*:\s*0\d/.exec(texto);
+        if (z) return { estado: '400 Bad Request', tono: 'tomate', cuerpo: "Invalid leading zero before '0'. Path: $." + z[1], nota: 'En JSON un número no puede empezar con un cero extra: <code>00</code> no es válido. Escribe <code>0</code> o <code>1500</code>.', notaMal: true };
+        return vacio('400 Bad Request', 'tomate', 'El JSON está roto: C# no puede convertirlo en un <code>Producto</code> y rechaza la petición antes de ejecutar tu función.');
+      }
+      if (d === null || typeof d !== 'object' || Array.isArray(d)) return vacio('400 Bad Request', 'tomate', 'El cuerpo no es un objeto: C# no puede convertirlo en un <code>Producto</code>.');
+      const buscar = (k) => { const c = Object.keys(d).find((x) => x.toLowerCase() === k); return c === undefined ? undefined : d[c]; };
+      let nombre = buscar('nombre');
+      let precio = buscar('precio');
+      if (nombre === undefined || nombre === null) nombre = '';
+      if (precio === undefined) precio = 0;
+      if (typeof precio === 'string' && /^-?\d+(\.\d+)?$/.test(precio.trim())) precio = Number(precio);
+      if (typeof nombre !== 'string' || typeof precio !== 'number') return vacio('400 Bad Request', 'tomate', 'C# no puede convertir un valor en el tipo que pide <code>Producto</code> y rechaza la petición antes de ejecutar tu función.');
+      if (!nombre.trim() || precio <= 0) return { estado: '400 Bad Request', tono: 'tomate', cuerpo: jsonCorto({ error: 'Nombre obligatorio y precio mayor que 0' }), nota: 'Esta respuesta sale de tu <code>if</code>.', notaMal: true };
+      const producto = { id: lista.length + 1, nombre, precio };
+      lista.push(producto);
+      const conId = buscar('id') !== undefined;
+      return { estado: '201 Created', cabeceras: ['Location: /productos/' + producto.id], cuerpo: jsonCorto(producto), nota: 'Guardado en la lista, en memoria.' + (conId ? ' El <code>id</code> que enviaste se ignoró: el servidor usa el siguiente número.' : '') };
+    };
     const enviar = () => {
-      const cliente = $('#pr-cliente').value;
-      const cantTxt = $('#pr-cantidad').value;
-      if (!/^-?\d+$/.test(cantTxt.trim())) {
-        pintarResp(resp, { peticion: 'POST /pedidos/formulario', enviado: ['cliente=' + cliente, 'producto=' + producto, 'cantidad=' + cantTxt], estado: '400 Bad Request', tono: 'tomate', cuerpo: '', nota: 'El servidor no pudo convertir <code>' + esc(cantTxt) + '</code> en un entero. <code>[FromForm]</code> falla antes de ejecutar el método: <code>Validar</code> ni corre.' + (logrado ? '' : ' <strong>Reto logrado:</strong> 400 con el cuerpo vacío.'), notaMal: true });
-        logrado = true;
-        return;
-      }
-      const error = validarPedido({ cliente, producto, cantidad: Number(cantTxt) });
-      if (error) {
-        pintarResp(resp, { peticion: 'POST /pedidos/formulario', enviado: ['cliente=' + cliente, 'producto=' + producto, 'cantidad=' + cantTxt], estado: '400 Bad Request', tono: 'tomate', cuerpo: jsonCorto({ error }), nota: '<code>Validar</code> rechazó el dato y devolvió este mensaje.', notaMal: true });
-      } else {
-        guardados += 1;
-        pintarResp(resp, { peticion: 'POST /pedidos/formulario', enviado: ['cliente=' + cliente, 'producto=' + producto, 'cantidad=' + cantTxt], estado: '302 Found', cabeceras: ['Location: /pedidos.html'], cuerpo: '', nota: 'Pedido ' + guardados + ' guardado. El navegador sigue la redirección y pide <code>/pedidos.html</code> con GET.' });
-      }
-      pistas();
+      const texto = $('#pj-body').value;
+      pintarResp(resp, Object.assign({ peticion: 'POST /productos', enviado: [texto] }, recibir(texto)));
     };
-    $('#pr-enviar').addEventListener('click', enviar);
-    $('#pr-ejemplo').addEventListener('click', () => { $('#pr-cantidad').value = 'abc'; enviar(); });
-  })();
-
-  /* ====== Diapositiva 12: falla provocada sin DisableAntiforgery ====== */
-  (() => {
-    const cod = Kit.codigo('cod-af');
-    const resp = $('#af-resp');
-    const term = $('#af-term');
-    const conAf = 'app.MapPost("/pedidos/formulario", ([FromForm] NuevoPedido nuevo) =>\n{\n    // ...\n}).DisableAntiforgery();';
-    const sinAf = 'app.MapPost("/pedidos/formulario", ([FromForm] NuevoPedido nuevo) =>\n{\n    // ...\n});';
-    const inicio = () => {
-      resp.innerHTML = '<p class="rp-nota" style="border: 0; padding: 0">Pulsa "Enviar el formulario" con y sin la llamada y compara.</p>';
-      pintarTerm(term, [[['t-tn', 'sin mensajes todavía']]], false);
-    };
-    inicio();
-    $('#af-quitar').addEventListener('kit:cambio', (e) => { cod.fijarTexto(e.detail ? sinAf : conAf); inicio(); });
-    $('#af-enviar').addEventListener('click', () => {
-      const quitado = $('#af-quitar').getAttribute('aria-checked') === 'true';
-      if (!quitado) {
-        pintarResp(resp, { peticion: 'POST /pedidos/formulario', estado: '302 Found', cabeceras: ['Location: /pedidos.html'], cuerpo: '', nota: 'Con la llamada, el servidor atiende el formulario sin pedir token.' });
-        pintarTerm(term, [[['t-tn', 'sin mensajes: la petición se atendió sin errores']]]);
-      } else {
-        pintarResp(resp, { peticion: 'POST /pedidos/formulario', estado: '500 Internal Server Error', tono: 'tomate', cuerpo: '', nota: 'Compiló y arrancó. Falla en el primer POST, y el motivo solo aparece en la consola. La etapa 8 recupera la protección: Razor agrega el token solo.', notaMal: true });
-        pintarTerm(term, [[['t-mal', 'System.InvalidOperationException: Endpoint HTTP: POST /pedidos/formulario contains anti-forgery metadata, but a middleware was not found that supports anti-forgery.']]]);
-      }
+    resp.innerHTML = '<p class="rp-nota" style="border: 0; padding: 0">Pulsa Send, o elige un caso para cargarlo y enviarlo.</p>';
+    $('#pj-ct').addEventListener('kit:cambio', (e) => { ct = e.detail; });
+    $('#pj-enviar').addEventListener('click', enviar);
+    $$('[data-pj]').forEach((b) => b.addEventListener('click', () => { $('#pj-body').value = b.dataset.pj; enviar(); }));
+    $('#pj-lista').addEventListener('click', () => {
+      pintarResp(resp, { peticion: 'GET /productos', estado: '200 OK', cuerpo: jsonCorto(lista), nota: lista.length + ' productos en la lista.' });
     });
   })();
 
-  /* ====== Diapositiva 13: JSON con fetch (lo que recibe el servidor) ====== */
+  /* ----- Paso 3: la regla de los tres lugares ----- */
+  Kit.flujo('#f-p3a', {
+    titulo: 'Simulación: de dónde sale cada parámetro',
+    icono: 'red',
+    vista: [670, 300],
+    nodos: [
+      { id: 'ruta', x: 115, y: 46, etiqueta: 'La ruta', sub: '/productos/2/comprar', tono: 'cielo', ancho: 200, alto: 70 },
+      { id: 'query', x: 115, y: 150, etiqueta: 'El query string', sub: '?cantidad=3', tono: 'maiz', ancho: 200, alto: 70 },
+      { id: 'cuerpo', x: 115, y: 254, etiqueta: 'El cuerpo', sub: '{"nombre":"Mango"}', tono: 'uva', ancho: 200, alto: 70 },
+      { id: 'fn', x: 545, y: 150, etiqueta: 'La función', sub: 'parámetros', tono: 'hoja', ancho: 190, alto: 110 },
+    ],
+    conectores: [
+      { desde: 'ruta', hasta: 'fn' },
+      { desde: 'query', hasta: 'fn' },
+      { desde: 'cuerpo', hasta: 'fn' },
+    ],
+    intro: 'Mira de dónde llega cada parámetro. La regla se aplica en este orden.',
+    pasos: () => [
+      { desde: 'ruta', hasta: 'fn', paquete: 'id = 2', tono: 'cielo', duracion: 1700, texto: 'Si su nombre está entre llaves en la ruta, sale de la ruta: <code>{id:int}</code> y <code>int id</code>. El <code>:int</code> exige un entero.', codigo: cd('cod-p3a', [1], 'id sale de la ruta'), estado: { fn: { texto: 'id', tono: 'cielo' } } },
+      { desde: 'query', hasta: 'fn', paquete: 'cantidad = 3', tono: 'maiz', duracion: 1700, texto: 'Si no está en la ruta, sale del query string: <code>?cantidad=3</code>. El <code>= 1</code> es su valor por defecto si no la envías.', codigo: cd('cod-p3a', [1], 'cantidad sale del query'), estado: { fn: { texto: 'id, cantidad', tono: 'maiz' } } },
+      { desde: 'cuerpo', hasta: 'fn', paquete: 'Producto nuevo', tono: 'uva', duracion: 1700, texto: 'Si es un objeto como <code>Producto</code>, sale del cuerpo, como en el paso 2: <code>(Producto nuevo)</code>.', estado: { fn: { texto: 'Producto', tono: 'uva' } } },
+      { nodo: 'fn', duracion: 2800, texto: 'Una sola regla, tres lugares: ruta, query string y cuerpo. La decide cómo declaras los parámetros.', estado: { fn: null } },
+    ],
+  });
+
+  /* ----- Paso 3: comprar ----- */
+  Kit.flujo('#f-p3b', {
+    titulo: 'Simulación: POST a comprar',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL(), SV()],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'dir', tipo: 'opciones', etiqueta: 'Dirección', opciones: [
+        { valor: 'sin', etiqueta: 'Sin cantidad' }, { valor: 'tres', etiqueta: 'cantidad=3' }, { valor: 'cero', etiqueta: 'cantidad=0' },
+        { valor: 'abc', etiqueta: 'cantidad=abc' }, { valor: 'p99', etiqueta: 'Producto 99' }, { valor: 'pabc', etiqueta: 'Producto abc' },
+      ], valor: 'tres' },
+    ],
+    intro: 'Elige una dirección y mira qué parte de la función responde. Todas van sin cuerpo.',
+    pasos: (v) => {
+      const D = {
+        sin: ['/productos/2/comprar', 'POST .../2/comprar'],
+        tres: ['/productos/2/comprar?cantidad=3', 'POST ...?cantidad=3'],
+        cero: ['/productos/2/comprar?cantidad=0', 'POST ...?cantidad=0'],
+        abc: ['/productos/2/comprar?cantidad=abc', 'POST ...?cantidad=abc'],
+        p99: ['/productos/99/comprar', 'POST .../99/comprar'],
+        pabc: ['/productos/abc/comprar', 'POST .../abc/comprar'],
+      }[v.dir];
+      const base = [
+        yo('Envías POST a <code>' + D[0] + '</code>, sin Body: todo va en la dirección.'),
+        va(D[1], 'Viaja la petición.'),
+      ];
+      if (v.dir === 'pabc') {
+        base.push(
+          ser('La ruta exige <code>{id:int}</code>. Con <code>abc</code> ninguna ruta coincide y tu función ni se ejecuta.', { estado: { srv: { texto: 'sin ruta', tono: 'tomate' } }, codigo: cd('cod-p3b', [1], '{id:int} exige un número') }),
+          vuelve('404 vacío', 'Responde <code>404</code> con el cuerpo vacío.', 'tomate', { estado: { srv: null } }),
+          yo('Dos vacíos que parecen iguales: aquí es <code>404</code>, porque ninguna ruta coincide. Con <code>cantidad=abc</code> es <code>400</code>, porque la ruta existe pero el dato no se convierte.', { duracion: 3600 }),
+        );
+        return base;
+      }
+      if (v.dir === 'abc') {
+        base.push(
+          ser('La ruta coincide, pero C# no puede convertir <code>abc</code> en un número y rechaza la petición antes de ejecutar tu función.', { estado: { srv: { texto: 'la función no corre', tono: 'tomate' } }, codigo: cd('cod-p3b', [1], 'cantidad es int') }),
+          vuelve('400 vacío', 'Responde <code>400</code> con el cuerpo vacío.', 'tomate', { estado: { srv: null } }),
+          yo('Dos vacíos que parecen iguales: aquí es <code>400</code>, porque la ruta existe pero el dato no se convierte. Con <code>/productos/abc/comprar</code> es <code>404</code>.', { duracion: 3600 }),
+        );
+        return base;
+      }
+      const cant = { sin: 1, tres: 3, cero: 0, p99: 1 }[v.dir];
+      const por = v.dir === 'sin' || v.dir === 'p99' ? ' (el valor por defecto)' : '';
+      base.push(
+        ser('La ruta coincide. <code>id</code> sale de la ruta y <code>cantidad</code> vale ' + cant + por + '.', { codigo: cd('cod-p3b', [1], 'id y cantidad') }),
+        ser(v.dir === 'p99' ? '<code>FirstOrDefault</code> no encuentra el producto 99 y devuelve <code>null</code>.' : '<code>FirstOrDefault</code> busca el producto con ese <code>Id</code> y encuentra Tomate.', { estado: { srv: { texto: v.dir === 'p99' ? 'null' : 'Tomate', tono: v.dir === 'p99' ? 'tomate' : 'uva' } }, codigo: cd('cod-p3b', [3], 'Buscar el producto') }),
+      );
+      if (v.dir === 'p99') {
+        base.push(
+          ser('<code>producto is null</code>: no existe, así que responde <code>NotFound</code> con un mensaje.', { codigo: cd('cod-p3b', [5, 6, 7, 8], 'No existe') }),
+          vuelve('404 + error', 'Responde <code>404</code> con <code>{"error":"No existe el producto 99"}</code>.', 'tomate', { estado: { srv: null } }),
+        );
+      } else if (v.dir === 'cero') {
+        base.push(
+          ser('<code>cantidad &lt; 1</code>: una cantidad inválida responde <code>400</code>.', { estado: { srv: { texto: 'cantidad 0', tono: 'tomate' } }, codigo: cd('cod-p3b', [10, 11, 12, 13], 'Cantidad inválida') }),
+          vuelve('400 + error', 'Responde <code>400</code> con <code>{"error":"La cantidad debe ser al menos 1"}</code>.', 'tomate', { estado: { srv: null } }),
+        );
+      } else {
+        const total = 3500 * cant;
+        base.push(
+          ser('<code>Precio * cantidad</code>: 3500 por ' + cant + ' da ' + total + '.', { estado: { srv: { texto: 'total ' + total, tono: 'hoja' } }, codigo: cd('cod-p3b', [15], 'Calcular el total') }),
+          vuelve('200 total ' + total, 'Responde <code>200</code> con <code>{"producto":"Tomate","cantidad":' + cant + ',"total":' + total + '}</code>.', 'hoja', { estado: { srv: null }, codigo: cd('cod-p3b', [16], 'Responder') }),
+        );
+      }
+      return base;
+    },
+  });
+
+  /* ----- Paso 4: cómo viaja un formulario ----- */
+  (() => {
+    const PET = { form: BLOQUES.peticion_form.trimEnd(), json: BLOQUES.peticion_json.trimEnd() };
+    Kit.flujo('#f-p4a', {
+      titulo: 'Simulación: el cuerpo según el formato',
+      icono: 'red',
+      vista: [670, 262],
+      nodos: [CL(), SV()],
+      conectores: IDA_VUELTA,
+      parametros: [
+        { id: 'formato', tipo: 'opciones', etiqueta: 'Body en Thunder Client', opciones: [{ valor: 'form', etiqueta: 'Form-encode' }, { valor: 'json', etiqueta: 'JSON' }], valor: 'form' },
+      ],
+      alRecalcular: (v) => { Kit.codigo('cod-p4a').fijarTexto(PET[v.formato]); },
+      intro: 'Cambia el formato del Body y mira cómo cambia el cuerpo que viaja.',
+      pasos: (v) => {
+        const f = v.formato === 'form';
+        return [
+          yo('Armas la petición. El primer renglón dice el verbo y la ruta.', { codigo: cd('cod-p4a', [1]) }),
+          yo('El <code>Content-Type</code> dice cómo está escrito el cuerpo.' + (f ? ' En Thunder Client es la opción Form-encode.' : ''), { codigo: cd('cod-p4a', [3]) }),
+          yo(f ? 'El cuerpo es texto plano: <code>clave=valor</code> unido por <code>&amp;</code>.' : 'El cuerpo es un objeto JSON.', { codigo: cd('cod-p4a', [5]) }),
+          va(f ? 'POST formulario' : 'POST /productos', 'Viaja la petición completa.'),
+          ser(f ? 'Con ese tipo, C# necesita que le digas que lea de ahí: <code>[FromForm]</code>.' : 'Con JSON, C# lee el cuerpo solo cuando el parámetro es un objeto como <code>Producto</code>.', { estado: { srv: { texto: f ? 'lee el formulario' : 'lee el JSON', tono: 'uva' } } }),
+        ];
+      },
+    });
+  })();
+
+  /* ----- Paso 4: el código del formulario ----- */
+  Kit.flujo('#f-p4b', {
+    titulo: 'Simulación: una ruta de formulario',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL(), SV()],
+    conectores: IDA_VUELTA,
+    intro: 'Mira qué hace cada parte de la ruta cuando llega un formulario.',
+    pasos: () => [
+      yo('Envías <code>id</code>, <code>nombre</code> y <code>precio</code> con Form-encode.', { estado: { nav: { texto: 'Form-encode', tono: 'maiz' } } }),
+      va('POST formulario', 'Viaja <code>id=0&amp;nombre=Uva&amp;precio=1500</code>.'),
+      ser('<code>[FromForm]</code> le dice a C# que lea el cuerpo como formulario y no como JSON. Vive en <code>Microsoft.AspNetCore.Mvc</code>: por eso el <code>using</code> al principio del archivo.', { estado: { srv: { texto: 'lee el formulario', tono: 'uva' } }, codigo: [cd('cod-p4u', [1], 'El using'), cd('cod-p4b', [1], '[FromForm]')] }),
+      ser('<code>.DisableAntiforgery()</code> va pegado al cierre de la ruta. Thunder Client no trae el token antifalsificación.', { codigo: cd('cod-p4b', [12], 'Sin comprobar el token') }),
+      ser('La validación es la misma del paso 2: nombre obligatorio y precio mayor que 0.', { codigo: cd('cod-p4b', [3, 4, 5, 6], 'La misma validación') }),
+      ser('Guarda el producto con el siguiente <code>Id</code>, en la lista en memoria.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } }, codigo: cd('cod-p4b', [8, 9], 'Guardar') }),
+      vuelve('201 Created', 'Responde <code>201</code> con el producto, igual que la ruta de JSON.', 'hoja', { estado: { srv: null }, codigo: cd('cod-p4b', [11], 'Creado') }),
+    ],
+  });
+
+  /* ----- Paso 4: para qué sirve DisableAntiforgery ----- */
+  Kit.flujo('#f-af', {
+    titulo: 'Simulación: el formulario sin token',
+    icono: 'candado',
+    vista: [670, 262],
+    nodos: [CL(), SV()],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'caso', tipo: 'opciones', etiqueta: 'La ruta', opciones: [{ valor: 'con', etiqueta: 'Con la línea' }, { valor: 'sin', etiqueta: 'Sin la línea' }, { valor: 'prot', etiqueta: 'Sin la línea y con UseAntiforgery' }], valor: 'con' },
+    ],
+    alRecalcular: (v) => { Kit.codigo('cod-af').fijarTexto(v.caso === 'con' ? BLOQUES.af_linea.trimEnd() : BLOQUES.af_sin.trimEnd()); },
+    intro: 'Elige cómo está la ruta y mira qué pasa con un formulario que llega sin token.',
+    pasos: (v) => {
+      const base = [
+        yo('Thunder Client envía el formulario con Form-encode: trae <code>id</code>, <code>nombre</code> y <code>precio</code>, pero ningún token.', { estado: { nav: { texto: 'sin token', tono: 'maiz' } } }),
+        va('POST formulario', 'Viaja la petición.'),
+        ser('<code>[FromForm]</code> hace que .NET marque la ruta como "pide token antifalsificación".', { estado: { srv: { texto: 'pide token', tono: 'uva' } } }),
+      ];
+      if (v.caso === 'con') {
+        base.push(
+          ser('<code>.DisableAntiforgery()</code> exime a esta ruta: no se valida ningún token. No hace falta habilitar nada más.', { estado: { srv: { texto: 'ruta exenta', tono: 'hoja' } }, codigo: cd('cod-af', [1], 'Exime a la ruta') }),
+          vuelve('201 Created', 'Responde <code>201</code> con el producto. Funciona directo, sin configuración previa.', 'hoja', { estado: { srv: null } }),
+        );
+      } else if (v.caso === 'sin') {
+        base.push(
+          ser('La ruta no está exenta, pero la aplicación no tiene el middleware que valida el token (<code>UseAntiforgery</code>).', { estado: { srv: { texto: 'sin validador', tono: 'tomate' } }, codigo: cd('cod-af', [1], 'Sin la línea') }),
+          vuelve('500', 'Responde <code>500</code>. En la consola: <code>contains anti-forgery metadata, but a middleware was not found</code>.', 'tomate', { estado: { srv: null } }),
+        );
+      } else {
+        base.push(
+          ser('Con <code>AddAntiforgery()</code> y <code>UseAntiforgery()</code> activos (no se usan en este tutorial), el middleware busca el token y la cookie del formulario.', { estado: { srv: { texto: 'valida el token', tono: 'maiz' } }, codigo: cd('cod-af', [1], 'Sin la línea') }),
+          vuelve('400', 'Responde <code>400</code>: <code>The required antiforgery cookie is not present</code>. Thunder Client no la trae.', 'tomate', { estado: { srv: null } }),
+        );
+      }
+      base.push(yo('El token evita que otra página envíe formularios en tu nombre (CSRF). Una página de Razor lo agrega sola; Thunder Client no, y por eso se exime la ruta.', { duracion: 3800 }));
+      return base;
+    },
+  });
+
+  /* ----- Paso 4: el formulario es más estricto ----- */
+  (() => {
+    const resp = $('#pe-resp');
+    const term = $('#pe-term');
+    let precio = '3500.50';
+    let siguiente = 4;
+    const inicio = () => {
+      resp.innerHTML = '<p class="rp-nota" style="border: 0; padding: 0">Envía con el campo <code>id</code> y sin él. Luego prueba el precio con coma.</p>';
+      pintarTerm(term, [[['t-tn', 'sin mensajes todavía']]], false);
+    };
+    inicio();
+    $('#pe-precio').addEventListener('kit:cambio', (e) => { precio = e.detail; });
+    $('#pe-enviar').addEventListener('click', () => {
+      const sinId = $('#pe-sinid').getAttribute('aria-checked') === 'true';
+      const nombre = $('#pe-nombre').value;
+      const enviado = (sinId ? [] : ['id=0']).concat(['nombre=' + nombre, 'precio=' + precio]);
+      const peticion = 'POST /productos/formulario';
+      if (sinId) {
+        pintarResp(resp, { peticion, enviado, estado: '400 Bad Request', tono: 'tomate', cuerpo: '', nota: '<code>Producto</code> pide tres valores para construirse y el formulario trae dos. C# rechaza la petición antes de ejecutar tu código.', notaMal: true });
+        pintarTerm(term, [[['t-mal', "Microsoft.AspNetCore.Http.BadHttpRequestException: Missing required value for constructor parameter 'Id'."]]]);
+        return;
+      }
+      if (!nombre.trim()) {
+        pintarResp(resp, { peticion, enviado, estado: '400 Bad Request', tono: 'tomate', cuerpo: jsonCorto({ error: 'Nombre obligatorio y precio mayor que 0' }), nota: 'El campo llegó, pero vacío: esta respuesta sale de tu <code>if</code>.', notaMal: true });
+        pintarTerm(term, [[['t-tn', 'sin mensajes']]]);
+        return;
+      }
+      const valor = precio.replace(/,/g, '');
+      const coma = precio.indexOf(',') >= 0;
+      pintarResp(resp, { peticion, enviado, estado: '201 Created', cabeceras: ['Location: /productos/' + siguiente], cuerpo: '{"id":' + siguiente + ',"nombre":' + JSON.stringify(nombre) + ',"precio":' + valor + '}', nota: coma ? '<strong>Sin error y con un valor mal guardado:</strong> C# tomó la coma como separador de miles y guardó <code>350050</code>. Usa el punto.' : 'Con el punto decimal guarda <code>3500.50</code>.', notaMal: coma });
+      pintarTerm(term, [[['t-tn', 'sin mensajes: la petición se atendió sin errores']]]);
+      siguiente += 1;
+    });
+  })();
+
+  /* ----- Paso 5: que el servidor entregue archivos ----- */
+  Kit.flujo('#f-p5s', {
+    titulo: 'Simulación: servir archivos estáticos',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL({ etiqueta: 'Navegador', sub: 'formulario.html' }), SV()],
+    conectores: IDA_VUELTA,
+    intro: 'Mira qué hace cada línea cuando el navegador pide una página.',
+    pasos: () => [
+      yo('Creas la carpeta <code>wwwroot</code> al lado de <code>Program.cs</code>. Ahí viven tus páginas.'),
+      ser('Agregas las dos líneas justo después de <code>var app = builder.Build();</code>.', { estado: { srv: { texto: 'wwwroot', tono: 'maiz' } }, codigo: cd('cod-p5a', [1, 2], 'Dos líneas nuevas') }),
+      ser('<code>UseDefaultFiles</code> hace que <code>/</code> entregue <code>index.html</code> si existe.', { codigo: cd('cod-p5a', [1], 'La raíz entrega index.html') }),
+      ser('<code>UseStaticFiles</code> entrega el resto de los archivos de <code>wwwroot</code>.', { codigo: cd('cod-p5a', [2], 'Entrega los archivos') }),
+      va('GET /formulario.html', 'Abres <code>http://localhost:5056/formulario.html</code>.', { codigo: cd('cod-p5a', [2], 'Entrega los archivos') }),
+      vuelve('200 + HTML', 'El servidor encuentra <code>wwwroot/formulario.html</code> y lo entrega.', 'hoja', { estado: { srv: null, nav: { texto: 'el formulario', tono: 'hoja' } } }),
+      yo('Son líneas nuevas al arranque: con <code>dotnet watch</code> necesitas <kbd>Ctrl</kbd> + <kbd>R</kbd>.', { duracion: 3000 }),
+    ],
+  });
+
+  /* ----- Paso 5: enviar desde una página HTML ----- */
+  Kit.flujo('#f-p5', {
+    titulo: 'Simulación: abrir y enviar el formulario',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL({ etiqueta: 'Navegador', sub: 'formulario.html' }), SV()],
+    conectores: IDA_VUELTA,
+    intro: 'Sigue el recorrido: la página arma el POST con los name de sus campos.',
+    pasos: () => [
+      yo('Abres <code>http://localhost:5056/formulario.html</code>: el servidor entrega esta página.', { estado: { nav: { texto: 'el formulario', tono: 'hoja' } }, codigo: cd('cod-p5b', [10, 17], 'El formulario') }),
+      yo('Al pulsar el botón, el navegador hace un POST a <code>/productos/formulario</code> con <code>Content-Type: application/x-www-form-urlencoded</code>.', { codigo: cd('cod-p5b', [10], 'method y action') }),
+      yo('Cada campo lleva un <code>name</code>: es el nombre con que viaja y con que llega a tu <code>Producto</code>. Sin <code>name</code> no se envía.', { codigo: cd('cod-p5b', [13, 14], 'name decide qué viaja') }),
+      yo('El campo oculto envía <code>id=0</code>. Hace falta porque <code>Producto</code> exige <code>Id</code>; tu código lo ignora.', { codigo: cd('cod-p5b', [11], 'Un campo invisible') }),
+      yo('Escribes <code>guayaba</code> y <code>2000</code> y pulsas Guardar.', { codigo: cd('cod-p5b', [16], 'Guardar') }),
+      va('POST formulario', 'El navegador envía <code>id=0&amp;nombre=guayaba&amp;precio=2000</code>.', { codigo: cd('cod-p5b', [10], 'method y action') }),
+      ser('La ruta del paso 4 recibe el formulario y guarda el producto.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } } }),
+      vuelve('201 + JSON', 'El navegador pasa a <code>/productos/formulario</code> y muestra el JSON. Es normal: tu ruta devuelve JSON, no una página.', 'hoja', { estado: { srv: null, nav: { texto: 'JSON crudo', tono: 'maiz' } } }),
+    ],
+  });
+
+  /* ----- Paso 6: fetch, armar el envío y leer la respuesta ----- */
+  Kit.flujo('#f-p6', {
+    titulo: 'Simulación: la página con fetch',
+    icono: 'red',
+    vista: [670, 262],
+    nodos: [CL({ etiqueta: 'Navegador', sub: 'fetch.html' }), SV()],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'caso', tipo: 'opciones', etiqueta: 'Qué guardas', opciones: [{ valor: 'ok', etiqueta: 'guayaba, 2000' }, { valor: 'malo', etiqueta: 'Nombre vacío' }], valor: 'ok' },
+    ],
+    intro: 'Sigue la página línea por línea y elige qué guardas.',
+    pasos: (v) => {
+      const ok = v.caso === 'ok';
+      return [
+        yo('El formulario no tiene <code>method</code> ni <code>action</code>: ya no envía el navegador, lo hace el script. Los campos llevan <code>id</code> y no <code>name</code>.', { codigo: cd('cod-p6', [10, 11, 12, 13, 14], 'El formulario') }),
+        yo('Al enviar el formulario se dispara el evento <code>submit</code> y tu función se ejecuta.', { codigo: cd('cod-p6', [22], 'El evento submit') }),
+        yo('<code>preventDefault()</code> evita el envío normal del navegador. Sin esta línea recargaría la página y <code>fetch</code> no alcanzaría a terminar.', { codigo: cd('cod-p6', [23], 'Cancelar el envío normal') }),
+        yo('<code>Number(...)</code>: lo que escribe el usuario siempre es texto. Con <code>Number</code> el JSON lleva un número y no un texto.', { codigo: cd('cod-p6', [25, 26, 27, 28, 29], 'Armar el objeto') }),
+        yo('El encabezado <code>Content-Type: application/json</code> le dice a C# cómo leer el cuerpo. Sin él, el servidor responde <code>415</code>.', { codigo: cd('cod-p6', [33], 'Cómo leer el cuerpo') }),
+        yo('<code>JSON.stringify</code> convierte el objeto en el texto JSON que viaja en el cuerpo.', { codigo: cd('cod-p6', [34], 'Objeto a texto') }),
+        va('POST /productos', ok ? '<code>await</code> espera la respuesta antes de seguir. Se envía <code>{"id":0,"nombre":"guayaba","precio":2000}</code>.' : '<code>await</code> espera la respuesta antes de seguir. Se envía <code>{"id":0,"nombre":"","precio":500}</code>.', { codigo: cd('cod-p6', [31, 32, 35], 'fetch con await') }),
+        ser(ok ? 'El servidor valida y guarda el producto.' : 'El servidor valida y rechaza: el nombre está vacío.', { estado: { srv: { texto: ok ? 'producto 4' : 'inválido', tono: ok ? 'hoja' : 'tomate' } } }),
+        vuelve(ok ? '201 + JSON' : '400 + error', ok ? 'Responde <code>201</code> con el producto.' : 'Responde <code>400</code> con <code>{"error":"Nombre obligatorio y precio mayor que 0"}</code>.', ok ? 'hoja' : 'tomate', { estado: { srv: null } }),
+        yo('<code>await respuesta.json()</code> lee el cuerpo y lo convierte en un objeto.', { codigo: cd('cod-p6', [37], 'Leer el cuerpo') }),
+        yo('<code>respuesta.status === 201</code> decide qué mostrar.', { codigo: cd('cod-p6', [39], 'Decidir por el estado') }),
+        ok
+          ? yo('Escribe <code>Guardado: guayaba con id 4</code> y limpia el formulario.', { estado: { nav: { texto: 'Guardado', tono: 'hoja' } }, codigo: cd('cod-p6', [40, 41], 'Camino de éxito') })
+          : yo('Escribe <code>Error 400: Nombre obligatorio y precio mayor que 0</code>. Sin salir de la página.', { estado: { nav: { texto: 'Error 400', tono: 'tomate' } }, codigo: cd('cod-p6', [43], 'Camino de error') }),
+      ];
+    },
+  });
+
+  /* ----- Paso 6: reto con fetch (lo que recibe el servidor) ----- */
   (() => {
     const rec = $('#ej-recibido');
     pintarTerm(rec, [[['t-tn', 'Ejecuta el código para ver qué llega al servidor.']]], false);
@@ -6659,6 +7377,278 @@ Kit.listo(() => {
     });
   })();
 
+  /* ----- Paso 7: CORS ----- */
+  Kit.flujo('#f-p7', {
+    titulo: 'Simulación: una página en otro puerto',
+    icono: 'candado',
+    vista: [700, 262],
+    nodos: [
+      CL({ x: 105, etiqueta: 'Navegador', sub: 'página en :5300' }),
+      SV({ x: 595, sub: 'API en :5056' }),
+    ],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'envio', tipo: 'opciones', etiqueta: 'La página envía', opciones: [{ valor: 'json', etiqueta: 'JSON' }, { valor: 'form', etiqueta: 'Formulario' }], valor: 'json' },
+      { id: 'cors', tipo: 'interruptor', etiqueta: 'Política CORS activa', valor: false, tono: 'hoja' },
+    ],
+    intro: 'Cambia el tipo de envío y activa la política para ver cuándo el navegador deja pasar.',
+    pasos: (v) => {
+      const json = v.envio === 'json';
+      const pol = v.cors;
+      const ruta = json ? 'POST /productos' : 'POST formulario';
+      const base = [
+        yo(json ? 'La página de <code>:5300</code> hace un <code>fetch</code> con JSON a la API en <code>:5056</code>. Son dos orígenes: cambia el puerto.' : 'La página de <code>:5300</code> envía un formulario clásico a la API en <code>:5056</code>. Son dos orígenes.', { estado: { nav: { texto: 'otro origen', tono: 'maiz' } } }),
+      ];
+      if (json) {
+        base.push(va('OPTIONS /productos', 'Antes de un POST con JSON, el navegador envía una pregunta previa (<strong>preflight</strong>).', { tono: 'maiz' }));
+        if (!pol) {
+          base.push(
+            ser('El servidor no tiene política: responde sin <code>Access-Control-Allow-Origin</code>.', { estado: { srv: { texto: 'sin política', tono: 'tomate' } } }),
+            vuelve('sin permiso', 'El preflight vuelve sin permiso.', 'tomate', { estado: { srv: null } }),
+            yo('Bloqueado: <code>blocked by CORS policy ... preflight</code>. El POST nunca se envía y la lista no cambia.', { duracion: 3400, estado: { nav: { texto: 'bloqueado', tono: 'tomate' } } }),
+          );
+        } else {
+          base.push(
+            ser('La política <code>MiPagina</code> acepta ese origen, el encabezado <code>Content-Type</code> y el método.', { estado: { srv: { texto: 'MiPagina', tono: 'hoja' } }, codigo: cd('cod-p7', [5, 6, 7], 'Origen, encabezado y método') }),
+            vuelve('204 + Allow-Origin', 'Responde <code>204</code> con <code>Access-Control-Allow-Origin: http://localhost:5300</code>.', 'hoja', { estado: { srv: null }, codigo: cd('cod-p7u', [1], 'UseCors activa la política') }),
+            va(ruta, 'Ahora sí se envía el POST.'),
+            ser('La ruta valida y guarda el producto.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } } }),
+            vuelve('201 + JSON', 'Responde <code>201</code>. El navegador deja leer la respuesta a la página.', 'hoja', { estado: { srv: null, nav: { texto: 'Guardado', tono: 'hoja' } } }),
+          );
+        }
+        return base;
+      }
+      base.push(
+        va(ruta, 'Un formulario clásico no necesita la pregunta previa: el POST sale directo.'),
+        ser('La ruta se ejecuta y guarda el producto, con política o sin ella.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } } }),
+      );
+      if (!pol) {
+        base.push(
+          vuelve('201 sin permiso', 'El servidor responde, pero sin permiso CORS.', 'tomate', { estado: { srv: null } }),
+          yo('El navegador esconde la respuesta: <code>Failed to fetch</code>. Pero la lista sí creció. CORS no protege tu servidor.', { duracion: 3600, estado: { nav: { texto: 'Failed to fetch', tono: 'tomate' } } }),
+        );
+      } else {
+        base.push(
+          vuelve('201 + Allow-Origin', 'Responde <code>201</code> con el permiso de la política.', 'hoja', { estado: { srv: null }, codigo: [cd('cod-p7', [5], 'Origen permitido'), cd('cod-p7u', [1], 'UseCors')] }),
+          yo('Con el permiso, la página puede leer la respuesta.', { estado: { nav: { texto: 'Guardado', tono: 'hoja' } } }),
+        );
+      }
+      return base;
+    },
+  });
+
+  /* ----- Paso 7: qué orígenes deja pasar ----- */
+  Kit.flujo('#f-p7b', {
+    titulo: 'Simulación: comparar el origen',
+    icono: 'candado',
+    vista: [700, 262],
+    nodos: [
+      CL({ x: 105, etiqueta: 'Navegador', sub: 'una página' }),
+      SV({ x: 595, sub: 'WithOrigins' }),
+    ],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'origen', tipo: 'opciones', etiqueta: 'Quién pregunta', opciones: [
+        { valor: 'ok', etiqueta: 'localhost:5300' }, { valor: 'ip', etiqueta: '127.0.0.1:5300' },
+        { valor: 'puerto', etiqueta: 'localhost:5301' }, { valor: 'tc', etiqueta: 'Thunder Client' },
+      ], valor: 'ip' },
+    ],
+    intro: 'Elige quién pregunta y mira si la política lo deja pasar.',
+    pasos: (v) => {
+      const O = { ok: 'http://localhost:5300', ip: 'http://127.0.0.1:5300', puerto: 'http://localhost:5301' }[v.origen];
+      if (v.origen === 'tc') {
+        return [
+          yo('Thunder Client y <code>curl</code> no son un navegador: su petición no lleva <code>Origin</code>.'),
+          va('POST /productos', 'Viaja el POST sin encabezado <code>Origin</code>.'),
+          ser('Sin <code>Origin</code>, CORS no entra en juego: la petición pasa siempre.', { estado: { srv: { texto: 'sin Origin', tono: 'hoja' } } }),
+          vuelve('201 + JSON', 'Responde <code>201</code>. CORS es una regla del navegador.', 'hoja', { estado: { srv: null, nav: { texto: 'funciona', tono: 'hoja' } } }),
+        ];
+      }
+      const pasa = v.origen === 'ok';
+      return [
+        yo('La página está en <code>' + O + '</code>. El navegador envía el preflight con ese <code>Origin</code>.', { estado: { nav: { texto: O.replace('http://', ''), tono: 'maiz' } } }),
+        va('OPTIONS + Origin', 'Viaja la pregunta previa con el origen de la página.', { tono: 'maiz' }),
+        ser(pasa ? 'Compara el origen con la lista como texto exacto: <code>http://localhost:5300</code> coincide.' : 'Compara el origen con la lista como texto exacto: <code>' + O + '</code> no coincide con <code>http://localhost:5300</code>.', { estado: { srv: { texto: pasa ? 'coincide' : 'no coincide', tono: pasa ? 'hoja' : 'tomate' } }, codigo: cd('cod-p7b', [5], 'La lista de orígenes') }),
+        vuelve(pasa ? '204 + Allow-Origin' : '204 sin Allow-Origin', pasa ? 'Responde con <code>Access-Control-Allow-Origin: http://localhost:5300</code>.' : 'Responde sin la cabecera <code>Access-Control-Allow-Origin</code>.', pasa ? 'hoja' : 'tomate', { estado: { srv: null } }),
+        yo(pasa ? 'El navegador deja pasar el POST y la página lee la respuesta.' : 'El navegador bloquea. Aunque sea el mismo equipo, los orígenes se comparan como texto exacto.', { duracion: 3200, estado: { nav: { texto: pasa ? 'permitido' : 'bloqueado', tono: pasa ? 'hoja' : 'tomate' } } }),
+      ];
+    },
+  });
+
+  /* ----- Paso 7: probar CORS desde otro puerto ----- */
+  Kit.flujo('#f-p7c', {
+    titulo: 'Simulación: la prueba con dos puertos',
+    icono: 'candado',
+    vista: [700, 262],
+    nodos: [
+      CL({ x: 105, etiqueta: 'Navegador', sub: 'página en :5300' }),
+      SV({ x: 595, sub: 'Plaza en :5056' }),
+    ],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'cors', tipo: 'interruptor', etiqueta: 'Política MiPagina activa', valor: false, tono: 'hoja' },
+    ],
+    intro: 'Activa y desactiva la política y compara el resultado de la misma página.',
+    pasos: (v) => {
+      const base = [
+        ser('En una terminal arrancas Plaza con <code>dotnet run</code>: escucha en el puerto 5056.', { estado: { srv: { texto: 'escuchando :5056', tono: 'hoja' } } }),
+        yo('En otra terminal, en la carpeta donde guardaste <code>prueba-cors.html</code>, sirves esa carpeta en el puerto 5300.', { estado: { nav: { texto: 'servidor :5300', tono: 'maiz' } }, codigo: cd('cod-p7cmd', [1], 'Segundo origen') }),
+        yo('Abres <code>http://localhost:5300/prueba-cors.html</code> y pulsas <strong>Enviar a Plaza</strong>.', { codigo: cd('cod-p7c', [9], 'El botón') }),
+        va('OPTIONS /productos', 'El <code>fetch</code> lleva JSON a otro origen: el navegador pregunta antes (preflight).', { tono: 'maiz', codigo: cd('cod-p7c', [15, 16, 17, 18, 19], 'fetch a otro origen') }),
+      ];
+      if (!v.cors) {
+        base.push(
+          ser('Plaza no tiene política: responde sin <code>Access-Control-Allow-Origin</code>.', { estado: { srv: { texto: 'sin política', tono: 'tomate' } } }),
+          vuelve('sin permiso', 'El preflight vuelve sin permiso.', 'tomate', { estado: { srv: null } }),
+          yo('El navegador bloquea el POST y entra el <code>catch</code>: la página escribe <code>Bloqueado: Failed to fetch</code>.', { duracion: 3400, estado: { nav: { texto: 'bloqueado', tono: 'tomate' } }, codigo: cd('cod-p7c', [22, 23], 'El catch') }),
+        );
+      } else {
+        base.push(
+          ser('La política <code>MiPagina</code> acepta el origen <code>http://localhost:5300</code>.', { estado: { srv: { texto: 'MiPagina', tono: 'hoja' } } }),
+          vuelve('204 + Allow-Origin', 'Responde <code>204</code> con <code>Access-Control-Allow-Origin: http://localhost:5300</code>.', 'hoja', { estado: { srv: null } }),
+          va('POST /productos', 'Ahora sí se envía el POST con el JSON.'),
+          ser('La ruta valida y guarda el producto.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } } }),
+          vuelve('201 + JSON', 'Responde <code>201</code> con el producto.', 'hoja', { estado: { srv: null } }),
+          yo('La página lee la respuesta y escribe <code>Respondió 201: Mango</code>.', { duracion: 3000, estado: { nav: { texto: 'Respondió 201', tono: 'hoja' } }, codigo: cd('cod-p7c', [20, 21], 'Leer la respuesta') }),
+        );
+      }
+      return base;
+    },
+  });
+
+  /* ----- Paso 8: los demás tipos de POST ----- */
+  (() => {
+    const CODIGOS = { texto: BLOQUES.texto, archivo: BLOQUES.archivo, encabezado: BLOQUES.encabezado, mezcla: BLOQUES.mezcla_dos };
+    Object.keys(CODIGOS).forEach((k) => { CODIGOS[k] = CODIGOS[k].trimEnd(); });
+    Kit.flujo('#f-p8', {
+      titulo: 'Simulación: otros cuerpos de POST',
+      icono: 'red',
+      vista: [670, 262],
+      nodos: [CL(), SV()],
+      conectores: IDA_VUELTA,
+      parametros: [
+        { id: 'tipo', tipo: 'opciones', etiqueta: 'Qué envías', opciones: [{ valor: 'texto', etiqueta: 'Texto' }, { valor: 'archivo', etiqueta: 'Archivo' }, { valor: 'encabezado', etiqueta: 'Encabezado' }, { valor: 'mezcla', etiqueta: 'Ruta y JSON' }], valor: 'texto' },
+      ],
+      alRecalcular: (v) => { Kit.codigo('cod-p8').fijarTexto(CODIGOS[v.tipo]); },
+      intro: 'Elige qué envías y mira qué parámetro lo lee.',
+      pasos: (v) => {
+        const c = (l, n) => ({ codigo: cd('cod-p8', l, n) });
+        if (v.tipo === 'archivo') {
+          return [
+            yo('Envías <code>nota.txt</code> en un formulario <code>multipart/form-data</code>.'),
+            va('POST /archivo', 'Viaja el archivo dentro del cuerpo.'),
+            ser('<code>IFormFile</code> representa un archivo del formulario. El nombre del parámetro (<code>archivo</code>) debe coincidir con el nombre del campo.', c([1], 'IFormFile')),
+            ser('<code>StreamReader</code> abre el archivo y lo lee como texto.', c([3, 4], 'Leer el contenido')),
+            ser('Lleva <code>.DisableAntiforgery()</code> por la misma razón que el formulario clásico.', c([6], 'Sin token')),
+            vuelve('200 + archivo', 'Responde <code>{"nombre":"nota.txt","bytes":21,"contenido":"hola desde un archivo"}</code>.', 'hoja', c([5], 'La respuesta')),
+          ];
+        }
+        if (v.tipo === 'encabezado') {
+          return [
+            yo('Envías el encabezado <code>X-Clave: abc123</code>, sin cuerpo.'),
+            va('POST /encabezado', 'Viaja la petición con ese encabezado.'),
+            ser('<code>[FromHeader(Name = "X-Clave")]</code> lee ese encabezado de la petición.', c([1], 'Un dato en un encabezado')),
+            vuelve('200 Clave recibida', 'Responde <code>Clave recibida: abc123</code>.', 'hoja', c([1], 'La respuesta')),
+          ];
+        }
+        if (v.tipo === 'mezcla') {
+          return [
+            yo('POST a <code>/personas/5</code> con el JSON <code>{"nombre":"Rosa","edad":41}</code>.'),
+            va('POST /personas/5', 'Viaja la ruta con su cuerpo.'),
+            ser('<code>id</code> sale de la ruta, porque está entre llaves.', c([2], 'id de la ruta')),
+            ser('<code>Persona</code> es un objeto: sale del cuerpo. Son las reglas del paso 3, combinadas.', c([2, 5], 'Persona del cuerpo')),
+            vuelve('200 + JSON', 'Responde <code>{"id":5,"nombre":"Rosa","edad":41}</code>.', 'hoja', c([2], 'La respuesta')),
+          ];
+        }
+        return [
+          yo('Envías <code>Content-Type: text/plain</code> y el cuerpo <code>hola mundo</code>.'),
+          va('POST /texto', 'Viaja el texto plano.'),
+          ser('<code>HttpRequest</code> es la petición completa.', c([1], 'La petición completa')),
+          ser('<code>request.Body</code> es el cuerpo como flujo de bytes y <code>StreamReader</code> lo lee como texto.', c([3, 4], 'Leer el flujo')),
+          vuelve('200 + texto', 'Responde <code>Llegaron 10 caracteres: hola mundo</code>.', 'hoja', c([5], 'La respuesta')),
+        ];
+      },
+    });
+  })();
+
+  /* ----- Mejora: Post/Redirect/Get ----- */
+  Kit.flujo('#f-prg', {
+    titulo: 'Simulación: POST, redirección y GET',
+    icono: 'red',
+    vista: [700, 262],
+    nodos: [
+      CL({ x: 105, etiqueta: 'Navegador', sub: 'formulario.html' }),
+      SV({ x: 595 }),
+    ],
+    conectores: IDA_VUELTA,
+    parametros: [
+      { id: 'invalido', tipo: 'interruptor', etiqueta: 'Nombre vacío', valor: false, tono: 'tomate' },
+      { id: 'recarga', tipo: 'interruptor', etiqueta: 'Recargar con F5 al final', valor: false, tono: 'maiz' },
+    ],
+    intro: 'Mira qué pide el navegador después del POST. Activa "Nombre vacío" para ver el caso inválido.',
+    pasos: (v) => {
+      const base = [
+        yo('Pulsas Guardar en <code>formulario.html</code>.', { estado: { nav: { texto: 'formulario', tono: 'maiz' } } }),
+        va('POST formulario', 'El formulario viaja con POST y su cuerpo.'),
+      ];
+      if (v.invalido) {
+        base.push(
+          ser('La validación falla: el nombre está vacío. No se guarda nada.', { estado: { srv: { texto: 'nombre vacío', tono: 'tomate' } } }),
+          vuelve('400 + JSON', 'Responde <code>400</code> con el mensaje. No hay redirección.', 'tomate', { estado: { srv: null } }),
+          yo('El navegador muestra el JSON tal cual. Si recargas, pregunta si quieres reenviar el formulario.', { duracion: 3000, estado: { nav: { texto: 'JSON del error', tono: 'tomate' } } }),
+        );
+        return base;
+      }
+      base.push(
+        ser('La validación acepta el producto y lo agrega a la lista, en memoria.', { estado: { srv: { texto: 'producto 4', tono: 'hoja' } } }),
+        vuelve('302 /productos', 'La respuesta no trae una página: trae <code>Location: /productos</code>.', 'hoja', { estado: { srv: null }, codigo: cd('cod-prg', [11], 'Redirigir en vez de Created') }),
+        va('GET /productos', 'El navegador sigue la redirección solo y pide esa dirección con <strong>GET</strong>.'),
+        vuelve('200 + JSON', 'Llega la lista de productos, con el producto nuevo.', 'hoja'),
+        yo('Ves la lista. La barra dice <code>/productos</code>, no la ruta del POST.', { duracion: 2800, estado: { nav: { texto: '/productos', tono: 'hoja' } } }),
+      );
+      if (v.recarga) {
+        base.push(
+          va('GET /productos', 'Pulsas F5: el navegador repite el último GET, no el POST.'),
+          vuelve('200 + JSON', 'La misma lista.', 'hoja'),
+          yo('La lista sigue con un solo producto nuevo: recargar no creó otro.', { duracion: 2800, estado: { nav: { texto: 'sin duplicados', tono: 'hoja' } } }),
+        );
+      }
+      return base;
+    },
+  });
+
+  /* ----- Cierre: el Program.cs completo ----- */
+  Kit.flujo('#f-completo', {
+    titulo: 'Mapa: dónde va cada pieza',
+    icono: 'documento',
+    vista: [760, 262],
+    nodos: [
+      { id: 'antes', x: 66, y: 112, etiqueta: 'Antes de Build', sub: 'using y CORS', tono: 'maiz', ancho: 128, alto: 80 },
+      { id: 'build', x: 224, y: 112, etiqueta: 'Build()', sub: 'var app', tono: 'cielo', ancho: 128, alto: 80 },
+      { id: 'desp', x: 382, y: 112, etiqueta: 'Después', sub: 'UseCors, archivos', tono: 'uva', ancho: 128, alto: 80 },
+      { id: 'rutas', x: 540, y: 112, etiqueta: 'Rutas', sub: 'GET y POST', tono: 'hoja', ancho: 128, alto: 80 },
+      { id: 'run', x: 698, y: 112, etiqueta: 'Run()', sub: 'y el record', tono: 'tomate', ancho: 128, alto: 80 },
+    ],
+    conectores: [
+      { desde: 'antes', hasta: 'build', flecha: true },
+      { desde: 'build', hasta: 'desp', flecha: true },
+      { desde: 'desp', hasta: 'rutas', flecha: true },
+      { desde: 'rutas', hasta: 'run', flecha: true },
+    ],
+    intro: 'Recorre el archivo de arriba abajo: cada pieza tiene un lugar fijo.',
+    pasos: () => [
+      { nodo: 'antes', duracion: 3000, texto: 'Primero el <code>using</code> y, antes de <code>Build()</code>, la configuración de CORS.', codigo: cd('cod-completo', [1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 'Antes de Build') },
+      { nodo: 'build', duracion: 2400, texto: '<code>Build()</code> crea la aplicación. Esta línea no se repite.', codigo: cd('cod-completo', [16], 'Una sola vez') },
+      { nodo: 'desp', duracion: 3000, texto: 'Justo después: <code>UseCors</code> y los archivos de <code>wwwroot</code>.', codigo: cd('cod-completo', [18, 20, 21, 22], 'Después de Build') },
+      { nodo: 'rutas', duracion: 2600, texto: 'Las rutas GET del paso 0.', codigo: cd('cod-completo', [24, 26, 28, 29, 30, 31, 32, 33, 34, 35, 37], 'Rutas GET') },
+      { nodo: 'rutas', duracion: 2600, texto: 'La lista de productos y su <code>GET /productos</code>.', codigo: cd('cod-completo', [39, 40, 41, 42, 43, 45], 'La lista') },
+      { nodo: 'rutas', duracion: 2400, texto: 'Paso 1: el POST sin datos.', codigo: cd('cod-completo', [47, 48], 'Paso 1') },
+      { nodo: 'rutas', duracion: 2400, texto: 'Paso 2: el POST con JSON.', codigo: cd('cod-completo', [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62], 'Paso 2') },
+      { nodo: 'rutas', duracion: 2400, texto: 'Paso 3: la ruta con el dato en la dirección.', codigo: cd('cod-completo', [64, 65], 'Paso 3') },
+      { nodo: 'rutas', duracion: 2400, texto: 'Paso 4: el formulario clásico.', codigo: cd('cod-completo', [83, 84], 'Paso 4') },
+      { nodo: 'run', duracion: 3000, texto: '<code>app.Run()</code> va después de todas las rutas, y el <code>record</code> al final del archivo.', codigo: cd('cod-completo', [97, 99], 'Al final') },
+    ],
+  });
 
   /* ====== Diapositiva 16: Program.cs se reparte en carpetas ====== */
   (() => {
