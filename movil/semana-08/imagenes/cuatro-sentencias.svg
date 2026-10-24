@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="760" height="290" fill="#ffffff"/>
+<g data-node="s0">
+<rect x="31" y="30" width="140" height="76" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="101" y="62" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">INSERT</text>
+<text x="101" y="84" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">agregar una fila</text>
+</g>
+<g data-node="m0">
+<rect x="31" y="204" width="140" height="56" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="101" y="237" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">db.insert</text>
+</g>
+<g data-node="s1">
+<rect x="217" y="30" width="140" height="76" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="287" y="62" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">SELECT</text>
+<text x="287" y="84" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">leer filas</text>
+</g>
+<g data-node="m1">
+<rect x="217" y="204" width="140" height="56" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="287" y="237" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">db.query</text>
+</g>
+<g data-node="s2">
+<rect x="403" y="30" width="140" height="76" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="473" y="62" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">UPDATE</text>
+<text x="473" y="84" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">cambiar una fila</text>
+</g>
+<g data-node="m2">
+<rect x="403" y="204" width="140" height="56" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="473" y="237" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">db.update</text>
+</g>
+<g data-node="s3">
+<rect x="589" y="30" width="140" height="76" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="659" y="62" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">DELETE</text>
+<text x="659" y="84" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">borrar filas</text>
+</g>
+<g data-node="m3">
+<rect x="589" y="204" width="140" height="56" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="659" y="237" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">db.delete</text>
+</g>
+<path d="M101,106 L101,204" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M287,106 L287,204" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M473,106 L473,204" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M659,106 L659,204" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-label="sqflite"><rect x="66.05" y="142" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="101" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sqflite</text></g>
+<g data-label="sqflite"><rect x="252.05" y="142" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="287" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sqflite</text></g>
+<g data-label="sqflite"><rect x="438.05" y="142" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="473" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sqflite</text></g>
+<g data-label="sqflite"><rect x="624.05" y="142" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="659" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sqflite</text></g>
+</svg>

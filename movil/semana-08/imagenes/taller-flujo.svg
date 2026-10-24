@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="760" height="340" fill="#ffffff"/>
+<g data-node="p">
+<rect x="30" y="40" width="160" height="84" rx="12" ry="12" fill="#efe6f8" stroke="#7b3fb0" stroke-width="2.5"/>
+<text x="110" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#532478">Pedir a la red</text>
+<text x="110" y="98" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">pedirCatalogo</text>
+</g>
+<g data-node="g">
+<rect x="300" y="40" width="160" height="84" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="380" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Guardar</text>
+<text x="380" y="98" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">guardarProductos</text>
+</g>
+<g data-node="l">
+<rect x="570" y="40" width="160" height="84" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="650" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">Leer y pintar</text>
+<text x="650" y="98" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">leerProductos</text>
+</g>
+<g data-node="f">
+<rect x="280" y="222" width="200" height="84" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="380" y="258" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">Falla la petición</text>
+<text x="380" y="280" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">aviso y botón bloqueado</text>
+</g>
+<path d="M190,82 L300,82" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M460,82 L570,82" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M110,124 L110,252 Q110,264 122,264 L280,264" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M480,264 L638,264 Q650,264 650,252 L650,124" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-label="hay red"><rect x="210.05" y="69" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="245" y="87" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">hay red</text></g>
+<g data-label="después"><rect x="480.05" y="69" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="515" y="87" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">después</text></g>
+<g data-label="sin red"><rect x="160.05" y="251" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="195" y="269" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">sin red</text></g>
+<g data-label="queda lo guardado"><rect x="491.55" y="251" width="146.9" height="26" rx="5" fill="#ffffff"/><text x="565" y="269" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">queda lo guardado</text></g>
+</svg>

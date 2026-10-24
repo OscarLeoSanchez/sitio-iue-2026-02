@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" width="760" height="310">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="760" height="310" fill="#ffffff"/>
+<g data-node="a">
+<rect x="30" y="30" width="160" height="84" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="110" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">App abierta</text>
+<text x="110" y="88" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">contador = 3</text>
+</g>
+<g data-node="b">
+<rect x="300" y="30" width="160" height="84" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="380" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">Cierras la app</text>
+<text x="380" y="88" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">la memoria se libera</text>
+</g>
+<g data-node="c">
+<rect x="570" y="30" width="160" height="84" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="650" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">Abres otra vez</text>
+<text x="650" y="88" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">la variable vale 0</text>
+</g>
+<g data-node="d">
+<rect x="300" y="196" width="160" height="84" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="380" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Disco</text>
+<text x="380" y="254" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">contador = 3 guardado</text>
+</g>
+<g data-node="e">
+<rect x="570" y="196" width="160" height="84" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="650" y="232" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Abres otra vez</text>
+<text x="650" y="254" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">lee 3 del disco</text>
+</g>
+<path d="M190,72 L300,72" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M460,72 L570,72" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M110,114 L110,226 Q110,238 122,238 L300,238" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M460,238 L570,238" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-label="cierras"><rect x="210.05" y="59" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="245" y="77" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">cierras</text></g>
+<g data-label="abres"><rect x="487.75" y="59" width="54.5" height="26" rx="5" fill="#ffffff"/><text x="515" y="77" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">abres</text></g>
+<g data-label="guardas"><rect x="170.05" y="225" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="205" y="243" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">guardas</text></g>
+<g data-label="al leer"><rect x="480.05" y="225" width="69.9" height="26" rx="5" fill="#ffffff"/><text x="515" y="243" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">al leer</text></g>
+</svg>
