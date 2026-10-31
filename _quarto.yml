@@ -22,6 +22,9 @@ project:
     - movil/semana-07/presentacion-interactiva.html
     - movil/semana-07/presentacion-statefulwidget.html
     - movil/semana-08/presentacion-interactiva.html
+    # Presentacion interactiva de la guia de persistencia local y Firebase,
+    # mismo motivo: solo la enlaza el boton de la guia.
+    - movil/persistencia-y-nube/presentacion-interactiva.html
 
 lang: es
 
@@ -73,6 +76,8 @@ website:
               href: movil/semana-08/index.qmd
         - text: "Proyecto: entregable 1"
           href: movil/proyecto-entregable-1/index.qmd
+        - text: "Persistencia local y Firebase: guía paso a paso"
+          href: movil/persistencia-y-nube/index.qmd
     - id: web
       style: docked
       background: light

@@ -1,0 +1,1908 @@
+---
+title: "Persistencia local y Firebase: guía paso a paso"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+number-sections: false
+---
+
+::: {.ficha}
+|                 |                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------|
+| Qué construyes  | **clase_nube**, una app de Flutter que guarda datos en el teléfono (preferencias, almacenamiento seguro y SQLite) y en la nube (cuentas con Firebase Authentication, productos en Cloud Firestore y fotos en Cloud Storage), y que muestra avisos locales y notificaciones push |
+| Prerrequisitos  | Widgets básicos de Flutter, navegación entre pantallas, `StatefulWidget` y `async`/`await`. Parte de un proyecto vacío: no necesitas otra guía |
+| Herramientas    | Flutter 3.41.9, Dart 3.11.5, VS Code, un emulador o un teléfono con Android, Node.js y una cuenta de Google |
+:::
+
+::: {.acceso}
+::: {.acceso-item}
+Presentación interactiva: de la memoria al disco y a la nube, con diagramas que se arman paso a paso y el código de cada concepto
+
+[Abrir la presentación](presentacion-interactiva.html){.btn-doc target="_blank"}
+:::
+:::
+
+::: {.callout-note}
+## Cómo usar esta guía
+
+- Construyes **una sola app**, paso a paso. Cada paso dice qué hacer, por qué y cómo comprobar que quedó bien. No pases al siguiente hasta que se cumpla el **Comprueba**.
+- La interfaz es mínima a propósito: botones, campos de texto y listas sin estilos. Lo que se aprende aquí es dónde vive cada dato, no cómo se ve. El diseño se agrega después.
+- Cuando un archivo cambia en un paso posterior, la guía lo muestra **completo** otra vez: reemplaza todo su contenido.
+- Todos los comandos se ejecutan en la terminal, dentro de la carpeta `clase_nube`, salvo los que indican otra cosa.
+- **Ejecuta siempre en Android**, en el emulador o en un teléfono. `sqflite` no funciona en Chrome ni en Windows, y el proyecto se crea solo con la plataforma Android.
+:::
+
+## Lo que vas a lograr
+
+| Etapa | Pasos | Qué agregas |
+|---|---|---|
+| 1. Persistencia local | 1 a 6 | Un contador que sobrevive al cierre de la app, un token guardado cifrado y una lista de productos en SQLite |
+| 2. Firebase y Authentication | 7 a 12 | El proyecto en la nube, la conexión con la app y una pantalla para registrar, iniciar y cerrar sesión |
+| 3. Firestore | 13 a 15 | Los mismos productos, ahora en la nube, con la lista en tiempo real y el comportamiento sin internet |
+| 4. Archivos y avisos | 16 a 18 | Una foto por producto en Cloud Storage, un aviso local y una notificación push |
+
+Al terminar puedes:
+
+1. Decir en qué lugar vive un dato (variable, preferencias, almacenamiento seguro, SQLite o nube) y qué sobrevive al cerrar la app.
+2. Guardar y leer datos con `shared_preferences`, `flutter_secure_storage` y `sqflite`.
+3. Crear un proyecto de Firebase, conectarlo con la app y explicar qué archivos se generan y para qué sirven.
+4. Registrar cuentas, iniciar y cerrar sesión, y reaccionar a los errores que devuelve el servidor.
+5. Crear, leer, actualizar y borrar documentos en Firestore, y escribir una regla que decida quién puede hacerlo.
+6. Explicar qué pasa con cada función cuando el teléfono pierde la conexión.
+7. Subir una foto a Cloud Storage y guardar su dirección en un documento.
+8. Mostrar una notificación local y recibir una notificación push.
+
+::: {.callout-note}
+## Antes de empezar
+
+Necesitas:
+
+- **Flutter 3.41.9** (canal stable) y **Dart 3.11.5**. Verifica con `flutter doctor`.
+- Un **emulador de Android** o un teléfono conectado con la depuración USB activada.
+- **Node.js**, para instalar las herramientas de Firebase.
+- Una **cuenta de Google**, para crear el proyecto de Firebase.
+- Para el paso 16 (Cloud Storage), una cuenta de facturación asociada al proyecto: crear el almacenamiento exige el plan **Blaze**. Ese paso es opcional: el resto de la guía no depende de él.
+
+**Versiones de los paquetes.** Son las versiones con las que se verificó la guía. Se instalan fijas a propósito: con una versión mayor, la API puede cambiar.
+
+| Paquete | Versión | Para qué |
+|---|---|---|
+| `shared_preferences` | 2.5.5 | Preferencias: un ajuste sencillo |
+| `flutter_secure_storage` | 11.2.0 | Datos secretos, cifrados |
+| `sqflite` | 2.4.2+1 | La base de datos SQLite |
+| `path` | 1.9.1 | Armar la ruta del archivo de la base |
+| `firebase_core` | 5.1.0 | Conectar la app con el proyecto |
+| `firebase_auth` | 7.0.1 | Cuentas de usuario |
+| `cloud_firestore` | 7.1.0 | Base de datos en la nube |
+| `firebase_storage` | 14.0.1 | Archivos en la nube |
+| `image_picker` | 1.2.4 | Elegir una foto de la galería |
+| `flutter_local_notifications` | 22.3.3 | Avisos locales |
+| `firebase_messaging` | 17.0.1 | Notificaciones push |
+:::
+
+## Crear el proyecto
+
+```powershell
+flutter create --empty --org co.edu.iue --platforms=android clase_nube
+```
+
+- `--empty` deja `lib/main.dart` casi vacío, sin la app de ejemplo del contador.
+- `--org co.edu.iue` define el identificador de la app en Android: `co.edu.iue.clase_nube`. Ese identificador se registra después en Firebase y no conviene cambiarlo.
+- `--platforms=android` crea solo la carpeta de Android, que es la que usamos.
+
+**Comprueba:** dentro de `clase_nube` existen `lib/main.dart`, `pubspec.yaml` y la carpeta `android`.
+
+## Etapa 1. Persistencia local
+
+### Paso 1. Instalar los paquetes
+
+Hay dos formas de instalar una dependencia. Las dos dejan el mismo resultado.
+
+**Forma A: con un comando.** Desde la carpeta del proyecto:
+
+```powershell
+flutter pub add shared_preferences:2.5.5 flutter_secure_storage:11.2.0 sqflite:2.4.2+1 path:1.9.1
+```
+
+El comando escribe los paquetes en `pubspec.yaml` y descarga el código por ti. No hace falta ejecutar `flutter pub get` aparte.
+
+**Forma B: editando el archivo.** Abre `pubspec.yaml` y, dentro de `dependencies:`, agrega las líneas:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: 11.2.0
+  path: 1.9.1
+  shared_preferences: 2.5.5
+  sqflite: 2.4.2+1
+```
+
+Después ejecuta:
+
+```powershell
+flutter pub get
+```
+
+`flutter pub get` lee el `pubspec.yaml` y descarga los paquetes que declara. Sin ese comando, el editor marca los paquetes como no encontrados. Cuidado con la sangría: son dos espacios, y el archivo falla si usas tabuladores.
+
+Para qué sirve cada paquete:
+
+- `shared_preferences` guarda datos simples de clave y valor, como un contador.
+- `flutter_secure_storage` guarda datos secretos, como un token, cifrados con el Keystore de Android. Preferencias los deja en texto legible.
+- `sqflite` da una base de datos SQLite en el teléfono, para guardar listas de objetos como los productos.
+- `path` arma la ruta del archivo de la base de datos con `join`.
+
+Las versiones van fijas porque el código de esta guía se verificó con ellas. Sin versión, `flutter pub add` instala la última, y una versión mayor puede cambiar la API.
+
+**Comprueba:** en `pubspec.yaml`, dentro de `dependencies:`, aparecen los cuatro paquetes con esas versiones y el editor no marca errores.
+
+### Paso 2. El modelo Producto
+
+Crea el archivo `lib/producto.dart` con este contenido:
+
+```dart
+class Producto {
+  const Producto({
+    required this.id,
+    required this.nombre,
+    required this.precio,
+    required this.disponible,
+  });
+
+  final int id;
+  final String nombre;
+  final int precio;
+  final bool disponible;
+
+  // bool en Dart, 0 o 1 en SQLite
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'nombre': nombre,
+      'precio': precio,
+      'disponible': disponible ? 1 : 0,
+    };
+  }
+
+  factory Producto.fromMap(Map<String, Object?> mapa) {
+    return Producto(
+      id: mapa['id'] as int,
+      nombre: mapa['nombre'] as String,
+      precio: mapa['precio'] as int,
+      disponible: mapa['disponible'] == 1,
+    );
+  }
+}
+```
+
+Por qué así:
+
+- Un `Producto` es un objeto de Dart, pero SQLite guarda filas con columnas. Hace falta un puente entre los dos.
+- `toMap` convierte el objeto en un `Map`, que es lo que `sqflite` sabe insertar. Cada llave es el nombre de una columna.
+- `fromMap` hace el camino contrario: convierte una fila leída en un `Producto`.
+- SQLite no tiene tipo booleano. Por eso `disponible` se guarda como 1 o 0, y al leer se compara con `== 1`.
+
+**Comprueba:** ejecuta `flutter analyze`. Debe decir `No issues found!`.
+
+### Paso 3. La base de datos
+
+Crea el archivo `lib/base_datos.dart` con este contenido:
+
+```dart
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+import 'producto.dart';
+
+Future<Database> abrirBase() async {
+  final ruta = join(await getDatabasesPath(), 'mercado.db');
+  return openDatabase(
+    ruta,
+    version: 1,
+    onCreate: (db, version) {
+      return db.execute(
+        'CREATE TABLE productos(id INTEGER PRIMARY KEY, nombre TEXT, '
+        'precio INTEGER, disponible INTEGER)',
+      );
+    },
+  );
+}
+
+Future<void> insertarProducto(Database db, Producto producto) async {
+  await db.insert('productos', producto.toMap());
+}
+
+Future<List<Producto>> leerProductos(Database db) async {
+  final filas = await db.query('productos');
+  return [for (final fila in filas) Producto.fromMap(fila)];
+}
+
+Future<void> borrarProducto(Database db, int id) async {
+  await db.delete('productos', where: 'id = ?', whereArgs: [id]);
+}
+```
+
+Por qué así:
+
+- `getDatabasesPath()` devuelve la carpeta donde Android guarda las bases de datos de la app, y `join` le agrega el nombre del archivo: `mercado.db`.
+- `openDatabase` abre ese archivo y, si no existe, lo crea.
+- `onCreate` corre solo la primera vez, cuando el archivo se crea. Ahí va el `CREATE TABLE`. En las siguientes aperturas la tabla ya existe y no se repite.
+- `insert` recibe el `Map` que arma `toMap`; `sqflite` construye el `INSERT` por ti.
+- `query` devuelve las filas como una lista de `Map`, y `fromMap` las vuelve `Producto`.
+- `delete` usa `where: 'id = ?'` con `whereArgs`: el signo `?` se reemplaza por el id. Sin `where`, el `delete` borraría todas las filas.
+- Todas las funciones son `Future` porque leer y escribir en disco toma tiempo, y la app no debe quedarse congelada esperando.
+
+**Comprueba:** ejecuta `flutter analyze`. Debe decir `No issues found!`.
+
+### Paso 4. Preferencias: el contador que sobrevive al cierre
+
+Crea el archivo `lib/contador.dart` con este contenido:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class ContadorPantalla extends StatefulWidget {
+  const ContadorPantalla({super.key});
+
+  @override
+  State<ContadorPantalla> createState() => _ContadorPantallaState();
+}
+
+class _ContadorPantallaState extends State<ContadorPantalla> {
+  final prefs = SharedPreferencesAsync();
+  int contador = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    cargar();
+  }
+
+  Future<void> cargar() async {
+    final guardado = await prefs.getInt('contador') ?? 0;
+    setState(() => contador = guardado);
+  }
+
+  Future<void> sumar() async {
+    setState(() => contador++);
+    await prefs.setInt('contador', contador);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Contador guardado')),
+      body: Center(
+        child: Text('$contador', style: Theme.of(context).textTheme.displayLarge),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: sumar,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+Para ver la pantalla, reemplaza todo el contenido de `lib/main.dart` por esto:
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'contador.dart';
+
+void main() => runApp(const MaterialApp(home: ContadorPantalla()));
+```
+
+Por qué así:
+
+- `SharedPreferencesAsync` guarda pares de clave y valor en un archivo de preferencias del teléfono. Es la forma actual del paquete: sus métodos son `Future`.
+- `sumar` primero cambia la pantalla con `setState` y después guarda con `setInt`. La clave es `contador`.
+- `initState` corre una vez al abrir la pantalla y llama a `cargar`, que lee con `getInt`.
+- Si la clave no existe todavía, `getInt` devuelve `null`. El operador `?? 0` pone 0 en ese caso.
+- Nada de esto usa internet: el archivo está en el teléfono.
+
+**Comprueba:** ejecuta `flutter run`, toca el botón `+` varias veces y detén la app con `q` en la terminal. Vuelve a ejecutar `flutter run`: el contador debe arrancar en el valor que dejaste, no en 0.
+
+### Paso 5. Almacenamiento seguro: el token en la caja fuerte
+
+Crea el archivo `lib/token.dart` con este contenido:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+class TokenPantalla extends StatefulWidget {
+  const TokenPantalla({super.key});
+
+  @override
+  State<TokenPantalla> createState() => _TokenPantallaState();
+}
+
+class _TokenPantallaState extends State<TokenPantalla> {
+  final almacen = const FlutterSecureStorage();
+  String? token;
+
+  @override
+  void initState() {
+    super.initState();
+    leer();
+  }
+
+  Future<void> escribir() async {
+    await almacen.write(key: 'token', value: 'token-de-prueba-123');
+    await leer();
+  }
+
+  Future<void> leer() async {
+    final guardado = await almacen.read(key: 'token');
+    setState(() => token = guardado);
+  }
+
+  Future<void> borrar() async {
+    await almacen.delete(key: 'token');
+    await leer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Token seguro')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(token ?? 'Sin token guardado'),
+            Row(
+              children: [
+                FilledButton(onPressed: escribir, child: const Text('Guardar')),
+                TextButton(onPressed: borrar, child: const Text('Borrar')),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+Ahora la app tiene dos pantallas, así que `lib/main.dart` pasa a ser un inicio con un botón por pantalla. Reemplaza todo su contenido por esto:
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'contador.dart';
+import 'token.dart';
+
+void main() => runApp(const MaterialApp(home: InicioPantalla()));
+
+class InicioPantalla extends StatelessWidget {
+  const InicioPantalla({super.key});
+
+  void abrir(BuildContext context, Widget pantalla) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => pantalla));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('clase_nube')),
+      body: ListView(
+        children: [
+          ListTile(
+            title: const Text('Contador'),
+            onTap: () => abrir(context, const ContadorPantalla()),
+          ),
+          ListTile(
+            title: const Text('Token seguro'),
+            onTap: () => abrir(context, const TokenPantalla()),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+Por qué así:
+
+- Un token de sesión es un dato secreto. Con `shared_preferences` quedaría como texto legible en un archivo; `flutter_secure_storage` lo cifra con una llave que guarda el Keystore de Android, y tú no manejas esa llave.
+- Se usa con tres llamadas: `write` guarda, `read` lee y `delete` borra. Todas reciben una clave, como en preferencias.
+- Si la clave no existe, `read` devuelve `null`, y la pantalla muestra "Sin token guardado".
+- Aquí el valor `token-de-prueba-123` es de práctica. Más adelante el token real llega de Firebase.
+- `main.dart` ahora tiene un menú: `abrir` empuja la pantalla elegida con `Navigator.push`. Cada pantalla nueva que agreguemos sumará un `ListTile`.
+
+Si al ejecutar aparece una pantalla roja con "No Directionality widget found", `runApp` está recibiendo el menú sin un `MaterialApp` que lo envuelva. `MaterialApp` es quien aporta la dirección del texto, el tema y la navegación. Revisa que `main` diga `runApp(const MaterialApp(home: InicioPantalla()))` y que la clase se llame `InicioPantalla`, no `MainApp`.
+
+Ejecuta la app en el emulador o en el teléfono Android, no en Chrome: el proyecto se creó solo con Android. Mira los dispositivos con `flutter devices` y elige uno con `flutter run -d <id>`.
+
+**Comprueba:** ejecuta `flutter run`, entra a "Token seguro" y toca "Guardar": debe aparecer `token-de-prueba-123`. Cierra la app por completo, ábrela y entra de nuevo: el token sigue ahí. Toca "Borrar" y debe volver a "Sin token guardado".
+
+### Paso 6. Base de datos: la lista de productos
+
+Crea el archivo `lib/productos.dart` con este contenido:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+
+import 'base_datos.dart';
+import 'producto.dart';
+
+class ProductosPantalla extends StatefulWidget {
+  const ProductosPantalla({super.key});
+
+  @override
+  State<ProductosPantalla> createState() => _ProductosPantallaState();
+}
+
+class _ProductosPantallaState extends State<ProductosPantalla> {
+  final nombre = TextEditingController();
+  final precio = TextEditingController();
+  Database? db;
+  List<Producto> productos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    iniciar();
+  }
+
+  Future<void> iniciar() async {
+    db = await abrirBase();
+    await cargar();
+  }
+
+  Future<void> cargar() async {
+    final lista = await leerProductos(db!);
+    setState(() => productos = lista);
+  }
+
+  Future<void> agregar() async {
+    final producto = Producto(
+      id: DateTime.now().millisecondsSinceEpoch,
+      nombre: nombre.text,
+      precio: int.tryParse(precio.text) ?? 0,
+      disponible: true,
+    );
+    await insertarProducto(db!, producto);
+    nombre.clear();
+    precio.clear();
+    await cargar();
+  }
+
+  Future<void> borrar(int id) async {
+    await borrarProducto(db!, id);
+    await cargar();
+  }
+
+  @override
+  void dispose() {
+    nombre.dispose();
+    precio.dispose();
+    db?.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Productos guardados')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombre,
+              decoration: const InputDecoration(labelText: 'Nombre'),
+            ),
+            TextField(
+              controller: precio,
+              decoration: const InputDecoration(labelText: 'Precio'),
+              keyboardType: TextInputType.number,
+            ),
+            FilledButton(onPressed: agregar, child: const Text('Agregar')),
+            Expanded(
+              child: ListView(
+                children: [
+                  for (final p in productos)
+                    ListTile(
+                      title: Text(p.nombre),
+                      subtitle: Text('\$${p.precio}'),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => borrar(p.id),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+Después, en `lib/main.dart`, agrega el import y un `ListTile` más al menú:
+
+```dart
+import 'productos.dart';
+```
+
+```dart
+          ListTile(
+            title: const Text('Productos'),
+            onTap: () => abrir(context, const ProductosPantalla()),
+          ),
+```
+
+Por qué así:
+
+- `initState` no puede ser `async`, así que llama a `iniciar`, que abre la base con `abrirBase()` y carga la lista.
+- `cargar` lee todas las filas con `leerProductos` y llama a `setState`, que redibuja la lista.
+- `agregar` arma un `Producto`, lo guarda con `insertarProducto` y vuelve a cargar. El `id` sale de la hora actual en milisegundos: así es único sin que lo escribas.
+- `int.tryParse` convierte el texto del precio a número. Si el campo está vacío o no es un número, devuelve `null` y el `?? 0` pone 0.
+- `borrar` quita una fila por su `id` y vuelve a cargar.
+- `dispose` libera los controladores y cierra la base cuando sales de la pantalla.
+- Los `TextEditingController` guardan lo que el usuario escribe en cada `TextField`.
+
+Importante: esta pantalla debe probarse en el emulador o el teléfono Android. `sqflite` no funciona en Chrome.
+
+**Comprueba:** ejecuta `flutter run -d <id>` en Android. Agrega dos o tres productos, cierra la app por completo y ábrela: la lista sigue ahí. Borra uno con el ícono de la papelera y vuelve a abrir: ya no aparece. Activa el modo avión y repite: todo sigue funcionando, porque la base está en el teléfono.
+
+## Etapa 2. Firebase y Authentication
+
+### Paso 7. Crear el proyecto en la consola de Firebase
+
+Este paso no escribe código: se hace en el navegador, con una cuenta de Google.
+
+1. Entra a la consola de Firebase: <https://console.firebase.google.com>.
+2. Elige **Agregar proyecto** (o **Create a project**).
+3. Ponle el nombre `clase-nube`.
+4. Google Analytics no hace falta en esta guía: puedes dejarlo desactivado.
+5. Pulsa **Crear proyecto** y espera a que termine.
+
+Por qué: un proyecto de Firebase es el espacio en la nube de tu app. Ahí viven las cuentas de usuario, la base de datos y los archivos. Tu app se conecta a él en los pasos siguientes. Lo creas tú, desde el navegador, porque es una cuenta tuya y Google la administra: ningún comando lo hace por ti.
+
+**Comprueba:** la consola abre el panel del proyecto `clase-nube`.
+
+### Paso 8. Instalar las herramientas de línea de comandos
+
+Para conectar la app con el proyecto hacen falta dos herramientas. Se instalan una sola vez en el computador.
+
+**Firebase CLI.** Es la herramienta oficial de Firebase para la terminal. Necesita Node.js. Instálala así:
+
+```powershell
+npm install -g firebase-tools
+```
+
+Comprueba con `firebase --version`. Después inicia sesión con la misma cuenta de Google con la que creaste el proyecto:
+
+```powershell
+firebase login
+```
+
+Se abre el navegador para que autorices el acceso.
+
+**FlutterFire CLI.** Es la herramienta que lee tu proyecto de Firebase y genera los archivos de configuración de la app. Se instala con Dart:
+
+```powershell
+dart pub global activate flutterfire_cli
+```
+
+Comprueba con `flutterfire --version`. Si la terminal responde que no encuentra el comando, falta agregar la carpeta `%LOCALAPPDATA%\Pub\Cache\bin` a la variable de entorno `Path` de Windows. Al terminar la instalación, Dart avisa de esto. Después de agregarla, cierra y abre la terminal.
+
+Por qué: `firebase login` demuestra a Firebase que eres el dueño del proyecto. `flutterfire` usa esa sesión para consultar el proyecto y escribir los datos que tu app necesita.
+
+**Comprueba:** `firebase --version` y `flutterfire --version` responden con un número de versión.
+
+### Paso 9. Conectar la app con el proyecto
+
+Primero instala el paquete base de Firebase. Los archivos que genera el siguiente comando lo necesitan:
+
+```powershell
+flutter pub add firebase_core:5.1.0
+```
+
+Después, desde la carpeta del proyecto, ejecuta:
+
+```powershell
+flutterfire configure
+```
+
+El comando te hace preguntas en la terminal:
+
+1. **Proyecto:** elige `clase-nube` con las flechas y pulsa Enter.
+2. **Plataformas:** deja marcada solo **android**. Se marca y desmarca con la barra espaciadora.
+3. **Identificador de Android:** debe decir `co.edu.iue.clase_nube`, el mismo que definimos al crear el proyecto.
+
+Qué hace el comando:
+
+- Registra tu app de Android dentro del proyecto de Firebase.
+- Crea `lib/firebase_options.dart`, con los datos que identifican tu proyecto.
+- Crea `android/app/google-services.json`, con la misma información en el formato que usa Android.
+- Crea `firebase.json` en la raíz del proyecto, donde `flutterfire` anota con qué proyecto quedó enlazada la app.
+- Agrega a los dos archivos de Gradle de Android el plugin `com.google.gms.google-services`, que es el que lee el `google-services.json`: se declara en `android/settings.gradle.kts` y se activa en `android/app/build.gradle.kts`.
+
+Por qué: la app necesita saber a qué proyecto de Firebase hablar. Esos datos no son secretos: identifican el proyecto, pero no dan acceso. Quien manda sobre qué se puede leer o escribir son las reglas del servidor, que se ven más adelante.
+
+**Comprueba:** existen `lib/firebase_options.dart` y `android/app/google-services.json`, y `flutter analyze` dice `No issues found!`.
+
+#### Cambiar el proyecto de Firebase, o desenlazarlo
+
+**Cambiar a otro proyecto.** Vuelve a ejecutar `flutterfire configure` y elige el otro proyecto en la lista. El comando reescribe `lib/firebase_options.dart`, `android/app/google-services.json` y `firebase.json` con los datos del nuevo proyecto, y registra la app allí. No hace falta borrar nada antes. También puedes indicar el proyecto sin que pregunte:
+
+```powershell
+flutterfire configure --project=<id-del-proyecto> --platforms=android
+```
+
+El id del proyecto aparece en la consola de Firebase, en la configuración del proyecto. La opción `--platforms` limita el resultado a las plataformas que indiques.
+
+**Usar otra cuenta de Google.** Si la lista no muestra el proyecto que buscas, probablemente iniciaste sesión con otra cuenta. Cierra la sesión y vuelve a entrar con la correcta:
+
+```powershell
+firebase logout
+firebase login
+```
+
+O indica la cuenta al configurar: `flutterfire configure --account=<correo>`.
+
+**Desenlazar la app de Firebase.** Para dejar el proyecto como si nunca se hubiera conectado:
+
+1. Borra `lib/firebase_options.dart`, `android/app/google-services.json` y `firebase.json`.
+2. En `android/settings.gradle.kts`, borra la línea `id("com.google.gms.google-services") version("4.4.4") apply false`.
+3. En `android/app/build.gradle.kts`, borra la línea `id("com.google.gms.google-services")`.
+4. Quita el paquete con `flutter pub remove firebase_core`, y cualquier otro de Firebase que ya hayas agregado.
+5. Borra del código las líneas que importen `firebase_options.dart` o llamen a `Firebase.initializeApp`.
+
+Esto no borra nada en la nube: la app de Android sigue registrada en el proyecto de Firebase. Si quieres quitarla, hazlo en la consola, en **Configuración del proyecto**, sección **Tus apps**.
+
+### Paso 10. Iniciar Firebase al arrancar la app
+
+En `lib/main.dart`, agrega estos dos imports junto a los otros:
+
+```dart
+import 'package:clase_nube/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+```
+
+Y reemplaza la función `main` por esta:
+
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MaterialApp(home: InicioPantalla()));
+}
+```
+
+Por qué así:
+
+- `Firebase.initializeApp` conecta la app con el proyecto. Lee los datos de `firebase_options.dart` y deja listos todos los servicios de Firebase. Sin esa llamada, cualquier otra función de Firebase falla.
+- `DefaultFirebaseOptions.currentPlatform` elige los datos de la plataforma donde corre la app: Android en el teléfono.
+- `initializeApp` es un `Future`, por eso `main` pasa a ser `async` y espera con `await`.
+- `WidgetsFlutterBinding.ensureInitialized()` prepara el motor de Flutter. Hace falta cuando se llama a código nativo antes de `runApp`.
+- La llamada va antes de `runApp`: así Firebase está listo antes de que se dibuje la primera pantalla.
+
+**Comprueba:** ejecuta la app en el teléfono. Debe abrir el menú como antes, sin errores en la consola. La primera vez tarda más porque Gradle descarga las librerías de Firebase.
+
+### Paso 11. Activar Authentication e instalar el paquete
+
+**En la consola de Firebase:**
+
+1. Abre tu proyecto y entra a **Authentication** (en el menú de la izquierda, dentro de **Build** o **Compilación**).
+2. Pulsa **Comenzar** (**Get started**).
+3. En la pestaña **Método de acceso** (**Sign-in method**), elige **Correo electrónico/contraseña**.
+4. Activa la primera opción, **Correo electrónico/contraseña**, y deja desactivado el vínculo por correo.
+5. Pulsa **Guardar**.
+
+Por qué: Authentication viene apagado. Mientras ese método no esté activo, el servidor rechaza cualquier intento de registrar o iniciar sesión con correo y contraseña, aunque el código de la app sea correcto.
+
+**En la terminal:**
+
+```powershell
+flutter pub add firebase_auth:7.0.1
+```
+
+Por qué: `firebase_core` solo conecta la app con el proyecto. Cada servicio de Firebase trae su propio paquete: `firebase_auth` es el que sabe registrar cuentas, iniciar y cerrar sesión.
+
+**Comprueba:** en la consola, la pestaña **Método de acceso** muestra **Correo electrónico/contraseña** como **Habilitado**. En `pubspec.yaml` aparece `firebase_auth: 7.0.1`. Ejecuta la app en el teléfono una vez más: tarda un poco porque descarga el paquete nuevo, y debe abrir el menú sin errores.
+
+::: {.callout-warning}
+## Si la compilación falla con "Module was compiled with an incompatible version of Kotlin"
+
+Las librerías de Firebase de este conjunto de versiones están compiladas con una versión de Kotlin más nueva que la que trae el proyecto. Se arregla actualizando el plugin de Kotlin, en dos archivos de la carpeta `android`.
+
+1. En `android/settings.gradle.kts`, cambia la versión del plugin `org.jetbrains.kotlin.android` por `2.3.21`:
+
+```kotlin
+    id("org.jetbrains.kotlin.android") version "2.3.21" apply false
+```
+
+2. Con esa versión de Kotlin, el bloque `kotlinOptions` ya no se acepta. En `android/app/build.gradle.kts`, borra este bloque, que está dentro de `android { ... }`:
+
+```kotlin
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+```
+
+y agrega este otro al final del archivo, justo antes del bloque `flutter { ... }`:
+
+```kotlin
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
+}
+```
+
+Vuelve a ejecutar la app. Si tu compilación ya funciona, no necesitas este cambio.
+:::
+
+### Paso 12. La pantalla de cuenta: registrar, iniciar y cerrar sesión
+
+Crea el archivo `lib/cuenta.dart` con este contenido:
+
+```dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+class CuentaPantalla extends StatefulWidget {
+  const CuentaPantalla({super.key});
+
+  @override
+  State<CuentaPantalla> createState() => _CuentaPantallaState();
+}
+
+class _CuentaPantallaState extends State<CuentaPantalla> {
+  final auth = FirebaseAuth.instance;
+  final correo = TextEditingController();
+  final clave = TextEditingController();
+  String? error;
+
+  Future<void> registrar() {
+    return probar(() => auth.createUserWithEmailAndPassword(
+          email: correo.text.trim(),
+          password: clave.text,
+        ));
+  }
+
+  Future<void> iniciar() {
+    return probar(() => auth.signInWithEmailAndPassword(
+          email: correo.text.trim(),
+          password: clave.text,
+        ));
+  }
+
+  Future<void> probar(Future<void> Function() accion) async {
+    setState(() => error = null);
+    try {
+      await accion();
+    } on FirebaseAuthException catch (e) {
+      if (mounted) setState(() => error = mensajeDe(e.code));
+    }
+  }
+
+  String mensajeDe(String codigo) {
+    switch (codigo) {
+      case 'email-already-in-use':
+        return 'Ese correo ya tiene una cuenta';
+      case 'weak-password':
+        return 'La contraseña es muy corta: usa al menos 6 caracteres';
+      case 'invalid-email':
+        return 'El correo no tiene un formato válido';
+      case 'invalid-credential':
+        return 'Correo o contraseña incorrectos';
+      case 'network-request-failed':
+        return 'Sin conexión: revisa tu internet';
+      default:
+        return 'Error: $codigo';
+    }
+  }
+
+  @override
+  void dispose() {
+    correo.dispose();
+    clave.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Cuenta')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: StreamBuilder<User?>(
+          stream: auth.authStateChanges(),
+          builder: (context, snapshot) {
+            final usuario = snapshot.data;
+            if (usuario != null) {
+              return Column(
+                children: [
+                  Text('Sesión iniciada: ${usuario.email}'),
+                  FilledButton(
+                    onPressed: auth.signOut,
+                    child: const Text('Cerrar sesión'),
+                  ),
+                ],
+              );
+            }
+            return Column(
+              children: [
+                TextField(
+                  controller: correo,
+                  decoration: const InputDecoration(labelText: 'Correo'),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                TextField(
+                  controller: clave,
+                  decoration: const InputDecoration(labelText: 'Contraseña'),
+                  obscureText: true,
+                ),
+                if (error != null) Text(error!),
+                Row(
+                  children: [
+                    FilledButton(onPressed: registrar, child: const Text('Registrar')),
+                    TextButton(onPressed: iniciar, child: const Text('Iniciar sesión')),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+```
+
+Después, en `lib/main.dart`, agrega el import y un `ListTile` más al menú:
+
+```dart
+import 'package:clase_nube/cuenta.dart';
+```
+
+```dart
+          ListTile(
+            title: const Text('Cuenta'),
+            onTap: () => abrir(context, const CuentaPantalla()),
+          ),
+```
+
+Por qué así:
+
+- `FirebaseAuth.instance` es el punto de entrada a Authentication. Todas las operaciones salen de ahí.
+- `createUserWithEmailAndPassword` crea una cuenta nueva y, si sale bien, deja la sesión iniciada. `signInWithEmailAndPassword` abre sesión en una cuenta que ya existe. `signOut` la cierra.
+- `authStateChanges()` es un flujo que avisa cada vez que cambia la sesión: al registrar, al iniciar y al cerrar. `StreamBuilder` redibuja la pantalla con cada aviso, así que el formulario se cambia por "Sesión iniciada" sin que tú lo hagas a mano.
+- Si el servidor rechaza la operación, Firebase lanza un `FirebaseAuthException` con un código. `mensajeDe` traduce esos códigos a un texto claro para quien usa la app.
+- `trim()` quita los espacios que se cuelan al escribir o pegar el correo.
+- Firebase exige contraseñas de al menos 6 caracteres.
+- `obscureText: true` oculta la contraseña mientras se escribe.
+- Firebase guarda la sesión en el teléfono. Si cierras la app y la abres, la sesión sigue iniciada.
+
+**Comprueba:**
+
+1. Ejecuta la app, entra a "Cuenta", escribe un correo y una contraseña de al menos 6 caracteres, y pulsa "Registrar". La pantalla debe cambiar a "Sesión iniciada" con tu correo.
+2. En la consola de Firebase, en **Authentication**, pestaña **Usuarios**, aparece la cuenta nueva.
+3. Cierra la app por completo y ábrela: al entrar a "Cuenta" la sesión sigue iniciada.
+4. Pulsa "Cerrar sesión", escribe una contraseña equivocada y pulsa "Iniciar sesión": debe aparecer "Correo o contraseña incorrectos".
+
+## Etapa 3. Firestore
+
+### Paso 13. Crear la base de datos y sus reglas
+
+**En la consola de Firebase:**
+
+1. Entra a **Firestore Database** (en **Compilación** o **Build**) y pulsa **Crear base de datos**.
+2. Elige la ubicación más cercana a tus usuarios. La ubicación **no se puede cambiar después**.
+3. Elige **modo de producción**. Así la base empieza cerrada y tú decides quién entra.
+4. Pulsa **Crear** y espera a que termine.
+5. Entra a la pestaña **Reglas**, reemplaza todo el contenido por esto y pulsa **Publicar**:
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /productos/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+```
+
+Por qué:
+
+- Firestore guarda los datos en **colecciones** de **documentos**. Aquí usaremos una colección llamada `productos`, y cada producto será un documento.
+- Las reglas corren en el servidor de Google, no en tu app. Por eso nadie puede saltárselas modificando el código del teléfono.
+- Esta regla dice: cualquiera puede **leer** los productos, pero solo quien tiene sesión iniciada puede **escribir** (crear, editar o borrar). `request.auth != null` significa "hay un usuario autenticado en la petición".
+- El modo de producción arranca rechazando todo. Sin la regla del paso 5, la app recibiría un error de permisos.
+- El modo de prueba abre la base a cualquiera por un tiempo limitado: es cómodo, pero deja los datos expuestos. Por eso no lo usamos.
+
+**En la terminal:**
+
+```powershell
+flutter pub add cloud_firestore:7.1.0
+```
+
+Por qué: es el paquete de Firebase que habla con Firestore. Authentication y Firestore son servicios distintos, y cada uno trae el suyo.
+
+**Comprueba:** en la consola, la pestaña **Reglas** muestra la regla publicada. En `pubspec.yaml` aparece `cloud_firestore: 7.1.0`. Ejecuta la app una vez: tarda un poco porque descarga el paquete, y debe abrir el menú sin errores.
+
+### Paso 14. Los productos en la nube
+
+Hasta ahora los productos vivían en el teléfono, con `sqflite`. Ahora vivirán en Firestore. La pantalla de productos locales se queda como está, para que puedas comparar las dos.
+
+Crea el archivo `lib/producto_nube.dart` con este contenido:
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class ProductoNube {
+  const ProductoNube({
+    required this.id,
+    required this.nombre,
+    required this.precio,
+    required this.disponible,
+  });
+
+  final String id;
+  final String nombre;
+  final int precio;
+  final bool disponible;
+
+  // Firestore guarda bool tal cual: no hay conversión a 0 o 1
+  factory ProductoNube.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final d = doc.data()!;
+    return ProductoNube(
+      id: doc.id,
+      nombre: d['nombre'] as String,
+      precio: d['precio'] as int,
+      disponible: d['disponible'] as bool,
+    );
+  }
+}
+```
+
+Crea el archivo `lib/productos_nube_pantalla.dart` con este contenido:
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clase_nube/producto_nube.dart';
+import 'package:flutter/material.dart';
+
+class ProductosNubePantalla extends StatefulWidget {
+  const ProductosNubePantalla({super.key});
+
+  @override
+  State<ProductosNubePantalla> createState() => _ProductosNubePantallaState();
+}
+
+class _ProductosNubePantallaState extends State<ProductosNubePantalla> {
+  final productos = FirebaseFirestore.instance.collection('productos');
+  final nombre = TextEditingController();
+  final precio = TextEditingController();
+  String? error;
+
+  Future<void> probar(Future<void> Function() accion) async {
+    setState(() => error = null);
+    try {
+      await accion();
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        error = e.code == 'permission-denied'
+            ? 'Inicia sesión para guardar cambios'
+            : 'Error: ${e.code}';
+      });
+    }
+  }
+
+  Future<void> agregar() {
+    return probar(() async {
+      await productos.add({
+        'nombre': nombre.text,
+        'precio': int.tryParse(precio.text) ?? 0,
+        'disponible': true,
+      });
+      nombre.clear();
+      precio.clear();
+    });
+  }
+
+  @override
+  void dispose() {
+    nombre.dispose();
+    precio.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Productos en la nube')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombre,
+              decoration: const InputDecoration(labelText: 'Nombre'),
+            ),
+            TextField(
+              controller: precio,
+              decoration: const InputDecoration(labelText: 'Precio'),
+              keyboardType: TextInputType.number,
+            ),
+            FilledButton(onPressed: agregar, child: const Text('Agregar')),
+            if (error != null) Text(error!),
+            Expanded(
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: productos.snapshots(),
+                builder: (context, snap) {
+                  if (snap.hasError) return Text('No se pudo leer: ${snap.error}');
+                  if (!snap.hasData) return const CircularProgressIndicator();
+                  return ListView(
+                    children: [
+                      for (final doc in snap.data!.docs)
+                        filaDe(ProductoNube.fromDoc(doc)),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget filaDe(ProductoNube p) {
+    return ListTile(
+      leading: Switch(
+        value: p.disponible,
+        onChanged: (v) => probar(() => productos.doc(p.id).update({'disponible': v})),
+      ),
+      title: Text(p.nombre),
+      subtitle: Text('\$${p.precio}'),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete),
+        onPressed: () => probar(() => productos.doc(p.id).delete()),
+      ),
+    );
+  }
+}
+```
+
+Después, en `lib/main.dart`, agrega el import y un `ListTile` más al menú:
+
+```dart
+import 'package:clase_nube/productos_nube_pantalla.dart';
+```
+
+```dart
+          ListTile(
+            title: const Text('Productos en la nube'),
+            onTap: () => abrir(context, const ProductosNubePantalla()),
+          ),
+```
+
+Por qué así:
+
+- `ProductoNube` es distinto de `Producto`. El `id` ya no es un número que elegimos nosotros: Firestore asigna a cada documento un texto único, por eso aquí es `String`.
+- No hay `toMap` con conversión a 0 o 1: Firestore guarda el `bool` tal cual.
+- `productos` es una referencia a la colección `productos`. A partir de ella se hace todo: `add` crea un documento, `doc(id).update` cambia campos y `doc(id).delete` lo borra.
+- `snapshots()` es un flujo de la colección completa: avisa cada vez que algo cambia en la nube, sea por esta app o por otra. `StreamBuilder` redibuja la lista con cada aviso, sin recargar a mano. Por eso `agregar` no vuelve a leer la lista.
+- Si la regla del servidor rechaza una escritura, Firebase lanza un `FirebaseException` con el código `permission-denied`. La pantalla lo traduce a "Inicia sesión para guardar cambios".
+- El `Switch` usa `update` para cambiar solo el campo `disponible` del documento, sin tocar los demás.
+
+**Comprueba:**
+
+1. Entra a "Productos en la nube" **sin** haber iniciado sesión y pulsa "Agregar" con un nombre y un precio. Debe aparecer "Inicia sesión para guardar cambios": la regla del servidor rechazó la escritura.
+2. Entra a "Cuenta", inicia sesión, vuelve y agrega un producto. Aparece en la lista al instante.
+3. En la consola de Firebase, en **Firestore Database**, la colección `productos` tiene el documento nuevo, con los campos `nombre`, `precio` y `disponible`.
+4. Cambia el interruptor y borra un producto. Mira cómo cambia el documento en la consola.
+5. Con la app abierta, edita un campo directamente en la consola: la lista de la app se actualiza sola.
+
+### Paso 15. Qué pasa sin internet
+
+Firestore guarda una copia de los datos en el teléfono. En Android esa copia viene activada por defecto: no hay que escribir ni configurar nada. Eso cambia cómo se comporta la pantalla cuando se pierde la conexión:
+
+- Las **lecturas** se atienden desde la copia local. La lista sigue apareciendo.
+- Las **escrituras** se aplican primero en la copia local y quedan en cola. La lista se actualiza al instante y, cuando vuelve la conexión, Firestore las envía al servidor.
+- El `Future` que devuelve `add`, `update` o `delete` **solo termina cuando el servidor confirma**. Sin internet se queda esperando. Por eso la pantalla no debe esperarlo para limpiar los campos.
+
+Reemplaza todo el contenido de `lib/productos_nube_pantalla.dart` por esto. Cambian `agregar`, que ahora limpia los campos sin esperar al servidor, el encabezado de la lista y el subtítulo de cada fila:
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clase_nube/producto_nube.dart';
+import 'package:flutter/material.dart';
+
+class ProductosNubePantalla extends StatefulWidget {
+  const ProductosNubePantalla({super.key});
+
+  @override
+  State<ProductosNubePantalla> createState() => _ProductosNubePantallaState();
+}
+
+class _ProductosNubePantallaState extends State<ProductosNubePantalla> {
+  final productos = FirebaseFirestore.instance.collection('productos');
+  final nombre = TextEditingController();
+  final precio = TextEditingController();
+  String? error;
+
+  Future<void> probar(Future<void> Function() accion) async {
+    setState(() => error = null);
+    try {
+      await accion();
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        error = e.code == 'permission-denied'
+            ? 'Inicia sesión para guardar cambios'
+            : 'Error: ${e.code}';
+      });
+    }
+  }
+
+  Future<void> agregar() {
+    final nuevo = {
+      'nombre': nombre.text,
+      'precio': int.tryParse(precio.text) ?? 0,
+      'disponible': true,
+    };
+    nombre.clear();
+    precio.clear();
+    return probar(() => productos.add(nuevo));
+  }
+
+  @override
+  void dispose() {
+    nombre.dispose();
+    precio.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Productos en la nube')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombre,
+              decoration: const InputDecoration(labelText: 'Nombre'),
+            ),
+            TextField(
+              controller: precio,
+              decoration: const InputDecoration(labelText: 'Precio'),
+              keyboardType: TextInputType.number,
+            ),
+            FilledButton(onPressed: agregar, child: const Text('Agregar')),
+            if (error != null) Text(error!),
+            Expanded(
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: productos.snapshots(),
+                builder: (context, snap) {
+                  if (snap.hasError) return Text('No se pudo leer: ${snap.error}');
+                  if (!snap.hasData) return const CircularProgressIndicator();
+                  final datos = snap.data!;
+                  return Column(
+                    children: [
+                      Text(
+                        datos.metadata.isFromCache
+                            ? 'Datos guardados en el teléfono'
+                            : 'Datos del servidor',
+                      ),
+                      Expanded(
+                        child: ListView(
+                          children: [for (final doc in datos.docs) filaDe(doc)],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget filaDe(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+    final p = ProductoNube.fromDoc(doc);
+    return ListTile(
+      leading: Switch(
+        value: p.disponible,
+        onChanged: (v) => probar(() => productos.doc(p.id).update({'disponible': v})),
+      ),
+      title: Text(p.nombre),
+      subtitle: Text(
+        doc.metadata.hasPendingWrites ? '\$${p.precio} (sin enviar)' : '\$${p.precio}',
+      ),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete),
+        onPressed: () => probar(() => productos.doc(p.id).delete()),
+      ),
+    );
+  }
+}
+```
+
+Por qué así:
+
+- `agregar` arma el mapa y limpia los campos **antes** de llamar a `add`. Así el formulario responde aunque el servidor tarde: la espera del `Future` ocurre dentro de `probar`, y nadie la bloquea.
+- `datos.metadata.isFromCache` es `true` cuando la lista salió de la copia local y `false` cuando viene del servidor. La pantalla lo muestra en el encabezado.
+- `doc.metadata.hasPendingWrites` es `true` mientras un documento tiene un cambio que todavía no llegó al servidor. La fila lo marca con "(sin enviar)".
+- La lectura de `snap.error` ya estaba en el paso 14: si algo falla, la pantalla muestra el motivo.
+
+**Comprueba:**
+
+1. Con internet, entra a "Productos en la nube" con la sesión iniciada. El encabezado dice "Datos del servidor".
+2. Activa el **modo avión** en el teléfono o el emulador y vuelve a abrir la pantalla. La lista sigue ahí y el encabezado dice "Datos guardados en el teléfono".
+3. Con el modo avión activado, agrega un producto. Aparece en la lista al instante con "(sin enviar)", y los campos quedan limpios.
+4. En la consola de Firebase, en Firestore, ese producto **todavía no existe**.
+5. Desactiva el modo avión. Al volver la conexión, la marca "(sin enviar)" desaparece y el producto aparece en la consola.
+
+Dos advertencias:
+
+- Si el servidor rechaza una escritura cuando llega la conexión, por ejemplo porque la regla no la permite, Firestore deshace el cambio local y el producto desaparece de la lista.
+- En la **web** la copia local viene desactivada por defecto, así que este comportamiento solo aplica a Android y iOS.
+
+## Etapa 4. Archivos y avisos
+
+### Paso 16. Subir una foto con Cloud Storage
+
+Firestore guarda datos pequeños y estructurados. Una foto es un archivo grande: va en **Cloud Storage**, y en el documento del producto solo se guarda la dirección donde quedó.
+
+**En la consola de Firebase:**
+
+1. Entra a **Storage** (en **Compilación** o **Build**) y pulsa **Comenzar**.
+2. Crear el almacenamiento exige el **plan Blaze**, que es de pago por uso. Firebase pide asociar una cuenta de facturación, y el uso gratuito se mantiene dentro de su cuota. Si no quieres activarlo, salta al paso 17: el resto de la guía no depende de este paso.
+3. Elige la ubicación y pulsa **Listo**.
+4. Entra a la pestaña **Reglas**, reemplaza todo el contenido por esto y pulsa **Publicar**:
+
+```text
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /productos/{archivo} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+```
+
+Es la misma idea de las reglas de Firestore: cualquiera ve las fotos de `productos/`, pero solo quien tiene sesión iniciada puede subirlas.
+
+**En la terminal:**
+
+```powershell
+flutter pub add firebase_storage:14.0.1 image_picker:1.2.4
+```
+
+- `firebase_storage` sube y descarga archivos.
+- `image_picker` abre la galería del teléfono para elegir una foto. El selector de galería de Android no pide permisos de almacenamiento, así que no hay que tocar el manifiesto.
+
+Reemplaza todo el contenido de `lib/producto_nube.dart` por esto. Agrega el campo `fotoUrl`, que puede ser nulo porque un producto nuevo todavía no tiene foto:
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class ProductoNube {
+  const ProductoNube({
+    required this.id,
+    required this.nombre,
+    required this.precio,
+    required this.disponible,
+    this.fotoUrl,
+  });
+
+  final String id;
+  final String nombre;
+  final int precio;
+  final bool disponible;
+  final String? fotoUrl;
+
+  // Firestore guarda bool tal cual: no hay conversión a 0 o 1
+  factory ProductoNube.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final d = doc.data()!;
+    return ProductoNube(
+      id: doc.id,
+      nombre: d['nombre'] as String,
+      precio: d['precio'] as int,
+      disponible: d['disponible'] as bool,
+      fotoUrl: d['fotoUrl'] as String?,
+    );
+  }
+}
+```
+
+Reemplaza todo el contenido de `lib/productos_nube_pantalla.dart` por esto. Agrega `subirFoto`, la miniatura y un botón con ícono de cámara en cada fila:
+
+```dart
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clase_nube/producto_nube.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ProductosNubePantalla extends StatefulWidget {
+  const ProductosNubePantalla({super.key});
+
+  @override
+  State<ProductosNubePantalla> createState() => _ProductosNubePantallaState();
+}
+
+class _ProductosNubePantallaState extends State<ProductosNubePantalla> {
+  final productos = FirebaseFirestore.instance.collection('productos');
+  final nombre = TextEditingController();
+  final precio = TextEditingController();
+  String? error;
+
+  Future<void> probar(Future<void> Function() accion) async {
+    setState(() => error = null);
+    try {
+      await accion();
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        error = e.code == 'permission-denied' || e.code == 'unauthorized'
+            ? 'Inicia sesión para guardar cambios'
+            : 'Error: ${e.code}';
+      });
+    }
+  }
+
+  Future<void> agregar() {
+    final nuevo = {
+      'nombre': nombre.text,
+      'precio': int.tryParse(precio.text) ?? 0,
+      'disponible': true,
+    };
+    nombre.clear();
+    precio.clear();
+    return probar(() => productos.add(nuevo));
+  }
+
+  Future<void> subirFoto(String id) {
+    return probar(() async {
+      final foto = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (foto == null) return;
+      final ref = FirebaseStorage.instance.ref('productos/$id.jpg');
+      await ref.putFile(File(foto.path));
+      final url = await ref.getDownloadURL();
+      await productos.doc(id).update({'fotoUrl': url});
+    });
+  }
+
+  @override
+  void dispose() {
+    nombre.dispose();
+    precio.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Productos en la nube')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: nombre,
+              decoration: const InputDecoration(labelText: 'Nombre'),
+            ),
+            TextField(
+              controller: precio,
+              decoration: const InputDecoration(labelText: 'Precio'),
+              keyboardType: TextInputType.number,
+            ),
+            FilledButton(onPressed: agregar, child: const Text('Agregar')),
+            if (error != null) Text(error!),
+            Expanded(
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: productos.snapshots(),
+                builder: (context, snap) {
+                  if (snap.hasError) return Text('No se pudo leer: ${snap.error}');
+                  if (!snap.hasData) return const CircularProgressIndicator();
+                  final datos = snap.data!;
+                  return Column(
+                    children: [
+                      Text(
+                        datos.metadata.isFromCache
+                            ? 'Datos guardados en el teléfono'
+                            : 'Datos del servidor',
+                      ),
+                      Expanded(
+                        child: ListView(
+                          children: [for (final doc in datos.docs) filaDe(doc)],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget filaDe(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+    final p = ProductoNube.fromDoc(doc);
+    return ListTile(
+      leading: p.fotoUrl == null
+          ? const Icon(Icons.image_outlined, size: 48)
+          : Image.network(
+              p.fotoUrl!,
+              width: 48,
+              height: 48,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => const Icon(Icons.broken_image, size: 48),
+            ),
+      title: Text(p.nombre),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            doc.metadata.hasPendingWrites ? '\$${p.precio} (sin enviar)' : '\$${p.precio}',
+          ),
+          Row(
+            children: [
+              Switch(
+                value: p.disponible,
+                onChanged: (v) => probar(() => productos.doc(p.id).update({'disponible': v})),
+              ),
+              IconButton(
+                icon: const Icon(Icons.photo_camera),
+                onPressed: () => subirFoto(p.id),
+              ),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () => probar(() => productos.doc(p.id).delete()),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+Por qué así:
+
+- `pickImage` abre la galería y devuelve el archivo elegido, o `null` si la persona cancela. En ese caso la función termina sin hacer nada.
+- `ref('productos/$id.jpg')` es la ruta del archivo dentro de Storage. Usar el id del producto como nombre garantiza que cada producto tenga su propia foto.
+- `putFile` sube el archivo. Con `await` se espera a que Storage lo reciba.
+- `getDownloadURL` pide la dirección pública del archivo ya subido, y `update` la guarda en el campo `fotoUrl` del documento. Firestore guarda solo la dirección, nunca la foto.
+- `Image.network` descarga y muestra la foto desde esa dirección. `errorBuilder` pone un ícono si no se puede cargar.
+- Storage también rechaza con un código propio, `unauthorized`. `probar` lo trata igual que `permission-denied`.
+
+**Comprueba:**
+
+1. Agrega una foto a la galería del emulador: arrastra una imagen `.jpg` sobre la ventana del emulador. En un teléfono físico, usa cualquier foto.
+2. En "Productos en la nube", con la sesión iniciada, toca el ícono de la cámara de un producto y elige la foto. Después de un momento, la miniatura aparece en la fila.
+3. En la consola, en **Storage**, la carpeta `productos` contiene el archivo, y en **Firestore** el documento tiene el campo `fotoUrl`.
+4. Cierra la sesión e intenta subir otra foto: aparece "Inicia sesión para guardar cambios".
+5. Sin internet la subida falla, y a diferencia de Firestore **no queda en cola**: hay que repetirla cuando vuelva la conexión.
+
+### Paso 17. Un aviso local
+
+Una notificación **local** la crea y la muestra la propia app, sin pasar por ningún servidor. Por eso funciona sin internet.
+
+**Configuración de Android.** Este paso toca tres archivos de la carpeta `android`.
+
+1. En `android/app/src/main/AndroidManifest.xml`, agrega esta línea justo debajo de la etiqueta `<manifest ...>` y antes de `<application`:
+
+```xml
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+```
+
+Desde Android 13 una app necesita este permiso para mostrar avisos. Sin él, la notificación se crea pero nunca aparece.
+
+2. El paquete usa funciones de Java que los teléfonos más viejos no traen, y Gradle debe traducirlas. Esto se llama **desugaring** y no se activa solo. En `android/app/build.gradle.kts`, agrega esta línea dentro del bloque `compileOptions`:
+
+```kotlin
+        isCoreLibraryDesugaringEnabled = true
+```
+
+y agrega este bloque al final del archivo:
+
+```kotlin
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
+```
+
+Si te saltas este cambio, la compilación falla con el mensaje `requires core library desugaring to be enabled`.
+
+
+**En la terminal:**
+
+```powershell
+flutter pub add flutter_local_notifications:22.3.3
+```
+
+Crea el archivo `lib/avisos.dart` con este contenido:
+
+```dart
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+final avisos = FlutterLocalNotificationsPlugin();
+
+Future<void> iniciarAvisos() async {
+  const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+  await avisos.initialize(
+    settings: const InitializationSettings(android: android),
+  );
+  await avisos
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.requestNotificationsPermission();
+}
+
+Future<void> avisarPedido() async {
+  const detalle = AndroidNotificationDetails(
+    'pedidos',
+    'Pedidos',
+    importance: Importance.high,
+  );
+  await avisos.show(
+    id: 1,
+    title: 'Pedido listo',
+    body: 'Tu canasta salió del mercado',
+    notificationDetails: const NotificationDetails(android: detalle),
+  );
+}
+```
+
+Crea el archivo `lib/avisos_pantalla.dart` con este contenido:
+
+```dart
+import 'package:clase_nube/avisos.dart';
+import 'package:flutter/material.dart';
+
+class AvisosPantalla extends StatelessWidget {
+  const AvisosPantalla({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Avisos')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            FilledButton(
+              onPressed: avisarPedido,
+              child: const Text('Mostrar aviso local'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+En `lib/main.dart`, agrega el import:
+
+```dart
+import 'package:clase_nube/avisos.dart';
+import 'package:clase_nube/avisos_pantalla.dart';
+```
+
+agrega esta línea en `main`, justo después de `Firebase.initializeApp`:
+
+```dart
+  await iniciarAvisos();
+```
+
+y un `ListTile` más al menú:
+
+```dart
+          ListTile(
+            title: const Text('Avisos'),
+            onTap: () => abrir(context, const AvisosPantalla()),
+          ),
+```
+
+Por qué así:
+
+- `iniciarAvisos` prepara el plugin una sola vez, al arrancar. `@mipmap/ic_launcher` es el ícono de la app, que Android usa como ícono del aviso.
+- `requestNotificationsPermission` muestra el diálogo del permiso en Android 13 o superior. En versiones anteriores no hace nada.
+- Un **canal** (`'pedidos'`) agrupa avisos del mismo tipo. Desde Android 8 cada aviso pertenece a un canal, y la persona puede silenciar un canal sin silenciar la app. `Importance.high` hace que el aviso aparezca como mensaje emergente.
+- `show` muestra el aviso con un `id`, un título y un texto. Un `id` repetido reemplaza el aviso anterior.
+
+**Comprueba:**
+
+1. Ejecuta la app. La primera vez, Android pregunta si permites las notificaciones: acepta.
+2. Entra a "Avisos" y toca "Mostrar aviso local". Aparece "Pedido listo" en la barra de notificaciones.
+3. Activa el modo avión y repite: el aviso aparece igual, porque no usa la red.
+4. Si rechazaste el permiso y no ves nada, actívalo en los ajustes de la app, en **Notificaciones**.
+
+### Paso 18. Un aviso desde la nube: push con FCM
+
+Una notificación **push** la envía la nube mediante **Firebase Cloud Messaging** (FCM). La app solo la recibe. Para dirigirle un mensaje a un teléfono concreto, la nube necesita un identificador de esa instalación de la app.
+
+**En la terminal:**
+
+```powershell
+flutter pub add firebase_messaging:17.0.1
+```
+
+**En `android/app/src/main/AndroidManifest.xml`**, agrega esta etiqueta dentro de `<application>`, junto a la que ya dice `flutterEmbedding`:
+
+```xml
+        <meta-data
+            android:name="firebase_messaging_installation_id_enabled"
+            android:value="true" />
+```
+
+Desde la versión 17, `firebase_messaging` ya no entrega un *token*: `getToken` quedó obsoleto y se usa `register()`, que entrega un **identificador de instalación**. En Android, `register()` solo funciona si el manifiesto trae esa marca. Con la marca activa, `getToken` falla, así que no se mezclan los dos caminos.
+
+Crea el archivo `lib/push.dart` con este contenido:
+
+```dart
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+
+final instalacion = ValueNotifier<String?>(null);
+final ultimoMensaje = ValueNotifier<String?>(null);
+
+@pragma('vm:entry-point')
+Future<void> alSegundoPlano(RemoteMessage mensaje) async {
+  debugPrint('Segundo plano: ${mensaje.notification?.title}');
+}
+
+Future<void> configurarPush() async {
+  final fcm = FirebaseMessaging.instance;
+  await fcm.requestPermission();
+  fcm.onRegistered.listen((id) => instalacion.value = id);
+  await fcm.register();
+  FirebaseMessaging.onMessage.listen((m) {
+    ultimoMensaje.value = m.notification?.title;
+  });
+}
+```
+
+Reemplaza todo el contenido de `lib/avisos_pantalla.dart` por esto. Ahora la pantalla también muestra el identificador y el último mensaje recibido:
+
+```dart
+import 'package:clase_nube/avisos.dart';
+import 'package:clase_nube/push.dart';
+import 'package:flutter/material.dart';
+
+class AvisosPantalla extends StatefulWidget {
+  const AvisosPantalla({super.key});
+
+  @override
+  State<AvisosPantalla> createState() => _AvisosPantallaState();
+}
+
+class _AvisosPantallaState extends State<AvisosPantalla> {
+  @override
+  void initState() {
+    super.initState();
+    configurarPush();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Avisos')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            FilledButton(
+              onPressed: avisarPedido,
+              child: const Text('Mostrar aviso local'),
+            ),
+            const SizedBox(height: 16),
+            const Text('Identificador de esta instalación:'),
+            ValueListenableBuilder<String?>(
+              valueListenable: instalacion,
+              builder: (context, id, _) => SelectableText(id ?? 'Esperando...'),
+            ),
+            const SizedBox(height: 16),
+            const Text('Último mensaje recibido:'),
+            ValueListenableBuilder<String?>(
+              valueListenable: ultimoMensaje,
+              builder: (context, titulo, _) => Text(titulo ?? 'Ninguno'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+En `lib/main.dart`, agrega estos imports:
+
+```dart
+import 'package:clase_nube/push.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+```
+
+y esta línea en `main`, justo después de `Firebase.initializeApp`:
+
+```dart
+  FirebaseMessaging.onBackgroundMessage(alSegundoPlano);
+```
+
+Por qué así:
+
+- `requestPermission` pide el permiso de notificaciones. Es el mismo que usa el aviso local.
+- `register` inscribe esta instalación en FCM, y `onRegistered` entrega su identificador cuando está listo. En una app real ese identificador se envía a tu servidor, para que sepa a quién dirigirle los mensajes.
+- `onMessage` entrega los mensajes que llegan con la app **abierta**. Con la app abierta Android no dibuja el aviso por su cuenta: la app decide qué hacer. Aquí solo se muestra el título en pantalla.
+- `onBackgroundMessage` entrega los mensajes que llegan con la app **en segundo plano**. Debe apuntar a una función de nivel superior, con la anotación `@pragma('vm:entry-point')`, porque Android la ejecuta fuera de la pantalla.
+- Con la app cerrada o en segundo plano, Android muestra por su cuenta los mensajes de tipo "notificación".
+
+**Comprueba:**
+
+1. Ejecuta la app y entra a "Avisos". Después de unos segundos, "Esperando..." se reemplaza por el identificador de la instalación. Mantén pulsado el texto para seleccionarlo y copiarlo.
+2. En la consola de Firebase, abre **Messaging** y crea una campaña de tipo **Mensajes de notificación de Firebase**. Escribe un título y un texto, y pulsa **Enviar mensaje de prueba**.
+3. Pega el identificador en el campo de destino y pulsa **Probar**.
+4. Con la app abierta, el título del mensaje aparece en "Último mensaje recibido". Con la app en segundo plano, Android muestra el aviso en la barra de notificaciones.
+5. Con el modo avión activado, el mensaje **no llega**. Llegará cuando el teléfono vuelva a tener conexión.
+
+::: {.callout-warning}
+## Esta prueba de envío no se verificó
+
+La consola de Firebase está pensada para enviar pruebas a un *token* de registro, y la documentación oficial todavía describe el envío con ese token. El identificador de instalación se puede usar como destino directo, pero **no se comprobó que la consola lo acepte en el campo de prueba**. Si la consola lo rechaza, el mensaje se envía a través de la API HTTP v1 de FCM, poniendo el identificador en el campo `token` del cuerpo de la petición. La parte de la app, en cambio, sí compila y se ejecuta: el identificador aparece en pantalla.
+:::
+
+## Así queda el proyecto
+
+Al terminar, la carpeta `lib` tiene estos archivos:
+
+```text
+lib/
+  main.dart                    el menú y el arranque de Firebase y de los avisos
+  producto.dart                el Producto de SQLite (id numérico)
+  base_datos.dart              abrir la base, insertar, leer y borrar
+  productos_pantalla.dart      la lista de productos de SQLite
+  contador.dart                el contador con preferencias
+  token.dart                   el token en almacenamiento seguro
+  cuenta.dart                  registrar, iniciar y cerrar sesión
+  producto_nube.dart           el Producto de Firestore (id de texto, foto)
+  productos_nube_pantalla.dart los productos en la nube, con foto
+  avisos.dart                  el aviso local
+  push.dart                    el registro y la escucha de FCM
+  avisos_pantalla.dart         la pantalla de avisos
+  firebase_options.dart        lo genera flutterfire
+```
+
+Y este es el `lib/main.dart` completo:
+
+```dart
+import 'package:clase_nube/avisos.dart';
+import 'package:clase_nube/avisos_pantalla.dart';
+import 'package:clase_nube/contador.dart';
+import 'package:clase_nube/cuenta.dart';
+import 'package:clase_nube/firebase_options.dart';
+import 'package:clase_nube/push.dart';
+import 'package:clase_nube/productos_nube_pantalla.dart';
+import 'package:clase_nube/productos_pantalla.dart';
+import 'package:clase_nube/token.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseMessaging.onBackgroundMessage(alSegundoPlano);
+  await iniciarAvisos();
+  runApp(const MaterialApp(home: InicioPantalla()));
+}
+
+class InicioPantalla extends StatelessWidget {
+  const InicioPantalla({super.key});
+
+  void abrir(BuildContext context, Widget pantalla) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => pantalla));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('clase_nube')),
+      body: ListView(
+        children: [
+          ListTile(
+            title: const Text('Contador'),
+            onTap: () => abrir(context, const ContadorPantalla()),
+          ),
+          ListTile(
+            title: const Text('Token seguro'),
+            onTap: () => abrir(context, const TokenPantalla()),
+          ),
+          ListTile(
+            title: const Text('Productos'),
+            onTap: () => abrir(context, const ProductosPantalla()),
+          ),
+          ListTile(
+            title: const Text('Cuenta'),
+            onTap: () => abrir(context, const CuentaPantalla()),
+          ),
+          ListTile(
+            title: const Text('Avisos'),
+            onTap: () => abrir(context, const AvisosPantalla()),
+          ),
+          ListTile(
+            title: const Text('Productos en la nube'),
+            onTap: () => abrir(context, const ProductosNubePantalla()),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## Qué funciona sin internet
+
+| Función | Sin internet | Por qué |
+|---|---|---|
+| Contador, token y productos de SQLite | Funciona | Los datos están en un archivo del teléfono |
+| Iniciar sesión o registrar una cuenta | **No funciona** | El servidor de Authentication debe responder |
+| Una sesión que ya estaba iniciada | Se conserva | Firebase guarda la sesión en el teléfono |
+| Leer los productos de la nube | Funciona | Firestore los lee de su copia local |
+| Escribir un producto en la nube | Queda en cola | Se envía solo cuando vuelve la conexión |
+| Subir una foto a Storage | **Falla** | No queda en cola: hay que repetirla |
+| Aviso local | Funciona | Todo ocurre dentro del teléfono |
+| Notificación push | **No llega** | Llega cuando el teléfono vuelva a tener conexión |
+
+## Si algo falla
+
+| Lo que ves | Qué pasa | Qué hacer |
+|---|---|---|
+| `No Directionality widget found` | `runApp` recibe un `Scaffold` sin `MaterialApp` | Usa `runApp(const MaterialApp(home: InicioPantalla()))` (paso 5) |
+| `Navigator operation requested with a context that does not include a Navigator` | El `context` que usas para navegar está por encima del `MaterialApp` | Deja el `MaterialApp` en `main` y el menú en otra clase (paso 5) |
+| `databaseFactory not initialized` | Ejecutas `sqflite` en Chrome o en Windows | Ejecuta en Android (paso 6) |
+| `This application is not configured to build on the web` | El proyecto se creó solo con Android | Ejecuta en un emulador o un teléfono Android |
+| El editor marca un paquete en rojo | El paquete no está instalado | Revisa `pubspec.yaml` y ejecuta `flutter pub get` |
+| `permission-denied` o `unauthorized` | La regla del servidor rechazó la operación | Inicia sesión, y revisa las reglas publicadas (pasos 13 y 16) |
+| `requires core library desugaring to be enabled` | Falta activar el desugaring en Gradle | Paso 17 |
+| `Module was compiled with an incompatible version of Kotlin` | El plugin de Kotlin del proyecto es más viejo que el que usan las librerías de Firebase | Actualiza el plugin de Kotlin (paso 11) |
+| El aviso local no aparece | Falta el permiso de notificaciones | Acepta el permiso o actívalo en los ajustes de la app (paso 17) |
+
+## Qué se comprobó y qué no
+
+::: {.callout-warning}
+**Se comprobó:**
+
+- Cada archivo de esta guía pasa `flutter analyze` sin problemas.
+- El proyecto completo, con todos los paquetes y los cambios de Gradle y del manifiesto de la guía, genera el APK de depuración de Android.
+- La ejecución en un teléfono de las pantallas hasta el paso 13.
+
+**No se comprobó:**
+
+- La ejecución de las pantallas de Storage y de avisos contra un proyecto de Firebase real.
+- El envío de una notificación push de extremo a extremo, ni que la consola de Firebase acepte el identificador de instalación como destino de prueba.
+- El comportamiento sin internet de Firestore: lo describe la documentación del paquete y la guía lo explica, pero no se ejecutó en un teléfono sin conexión.
+
+Cada paso trae su **Comprueba**: si algo no coincide con lo que describe, es la señal para revisar antes de seguir.
+:::
