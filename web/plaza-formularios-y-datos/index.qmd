@@ -1,0 +1,2105 @@
+---
+title: "Plaza: formularios, validación y base de datos"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+number-sections: false
+---
+
+::: {.ficha}
+|                 |                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------|
+| Qué construyes  | Plaza, un servidor ASP.NET Core MVC con catálogo, detalle de producto y pedidos, con formularios que se validan en el navegador y en el servidor, y catálogo y pedidos guardados en una base de datos PostgreSQL con Entity Framework Core, consultados con LINQ |
+| Prerrequisitos  | Una terminal, Git instalado y nociones de C# (clases, listas y métodos). Parte de cero: no necesitas otra guía |
+| Herramientas    | .NET SDK 10 (10.0.302), VS Code, Git, PowerShell y PostgreSQL 18.6 en versión portable |
+:::
+
+::: {.acceso}
+::: {.acceso-item}
+Presentación interactiva: el recorrido de un pedido desde el formulario hasta la base de datos, con diagramas y el código de cada paso
+
+[Abrir la presentación](presentacion-interactiva.html){.btn-doc target="_blank"}
+:::
+:::
+
+::: {.callout-note}
+## Cómo usar esta guía
+
+- Todos los comandos van en **PowerShell**. Si usas otra terminal, la sintaxis de las variables de entorno cambia.
+- Los comandos de `dotnet` se ejecutan **dentro de la carpeta `Plaza`**, la que crea la primera etapa.
+- Cada archivo aparece completo con su ruta encima. Si un archivo cambia en una etapa posterior, la guía lo muestra completo otra vez: reemplaza todo su contenido.
+- Cada etapa termina con una sección **Comprueba**. No sigas a la etapa siguiente hasta que se cumpla.
+- Al cerrar una etapa que funciona, guarda un commit. Si algo se rompe después, vuelves a ese punto.
+:::
+
+## Lo que vas a lograr
+
+| Etapa | Qué agregas |
+|---|---|
+| 1 a 3 | El proyecto vacío, cómo se lee `Program.cs` y el control de versiones |
+| 4 a 6 | El modelo `Producto`, el servicio del catálogo y la página que lista los productos |
+| 7 | El detalle de un producto con una ruta que recibe un parámetro |
+| 8 y 9 | Los pedidos: modelos, servicio y un formulario que los recibe |
+| 10 | La regla de negocio que el servidor revisa aunque el navegador diga que todo está bien |
+| 11 | La validación en el navegador, sin viajar al servidor |
+| 12 | PostgreSQL, Entity Framework Core y el catálogo leído desde la base de datos |
+| 13 | Los pedidos guardados en la base de datos, con su clave foránea hacia los productos |
+| 14 | Consultas con LINQ y el SQL que genera cada una |
+| 15 | Una práctica final con su solución: el teléfono opcional del cliente |
+
+::: {.callout-warning}
+## Lo que esta guía no enseña
+
+Autenticación, repositorios genéricos, procedimientos almacenados, operaciones asíncronas, paginación y pruebas automáticas. Al final de la guía, en "Para seguir aprendiendo", encuentras qué es cada uno y por dónde seguir.
+:::
+
+## Etapa 1. Crear el proyecto vacío
+
+### Qué vas a lograr
+
+Un servidor mínimo que responde `Hello World!` en tu equipo.
+
+### Los comandos
+
+Ubícate en la carpeta donde guardes tus proyectos y ejecuta:
+
+```powershell
+dotnet new web -n Plaza
+cd Plaza
+dotnet run
+```
+
+- `dotnet new web` crea un proyecto web de ASP.NET Core mínimo. No trae controladores, vistas ni base de datos: los agregas tú, etapa por etapa.
+- `-n Plaza` fija el nombre del proyecto y de su carpeta. Escribe `Plaza` con mayúscula: en C# esa es la convención para nombres de proyecto y de clase.
+- `dotnet run` compila y arranca el servidor. Se detiene con `Ctrl + C`.
+
+### Los archivos que se generan
+
+| Archivo | Para qué sirve |
+|---|---|
+| `Plaza.csproj` | La ficha del proyecto: versión de .NET y paquetes |
+| `Program.cs` | El punto de entrada: arma y arranca el servidor |
+| `appsettings.json` | Configuración de la aplicación |
+| `Properties/launchSettings.json` | El puerto y el entorno cuando ejecutas en tu equipo |
+
+### Comprueba
+
+`dotnet run` imprime una dirección como `http://localhost:5079`. Ábrela en el navegador: debe mostrar `Hello World!`. El puerto puede ser otro en tu equipo; usa el que imprima tu terminal.
+
+## Etapa 2. Entender `Program.cs`
+
+Abre `Program.cs`. Son seis líneas y ahí está la base de todo lo que construyes:
+
+```{.csharp filename="Program.cs"}
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/", () => "Hello World!");
+
+app.Run();
+```
+
+1. `builder` es la fase de preparación. Aquí registras los servicios que necesita la aplicación: controladores, base de datos, inyección de dependencias.
+2. `Build()` cierra esa preparación y crea la aplicación. Después de esta línea ya no puedes registrar servicios.
+3. `MapGet` es una ruta: cuando llega un GET a `/`, responde ese texto.
+4. `Run()` deja el servidor escuchando peticiones hasta que lo detengas.
+
+Guarda este patrón: **registrar servicios, construir, configurar rutas, ejecutar**. El proyecto final tiene el mismo orden, solo que más grande.
+
+## Etapa 3. Control de versiones
+
+### Qué vas a lograr
+
+Que cada cambio quede registrado y se pueda deshacer.
+
+### Los comandos
+
+```powershell
+git init
+dotnet new gitignore
+git status
+```
+
+- `git init` convierte la carpeta en un repositorio.
+- `dotnet new gitignore` crea un `.gitignore` para proyectos .NET. Deja fuera `bin/` y `obj/`, que se regeneran al compilar y nunca se suben.
+- `git status` no debe mostrar `bin/` ni `obj/`.
+
+Guarda el primer commit:
+
+```powershell
+git add .
+git commit -m "chore: proyecto web vacio"
+```
+
+### Comprueba
+
+`git log --oneline` muestra un commit.
+
+## Etapa 4. Las carpetas y el modelo `Producto`
+
+### Qué vas a lograr
+
+Una estructura de carpetas donde cada cosa tiene su lugar, y la primera clase del negocio.
+
+### Las carpetas
+
+```powershell
+mkdir Models, Services, Controllers, Views
+```
+
+Cada carpeta responde una pregunta:
+
+| Carpeta | Pregunta que responde |
+|---|---|
+| `Models` | ¿Qué datos manejo? |
+| `Services` | ¿Dónde vive la lógica? |
+| `Controllers` | ¿Quién atiende las peticiones? |
+| `Views` | ¿Qué ve el usuario? |
+
+Git no guarda carpetas vacías: aparecen en el repositorio cuando tengan su primer archivo.
+
+### El modelo
+
+```{.csharp filename="Models/Producto.cs"}
+public class Producto
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public decimal Precio { get; set; }
+}
+```
+
+- Un **modelo** es una clase que describe un dato del negocio. Esta carpeta guarda datos, no lógica.
+- `Id` identifica cada producto. Cuando lleguen a la base de datos será la clave primaria.
+- `= string.Empty` evita que `Nombre` quede nulo: el proyecto tiene `Nullable` activado y sin esto el compilador avisa.
+- `decimal` es el tipo para dinero. `double` tiene errores de redondeo (0.1 más 0.2 no da exactamente 0.3).
+
+::: {.callout-note}
+## Sobre los `namespace`
+
+Esta guía deja las clases en el espacio global para mantener el código corto. En un proyecto grande cada carpeta tiene su propio `namespace` (por ejemplo `Plaza.Models`) y los archivos que usan esas clases agregan el `using` correspondiente. Funciona igual en este tamaño.
+:::
+
+### Comprueba
+
+`dotnet build` termina con `0 Errores`.
+
+## Etapa 5. El contrato del catálogo y su servicio
+
+### Qué vas a lograr
+
+Un catálogo de productos que el resto del programa usa sin saber de dónde salen los datos.
+
+### El contrato
+
+```{.csharp filename="Services/ICatalogo.cs"}
+public interface ICatalogo
+{
+    List<Producto> Listar();
+
+    Producto? Buscar(int id);
+}
+```
+
+Una **interfaz** es un contrato: dice qué sabe hacer un catálogo (listar y buscar) sin decir cómo. Va primero a propósito: más adelante cambias la lista en memoria por una base de datos y quien usa el catálogo no se entera. `Producto?` lleva el signo de pregunta porque `Buscar` puede no encontrar nada.
+
+### La primera implementación
+
+```{.csharp filename="Services/CatalogoEnMemoria.cs"}
+public class CatalogoEnMemoria : ICatalogo
+{
+    private readonly List<Producto> productos = new()
+    {
+        new Producto { Id = 1, Nombre = "Tomate", Precio = 3500m },
+        new Producto { Id = 2, Nombre = "Aguacate", Precio = 6000m },
+        new Producto { Id = 3, Nombre = "Papa", Precio = 2800m },
+        new Producto { Id = 4, Nombre = "Panela", Precio = 4500m },
+    };
+
+    public Producto? Buscar(int id)
+    {
+        return productos.FirstOrDefault(p => p.Id == id);
+    }
+
+    public List<Producto> Listar()
+    {
+        return productos;
+    }
+}
+```
+
+La clase cumple el contrato guardando la lista dentro del programa. La `m` en `3500m` marca el número como `decimal`; sin ella C# lo toma como `double`.
+
+### Comprueba
+
+`dotnet build` termina sin errores. Todavía no se ve nada nuevo en el navegador.
+
+## Etapa 6. Registrar el servicio y mostrar el catálogo
+
+### Qué vas a lograr
+
+Que `/catalogo` muestre los productos.
+
+### Registrar servicios en `Program.cs`
+
+```{.csharp filename="Program.cs"}
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ICatalogo, CatalogoEnMemoria>();
+
+var app = builder.Build();
+
+app.MapControllers();
+
+app.Run();
+```
+
+- `AddControllersWithViews` activa los controladores y las vistas Razor.
+- `AddSingleton<ICatalogo, CatalogoEnMemoria>` le dice a ASP.NET Core: cuando alguien pida un `ICatalogo`, entrégale un `CatalogoEnMemoria`, siempre el mismo objeto (singleton), para que la lista no se reinicie en cada petición.
+- `MapControllers` conecta las rutas que declaran los controladores con el servidor.
+- El `MapGet` de `Hello World!` ya no hace falta.
+
+### El controlador
+
+```{.csharp filename="Controllers/CatalogoController.cs"}
+using Microsoft.AspNetCore.Mvc;
+
+public class CatalogoController : Controller
+{
+    private readonly ICatalogo catalogo;
+
+    public CatalogoController(ICatalogo catalogo)
+    {
+        this.catalogo = catalogo;
+    }
+
+    [HttpGet("catalogo")]
+    public IActionResult Listar()
+    {
+        return View(catalogo.Listar());
+    }
+}
+```
+
+Un **controlador** recibe la petición, pide lo que necesita y decide la respuesta.
+
+- El constructor pide un `ICatalogo`. Esto es la **inyección de dependencias**: el controlador no crea el catálogo, lo recibe.
+- `[HttpGet("catalogo")]` es la ruta: un GET a `/catalogo` ejecuta `Listar`. El nombre del método no cambia la dirección; la define el atributo.
+- `View(...)` entrega la lista a la vista.
+
+### La vista
+
+```{.html filename="Views/Catalogo/Listar.cshtml"}
+@model List<Producto>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Catálogo - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Catálogo</h1>
+
+    <ul>
+        @foreach (var producto in Model)
+        {
+            <li>@producto.Nombre - $@producto.Precio</li>
+        }
+    </ul>
+</body>
+
+</html>
+```
+
+- `@model` declara qué dato recibe la vista, y `Model` es ese dato.
+- ASP.NET Core busca la vista en `Views/<Controlador>/<Método>.cshtml`. Por eso este archivo va en `Views/Catalogo/` y se llama `Listar.cshtml`, igual que el método. Si el nombre del método y el del archivo no coinciden, la página responde 500 con el mensaje `The view 'Listar' was not found`.
+
+::: {.callout-tip}
+## Una regla para todo el proyecto
+
+El nombre del método del controlador y el de su vista siempre coinciden.
+:::
+
+### Comprueba
+
+Ejecuta `dotnet run` y abre `/catalogo`: aparecen los cuatro productos. Guarda el commit:
+
+```powershell
+git add .
+git commit -m "feat: catalogo en memoria"
+```
+
+## Etapa 7. El detalle de un producto
+
+### Qué vas a lograr
+
+Una página por producto, con una ruta que recibe el `Id` en la dirección.
+
+### El controlador con el método nuevo
+
+```{.csharp filename="Controllers/CatalogoController.cs"}
+using Microsoft.AspNetCore.Mvc;
+
+public class CatalogoController : Controller
+{
+    private readonly ICatalogo catalogo;
+
+    public CatalogoController(ICatalogo catalogo)
+    {
+        this.catalogo = catalogo;
+    }
+
+    [HttpGet("catalogo")]
+    public IActionResult Listar()
+    {
+        return View(catalogo.Listar());
+    }
+
+    [HttpGet("catalogo/{id:int:min(1)}")]
+    public IActionResult Buscar(int id)
+    {
+        var producto = catalogo.Buscar(id);
+        if (producto is null)
+        {
+            return NotFound();
+        }
+        return View(producto);
+    }
+}
+```
+
+- `{id}` es un **parámetro de la ruta**: lo que venga en esa parte de la dirección llega al método como `id`.
+- `int:min(1)` es una **restricción**: solo atiende enteros desde 1. `/catalogo/abc` y `/catalogo/0` ni llegan al método.
+- Si el producto no existe, `NotFound()` responde 404 en lugar de fallar con un error.
+
+### Los tag helpers
+
+```{.html filename="Views/_ViewImports.cshtml"}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+```
+
+Un **tag helper** es un atributo especial (`asp-action`, `asp-route-id`) que ASP.NET Core convierte en HTML normal. Esta línea los activa para todas las vistas. Sin ella, el navegador recibiría esos atributos sin procesar y los enlaces quedarían sin `href`.
+
+### La vista del detalle
+
+```{.html filename="Views/Catalogo/Buscar.cshtml"}
+@model Producto
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>@Model.Nombre - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>@Model.Nombre</h1>
+    <p>Precio: $@Model.Precio</p>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+El archivo se llama `Buscar.cshtml` porque el método se llama `Buscar`.
+
+### Enlaces desde el listado
+
+Cambia la vista del listado para que cada producto sea un enlace:
+
+```{.html filename="Views/Catalogo/Listar.cshtml"}
+@model List<Producto>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Catálogo - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Catálogo</h1>
+
+    <ul>
+        @foreach (var producto in Model)
+        {
+            <li><a asp-action="Buscar" asp-route-id="@producto.Id">@producto.Nombre</a> - $@producto.Precio</li>
+        }
+    </ul>
+</body>
+
+</html>
+```
+
+- `asp-action="Buscar"` apunta al método `Buscar` del controlador.
+- `asp-route-id="@producto.Id"` rellena el `{id}` de la ruta con el `Id` de ese producto. Para el Aguacate el enlace resulta `/catalogo/2`.
+- No escribes la dirección a mano: ASP.NET Core la arma desde la ruta. Si mañana cambia la ruta, los enlaces siguen funcionando.
+
+### Comprueba
+
+Detén el servidor con `Ctrl + C` y vuelve a ejecutar `dotnet run`: las vistas se compilan al arrancar, así que un cambio en una vista no se ve sin reiniciar.
+
+| Dirección | Respuesta esperada |
+|---|---|
+| `/catalogo` | La lista, con cada nombre como enlace |
+| `/catalogo/2` | El detalle del Aguacate, 200 |
+| `/catalogo/99` | 404: el producto no existe |
+| `/catalogo/0` y `/catalogo/abc` | 404: la restricción los rechaza |
+
+```powershell
+git add .
+git commit -m "feat: detalle de producto con ruta y parametro"
+```
+
+## Etapa 8. Los pedidos: modelos y servicio
+
+### Qué vas a lograr
+
+Las clases y el servicio que reciben y guardan pedidos. Todavía no se ve nada en el navegador.
+
+### Los dos modelos
+
+```{.csharp filename="Models/NuevoPedido.cs"}
+using System.ComponentModel.DataAnnotations;
+
+public class NuevoPedido
+{
+    [Required(ErrorMessage = "El nombre del cliente es obligatorio")]
+    [StringLength(60, MinimumLength = 3, ErrorMessage = "El nombre debe tener entre 3 y 60 letras")]
+    public string Cliente { get; set; } = string.Empty;
+
+    public string Producto { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "La cantidad es obligatoria")]
+    [Range(1, 100, ErrorMessage = "La cantidad debe estar entre 1 y 100")]
+    public int Cantidad { get; set; } = 1;
+}
+```
+
+```{.csharp filename="Models/Pedido.cs"}
+public class Pedido
+{
+    public int Id { get; set; }
+    public string Cliente { get; set; } = string.Empty;
+    public string Producto { get; set; } = string.Empty;
+    public int Cantidad { get; set; }
+}
+```
+
+Son dos clases porque son dos cosas distintas:
+
+- `NuevoPedido` es lo que el cliente envía. Todavía no tiene `Id` y no es de fiar: puede traer cualquier cosa.
+- `Pedido` es lo que el servidor ya aceptó y guardó, con su número.
+
+Los atributos entre corchetes (`[Required]`, `[StringLength]`, `[Range]`) son **anotaciones de datos**. Escriben la regla junto al dato que protegen, y ASP.NET Core las revisa solo cuando llega el formulario.
+
+Las tres clases del modelo deben ser `public`. Si declaras `class NuevoPedido` sin `public`, el compilador responde `CS0051: Inconsistent accessibility`: una clase sin modificador es visible solo dentro del proyecto, y un método público no puede exigir un parámetro menos visible que él mismo.
+
+### El servicio de pedidos
+
+```{.csharp filename="Services/IPedidos.cs"}
+public interface IPedidos
+{
+    Pedido Guardar(NuevoPedido nuevo);
+
+    Pedido? Buscar(int id);
+}
+```
+
+```{.csharp filename="Services/PedidosEnMemoria.cs"}
+public class PedidosEnMemoria : IPedidos
+{
+    private readonly List<Pedido> pedidos = new();
+
+    public Pedido Guardar(NuevoPedido nuevo)
+    {
+        var pedido = new Pedido
+        {
+            Id = pedidos.Count + 1,
+            Cliente = nuevo.Cliente,
+            Producto = nuevo.Producto,
+            Cantidad = nuevo.Cantidad,
+        };
+        pedidos.Add(pedido);
+        return pedido;
+    }
+
+    public Pedido? Buscar(int id)
+    {
+        return pedidos.FirstOrDefault(p => p.Id == id);
+    }
+}
+```
+
+Es el mismo patrón del catálogo: un contrato y una implementación en memoria. `Guardar` convierte un `NuevoPedido` en un `Pedido` con su número.
+
+### Registrar el servicio
+
+```{.csharp filename="Program.cs"}
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ICatalogo, CatalogoEnMemoria>();
+builder.Services.AddSingleton<IPedidos, PedidosEnMemoria>();
+
+var app = builder.Build();
+
+app.MapControllers();
+
+app.Run();
+```
+
+### Comprueba
+
+`dotnet build` termina con `0 Errores` y `0 Advertencia(s)`.
+
+## Etapa 9. El formulario de pedido
+
+### Qué vas a lograr
+
+Un formulario que envía un pedido, lo valida en el servidor y muestra una página de confirmación.
+
+### El controlador completo
+
+El controlador recibe ahora también `IPedidos` y suma tres métodos.
+
+```{.csharp filename="Controllers/CatalogoController.cs"}
+using Microsoft.AspNetCore.Mvc;
+
+public class CatalogoController : Controller
+{
+    private readonly ICatalogo catalogo;
+    private readonly IPedidos pedidos;
+
+    public CatalogoController(ICatalogo catalogo, IPedidos pedidos)
+    {
+        this.catalogo = catalogo;
+        this.pedidos = pedidos;
+    }
+
+    [HttpGet("catalogo")]
+    public IActionResult Listar()
+    {
+        return View(catalogo.Listar());
+    }
+
+    [HttpGet("catalogo/{id:int:min(1)}")]
+    public IActionResult Buscar(int id)
+    {
+        var producto = catalogo.Buscar(id);
+        if (producto is null)
+        {
+            return NotFound();
+        }
+        return View(producto);
+    }
+
+    [HttpGet("catalogo/{id:int:min(1)}/pedir")]
+    public IActionResult Pedir(int id)
+    {
+        var producto = catalogo.Buscar(id);
+        if (producto is null)
+        {
+            return NotFound();
+        }
+        return View(new NuevoPedido { Producto = producto.Nombre });
+    }
+
+    [HttpPost("catalogo/pedir")]
+    [ValidateAntiForgeryToken]
+    public IActionResult Confirmar(NuevoPedido nuevo)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View("Pedir", nuevo);
+        }
+
+        var pedido = pedidos.Guardar(nuevo);
+        return RedirectToAction(nameof(Gracias), new { id = pedido.Id });
+    }
+
+    [HttpGet("catalogo/gracias/{id:int:min(1)}")]
+    public IActionResult Gracias(int id)
+    {
+        var pedido = pedidos.Buscar(id);
+        if (pedido is null)
+        {
+            return NotFound();
+        }
+        return View(pedido);
+    }
+}
+```
+
+- **`Pedir` (GET)** muestra el formulario con el producto ya elegido.
+- **`Confirmar` (POST)** recibe lo enviado. ASP.NET Core llena un `NuevoPedido` con los campos del formulario y revisa sus anotaciones. `ModelState.IsValid` dice si todo cumple.
+- Si no es válido, devuelve el mismo formulario con los errores. Aquí escribes `View("Pedir", nuevo)` con el nombre porque es el único caso donde el método (`Confirmar`) y la vista (`Pedir`) no coinciden.
+- Si es válido, guarda y **redirige** a `Gracias`. Redirigir después de un POST evita que, al recargar la página, el navegador reenvíe el formulario y duplique el pedido.
+- `[ValidateAntiForgeryToken]` rechaza con 400 cualquier envío que no traiga el token que el formulario genera solo. Evita que otro sitio envíe pedidos a nombre del usuario.
+
+### Las vistas
+
+```{.html filename="Views/Catalogo/Pedir.cshtml"}
+@model NuevoPedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pedir @Model.Producto - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Pedir @Model.Producto</h1>
+
+    <form method="post" asp-action="Confirmar">
+        <input type="hidden" asp-for="Producto">
+
+        <label>
+            Cliente
+            <input asp-for="Cliente">
+            <span asp-validation-for="Cliente"></span>
+        </label>
+
+        <label>
+            Cantidad
+            <input asp-for="Cantidad">
+            <span asp-validation-for="Cantidad"></span>
+        </label>
+
+        <button type="submit">Enviar pedido</button>
+    </form>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+```{.html filename="Views/Catalogo/Gracias.cshtml"}
+@model Pedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gracias - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Gracias, @Model.Cliente</h1>
+    <p>Tu pedido número @Model.Id quedó guardado: @Model.Cantidad de @Model.Producto.</p>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+Y en el detalle del producto, un enlace al formulario:
+
+```{.html filename="Views/Catalogo/Buscar.cshtml"}
+@model Producto
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>@Model.Nombre - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>@Model.Nombre</h1>
+    <p>Precio: $@Model.Precio</p>
+
+    <p><a asp-action="Pedir" asp-route-id="@Model.Id">Pedir este producto</a></p>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+- `asp-for` arma cada campo (nombre, valor y atributos de validación) a partir del modelo.
+- `asp-validation-for` es el lugar donde aparece el mensaje de error de ese campo.
+- `<input type="hidden" asp-for="Producto">` envía el producto elegido sin que el usuario lo escriba.
+
+### Comprueba
+
+Reinicia `dotnet run`, entra a un producto y pulsa "Pedir este producto":
+
+| Qué envías | Resultado |
+|---|---|
+| Cliente vacío y cantidad 0 | Vuelve el formulario con "El nombre del cliente es obligatorio" y "La cantidad debe estar entre 1 y 100" |
+| Cliente "Ana Ruiz" y cantidad 3 | Te lleva a `/catalogo/gracias/1` con el resumen |
+| `/catalogo/99/pedir` | 404 |
+
+```powershell
+git add .
+git commit -m "feat: formulario de pedido con validacion en el servidor"
+```
+
+## Etapa 10. El servidor no confía en lo que recibe
+
+### El problema
+
+El campo oculto `Producto` viaja en el navegador y cualquiera puede cambiarlo. Pruébalo:
+
+1. Abre un producto y pulsa "Pedir este producto".
+2. Clic derecho sobre el formulario y **Inspeccionar**.
+3. Busca `<input type="hidden" name="Producto" value="Tomate">` y cambia `Tomate` por `Mango`.
+4. Llena el nombre y la cantidad y envía.
+
+El pedido se guarda: "Gracias, tu pedido quedó guardado: 3 de Mango", aunque la plaza no vende mango. Las anotaciones no lo detectan porque revisan la **forma** de los datos (que exista, que tenga cierto largo o rango), no las reglas del negocio. Esa regla solo la puede validar el servidor, consultando sus propios datos.
+
+### La solución
+
+El contrato del catálogo suma una pregunta:
+
+```{.csharp filename="Services/ICatalogo.cs"}
+public interface ICatalogo
+{
+    List<Producto> Listar();
+
+    Producto? Buscar(int id);
+
+    bool Existe(string nombre);
+}
+```
+
+```{.csharp filename="Services/CatalogoEnMemoria.cs"}
+public class CatalogoEnMemoria : ICatalogo
+{
+    private readonly List<Producto> productos = new()
+    {
+        new Producto { Id = 1, Nombre = "Tomate", Precio = 3500m },
+        new Producto { Id = 2, Nombre = "Aguacate", Precio = 6000m },
+        new Producto { Id = 3, Nombre = "Papa", Precio = 2800m },
+        new Producto { Id = 4, Nombre = "Panela", Precio = 4500m },
+    };
+
+    public bool Existe(string nombre)
+    {
+        return productos.Any(p => p.Nombre == nombre);
+    }
+
+    public Producto? Buscar(int id)
+    {
+        return productos.FirstOrDefault(p => p.Id == id);
+    }
+
+    public List<Producto> Listar()
+    {
+        return productos;
+    }
+}
+```
+
+Y `Confirmar` la consulta antes de revisar `ModelState`:
+
+```{.csharp filename="Controllers/CatalogoController.cs"}
+using Microsoft.AspNetCore.Mvc;
+
+public class CatalogoController : Controller
+{
+    private readonly ICatalogo catalogo;
+    private readonly IPedidos pedidos;
+
+    public CatalogoController(ICatalogo catalogo, IPedidos pedidos)
+    {
+        this.catalogo = catalogo;
+        this.pedidos = pedidos;
+    }
+
+    [HttpGet("catalogo")]
+    public IActionResult Listar()
+    {
+        return View(catalogo.Listar());
+    }
+
+    [HttpGet("catalogo/{id:int:min(1)}")]
+    public IActionResult Buscar(int id)
+    {
+        var producto = catalogo.Buscar(id);
+        if (producto is null)
+        {
+            return NotFound();
+        }
+        return View(producto);
+    }
+
+    [HttpGet("catalogo/{id:int:min(1)}/pedir")]
+    public IActionResult Pedir(int id)
+    {
+        var producto = catalogo.Buscar(id);
+        if (producto is null)
+        {
+            return NotFound();
+        }
+        return View(new NuevoPedido { Producto = producto.Nombre });
+    }
+
+    [HttpPost("catalogo/pedir")]
+    [ValidateAntiForgeryToken]
+    public IActionResult Confirmar(NuevoPedido nuevo)
+    {
+        if (!catalogo.Existe(nuevo.Producto))
+        {
+            ModelState.AddModelError(string.Empty, $"No vendemos {nuevo.Producto}");
+        }
+        if (!ModelState.IsValid)
+        {
+            return View("Pedir", nuevo);
+        }
+
+        var pedido = pedidos.Guardar(nuevo);
+        return RedirectToAction(nameof(Gracias), new { id = pedido.Id });
+    }
+
+    [HttpGet("catalogo/gracias/{id:int:min(1)}")]
+    public IActionResult Gracias(int id)
+    {
+        var pedido = pedidos.Buscar(id);
+        if (pedido is null)
+        {
+            return NotFound();
+        }
+        return View(pedido);
+    }
+}
+```
+
+`AddModelError` con `string.Empty` registra un error del modelo completo, no de un campo. Para mostrarlo, el formulario necesita un resumen de errores:
+
+```{.html filename="Views/Catalogo/Pedir.cshtml"}
+@model NuevoPedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pedir @Model.Producto - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Pedir @Model.Producto</h1>
+
+    <form method="post" asp-action="Confirmar">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Producto">
+
+        <label>
+            Cliente
+            <input asp-for="Cliente">
+            <span asp-validation-for="Cliente"></span>
+        </label>
+
+        <label>
+            Cantidad
+            <input asp-for="Cantidad">
+            <span asp-validation-for="Cantidad"></span>
+        </label>
+
+        <button type="submit">Enviar pedido</button>
+    </form>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+### Comprueba
+
+Reinicia `dotnet run` y repite el truco del `Mango`: el formulario vuelve con "No vendemos Mango" y no guarda nada.
+
+Regla que deja esta etapa: las anotaciones validan la forma del dato; la regla de negocio la valida el servidor consultando sus datos reales.
+
+```powershell
+git add .
+git commit -m "fix: el servidor valida que el producto exista"
+```
+
+## Etapa 11. Validación en el navegador
+
+### Qué vas a lograr
+
+Que los errores de forma salgan al instante, sin viajar al servidor.
+
+### Por qué en los dos lados
+
+El navegador mejora la experiencia: avisa rápido y ahorra viajes. Pero cualquiera puede saltárselo, así que el servidor sigue validando igual. Una validación no reemplaza a la otra.
+
+### Los scripts
+
+Se descargan una vez a `wwwroot/lib/`:
+
+```powershell
+mkdir wwwroot\lib
+curl.exe -L -o wwwroot\lib\jquery.min.js https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js
+curl.exe -L -o wwwroot\lib\jquery.validate.min.js https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js
+curl.exe -L -o wwwroot\lib\jquery.validate.unobtrusive.min.js https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js
+```
+
+Escribe `curl.exe` y no `curl`: en PowerShell, `curl` es un alias de otro comando y no acepta esas opciones.
+
+### Servir los archivos estáticos
+
+```{.csharp filename="Program.cs"}
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ICatalogo, CatalogoEnMemoria>();
+builder.Services.AddSingleton<IPedidos, PedidosEnMemoria>();
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.MapControllers();
+
+app.Run();
+```
+
+`UseStaticFiles` hace que ASP.NET Core sirva lo que esté en la carpeta `wwwroot/` (CSS, scripts, imágenes). Sin esa línea, las rutas `/lib/...` y `/estilos.css` dan 404.
+
+### Los estilos de los errores
+
+```{.css filename="wwwroot/estilos.css"}
+.field-validation-error,
+.validation-summary-errors {
+    color: #b3261e;
+}
+
+.input-validation-error {
+    border: 1px solid #b3261e;
+}
+```
+
+### El formulario con los scripts
+
+```{.html filename="Views/Catalogo/Pedir.cshtml"}
+@model NuevoPedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/estilos.css">
+    <title>Pedir @Model.Producto - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Pedir @Model.Producto</h1>
+
+    <form method="post" asp-action="Confirmar">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Producto">
+
+        <label>
+            Cliente
+            <input asp-for="Cliente">
+            <span asp-validation-for="Cliente"></span>
+        </label>
+
+        <label>
+            Cantidad
+            <input asp-for="Cantidad">
+            <span asp-validation-for="Cantidad"></span>
+        </label>
+
+        <button type="submit">Enviar pedido</button>
+    </form>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/jquery.validate.min.js"></script>
+    <script src="/lib/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+</html>
+```
+
+Los `asp-for` que ya tenías generan en el HTML atributos `data-val-*` con las reglas y los mensajes de tus anotaciones. El script `jquery.validate.unobtrusive` los lee y aplica la validación en el navegador. Las reglas se escriben **una sola vez**, en el modelo, y valen en los dos lados.
+
+### Comprueba
+
+Reinicia `dotnet run` y abre un pedido:
+
+- Envía el formulario vacío: los mensajes aparecen en rojo, el campo se marca con borde rojo y la página **no se recarga**.
+- Abre las herramientas del navegador (F12), pestaña Red: al enviar con errores no aparece ningún POST.
+- Repite el truco del `Mango`: el servidor sigue protegiendo.
+
+```powershell
+git add .
+git commit -m "feat: validacion en el navegador"
+```
+
+## Etapa 12. PostgreSQL y el catálogo desde la base de datos
+
+### Qué vas a lograr
+
+Que los productos salgan de una base de datos real y no de una lista dentro del programa. Usas **Entity Framework Core** (EF Core), un ORM: una librería que traduce entre las tablas de la base y las clases de C#, sin que escribas el SQL a mano.
+
+### Instalar PostgreSQL sin administrador
+
+El motor es PostgreSQL porque se instala sin permisos de administrador: es un `.zip` que se descomprime.
+
+1. Descarga los binarios de la versión 18.6 (unos 344 MB): <https://get.enterprisedb.com/postgresql/postgresql-18.6-1-windows-x64-binaries.zip>
+2. Descomprime el archivo en una carpeta `postgres` dentro de tu carpeta de usuario, de modo que quede `postgres\pgsql\bin`. En PowerShell, esa carpeta es `$env:USERPROFILE\postgres`.
+3. Agrega la carpeta `bin` a tu variable `Path` de usuario (no pide permisos de administrador):
+
+```powershell
+$bin = "$env:USERPROFILE\postgres\pgsql\bin"
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";" + $bin, "User")
+```
+
+4. **Cierra y abre de nuevo la terminal**: la variable solo se carga en terminales nuevas. Comprueba:
+
+```powershell
+postgres --version
+```
+
+Debe responder `postgres (PostgreSQL) 18.6`.
+
+Los comandos de esta guía no llevan tu nombre de usuario escrito: `$env:USERPROFILE` es una variable de Windows que vale la carpeta de usuario de quien ejecuta el comando (`C:\Users\maria` en un equipo, `C:\Users\carlos` en otro). Si descomprimiste PostgreSQL en otro lugar, cambia solo esa parte de la ruta.
+
+::: {.callout-note}
+## Programas y datos son carpetas distintas
+
+Agregar `bin` al `Path` solo te permite escribir `pg_ctl` o `psql` sin la ruta completa del programa. No dice dónde están los datos: eso lo indican las opciones `-D` (la carpeta de datos, que `initdb` crea) y `-l` (el archivo de registro).
+:::
+
+### Crear el servidor y arrancarlo
+
+La primera vez, `initdb` crea la carpeta de datos. Después solo arrancas el servidor:
+
+```powershell
+initdb -D "$env:USERPROFILE\postgres\data" -U postgres -A trust --encoding=UTF8
+pg_ctl -D "$env:USERPROFILE\postgres\data" -l "$env:USERPROFILE\postgres\pg.log" start
+psql -U postgres -c "select version();"
+```
+
+- `initdb` prepara la carpeta de datos con el usuario `postgres`. Se hace una sola vez.
+- `-A trust` deja entrar sin contraseña desde el mismo equipo. Sirve para la clase y nunca para un servidor real.
+- `pg_ctl start` arranca el servidor en el puerto 5432 y guarda su registro en `pg.log`. No encadenes su salida con `|` hacia otro comando: la terminal se queda esperando.
+- `psql` debe mostrar `PostgreSQL 18.6`. Si lo escribes sin `-U postgres`, falla con `no existe el rol` y tu nombre de usuario de Windows, porque intenta entrar con ese usuario.
+
+Para detenerlo y para saber si está arriba:
+
+```powershell
+pg_ctl -D "$env:USERPROFILE\postgres\data" stop
+pg_isready -h localhost -p 5432
+```
+
+`pg_isready` responde `aceptando conexiones` cuando el servidor está arriba.
+
+### Los paquetes
+
+Dentro de la carpeta `Plaza`:
+
+```powershell
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.3
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.14
+dotnet tool install --global dotnet-ef --version 10.0.14
+```
+
+- `Npgsql.EntityFrameworkCore.PostgreSQL` es el proveedor que habla con PostgreSQL.
+- `Microsoft.EntityFrameworkCore.Design` lo usan las migraciones.
+- `dotnet-ef` es la herramienta de línea de comandos de las migraciones. Se instala una sola vez por equipo; si ya la tienes, `dotnet tool update --global dotnet-ef --version 10.0.14` la deja en esta versión.
+
+### La cadena de conexión
+
+```{.json filename="appsettings.Development.json"}
+{
+  "ConnectionStrings": {
+    "Plaza": "Host=localhost;Port=5432;Database=plaza_campesina;Username=postgres"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
+```
+
+La **cadena de conexión** dice dónde está el servidor, cómo se llama la base de datos y con qué usuario entrar. Va en el archivo de desarrollo, que solo se usa en tu equipo. En un proyecto real las contraseñas no se escriben en archivos del repositorio.
+
+### El `DbContext`
+
+```{.csharp filename="Data/PlazaDbContext.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PlazaDbContext : DbContext
+{
+    public PlazaDbContext(DbContextOptions<PlazaDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<Producto> Productos => Set<Producto>();
+
+    protected override void OnModelCreating(ModelBuilder modelo)
+    {
+        modelo.Entity<Producto>().Property(p => p.Nombre).HasMaxLength(60);
+        modelo.Entity<Producto>().Property(p => p.Precio).HasPrecision(10, 2);
+
+        modelo.Entity<Producto>().HasData(
+            new Producto { Id = 1, Nombre = "Tomate", Precio = 3500m },
+            new Producto { Id = 2, Nombre = "Aguacate", Precio = 6000m },
+            new Producto { Id = 3, Nombre = "Papa", Precio = 2800m },
+            new Producto { Id = 4, Nombre = "Panela", Precio = 4500m });
+    }
+}
+```
+
+- El **`DbContext`** es la conexión con la base de datos. Cada `DbSet` es una tabla: `Productos` será la tabla de productos.
+- `OnModelCreating` afina el modelo: largo máximo del nombre, precisión del precio (10 dígitos, 2 decimales) y los datos iniciales. `HasData` viaja dentro de la migración.
+
+### El catálogo con base de datos
+
+```{.csharp filename="Services/CatalogoEf.cs"}
+public class CatalogoEf : ICatalogo
+{
+    private readonly PlazaDbContext db;
+
+    public CatalogoEf(PlazaDbContext db)
+    {
+        this.db = db;
+    }
+
+    public List<Producto> Listar()
+    {
+        return db.Productos.OrderBy(p => p.Nombre).ToList();
+    }
+
+    public Producto? Buscar(int id)
+    {
+        return db.Productos.Find(id);
+    }
+
+    public bool Existe(string nombre)
+    {
+        return db.Productos.Any(p => p.Nombre == nombre);
+    }
+}
+```
+
+Cumple el mismo contrato `ICatalogo` que `CatalogoEnMemoria`, por eso el controlador no cambia. Las consultas están escritas en C# con **LINQ** y EF Core las traduce a SQL.
+
+### Registrar la base de datos
+
+```{.csharp filename="Program.cs"}
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<PlazaDbContext>(opciones =>
+    opciones.UseNpgsql(builder.Configuration.GetConnectionString("Plaza")));
+builder.Services.AddScoped<ICatalogo, CatalogoEf>();
+builder.Services.AddSingleton<IPedidos, PedidosEnMemoria>();
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.MapControllers();
+
+app.Run();
+```
+
+- `AddDbContext` registra la conexión y le dice qué proveedor usar.
+- El catálogo pasa de `AddSingleton` a **`AddScoped`**: el `DbContext` vive una petición, y un singleton no puede depender de algo con vida más corta. ASP.NET Core lo detecta y falla al arrancar con el mensaje `Cannot consume scoped service 'PlazaDbContext' from singleton 'ICatalogo'` si lo intentas.
+
+### La migración
+
+Con PostgreSQL arriba:
+
+```powershell
+dotnet ef migrations add Inicial
+dotnet ef database update
+```
+
+- `migrations add` compara el modelo de C# con el estado anterior y genera la carpeta `Migrations/` con el cambio.
+- `database update` ejecuta ese cambio en PostgreSQL: crea la base `plaza_campesina`, la tabla `Productos` y los cuatro productos. Lo que ves en la terminal es el SQL que EF Core escribió a partir de tus clases:
+
+| Tu código de C# | El SQL que ejecuta |
+|---|---|
+| `public int Id { get; set; }` | `"Id" integer GENERATED BY DEFAULT AS IDENTITY` (un número que se genera solo) |
+| `HasMaxLength(60)` | `character varying(60) NOT NULL` |
+| `HasPrecision(10, 2)` | `numeric(10,2)` |
+| La propiedad `Id` por convención | `CONSTRAINT "PK_Productos" PRIMARY KEY ("Id")` |
+| `HasData(...)` | Los cuatro `INSERT INTO "Productos"` |
+
+La primera vez aparece una línea `fail: ... An error occurred using the connection to database`. Es normal: EF Core intenta conectarse a una base que todavía no existe y entonces ejecuta `CREATE DATABASE`. Lo que cuenta es el `Done.` del final. La tabla `__EFMigrationsHistory` es donde EF anota qué migraciones ya aplicó, para no repetirlas.
+
+### Comprueba
+
+Ejecuta `dotnet run` y abre `/catalogo`: los productos salen **ordenados por nombre** (Aguacate, Panela, Papa, Tomate) y con dos decimales en el precio (`$3500,00`), porque la columna es `numeric(10,2)`.
+
+### Cómo saber que los datos vienen de la base
+
+El controlador y las vistas no cambiaron. Cambiaste una línea de `Program.cs`, que decide qué implementación de `ICatalogo` se entrega. Tres pruebas muestran que los datos salen de PostgreSQL:
+
+1. **Cambia una fila y recarga.** Con la aplicación corriendo, edita un precio desde `psql` (ver más abajo) y recarga `/catalogo` **sin reiniciar el servidor**: el nuevo precio aparece. Una lista dentro del programa jamás se enteraría.
+2. **Mira el SQL en la terminal de `dotnet run`.** Cada vez que abres `/catalogo` aparece `SELECT p."Id", p."Nombre", p."Precio" FROM "Productos" AS p ORDER BY p."Nombre"`.
+3. **Fíjate en el orden.** La lista en memoria salía en el orden Tomate, Aguacate, Papa, Panela. Ahora sale alfabético por el `OrderBy` de `CatalogoEf`.
+
+`CatalogoEnMemoria.cs` ya no se usa. La etapa 13 retira los dos servicios en memoria de una vez, así que por ahora déjalo donde está.
+
+```powershell
+git add .
+git commit -m "feat: catalogo desde PostgreSQL con EF Core"
+```
+
+### Entrar a PostgreSQL desde la terminal
+
+`psql` es el cliente de línea de comandos de PostgreSQL. Sin `-c` abre un prompt interactivo donde escribes todo el SQL que quieras:
+
+```powershell
+psql -U postgres -d plaza_campesina
+```
+
+`-d plaza_campesina` es la base a la que te conectas; sin esa opción entraría a una base llamada `postgres`. El prompt pasa a `plaza_campesina=#`. Para salir, escribe `\q`. Si olvidas el `;` al final de una orden, el prompt pasa a `plaza_campesina-#` y espera que sigas escribiendo la misma orden.
+
+```sql
+select * from "Productos" order by "Id";
+update "Productos" set "Precio" = 9999 where "Nombre" = 'Tomate';
+select "Nombre", "Precio" from "Productos";
+update "Productos" set "Precio" = 3500 where "Nombre" = 'Tomate';
+```
+
+Las tablas y columnas las creó EF Core con mayúscula inicial, y PostgreSQL convierte a minúsculas todo nombre sin comillas. Por eso en el SQL van siempre entre comillas dobles (`"Productos"`). Los valores de texto van entre comillas simples (`'Tomate'`).
+
+Comandos propios de `psql`: empiezan con barra invertida y no llevan `;`.
+
+| Comando | Qué hace |
+|---|---|
+| `\dt` | Lista las tablas de la base |
+| `\d "Productos"` | Muestra las columnas y claves de esa tabla |
+| `\l` | Lista todas las bases del servidor |
+| `\c otra_base` | Cambia a otra base |
+| `\q` | Sale de `psql` |
+
+### Ejecutar una sola orden desde PowerShell
+
+Para una orden suelta sin entrar al prompt, no pases el SQL con `-c "..."`: PowerShell se come las comillas dobles internas y `psql` responde con un error de sintaxis. Envía el SQL por la entrada con un bloque `@' ... '@`, donde `@'` y `'@` van solos en su línea:
+
+```powershell
+@'
+update "Productos" set "Precio" = 9999 where "Nombre" = 'Tomate';
+'@ | psql -U postgres -d plaza_campesina
+```
+
+Debe responder `UPDATE 1`.
+
+### Escribir menos: variables de entorno de PostgreSQL
+
+Si la variable `PGDATA` apunta a la carpeta de datos, `pg_ctl` la usa y ya no hace falta `-D`. Con `PGUSER` y `PGDATABASE`, `psql` entra sin `-U` ni `-d`. Para la sesión actual de PowerShell:
+
+```powershell
+$env:PGDATA = "$env:USERPROFILE\postgres\data"
+$env:PGUSER = "postgres"
+$env:PGDATABASE = "plaza_campesina"
+pg_ctl start -l "$env:USERPROFILE\postgres\pg.log"
+psql
+```
+
+Para que valgan en todas las terminales nuevas, guárdalas a nivel de usuario con `[Environment]::SetEnvironmentVariable("PGDATA", "$env:USERPROFILE\postgres\data", "User")`, igual que hiciste con el `Path`.
+
+## Etapa 13. Los pedidos en la base de datos
+
+### Qué vas a lograr
+
+Que los pedidos sobrevivan al reinicio del servidor. Hoy `PedidosEnMemoria` guarda los pedidos en una lista dentro del programa: si detienes y arrancas `dotnet run`, la lista vuelve vacía. En esta etapa los pedidos pasan a una tabla de PostgreSQL, y para eso aprendes la idea central de una base de datos relacional: **relacionar** una tabla con otra.
+
+### La idea: dos tablas que se apuntan
+
+Un pedido no guarda el nombre del producto como texto suelto. Guarda el **número** del producto, y ese número apunta a una fila de la tabla `Productos`:
+
+| Palabra | Qué significa | En Plaza |
+|---|---|---|
+| Tabla | Una colección de filas con las mismas columnas | `Productos` y `Pedidos` |
+| Fila | Un registro de la tabla | El Aguacate, o el pedido número 1 |
+| Columna | Un dato de cada fila | `Nombre`, `Precio`, `Cantidad` |
+| Clave primaria | La columna que identifica cada fila de forma única | `Id` en las dos tablas |
+| Clave foránea | Una columna que guarda la clave primaria de otra tabla | `ProductoId` en `Pedidos`, que apunta a `Id` en `Productos` |
+| Relación uno a muchos | Una fila de una tabla se relaciona con varias de otra | Un producto aparece en muchos pedidos; cada pedido tiene un solo producto |
+
+Guardar el número y no el nombre evita repetir datos: si el precio o el nombre del producto cambian, cambian en un solo lugar, la tabla `Productos`.
+
+### El modelo `Pedido` con su relación
+
+```{.csharp filename="Models/Pedido.cs"}
+public class Pedido
+{
+    public int Id { get; set; }
+    public string Cliente { get; set; } = string.Empty;
+    public int Cantidad { get; set; }
+    public int ProductoId { get; set; }
+    public Producto Producto { get; set; } = null!;
+}
+```
+
+- `ProductoId` es la **clave foránea**: la columna que se guarda en la tabla.
+- `Producto` es una **propiedad de navegación**: no es una columna, es el objeto `Producto` completo al que apunta `ProductoId`. EF Core entiende por convención que `ProductoId` y `Producto` van juntos.
+- `= null!` le dice al compilador "esta propiedad no es nula, EF Core la llena cuando le pides el producto con `Include`". Sin eso, el compilador avisa porque `Producto` no se inicializa en el constructor.
+- Cambió la forma del `Pedido`: ya no tiene un `string Producto`. Por eso la vista `Gracias` y los servicios cambian en esta misma etapa.
+
+### Retirar los servicios en memoria
+
+Los dos servicios en memoria ya no se usan, y `PedidosEnMemoria` dejaría de compilar porque asigna un texto a `Producto`. Bórralos:
+
+```powershell
+Remove-Item Services\CatalogoEnMemoria.cs, Services\PedidosEnMemoria.cs
+```
+
+Git los conserva en el historial si algún día los necesitas.
+
+### El `DbContext` con la segunda tabla
+
+```{.csharp filename="Data/PlazaDbContext.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PlazaDbContext : DbContext
+{
+    public PlazaDbContext(DbContextOptions<PlazaDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<Producto> Productos => Set<Producto>();
+
+    public DbSet<Pedido> Pedidos => Set<Pedido>();
+
+    protected override void OnModelCreating(ModelBuilder modelo)
+    {
+        modelo.Entity<Producto>().Property(p => p.Nombre).HasMaxLength(60);
+        modelo.Entity<Producto>().Property(p => p.Precio).HasPrecision(10, 2);
+        modelo.Entity<Pedido>().Property(p => p.Cliente).HasMaxLength(60);
+
+        modelo.Entity<Producto>().HasData(
+            new Producto { Id = 1, Nombre = "Tomate", Precio = 3500m },
+            new Producto { Id = 2, Nombre = "Aguacate", Precio = 6000m },
+            new Producto { Id = 3, Nombre = "Papa", Precio = 2800m },
+            new Producto { Id = 4, Nombre = "Panela", Precio = 4500m });
+    }
+}
+```
+
+Hay dos líneas nuevas: el `DbSet<Pedido> Pedidos`, que declara la tabla, y el largo máximo de `Cliente`, que coincide con el `[StringLength(60)]` del formulario.
+
+### El servicio de pedidos con base de datos
+
+```{.csharp filename="Services/PedidosEf.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PedidosEf : IPedidos
+{
+    private readonly PlazaDbContext db;
+
+    public PedidosEf(PlazaDbContext db)
+    {
+        this.db = db;
+    }
+
+    public Pedido Guardar(NuevoPedido nuevo)
+    {
+        var producto = db.Productos.First(p => p.Nombre == nuevo.Producto);
+        var pedido = new Pedido { Cliente = nuevo.Cliente, Cantidad = nuevo.Cantidad, ProductoId = producto.Id };
+        db.Pedidos.Add(pedido);
+        db.SaveChanges();
+        return Buscar(pedido.Id)!;
+    }
+
+    public Pedido? Buscar(int id)
+    {
+        return db.Pedidos.Include(p => p.Producto).FirstOrDefault(p => p.Id == id);
+    }
+}
+```
+
+Cumple el mismo contrato `IPedidos` que `PedidosEnMemoria`, por eso el controlador no cambia. Qué hace cada parte:
+
+- **`Guardar` busca el producto por su nombre** para obtener su `Id`. Es seguro usar `First` porque `Confirmar` ya comprobó con `catalogo.Existe` que el producto existe. Con el `Id` arma el `Pedido` con su clave foránea.
+- **`db.Pedidos.Add(pedido)`** marca el pedido como pendiente de guardar. Todavía no escribe nada en la base.
+- **`db.SaveChanges()`** envía todo lo pendiente a PostgreSQL en una sola transacción: aquí ejecuta el `INSERT`. Si algo falla, no queda guardado nada a medias.
+- **`Include(p => p.Producto)`** le pide a EF Core que traiga también el producto de cada pedido, uniendo las dos tablas (un `JOIN`). Sin `Include`, la propiedad `Producto` llega vacía y la vista `Gracias` falla al leer su nombre.
+
+### Registrar el servicio y ajustar la vista
+
+```{.csharp filename="Program.cs"}
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<PlazaDbContext>(opciones =>
+    opciones.UseNpgsql(builder.Configuration.GetConnectionString("Plaza")));
+builder.Services.AddScoped<ICatalogo, CatalogoEf>();
+builder.Services.AddScoped<IPedidos, PedidosEf>();
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.MapControllers();
+
+app.Run();
+```
+
+`IPedidos` también pasa a `AddScoped`, por la misma razón que el catálogo: `PedidosEf` usa el `DbContext`, que vive una petición.
+
+```{.html filename="Views/Catalogo/Gracias.cshtml"}
+@model Pedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gracias - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Gracias, @Model.Cliente</h1>
+    <p>Tu pedido número @Model.Id quedó guardado: @Model.Cantidad de @Model.Producto.Nombre.</p>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+El único cambio es `@Model.Producto.Nombre`: ahora `Producto` es un objeto y el texto que se muestra es su nombre.
+
+### La segunda migración
+
+Con PostgreSQL arriba:
+
+```powershell
+dotnet ef migrations add Pedidos
+dotnet ef database update
+```
+
+Cada migración es un paso del historial de tu base de datos. La primera (`Inicial`) creó la tabla `Productos`; esta compara el modelo con el estado que dejó la anterior y genera solo lo nuevo: la tabla `Pedidos`, su clave foránea y un índice sobre `ProductoId`. Por eso no vuelve a crear `Productos` ni a insertar los productos.
+
+La tabla que quedó en PostgreSQL se ve así. Entra con `psql -U postgres -d plaza_campesina` y escribe `\d "Pedidos"`:
+
+```text
+                                  Tabla "public.Pedidos"
+  Columna   |         Tipo          | Ordenamiento | Nulable  |           Por omisión
+------------+-----------------------+--------------+----------+----------------------------------
+ Id         | integer               |              | not null | generated by default as identity
+ Cliente    | character varying(60) |              | not null |
+ Cantidad   | integer               |              | not null |
+ ProductoId | integer               |              | not null |
+Índices:
+    "PK_Pedidos" PRIMARY KEY, btree ("Id")
+    "IX_Pedidos_ProductoId" btree ("ProductoId")
+Restricciones de llave foránea:
+    "FK_Pedidos_Productos_ProductoId" FOREIGN KEY ("ProductoId") REFERENCES "Productos"("Id") ON DELETE CASCADE
+```
+
+El texto de `psql` sale en el idioma de tu sistema: en uno en inglés las secciones se llaman `Indexes` y `Foreign-key constraints`. La parte importante es la última, `Restricciones de llave foránea`: la base de datos misma impide guardar un pedido cuyo `ProductoId` no exista en `Productos`. `ON DELETE CASCADE` significa que si borras un producto, también se borran sus pedidos.
+
+### Comprueba
+
+Ejecuta `dotnet run` y haz un pedido: abre un producto, pulsa "Pedir este producto", escribe un nombre y una cantidad y envía. Llegas a `/catalogo/gracias/1` con el resumen.
+
+Ahora la prueba que importa. **Detén el servidor con `Ctrl + C`, vuelve a ejecutar `dotnet run` y abre otra vez `/catalogo/gracias/1`**: el pedido sigue ahí, porque vive en PostgreSQL y no en la memoria del programa. Con `PedidosEnMemoria` esa dirección habría respondido 404.
+
+Mira el pedido en la base. En `psql`:
+
+```sql
+select * from "Pedidos";
+```
+
+Verás una fila con el `ProductoId` (por ejemplo `1`), no con el nombre del producto. Para ver el nombre hay que unir las dos tablas, y esa unión se escribe con `join`:
+
+```sql
+select p."Id", p."Cliente", pr."Nombre", p."Cantidad"
+from "Pedidos" p
+join "Productos" pr on pr."Id" = p."ProductoId";
+```
+
+```text
+ Id | Cliente  | Nombre | Cantidad
+----+----------+--------+----------
+  1 | Ana Ruiz | Tomate |        3
+(1 fila)
+```
+
+`join ... on pr."Id" = p."ProductoId"` dice: une cada pedido con el producto cuyo `Id` es igual a su `ProductoId`. Es lo mismo que hace `Include` por ti desde C#.
+
+```powershell
+git add .
+git commit -m "feat: pedidos en PostgreSQL con clave foranea"
+```
+
+## Etapa 14. Consultar con LINQ
+
+### Qué vas a lograr
+
+Una página `/pedidos` que lista los pedidos guardados y que se puede filtrar por cantidad mínima. Con ella ves cómo una consulta escrita en C# se convierte en SQL.
+
+### La idea: preguntar en C#, responder en SQL
+
+**LINQ** son métodos de C# (`Where`, `OrderBy`, `Select`) que describen una consulta sobre una colección. Cuando esa colección es una tabla (`db.Pedidos`), EF Core **traduce** la cadena de métodos a una sola consulta SQL y la ejecuta en PostgreSQL. No escribes SQL: escribes C# y EF Core lo escribe por ti.
+
+| En C# | En SQL |
+|---|---|
+| `db.Pedidos` | `FROM "Pedidos"` |
+| `.Include(p => p.Producto)` | `INNER JOIN "Productos"` |
+| `.Where(p => p.Cantidad >= minimo)` | `WHERE p."Cantidad" >= @minimo` |
+| `.OrderByDescending(p => p.Cantidad)` | `ORDER BY p."Cantidad" DESC` |
+| `.ToList()` | Ejecuta la consulta y devuelve la lista |
+
+La consulta no se ejecuta cuando la escribes: se ejecuta cuando la pides con `ToList()`, `First()`, `Any()` o un método parecido. Hasta ese momento EF Core solo va armando la descripción de lo que quieres.
+
+### El contrato y el servicio
+
+```{.csharp filename="Services/IPedidos.cs"}
+public interface IPedidos
+{
+    Pedido Guardar(NuevoPedido nuevo);
+
+    Pedido? Buscar(int id);
+
+    List<Pedido> Listar();
+
+    List<Pedido> ListarGrandes(int minimo);
+}
+```
+
+```{.csharp filename="Services/PedidosEf.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PedidosEf : IPedidos
+{
+    private readonly PlazaDbContext db;
+
+    public PedidosEf(PlazaDbContext db)
+    {
+        this.db = db;
+    }
+
+    public Pedido Guardar(NuevoPedido nuevo)
+    {
+        var producto = db.Productos.First(p => p.Nombre == nuevo.Producto);
+        var pedido = new Pedido { Cliente = nuevo.Cliente, Cantidad = nuevo.Cantidad, ProductoId = producto.Id };
+        db.Pedidos.Add(pedido);
+        db.SaveChanges();
+        return Buscar(pedido.Id)!;
+    }
+
+    public Pedido? Buscar(int id)
+    {
+        return db.Pedidos.Include(p => p.Producto).FirstOrDefault(p => p.Id == id);
+    }
+
+    public List<Pedido> Listar()
+    {
+        return db.Pedidos.Include(p => p.Producto).OrderByDescending(p => p.Id).ToList();
+    }
+
+    public List<Pedido> ListarGrandes(int minimo)
+    {
+        return db.Pedidos
+            .Include(p => p.Producto)
+            .Where(p => p.Cantidad >= minimo)
+            .OrderByDescending(p => p.Cantidad)
+            .ToList();
+    }
+}
+```
+
+- `Listar` trae todos los pedidos, del más reciente al más antiguo.
+- `ListarGrandes` trae solo los pedidos de `minimo` unidades o más, del más grande al más pequeño. La cadena `Include`, `Where`, `OrderByDescending`, `ToList` se lee de arriba abajo igual que el SQL resultante.
+- Los dos métodos nuevos están en el contrato, así que cualquier otra implementación de `IPedidos` tendría que ofrecerlos también.
+
+### El controlador y la vista de pedidos
+
+```{.csharp filename="Controllers/PedidosController.cs"}
+using Microsoft.AspNetCore.Mvc;
+
+public class PedidosController : Controller
+{
+    private readonly IPedidos pedidos;
+
+    public PedidosController(IPedidos pedidos)
+    {
+        this.pedidos = pedidos;
+    }
+
+    [HttpGet("pedidos")]
+    public IActionResult Listar(int minimo = 0)
+    {
+        var lista = minimo > 0 ? pedidos.ListarGrandes(minimo) : pedidos.Listar();
+        return View(lista);
+    }
+}
+```
+
+`Listar(int minimo = 0)` recibe el parámetro desde la dirección: `/pedidos?minimo=5` llega con `minimo` igual a 5, y `/pedidos` llega con 0. Todo lo que va después del `?` en una dirección se llama **query string**, y ASP.NET Core lo asocia por nombre con los parámetros del método. Con `minimo` mayor que cero se usa el filtro; si no, la lista completa.
+
+```{.html filename="Views/Pedidos/Listar.cshtml"}
+@model List<Pedido>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pedidos - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Pedidos</h1>
+
+    <form method="get" asp-action="Listar">
+        <label>
+            Cantidad mínima
+            <input type="number" name="minimo" min="1">
+        </label>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pedido in Model)
+            {
+                <tr>
+                    <td>@pedido.Id</td>
+                    <td>@pedido.Cliente</td>
+                    <td>@pedido.Producto.Nombre</td>
+                    <td>@pedido.Cantidad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><a asp-controller="Catalogo" asp-action="Listar">Volver al catálogo</a></p>
+</body>
+
+</html>
+```
+
+- La vista está en `Views/Pedidos/` y se llama `Listar.cshtml`: sigue la regla de la guía, controlador `Pedidos` y método `Listar`.
+- El formulario usa `method="get"`: al enviarlo, el navegador arma la dirección `/pedidos?minimo=5` y la abre. Un filtro no modifica nada, así que va por GET y no por POST.
+- `asp-controller="Catalogo"` hace falta porque este enlace sale de la vista de otro controlador: sin él, `asp-action="Listar"` buscaría el método `Listar` de `Pedidos`.
+
+Y un enlace desde el catálogo para llegar a la página:
+
+```{.html filename="Views/Catalogo/Listar.cshtml"}
+@model List<Producto>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Catálogo - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Catálogo</h1>
+
+    <ul>
+        @foreach (var producto in Model)
+        {
+            <li><a asp-action="Buscar" asp-route-id="@producto.Id">@producto.Nombre</a> - $@producto.Precio</li>
+        }
+    </ul>
+
+    <p><a asp-controller="Pedidos" asp-action="Listar">Ver pedidos</a></p>
+</body>
+
+</html>
+```
+
+### Comprueba
+
+Haz tres pedidos con cantidades distintas (por ejemplo 3, 8 y 5) y abre `/pedidos`: aparecen del más reciente al más antiguo. Luego abre `/pedidos?minimo=5`: aparecen solo los de 8 y 5, del mayor al menor. También puedes escribir el 5 en el campo "Cantidad mínima" y pulsar "Filtrar".
+
+### Ver el SQL que escribió EF Core
+
+La terminal donde corre `dotnet run` imprime cada consulta. Al abrir `/pedidos?minimo=5` aparece:
+
+```text
+SELECT p."Id", p."Cantidad", p."Cliente", p."ProductoId", p0."Id", p0."Nombre", p0."Precio"
+FROM "Pedidos" AS p
+INNER JOIN "Productos" AS p0 ON p."ProductoId" = p0."Id"
+WHERE p."Cantidad" >= @minimo
+ORDER BY p."Cantidad" DESC
+```
+
+Es la traducción de `ListarGrandes`, línea por línea según la tabla de arriba. Y estas son las consultas de las otras llamadas que ya usabas, para que veas cómo se traduce cada método de LINQ:
+
+| Llamada en C# | SQL que ejecuta |
+|---|---|
+| `db.Productos.OrderBy(p => p.Nombre).ToList()` | `SELECT p."Id", p."Nombre", p."Precio" FROM "Productos" AS p ORDER BY p."Nombre"` |
+| `db.Productos.Any(p => p.Nombre == nombre)` | `SELECT EXISTS ( SELECT 1 FROM "Productos" AS p WHERE p."Nombre" = @nombre)` |
+| `db.Productos.Find(id)` | `SELECT p."Id", p."Nombre", p."Precio" FROM "Productos" AS p WHERE p."Id" = @p LIMIT 1` |
+
+::: {.callout-warning}
+## Un error clásico: filtrar después de traer todo
+
+Si escribes `db.Pedidos.ToList().Where(p => p.Cantidad >= minimo)`, `ToList()` se ejecuta primero: trae **todos** los pedidos de la base a la memoria del programa y recién ahí C# filtra. El resultado es el mismo, pero con un millón de pedidos el programa los carga todos. Con el filtro **antes** de `ToList()`, el `WHERE` viaja a PostgreSQL y solo regresan los pedidos que cumplen. Regla: filtra, ordena y une antes de `ToList()`.
+:::
+
+```powershell
+git add .
+git commit -m "feat: pedidos con consultas LINQ"
+```
+
+## Etapa 15. Práctica final: el teléfono del cliente
+
+### Qué vas a lograr
+
+Aplicar todo lo anterior sin guía: agregar un dato nuevo al pedido, validarlo y guardarlo en la base de datos. Es una práctica, no tiene nota. Intenta resolverla antes de abrir la solución.
+
+### El enunciado
+
+Cada pedido debe poder llevar el **teléfono del cliente**:
+
+- Es opcional: un pedido sin teléfono sigue siendo válido.
+- Si se escribe, debe tener forma de teléfono y no pasar de 20 caracteres, con mensajes en español.
+- Debe aparecer en el formulario de pedido.
+- Debe guardarse en la tabla `Pedidos`.
+
+### Pistas
+
+Ordenadas desde la que menos revela:
+
+1. Piensa en cuántas capas toca un dato nuevo: el formulario, el modelo que llega, el modelo que se guarda, el servicio y la base de datos.
+2. Las reglas de forma se escriben con anotaciones sobre la propiedad de `NuevoPedido`. Para un teléfono existe una anotación llamada `[Phone]`.
+3. Un texto que puede faltar se declara con `string?`.
+4. Cuando cambia una clase que EF Core guarda, hace falta una migración nueva. Dale un nombre que diga qué cambió.
+
+::: {.callout-note collapse="true"}
+## Solución
+
+Cinco archivos cambian. La propiedad opcional y sus reglas van en `NuevoPedido`:
+
+```{.csharp filename="Models/NuevoPedido.cs"}
+using System.ComponentModel.DataAnnotations;
+
+public class NuevoPedido
+{
+    [Required(ErrorMessage = "El nombre del cliente es obligatorio")]
+    [StringLength(60, MinimumLength = 3, ErrorMessage = "El nombre debe tener entre 3 y 60 letras")]
+    public string Cliente { get; set; } = string.Empty;
+
+    public string Producto { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "La cantidad es obligatoria")]
+    [Range(1, 100, ErrorMessage = "La cantidad debe estar entre 1 y 100")]
+    public int Cantidad { get; set; } = 1;
+
+    [Phone(ErrorMessage = "El teléfono no es válido")]
+    [StringLength(20, ErrorMessage = "El teléfono admite hasta 20 caracteres")]
+    public string? Telefono { get; set; }
+}
+```
+
+El pedido que se guarda gana la misma propiedad:
+
+```{.csharp filename="Models/Pedido.cs"}
+public class Pedido
+{
+    public int Id { get; set; }
+    public string Cliente { get; set; } = string.Empty;
+    public int Cantidad { get; set; }
+    public string? Telefono { get; set; }
+    public int ProductoId { get; set; }
+    public Producto Producto { get; set; } = null!;
+}
+```
+
+El `DbContext` fija el largo máximo de la columna:
+
+```{.csharp filename="Data/PlazaDbContext.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PlazaDbContext : DbContext
+{
+    public PlazaDbContext(DbContextOptions<PlazaDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<Producto> Productos => Set<Producto>();
+
+    public DbSet<Pedido> Pedidos => Set<Pedido>();
+
+    protected override void OnModelCreating(ModelBuilder modelo)
+    {
+        modelo.Entity<Producto>().Property(p => p.Nombre).HasMaxLength(60);
+        modelo.Entity<Producto>().Property(p => p.Precio).HasPrecision(10, 2);
+        modelo.Entity<Pedido>().Property(p => p.Cliente).HasMaxLength(60);
+        modelo.Entity<Pedido>().Property(p => p.Telefono).HasMaxLength(20);
+
+        modelo.Entity<Producto>().HasData(
+            new Producto { Id = 1, Nombre = "Tomate", Precio = 3500m },
+            new Producto { Id = 2, Nombre = "Aguacate", Precio = 6000m },
+            new Producto { Id = 3, Nombre = "Papa", Precio = 2800m },
+            new Producto { Id = 4, Nombre = "Panela", Precio = 4500m });
+    }
+}
+```
+
+El servicio copia el dato al guardar:
+
+```{.csharp filename="Services/PedidosEf.cs"}
+using Microsoft.EntityFrameworkCore;
+
+public class PedidosEf : IPedidos
+{
+    private readonly PlazaDbContext db;
+
+    public PedidosEf(PlazaDbContext db)
+    {
+        this.db = db;
+    }
+
+    public Pedido Guardar(NuevoPedido nuevo)
+    {
+        var producto = db.Productos.First(p => p.Nombre == nuevo.Producto);
+        var pedido = new Pedido
+        {
+            Cliente = nuevo.Cliente,
+            Cantidad = nuevo.Cantidad,
+            Telefono = nuevo.Telefono,
+            ProductoId = producto.Id,
+        };
+        db.Pedidos.Add(pedido);
+        db.SaveChanges();
+        return Buscar(pedido.Id)!;
+    }
+
+    public Pedido? Buscar(int id)
+    {
+        return db.Pedidos.Include(p => p.Producto).FirstOrDefault(p => p.Id == id);
+    }
+
+    public List<Pedido> Listar()
+    {
+        return db.Pedidos.Include(p => p.Producto).OrderByDescending(p => p.Id).ToList();
+    }
+
+    public List<Pedido> ListarGrandes(int minimo)
+    {
+        return db.Pedidos
+            .Include(p => p.Producto)
+            .Where(p => p.Cantidad >= minimo)
+            .OrderByDescending(p => p.Cantidad)
+            .ToList();
+    }
+}
+```
+
+Y el formulario muestra el campo nuevo:
+
+```{.html filename="Views/Catalogo/Pedir.cshtml"}
+@model NuevoPedido
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/estilos.css">
+    <title>Pedir @Model.Producto - Plaza Campesina</title>
+</head>
+
+<body>
+    <h1>Pedir @Model.Producto</h1>
+
+    <form method="post" asp-action="Confirmar">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Producto">
+
+        <label>
+            Cliente
+            <input asp-for="Cliente">
+            <span asp-validation-for="Cliente"></span>
+        </label>
+
+        <label>
+            Cantidad
+            <input asp-for="Cantidad">
+            <span asp-validation-for="Cantidad"></span>
+        </label>
+
+        <label>
+            Teléfono (opcional)
+            <input asp-for="Telefono">
+            <span asp-validation-for="Telefono"></span>
+        </label>
+
+        <button type="submit">Enviar pedido</button>
+    </form>
+
+    <p><a asp-action="Listar">Volver al catálogo</a></p>
+
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/jquery.validate.min.js"></script>
+    <script src="/lib/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+</html>
+```
+
+Por último, la migración que agrega la columna:
+
+```powershell
+dotnet ef migrations add AgregarTelefono
+dotnet ef database update
+```
+
+Las filas que ya existían quedan con el teléfono vacío (`NULL`), porque la columna admite valores nulos.
+:::
+
+### Comprueba
+
+Haz un pedido sin teléfono: se guarda. Haz otro con el teléfono `abc`: el formulario vuelve con "El teléfono no es válido" y no guarda nada. Haz uno con `3001234567`: se guarda. En `psql`:
+
+```sql
+select "Id", "Cliente", "Telefono" from "Pedidos" order by "Id";
+```
+
+Tu tabla tendrá tus propios pedidos. Lo que debes ver es el teléfono vacío en los pedidos que enviaste sin él y el número escrito en el que lo llevaba. Este es un ejemplo de lo que muestra:
+
+```text
+ Id |  Cliente  |  Telefono
+----+-----------+------------
+  1 | Ana Ruiz  |
+  2 | Luis Mora |
+  3 | Luis Mora |
+  4 | Ana Ruiz  | 3001234567
+  5 | Ana Ruiz  |
+(5 filas)
+```
+
+```powershell
+git add .
+git commit -m "feat: telefono opcional en el pedido"
+```
+
+## Lo que construiste
+
+Recorre el camino de un pedido, de la pantalla a la base de datos, y qué pieza hace cada trabajo:
+
+| Paso | Qué ocurre | Quién lo hace |
+|---|---|---|
+| 1 | El navegador pide `/catalogo/1/pedir` | La **ruta** `catalogo/{id:int:min(1)}/pedir` del método `Pedir` |
+| 2 | Aparece el formulario | La vista `Pedir.cshtml` y los `asp-for` del modelo `NuevoPedido` |
+| 3 | El navegador revisa lo escrito antes de enviar | Los atributos `data-val-*` y los tres scripts de jQuery |
+| 4 | El formulario viaja por POST a `catalogo/pedir` | El método `Confirmar`, protegido por `[ValidateAntiForgeryToken]` |
+| 5 | El servidor revisa la forma y las reglas del negocio | Las anotaciones, `ModelState` y `catalogo.Existe` |
+| 6 | El pedido se convierte en una fila | `PedidosEf.Guardar`, `Add` y `SaveChanges` |
+| 7 | La fila queda guardada y relacionada con su producto | PostgreSQL: la tabla `Pedidos` y su clave foránea `ProductoId` |
+| 8 | El navegador pasa a la página de confirmación | `RedirectToAction` y el método `Gracias` |
+
+Y las ideas que se repiten en todo el proyecto:
+
+- **Un contrato antes que su implementación.** `ICatalogo` e `IPedidos` permitieron cambiar de la memoria a la base de datos tocando solo `Program.cs` y los servicios.
+- **Validar en los dos lados.** El navegador ahorra viajes; el servidor protege.
+- **La forma la revisan las anotaciones; las reglas del negocio las revisa el servidor con sus datos.**
+- **El código define la base de datos.** Cambias una clase, generas una migración y la aplicas.
+- **Filtrar antes de traer.** `Where`, `OrderBy` e `Include` van antes de `ToList()`.
+
+## Referencia rápida de comandos
+
+Todos se ejecutan en PowerShell. Los de `dotnet` y `git`, dentro de la carpeta `Plaza`.
+
+| Qué quieres hacer | Comando |
+|---|---|
+| Compilar sin ejecutar | `dotnet build` |
+| Ejecutar el servidor | `dotnet run` |
+| Detener el servidor | `Ctrl + C` |
+| Ver qué cambió en Git | `git status` |
+| Guardar un commit | `git add .` y `git commit -m "mensaje"` |
+| Ver los commits | `git log --oneline` |
+| Arrancar PostgreSQL | `pg_ctl -D "$env:USERPROFILE\postgres\data" -l "$env:USERPROFILE\postgres\pg.log" start` |
+| Detener PostgreSQL | `pg_ctl -D "$env:USERPROFILE\postgres\data" stop` |
+| Saber si PostgreSQL responde | `pg_isready -h localhost -p 5432` |
+| Entrar a la base | `psql -U postgres -d plaza_campesina` |
+| Salir de `psql` | `\q` |
+| Crear una migración | `dotnet ef migrations add NombreDelCambio` |
+| Aplicar las migraciones pendientes | `dotnet ef database update` |
+| Deshacer la última migración (si no se aplicó) | `dotnet ef migrations remove` |
+| Ver las migraciones y cuáles están aplicadas | `dotnet ef migrations list` |
+
+## Para seguir aprendiendo
+
+Esta guía deja un proyecto que funciona de punta a punta. Estos temas completan una aplicación real y no se tratan aquí:
+
+- **Autenticación y roles:** quién puede hacer pedidos y quién puede ver la lista de pedidos.
+- **Operaciones asíncronas:** `async` y `await` en los métodos de EF Core (`ToListAsync`, `SaveChangesAsync`) para no bloquear el servidor mientras espera a la base.
+- **Paginación:** devolver los pedidos de 20 en 20 con `Skip` y `Take` en lugar de todos juntos.
+- **Pruebas automáticas:** probar `PedidosEf` y los controladores sin abrir el navegador. Los contratos `ICatalogo` e `IPedidos` ya dejan el camino listo: una prueba puede usar una implementación falsa.
+- **Secretos de configuración:** sacar las contraseñas de `appsettings.Development.json` con `dotnet user-secrets` o variables de entorno.
+
+## Errores frecuentes
+
+| Qué ves | Por qué pasa | Cómo se arregla |
+|---|---|---|
+| `CS0051: Inconsistent accessibility: parameter type 'NuevoPedido' is less accessible than method` | La clase no tiene `public` | Escribe `public class NuevoPedido` |
+| `/catalogo/2` responde 500 con `The view 'Buscar' was not found` | El archivo de la vista no se llama igual que el método (por ejemplo `Buscar..cshtml`, con dos puntos) | Renombra el archivo a `Buscar.cshtml` y reinicia `dotnet run` |
+| Los enlaces del listado no tienen `href` | Falta `@addTagHelper` en `Views/_ViewImports.cshtml` | Agrega la línea de la etapa 7 y reinicia |
+| `/lib/jquery.min.js` responde 404 | Falta `app.UseStaticFiles();` en `Program.cs` o los scripts no se descargaron | Agrega la línea y revisa que existan los tres archivos en `wwwroot/lib/` |
+| `Unable to resolve service for type 'DbContextOptions'` al ejecutar `dotnet ef migrations add` | `Program.cs` no registra el `DbContext` con `AddDbContext` | Copia el `Program.cs` de la etapa 12 completo |
+| `Cannot consume scoped service 'PlazaDbContext' from singleton 'ICatalogo'` al arrancar | El catálogo con base de datos está registrado con `AddSingleton` | Usa `AddScoped<ICatalogo, CatalogoEf>()` |
+| `no existe el rol` y tu nombre de usuario de Windows al ejecutar `psql` | `psql` intenta entrar con tu usuario de Windows | Agrega `-U postgres` |
+| `psql: precaución: se ignoró argumento extra` y `error de sintaxis al final de la entrada` | PowerShell se comió las comillas dobles de `-c "..."` | Usa el bloque `@' ... '@` o el prompt interactivo |
+| `pg_ctl` o `psql` no se reconocen como comando | La terminal se abrió antes de agregar `bin` al `Path` | Cierra la terminal y abre una nueva |
+| `no se especificó directorio de datos` al ejecutar `pg_ctl` | Falta `-D` y la variable `PGDATA` no está definida | Agrega `-D "$env:USERPROFILE\postgres\data"` |
+| `Host desconocido` al agregar un paquete con `dotnet add package` | Falla momentánea de red | Repite el comando: NuGet reintenta y termina bien |
+| `dotnet build` falla con `MSB3027` o `MSB3021` por `Plaza.exe` | El servidor sigue corriendo y bloquea el archivo | Deténlo con `Ctrl + C` y compila otra vez |
+| `dotnet ef database update` falla con `The model for context 'PlazaDbContext' has pending changes. Add a new migration before updating the database` | Cambiaste una clase del modelo (por ejemplo agregaste una propiedad a `Pedido`) y no generaste la migración | Ejecuta `dotnet ef migrations add NombreDelCambio` y luego `dotnet ef database update` |
+| La página responde 500 y la terminal dice `42P01: no existe la relación` y el nombre de la tabla (en un sistema en inglés, `relation "Productos" does not exist`) | El servidor se conecta a una base que no tiene las tablas: nunca se aplicó la migración o la cadena de conexión apunta a otra base | Ejecuta `dotnet ef database update` y revisa el nombre de la base en `appsettings.Development.json` |
+| `Gracias` falla con `NullReferenceException` al mostrar el nombre del producto | La consulta no trajo el producto relacionado: falta `Include(p => p.Producto)` | Agrega el `Include` en el método de `PedidosEf` que devuelve el pedido |
+| `Remove-Item` dice que no encuentra `Services\PedidosEnMemoria.cs` | Ya lo habías borrado | No pasa nada: esos dos archivos ya no deben existir |
+## La estructura final del proyecto
+
+```text
+Plaza/
+  Controllers/
+    CatalogoController.cs
+    PedidosController.cs
+  Data/
+    PlazaDbContext.cs
+  Migrations/
+    (una migración por cada cambio: Inicial, Pedidos y AgregarTelefono, cada una con su
+    marca de fecha, más PlazaDbContextModelSnapshot.cs)
+  Models/
+    NuevoPedido.cs
+    Pedido.cs
+    Producto.cs
+  Services/
+    CatalogoEf.cs
+    ICatalogo.cs
+    IPedidos.cs
+    PedidosEf.cs
+  Views/
+    _ViewImports.cshtml
+    Catalogo/
+      Buscar.cshtml
+      Gracias.cshtml
+      Listar.cshtml
+      Pedir.cshtml
+    Pedidos/
+      Listar.cshtml
+  wwwroot/
+    estilos.css
+    lib/
+      jquery.min.js
+      jquery.validate.min.js
+      jquery.validate.unobtrusive.min.js
+  appsettings.json
+  appsettings.Development.json
+  Plaza.csproj
+  Program.cs
+```

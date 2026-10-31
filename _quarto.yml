@@ -15,6 +15,9 @@ project:
     # Presentaciones interactivas de Web (Semana 10), mismo motivo.
     - web/semana-10/presentacion-interactiva-rutas.html
     - web/semana-10/presentacion-interactiva-mvc.html
+    # Presentacion interactiva de la guia de Plaza (formularios, validacion y
+    # base de datos), mismo motivo: solo la enlaza el boton de la guia.
+    - web/plaza-formularios-y-datos/presentacion-interactiva.html
     # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
     - movil/semana-07/presentacion-interactiva.html
     - movil/semana-07/presentacion-statefulwidget.html
@@ -107,6 +110,8 @@ website:
               href: web/semana-10/mvc.qmd
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
+        - text: "Plaza: formularios, validación y base de datos"
+          href: web/plaza-formularios-y-datos/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"
