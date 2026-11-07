@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad: proyecto funcionando</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; --azul: #1f5f8b; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin: 1.6rem 0 .3rem; font-size: 1.08rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: #22261f; color: #eef1e4; padding: 12px 14px; border-radius: 8px; overflow-x: auto;
+        font-size: .86rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  table.ancha { min-width: 680px; }
+  .scroll { overflow-x: auto; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .ejemplo { border-left: 4px solid var(--azul); background: #eef4f9; padding: 8px 14px; margin: 8px 0 14px; border-radius: 0 6px 6px 0; font-size: .93rem; }
+  .ejemplo > strong:first-child { color: var(--azul); display: block; margin-bottom: 2px; }
+  .ejemplo p { margin: .3rem 0; }
+  .ejemplo ul { margin: .3rem 0; padding-left: 1.2rem; }
+  .ejemplo pre { margin: .4rem 0; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.lista li, ol.lista li { margin: 5px 0; }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .84rem; } }
+  @media print { body { background: #fff; } table, pre, .ejemplo { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad: proyecto funcionando</h1>
+  <p>Entregable final del proyecto. Programación Móvil (IF2004), grupos 601 y 602</p>
+</header>
+
+<h2>Objetivo</h2>
+<p>Tu equipo entrega la <strong>aplicación móvil completa y funcionando</strong> que definió en el primer entregable. La app usa <strong>almacenamiento en la nube y almacenamiento local</strong>, funciona también sin conexión, trae datos de una API, tiene una arquitectura organizada y seguridad. Además, el repositorio cuenta, con su historial de cambios, <strong>cómo se construyó y quién aportó qué</strong>.</p>
+
+<div class="caja">
+  <strong>Se entrega el enlace al repositorio de GitHub del equipo.</strong> El proyecto debe poder ejecutarse desde el código siguiendo el README, y en la sustentación se muestra funcionando en un dispositivo real o en un emulador.
+</div>
+
+<p>Los ejemplos de esta página usan el proyecto ficticio <strong>SalaYa</strong>, una app para reservar salas de estudio de una biblioteca, el mismo del primer entregable. Sirven para mostrar el nivel de detalle esperado. Tu proyecto es el que tu equipo definió.</p>
+
+<h2>Qué se entrega</h2>
+<table>
+  <tr><th>Entregable</th><th>Contenido</th><th>Modalidad</th></tr>
+  <tr><td>Proyecto funcionando</td><td>El proyecto Flutter completo en el repositorio, que ejecuta con <code>flutter run</code> siguiendo el README.</td><td>Equipo</td></tr>
+  <tr><td>Historial de Git</td><td>Commits, ramas y Pull Requests que muestran el aporte de cada integrante.</td><td>Individual</td></tr>
+  <tr><td>Documento de definición actualizado</td><td><code>docs/definicion.md</code> en versión final, con su historial de cambios y dos secciones nuevas.</td><td>Equipo</td></tr>
+  <tr><td>Presentación</td><td>Diapositivas para la sustentación, con una parte no técnica y una parte técnica.</td><td>Equipo</td></tr>
+  <tr><td>Sustentación</td><td>Demo en vivo, explicación y ronda de preguntas.</td><td>Individual</td></tr>
+</table>
+<p>Se entrega <strong>únicamente el enlace al repositorio de GitHub</strong>. Todo lo demás vive dentro de él.</p>
+
+<h2>Condiciones mínimas del proyecto</h2>
+<p>La app tiene que cumplir lo que el equipo definió en el primer entregable, al menos todos los requerimientos de prioridad alta. Además, sea cual sea el tema, incluye como mínimo lo siguiente:</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Condición</th><th>Qué se verifica</th></tr>
+  <tr><td><strong>Autenticación en la nube</strong></td><td>Registro e inicio de sesión con Firebase Authentication, con los roles que el proyecto necesite y lo que puede hacer cada uno.</td></tr>
+  <tr><td><strong>Datos en la nube</strong></td><td>Los datos del proyecto viven en Firestore, protegidos con reglas de seguridad. Un usuario solo lee y escribe lo que su rol permite.</td></tr>
+  <tr><td><strong>Base de datos local</strong></td><td>SQLite guarda una copia de los datos principales, para consultarlos sin conexión.</td></tr>
+  <tr><td><strong>Preferencias locales</strong></td><td>La configuración del usuario (por ejemplo tema claro u oscuro, o un filtro favorito) se conserva entre aperturas.</td></tr>
+  <tr><td><strong>Almacenamiento seguro</strong></td><td>La sesión, el token o cualquier credencial se guardan en almacenamiento seguro, nunca en texto plano ni en preferencias.</td></tr>
+  <tr><td><strong>Comportamiento sin conexión</strong></td><td>Sin internet, la app muestra lo último guardado con un aviso. Las acciones que necesitan conexión se bloquean y explican por qué, sin cerrarse ni perder lo escrito.</td></tr>
+  <tr><td><strong>Estados de la interfaz</strong></td><td>Toda pantalla que carga datos remotos muestra los estados de carga, vacío y error.</td></tr>
+  <tr><td><strong>Notificaciones</strong></td><td>Al menos un caso de notificación local o push que responda a un evento del proyecto.</td></tr>
+  <tr><td><strong>Arquitectura</strong></td><td>Código organizado en capas (presentación, dominio y datos), con repositorios y una fuente de datos intercambiable entre la nube y lo local.</td></tr>
+  <tr><td><strong>Seguridad</strong></td><td>Ninguna clave privada ni credencial dentro del repositorio. Las reglas de Firestore no están abiertas a todo el mundo.</td></tr>
+  <tr><td><strong>Datos de una API</strong></td><td>La app consume al menos una API REST (pública, propia o de un servicio) y muestra sus datos: petición HTTP, conversión del JSON a modelos, tiempos de espera y manejo de errores y reintentos. Si la API pide clave, la clave no está en el repositorio.</td></tr>
+</table></div>
+
+<h2>El documento de definición actualizado</h2>
+<p>El documento <code>docs/definicion.md</code> del primer entregable sigue siendo la fuente de verdad. Aquí se actualiza a su <strong>versión final</strong>, de modo que describa la app que realmente existe.</p>
+<ul class="lista">
+  <li>Cada requerimiento queda marcado como <strong>implementado</strong>, <strong>modificado</strong> o <strong>recortado</strong>, con la razón de su estado.</li>
+  <li>Las secciones que cambiaron (alcance, modelo de datos, pantallas, arquitectura) se corrigen para que coincidan con el código. Un documento que describe una app distinta de la entregada se califica como desactualizado.</li>
+  <li>La tabla de <strong>historial de cambios</strong> registra cada modificación importante: fecha, qué cambió, por qué y quién.</li>
+  <li>Se agregan estas dos secciones nuevas, después de la 14.</li>
+</ul>
+
+<h3>15. Almacenamiento: nube y local</h3>
+<p>Una tabla que dice, para cada dato de la app, <strong>dónde vive</strong> y <strong>por qué</strong> ahí. Deja claro qué pasa con ese dato cuando no hay conexión.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Dato</th><th>Dónde se guarda</th><th>Por qué</th><th>Sin conexión</th></tr>
+  <tr><td>Cuenta del usuario</td><td>Firebase Authentication</td><td>Identidad central y recuperable.</td><td>La sesión sigue abierta.</td></tr>
+  <tr><td>Salas y reservas</td><td>Firestore, con copia en SQLite</td><td>Varios usuarios las comparten; la copia permite consultarlas.</td><td>Se consulta la copia. No se puede reservar.</td></tr>
+  <tr><td>Tema de la app</td><td>Preferencias</td><td>Es un ajuste personal y pequeño.</td><td>Funciona igual.</td></tr>
+  <tr><td>Token de sesión</td><td>Almacenamiento seguro</td><td>Es una credencial.</td><td>Funciona igual.</td></tr>
+</table></div></div>
+
+<h3>16. Aportes por integrante</h3>
+<p>Una tabla donde cada integrante declara qué construyó, con los Pull Requests o commits que lo respaldan. El docente la contrasta con el historial real de GitHub.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Integrante</th><th>Aportes principales</th><th>Evidencia</th></tr>
+  <tr><td>Ana</td><td>Autenticación, roles y reglas de Firestore.</td><td>PR #4, #9; commits en <code>lib/data/auth/</code></td></tr>
+  <tr><td>Luis</td><td>Base local con SQLite y modo sin conexión.</td><td>PR #6, #11</td></tr>
+  <tr><td>Marta</td><td>Pantallas de reserva y consumo de la API.</td><td>PR #5, #8, #12</td></tr>
+</table></div></div>
+
+<h2>El README para ejecutar el proyecto</h2>
+<p>El README es la puerta de entrada al proyecto. Debe permitir que otra persona ejecute el proyecto sin preguntarle al equipo. Incluye:</p>
+<ul class="lista">
+  <li>Nombre del proyecto, integrantes y una captura de pantalla.</li>
+  <li>Versiones exactas de Flutter y Dart, y los comandos para ejecutar: <code>flutter pub get</code> y <code>flutter run</code>.</li>
+  <li>Qué archivos de configuración de Firebase y qué claves hacen falta, <strong>cómo se generan</strong> y dónde se colocan. Los archivos privados no van en el repositorio: se incluye un archivo de ejemplo con los nombres de las variables y sin sus valores.</li>
+  <li>Los usuarios de ejemplo de cada rol, para entrar a la app durante la sustentación.</li>
+  <li>El enlace a <code>docs/definicion.md</code>.</li>
+</ul>
+
+<h2>Cómo se sube a Git</h2>
+<p>El mismo repositorio público del primer entregable, con esta estructura como mínimo:</p>
+<pre><code>README.md                nombre, integrantes, cómo ejecutar, usuarios de ejemplo y capturas
+docs/definicion.md       el documento en su versión final, con 16 secciones
+docs/mockup/             una imagen por pantalla
+docs/presentacion/       las diapositivas de la sustentación
+lib/                     presentación, dominio y datos, organizados en capas
+pubspec.yaml             dependencias con versiones fijadas
+.env.example             nombres de las variables de configuración, sin valores</code></pre>
+
+<h3>Historial de cambios en Git</h3>
+<ul class="lista">
+  <li><strong>Todos los integrantes hacen aportes reales</strong>, repartidos en funcionalidades distintas y no solo en documentación o en cambios de formato.</li>
+  <li><strong>Una rama por funcionalidad</strong>, con nombres que digan qué hace (por ejemplo <code>feature/modo-sin-conexion</code>).</li>
+  <li><strong>Pull Request para integrar a <code>main</code></strong>, revisado y aprobado por un integrante distinto de quien lo escribió. Nadie fusiona su propio Pull Request.</li>
+  <li><strong>Commits pequeños y claros</strong>, con mensajes que digan qué se hizo, en formato de commits convencionales (<code>feat:</code>, <code>fix:</code>, <code>docs:</code>).</li>
+  <li>El historial no se reescribe: no se borran ni se reemplazan commits para esconder errores o aportes.</li>
+  <li>El <code>.gitignore</code> de Flutter está presente, y no hay claves, archivos de configuración privados ni la carpeta <code>build/</code> en el repositorio.</li>
+</ul>
+
+<div class="caja aviso">
+  <strong>El historial se revisa por persona.</strong> El docente revisa en GitHub los commits y los Pull Requests de cada integrante, y los contrasta con la tabla de la sección 16 del documento. Un integrante sin aportes reales en el historial recibe 0 en el criterio de Git y no recibe la nota de equipo completa en los demás criterios. Declarar un aporte que el historial no respalda es una falta de integridad académica.
+</div>
+
+<h2>Sustentación</h2>
+<p>Todos los integrantes participan. El docente informa el tiempo disponible por equipo, y la nota de la sustentación es <strong>individual</strong>.</p>
+<table>
+  <tr><th>Parte</th><th>Qué se muestra</th></tr>
+  <tr><td>No técnica</td><td>El problema, la solución y el recorrido de cada rol por la app funcionando.</td></tr>
+  <tr><td>Técnica</td><td>Los casos sin conexión y de error, la arquitectura, el almacenamiento, la API y el historial de Git.</td></tr>
+  <tr><td>Preguntas</td><td>Preguntas del docente a cada integrante sobre el proyecto y sobre lo que aportó en Git.</td></tr>
+</table>
+
+<div class="caja aviso">
+  <strong>Se sustenta con una presentación, no con un documento.</strong> El equipo prepara diapositivas y las guarda en <code>docs/presentacion/</code>. No se permite sustentar mostrando el README ni el <code>docs/definicion.md</code> completos en pantalla, ni leerlos. Fuera de las diapositivas solo se muestra la demo en vivo de la app, el historial de GitHub y, si una pregunta lo requiere, el código.
+</div>
+
+<h3>Parte no técnica</h3>
+<p>Dirigida a alguien que no programa, como un cliente. Cubre:</p>
+<ul class="lista">
+  <li><strong>El problema y la solución:</strong> qué pasaba antes y qué cambia con la app.</li>
+  <li><strong>La demo del flujo principal</strong> de cada rol, en un dispositivo real o en un emulador, con datos que viajan a la nube y regresan.</li>
+  <li><strong>Lo que quedó fuera:</strong> qué se recortó del alcance original y por qué.</li>
+</ul>
+
+<h3>Parte técnica</h3>
+<p>Dirigida a otros desarrolladores. Cubre:</p>
+<ul class="lista">
+  <li><strong>Demo del modo sin conexión:</strong> se apaga la conexión, se muestra lo guardado y se intenta una acción bloqueada.</li>
+  <li><strong>Demo de un caso de error</strong> con su mensaje claro.</li>
+  <li>El almacenamiento: qué dato vive en la nube, cuál en local, y las reglas de seguridad que lo protegen.</li>
+  <li>La arquitectura en capas y cómo se intercambia la fuente de datos.</li>
+  <li>La API: cuál se consume, qué datos trae, cómo se convierten a modelos y qué pasa cuando la petición falla o tarda demasiado.</li>
+  <li>El historial de Git: ramas, Pull Requests y el aporte de cada integrante.</li>
+</ul>
+
+<h2>Rúbrica de evaluación</h2>
+<p>La rúbrica tiene cinco criterios y suma 100 puntos. <strong>Los criterios de Git y de sustentación son individuales</strong>, y suman el 40%. Los otros tres reciben la misma nota para todo el equipo, salvo lo dicho sobre integrantes sin aportes.</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Criterio</th><th>Peso</th><th>Excelente</th><th>Aceptable</th><th>Insuficiente</th></tr>
+  <tr>
+    <td><strong>Funcionalidad completa</strong> (equipo)</td><td>30</td>
+    <td><strong>30.</strong> Cumple todos los requerimientos de prioridad alta del documento. Usa la nube (autenticación y Firestore), trae datos de una API y usa lo local (SQLite, preferencias y almacenamiento seguro). Funciona sin conexión según lo definido, muestra los estados de carga, vacío y error, y tiene notificaciones.</td>
+    <td><strong>18.</strong> Funciona, pero falta alguna parte de la nube, de la API o de lo local, o el modo sin conexión es incompleto, o faltan algunos estados de la interfaz.</td>
+    <td><strong>9.</strong> No ejecuta, o falta una de las dos formas de almacenamiento, o los datos no persisten.</td>
+  </tr>
+  <tr>
+    <td><strong>Arquitectura y seguridad</strong> (equipo)</td><td>20</td>
+    <td><strong>20.</strong> Código en capas con fuente de datos intercambiable. Sin claves en el repositorio, reglas de seguridad cerradas por rol, y la clave de la API (si la hay) protegida.</td>
+    <td><strong>12.</strong> Hay capas pero mezcladas, o las reglas son más abiertas de lo necesario.</td>
+    <td><strong>6.</strong> Todo el código junto, o claves expuestas en el repositorio.</td>
+  </tr>
+  <tr>
+    <td><strong>Historial de Git y aportes</strong> (individual)</td><td>15</td>
+    <td><strong>15.</strong> Aportes propios y significativos en funcionalidades distintas, ramas por funcionalidad, integración por Pull Request revisado por otro integrante, commits claros. La tabla de la sección 16 coincide con el historial.</td>
+    <td><strong>9.</strong> Aportes reales pero desiguales, o integraciones sin revisión, o mensajes de commit poco claros.</td>
+    <td><strong>0 a 4.</strong> Sin aportes reales, un solo autor casi en todo el historial, o aportes declarados que el historial no respalda.</td>
+  </tr>
+  <tr>
+    <td><strong>Sustentación</strong> (individual)</td><td>25</td>
+    <td><strong>25.</strong> Explica con claridad y sin leer su parte no técnica y su parte técnica. Muestra qué hizo y responde con precisión las preguntas del docente, también sobre partes que no escribió.</td>
+    <td><strong>15.</strong> Cubre lo que le corresponde de forma superficial o leyendo, o no puede explicar partes que no escribió.</td>
+    <td><strong>7.</strong> Participa muy poco, no puede explicar lo que hizo, o el equipo sustenta mostrando un documento en lugar de una presentación.</td>
+  </tr>
+  <tr>
+    <td><strong>Documentación y README</strong> (equipo)</td><td>10</td>
+    <td><strong>10.</strong> El documento está en su versión final, coincide con la app, incluye las secciones 15 y 16, el historial de cambios, las referencias y la declaración de uso de IA. El README permite ejecutar el proyecto sin ayuda.</td>
+    <td><strong>6.</strong> Falta alguna sección o el documento tiene diferencias con la app, o el README no basta para ejecutar.</td>
+    <td><strong>3.</strong> Documento desactualizado, sin historial de cambios, o README que no sirve para ejecutar.</td>
+  </tr>
+</table></div>
+<p>Si no se entrega o no se sustenta, el criterio vale 0.</p>
+
+<div class="caja">
+  <strong>Notas individuales.</strong> El historial de Git y la sustentación se califican por persona. Quien no esté presente en la sustentación sin causa justificada recibe 0 en ese criterio.
+</div>
+
+<h2>Advertencias</h2>
+<ul class="lista">
+  <li>El uso de inteligencia artificial está permitido <strong>como apoyo</strong>, no para construir el proyecto completo. La declaración de uso de inteligencia artificial del documento sigue siendo obligatoria y se actualiza con lo que se usó durante el semestre. Declarar el uso no resta puntos. Usar IA sin declararlo, o no poder explicar lo que se entregó, sí.</li>
+  <li>Si la demo no ejecuta durante la sustentación, la funcionalidad se califica solo con lo que se pueda comprobar en el repositorio, y como máximo en el nivel Aceptable.</li>
+  <li>No se reciben archivos PDF ni Word. Si el repositorio es privado, la entrega no se puede calificar.</li>
+  <li>Las claves privadas nunca se suben a Git. Si una clave se sube por error, se revoca de inmediato y se genera una nueva: borrar el commit no basta porque la clave queda en el historial.</li>
+</ul>
+
+</main>
+</body>
+</html>

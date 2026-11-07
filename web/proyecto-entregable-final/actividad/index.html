@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actividad: proyecto funcionando</title>
+<style>
+  :root { --verde: #2e7d32; --fondo: #fafaf7; --texto: #1d1d1b; --suave: #5f6358; --borde: #d8dbd0; --azul: #1f5f8b; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo);
+         color: var(--texto); line-height: 1.55; margin: 0; padding: 0 16px 48px; }
+  main { max-width: 820px; margin: 0 auto; }
+  header { border-bottom: 3px solid var(--verde); padding: 28px 0 14px; margin-bottom: 8px; }
+  header p { margin: 0; color: var(--suave); font-size: .95rem; }
+  h1 { margin: 4px 0 6px; font-size: 1.9rem; }
+  h2 { margin-top: 2.2rem; color: var(--verde); font-size: 1.35rem; }
+  h3 { margin: 1.6rem 0 .3rem; font-size: 1.08rem; }
+  code { background: #eceee4; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: #22261f; color: #eef1e4; padding: 12px 14px; border-radius: 8px; overflow-x: auto;
+        font-size: .86rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--borde); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceee4; }
+  table.ancha { min-width: 680px; }
+  .scroll { overflow-x: auto; }
+  .caja { border-left: 4px solid var(--verde); background: #f0f4ea; padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+  .aviso { border-left-color: #b26a00; background: #fbf1df; }
+  .ejemplo { border-left: 4px solid var(--azul); background: #eef4f9; padding: 8px 14px; margin: 8px 0 14px; border-radius: 0 6px 6px 0; font-size: .93rem; }
+  .ejemplo > strong:first-child { color: var(--azul); display: block; margin-bottom: 2px; }
+  .ejemplo p { margin: .3rem 0; }
+  .ejemplo ul { margin: .3rem 0; padding-left: 1.2rem; }
+  .ejemplo pre { margin: .4rem 0; }
+  ul.lista, ol.lista { padding-left: 1.2rem; }
+  ul.lista li, ol.lista li { margin: 5px 0; }
+  @media (max-width: 560px) { h1 { font-size: 1.55rem; } table { font-size: .84rem; } }
+  @media print { body { background: #fff; } table, pre, .ejemplo { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Actividad: proyecto funcionando</h1>
+  <p>Entregable final del proyecto. Programación Web (IF2003), grupo 603</p>
+</header>
+
+<h2>Objetivo</h2>
+<p>Tu equipo entrega la <strong>plataforma web completa y funcionando</strong> que definió en el primer entregable. La plataforma guarda su información en una <strong>base de datos relacional</strong>, expone y consume una <strong>API propia</strong>, valida los datos en el cliente y en el servidor, controla el acceso por roles y está <strong>publicada en internet</strong>. Además, el repositorio cuenta, con su historial de cambios, <strong>cómo se construyó y quién aportó qué</strong>.</p>
+
+<div class="caja">
+  <strong>Se entrega el enlace al repositorio de GitHub del equipo y la dirección pública de la plataforma publicada.</strong> El proyecto también debe poder ejecutarse en local siguiendo el README, y en la sustentación se muestra funcionando en la dirección pública.
+</div>
+
+<p>Los ejemplos de esta página usan el proyecto ficticio <strong>SalaYa</strong>, una plataforma para reservar salas de estudio de una biblioteca, el mismo del primer entregable. Sirven para mostrar el nivel de detalle esperado. Tu proyecto es el que tu equipo definió.</p>
+
+<h2>Qué se entrega</h2>
+<table>
+  <tr><th>Entregable</th><th>Contenido</th><th>Modalidad</th></tr>
+  <tr><td>Plataforma funcionando</td><td>El proyecto ASP.NET Core en el repositorio, que ejecuta en local siguiendo el README y está publicado en una dirección pública.</td><td>Equipo</td></tr>
+  <tr><td>Historial de Git</td><td>Commits, ramas y Pull Requests que muestran el aporte de cada integrante.</td><td>Individual</td></tr>
+  <tr><td>Documento de definición actualizado</td><td><code>docs/definicion.md</code> en versión final, con su historial de cambios y tres secciones nuevas.</td><td>Equipo</td></tr>
+  <tr><td>Presentación</td><td>Diapositivas para la sustentación, con una parte no técnica y una parte técnica.</td><td>Equipo</td></tr>
+  <tr><td>Sustentación</td><td>Demo en vivo, explicación y ronda de preguntas.</td><td>Individual</td></tr>
+</table>
+<p>Se entrega <strong>únicamente el enlace al repositorio y la dirección pública</strong>. Todo lo demás vive dentro del repositorio.</p>
+
+<h2>Condiciones mínimas del proyecto</h2>
+<p>La plataforma tiene que cumplir lo que el equipo definió en el primer entregable, al menos todos los requerimientos de prioridad alta. Además, sea cual sea el tema, incluye como mínimo lo siguiente:</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Condición</th><th>Qué se verifica</th></tr>
+  <tr><td><strong>Arquitectura MVC</strong></td><td>Modelos, vistas y controladores separados, con rutas propias y servicios inyectados donde corresponda. La lógica no vive en las vistas.</td></tr>
+  <tr><td><strong>Vistas con Razor</strong></td><td>Un layout común, vistas parciales para lo que se repite y vistas que reciben su modelo desde el controlador.</td></tr>
+  <tr><td><strong>Formularios validados</strong></td><td>Al menos un formulario con validación en el navegador y en el servidor. El servidor rechaza los datos inválidos aunque se salte la validación del navegador, y muestra el error sin borrar lo que el usuario escribió.</td></tr>
+  <tr><td><strong>Base de datos relacional</strong></td><td>Una base de datos relacional a elección del equipo, como PostgreSQL, SQL Server u otra, usada con Entity Framework Core y migraciones. Al menos tres entidades relacionadas, con CRUD completo (crear, consultar, editar y eliminar) de las principales y consultas LINQ.</td></tr>
+  <tr><td><strong>Inicio de sesión y roles</strong></td><td>Login y al menos dos roles con permisos distintos. Los permisos se aplican en el servidor: una persona sin el rol no puede entrar a una ruta restringida escribiendo su dirección.</td></tr>
+  <tr><td><strong>API propia</strong></td><td>Una API REST con los endpoints que el proyecto necesita, documentada con OpenAPI, y consumida desde el frontend de la plataforma con <code>fetch</code>, con manejo de errores.</td></tr>
+  <tr><td><strong>Páginas de estado</strong></td><td>Una página de error clara y una página para recursos que no existen. Las listas vacías muestran un aviso en lugar de una pantalla en blanco.</td></tr>
+  <tr><td><strong>Publicación</strong></td><td>La plataforma está publicada en Azure App Service, con la base de datos en un servicio en la nube, y es accesible desde una dirección pública. La publicación se hace desde GitHub de forma continua.</td></tr>
+  <tr><td><strong>Configuración por entornos</strong></td><td>La plataforma funciona en local y en producción con configuración distinta. Las cadenas de conexión y los secretos se manejan con variables de entorno o secretos de usuario, nunca dentro del repositorio.</td></tr>
+  <tr><td><strong>Seguridad</strong></td><td>Contraseñas cifradas, ninguna clave ni cadena de conexión en el repositorio, y rutas y endpoints protegidos según el rol.</td></tr>
+</table></div>
+
+<h2>El documento de definición actualizado</h2>
+<p>El documento <code>docs/definicion.md</code> del primer entregable sigue siendo la fuente de verdad. Aquí se actualiza a su <strong>versión final</strong>, de modo que describa la plataforma que realmente existe.</p>
+<ul class="lista">
+  <li>Cada requerimiento queda marcado como <strong>implementado</strong>, <strong>modificado</strong> o <strong>recortado</strong>, con la razón de su estado.</li>
+  <li>Las secciones que cambiaron (alcance, modelo de datos, pantallas) se corrigen para que coincidan con el código. Un documento que describe una plataforma distinta de la entregada se califica como desactualizado.</li>
+  <li>La tabla de <strong>historial de cambios</strong> registra cada modificación importante: fecha, qué cambió, por qué y quién.</li>
+  <li>Se agregan estas tres secciones nuevas, después de la 13.</li>
+</ul>
+
+<h3>14. Arquitectura, base de datos y API</h3>
+<p>La estructura del proyecto, la base de datos elegida y el modelo de datos tal como quedó, y la tabla de endpoints de la API. Conecta el documento con el código.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<p><strong>Entorno:</strong> ASP.NET Core MVC, Entity Framework Core con PostgreSQL. <strong>Carpetas:</strong> <code>Controllers/</code>, <code>Models/</code>, <code>Views/</code>, <code>Services/</code>, <code>Data/</code>. <strong>Migraciones:</strong> una por cambio del modelo, en <code>Migrations/</code>.</p>
+<div class="scroll"><table>
+  <tr><th>Método</th><th>Ruta</th><th>Para qué sirve</th><th>Rol</th></tr>
+  <tr><td>GET</td><td><code>/api/salas</code></td><td>Lista las salas activas.</td><td>Todos</td></tr>
+  <tr><td>GET</td><td><code>/api/salas/{id}/horarios</code></td><td>Devuelve los horarios libres de una sala.</td><td>Estudiante</td></tr>
+  <tr><td>POST</td><td><code>/api/reservas</code></td><td>Crea una reserva si el horario está libre.</td><td>Estudiante</td></tr>
+  <tr><td>DELETE</td><td><code>/api/reservas/{id}</code></td><td>Cancela una reserva propia.</td><td>Estudiante</td></tr>
+</table></div></div>
+
+<h3>15. Despliegue y configuración</h3>
+<p>Dónde está publicada la plataforma y cómo se configura cada entorno. Deja claro qué cambia entre local y producción y dónde vive cada secreto.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Elemento</th><th>Local</th><th>Producción</th></tr>
+  <tr><td>Dirección</td><td><code>https://localhost:7100</code></td><td>La dirección pública de Azure App Service</td></tr>
+  <tr><td>Base de datos</td><td>PostgreSQL en el computador del desarrollador</td><td>PostgreSQL en un servicio en la nube</td></tr>
+  <tr><td>Cadena de conexión</td><td>Secretos de usuario</td><td>Configuración de la aplicación en Azure</td></tr>
+  <tr><td>Publicación</td><td>No aplica</td><td>Automática al integrar a <code>main</code></td></tr>
+</table></div></div>
+
+<h3>16. Aportes por integrante</h3>
+<p>Una tabla donde cada integrante declara qué construyó, con los Pull Requests o commits que lo respaldan. El docente la contrasta con el historial real de GitHub.</p>
+<div class="ejemplo"><strong>Ejemplo</strong>
+<div class="scroll"><table>
+  <tr><th>Integrante</th><th>Aportes principales</th><th>Evidencia</th></tr>
+  <tr><td>Ana</td><td>Login, roles y protección de rutas.</td><td>PR #4, #9; commits en <code>Controllers/Cuenta</code></td></tr>
+  <tr><td>Luis</td><td>Modelo de datos, migraciones y consultas LINQ.</td><td>PR #6, #11</td></tr>
+  <tr><td>Marta</td><td>API de reservas, consumo desde el frontend y publicación en Azure.</td><td>PR #5, #8, #12</td></tr>
+</table></div></div>
+
+<h2>El README para ejecutar el proyecto</h2>
+<p>El README es la puerta de entrada al proyecto. Debe permitir que otra persona ejecute la plataforma en local sin preguntarle al equipo. Incluye:</p>
+<ul class="lista">
+  <li>Nombre del proyecto, integrantes, una captura de pantalla y la <strong>dirección pública</strong> de la plataforma.</li>
+  <li>La versión exacta del SDK de .NET y los comandos para ejecutar: <code>dotnet restore</code>, <code>dotnet ef database update</code> y <code>dotnet run</code>.</li>
+  <li>Qué base de datos se usa y cómo tenerla en local, qué configuración hace falta (cadena de conexión y secretos), <strong>cómo se establece</strong> y dónde. Los valores privados no van en el repositorio: se incluye un archivo de ejemplo con los nombres de las variables y sin sus valores.</li>
+  <li>Los usuarios de ejemplo de cada rol, para entrar a la plataforma durante la sustentación.</li>
+  <li>El enlace a <code>docs/definicion.md</code>.</li>
+</ul>
+
+<h2>Cómo se sube a Git</h2>
+<p>El mismo repositorio público del primer entregable, con esta estructura como mínimo:</p>
+<pre><code>README.md                nombre, integrantes, dirección pública, cómo ejecutar y usuarios de ejemplo
+docs/definicion.md       el documento en su versión final, con 16 secciones
+docs/mockup/             una imagen por pantalla
+docs/presentacion/       las diapositivas de la sustentación
+Controllers/             controladores y controladores de la API
+Models/                  modelos y modelos de vista
+Views/                   vistas Razor, layout y vistas parciales
+Data/ y Migrations/      contexto de la base de datos y migraciones
+appsettings.example.json nombres de la configuración, sin valores privados</code></pre>
+
+<h3>Historial de cambios en Git</h3>
+<ul class="lista">
+  <li><strong>Todos los integrantes hacen aportes reales</strong>, repartidos en funcionalidades distintas y no solo en documentación o en cambios de formato.</li>
+  <li><strong>Una rama por funcionalidad</strong>, con nombres que digan qué hace (por ejemplo <code>feature/api-reservas</code>).</li>
+  <li><strong>Pull Request para integrar a <code>main</code></strong>, revisado y aprobado por un integrante distinto de quien lo escribió. Nadie fusiona su propio Pull Request.</li>
+  <li><strong>Commits pequeños y claros</strong>, con mensajes que digan qué se hizo, en formato de commits convencionales (<code>feat:</code>, <code>fix:</code>, <code>docs:</code>).</li>
+  <li>El historial no se reescribe: no se borran ni se reemplazan commits para esconder errores o aportes.</li>
+  <li>El <code>.gitignore</code> de .NET está presente, y no hay cadenas de conexión, claves ni las carpetas <code>bin/</code> y <code>obj/</code> en el repositorio.</li>
+</ul>
+
+<div class="caja aviso">
+  <strong>El historial se revisa por persona.</strong> El docente revisa en GitHub los commits y los Pull Requests de cada integrante, y los contrasta con la tabla de la sección 16 del documento. Un integrante sin aportes reales en el historial recibe 0 en el criterio de Git y no recibe la nota de equipo completa en los demás criterios. Declarar un aporte que el historial no respalda es una falta de integridad académica.
+</div>
+
+<h2>Sustentación</h2>
+<p>Todos los integrantes participan. El docente informa el tiempo disponible por equipo, y la nota de la sustentación es <strong>individual</strong>.</p>
+<table>
+  <tr><th>Parte</th><th>Qué se muestra</th></tr>
+  <tr><td>No técnica</td><td>El problema, la solución y el recorrido de cada rol por la plataforma publicada.</td></tr>
+  <tr><td>Técnica</td><td>La validación, los roles, la base de datos, la API, la publicación y el historial de Git.</td></tr>
+  <tr><td>Preguntas</td><td>Preguntas del docente a cada integrante sobre el proyecto y sobre lo que aportó en Git.</td></tr>
+</table>
+
+<div class="caja aviso">
+  <strong>Se sustenta con una presentación, no con un documento.</strong> El equipo prepara diapositivas y las guarda en <code>docs/presentacion/</code>. No se permite sustentar mostrando el README ni el <code>docs/definicion.md</code> completos en pantalla, ni leerlos. Fuera de las diapositivas solo se muestra la demo en vivo de la plataforma, el historial de GitHub y, si una pregunta lo requiere, el código.
+</div>
+
+<h3>Parte no técnica</h3>
+<p>Dirigida a alguien que no programa, como un cliente. Cubre:</p>
+<ul class="lista">
+  <li><strong>El problema y la solución:</strong> qué pasaba antes y qué cambia con la plataforma.</li>
+  <li><strong>La demo del flujo principal</strong> de cada rol, en la dirección pública, con datos que se guardan y se consultan.</li>
+  <li><strong>Lo que quedó fuera:</strong> qué se recortó del alcance original y por qué.</li>
+</ul>
+
+<h3>Parte técnica</h3>
+<p>Dirigida a otros desarrolladores. Cubre:</p>
+<ul class="lista">
+  <li><strong>Demo de la validación:</strong> se envía un formulario inválido y se muestra el error en el navegador y en el servidor.</li>
+  <li><strong>Demo de los roles:</strong> una persona sin el rol intenta entrar a una ruta restringida.</li>
+  <li>La base de datos elegida y por qué, el modelo de datos, las migraciones y una consulta LINQ importante.</li>
+  <li>La API: los endpoints, su documentación OpenAPI y cómo el frontend la consume y maneja los errores.</li>
+  <li>La publicación: cómo se despliega desde GitHub y qué cambia entre local y producción.</li>
+  <li>El historial de Git: ramas, Pull Requests y el aporte de cada integrante.</li>
+</ul>
+
+<h2>Rúbrica de evaluación</h2>
+<p>La rúbrica tiene cinco criterios y suma 100 puntos. <strong>Los criterios de Git y de sustentación son individuales</strong>, y suman el 40%. Los otros tres reciben la misma nota para todo el equipo, salvo lo dicho sobre integrantes sin aportes.</p>
+
+<div class="scroll"><table class="ancha">
+  <tr><th>Criterio</th><th>Peso</th><th>Excelente</th><th>Aceptable</th><th>Insuficiente</th></tr>
+  <tr>
+    <td><strong>Funcionalidad completa y publicada</strong> (equipo)</td><td>30</td>
+    <td><strong>30.</strong> Cumple todos los requerimientos de prioridad alta del documento. Tiene CRUD sobre la base de datos, formularios validados en cliente y servidor, login con roles aplicados en el servidor y una API propia consumida desde el frontend. Está publicada en una dirección pública con su base de datos en la nube.</td>
+    <td><strong>18.</strong> Funciona, pero falta alguna parte (la API, la validación en el servidor o algún rol), o la publicación tiene fallas.</td>
+    <td><strong>9.</strong> No ejecuta, no está publicada, o los datos no persisten en la base de datos.</td>
+  </tr>
+  <tr>
+    <td><strong>Arquitectura y seguridad</strong> (equipo)</td><td>20</td>
+    <td><strong>20.</strong> MVC bien separado, servicios inyectados, migraciones ordenadas y configuración distinta para local y producción. Sin cadenas de conexión ni claves en el repositorio, contraseñas cifradas y rutas y endpoints protegidos por rol.</td>
+    <td><strong>12.</strong> Hay separación pero con lógica en las vistas o los controladores, o la protección por rol es incompleta.</td>
+    <td><strong>6.</strong> Todo el código mezclado, o cadenas de conexión y claves expuestas en el repositorio.</td>
+  </tr>
+  <tr>
+    <td><strong>Historial de Git y aportes</strong> (individual)</td><td>15</td>
+    <td><strong>15.</strong> Aportes propios y significativos en funcionalidades distintas, ramas por funcionalidad, integración por Pull Request revisado por otro integrante, commits claros. La tabla de la sección 16 coincide con el historial.</td>
+    <td><strong>9.</strong> Aportes reales pero desiguales, o integraciones sin revisión, o mensajes de commit poco claros.</td>
+    <td><strong>0 a 4.</strong> Sin aportes reales, un solo autor casi en todo el historial, o aportes declarados que el historial no respalda.</td>
+  </tr>
+  <tr>
+    <td><strong>Sustentación</strong> (individual)</td><td>25</td>
+    <td><strong>25.</strong> Explica con claridad y sin leer su parte no técnica y su parte técnica. Muestra qué hizo y responde con precisión las preguntas del docente, también sobre partes que no escribió.</td>
+    <td><strong>15.</strong> Cubre lo que le corresponde de forma superficial o leyendo, o no puede explicar partes que no escribió.</td>
+    <td><strong>7.</strong> Participa muy poco, no puede explicar lo que hizo, o el equipo sustenta mostrando un documento en lugar de una presentación.</td>
+  </tr>
+  <tr>
+    <td><strong>Documentación y README</strong> (equipo)</td><td>10</td>
+    <td><strong>10.</strong> El documento está en su versión final, coincide con la plataforma, incluye las secciones 14, 15 y 16, el historial de cambios, las referencias y la declaración de uso de IA. El README permite ejecutar el proyecto sin ayuda.</td>
+    <td><strong>6.</strong> Falta alguna sección o el documento tiene diferencias con la plataforma, o el README no basta para ejecutar.</td>
+    <td><strong>3.</strong> Documento desactualizado, sin historial de cambios, o README que no sirve para ejecutar.</td>
+  </tr>
+</table></div>
+<p>Si no se entrega o no se sustenta, el criterio vale 0.</p>
+
+<div class="caja">
+  <strong>Notas individuales.</strong> El historial de Git y la sustentación se califican por persona. Quien no esté presente en la sustentación sin causa justificada recibe 0 en ese criterio.
+</div>
+
+<h2>Advertencias</h2>
+<ul class="lista">
+  <li>El uso de inteligencia artificial está permitido <strong>como apoyo</strong>, no para construir el proyecto completo. La declaración de uso de inteligencia artificial del documento sigue siendo obligatoria y se actualiza con lo que se usó durante el semestre. Declarar el uso no resta puntos. Usar IA sin declararlo, o no poder explicar lo que se entregó, sí.</li>
+  <li>Si la plataforma publicada no responde durante la sustentación, la funcionalidad se califica solo con lo que se pueda comprobar en el repositorio, y como máximo en el nivel Aceptable.</li>
+  <li>No se reciben archivos PDF ni Word. Si el repositorio es privado, la entrega no se puede calificar.</li>
+  <li>Las cadenas de conexión y las claves nunca se suben a Git. Si una se sube por error, se cambia de inmediato y se genera una nueva: borrar el commit no basta porque el valor queda en el historial.</li>
+</ul>
+
+</main>
+</body>
+</html>

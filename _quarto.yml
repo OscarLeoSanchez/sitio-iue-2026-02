@@ -76,6 +76,8 @@ website:
               href: movil/semana-08/index.qmd
         - text: "Proyecto: entregable 1"
           href: movil/proyecto-entregable-1/index.qmd
+        - text: "Proyecto: entregable final"
+          href: movil/proyecto-entregable-final/index.qmd
         - text: "Persistencia local y Firebase: guía paso a paso"
           href: movil/persistencia-y-nube/index.qmd
     - id: web
@@ -115,6 +117,8 @@ website:
               href: web/semana-10/mvc.qmd
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
+        - text: "Proyecto: entregable final"
+          href: web/proyecto-entregable-final/index.qmd
         - text: "Plaza: formularios, validación y base de datos"
           href: web/plaza-formularios-y-datos/index.qmd
   page-footer:

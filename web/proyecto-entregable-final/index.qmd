@@ -1,0 +1,36 @@
+---
+title: "Proyecto: entregable final"
+author: "Oscar Leonel Sánchez Conde"
+date: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+---
+
+::: {.ficha}
+|            |                                       |
+|------------|---------------------------------------|
+| Asignatura | Programación Web (IF2003)             |
+| Grupo      | 603 de Ingeniería Informática         |
+| Entregable | Proyecto funcionando                  |
+:::
+
+## Lo que vas a lograr
+
+El entregable final es el **proyecto completo, funcionando y publicado**: la plataforma que el equipo definió en el entregable 1, construida con todo lo visto en el curso. Incluye una base de datos relacional, formularios validados en el cliente y en el servidor, inicio de sesión con roles, una API propia consumida desde el frontend y la publicación en internet.
+
+Lo que se evalúa no es solo que la plataforma funcione. También se evalúa el **historial de cambios**: que todo el equipo haya hecho aportes reales, visibles en Git, y que el documento de definición cuente lo que se construyó, lo que se recortó y por qué.
+
+Todo se entrega en el repositorio del equipo, junto con la dirección pública de la plataforma, y se sustenta con una presentación de diapositivas que tiene una parte no técnica y una parte técnica.
+
+La actividad explica qué se entrega, las condiciones mínimas, cómo se documenta la arquitectura y el despliegue, cómo se sube a Git, cómo se sustenta y cómo se evalúa.
+
+::: {.acceso}
+Actividad: proyecto funcionando
+
+[Abrir la actividad](actividad/index.html){.btn-doc target="_blank"}
+:::
+
+::: {.pie-doc}
+Programación Web (IF2003). Institución Universitaria de Envigado. Facultad de Ingenierías. Semestre 2026-02.
+
+**Transparencia.** La redacción de esta página contó con el apoyo de inteligencia artificial, usando el modelo Claude Sonnet 5.5 de Anthropic. Todo el contenido fue revisado y validado.
+:::
