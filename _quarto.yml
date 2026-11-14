@@ -77,6 +77,8 @@ website:
               href: movil/semana-07/index.qmd
             - text: "Semana 8. Persistencia local"
               href: movil/semana-08/index.qmd
+            - text: "Persistencia local y Firebase: guía paso a paso"
+              href: movil/persistencia-y-nube/index.qmd
             - text: "MVVM y Repository Pattern"
               href: movil/semana-12/index.qmd
             - text: "Clean Architecture"
@@ -85,8 +87,6 @@ website:
           href: movil/proyecto-entregable-1/index.qmd
         - text: "Proyecto: entregable final"
           href: movil/proyecto-entregable-final/index.qmd
-        - text: "Persistencia local y Firebase: guía paso a paso"
-          href: movil/persistencia-y-nube/index.qmd
     - id: web
       style: docked
       background: light
