@@ -12,6 +12,7 @@ number-sections: false
 | Qué construyes  | Plaza, un servidor ASP.NET Core MVC con catálogo, detalle de producto y pedidos, con formularios que se validan en el navegador y en el servidor, y catálogo y pedidos guardados en una base de datos PostgreSQL con Entity Framework Core, consultados con LINQ |
 | Prerrequisitos  | Una terminal, Git instalado y nociones de C# (clases, listas y métodos). Parte de cero: no necesitas otra guía |
 | Herramientas    | .NET SDK 10 (10.0.302), VS Code, Git, PowerShell y PostgreSQL 18.6 en versión portable |
+| Repositorio de la actividad | [iue-web-plaza](https://github.com/OscarLeoSanchez/iue-web-plaza), el punto de partida donde quedó la sesión anterior |
 :::
 
 ::: {.acceso}

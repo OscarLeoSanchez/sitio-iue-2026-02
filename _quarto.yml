@@ -124,12 +124,14 @@ website:
               href: web/semana-10/index.qmd
             - text: "Semana 10. POST, MVC, inyección y middleware"
               href: web/semana-10/mvc.qmd
+            - text: "Plaza: formularios, validación y base de datos"
+              href: web/plaza-formularios-y-datos/index.qmd
+        - text: "Actividad de pantalla"
+          href: web/semana-05/actividad-pantalla/index.html
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
         - text: "Proyecto: entregable final"
           href: web/proyecto-entregable-final/index.qmd
-        - text: "Plaza: formularios, validación y base de datos"
-          href: web/plaza-formularios-y-datos/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"
