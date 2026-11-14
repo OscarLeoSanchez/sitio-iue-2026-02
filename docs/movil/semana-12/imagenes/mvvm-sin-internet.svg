@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 490" width="880" height="490" role="img">
+<title>Qué pasa sin internet</title>
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flecha-tomate" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c0392b"/></marker></defs>
+<rect width="880" height="490" fill="#ffffff"/>
+<g><circle cx="184" cy="40" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="184" y="45" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">1</text></g>
+<text x="208" y="45" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">Sin red: toca Agregar</text>
+<g><circle cx="420" cy="40" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="420" y="45" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">2</text></g>
+<text x="444" y="45" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">Mientras sigue sin red</text>
+<g><circle cx="656" cy="40" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="656" y="45" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">3</text></g>
+<text x="680" y="45" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">El servidor confirma</text>
+<text x="20" y="132.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Lo que ve</text>
+<text x="20" y="150.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">la persona</text>
+<text x="20" y="248.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Firestore, en</text>
+<text x="20" y="266.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">el teléfono</text>
+<text x="20" y="352.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">El Future</text>
+<text x="20" y="370.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">del add</text>
+<g data-box="1">
+<rect x="170" y="90" width="210" height="88" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="275.0" y="118.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">Aparece la fila</text>
+<text x="275.0" y="139.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">Papa criolla</text>
+<text x="275.0" y="159.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">$2500 (sin enviar)</text>
+</g>
+<g data-box="1">
+<rect x="406" y="90" width="210" height="88" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="511.0" y="128.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">La fila sigue ahí</text>
+<text x="511.0" y="149.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">con (sin enviar)</text>
+</g>
+<g data-box="1">
+<rect x="642" y="90" width="210" height="88" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="747.0" y="128.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">La fila ya no</text>
+<text x="747.0" y="149.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">dice (sin enviar)</text>
+</g>
+<g data-box="1">
+<rect x="170" y="206" width="210" height="88" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="275.0" y="234.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Guarda en su copia</text>
+<text x="275.0" y="255.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">local y emite ya</text>
+<text x="275.0" y="275.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">(los puntos 8 a 10)</text>
+</g>
+<g data-box="1">
+<rect x="406" y="206" width="210" height="88" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="511.0" y="244.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">La escritura queda</text>
+<text x="511.0" y="265.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">pendiente</text>
+</g>
+<g data-box="1">
+<rect x="642" y="206" width="210" height="88" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="747.0" y="234.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">El servidor</text>
+<text x="747.0" y="255.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">confirma la</text>
+<text x="747.0" y="275.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">escritura</text>
+</g>
+<path d="M380,134 L406,134" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M616,134 L642,134" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M380,250 L406,250" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M616,250 L642,250" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-box="1">
+<rect x="170" y="322" width="446" height="64" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="393.0" y="348.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">No termina: espera al servidor</text>
+<text x="393.0" y="369.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">la escritura sigue en curso</text>
+</g>
+<g data-box="1">
+<rect x="642" y="322" width="210" height="64" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="747.0" y="348.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">El Future termina</text>
+<text x="747.0" y="369.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ya no hay espera</text>
+</g>
+<path d="M616,354 L642,354" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-box="1">
+<rect x="20" y="410" width="420" height="66" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="230.0" y="437.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1b5e3a">El Repository marca la fila</text>
+<text x="230.0" y="458.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">pendiente: doc.metadata.hasPendingWrites</text>
+</g>
+<g data-box="1">
+<rect x="460" y="410" width="400" height="66" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="660.0" y="437.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">La Vista no espera</text>
+<text x="660.0" y="458.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">agregar usa unawaited y devuelve true</text>
+</g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 664" width="880" height="664">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flechaGris" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#9aa5b1"/></marker></defs>
+<rect width="880" height="664" fill="#fff"/>
+<text x="30" y="30" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#8e2418">Lo que cuesta</text>
+<text x="30" y="62" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#26323d">Archivos en lib</text>
+<g data-node="1"><rect x="30" y="74" width="222" height="36" rx="10" ry="10" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/><text x="44" y="98" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">mvvm_app: 12</text></g>
+<g data-node="1"><rect x="30" y="120" width="370" height="36" rx="10" ry="10" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/><text x="44" y="144" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">clean_app: 20</text></g>
+<text x="450" y="62" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#26323d">Líneas de código</text>
+<g data-node="1"><rect x="450" y="74" width="251" height="36" rx="10" ry="10" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/><text x="464" y="98" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">mvvm_app: 505</text></g>
+<g data-node="1"><rect x="450" y="120" width="370" height="36" rx="10" ry="10" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/><text x="464" y="144" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">clean_app: 743</text></g>
+<text x="30" y="180" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">No se cuenta firebase_options.dart en ninguno de los dos.</text>
+<g data-node="1">
+<rect x="30" y="198" width="260" height="80" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="160.0" y="231.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">Casos de uso que delegan</text>
+<text x="160.0" y="253.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">4 archivos de 9 a 11 líneas</text>
+</g>
+<g data-node="1">
+<rect x="310" y="198" width="260" height="80" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="440.0" y="221.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">Datos repetidos</text>
+<text x="440.0" y="243.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">Producto y ProductoDto</text>
+<text x="440.0" y="263.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">tienen los mismos 5 campos</text>
+</g>
+<g data-node="1">
+<rect x="590" y="198" width="260" height="80" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="720.0" y="231.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">El costo son las capas</text>
+<text x="720.0" y="253.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">sin SQLite quedan 19 archivos</text>
+</g>
+<text x="30" y="330" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1b5e3a">Lo que compra</text>
+<text x="410" y="362" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">mvvm_app</text>
+<text x="710" y="362" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">clean_app</text>
+<text x="30" y="416" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#26323d">Cambiar la regla del precio</text>
+<g data-node="1">
+<rect x="260" y="376" width="300" height="70" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="410.0" y="404.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#174f80">productos_view_model.dart</text>
+<text x="410.0" y="426.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">el if, junto al mensaje</text>
+</g>
+<g data-node="1">
+<rect x="570" y="376" width="280" height="70" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="710.0" y="404.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1b5e3a">nuevo_producto.dart</text>
+<text x="710.0" y="426.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">un archivo, la regla sola</text>
+</g>
+<text x="30" y="498" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#26323d">Cambiar de fuente</text>
+<g data-node="1">
+<rect x="260" y="458" width="300" height="70" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="410.0" y="486.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#174f80">Reescribir service y repository</text>
+<text x="410.0" y="508.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">reciben tipos de Firestore</text>
+</g>
+<g data-node="1">
+<rect x="570" y="458" width="280" height="70" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="710.0" y="486.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1b5e3a">Una línea en main.dart</text>
+<text x="710.0" y="508.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">domain y presentation no se tocan</text>
+</g>
+<text x="30" y="580" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#26323d">Probar sin Firebase</text>
+<g data-node="1">
+<rect x="260" y="540" width="300" height="70" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="410.0" y="568.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#174f80">Un falso de la clase concreta</text>
+<text x="410.0" y="590.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">pero el import llega a cloud_firestore</text>
+</g>
+<g data-node="1">
+<rect x="570" y="540" width="280" height="70" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="710.0" y="568.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1b5e3a">ProductosEnMemoria</text>
+<text x="710.0" y="590.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">sin Firebase ni sqflite</text>
+</g>
+<text x="440" y="644" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Si la app es pequeña y la fuente no va a cambiar, MVVM ya separa lo que importa.</text>
+</svg>
