@@ -55,28 +55,30 @@ website:
           href: movil/definicion-proyecto/index.qmd
         - section: "Unidad 1. Fundamentos del desarrollo móvil"
           contents:
-            - text: "Semana 1. Instalación del entorno"
+            - text: "Instalación del entorno"
               href: movil/semana-01/index.qmd
-            - text: "Semana 2. Flutter y Dart"
+            - text: "Flutter y Dart"
               href: movil/semana-02/index.qmd
             - text: "Complemento: arquitectura de Flutter"
               href: movil/semana-02/arquitectura-flutter.qmd
             # Las diapositivas no van en la barra lateral: se abren con el
             # boton que esta al inicio de la guia de la semana.
-            - text: "Semana 3. Git y el arranque de tu proyecto"
+            - text: "Git y el arranque de tu proyecto"
               href: movil/semana-03/index.qmd
         - section: "Unidad 2. Interfaz, datos y persistencia"
           contents:
-            - text: "Semana 4. Material Design y widgets"
+            - text: "Material Design y widgets"
               href: movil/semana-04/index.qmd
-            - text: "Semana 5. Navegación"
+            - text: "Navegación"
               href: movil/semana-05/index.qmd
-            - text: "Semana 6. Formularios y componentes reutilizables"
+            - text: "Formularios y componentes reutilizables"
               href: movil/semana-06/index.qmd
-            - text: "Semana 7. JSON y APIs REST"
+            - text: "JSON y APIs REST"
               href: movil/semana-07/index.qmd
-            - text: "Semana 8. Persistencia local"
+            - text: "Persistencia local"
               href: movil/semana-08/index.qmd
+        - section: "Unidad 3. Servicios en la nube y arquitectura"
+          contents:
             - text: "Persistencia local y Firebase: guía paso a paso"
               href: movil/persistencia-y-nube/index.qmd
             - text: "MVVM y Repository Pattern"
