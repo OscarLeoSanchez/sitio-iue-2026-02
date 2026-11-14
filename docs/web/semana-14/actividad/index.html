@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plaza: actividad evaluativa</title>
+<style>
+  :root {
+    --fondo: #f7f8fa;
+    --tarjeta: #ffffff;
+    --texto: #1c2430;
+    --suave: #5a6677;
+    --borde: #dde2ea;
+    --a: #1f6f43;
+    --a-fondo: #e6f4ec;
+    --b: #1d4f91;
+    --b-fondo: #e7effa;
+    --alerta: #8a5a00;
+    --alerta-fondo: #fff4d6;
+    --codigo: #12202e;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  }
+  header.portada {
+    background: var(--tarjeta);
+    border-bottom: 1px solid var(--borde);
+    padding: 36px 16px 28px;
+  }
+  .contenedor { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  header.portada .contenedor { padding: 0; }
+  .etiqueta {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--suave);
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; }
+  h2 { font-size: 24px; margin: 0 0 12px; line-height: 1.25; }
+  h3 { font-size: 18px; margin: 28px 0 8px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--suave); font-size: 17px; max-width: 70ch; }
+  nav.indice {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(247, 248, 250, .95);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--borde);
+  }
+  nav.indice .contenedor { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+  nav.indice a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto);
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    padding: 4px 14px;
+  }
+  nav.indice a:hover { border-color: var(--suave); }
+  section.bloque { padding: 36px 0 8px; }
+  .tarjeta {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 14px 0;
+  }
+  .parte-a { border-left: 6px solid var(--a); }
+  .parte-b { border-left: 6px solid var(--b); }
+  .insignia {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 2px 10px;
+    margin-bottom: 8px;
+  }
+  .insignia.a { background: var(--a-fondo); color: var(--a); }
+  .insignia.b { background: var(--b-fondo); color: var(--b); }
+  .aviso {
+    background: var(--alerta-fondo);
+    border: 1px solid #ecd48a;
+    color: var(--alerta);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 14px 0;
+  }
+  .aviso p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .tabla { overflow-x: auto; margin: 12px 0; border: 1px solid var(--borde); border-radius: 10px; background: var(--tarjeta); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+  th { background: #eef1f6; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; color: var(--suave); }
+  tr:last-child td { border-bottom: 0; }
+  code { font-family: "Cascadia Code", Consolas, monospace; font-size: .92em; background: #eef1f6; padding: 1px 5px; border-radius: 4px; }
+  pre {
+    background: var(--codigo);
+    color: #e8eef5;
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+  ul, ol { margin: 0 0 12px; padding-left: 22px; }
+  li { margin: 4px 0; }
+  ul.lista-chequeo { list-style: none; padding-left: 0; }
+  ul.lista-chequeo li { padding-left: 0; }
+  ul.lista-chequeo label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+  ul.lista-chequeo input { margin-top: 6px; flex: none; }
+  .niveles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0; }
+  .nivel { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 10px; padding: 14px 16px; }
+  .nivel h4 { margin: 0 0 6px; font-size: 16px; }
+  .nivel p { margin: 0; font-size: 15px; color: var(--suave); }
+  .nivel.alto { border-top: 4px solid #2e8b57; }
+  .nivel.medio { border-top: 4px solid #d9a300; }
+  .nivel.bajo { border-top: 4px solid #c0504d; }
+  footer { padding: 32px 0 56px; color: var(--suave); font-size: 14px; }
+  @media (max-width: 600px) {
+    h1 { font-size: 25px; }
+    h2 { font-size: 21px; }
+    .tarjeta { padding: 16px; }
+  }
+  @media print {
+    nav.indice { display: none; }
+    body { background: #fff; }
+    pre { white-space: pre-wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="contenedor">
+    <span class="etiqueta">Programación Web, grupo 603</span>
+    <h1>Plaza: actividad evaluativa</h1>
+    <p class="lead">Agregas un módulo nuevo al sitio y le pones una API a todo lo que Plaza ya tiene y a lo que acabas de construir. Son dos evaluaciones separadas: la Parte A es el módulo con vistas y la Parte B es la API.</p>
+  </div>
+</header>
+
+<nav class="indice" aria-label="Secciones">
+  <div class="contenedor">
+    <a href="#como-se-trabaja">Cómo se trabaja</a>
+    <a href="#parte-a">Parte A: Productores</a>
+    <a href="#parte-b">Parte B: API</a>
+    <a href="#orden">Orden sugerido</a>
+  </div>
+</nav>
+
+<main class="contenedor">
+
+<section class="bloque" id="como-se-trabaja">
+  <h2>Cómo se trabaja y cómo se evalúa</h2>
+
+  <div class="tarjeta">
+    <ul>
+      <li><strong>Punto de partida:</strong> tu proyecto Plaza tal como quedó en la clase anterior. Los productos vienen de PostgreSQL con Entity Framework Core y los pedidos se guardan en memoria. No necesitas cambiar nada de eso.</li>
+      <li><strong>Repositorio de la actividad:</strong> <a href="https://github.com/OscarLeoSanchez/iue-web-plaza" target="_blank" rel="noopener">iue-web-plaza</a>, el punto de partida donde quedó la sesión anterior.</li>
+      <li><strong>En equipo:</strong> pueden trabajar juntos y entregar un solo proyecto por equipo.</li>
+      <li><strong>La evaluación es individual:</strong> cada integrante sustenta por separado, con el código abierto, y responde por su cuenta. Lo que se pregunta es el flujo y qué hace cada pieza, no la sintaxis de memoria.</li>
+      <li><strong>Dos evaluaciones separadas:</strong> la Parte A y la Parte B tienen cada una su valoración.</li>
+      <li><strong>Requisito para sustentar:</strong> el proyecto compila y arranca con <code>dotnet run</code>.</li>
+    </ul>
+  </div>
+
+  <div class="tarjeta">
+    <p><strong>Guías de apoyo</strong></p>
+    <ul>
+      <li><a href="https://oscarleosanchez.github.io/sitio-iue-2026-02/web/plaza-formularios-y-datos/index.html" target="_blank" rel="noopener">Plaza: formularios, validación y base de datos</a>. Es la guía de la Parte A: modelo, servicio, controlador, vistas y validación.</li>
+      <li><a href="https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-14/index.html" target="_blank" rel="noopener">Plaza: una API propia consumida desde el frontend</a>. Es la guía de la Parte B: la API sobre los mismos servicios.</li>
+    </ul>
+  </div>
+
+  <div class="aviso">
+    <p><strong>Qué no se pide en esta actividad:</strong> diseño o estilos, editar o borrar, inicio de sesión, documentación OpenAPI o Scalar, ni una página que consuma la API con <code>fetch</code>. Las vistas pueden ser HTML simple como las de <code>Views/Catalogo</code>.</p>
+  </div>
+</section>
+
+<!-- ============================ PARTE A ============================ -->
+<section class="bloque" id="parte-a">
+  <span class="insignia a">Parte A</span>
+  <h2>Un módulo nuevo: Productores</h2>
+  <p class="lead">Quién cultiva lo que vendemos. Sigue el mismo camino que ya recorriste con el catálogo y los pedidos: modelo, contrato, servicio, controlador y vistas.</p>
+  <p>Guía de apoyo: <a href="https://oscarleosanchez.github.io/sitio-iue-2026-02/web/plaza-formularios-y-datos/index.html" target="_blank" rel="noopener">Plaza: formularios, validación y base de datos</a>. Te sirven las etapas 4 a 7 (modelo, contrato, servicio, registro, controlador y detalle) y las etapas 9 a 11 (formulario y validación).</p>
+
+  <h3>A1. Archivos que debes crear, con nombre exacto</h3>
+  <div class="tabla"><table>
+    <thead><tr><th>Archivo</th><th>Qué contiene</th></tr></thead>
+    <tbody>
+      <tr><td><code>Models/Productor.cs</code></td><td>La clase <code>Productor</code>: <code>Id</code> (int), <code>Nombre</code> (string) y <code>Vereda</code> (string).</td></tr>
+      <tr><td><code>Models/NuevoProductor.cs</code></td><td>La clase <code>NuevoProductor</code>: <code>Nombre</code> y <code>Vereda</code> (los dos string) con las validaciones de A2. No lleva <code>Id</code>.</td></tr>
+      <tr><td><code>Services/IProductores.cs</code></td><td>La interfaz <code>IProductores</code> (A3).</td></tr>
+      <tr><td><code>Services/ProductoresEnMemoria.cs</code></td><td>Una clase que implementa <code>IProductores</code>. El nombre y el almacenamiento son tuyos: memoria, archivo o base de datos. Si eliges otra cosa, ponle un nombre que lo diga.</td></tr>
+      <tr><td><code>Controllers/ProductoresController.cs</code></td><td>El controlador con las cuatro acciones de A5.</td></tr>
+      <tr><td><code>Views/Productores/Listar.cshtml</code></td><td>La vista de la lista.</td></tr>
+      <tr><td><code>Views/Productores/Buscar.cshtml</code></td><td>La vista del detalle.</td></tr>
+      <tr><td><code>Views/Productores/Nuevo.cshtml</code></td><td>La vista del formulario.</td></tr>
+      <tr><td><code>Program.cs</code></td><td>Una línea nueva para registrar <code>IProductores</code> (A7).</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>A2. El modelo de entrada y sus validaciones</h3>
+  <p>Usa anotaciones de datos. Los mensajes deben ser exactamente estos, porque se comprueban en pantalla:</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Propiedad</th><th>Regla</th><th>Mensaje de error</th></tr></thead>
+    <tbody>
+      <tr><td><code>Nombre</code></td><td>Obligatorio</td><td><code>El nombre del productor es obligatorio</code></td></tr>
+      <tr><td><code>Nombre</code></td><td>Entre 3 y 60 caracteres</td><td><code>El nombre debe tener entre 3 y 60 letras</code></td></tr>
+      <tr><td><code>Vereda</code></td><td>Obligatoria</td><td><code>La vereda es obligatoria</code></td></tr>
+      <tr><td><code>Vereda</code></td><td>Máximo 40 caracteres</td><td><code>La vereda no puede pasar de 40 letras</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>A3. El contrato del servicio</h3>
+<pre><code>public interface IProductores
+{
+    List&lt;Productor&gt; Listar();
+
+    Productor? Buscar(int id);
+
+    Productor Guardar(NuevoProductor nuevo);
+}</code></pre>
+  <p><code>Buscar</code> devuelve <code>null</code> cuando no existe el productor. <code>Guardar</code> asigna el <code>Id</code> y devuelve el <code>Productor</code> ya creado.</p>
+
+  <h3>A4. Datos iniciales</h3>
+  <p>El servicio arranca con estos tres productores, con estos <code>Id</code>, para que la lista no salga vacía:</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Id</th><th>Nombre</th><th>Vereda</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Marta Rojas</td><td>El Retiro</td></tr>
+      <tr><td>2</td><td>Luis Gómez</td><td>La Floresta</td></tr>
+      <tr><td>3</td><td>Ana Torres</td><td>San Isidro</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>A5. Las cuatro acciones del controlador</h3>
+  <p><code>ProductoresController</code> hereda de <code>Controller</code>, recibe <code>IProductores</code> por el constructor y usa rutas por atributo como <code>CatalogoController</code>.</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Acción</th><th>Verbo y ruta</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><code>Listar</code></td><td><code>GET productores</code></td><td>Entrega la lista a la vista <code>Listar</code>.</td></tr>
+      <tr><td><code>Buscar</code></td><td><code>GET productores/{id}</code> con restricción de entero mayor o igual a 1</td><td>Entrega el productor a la vista <code>Buscar</code>. Si no existe, responde 404.</td></tr>
+      <tr><td><code>Nuevo</code></td><td><code>GET productores/nuevo</code></td><td>Muestra el formulario vacío con un <code>NuevoProductor</code>.</td></tr>
+      <tr><td><code>Crear</code></td><td><code>POST productores/nuevo</code> con token antifalsificación</td><td>Si el modelo no es válido, vuelve a mostrar el formulario con los mensajes. Si es válido, guarda y redirige al detalle del productor creado.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>A6. Qué debe mostrar cada vista</h3>
+  <div class="tabla"><table>
+    <thead><tr><th>Vista</th><th>Contenido exacto</th></tr></thead>
+    <tbody>
+      <tr><td><code>Listar</code></td><td>Un título <code>Productores</code>. Una lista donde cada línea es el nombre del productor como enlace a su detalle, seguido de <code> - </code> y su vereda. Debajo, un enlace con el texto <code>Registrar un productor</code> que lleva al formulario.</td></tr>
+      <tr><td><code>Buscar</code></td><td>El nombre del productor como título, su vereda y su número de <code>Id</code>. Un enlace <code>Volver a los productores</code>.</td></tr>
+      <tr><td><code>Nuevo</code></td><td>Un título <code>Nuevo productor</code>. Un formulario con los campos <code>Nombre</code> y <code>Vereda</code>, cada uno con su mensaje de error al lado. Un botón con el texto <code>Guardar productor</code> y un enlace <code>Volver a los productores</code>.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>A7. El registro en Program.cs</h3>
+  <p>Agrega el registro de <code>IProductores</code> junto a los que ya existen. El tiempo de vida lo eliges tú, y debes poder explicar por qué elegiste ese y qué pasaría con los otros dos.</p>
+
+  <h3>A8. Compruébalo antes de sustentar</h3>
+  <p>Con <code>dotnet run</code> en marcha, abre cada dirección en el navegador (el puerto es el que muestra la consola, en este ejemplo 5138):</p>
+  <ul class="lista-chequeo">
+    <li><label><input type="checkbox"> <span><code>http://localhost:5138/productores</code> muestra Marta Rojas, Luis Gómez y Ana Torres, cada uno con su vereda y como enlace.</span></label></li>
+    <li><label><input type="checkbox"> <span>Pulsar un nombre abre <code>/productores/1</code> (o el que corresponda) con nombre, vereda e <code>Id</code>.</span></label></li>
+    <li><label><input type="checkbox"> <span><code>/productores/99</code> responde 404. <code>/productores/0</code> también responde 404.</span></label></li>
+    <li><label><input type="checkbox"> <span>En <code>/productores/nuevo</code>, enviar el formulario vacío muestra al lado de los campos <code>El nombre del productor es obligatorio</code> y <code>La vereda es obligatoria</code>.</span></label></li>
+    <li><label><input type="checkbox"> <span>Escribir <code>Al</code> como nombre muestra <code>El nombre debe tener entre 3 y 60 letras</code>.</span></label></li>
+    <li><label><input type="checkbox"> <span>Enviar <code>Carlos Pineda</code> y <code>El Roble</code> te lleva al detalle del productor nuevo, y ese productor aparece en <code>/productores</code> junto a los otros tres.</span></label></li>
+  </ul>
+
+  <h3>A9. Lo que debes demostrar que conoces y manejas</h3>
+  <div class="tarjeta parte-a">
+    <ul>
+      <li>Recorrer, paso a paso, lo que pasa desde que escribes <code>/productores/2</code> en el navegador hasta que ves la página: qué ruta coincide, qué clase actúa, qué método se ejecuta, a quién se le pide el dato y qué vista se elige.</li>
+      <li>Explicar qué es el modelo que recibe una vista (<code>@model</code>) y cómo llegan ahí los datos que muestra.</li>
+      <li>Explicar por qué el controlador depende de <code>IProductores</code> y no de la clase concreta, y qué podrías cambiar en el almacenamiento sin tocar el controlador.</li>
+      <li>Explicar qué hace el registro en <code>Program.cs</code>, qué significa el tiempo de vida que elegiste y qué le pasaría a los datos con un tiempo de vida distinto.</li>
+      <li>Distinguir <code>Productor</code> de <code>NuevoProductor</code> y decir por qué son dos clases.</li>
+      <li>Explicar quién valida el formulario, cuándo se comprueba, dónde queda el resultado (<code>ModelState</code>) y por qué, cuando hay errores, se devuelve la misma vista y no una redirección.</li>
+      <li>Explicar por qué, cuando el guardado sale bien, <code>Crear</code> redirige en lugar de mostrar una vista, y qué pasaría si el usuario recarga la página.</li>
+      <li>Explicar la restricción de la ruta del detalle y por qué <code>/productores/0</code> responde 404 sin que escribas código para eso.</li>
+      <li>Explicar para qué sirve el token antifalsificación del formulario.</li>
+    </ul>
+  </div>
+
+  <h3>A10. Niveles de valoración de la Parte A</h3>
+  <div class="niveles">
+    <div class="nivel alto"><h4>Alto</h4><p>Explica el recorrido completo de una petición y cómo se conectan las piezas. Predice qué ocurre si se cambia algo (el tiempo de vida, la validación, la ruta) y lo justifica.</p></div>
+    <div class="nivel medio"><h4>Medio</h4><p>Explica cada pieza por separado, pero no logra conectarlas ni anticipar qué pasa si algo cambia.</p></div>
+    <div class="nivel bajo"><h4>Bajo</h4><p>Describe el código línea por línea sin explicar qué hace ni para qué está, o no reconoce el flujo.</p></div>
+  </div>
+</section>
+
+<!-- ============================ PARTE B ============================ -->
+<section class="bloque" id="parte-b">
+  <span class="insignia b">Parte B</span>
+  <h2>Una API para todo Plaza</h2>
+  <p class="lead">Siete rutas que devuelven JSON: cuatro sobre lo que ya existía y tres sobre Productores. No copias lógica: usan los mismos servicios que el sitio.</p>
+  <p>Guía de apoyo: <a href="https://oscarleosanchez.github.io/sitio-iue-2026-02/web/semana-14/index.html" target="_blank" rel="noopener">Plaza: una API propia consumida desde el frontend</a>. Te sirven la etapa 1 (leer) y la etapa 2 (escribir). Las etapas 3 y 4 no se piden.</p>
+
+  <h3>B1. Reglas que valen para las tres controladoras</h3>
+  <div class="tarjeta parte-b">
+    <ul>
+      <li>Cada controlador de la API lleva <code>[ApiController]</code> y una ruta base que empieza por <code>api/</code>.</li>
+      <li>Los controladores reciben <code>ICatalogo</code>, <code>IPedidos</code> o <code>IProductores</code> por el constructor. <strong>No se crean servicios nuevos para la API.</strong></li>
+      <li>La regla de los pedidos se aplica igual que en el sitio: el cliente, la cantidad y que el producto exista. No la escribes dos veces diferente.</li>
+      <li>Lo que crea la API se ve en el sitio y lo que crea el sitio se ve en la API, porque es el mismo servicio con los mismos datos.</li>
+      <li>Los controladores de MVC que ya funcionan no se modifican.</li>
+    </ul>
+  </div>
+
+  <h3>B2. Archivos que debes crear, con nombre exacto</h3>
+  <div class="tabla"><table>
+    <thead><tr><th>Archivo</th><th>Ruta base</th></tr></thead>
+    <tbody>
+      <tr><td><code>Controllers/ProductosApiController.cs</code></td><td><code>api/productos</code></td></tr>
+      <tr><td><code>Controllers/PedidosApiController.cs</code></td><td><code>api/pedidos</code></td></tr>
+      <tr><td><code>Controllers/ProductoresApiController.cs</code></td><td><code>api/productores</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>B3. Las siete rutas</h3>
+  <div class="tabla"><table>
+    <thead><tr><th>Verbo</th><th>Ruta</th><th>Respuestas</th><th>Sobre qué</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td><code>/api/productos</code></td><td>200 con la lista</td><td>Lo que ya existía</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/productos/{id}</code></td><td>200 con el producto, o 404</td><td>Lo que ya existía</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/pedidos</code></td><td>201 con el pedido creado y el encabezado <code>Location</code>, o 400</td><td>Lo que ya existía</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/pedidos/{id}</code></td><td>200 con el pedido, o 404</td><td>Lo que ya existía</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/productores</code></td><td>200 con la lista</td><td>Lo nuevo</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/productores/{id}</code></td><td>200 con el productor, o 404</td><td>Lo nuevo</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/productores</code></td><td>201 con el productor creado y el encabezado <code>Location</code>, o 400</td><td>Lo nuevo</td></tr>
+    </tbody>
+  </table></div>
+  <p>En las rutas con <code>{id}</code>, un identificador menor que 1 (como <code>/api/productos/0</code>) también responde 404.</p>
+
+  <h3>B4. Qué debe responder cada ruta</h3>
+
+  <p><strong>Productos</strong></p>
+<pre><code>GET /api/productos          responde 200 y:
+[
+  {"id":1,"nombre":"Tomate","precio":3500},
+  {"id":2,"nombre":"Aguacate","precio":6000},
+  {"id":3,"nombre":"Papa","precio":2800},
+  {"id":4,"nombre":"Panela","precio":4500}
+]
+
+GET /api/productos/1        responde 200 y:
+{"id":1,"nombre":"Tomate","precio":3500}
+
+GET /api/productos/99       responde 404</code></pre>
+
+  <p><strong>Pedidos</strong></p>
+<pre><code>POST /api/pedidos
+Content-Type: application/json
+{"cliente":"Ana Gomez","producto":"Tomate","cantidad":3}
+
+responde 201, con el encabezado Location apuntando a /api/pedidos/1
+y el cuerpo:
+{"id":1,"cliente":"Ana Gomez","producto":"Tomate","cantidad":3}
+
+GET /api/pedidos/1          responde 200 con ese mismo pedido
+GET /api/pedidos/99         responde 404</code></pre>
+  <p>Estos envíos deben responder <strong>400</strong>, y el texto del mensaje debe aparecer en el cuerpo de la respuesta:</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Cuerpo enviado</th><th>Mensaje que debe aparecer</th></tr></thead>
+    <tbody>
+      <tr><td><code>{"cliente":"Al","producto":"Tomate","cantidad":2}</code></td><td><code>El nombre debe tener entre 3 y 60 letras</code></td></tr>
+      <tr><td><code>{"cliente":"Ana Gomez","producto":"Tomate","cantidad":0}</code></td><td><code>La cantidad debe estar entre 1 y 100</code></td></tr>
+      <tr><td><code>{"cliente":"Ana Gomez","producto":"Mango","cantidad":2}</code></td><td><code>No vendemos Mango</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>Productores</strong></p>
+<pre><code>GET /api/productores        responde 200 y la lista con los tres iniciales:
+[
+  {"id":1,"nombre":"Marta Rojas","vereda":"El Retiro"},
+  {"id":2,"nombre":"Luis Gómez","vereda":"La Floresta"},
+  {"id":3,"nombre":"Ana Torres","vereda":"San Isidro"}
+]
+
+GET /api/productores/2      responde 200 y:
+{"id":2,"nombre":"Luis Gómez","vereda":"La Floresta"}
+
+GET /api/productores/99     responde 404
+
+POST /api/productores
+Content-Type: application/json
+{"nombre":"Carlos Pineda","vereda":"El Roble"}
+
+responde 201, con el encabezado Location apuntando a /api/productores/4
+y el cuerpo:
+{"id":4,"nombre":"Carlos Pineda","vereda":"El Roble"}</code></pre>
+  <div class="tabla"><table>
+    <thead><tr><th>Cuerpo enviado a <code>POST /api/productores</code></th><th>Debe responder 400 con los mensajes</th></tr></thead>
+    <tbody>
+      <tr><td><code>{"nombre":"Al","vereda":""}</code></td><td><code>El nombre debe tener entre 3 y 60 letras</code> y <code>La vereda es obligatoria</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>B5. Cómo probar tus rutas</h3>
+  <p>Prueba cada ruta con la herramienta que prefieras: Postman, Thunder Client (la extensión de VS Code), Scalar si ya la tienes de la guía, <code>curl.exe</code> o cualquier otra. Los <code>GET</code> también funcionan en el navegador, pero no te muestran el estado ni los encabezados con claridad. El puerto es el que muestra <code>dotnet run</code>.</p>
+
+  <p>En Postman o Thunder Client, para cada ruta:</p>
+  <ol>
+    <li>Elige el verbo (<code>GET</code> o <code>POST</code>) y escribe la dirección completa, por ejemplo <code>http://localhost:5138/api/productores/2</code>.</li>
+    <li>En los <code>POST</code>, abre la pestaña del cuerpo (<code>Body</code>), elige <code>raw</code> con formato <code>JSON</code> (en Thunder Client, la opción <code>JSON</code>) y pega el cuerpo de B4. La herramienta agrega el encabezado <code>Content-Type: application/json</code>; si la tuya no lo hace, agrégalo tú.</li>
+    <li>Envía y revisa tres cosas en la respuesta: el <strong>estado</strong> (200, 201, 400 o 404), los <strong>encabezados</strong> (en un 201 busca <code>Location</code>) y el <strong>cuerpo</strong> (el JSON o los mensajes de error).</li>
+    <li>Compara contra lo que dice B4 para esa ruta. Si no coincide, el problema está en tu código.</li>
+  </ol>
+  <p>Si prefieres la consola, estos son los mismos casos con <code>curl.exe</code> en PowerShell (en Windows PowerShell 5.1, <code>curl</code> a secas es otro comando):</p>
+<pre><code>curl.exe -i http://localhost:5138/api/productores/99
+
+'{"nombre":"Carlos Pineda","vereda":"El Roble"}' | curl.exe -i -s -X POST http://localhost:5138/api/productores -H "Content-Type: application/json" --data-binary "@-"
+
+'{"cliente":"Ana Gomez","producto":"Mango","cantidad":2}' | curl.exe -i -s -X POST http://localhost:5138/api/pedidos -H "Content-Type: application/json" --data-binary "@-"</code></pre>
+  <p>Recomendación: guarda las siete peticiones en una colección de tu herramienta, para repetirlas rápido cada vez que cambies algo.</p>
+
+  <h3>B6. Compruébalo antes de sustentar</h3>
+  <ul class="lista-chequeo">
+    <li><label><input type="checkbox"> <span>Probaste las siete rutas de B3 con una herramienta (Postman, Thunder Client u otra) y cada una responde con el estado indicado.</span></label></li>
+    <li><label><input type="checkbox"> <span>Un <code>POST /api/productores</code> válido responde 201 y trae el encabezado <code>Location</code>.</span></label></li>
+    <li><label><input type="checkbox"> <span>Después de ese <code>POST</code>, el productor nuevo aparece en <code>/productores</code> en el navegador.</span></label></li>
+    <li><label><input type="checkbox"> <span>Un productor creado con el formulario del sitio aparece en <code>GET /api/productores</code>.</span></label></li>
+    <li><label><input type="checkbox"> <span>Los tres envíos inválidos de pedidos y el de productores responden 400 con el mensaje esperado.</span></label></li>
+    <li><label><input type="checkbox"> <span>Las páginas de <code>/catalogo</code> y <code>/productores</code> siguen funcionando igual que antes.</span></label></li>
+  </ul>
+
+  <h3>B7. Lo que debes demostrar que conoces y manejas</h3>
+  <div class="tarjeta parte-b">
+    <ul>
+      <li>Explicar qué diferencia hay entre un controlador de MVC y uno de API: qué devuelve cada uno y quién consume esa respuesta.</li>
+      <li>Explicar la idea de las dos puertas con un solo servicio: qué parte del trabajo se comparte entre el sitio y la API y qué parte es propia de cada puerta.</li>
+      <li>Explicar qué significan los estados 200, 201, 400 y 404, en qué situación devuelve tu código cada uno y por qué ese y no otro.</li>
+      <li>Explicar qué es el encabezado <code>Location</code> y por qué un <code>POST</code> que crea algo lo devuelve.</li>
+      <li>Explicar qué hace <code>[ApiController]</code> cuando el cuerpo recibido no cumple las anotaciones, y en qué caso tuviste que producir el 400 tú mismo (el producto que no existe).</li>
+      <li>Explicar cómo un cuerpo JSON se convierte en un <code>NuevoPedido</code> o un <code>NuevoProductor</code>, y cómo el objeto que devuelves se convierte en JSON, incluidos los nombres de las propiedades.</li>
+      <li>Probar una ruta de la API: leer el estado, los encabezados y el cuerpo de la respuesta, y distinguir un error tuyo de un error del cliente.</li>
+      <li>Explicar por qué lo creado por la API aparece en el sitio y al revés, y qué ocurre con esos datos cuando se reinicia la aplicación según el almacenamiento que elegiste.</li>
+    </ul>
+  </div>
+
+  <h3>B8. Niveles de valoración de la Parte B</h3>
+  <div class="niveles">
+    <div class="nivel alto"><h4>Alto</h4><p>Explica el flujo completo de una petición a la API y por qué cada ruta responde lo que responde. Predice qué estado y qué cuerpo devuelve una petición nueva sin ejecutarla.</p></div>
+    <div class="nivel medio"><h4>Medio</h4><p>Sabe qué hace cada ruta y qué estado devuelve, pero no explica por qué ni cómo se relaciona con el servicio y con el sitio.</p></div>
+    <div class="nivel bajo"><h4>Bajo</h4><p>Repite lo que dice el código sin entender qué es una API, qué significan los estados o qué se comparte con el sitio.</p></div>
+  </div>
+</section>
+
+<section class="bloque" id="orden">
+  <h2>Orden sugerido de trabajo</h2>
+  <div class="tarjeta">
+    <ol>
+      <li>Parte A completa, hasta que pase todas las comprobaciones de A8.</li>
+      <li>Las cuatro rutas de la API sobre lo que ya existía (productos y pedidos).</li>
+      <li>Las tres rutas de la API sobre Productores.</li>
+      <li>Las comprobaciones de B6.</li>
+    </ol>
+    <p>La Parte B de Productores depende de que la Parte A funcione, porque usa el mismo servicio. Si te atascas en algo de A, deja esa pieza lo más simple posible y avanza: es mejor entregar todo funcionando de forma sencilla que la mitad de forma elaborada.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="contenedor">Plaza, Programación Web. Actividad evaluativa individual con trabajo en equipo permitido.</div>
+</footer>
+
+</body>
+</html>

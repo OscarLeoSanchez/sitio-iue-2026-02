@@ -3922,7 +3922,7 @@
     "href": "web/plaza-formularios-y-datos/index.html",
     "title": "Plaza: formularios, validación y base de datos",
     "section": "",
-    "text": "Qué construyes\nPlaza, un servidor ASP.NET Core MVC con catálogo, detalle de producto y pedidos, con formularios que se validan en el navegador y en el servidor, y catálogo y pedidos guardados en una base de datos PostgreSQL con Entity Framework Core, consultados con LINQ\n\n\nPrerrequisitos\nUna terminal, Git instalado y nociones de C# (clases, listas y métodos). Parte de cero: no necesitas otra guía\n\n\nHerramientas\n.NET SDK 10 (10.0.302), VS Code, Git, PowerShell y PostgreSQL 18.6 en versión portable\n\n\nRepositorio de la actividad\niue-web-plaza, el punto de partida donde quedó la sesión anterior",
+    "text": "Qué construyes\nPlaza, un servidor ASP.NET Core MVC con catálogo, detalle de producto y pedidos, con formularios que se validan en el navegador y en el servidor, y catálogo y pedidos guardados en una base de datos PostgreSQL con Entity Framework Core, consultados con LINQ\n\n\nPrerrequisitos\nUna terminal, Git instalado y nociones de C# (clases, listas y métodos). Parte de cero: no necesitas otra guía\n\n\nHerramientas\n.NET SDK 10 (10.0.302), VS Code, Git, PowerShell y PostgreSQL 18.6 en versión portable",
     "crumbs": [
       "Unidad 3. Backend con ASP.NET Core",
       "Plaza: formularios, validación y base de datos"
