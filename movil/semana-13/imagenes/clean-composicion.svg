@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 566" width="860" height="566">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flechaGris" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#9aa5b1"/></marker></defs>
+<rect width="860" height="566" fill="#fff"/>
+<rect x="20" y="44" width="820" height="500" rx="16" ry="16" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-dasharray="8 6"/>
+<text x="40" y="74" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#7a5200">main.dart: cada pieza se construye con la anterior</text>
+<g data-node="1">
+<rect x="50" y="96" width="340" height="70" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="220.0" y="124.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">FirestoreProductosRepository()</text>
+<text x="220.0" y="146.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">la fuente nube</text>
+</g>
+<g data-node="1">
+<rect x="470" y="96" width="340" height="70" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="640.0" y="124.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">SqliteProductosRepository.abrir()</text>
+<text x="640.0" y="146.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">la fuente local</text>
+</g>
+<g><circle cx="50" cy="96" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="50" y="101" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">1</text></g>
+<g><circle cx="470" cy="96" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="470" y="101" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">1</text></g>
+<path d="M220,166 V224" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<path d="M640,166 V224" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<text x="232" y="200" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">nube</text>
+<text x="652" y="200" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">local</text>
+<g data-node="1">
+<rect x="130" y="226" width="600" height="74" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="430.0" y="256.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">productos(titulo, fuente)</text>
+<text x="430.0" y="278.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe el contrato: la fila que tocas elige la fuente</text>
+</g>
+<g><circle cx="130" cy="226" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="130" y="231" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">2</text></g>
+<path d="M170,300 V350" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<g data-node="1">
+<rect x="40" y="352" width="260" height="130" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="170.0" y="380.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Casos de uso</text>
+<text x="170.0" y="402.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">ObservarProductos(fuente)</text>
+<text x="170.0" y="422.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">AgregarProducto(fuente)</text>
+<text x="170.0" y="442.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">CambiarDisponible(fuente)</text>
+<text x="170.0" y="462.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">BorrarProducto(fuente)</text>
+</g>
+<g><circle cx="40" cy="352" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="40" y="357" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">3</text></g>
+<path d="M300,417 H350" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<g data-node="1">
+<rect x="350" y="377" width="240" height="80" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="470.0" y="410.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosViewModel</text>
+<text x="470.0" y="432.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe los 4 casos de uso</text>
+</g>
+<g><circle cx="350" cy="377" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="350" y="382" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">4</text></g>
+<path d="M590,417 H640" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<g data-node="1">
+<rect x="640" y="377" width="180" height="80" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="730.0" y="410.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosPantalla</text>
+<text x="730.0" y="432.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe el ViewModel</text>
+</g>
+<g><circle cx="640" cy="377" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="640" y="382" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">5</text></g>
+<text x="430" y="518" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Ninguna pieza de adentro sabe qué repositorio hay detrás: solo main.dart lo sabe.</text>
+</svg>

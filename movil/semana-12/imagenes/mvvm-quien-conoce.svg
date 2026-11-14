@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="900" height="580" role="img">
+<title>Quién conoce a quién</title>
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flecha-tomate" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c0392b"/></marker></defs>
+<rect width="900" height="580" fill="#ffffff"/>
+<text x="40" y="34" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">Quién conoce a quién</text>
+<g data-box="1">
+<rect x="40" y="56" width="300" height="58" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="190.0" y="79.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#174f80">Vista</text>
+<text x="190.0" y="100.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ProductosPantalla</text>
+</g>
+<g data-box="1">
+<rect x="40" y="164" width="300" height="58" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="190.0" y="187.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#7a5200">ViewModel</text>
+<text x="190.0" y="208.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ProductosViewModel</text>
+</g>
+<g data-box="1">
+<rect x="40" y="272" width="300" height="58" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="190.0" y="295.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1b5e3a">Repository</text>
+<text x="190.0" y="316.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ProductosRepository</text>
+</g>
+<g data-box="1">
+<rect x="40" y="380" width="300" height="58" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="190.0" y="403.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#4f2c73">Service</text>
+<text x="190.0" y="424.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ProductosService</text>
+</g>
+<g data-box="1">
+<rect x="40" y="488" width="300" height="58" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="190.0" y="511.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#4f2c73">Firestore</text>
+<text x="190.0" y="532.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">la colección productos</text>
+</g>
+<path d="M110,114 L110,164" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="122" y="127.0" width="190" height="24" rx="5" fill="#ffffff"/>
+<text x="126" y="144.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">conoce a: <tspan font-weight="400" fill="#26323d" font-size="13.5">vm</tspan></text>
+<path d="M110,222 L110,272" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="122" y="235.0" width="190" height="24" rx="5" fill="#ffffff"/>
+<text x="126" y="252.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">conoce a: <tspan font-weight="400" fill="#26323d" font-size="13.5">_repository</tspan></text>
+<path d="M110,330 L110,380" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="122" y="343.0" width="190" height="24" rx="5" fill="#ffffff"/>
+<text x="126" y="360.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">conoce a: <tspan font-weight="400" fill="#26323d" font-size="13.5">_service</tspan></text>
+<path d="M110,438 L110,488" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="122" y="451.0" width="190" height="24" rx="5" fill="#ffffff"/>
+<text x="126" y="468.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">conoce a: <tspan font-weight="400" fill="#26323d" font-size="13.5">_coleccion</tspan></text>
+<path d="M300,164 L300,114" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha-tomate)"/>
+<path d="M290,129.0 L310,149.0 M310,129.0 L290,149.0" stroke="#c0392b" stroke-width="4" stroke-linecap="round" fill="none"/>
+<rect x="318" y="127.0" width="164" height="24" rx="5" fill="#ffffff"/>
+<text x="322" y="144.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#8e2418">no conoce a la Vista</text>
+<text x="500" y="34" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">El dato viaja en dos sentidos</text>
+<g data-box="1">
+<rect x="500" y="60" width="100" height="170" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="550.0" y="149.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#174f80">Vista</text>
+</g>
+<g data-box="1">
+<rect x="770" y="60" width="100" height="170" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="820.0" y="149.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#7a5200">ViewModel</text>
+</g>
+<text x="685.0" y="98" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">El evento sube</text>
+<path d="M600,114 L770,114" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="685.0" y="138" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">vm.agregar(...)</text>
+<text x="685.0" y="176" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">El estado baja</text>
+<path d="M770,192 L600,192" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="685.0" y="216" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">vm.productos y vm.error</text>
+<g data-box="1">
+<rect x="500" y="258" width="370" height="92" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="685.0" y="288.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">El ViewModel avisa con notifyListeners():</text>
+<text x="685.0" y="308.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">mi estado cambió. La Vista escucha con</text>
+<text x="685.0" y="328.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">ListenableBuilder y decide redibujarse.</text>
+</g>
+<g data-box="1">
+<rect x="500" y="380" width="370" height="112" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="685.0" y="410.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">Nadie conoce hacia arriba</text>
+<text x="685.0" y="431.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">El ViewModel no sabe que existe una Vista.</text>
+<text x="685.0" y="451.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">El Repository no sabe que existe</text>
+<text x="685.0" y="471.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">un ViewModel.</text>
+</g>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img">
+<title>Recorrido de un toque en Agregar</title>
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flecha-tomate" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c0392b"/></marker></defs>
+<rect width="900" height="900" fill="#ffffff"/>
+<text x="25" y="30" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">Un toque en Agregar: Papa criolla, 2500</text>
+<path d="M100,108 L100,886" stroke="#c4ccd4" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M275,108 L275,886" stroke="#c4ccd4" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M450,108 L450,886" stroke="#c4ccd4" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M625,108 L625,886" stroke="#c4ccd4" stroke-width="2" stroke-dasharray="6 6"/>
+<path d="M800,108 L800,886" stroke="#c4ccd4" stroke-width="2" stroke-dasharray="6 6"/>
+<g data-box="1">
+<rect x="25.0" y="46" width="150" height="60" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="100.0" y="70.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">Vista</text>
+<text x="100.0" y="91.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">ProductosPantalla</text>
+</g>
+<g data-box="1">
+<rect x="200.0" y="46" width="150" height="60" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="275.0" y="70.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">ViewModel</text>
+<text x="275.0" y="91.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">ProductosViewModel</text>
+</g>
+<g data-box="1">
+<rect x="375.0" y="46" width="150" height="60" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="450.0" y="70.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Repository</text>
+<text x="450.0" y="91.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">ProductosRepository</text>
+</g>
+<g data-box="1">
+<rect x="550.0" y="46" width="150" height="60" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="625.0" y="70.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Service</text>
+<text x="625.0" y="91.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">ProductosService</text>
+</g>
+<g data-box="1">
+<rect x="725.0" y="46" width="150" height="60" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="800.0" y="70.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Firestore</text>
+<text x="800.0" y="91.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">la nube</text>
+</g>
+<g data-box="1"><rect x="15.0" y="128" width="170" height="44" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/><g><circle cx="39.0" cy="150" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="39.0" y="155" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">1</text></g><text x="122.0" y="148" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#174f80">Escribe el texto</text><text x="122.0" y="164" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">Papa criolla y 2500</text></g>
+<path d="M100,220 L275,220" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="92.5" y="178" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="187.5" y="190" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Toca Agregar</text>
+<text x="187.5" y="207" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">vm.agregar(...)</text>
+<g><circle cx="124" cy="220" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="124" y="225" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">2</text></g>
+<g data-box="1"><rect x="190.0" y="268" width="170" height="44" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><g><circle cx="214.0" cy="290" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="214.0" y="295" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">3</text></g><text x="297.0" y="288" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">Valida el pedido</text><text x="297.0" y="304" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">nombre y precio</text></g>
+<path d="M360,290 L400,290" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-box="1"><rect x="400" y="268" width="170" height="44" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/><text x="485" y="288" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#8e2418">Si falla: error</text><text x="485" y="304" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">y termina aquí</text></g>
+<path d="M275,360 L450,360" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="267.5" y="318" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="362.5" y="330" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Pide guardar</text>
+<text x="362.5" y="347" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">repository.agregar(...)</text>
+<g><circle cx="299" cy="360" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="299" y="365" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">4</text></g>
+<path d="M450,430 L625,430" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="442.5" y="388" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="537.5" y="400" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Arma el mapa y protege</text>
+<text x="537.5" y="417" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">proteger(...)</text>
+<g><circle cx="474" cy="430" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="474" y="435" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">5</text></g>
+<path d="M625,500 L800,500" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="617.5" y="458" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="712.5" y="470" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Hace add</text>
+<text x="712.5" y="487" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">coleccion.add(datos)</text>
+<g><circle cx="649" cy="500" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="649" y="505" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">6</text></g>
+<path d="M25,523.0 L875,523.0" stroke="#c98a00" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="250" y="510.0" width="400" height="26" rx="5" fill="#ffffff"/>
+<text x="450" y="528.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">Firestore guarda y ahora el estado vuelve a la pantalla</text>
+<path d="M800,586 L625,586" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="617.5" y="544" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="712.5" y="556" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Guarda y emite</text>
+<text x="712.5" y="573" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">snapshots()</text>
+<g><circle cx="776" cy="586" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="776" y="591" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">7</text></g>
+<path d="M625,656 L450,656" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="442.5" y="614" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="537.5" y="626" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">QuerySnapshot</text>
+<text x="537.5" y="643" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">se convierte a Producto</text>
+<g><circle cx="601" cy="656" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="601" y="661" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">8</text></g>
+<path d="M450,726 L275,726" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="267.5" y="684" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="362.5" y="696" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">Asigna productos</text>
+<text x="362.5" y="713" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">y llama notifyListeners()</text>
+<g><circle cx="426" cy="726" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="426" y="731" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">9</text></g>
+<path d="M275,796 L100,796" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="92.5" y="754" width="190" height="38" rx="5" fill="#ffffff"/>
+<text x="187.5" y="766" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">ListenableBuilder</text>
+<text x="187.5" y="783" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">reconstruye</text>
+<g><circle cx="251" cy="796" r="13" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="251" y="801" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">10</text></g>
+<g data-box="1">
+<rect x="15" y="836" width="170" height="44" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="100" y="856" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#174f80">Aparece la fila</text><text x="100" y="872" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">Papa criolla</text></g>
+</svg>

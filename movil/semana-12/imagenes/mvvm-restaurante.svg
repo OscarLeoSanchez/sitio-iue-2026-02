@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" role="img">
+<title>La analogía del restaurante</title>
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flecha-tomate" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c0392b"/></marker></defs>
+<rect width="900" height="440" fill="#ffffff"/>
+<text x="25" y="34" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">En el restaurante</text>
+<g data-box="1">
+<rect x="25.0" y="52" width="150" height="100" rx="12" ry="12" fill="#f3f5f7" stroke="#6b7a88" stroke-width="2.5"/>
+<text x="100.0" y="86.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">Cliente</text>
+<text x="100.0" y="107.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">pide el plato</text>
+<text x="100.0" y="127.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">y lo recibe</text>
+</g>
+<g data-box="1">
+<rect x="200.0" y="52" width="150" height="100" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="275.0" y="86.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#174f80">Mesero</text>
+<text x="275.0" y="107.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">lleva y trae</text>
+<text x="275.0" y="127.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">no cocina</text>
+</g>
+<g data-box="1">
+<rect x="375.0" y="52" width="150" height="100" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="450.0" y="86.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#7a5200">Cocina</text>
+<text x="450.0" y="107.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">revisa el pedido</text>
+<text x="450.0" y="127.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">prepara y avisa</text>
+</g>
+<g data-box="1">
+<rect x="550.0" y="52" width="150" height="100" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="625.0" y="86.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1b5e3a">Despensa</text>
+<text x="625.0" y="107.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">entrega todo</text>
+<text x="625.0" y="127.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">ya listo</text>
+</g>
+<g data-box="1">
+<rect x="725.0" y="52" width="150" height="100" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="800.0" y="86.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#4f2c73">Proveedor</text>
+<text x="800.0" y="107.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">de él sale</text>
+<text x="800.0" y="127.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">lo crudo</text>
+</g>
+<g data-box="1">
+<rect x="25.0" y="236" width="150" height="80" rx="12" ry="12" fill="#f3f5f7" stroke="#6b7a88" stroke-width="2.5"/>
+<text x="100.0" y="270.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#26323d">Usuario</text>
+<text x="100.0" y="291.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">con el teléfono</text>
+</g>
+<g data-box="1">
+<rect x="200.0" y="236" width="150" height="80" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="275.0" y="270.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#174f80">ProductosPantalla</text>
+<text x="275.0" y="291.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">la Vista</text>
+</g>
+<g data-box="1">
+<rect x="375.0" y="236" width="150" height="80" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="450.0" y="270.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#7a5200">ProductosViewModel</text>
+<text x="450.0" y="291.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">el ViewModel</text>
+</g>
+<g data-box="1">
+<rect x="550.0" y="236" width="150" height="80" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="625.0" y="270.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#1b5e3a">ProductosRepository</text>
+<text x="625.0" y="291.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">el Repository</text>
+</g>
+<g data-box="1">
+<rect x="725.0" y="236" width="150" height="80" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="800.0" y="270.8" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#4f2c73">ProductosService</text>
+<text x="800.0" y="291.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#26323d">y Firestore</text>
+</g>
+<path d="M100,152 L100,236" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M275,152 L275,236" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M450,152 L450,236" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M625,152 L625,236" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M800,152 L800,236" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="110" y="182" width="130" height="24" rx="5" fill="#ffffff"/>
+<text x="116" y="199" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">en mvvm_app es</text>
+<path d="M175.0,102 L200.0,102" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M350.0,102 L375.0,102" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M525.0,102 L550.0,102" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M700.0,102 L725.0,102" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M175.0,276 L200.0,276" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M350.0,276 L375.0,276" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M525.0,276 L550.0,276" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<path d="M700.0,276 L725.0,276" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<g data-box="1">
+<rect x="25" y="350" width="850" height="70" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="450" y="378" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">La cocina pide a la despensa y no sabe de dónde viene lo que recibe.</text>
+<text x="450" y="402" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">El ViewModel pide productos al Repository y no sabe que existe Firestore.</text>
+</g>
+</svg>

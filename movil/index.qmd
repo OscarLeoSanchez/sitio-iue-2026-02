@@ -59,8 +59,8 @@ semestre.
 |:---:|---|---|:---:|
 | 10 | Firebase Authentication y Firestore | Registro e inicio de sesión con los datos protegidos | - |
 | 11 | Storage y notificaciones | Carga de imagen y recepción de notificación de prueba | **5%** |
-| 12 | MVVM y Repository Pattern | Funcionalidad reorganizada en vista, modelo de vista y repositorio | - |
-| 13 | Clean Architecture | Funcionalidad en tres capas, con fuente de datos intercambiable | **10%** |
+| **[12](semana-12/index.qmd)** | MVVM y Repository Pattern | Funcionalidad reorganizada en vista, modelo de vista y repositorio | - |
+| **[13](semana-13/index.qmd)** | Clean Architecture | Funcionalidad en tres capas, con fuente de datos intercambiable | **10%** |
 :::
 
 ### Unidad 4. Calidad, publicación e IA

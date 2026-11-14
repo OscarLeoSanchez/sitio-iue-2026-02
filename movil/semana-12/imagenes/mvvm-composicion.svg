@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="900" height="340" fill="#ffffff"/>
+<text x="450" y="34" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#26323d">De adentro hacia afuera: cada pieza recibe a la anterior por el constructor</text>
+<rect x="30" y="62" width="180" height="92" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="120.0" y="103.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">ProductosService</text>
+<text x="120.0" y="122.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">habla con Firestore</text>
+<circle cx="48" cy="60" r="15" fill="#c98a00"/>
+<text x="48" y="65.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">1</text>
+<path d="M210,108 L250,108" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="250" y="62" width="180" height="92" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="340.0" y="103.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">ProductosRepository</text>
+<text x="340.0" y="122.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe el Service</text>
+<circle cx="268" cy="60" r="15" fill="#c98a00"/>
+<text x="268" y="65.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">2</text>
+<path d="M430,108 L470,108" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="470" y="62" width="180" height="92" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="560.0" y="103.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosViewModel</text>
+<text x="560.0" y="122.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe el Repository</text>
+<circle cx="488" cy="60" r="15" fill="#c98a00"/>
+<text x="488" y="65.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">3</text>
+<path d="M650,108 L690,108" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="690" y="62" width="180" height="92" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="780.0" y="103.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosPantalla</text>
+<text x="780.0" y="122.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">recibe el ViewModel</text>
+<circle cx="708" cy="60" r="15" fill="#c98a00"/>
+<text x="708" y="65.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">4</text>
+<path d="M30,168 L30,180 L430,180 L430,168" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M470,168 L470,180 L870,180 L870,168" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M230,180 L230,200" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M670,180 L670,200" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="30" y="200" width="400" height="110" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="230.0" y="241.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">main() crea el Service y el Repository</text>
+<text x="230.0" y="260.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">ProductosRepository(ProductosService())</text>
+<text x="230.0" y="279.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">se crean una vez y viven con la app</text>
+<rect x="470" y="200" width="400" height="110" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="670.0" y="241.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">MainApp crea el ViewModel y la Pantalla</text>
+<text x="670.0" y="260.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">ProductosViewModel(productos)</text>
+<text x="670.0" y="279.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">uno nuevo cada vez que se abre la pantalla</text>
+</svg>

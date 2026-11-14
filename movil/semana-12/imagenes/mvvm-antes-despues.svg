@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" width="880" height="560">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker></defs>
+<rect width="880" height="560" fill="#ffffff"/>
+<text x="190" y="36" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#8e2418">Antes: clase_nube</text>
+<text x="660" y="36" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1b5e3a">Después: mvvm_app</text>
+<rect x="30" y="56" width="320" height="484" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="190" y="88" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">productos_nube_pantalla.dart</text>
+<text x="190" y="108" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">una sola pantalla hace los cuatro trabajos</text>
+<rect x="50" y="152" width="280" height="52" rx="12" ry="12" fill="#ffffff" stroke="#c0392b" stroke-width="2.5"/>
+<text x="190" y="183" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8e2418">Dibuja la lista</text>
+<path d="M350,178 L470,178" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="470" y="140" width="380" height="76" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="660.0" y="173.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">Vista</text>
+<text x="660.0" y="192.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">productos_pantalla.dart</text>
+<path d="M660,216 L660,242" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="50" y="254" width="280" height="52" rx="12" ry="12" fill="#ffffff" stroke="#c0392b" stroke-width="2.5"/>
+<text x="190" y="285" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8e2418">Valida el precio</text>
+<path d="M350,280 L470,280" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="470" y="242" width="380" height="76" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="660.0" y="275.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ViewModel</text>
+<text x="660.0" y="294.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">productos_view_model.dart</text>
+<path d="M660,318 L660,344" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="50" y="356" width="280" height="52" rx="12" ry="12" fill="#ffffff" stroke="#c0392b" stroke-width="2.5"/>
+<text x="190" y="387" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8e2418">Traduce el error de permisos</text>
+<path d="M350,382 L470,382" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="470" y="344" width="380" height="76" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="660.0" y="377.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Repository</text>
+<text x="660.0" y="396.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">productos_repository.dart</text>
+<path d="M660,420 L660,446" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="50" y="458" width="280" height="52" rx="12" ry="12" fill="#ffffff" stroke="#c0392b" stroke-width="2.5"/>
+<text x="190" y="489" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8e2418">Consulta Firestore directo</text>
+<path d="M350,484 L470,484" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<rect x="470" y="446" width="380" height="76" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="660.0" y="479.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Service</text>
+<text x="660.0" y="498.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">productos_service.dart</text>
+</svg>

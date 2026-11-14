@@ -25,6 +25,9 @@ project:
     # Presentacion interactiva de la guia de persistencia local y Firebase,
     # mismo motivo: solo la enlaza el boton de la guia.
     - movil/persistencia-y-nube/presentacion-interactiva.html
+    # Presentaciones interactivas de Movil (Semanas 12 y 13), mismo motivo.
+    - movil/semana-12/presentacion-interactiva.html
+    - movil/semana-13/presentacion-interactiva.html
 
 lang: es
 
@@ -74,6 +77,10 @@ website:
               href: movil/semana-07/index.qmd
             - text: "Semana 8. Persistencia local"
               href: movil/semana-08/index.qmd
+            - text: "MVVM y Repository Pattern"
+              href: movil/semana-12/index.qmd
+            - text: "Clean Architecture"
+              href: movil/semana-13/index.qmd
         - text: "Proyecto: entregable 1"
           href: movil/proyecto-entregable-1/index.qmd
         - text: "Proyecto: entregable final"

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flecha-t" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c0392b"/></marker><marker id="flecha-m" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#c98a00"/></marker></defs>
+<rect width="900" height="900" fill="#ffffff"/>
+<path d="M30,32 L90,32" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<text x="100" y="37" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">ejecución: el pedido sale hacia afuera</text>
+<path d="M500,32 L560,32" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="570" y="37" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">dependencia de código</text>
+<rect x="250" y="70" width="310" height="66" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="405.0" y="96.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosPantalla</text>
+<text x="405.0" y="117.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">presentation: recoge lo escrito</text>
+<rect x="250" y="200" width="310" height="66" rx="12" ry="12" fill="#e3f0fb" stroke="#2b7bbf" stroke-width="2.5"/>
+<text x="405.0" y="226.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#174f80">ProductosViewModel</text>
+<text x="405.0" y="247.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">presentation: crea el NuevoProducto</text>
+<rect x="250" y="330" width="310" height="66" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="405.0" y="356.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">AgregarProducto</text>
+<text x="405.0" y="377.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">domain: caso de uso</text>
+<rect x="250" y="460" width="310" height="66" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="405.0" y="486.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">ProductosRepository</text>
+<text x="405.0" y="507.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">domain: contrato</text>
+<rect x="250" y="590" width="310" height="66" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="405.0" y="616.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">FirestoreProductosRepository</text>
+<text x="405.0" y="637.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">data: arma el documento</text>
+<rect x="250" y="720" width="310" height="66" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="405.0" y="746.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Firestore</text>
+<text x="405.0" y="767.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">externo: guarda el documento</text>
+<rect x="650" y="200" width="230" height="66" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="765.0" y="226.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">NuevoProducto</text>
+<text x="765.0" y="247.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">domain: precio mayor que 0</text>
+<rect x="650" y="590" width="230" height="66" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="765.0" y="616.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">ProductoDto</text>
+<text x="765.0" y="637.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">data: traduce a Producto</text>
+<path d="M330,136 L330,199" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="330" cy="168.0" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="330" y="173.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">1</text>
+<text x="306" y="173.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">la pantalla pasa los textos</text>
+<path d="M330,266 L330,329" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="330" cy="298.0" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="330" y="303.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">3</text>
+<text x="306" y="303.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">el ViewModel pide la acción</text>
+<path d="M330,396 L330,459" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="330" cy="428.0" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="330" y="433.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">4</text>
+<text x="306" y="433.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">el caso de uso llama al contrato</text>
+<path d="M330,526 L330,589" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="330" cy="558.0" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="330" y="563.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">5</text>
+<text x="306" y="563.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">en ejecución responde Firestore</text>
+<path d="M330,656 L330,719" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="330" cy="688.0" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="330" y="693.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">6</text>
+<text x="306" y="693.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">el documento se guarda</text>
+<path d="M560,222 L648,222" fill="none" stroke="#c98a00" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha-m)"/>
+<circle cx="604" cy="222" r="14" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/><text x="604" y="227" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#7a5200">2</text>
+<text x="604" y="192" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">regla del precio</text>
+<path d="M500,136 L500,199" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="514" y="173.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">import</text>
+<path d="M500,266 L500,329" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="514" y="303.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">import</text>
+<path d="M500,396 L500,459" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="514" y="433.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">import</text>
+<path d="M500,656 L500,719" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="514" y="693.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#26323d">usa el paquete</text>
+<path d="M500,590 L500,527" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="514" y="563.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#3d4a57">implements</text>
+<path d="M560,246 L648,246" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="604" y="264" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">import</text>
+<path d="M560,623 L648,623" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#flecha)"/>
+<text x="604" y="617" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">usa</text>
+<rect x="120" y="820" width="660" height="56" rx="12" ry="12" fill="#fff3cf" stroke="#c98a00" stroke-width="2.5"/>
+<text x="450.0" y="852.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#7a5200">El pedido sale hacia afuera, pero implements apunta hacia adentro</text>
+</svg>

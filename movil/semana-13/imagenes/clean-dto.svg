@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 460" width="860" height="460">
+<defs><marker id="flecha" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#3d4a57"/></marker><marker id="flechaGris" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L14,7 L0,14 Z" fill="#9aa5b1"/></marker></defs>
+<rect width="860" height="460" fill="#fff"/>
+<path d="M600,44 V440" fill="none" stroke="#9aa5b1" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 5"/>
+<text x="590" y="30" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#4f2c73">data</text>
+<text x="610" y="30" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1b5e3a">domain</text>
+<g data-node="1">
+<rect x="30" y="60" width="220" height="150" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="46" y="88.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">Firestore: un documento</text>
+<text x="46" y="110.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">id: "a1B2"  (texto)</text>
+<text x="46" y="130.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">nombre: "Papa criolla"</text>
+<text x="46" y="150.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">precio: 2500</text>
+<text x="46" y="170.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">disponible: true</text>
+<text x="46" y="190.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">hasPendingWrites: false</text>
+</g>
+<g data-node="1">
+<rect x="30" y="280" width="220" height="130" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="46" y="308.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">SQLite: una fila</text>
+<text x="46" y="330.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">id: 7  (entero)</text>
+<text x="46" y="350.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">nombre: "Papa criolla"</text>
+<text x="46" y="370.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">precio: 2500</text>
+<text x="46" y="390.0" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">disponible: 1  (entero)</text>
+</g>
+<path d="M250,135 H315 V190 H380" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<path d="M250,345 H315 V280 H380" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<text x="315" y="121" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">desdeFirestore</text>
+<text x="315" y="370" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">desdeFila</text>
+<g data-node="1">
+<rect x="380" y="140" width="160" height="190" rx="12" ry="12" fill="#efe6f8" stroke="#7b4fa3" stroke-width="2.5"/>
+<text x="460.0" y="198.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#4f2c73">ProductoDto</text>
+<text x="460.0" y="220.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">data/dtos</text>
+<text x="460.0" y="240.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">convierte:</text>
+<text x="460.0" y="260.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">id a texto</text>
+<text x="460.0" y="280.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">1 y 0 a booleano</text>
+</g>
+<path d="M540,235 H660" fill="none" stroke="#3d4a57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#flecha)"/>
+<rect x="550" y="205" width="100" height="22" fill="#fff"/>
+<text x="600" y="221" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#26323d">aEntidad()</text>
+<g data-node="1">
+<rect x="660" y="185" width="180" height="100" rx="12" ry="12" fill="#e4f4e8" stroke="#2e8b57" stroke-width="2.5"/>
+<text x="750.0" y="208.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1b5e3a">Producto</text>
+<text x="750.0" y="230.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">entidad de dominio</text>
+<text x="750.0" y="250.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">id: texto</text>
+<text x="750.0" y="270.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d">disponible: bool</text>
+</g>
+<g data-node="1">
+<rect x="660" y="335" width="180" height="90" rx="12" ry="12" fill="#fde8e6" stroke="#c0392b" stroke-width="2.5"/>
+<text x="750.0" y="363.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#8e2418">El dominio nunca ve</text>
+<text x="750.0" y="385.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d" text-decoration="line-through">QueryDocumentSnapshot</text>
+<text x="750.0" y="405.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#26323d" text-decoration="line-through">Map de SQLite</text>
+</g>
+</svg>
