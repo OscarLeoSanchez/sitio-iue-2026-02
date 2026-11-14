@@ -1342,3 +1342,9 @@ El tercer requisito merece una advertencia honesta. En esta versión `ProductosR
 ## Lo que no se cubre
 
 Esta guía muestra una sola forma de manejar el estado: `ChangeNotifier` con `ListenableBuilder`, que ya vienen con Flutter. Existen otros gestores de estado, en paquetes externos, que resuelven lo mismo con otras convenciones; no se tratan aquí. Tampoco se cubre la presentación de la interfaz más allá de lo mínimo necesario: las pantallas son simples a propósito, para que se vea la arquitectura y no el diseño.
+
+## Ejercicio
+
+Para practicar lo visto, implementa una pantalla completa con MVVM y Firebase.
+
+[Abrir el ejercicio](ejercicio-mvvm.html){.btn-doc target="_blank"}

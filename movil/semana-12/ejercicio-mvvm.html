@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicio MVVM con Firebase</title>
+<style>
+:root { --bg:#fff; --fg:#1d1d1f; --muted:#5f6368; --card:#f5f6f8; --line:#d8dbe0; --accent:#1a6b3a; }
+@media (prefers-color-scheme: dark) { :root { --bg:#16181b; --fg:#e8eaed; --muted:#a0a4ab; --card:#202327; --line:#33373d; --accent:#6fcf97; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+main { max-width:820px; margin:0 auto; padding:32px 16px 64px; }
+h1 { font-size:1.7rem; margin:0 0 4px; }
+h2 { font-size:1.2rem; margin:32px 0 10px; color:var(--accent); }
+h3 { font-size:1.05rem; margin:0 0 6px; }
+p { margin:8px 0; }
+.sub { color:var(--muted); margin:0 0 16px; }
+ul { margin:6px 0; padding-left:20px; }
+li { margin:3px 0; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:12px 0; }
+.tag { display:inline-block; font-size:.75rem; color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:1px 8px; margin-left:6px; vertical-align:middle; }
+code { background:var(--card); border:1px solid var(--line); border-radius:4px; padding:0 4px; font-size:.9em; }
+.flow { font-family:ui-monospace,Consolas,monospace; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px; overflow-x:auto; white-space:nowrap; }
+</style>
+</head>
+<body>
+<main>
+<h1>Ejercicio práctico: MVVM con Firebase</h1>
+<p class="sub">Mercado campesino · Flutter + Firebase</p>
+
+<h2>Enunciado</h2>
+<p>Elige una de las pantallas de abajo e impleméntala de punta a punta en la app del mercado campesino, aplicando MVVM y guardando los datos en Firebase.</p>
+
+<h2>Requisitos generales</h2>
+<ul>
+<li><strong>Modelo:</strong> clase de datos con un constructor para leer desde Firestore, como <code>fromDoc</code> en <code>ProductoNube</code>.</li>
+<li><strong>Servicio:</strong> acceso directo a Firebase, sin lógica de negocio; aquí se arma el Map que se guarda.</li>
+<li><strong>Repositorio:</strong> abstrae el servicio y entrega modelos al ViewModel.</li>
+<li><strong>ViewModel:</strong> estado, validaciones y acciones; sin <code>BuildContext</code> ni widgets.</li>
+<li><strong>Vista:</strong> solo pinta el estado y delega los eventos al ViewModel.</li>
+<li>Los datos persisten al reiniciar la app y quedan asociados al usuario autenticado.</li>
+<li>La vista maneja los estados de carga, vacío y error.</li>
+</ul>
+<p class="flow">Vista → ViewModel → Repositorio → Servicio → Firebase</p>
+
+<h2>Pantallas a elegir</h2>
+
+<div class="card">
+<h3>1. Carrito de compras <span class="tag">comprador</span></h3>
+<ul>
+<li>Lista de ítems con producto, precio unitario y cantidad.</li>
+<li>Botones para aumentar y disminuir la cantidad; con cantidad 0 el ítem se elimina.</li>
+<li>Botón para quitar un ítem y otro para vaciar el carrito.</li>
+<li>Total calculado en el ViewModel, nunca en la vista.</li>
+<li>Agregar un producto que ya está en el carrito suma la cantidad, no duplica el ítem.</li>
+<li>Persistencia: un carrito por usuario en Firestore.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>2. Favoritos <span class="tag">comprador</span></h3>
+<ul>
+<li>Ícono de corazón en cada producto que alterna entre marcado y desmarcado.</li>
+<li>Pantalla que lista solo los productos favoritos del usuario.</li>
+<li>Quitar un favorito desde la lista lo elimina de inmediato.</li>
+<li>Mensaje de lista vacía cuando no hay favoritos.</li>
+<li>Persistencia: los favoritos se guardan por usuario en Firestore.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>3. Mis productos <span class="tag">campesino</span></h3>
+<ul>
+<li>Lista de los productos publicados por el campesino autenticado.</li>
+<li>Formulario para crear y editar: nombre, precio, unidad, stock y descripción.</li>
+<li>Validaciones en el ViewModel: nombre obligatorio, precio mayor que 0 y stock sin negativos.</li>
+<li>Eliminar con confirmación.</li>
+<li>Persistencia: cada producto guarda el identificador de su dueño.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4. Pedidos <span class="tag">comprador y campesino</span></h3>
+<ul>
+<li><strong>Comprador:</strong> confirma una compra y consulta su historial de pedidos.</li>
+<li><strong>Campesino:</strong> ve los pedidos que le llegaron y cambia su estado (pendiente, aceptado, entregado).</li>
+<li>Cada pedido guarda ítems, total, fecha, comprador y campesino.</li>
+<li>El estado solo avanza en orden; el ViewModel rechaza transiciones inválidas.</li>
+<li>Filtro por estado en la lista del campesino.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>5. Reseñas de producto <span class="tag">comprador</span></h3>
+<ul>
+<li>Formulario con calificación de 1 a 5 y comentario.</li>
+<li>Lista de reseñas del producto con autor y fecha.</li>
+<li>El promedio de calificaciones se muestra en el producto.</li>
+<li>Un usuario solo puede dejar una reseña por producto; puede editarla o eliminarla.</li>
+<li>Validaciones en el ViewModel: calificación obligatoria y comentario con largo máximo.</li>
+</ul>
+</div>
+</main>
+</body>
+</html>

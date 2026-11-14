@@ -4794,5 +4794,16 @@
       "Unidad 3. Backend con ASP.NET Core",
       "Semana 10. Mi servidor responde: rutas y respuestas"
     ]
+  },
+  {
+    "objectID": "movil/semana-12/index.html#ejercicio",
+    "href": "movil/semana-12/index.html#ejercicio",
+    "title": "MVVM y Repository Pattern: guía paso a paso",
+    "section": "Ejercicio",
+    "text": "Ejercicio\nPara practicar lo visto, implementa una pantalla completa con MVVM y Firebase.\nAbrir el ejercicio",
+    "crumbs": [
+      "Unidad 3. Servicios en la nube y arquitectura",
+      "MVVM y Repository Pattern"
+    ]
   }
 ]
