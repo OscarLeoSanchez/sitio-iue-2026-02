@@ -250,18 +250,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Plaza: actividad evaluativa</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../web/proyecto-entregable-1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proyecto: entregable 1</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../web/proyecto-entregable-final/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proyecto: entregable final</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -279,6 +267,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/proyecto-entregable-1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyecto: entregable 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/proyecto-entregable-final/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyecto: entregable final</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -289,7 +289,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta guía</h2>
    
   <ul>
-  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr">Lo que vas a lograr</a></li>
+  <li><a href="#antes-de-empezar" id="toc-antes-de-empezar" class="nav-link active" data-scroll-target="#antes-de-empezar">Antes de empezar</a>
+  <ul class="collapse">
+  <li><a href="#lo-que-necesitas-instalado-y-activo" id="toc-lo-que-necesitas-instalado-y-activo" class="nav-link" data-scroll-target="#lo-que-necesitas-instalado-y-activo">Lo que necesitas instalado y activo</a></li>
+  <li><a href="#tu-hoja-de-datos" id="toc-tu-hoja-de-datos" class="nav-link" data-scroll-target="#tu-hoja-de-datos">Tu hoja de datos</a></li>
+  <li><a href="#si-trabajas-con-tu-propio-proyecto-y-no-con-plaza" id="toc-si-trabajas-con-tu-propio-proyecto-y-no-con-plaza" class="nav-link" data-scroll-target="#si-trabajas-con-tu-propio-proyecto-y-no-con-plaza">Si trabajas con tu propio proyecto y no con Plaza</a></li>
+  </ul></li>
+  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link" data-scroll-target="#lo-que-vas-a-lograr">Lo que vas a lograr</a></li>
   <li><a href="#etapa-1.-entrar-al-portal-y-verificar-la-suscripción" id="toc-etapa-1.-entrar-al-portal-y-verificar-la-suscripción" class="nav-link" data-scroll-target="#etapa-1.-entrar-al-portal-y-verificar-la-suscripción">Etapa 1. Entrar al portal y verificar la suscripción</a>
   <ul class="collapse">
   <li><a href="#qué-vas-a-lograr" id="toc-qué-vas-a-lograr" class="nav-link" data-scroll-target="#qué-vas-a-lograr">Qué vas a lograr</a></li>
@@ -343,9 +349,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#etapa-6.-conectar-la-aplicación-con-la-base-de-datos" id="toc-etapa-6.-conectar-la-aplicación-con-la-base-de-datos" class="nav-link" data-scroll-target="#etapa-6.-conectar-la-aplicación-con-la-base-de-datos">Etapa 6. Conectar la aplicación con la base de datos</a>
   <ul class="collapse">
   <li><a href="#qué-vas-a-lograr-5" id="toc-qué-vas-a-lograr-5" class="nav-link" data-scroll-target="#qué-vas-a-lograr-5">Qué vas a lograr</a></li>
-  <li><a href="#qué-es-la-cadena-de-conexión" id="toc-qué-es-la-cadena-de-conexión" class="nav-link" data-scroll-target="#qué-es-la-cadena-de-conexión">Qué es la cadena de conexión</a></li>
-  <li><a href="#la-línea-que-vas-a-completar" id="toc-la-línea-que-vas-a-completar" class="nav-link" data-scroll-target="#la-línea-que-vas-a-completar">La línea que vas a completar</a></li>
+  <li><a href="#qué-es-la-cadena-de-conexión-y-de-dónde-sale" id="toc-qué-es-la-cadena-de-conexión-y-de-dónde-sale" class="nav-link" data-scroll-target="#qué-es-la-cadena-de-conexión-y-de-dónde-sale">Qué es la cadena de conexión y de dónde sale</a></li>
+  <li><a href="#los-datos-que-necesitas" id="toc-los-datos-que-necesitas" class="nav-link" data-scroll-target="#los-datos-que-necesitas">Los datos que necesitas</a></li>
+  <li><a href="#arma-la-línea-en-tu-bloc-de-notas" id="toc-arma-la-línea-en-tu-bloc-de-notas" class="nav-link" data-scroll-target="#arma-la-línea-en-tu-bloc-de-notas">Arma la línea en tu bloc de notas</a></li>
   <li><a href="#los-pasos-1" id="toc-los-pasos-1" class="nav-link" data-scroll-target="#los-pasos-1">Los pasos</a></li>
+  <li><a href="#si-algo-no-sale-como-esperabas" id="toc-si-algo-no-sale-como-esperabas" class="nav-link" data-scroll-target="#si-algo-no-sale-como-esperabas">Si algo no sale como esperabas</a></li>
   <li><a href="#cómo-llega-la-cadena-a-tu-código" id="toc-cómo-llega-la-cadena-a-tu-código" class="nav-link" data-scroll-target="#cómo-llega-la-cadena-a-tu-código">Cómo llega la cadena a tu código</a></li>
   <li><a href="#comprueba-5" id="toc-comprueba-5" class="nav-link" data-scroll-target="#comprueba-5">Comprueba</a></li>
   </ul></li>
@@ -353,14 +361,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#qué-vas-a-lograr-6" id="toc-qué-vas-a-lograr-6" class="nav-link" data-scroll-target="#qué-vas-a-lograr-6">Qué vas a lograr</a></li>
   <li><a href="#qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo" id="toc-qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo" class="nav-link" data-scroll-target="#qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo">Qué es una migración y por qué se aplica desde tu equipo</a></li>
+  <li><a href="#antes-del-comando" id="toc-antes-del-comando" class="nav-link" data-scroll-target="#antes-del-comando">Antes del comando</a></li>
   <li><a href="#el-comando" id="toc-el-comando" class="nav-link" data-scroll-target="#el-comando">El comando</a></li>
   <li><a href="#qué-debes-ver" id="toc-qué-debes-ver" class="nav-link" data-scroll-target="#qué-debes-ver">Qué debes ver</a></li>
   <li><a href="#si-falla" id="toc-si-falla" class="nav-link" data-scroll-target="#si-falla">Si falla</a></li>
+  <li><a href="#si-tu-ip-no-está-permitida" id="toc-si-tu-ip-no-está-permitida" class="nav-link" data-scroll-target="#si-tu-ip-no-está-permitida">Si tu IP no está permitida</a></li>
   <li><a href="#comprueba-6" id="toc-comprueba-6" class="nav-link" data-scroll-target="#comprueba-6">Comprueba</a></li>
   </ul></li>
   <li><a href="#etapa-8.-enlazar-la-aplicación-con-github" id="toc-etapa-8.-enlazar-la-aplicación-con-github" class="nav-link" data-scroll-target="#etapa-8.-enlazar-la-aplicación-con-github">Etapa 8. Enlazar la aplicación con GitHub</a>
   <ul class="collapse">
   <li><a href="#qué-vas-a-lograr-7" id="toc-qué-vas-a-lograr-7" class="nav-link" data-scroll-target="#qué-vas-a-lograr-7">Qué vas a lograr</a></li>
+  <li><a href="#resumen-de-lo-que-vas-a-hacer" id="toc-resumen-de-lo-que-vas-a-hacer" class="nav-link" data-scroll-target="#resumen-de-lo-que-vas-a-hacer">Resumen de lo que vas a hacer</a></li>
   <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">Cómo funciona</a></li>
   <li><a href="#por-qué-no-usamos-la-identidad-asignada-por-el-usuario" id="toc-por-qué-no-usamos-la-identidad-asignada-por-el-usuario" class="nav-link" data-scroll-target="#por-qué-no-usamos-la-identidad-asignada-por-el-usuario">Por qué no usamos la identidad asignada por el usuario</a></li>
   <li><a href="#paso-1.-habilitar-la-autenticación-básica-de-scm" id="toc-paso-1.-habilitar-la-autenticación-básica-de-scm" class="nav-link" data-scroll-target="#paso-1.-habilitar-la-autenticación-básica-de-scm">Paso 1. Habilitar la autenticación básica de SCM</a></li>
@@ -376,6 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#qué-vas-a-lograr-8" id="toc-qué-vas-a-lograr-8" class="nav-link" data-scroll-target="#qué-vas-a-lograr-8">Qué vas a lograr</a></li>
   <li><a href="#la-primera-publicación" id="toc-la-primera-publicación" class="nav-link" data-scroll-target="#la-primera-publicación">La primera publicación</a></li>
   <li><a href="#abre-plaza" id="toc-abre-plaza" class="nav-link" data-scroll-target="#abre-plaza">Abre Plaza</a></li>
+  <li><a href="#si-la-página-da-error-500-o-sale-en-blanco" id="toc-si-la-página-da-error-500-o-sale-en-blanco" class="nav-link" data-scroll-target="#si-la-página-da-error-500-o-sale-en-blanco">Si la página da error 500 o sale en blanco</a></li>
   <li><a href="#haz-un-cambio-y-míralo-publicarse" id="toc-haz-un-cambio-y-míralo-publicarse" class="nav-link" data-scroll-target="#haz-un-cambio-y-míralo-publicarse">Haz un cambio y míralo publicarse</a></li>
   <li><a href="#comprueba-8" id="toc-comprueba-8" class="nav-link" data-scroll-target="#comprueba-8">Comprueba</a></li>
   </ul></li>
@@ -394,6 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#paso-3.-comprobar" id="toc-paso-3.-comprobar" class="nav-link" data-scroll-target="#paso-3.-comprobar">Paso 3. Comprobar</a></li>
   <li><a href="#paso-4.-quitar-la-contraseña-vieja-del-repositorio" id="toc-paso-4.-quitar-la-contraseña-vieja-del-repositorio" class="nav-link" data-scroll-target="#paso-4.-quitar-la-contraseña-vieja-del-repositorio">Paso 4. Quitar la contraseña vieja del repositorio</a></li>
   </ul></li>
+  <li><a href="#glosario" id="toc-glosario" class="nav-link" data-scroll-target="#glosario">Glosario</a></li>
   <li><a href="#si-algo-sale-mal" id="toc-si-algo-sale-mal" class="nav-link" data-scroll-target="#si-algo-sale-mal">Si algo sale mal</a></li>
   </ul>
 </nav>
@@ -445,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Prerrequisitos</td>
-<td>Plaza funcionando en local con el catálogo en PostgreSQL, el proyecto subido a un repositorio de GitHub y una cuenta de <strong>Azure for Students</strong> activa con tu correo institucional</td>
+<td>Plaza (o tu proyecto) funcionando en local con PostgreSQL y Entity Framework Core, una cuenta de GitHub, una cuenta de <strong>Azure for Students</strong> activa con tu correo institucional y las herramientas que se comprueban en la sección <em>Antes de empezar</em></td>
 </tr>
 <tr class="odd">
 <td>Herramientas</td>
@@ -472,6 +485,186 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
+<section id="antes-de-empezar" class="level2">
+<h2 class="anchored" data-anchor-id="antes-de-empezar">Antes de empezar</h2>
+<section id="lo-que-necesitas-instalado-y-activo" class="level3">
+<h3 class="anchored" data-anchor-id="lo-que-necesitas-instalado-y-activo">Lo que necesitas instalado y activo</h3>
+<p>Comprueba cada punto <strong>antes</strong> de la etapa 1. Los comandos se escriben en PowerShell. Si no sabes abrirlo dentro de la carpeta de tu proyecto: en el Explorador de archivos abre la carpeta, haz clic derecho en un espacio vacío y elige <strong>Abrir en Terminal</strong>. También sirve abrir PowerShell desde el menú Inicio y escribir <code>cd "C:\ruta\a\tu\carpeta"</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Qué</th>
+<th>Cómo comprobarlo</th>
+<th>Qué debes ver</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.NET SDK 10</td>
+<td><code>dotnet --version</code></td>
+<td>Un número que empieza por <code>10.</code>, por ejemplo <code>10.0.302</code></td>
+</tr>
+<tr class="even">
+<td>Git</td>
+<td><code>git --version</code></td>
+<td>Una línea como <code>git version 2.50.0.windows.2</code></td>
+</tr>
+<tr class="odd">
+<td>Herramienta de Entity Framework</td>
+<td><code>dotnet ef --version</code></td>
+<td>El texto <em>Entity Framework Core .NET Command-line Tools</em> y una versión <code>10.x</code></td>
+</tr>
+<tr class="even">
+<td>Tu proyecto compila</td>
+<td><code>dotnet build</code>, dentro de la carpeta de tu proyecto</td>
+<td>Termina sin errores</td>
+</tr>
+<tr class="odd">
+<td>Cuenta de GitHub</td>
+<td>Entra a <a href="https://github.com">github.com</a> e inicia sesión</td>
+<td>Ves tu página de inicio</td>
+</tr>
+<tr class="even">
+<td>Cuenta de Azure for Students</td>
+<td>Se verifica en la etapa 1</td>
+<td>Estado <em>Activo</em></td>
+</tr>
+</tbody>
+</table>
+<p>Si <code>dotnet ef --version</code> dice que el comando no existe o no se reconoce, instala la herramienta. Tiene que ser la versión 10 para que coincida con tu .NET:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dotnet tool install <span class="op">--</span>global dotnet-ef <span class="op">--</span>version <span class="dv">10</span><span class="op">.*</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si ya la tenías instalada pero en otra versión, en lugar de <code>install</code> usa <code>update</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dotnet tool update <span class="op">--</span>global dotnet-ef <span class="op">--</span>version <span class="dv">10</span><span class="op">.*</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después <strong>cierra PowerShell y ábrelo de nuevo</strong> y repite <code>dotnet ef --version</code>.</p>
+</section>
+<section id="tu-hoja-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="tu-hoja-de-datos">Tu hoja de datos</h3>
+<p>En esta guía vas a inventar varios nombres y una contraseña, y los vas a necesitar de nuevo en etapas posteriores. Abre un bloc de notas <strong>fuera de la carpeta de tu proyecto</strong> (por ejemplo en el Escritorio) y copia esta tabla. Irás completando la columna <em>Mi valor</em> a medida que avances.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dato</th>
+<th>Qué es</th>
+<th>Se define en</th>
+<th>Mi valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Grupo de recursos</td>
+<td>La carpeta de Azure donde vive todo</td>
+<td>Etapa 2</td>
+<td><code>rg-plaza</code></td>
+</tr>
+<tr class="even">
+<td>Nombre del servidor</td>
+<td>Nombre de tu servidor PostgreSQL. Debe ser único en todo Azure</td>
+<td>Etapa 3</td>
+<td><code>plaza-pg-</code> más algo tuyo</td>
+</tr>
+<tr class="odd">
+<td>Punto de conexión</td>
+<td>La dirección del servidor en internet</td>
+<td>Etapa 3</td>
+<td><code>&lt;nombre del servidor&gt;.postgres.database.azure.com</code></td>
+</tr>
+<tr class="even">
+<td>Usuario administrador</td>
+<td>El usuario con el que se entra a la base</td>
+<td>Etapa 3</td>
+<td><code>plazaadmin</code></td>
+</tr>
+<tr class="odd">
+<td>Contraseña del servidor</td>
+<td>La que escribes al crear el servidor. Azure no la vuelve a mostrar</td>
+<td>Etapa 3</td>
+<td>Solo tú la conoces</td>
+</tr>
+<tr class="even">
+<td>Base de datos</td>
+<td>Donde se guardan las tablas</td>
+<td>Etapa 3</td>
+<td><code>plaza_campesina</code></td>
+</tr>
+<tr class="odd">
+<td>Nombre de la aplicación web</td>
+<td>Forma parte de tu dirección pública. Debe ser único en todo Azure</td>
+<td>Etapa 4</td>
+<td><code>plaza-</code> más algo tuyo</td>
+</tr>
+<tr class="even">
+<td>Dirección pública</td>
+<td>La URL con la que se abre tu aplicación</td>
+<td>Etapa 4</td>
+<td><code>https://...azurewebsites.net</code></td>
+</tr>
+<tr class="odd">
+<td>Repositorio de GitHub</td>
+<td>Dónde está tu código</td>
+<td>Etapa 5</td>
+<td><code>&lt;tu-usuario&gt;/&lt;tu-repositorio&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Esa hoja no es para compartir ni para subir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La contraseña y la cadena de conexión que armarás en la etapa 6 son secretos. No los pegues en chats, no los escribas en archivos dentro de tu proyecto y no los subas a GitHub.</p>
+</div>
+</div>
+</section>
+<section id="si-trabajas-con-tu-propio-proyecto-y-no-con-plaza" class="level3">
+<h3 class="anchored" data-anchor-id="si-trabajas-con-tu-propio-proyecto-y-no-con-plaza">Si trabajas con tu propio proyecto y no con Plaza</h3>
+<p>La guía usa Plaza como ejemplo. Puedes seguirla con tu proyecto si es ASP.NET Core en .NET 10, usa Entity Framework Core con PostgreSQL (Npgsql), tiene al menos una migración y lee su cadena de conexión con <code>GetConnectionString</code>. Cada vez que veas un dato de Plaza, cámbialo por el de tu proyecto:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>En la guía (Plaza)</th>
+<th>En tu proyecto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Carpeta <code>Plaza</code> y archivo <code>Plaza.csproj</code></td>
+<td>La carpeta de tu proyecto y su archivo <code>.csproj</code></td>
+</tr>
+<tr class="even">
+<td>Cadena de conexión llamada <code>Plaza</code></td>
+<td>El texto que aparece dentro de <code>GetConnectionString("...")</code> en tu <code>Program.cs</code></td>
+</tr>
+<tr class="odd">
+<td>Base de datos <code>plaza_campesina</code></td>
+<td>El valor de <code>Database=</code> en tu <code>appsettings.Development.json</code></td>
+</tr>
+<tr class="even">
+<td>Ruta <code>/catalogo</code></td>
+<td>Una ruta de tu proyecto que lea datos de la base</td>
+</tr>
+<tr class="odd">
+<td>Archivo <code>Views/Catalogo/Listar.cshtml</code></td>
+<td>Cualquier vista tuya</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
 <section id="lo-que-vas-a-lograr" class="level2">
 <h2 class="anchored" data-anchor-id="lo-que-vas-a-lograr">Lo que vas a lograr</h2>
 <table class="caption-top table">
@@ -528,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Al final hay un apéndice para cambiar la contraseña del servidor y una tabla con los problemas más frecuentes y su solución.</p>
+<p>Al final hay un apéndice para cambiar la contraseña del servidor, un glosario con los términos y una tabla con los problemas más frecuentes y su solución.</p>
 </section>
 <section id="etapa-1.-entrar-al-portal-y-verificar-la-suscripción" class="level2">
 <h2 class="anchored" data-anchor-id="etapa-1.-entrar-al-portal-y-verificar-la-suscripción">Etapa 1. Entrar al portal y verificar la suscripción</h2>
@@ -543,6 +736,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Inicia sesión con tu <strong>correo institucional</strong>. Azure for Students se activa con ese correo, no con uno personal.</li>
 <li>Llegarás a la página de <strong>Inicio</strong>. Si es tu primera vez, no tienes recursos: la sección <em>Recursos</em> aparece vacía.</li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Si todavía no tienes la cuenta de Azure for Students
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Actívala en <a href="https://azure.microsoft.com/free/students">azure.microsoft.com/free/students</a> con tu correo institucional. Si la página no reconoce tu correo o no te deja continuar, avisa a tu docente antes de seguir: sin la suscripción no puedes hacer el resto de la guía.</p>
+</div>
+</div>
 <p><img src="imagenes/01-portal-inicio.png" class="img-fluid" alt="Página de inicio del portal de Azure. Arriba, la lista de servicios de Azure con Crear un recurso, App Services, Bases de datos SQL y otros. En el centro, la sección Recursos vacía con el mensaje No se ha visto ningún recurso recientemente. Abajo, el bloque Navegar con Suscripciones, Grupos de recursos y Todos los recursos."></p>
 </section>
 <section id="verifica-la-suscripción" class="level3">
@@ -645,8 +851,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="abre-el-formulario-de-creación" class="level3">
 <h3 class="anchored" data-anchor-id="abre-el-formulario-de-creación">Abre el formulario de creación</h3>
 <ol type="1">
-<li>En el buscador de la parte superior del portal escribe <code>PostgreSQL</code> y elige <strong>Azure Database for PostgreSQL, servidores flexibles</strong>.</li>
-<li>Haz clic en <strong>Crear</strong>. Se abre el formulario con cuatro pestañas: <em>Básico</em>, <em>Redes</em>, <em>Seguridad</em> y <em>Etiquetas</em>.</li>
+<li>Haz clic en el buscador de la parte superior del portal (el icono de la lupa), escribe <code>PostgreSQL</code> y, en la sección <strong>Servicios</strong> de los resultados, elige <strong>Servidores flexibles de Azure Database for PostgreSQL</strong>. Ignora los resultados de <em>Microsoft Entra ID</em> y de <em>Marketplace</em>.</li>
+</ol>
+<p><img src="imagenes/75-busqueda-postgresql.png" class="img-fluid" alt="Cuadro de búsqueda del portal con la palabra PostgreSQL escrita. En la sección Servicios, el primer resultado es Servidores flexibles de Azure Database for PostgreSQL. Debajo hay otros resultados de Microsoft Entra ID, Marketplace y documentación."></p>
+<ol start="2" type="1">
+<li>Se abre la lista de tus servidores PostgreSQL. Haz clic en <strong>+ Crear</strong>, el botón azul de arriba a la izquierda. En la captura ya aparece el servidor de este ejemplo; en tu pantalla la lista estará vacía.</li>
+</ol>
+<p><img src="imagenes/76-lista-servidores-postgresql.png" class="img-fluid" alt="Página Servidores flexibles de Azure Database for PostgreSQL con el botón azul Crear arriba a la izquierda. La tabla muestra un servidor de ejemplo, plaza-pg-iue603, en estado Listo, versión 18.6, en Canada Central y en el grupo rg-plaza."></p>
+<ol start="3" type="1">
+<li>Se abre el formulario de creación, con cinco pestañas: <em>Básico</em>, <em>Redes</em>, <em>Seguridad</em>, <em>Etiquetas</em> y <em>Revisar y crear</em>.</li>
 </ol>
 </section>
 <section id="pestaña-básico-proyecto-y-servidor" class="level3">
@@ -706,6 +919,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><img src="imagenes/16-pg-autenticacion.png" class="img-fluid" alt="Sección de autenticación con el método Autenticación de PostgreSQL seleccionado. El inicio de sesión del administrador es plazaadmin y los campos de contraseña están vacíos."></p>
 <p>La contraseña debe tener entre 8 y 128 caracteres y combinar al menos tres de estas cuatro categorías: mayúsculas, minúsculas, números y símbolos. Si no cumple, el formulario lo marca en rojo y no te deja crear el servidor.</p>
+<p>Además, para evitar problemas en las etapas 6 y 7, <strong>no uses estos caracteres en la contraseña</strong>: punto y coma <code>;</code>, comillas <code>"</code> o <code>'</code>, signo de dólar <code>$</code>, acento grave <code>`</code>, signo igual <code>=</code> ni espacios. Tienen un significado especial dentro de la cadena de conexión o en PowerShell y la romperían. Usa letras, números y símbolos como <code>-</code>, <code>_</code>, <code>.</code>, <code>!</code> o <code>#</code>.</p>
 <p><img src="imagenes/19-pg-contrasena-requisitos.png" class="img-fluid" alt="Campos de contraseña vacíos con tres errores en rojo: el valor no puede estar vacío, la contraseña debe tener un mínimo de 8 caracteres y un máximo de 128, y debe contener caracteres de tres de las cuatro categorías de mayúsculas, minúsculas, números y símbolos."></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -717,7 +931,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Azure no la vuelve a mostrar. La necesitarás en la cadena de conexión de la aplicación y para aplicar la migración desde tu equipo. En esta guía aparece como <code>&lt;tu-contraseña&gt;</code>: nunca la escribas en el repositorio ni en un archivo que subas a GitHub.</p>
+<p>Azure no la vuelve a mostrar. <strong>Cópiala ahora en tu hoja de datos</strong> (el bloc de notas que está fuera de tu proyecto). La necesitarás en la cadena de conexión de la aplicación y para aplicar la migración desde tu equipo. En esta guía aparece como <code>&lt;tu-contraseña&gt;</code>: nunca la escribas en el repositorio ni en un archivo que subas a GitHub. Si la pierdes, no pasa nada grave: se puede cambiar (apéndice al final de la guía).</p>
 </div>
 </div>
 </section>
@@ -788,9 +1002,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Haz clic en <strong>Ir al recurso</strong>. Se abre la página del servidor.</li>
 <li>En <em>Información esencial</em> comprueba que <strong>Estado</strong> dice <strong>Ready</strong>, que el servidor está en tu grupo <code>rg-plaza</code> y que el <strong>Inicio de sesión del administrador</strong> es <code>plazaadmin</code>.</li>
-<li>Fíjate en el <strong>Punto de conexión</strong>: es la dirección <code>&lt;tu-servidor&gt;.postgres.database.azure.com</code>. Es el valor que irá en <code>Host=</code> en la cadena de conexión de la etapa 6. Para copiarlo, pasa el cursor por encima y usa el icono de copiar.</li>
+<li>Fíjate en el <strong>Punto de conexión</strong>. Es la dirección de tu servidor en internet y siempre tiene la forma <code>&lt;nombre-del-servidor&gt;.postgres.database.azure.com</code>; por ejemplo, si tu servidor se llama <code>plaza-pg-abc</code>, su punto de conexión es <code>plaza-pg-abc.postgres.database.azure.com</code>. En la pantalla se ve <strong>cortado</strong> con puntos suspensivos. Para copiarlo completo, pasa el cursor sobre el valor: a la derecha aparece un <strong>icono de copiar</strong> (dos hojas). Haz clic en él y pega el valor en tu hoja de datos.</li>
 </ol>
-<p><img src="imagenes/23-pg-servidor-listo.png" class="img-fluid" alt="Página del servidor flexible plaza-pg-iue603. Estado Ready, ubicación Canada Central, punto de conexión plaza-pg-iue603.postgres.database.azure.com, inicio de sesión del administrador plazaadmin, configuración con capacidad de ráfaga B1ms, versión de PostgreSQL 18.6 y alta disponibilidad no habilitada."></p>
+<p><img src="imagenes/77-servidor-datos-conexion.png" class="img-fluid" alt="Página del servidor flexible plaza-pg-iue603. Estado Ready, ubicación Canada Central, nombre del servidor plaza-pg-iue603, punto de conexión plaza-pg-iue603.postgres.database.a seguido de puntos suspensivos y, a su derecha, el icono de copiar. Más abajo, el inicio de sesión del administrador plazaadmin, la configuración B1ms y la versión de PostgreSQL 18.6."></p>
+<p>Esta misma pantalla te sirve para consultar después tres datos de tu hoja: el <strong>nombre del servidor</strong>, el <strong>punto de conexión</strong> y el <strong>inicio de sesión del administrador</strong>. La contraseña es la única que Azure no muestra.</p>
 <p>El aviso naranja de arriba dice que el nivel de proceso ampliable es para desarrollo y pruebas. Es correcto: Plaza es un proyecto de clase, no una aplicación con usuarios reales.</p>
 </section>
 <section id="crea-la-base-de-datos" class="level3">
@@ -820,7 +1035,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>El servidor está en estado <strong>Ready</strong>.</li>
 <li>La lista de bases de datos incluye <code>plaza_campesina</code>.</li>
-<li>Tienes anotados: el <strong>punto de conexión</strong> del servidor, el usuario <code>plazaadmin</code> y tu contraseña.</li>
+<li>Tu <strong>hoja de datos</strong> tiene completos estos cinco datos: nombre del servidor, punto de conexión, usuario <code>plazaadmin</code>, base de datos <code>plaza_campesina</code> y tu contraseña. Sin ellos no puedes hacer la etapa 6.</li>
 <li>El grupo <code>rg-plaza</code> ya contiene un recurso. Si abres el grupo, lo verás en la lista.</li>
 </ul>
 <p>Con esto la base de datos está lista, pero todavía está vacía: no tiene las tablas de Plaza. Esas se crean en la etapa de migraciones.</p>
@@ -839,8 +1054,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="abre-el-formulario-de-creación-1" class="level3">
 <h3 class="anchored" data-anchor-id="abre-el-formulario-de-creación-1">Abre el formulario de creación</h3>
 <ol type="1">
-<li>En la página de <strong>Inicio</strong> del portal haz clic en <strong>Crear un recurso</strong> y busca <strong>Aplicación web</strong> (en inglés, <em>Web App</em>). También sirve escribir <code>App Services</code> en el buscador superior y pulsar <strong>Crear</strong>.</li>
-<li>Se abre el formulario <strong>Crear aplicación web</strong>, con siete pestañas: <em>Datos básicos</em>, <em>Base de datos</em>, <em>Implementación</em>, <em>Redes</em>, <em>Supervisión y protección</em>, <em>Etiquetas</em> y <em>Revisar y crear</em>.</li>
+<li>En la página de <strong>Inicio</strong> del portal haz clic en <strong>Crear un recurso</strong>, escribe <code>Aplicación web</code> (en inglés, <em>Web App</em>) en el buscador de esa pantalla y elige <strong>Aplicación web</strong> de Microsoft. Otra forma: en <strong>Inicio</strong>, abre <strong>App Services</strong> (o búscalo con la lupa), haz clic en <strong>Crear</strong> y elige <strong>Aplicación web</strong>. Los nombres de los menús pueden variar un poco; lo que buscas es el formulario titulado <strong>Crear aplicación web</strong>.</li>
+<li>Se abre ese formulario, con siete pestañas: <em>Datos básicos</em>, <em>Base de datos</em>, <em>Implementación</em>, <em>Redes</em>, <em>Supervisión y protección</em>, <em>Etiquetas</em> y <em>Revisar y crear</em>.</li>
 </ol>
 </section>
 <section id="pestaña-datos-básicos" class="level3">
@@ -1029,7 +1244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Abre PowerShell <strong>dentro de la carpeta <code>Plaza</code></strong>, la que contiene <code>Plaza.csproj</code>.</li>
 <li>Ejecuta el comando. Le pedimos que escriba la salida en una carpeta temporal, para no ensuciar el proyecto:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dotnet publish Plaza<span class="op">.</span><span class="fu">csproj</span> <span class="op">-</span>c Release <span class="op">-</span>o <span class="st">"</span><span class="va">$env</span><span class="op">:</span><span class="va">TEMP</span><span class="st">\plaza-publish"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dotnet publish Plaza<span class="op">.</span><span class="fu">csproj</span> <span class="op">-</span>c Release <span class="op">-</span>o <span class="st">"</span><span class="va">$env</span><span class="op">:</span><span class="va">TEMP</span><span class="st">\plaza-publish"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Debe terminar sin errores y mostrar una línea como esta, con la ruta de la carpeta temporal:</li>
 </ol>
@@ -1040,19 +1255,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="revisa-que-el-repositorio-esté-limpio" class="level3">
 <h3 class="anchored" data-anchor-id="revisa-que-el-repositorio-esté-limpio">Revisa que el repositorio esté limpio</h3>
-<p>Tres comprobaciones antes de subir. Todas se ejecutan en la carpeta <code>Plaza</code>.</p>
+<p>Tres comprobaciones antes de subir. Todas se ejecutan en la carpeta de tu proyecto y <strong>necesitan que la carpeta ya sea un repositorio</strong>. Si <code>git status</code> te sale con <code>fatal: not a git repository</code> (Caso C, que se explica más abajo en <em>Sube el proyecto</em>), haz primero solo <code>git init -b main</code> y <code>git add .</code>, ejecuta estas tres revisiones y recién después haz el <code>git commit</code>.</p>
 <ol type="1">
 <li><strong>Que no se hayan subido archivos de compilación.</strong> No debe imprimir nada:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>git ls-files <span class="op">|</span> <span class="fu">Select-String</span> <span class="op">-</span>Pattern <span class="st">'(^|/)(bin|obj)/'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>git ls-files <span class="op">|</span> <span class="fu">Select-String</span> <span class="op">-</span>Pattern <span class="st">'(^|/)(bin|obj)/'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li><strong>Que no haya contraseñas en el código.</strong> No debe imprimir nada:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>git grep <span class="op">-</span>niE <span class="st">'password=|pwd='</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>git grep <span class="op">-</span>niE <span class="st">'password=|pwd='</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
-<li><strong>Qué falta por subir.</strong> Debe decir <em>nothing to commit, working tree clean</em>:</li>
+<li><strong>Qué cambios hay por subir.</strong> Antes de subir es normal que <code>git status</code> liste archivos modificados o nuevos: los subirás en el paso siguiente. Lo que <strong>no</strong> debe aparecer en esa lista son carpetas <code>bin/</code> u <code>obj/</code> ni archivos que contengan contraseñas:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si el primer comando imprime algo, <code>bin/</code> u <code>obj/</code> se subieron por error: el archivo <code>.gitignore</code> de la plantilla de .NET ya los excluye, así que revisa que no lo hayas borrado. Si el segundo imprime algo, quita esa contraseña del archivo <strong>antes</strong> de subirlo. Una contraseña que llegó a GitHub se considera comprometida aunque la borres después: queda en el historial.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1070,25 +1285,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sube-el-proyecto" class="level3">
 <h3 class="anchored" data-anchor-id="sube-el-proyecto">Sube el proyecto</h3>
-<p>Si <code>git status</code> mostró cambios, súbelos. Cambia el mensaje por uno que describa lo que hiciste:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"prepara Plaza para publicar en Azure"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Si todavía no tienes repositorio en GitHub:</p>
+<p>Lo que tienes que hacer depende de en qué situación estés. Averígualo con estos dos comandos, dentro de la carpeta de tu proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>git status</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>git remote <span class="op">-</span>v</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lo que ves</th>
+<th>Qué significa</th>
+<th>Sigue en</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git status</code> empieza con <code>On branch main</code> (o <code>En la rama main</code>) y <code>git remote -v</code> muestra una línea con <code>origin</code> y una dirección de github.com</td>
+<td>Ya tienes repositorio local <strong>y</strong> está enlazado con GitHub</td>
+<td>Caso A</td>
+</tr>
+<tr class="even">
+<td><code>git status</code> empieza con <code>On branch main</code>, pero <code>git remote -v</code> no imprime nada</td>
+<td>Tienes repositorio local, pero <strong>no</strong> está enlazado con GitHub</td>
+<td>Caso B</td>
+</tr>
+<tr class="odd">
+<td><code>git status</code> dice <code>fatal: not a git repository</code></td>
+<td>Tu carpeta <strong>todavía no es un repositorio</strong></td>
+<td>Caso C</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Caso A: ya está enlazado.</strong> Si <code>git status</code> mostró cambios, súbelos. Cambia el mensaje por uno que describa lo que hiciste:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"prepara el proyecto para publicar en Azure"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Caso B: hay repositorio local pero no está en GitHub.</strong> Primero crea el repositorio vacío en GitHub (ver más abajo) y luego, con la dirección que te muestra GitHub, ejecuta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>git remote add origin https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/&lt;</span>tu-usuario<span class="op">&gt;/&lt;</span>tu-repositorio<span class="op">&gt;.</span><span class="fu">git</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>git branch <span class="op">-</span>M main</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>git push <span class="op">-</span>u origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Caso C: la carpeta no es un repositorio.</strong> La primera vez que usas Git en un equipo debes decirle quién eres, con tu nombre y tu correo (se hace una sola vez por equipo):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global user<span class="op">.</span><span class="fu">name</span> <span class="st">"Tu Nombre"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global user<span class="op">.</span><span class="fu">email</span> <span class="st">"tu-correo@ejemplo.com"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después convierte la carpeta en repositorio y haz el primer commit. El comando <code>dotnet new gitignore</code> crea el archivo <code>.gitignore</code> que evita subir <code>bin/</code> y <code>obj/</code>; ejecútalo solo si tu carpeta no tiene ya un <code>.gitignore</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>git init <span class="op">-</span>b main</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dotnet new gitignore</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"primer commit"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y sigue con el Caso B: crear el repositorio vacío en GitHub y enlazarlo.</p>
+<p><strong>Crear el repositorio vacío en GitHub</strong> (casos B y C):</p>
 <ol type="1">
-<li>En github.com haz clic en <strong>New repository</strong>, dale un nombre (por ejemplo <code>iue-web-plaza</code>) y créalo <strong>vacío</strong>, sin README ni <code>.gitignore</code>.</li>
-<li>GitHub te muestra los comandos para un repositorio existente. En la carpeta <code>Plaza</code>, ejecútalos:</li>
+<li>Entra a <a href="https://github.com">github.com</a>, haz clic en el botón <strong>+</strong> de la esquina superior derecha y elige <strong>New repository</strong>.</li>
+<li>En <strong>Repository name</strong> escribe un nombre, por ejemplo <code>iue-web-plaza</code>.</li>
+<li>Elige <strong>Public</strong> o <strong>Private</strong>. Si es público, cualquier persona puede leer lo que subas: por eso importa la revisión de contraseñas de más arriba. Con un repositorio privado el Centro de implementación de Azure también funciona.</li>
+<li><strong>No marques</strong> <em>Add a README file</em>, <em>Add .gitignore</em> ni <em>Choose a license</em>: el repositorio debe nacer <strong>vacío</strong>.</li>
+<li>Haz clic en <strong>Create repository</strong>. GitHub muestra la dirección del repositorio, con la forma <code>https://github.com/&lt;tu-usuario&gt;/&lt;tu-repositorio&gt;.git</code>. Esa es la dirección que va en <code>git remote add origin</code>.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>git remote add origin https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/&lt;</span>tu-usuario<span class="op">&gt;/&lt;</span>tu-repositorio<span class="op">&gt;.</span><span class="fu">git</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>git branch <span class="op">-</span>M main</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>git push <span class="op">-</span>u origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La primera vez que ejecutes <code>git push</code>, Git normalmente abre una ventana del navegador para que inicies sesión en GitHub y autorices el acceso. Acéptala; solo ocurre una vez.</p>
 </section>
 <section id="comprueba-4" class="level3">
 <h3 class="anchored" data-anchor-id="comprueba-4">Comprueba</h3>
 <ul>
 <li><code>dotnet publish</code> en Release terminó sin errores.</li>
-<li>Los dos comandos de revisión no imprimieron nada.</li>
-<li><code>git status</code> dice que el árbol de trabajo está limpio y que la rama está al día con <code>origin/main</code>.</li>
+<li>Los dos primeros comandos de revisión no imprimieron nada.</li>
+<li>Después de subir, <code>git status</code> dice <em>nothing to commit, working tree clean</em> y que tu rama está al día con <code>origin/main</code>.</li>
 <li>Al abrir tu repositorio en github.com, la rama es <code>main</code> y ves las carpetas <code>Controllers</code>, <code>Models</code>, <code>Views</code>, <code>Migrations</code> y el archivo <code>Plaza.csproj</code>.</li>
 </ul>
 </section>
@@ -1099,14 +1362,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="qué-vas-a-lograr-5">Qué vas a lograr</h3>
 <p>Que la aplicación web de Azure sepa dónde está la base de datos y con qué usuario entrar. Para eso le guardas una <strong>cadena de conexión</strong> en su configuración.</p>
 </section>
-<section id="qué-es-la-cadena-de-conexión" class="level3">
-<h3 class="anchored" data-anchor-id="qué-es-la-cadena-de-conexión">Qué es la cadena de conexión</h3>
-<p>Es una sola línea de texto con los datos para entrar a la base: en qué servidor está, cómo se llama la base, qué usuario usar y su contraseña. En tu equipo, Plaza la lee de <code>appsettings.Development.json</code>. En Azure no existe ese archivo con tus datos, y la contraseña no puede estar en el repositorio, así que la guardas en la configuración de la aplicación web, fuera del código.</p>
+<section id="qué-es-la-cadena-de-conexión-y-de-dónde-sale" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-la-cadena-de-conexión-y-de-dónde-sale">Qué es la cadena de conexión y de dónde sale</h3>
+<p>Una <strong>cadena de conexión</strong> es una sola línea de texto con los datos que un programa necesita para entrar a una base de datos: en qué servidor está, cómo se llama la base, con qué usuario entrar y con qué contraseña. Está escrita como una lista de pares <code>nombre=valor</code> separados por punto y coma.</p>
+<p>Nadie te la entrega hecha: <strong>la armas tú con los datos de tu hoja de datos</strong>, que salieron de la etapa 3. El formato lo define Npgsql, la biblioteca que usa tu proyecto para hablar con PostgreSQL; por eso los nombres (<code>Host</code>, <code>Port</code>, <code>Database</code>, <code>Username</code>, <code>Password</code> y <code>SSL Mode</code>) son siempre esos, escritos igual.</p>
+<p>En tu equipo, el proyecto lee una línea así de <code>appsettings.Development.json</code>, con el servidor <code>localhost</code>. En Azure ese archivo no tiene tus datos, y la contraseña no puede estar en el repositorio. Por eso guardas la misma línea, pero con los datos de Azure, en la configuración de la aplicación web, fuera del código.</p>
 </section>
-<section id="la-línea-que-vas-a-completar" class="level3">
-<h3 class="anchored" data-anchor-id="la-línea-que-vas-a-completar">La línea que vas a completar</h3>
-<p>Copia esta línea en un bloc de notas y <strong>cambia los dos textos entre <code>&lt;</code> y <code>&gt;</code></strong>:</p>
-<pre class="text"><code>Host=&lt;tu-servidor&gt;.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=&lt;tu-contraseña&gt;;SSL Mode=Require</code></pre>
+<section id="los-datos-que-necesitas" class="level3">
+<h3 class="anchored" data-anchor-id="los-datos-que-necesitas">Los datos que necesitas</h3>
+<p>La línea lleva seis datos. Cuatro salen de tu hoja de datos y dos son fijos. Antes de seguir, ten abierta tu hoja y comprueba que los cuatro están completos:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dato</th>
+<th>Qué escribirás</th>
+<th>De dónde sale</th>
+<th>Ejemplo de esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Punto de conexión</td>
+<td>La dirección completa de tu servidor</td>
+<td>Etapa 3, sección <em>Revisa el servidor</em>, con el icono de copiar</td>
+<td><code>plaza-pg-abc.postgres.database.azure.com</code></td>
+</tr>
+<tr class="even">
+<td>Base de datos</td>
+<td>El nombre de la base que creaste</td>
+<td>Etapa 3, sección <em>Crea la base de datos</em></td>
+<td><code>plaza_campesina</code></td>
+</tr>
+<tr class="odd">
+<td>Usuario</td>
+<td>El administrador del servidor</td>
+<td>Etapa 3, sección <em>Pestaña Básico: autenticación</em></td>
+<td><code>plazaadmin</code></td>
+</tr>
+<tr class="even">
+<td>Contraseña</td>
+<td>La que escribiste al crear el servidor</td>
+<td>Tú la escribiste en la etapa 3. Azure no la muestra; si la perdiste, mira el apéndice</td>
+<td>La tuya, no la de este ejemplo</td>
+</tr>
+<tr class="odd">
+<td>Puerto</td>
+<td>Siempre <code>5432</code></td>
+<td>Fijo: es el puerto estándar de PostgreSQL</td>
+<td><code>5432</code></td>
+</tr>
+<tr class="even">
+<td>Modo SSL</td>
+<td>Siempre <code>Require</code></td>
+<td>Fijo: Azure rechaza las conexiones sin cifrar</td>
+<td><code>Require</code></td>
+</tr>
+</tbody>
+</table>
+<p>Si te falta alguno de los cuatro, vuelve a la etapa 3: ahí está. No sigas hasta tenerlos todos.</p>
+</section>
+<section id="arma-la-línea-en-tu-bloc-de-notas" class="level3">
+<h3 class="anchored" data-anchor-id="arma-la-línea-en-tu-bloc-de-notas">Arma la línea en tu bloc de notas</h3>
+<p>Haz esto en el bloc de notas de tu hoja de datos, <strong>no</strong> en el portal ni en un archivo de tu proyecto.</p>
+<ol type="1">
+<li>Copia esta plantilla. Tiene cuatro textos en MAYÚSCULAS entre <code>&lt;</code> y <code>&gt;</code> que debes reemplazar:</li>
+</ol>
+<pre class="text"><code>Host=&lt;PUNTO-DE-CONEXION&gt;;Port=5432;Database=&lt;BASE-DE-DATOS&gt;;Username=&lt;USUARIO&gt;;Password=&lt;CONTRASENA&gt;;SSL Mode=Require</code></pre>
+<ol start="2" type="1">
+<li>Reemplaza cada texto en MAYÚSCULAS, <strong>incluidos los signos <code>&lt;</code> y <code>&gt;</code></strong>, por el dato que le corresponde:</li>
+</ol>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1114,38 +1444,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th>Parte</th>
-<th>Qué escribir</th>
+<th>Reemplaza</th>
+<th>Por</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>Host=</code></td>
-<td>El <strong>punto de conexión</strong> de tu servidor, el que anotaste en la etapa 3. Reemplaza <code>&lt;tu-servidor&gt;</code> por el nombre de tu servidor, por ejemplo <code>plaza-pg-iue603</code>.</td>
+<td><code>&lt;PUNTO-DE-CONEXION&gt;</code></td>
+<td>Tu punto de conexión, completo, con <code>.postgres.database.azure.com</code> al final</td>
 </tr>
 <tr class="even">
-<td><code>Port=5432</code></td>
-<td>No cambia: es el puerto estándar de PostgreSQL.</td>
+<td><code>&lt;BASE-DE-DATOS&gt;</code></td>
+<td>El nombre de tu base de datos</td>
 </tr>
 <tr class="odd">
-<td><code>Database=</code></td>
-<td><code>plaza_campesina</code>, la base que creaste en la etapa 3.</td>
+<td><code>&lt;USUARIO&gt;</code></td>
+<td>Tu usuario administrador</td>
 </tr>
 <tr class="even">
-<td><code>Username=</code></td>
-<td><code>plazaadmin</code>, el usuario administrador de la etapa 3.</td>
-</tr>
-<tr class="odd">
-<td><code>Password=</code></td>
-<td>La contraseña que escribiste al crear el servidor. Reemplaza <code>&lt;tu-contraseña&gt;</code>, sin los signos <code>&lt;</code> ni <code>&gt;</code>.</td>
-</tr>
-<tr class="even">
-<td><code>SSL Mode=Require</code></td>
-<td>No cambia: Azure rechaza las conexiones sin cifrar.</td>
+<td><code>&lt;CONTRASENA&gt;</code></td>
+<td>Tu contraseña</td>
 </tr>
 </tbody>
 </table>
-<p>Todo va en <strong>una sola línea</strong>, sin saltos y sin espacios después de los punto y coma. Si te equivocas en un dato, la aplicación no falla al guardar: falla después, al intentar conectarse.</p>
+<ol start="3" type="1">
+<li>Así debe verse la línea <strong>ya completa</strong>. Este ejemplo usa un servidor llamado <code>plaza-pg-abc</code> y una contraseña inventada solo para el ejemplo:</li>
+</ol>
+<pre class="text"><code>Host=plaza-pg-abc.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=ClaveDeEjemplo.2026;SSL Mode=Require</code></pre>
+<ol start="4" type="1">
+<li>Antes de seguir, revísala punto por punto contra esta lista:</li>
+</ol>
+<ul>
+<li>Ya <strong>no queda ningún</strong> signo <code>&lt;</code> ni <code>&gt;</code> ni texto en MAYÚSCULAS de la plantilla.</li>
+<li>Empieza con <code>Host=</code> y termina con <code>SSL Mode=Require</code>.</li>
+<li>El valor de <code>Host=</code> termina en <code>.postgres.database.azure.com</code>.</li>
+<li>Es <strong>una sola línea</strong>: tú no pusiste ningún salto de línea. Si el bloc de notas la parte en varios renglones solo porque la ventana es angosta, está bien.</li>
+<li><strong>No tiene comillas</strong> al principio, al final ni alrededor de ningún valor.</li>
+<li>No hay espacios al principio ni al final, ni alrededor de los signos <code>=</code> y <code>;</code>. El único espacio que debe existir está dentro de <code>SSL Mode</code>.</li>
+<li>Hay seis pares, separados por cinco punto y coma.</li>
+</ul>
+<p>Los errores más comunes y lo que provocan:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Qué pasa después</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dejar los signos <code>&lt;</code> <code>&gt;</code> en un dato</td>
+<td>La aplicación no encuentra el servidor o rechaza el usuario</td>
+</tr>
+<tr class="even">
+<td>Escribir mal el punto de conexión o dejarlo sin <code>.postgres.database.azure.com</code></td>
+<td><code>Host desconocido</code> al conectarse</td>
+</tr>
+<tr class="odd">
+<td>Contraseña distinta a la del servidor</td>
+<td><code>password authentication failed</code></td>
+</tr>
+<tr class="even">
+<td>Olvidar <code>SSL Mode=Require</code></td>
+<td>El servidor rechaza la conexión por no estar cifrada</td>
+</tr>
+<tr class="odd">
+<td>Poner comillas alrededor de la línea o de un valor</td>
+<td>Los valores incluyen las comillas y no coinciden</td>
+</tr>
+</tbody>
+</table>
+<p>Si te equivocas en un dato, la aplicación <strong>no falla al guardar</strong>: falla después, cuando intenta conectarse. Por eso conviene revisar la línea ahora.</p>
 </section>
 <section id="los-pasos-1" class="level3">
 <h3 class="anchored" data-anchor-id="los-pasos-1">Los pasos</h3>
@@ -1163,13 +1536,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><img src="imagenes/47-app-cadena-panel-vacio.png" class="img-fluid" alt="Panel Agregar o editar una cadena de conexión con los campos Nombre, Valor y Tipo vacíos y la casilla de configuración de ranura de implementación sin marcar. Abajo, los botones Aplicar y Descartar."></p>
 <ol start="4" type="1">
-<li>En <strong>Nombre</strong> escribe exactamente <code>Plaza</code>, con la P mayúscula. Es el nombre que Plaza busca en <code>Program.cs</code>: si lo escribes distinto, la aplicación no encuentra la cadena.</li>
+<li>En <strong>Nombre</strong> escribe exactamente <code>Plaza</code>, con la P mayúscula. Es el nombre que Plaza busca en <code>Program.cs</code>, en la línea <code>GetConnectionString("Plaza")</code>: si lo escribes distinto, la aplicación no encuentra la cadena. Si trabajas con tu propio proyecto, abre tu <code>Program.cs</code>, busca <code>GetConnectionString(</code> y usa el texto que aparece entre comillas, escrito igual, con las mismas mayúsculas.</li>
 <li>En <strong>Tipo</strong> abre la lista y elige <strong>PostgreSQL</strong>. No elijas <em>Custom</em> ni <em>SQLServer</em>: el tipo hace que Azure le ponga a la variable un prefijo que .NET reconoce como cadena de conexión.</li>
 </ol>
 <p><img src="imagenes/48-app-cadena-tipos.png" class="img-fluid" alt="Lista desplegable del tipo de cadena de conexión con las opciones MySQL, SQLServer, SQLAzure, PostgreSQL, Custom, Notification Hub, Service Bus, Event Hub, Document Db y Redis Cache."></p>
 <p><img src="imagenes/49-app-cadena-nombre-tipo.png" class="img-fluid" alt="Panel con el nombre Plaza escrito, el valor todavía vacío y el tipo PostgreSQL seleccionado."></p>
 <ol start="6" type="1">
-<li>En <strong>Valor</strong> pega la línea que completaste. Por seguridad el campo muestra puntos en vez de texto. Si quieres comprobar lo que escribiste, el icono del ojo lo muestra mientras lo tienes pulsado, pero hazlo sin nadie mirando tu pantalla.</li>
+<li>En <strong>Valor</strong> pega la línea completa que armaste en tu bloc de notas:
+<ol type="1">
+<li>En el bloc de notas, haz clic dentro de la línea, pulsa <strong>Ctrl+A</strong> para seleccionarla toda y <strong>Ctrl+C</strong> para copiarla.</li>
+<li>En el panel, haz clic dentro del campo <strong>Valor</strong> y pulsa <strong>Ctrl+V</strong> para pegar.</li>
+<li>El campo muestra <strong>puntos</strong> en lugar de texto, como en la captura, porque se trata como una contraseña. Además es angosto: la línea tiene unos 140 caracteres y solo cabe una parte. Es normal.</li>
+<li>Para comprobar lo que pegaste, haz clic en el icono del <strong>ojo</strong> que está a la derecha del campo. El texto se muestra y el aviso del icono pasa a <em>Ocultar contraseña</em>. Para ver el final de la línea, haz clic dentro del campo y pulsa la tecla <strong>Fin</strong> (<em>End</em>). Comprueba que empieza con <code>Host=</code> y termina con <code>SSL Mode=Require</code>.</li>
+<li>Haz otro clic en el ojo para volver a ocultarla. Hazlo siempre sin nadie mirando tu pantalla, porque al mostrarla se ve tu contraseña.</li>
+</ol></li>
 </ol>
 <p><img src="imagenes/50-app-cadena-valor-oculto.png" class="img-fluid" alt="Panel con el nombre Plaza, el tipo PostgreSQL y el campo Valor lleno de puntos que ocultan la cadena de conexión. Al lado del campo hay un icono de ojo y uno de copiar."></p>
 <ol start="7" type="1">
@@ -1198,19 +1578,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="si-algo-no-sale-como-esperabas" class="level3">
+<h3 class="anchored" data-anchor-id="si-algo-no-sale-como-esperabas">Si algo no sale como esperabas</h3>
+<p><strong>El panel dice <em>Los nombres de las cadenas de conexión deben ser únicos</em>.</strong> Ya existe una cadena con ese nombre, porque la guardaste antes. No crees otra: edita la que ya está. En la tabla haz clic sobre el nombre <code>Plaza</code> para abrir su panel, reemplaza el contenido de <strong>Valor</strong> con la línea correcta y repite desde el paso 7.</p>
+<p><img src="imagenes/79-app-cadena-nombre-repetido.png" class="img-fluid" alt="Panel Agregar o editar una cadena de conexión con el nombre Plaza escrito y un mensaje de error en rojo que dice que los nombres de las cadenas de conexión deben ser únicos. El campo Valor muestra puntos y el tipo está vacío con un error."></p>
+<p><strong>Te equivocaste en un dato después de guardar.</strong> El procedimiento es el mismo: haz clic en el nombre <code>Plaza</code> en la tabla, corrige <strong>Valor</strong>, pulsa <strong>Aplicar</strong> en el panel, <strong>Aplicar</strong> en la parte inferior de la página y <strong>Confirmar</strong>.</p>
+<p><strong>No recuerdas qué escribiste en Valor.</strong> En la tabla, el enlace <em>Mostrar valor</em> o el icono del ojo del panel lo muestran. Hazlo sin nadie mirando tu pantalla.</p>
+<p><strong>Nombre distinto al de tu código.</strong> Si el nombre de la cadena no coincide exactamente con el de <code>GetConnectionString("...")</code>, la aplicación no encuentra la cadena y falla al consultar la base de datos. Corrige el nombre en la tabla y guarda de nuevo.</p>
+</section>
 <section id="cómo-llega-la-cadena-a-tu-código" class="level3">
 <h3 class="anchored" data-anchor-id="cómo-llega-la-cadena-a-tu-código">Cómo llega la cadena a tu código</h3>
 <p>Para el tipo PostgreSQL, Azure crea una variable de entorno llamada <code>POSTGRESQLCONNSTR_Plaza</code>. .NET reconoce ese prefijo y la entrega a tu código como si fuera <code>ConnectionStrings:Plaza</code>, de modo que la línea de <code>Program.cs</code> no cambia:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>opciones<span class="op">.</span><span class="fu">UseNpgsql</span><span class="op">(</span>builder<span class="op">.</span><span class="fu">Configuration</span><span class="op">.</span><span class="fu">GetConnectionString</span><span class="op">(</span><span class="st">"Plaza"</span><span class="op">))</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>opciones<span class="op">.</span><span class="fu">UseNpgsql</span><span class="op">(</span>builder<span class="op">.</span><span class="fu">Configuration</span><span class="op">.</span><span class="fu">GetConnectionString</span><span class="op">(</span><span class="st">"Plaza"</span><span class="op">))</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="comprueba-5" class="level3">
 <h3 class="anchored" data-anchor-id="comprueba-5">Comprueba</h3>
 <ul>
 <li>En la pestaña <strong>Cadenas de conexión</strong> hay una fila llamada <code>Plaza</code>.</li>
 <li>La notificación de guardado salió en verde.</li>
-<li>Los datos de la línea coinciden con los de la etapa 3: mismo servidor, mismo usuario y la base <code>plaza_campesina</code>.</li>
+<li>Los datos de la línea coinciden con los de tu hoja de datos de la etapa 3: mismo punto de conexión, mismo usuario, misma base de datos y la misma contraseña.</li>
+<li>Puedes explicar con tus palabras de dónde salió cada uno de los seis datos de la línea.</li>
 </ul>
-<p>Todavía no puedes ver Plaza funcionando: la base de datos está vacía y la aplicación todavía no tiene tu código. Eso se resuelve en las dos etapas siguientes.</p>
+<p>Todavía no hay forma de comprobar que la conexión funciona: la base de datos está vacía y la aplicación todavía no tiene tu código. La primera prueba real de esta cadena llega en la etapa 9, cuando abras tu aplicación publicada. Si algo está mal, se verá entonces.</p>
 </section>
 </section>
 <section id="etapa-7.-crear-las-tablas-en-la-base-de-datos" class="level2">
@@ -1224,10 +1613,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Una <strong>migración</strong> es un archivo del proyecto que describe cómo crear o cambiar las tablas. Plaza ya tiene una, llamada <code>Inicial</code>, en la carpeta <code>Migrations</code>: define la tabla <code>Productos</code> y cuatro productos de ejemplo. Entity Framework Core la ejecuta contra la base de datos que le indiques.</p>
 <p>Azure no aplica las migraciones por su cuenta: <code>Program.cs</code> no las ejecuta al arrancar. Las aplicas tú, <strong>desde tu equipo</strong>, apuntando a la base de Azure. Eso es posible porque en la etapa 3 abriste el firewall del servidor para tu dirección IP.</p>
 </section>
+<section id="antes-del-comando" class="level3">
+<h3 class="anchored" data-anchor-id="antes-del-comando">Antes del comando</h3>
+<p>Comprueba estos cuatro puntos. Si alguno falla, el comando también fallará:</p>
+<ol type="1">
+<li><strong>La herramienta de Entity Framework está instalada.</strong> En PowerShell, <code>dotnet ef --version</code> debe mostrar una versión <code>10.x</code>. Si no, instálala como se explica en <em>Antes de empezar</em>.</li>
+<li><strong>Tu proyecto está restaurado.</strong> Si acabas de descargar o clonar el proyecto y nunca lo compilaste, ejecuta una vez <code>dotnet restore</code> dentro de su carpeta. Sin eso, <code>dotnet ef</code> falla con un error que menciona <code>NETSDK1004</code> y <code>project.assets.json</code>.</li>
+<li><strong>Tu IP está permitida en el firewall del servidor.</strong> Se agregó en la etapa 3, pero cambia si usas otra red. Si no estás seguro, mira <em>Si tu IP no está permitida</em>, más abajo.</li>
+<li><strong>Tienes a mano la línea de conexión</strong> que armaste en la etapa 6, en tu bloc de notas.</li>
+</ol>
+</section>
 <section id="el-comando" class="level3">
 <h3 class="anchored" data-anchor-id="el-comando">El comando</h3>
-<p>Abre PowerShell <strong>dentro de la carpeta <code>Plaza</code></strong>, la que contiene <code>Plaza.csproj</code>, y ejecuta este comando. Cambia <code>&lt;tu-servidor&gt;</code> y <code>&lt;tu-contraseña&gt;</code> por tus datos, igual que en la etapa 6:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dotnet ef database update <span class="op">--</span>connection <span class="st">"Host=&lt;tu-servidor&gt;.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=&lt;tu-contraseña&gt;;SSL Mode=Require"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Abre PowerShell <strong>dentro de la carpeta de tu proyecto</strong>, la que contiene el archivo <code>.csproj</code>. Vas a ejecutar este comando, que usa <strong>la misma línea de conexión de la etapa 6</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dotnet ef database update <span class="op">--</span>connection <span class="st">'&lt;TU-LINEA-DE-CONEXION&gt;'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para armarlo:</p>
+<ol type="1">
+<li>Escribe <code>dotnet ef database update --connection '</code> (termina con una comilla simple, sin cerrarla).</li>
+<li>Pega, sin cambiar nada, la línea completa de tu bloc de notas.</li>
+<li>Cierra con otra comilla simple <code>'</code> y pulsa Enter.</li>
+</ol>
+<p>Con la línea de ejemplo de la etapa 6, el comando completo se ve así (con tus datos y tu contraseña en lugar de los del ejemplo):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dotnet ef database update <span class="op">--</span>connection <span class="st">'Host=plaza-pg-abc.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=ClaveDeEjemplo.2026;SSL Mode=Require'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Usa <strong>comillas simples</strong> (<code>'</code>), no dobles. En PowerShell las comillas simples entregan el texto tal cual; con comillas dobles, un símbolo como <code>$</code> en la contraseña se interpretaría y la cadena llegaría rota.</p>
 <p>La opción <code>--connection</code> le dice a <code>dotnet ef</code> que use <strong>esa base</strong> en lugar de la de <code>appsettings.Development.json</code>, que apunta a <code>localhost</code>. Sin ella, las tablas se crearían en tu PostgreSQL local y la base de Azure seguiría vacía.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1297,7 +1705,7 @@ Done.</code></pre>
 <tr class="even">
 <td>Un mensaje con <code>pg_hba.conf</code> o que la conexión se agota</td>
 <td>El firewall del servidor no deja entrar a tu IP. Tu IP pública cambia si cambias de red.</td>
-<td>En el servidor, abre <strong>Redes</strong> y agrega tu IP actual, como en la etapa 3.</td>
+<td>Agrega tu IP actual, como se explica en <em>Si tu IP no está permitida</em>, justo debajo.</td>
 </tr>
 <tr class="odd">
 <td><code>password authentication failed</code></td>
@@ -1309,8 +1717,34 @@ Done.</code></pre>
 <td>La base de datos no existe en el servidor.</td>
 <td>Créala como en la etapa 3.</td>
 </tr>
+<tr class="odd">
+<td><code>dotnet ef</code> no se reconoce, o dice que no encontró el comando o archivo</td>
+<td>La herramienta de Entity Framework no está instalada, o PowerShell se abrió antes de instalarla.</td>
+<td>Instálala (sección <em>Antes de empezar</em>), cierra PowerShell, ábrelo de nuevo y repite.</td>
+</tr>
+<tr class="even">
+<td>Un error con <code>NETSDK1004</code> y <code>project.assets.json</code></td>
+<td>El proyecto no está restaurado.</td>
+<td>Ejecuta <code>dotnet restore</code> en la carpeta del proyecto y repite.</td>
+</tr>
+<tr class="odd">
+<td><code>No project was found</code> o no encuentra el proyecto</td>
+<td>PowerShell no está dentro de la carpeta correcta.</td>
+<td>Muévete con <code>cd</code> a la carpeta que contiene el <code>.csproj</code> y repite.</td>
+</tr>
 </tbody>
 </table>
+</section>
+<section id="si-tu-ip-no-está-permitida" class="level3">
+<h3 class="anchored" data-anchor-id="si-tu-ip-no-está-permitida">Si tu IP no está permitida</h3>
+<p>El firewall del servidor solo deja entrar a las direcciones IP que le indicaste. Tu IP pública cambia cuando te conectas desde otra red (la de la universidad, la de tu casa, los datos del celular). Para agregar tu IP actual:</p>
+<ol type="1">
+<li>En el portal abre tu servidor PostgreSQL. En el menú de la izquierda, dentro de <strong>Configuración</strong>, haz clic en <strong>Redes</strong>.</li>
+<li>Baja hasta <strong>Reglas de firewall</strong> y haz clic en <strong>+ Agregar dirección IP del cliente actual</strong>. Entre paréntesis aparece tu IP actual, y se agrega una fila nueva a la tabla. En la captura el enlace aparece en gris porque ese ejemplo ya tenía su IP agregada; en tu pantalla estará activo.</li>
+<li>Haz clic en <strong>Guardar</strong>, arriba a la izquierda de la página, y espera la confirmación. Sin este paso la regla no queda guardada.</li>
+<li>Repite el comando de migración.</li>
+</ol>
+<p><img src="imagenes/78-servidor-redes-agregar-ip.png" class="img-fluid" alt="Página Redes del servidor plaza-pg-iue603. Muestra la sección Acceso público, con la casilla marcada, y Reglas de firewall, con la casilla de permitir acceso desde servicios de Azure marcada. Debajo, el enlace para agregar la dirección IP del cliente actual y una tabla con una regla de firewall cuyas direcciones IP están tapadas en la captura. Arriba, los botones Guardar y Descartar."></p>
 </section>
 <section id="comprueba-6" class="level3">
 <h3 class="anchored" data-anchor-id="comprueba-6">Comprueba</h3>
@@ -1327,6 +1761,18 @@ Done.</code></pre>
 <section id="qué-vas-a-lograr-7" class="level3">
 <h3 class="anchored" data-anchor-id="qué-vas-a-lograr-7">Qué vas a lograr</h3>
 <p>Que cada vez que subas cambios a la rama <code>main</code> de tu repositorio, GitHub compile Plaza y la publique en la aplicación web de Azure, sin que tengas que hacer nada más. Eso se llama <strong>publicación continua</strong> (CI/CD).</p>
+</section>
+<section id="resumen-de-lo-que-vas-a-hacer" class="level3">
+<h3 class="anchored" data-anchor-id="resumen-de-lo-que-vas-a-hacer">Resumen de lo que vas a hacer</h3>
+<p>Necesitas tener hecha la etapa 4 (la aplicación web) y la etapa 5 (tu proyecto en un repositorio de GitHub). Los pasos de esta etapa son cinco:</p>
+<ol type="1">
+<li>Habilitar la autenticación básica de SCM en tu aplicación web.</li>
+<li>Abrir el Centro de implementación de la aplicación web.</li>
+<li>Autorizar a Azure en tu cuenta de GitHub.</li>
+<li>Elegir tu repositorio, la rama <code>main</code> y la opción de flujo de trabajo.</li>
+<li>Elegir <em>Autenticación básica</em> y guardar.</li>
+</ol>
+<p>Antes de los pasos viene una explicación de por qué se usa la autenticación básica y no la opción que el portal propone. Puedes saltarla si solo quieres ejecutar los pasos, pero te ayudará a entender el error que verás si eliges la otra opción.</p>
 </section>
 <section id="cómo-funciona" class="level3">
 <h3 class="anchored" data-anchor-id="cómo-funciona">Cómo funciona</h3>
@@ -1389,7 +1835,7 @@ Done.</code></pre>
 <p><img src="imagenes/64-app-configuracion-general.png" class="img-fluid" alt="Página Configuración, pestaña Configuración general, de la aplicación web. Las casillas de credenciales de publicación de autenticación básica de SCM y de FTP están sin marcar. Debajo, el estado de FTP en Solo FTPS, HTTP 1.1, SSH y HTTPS solamente marcados."></p>
 <ol start="3" type="1">
 <li>Marca la casilla de <strong>SCM</strong>. La de <strong>FTP</strong> déjala sin marcar: no la necesitas.</li>
-<li>Haz clic en <strong>Aplicar</strong> al pie de la página y confirma. El portal avisa: <strong>La configuración general se actualizó correctamente</strong>.</li>
+<li>Haz clic en <strong>Aplicar</strong> al pie de la página. Si el portal pide confirmar el cambio, haz clic en <strong>Confirmar</strong>. El portal avisa: <strong>La configuración general se actualizó correctamente</strong>.</li>
 </ol>
 <p><img src="imagenes/65-app-basica-scm-habilitada.png" class="img-fluid" alt="Configuración general con la casilla de credenciales de publicación de autenticación básica de SCM marcada y la de FTP sin marcar. Los botones Aplicar y Descartar al pie están desactivados porque no quedan cambios pendientes."></p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -1417,7 +1863,7 @@ Done.</code></pre>
 <section id="paso-3.-autorizar-a-azure-en-github" class="level3">
 <h3 class="anchored" data-anchor-id="paso-3.-autorizar-a-azure-en-github">Paso 3. Autorizar a Azure en GitHub</h3>
 <ol type="1">
-<li>Haz clic en <strong>Autorizar</strong>. Se abre una ventana de GitHub.</li>
+<li>Haz clic en <strong>Autorizar</strong>. Se abre una ventana o pestaña de GitHub. Si no se abre, tu navegador probablemente bloqueó las ventanas emergentes: permítelas para el portal de Azure y vuelve a hacer clic.</li>
 <li>Inicia sesión con <strong>tu</strong> cuenta de GitHub y acepta el acceso que pide Azure. Esa pantalla pide permisos sobre tu cuenta: léela antes de aceptar.</li>
 <li>Al volver al portal, junto a <strong>Sesión iniciada como</strong> aparece tu nombre de usuario de GitHub.</li>
 </ol>
@@ -1430,7 +1876,7 @@ Done.</code></pre>
 </ol>
 <p><img src="imagenes/56-github-organizacion.png" class="img-fluid" alt="Lista de organizaciones con una sola opción, el nombre de usuario de GitHub."></p>
 <ol start="2" type="1">
-<li><strong>Repositorio</strong>: la lista muestra todos tus repositorios. Escribe <code>plaza</code> en el cuadro de búsqueda para filtrar y elige tu repositorio de Plaza.</li>
+<li><strong>Repositorio</strong>: la lista muestra todos tus repositorios. Escribe parte del nombre del tuyo en el cuadro de búsqueda (en el ejemplo, <code>plaza</code>) y elige <strong>el repositorio donde subiste tu proyecto en la etapa 5</strong>. Si eliges otro, Azure publicaría un código distinto.</li>
 </ol>
 <p><img src="imagenes/57-github-repositorio.png" class="img-fluid" alt="Lista de repositorios filtrada por la palabra plaza, con una sola opción: iue-web-plaza."></p>
 <ol start="3" type="1">
@@ -1450,7 +1896,7 @@ Done.</code></pre>
 <p><img src="imagenes/66-github-autenticacion-basica.png" class="img-fluid" alt="Configuración de autenticación con la opción Autenticación básica seleccionada y sin mensajes de error. Debajo, Configuración del flujo de trabajo con el botón Vista previa de archivo."></p>
 <ol start="2" type="1">
 <li>Sube al inicio de la página y haz clic en <strong>Guardar</strong>.</li>
-<li>Espera unos segundos. Aparece una notificación verde: <strong>Se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub</strong>.</li>
+<li>Espera unos segundos. Aparece una notificación verde: <strong>Se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub</strong>. Si en cambio aparece un error en rojo, busca su texto en la tabla <em>Si algo sale mal</em>, al final de la guía.</li>
 </ol>
 <p><img src="imagenes/67-github-pipeline-configurado.png" class="img-fluid" alt="Panel de notificaciones con dos avisos verdes: Guardar configuración de código, se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub, y Actualizar la configuración general, la configuración general se actualizó correctamente. Más abajo, los dos errores anteriores de OIDC."></p>
 </section>
@@ -1462,58 +1908,58 @@ Done.</code></pre>
 <li><strong>Creó un secreto</strong> de Actions llamado <code>AZUREAPPSERVICE_PUBLISHPROFILE_&lt;código&gt;</code>, con las credenciales de publicación. Es lo que permite a GitHub desplegar en tu aplicación.</li>
 </ol>
 <p>Este es el contenido del archivo, con los comentarios iniciales quitados:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and deploy ASP.Net Core app to Azure Web App - plaza-iue603</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">'main'</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> read</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up .NET Core</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-dotnet@v4</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">dotnet-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'10.x'</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build with dotnet</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet build --configuration Release</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> dotnet publish</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload artifact for deployment job</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-artifact@v4</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ${{env.DOTNET_ROOT}}/myapp</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy</span><span class="kw">:</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> build</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download artifact from build job</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/download-artifact@v4</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to Azure Web App</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> deploy-to-webapp</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> azure/webapps-deploy@v3</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">app-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'plaza-iue603'</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">slot-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'Production'</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">package</span><span class="kw">:</span><span class="at"> .</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish-profile</span><span class="kw">:</span><span class="at"> ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_&lt;código&gt; }}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and deploy ASP.Net Core app to Azure Web App - plaza-iue603</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">'main'</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> read</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up .NET Core</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-dotnet@v4</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">dotnet-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'10.x'</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build with dotnet</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet build --configuration Release</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> dotnet publish</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload artifact for deployment job</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-artifact@v4</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ${{env.DOTNET_ROOT}}/myapp</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy</span><span class="kw">:</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> build</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download artifact from build job</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/download-artifact@v4</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to Azure Web App</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> deploy-to-webapp</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> azure/webapps-deploy@v3</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">app-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'plaza-iue603'</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">slot-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'Production'</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">package</span><span class="kw">:</span><span class="at"> .</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish-profile</span><span class="kw">:</span><span class="at"> ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_&lt;código&gt; }}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Se lee de arriba hacia abajo:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1570,12 +2016,12 @@ Done.</code></pre>
 <section id="abre-plaza" class="level3">
 <h3 class="anchored" data-anchor-id="abre-plaza">Abre Plaza</h3>
 <ol type="1">
-<li>En el portal, abre tu aplicación web y copia el <strong>Dominio predeterminado</strong>, la dirección que termina en <code>azurewebsites.net</code>.</li>
-<li>Ábrela en el navegador agregando al final <code>/catalogo</code>, porque esa es la ruta de Plaza que muestra los productos:</li>
+<li>En el portal, abre tu aplicación web (en <strong>Inicio</strong>, en <em>Recursos</em>, o en <strong>App Services</strong>). En <em>Información esencial</em> busca <strong>Dominio predeterminado</strong>: es la dirección pública de tu aplicación, un enlace que termina en <code>azurewebsites.net</code>. Es el mismo enlace que usaste al final de la etapa 4.</li>
+<li>Ábrela en el navegador agregando al final <code>/catalogo</code>, porque esa es la ruta de Plaza que muestra los productos (si trabajas con tu propio proyecto, usa una ruta tuya que lea datos de la base):</li>
 </ol>
 <pre class="text"><code>https://&lt;tu-dominio&gt;.azurewebsites.net/catalogo</code></pre>
 <ol start="3" type="1">
-<li>Debe aparecer la lista de productos con sus precios. Esos datos <strong>vienen de la base de datos de Azure</strong>: son los que creó la migración de la etapa 7.</li>
+<li>Debe aparecer la lista de productos con sus precios. Esos datos <strong>vienen de la base de datos de Azure</strong>: son los que creó la migración de la etapa 7. Esta es la primera prueba real de la cadena de conexión de la etapa 6.</li>
 </ol>
 <p><img src="imagenes/68-plaza-en-linea.png" class="img-fluid" alt="Página Catálogo de Plaza abierta desde la dirección pública azurewebsites.net. Muestra el título Catálogo y una lista con cuatro productos y sus precios: Aguacate 6000, Panela 4500, Papa 2800 y Tomate 3500."></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1595,6 +2041,24 @@ Done.</code></pre>
 </div>
 </div>
 </section>
+<section id="si-la-página-da-error-500-o-sale-en-blanco" class="level3">
+<h3 class="anchored" data-anchor-id="si-la-página-da-error-500-o-sale-en-blanco">Si la página da error 500 o sale en blanco</h3>
+<p>Un error <code>500</code> o una página en blanco al abrir una ruta que lee datos casi siempre significa que la aplicación <strong>no pudo conectarse a la base de datos</strong>. Las causas más comunes, en este orden:</p>
+<ol type="1">
+<li>La cadena de conexión tiene un dato mal escrito (etapa 6).</li>
+<li>La contraseña de la cadena no es la del servidor, por ejemplo porque la cambiaste en el servidor y no en la aplicación (apéndice).</li>
+<li>El nombre de la cadena en el portal no coincide con el de <code>GetConnectionString("...")</code> de tu código.</li>
+<li>Las tablas no existen porque no se aplicó la migración (etapa 7).</li>
+</ol>
+<p>Para ver el motivo exacto, mira el registro de la aplicación en vivo:</p>
+<ol type="1">
+<li>En tu aplicación web, abre en el menú de la izquierda la sección <strong>Supervisión</strong> y haz clic en <strong>Secuencia de registro</strong>.</li>
+<li>Deja esa pantalla abierta y, en otra pestaña, recarga la página que da error. Aparecen líneas nuevas en el registro cada vez que la aplicación escribe algo.</li>
+<li>Escribe una palabra en el cuadro de búsqueda del registro, por ejemplo <code>authentication</code>, para filtrar las líneas. Si las líneas tienen texto como <em>password authentication failed</em>, el problema es la contraseña o el usuario de la cadena.</li>
+</ol>
+<p><img src="imagenes/80-app-secuencia-registro.png" class="img-fluid" alt="Pantalla Secuencia de registro de la aplicación web. Arriba, el intervalo de tiempo En vivo, un cuadro para buscar mensajes y los botones Filtros y Pantalla. En el centro, un panel negro con el texto Esperando entradas de registro: las nuevas entradas aparecerán aquí a medida que la aplicación las genere."></p>
+<p>Cuando corrijas la causa, vuelve a cargar la página. Tras cambiar una cadena de conexión, la aplicación se reinicia y puede tardar unos segundos en responder.</p>
+</section>
 <section id="haz-un-cambio-y-míralo-publicarse" class="level3">
 <h3 class="anchored" data-anchor-id="haz-un-cambio-y-míralo-publicarse">Haz un cambio y míralo publicarse</h3>
 <p>Esta es la parte que da sentido a la publicación continua. Vas a cambiar algo en Plaza y verlo aparecer en internet sin tocar el portal.</p>
@@ -1609,16 +2073,16 @@ Done.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Azure agregó un commit a tu repositorio (el archivo del flujo de trabajo), pero <strong>tu carpeta local no lo tiene</strong>. Si intentas subir un cambio sin traerlo, Git rechaza el push con un mensaje como <em>rejected</em> o <em>fetch first</em>. Antes de cualquier cambio, ejecuta en la carpeta <code>Plaza</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>git pull origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>git pull origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <ol type="1">
-<li>Abre <code>Views/Catalogo/Listar.cshtml</code> y cambia el título <code>&lt;h1&gt;Catálogo&lt;/h1&gt;</code> por otro texto, por ejemplo <code>&lt;h1&gt;Catálogo de la plaza&lt;/h1&gt;</code>.</li>
-<li>Sube el cambio:</li>
+<li>Abre en tu editor un archivo de vista que se vea en el navegador. En Plaza es <code>Views/Catalogo/Listar.cshtml</code>, y puedes cambiar el título <code>&lt;h1&gt;Catálogo&lt;/h1&gt;</code> por otro texto, por ejemplo <code>&lt;h1&gt;Catálogo de la plaza&lt;/h1&gt;</code>. En tu proyecto, elige cualquier vista tuya y cambia un texto que se note.</li>
+<li>Guarda el archivo y sube el cambio. Antes de subir, ejecuta otra vez <code>git grep -niE 'password=|pwd='</code> (no debe imprimir nada):</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"cambia el titulo del catalogo"</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"cambia el titulo del catalogo"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>En GitHub, abre la pestaña <strong>Actions</strong>: aparece una ejecución nueva. Cuando termine en verde, recarga <code>/catalogo</code> en el navegador: el título cambió.</li>
 </ol>
@@ -1722,6 +2186,92 @@ Done.</code></pre>
 <p>Borra del código cualquier línea que contenga la contraseña, ejecuta <code>git grep -niE 'password=|pwd='</code> (no debe imprimir nada) y sube el cambio. Que no quede en el código <strong>no la hace secreta otra vez</strong>: la versión anterior sigue en el historial de Git. Por eso el primer paso, cambiar la contraseña, es el que cuenta.</p>
 </section>
 </section>
+<section id="glosario" class="level2">
+<h2 class="anchored" data-anchor-id="glosario">Glosario</h2>
+<p>Los términos que aparecen en la guía, explicados en una línea. Si alguno no te queda claro, vuelve aquí.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Término</th>
+<th>Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Suscripción</strong></td>
+<td>Tu cuenta de Azure con su crédito. Todo lo que creas se cobra de ahí.</td>
+</tr>
+<tr class="even">
+<td><strong>Grupo de recursos</strong></td>
+<td>Una carpeta lógica de Azure que reúne todo lo de un proyecto. Al borrarla se borra todo lo que contiene.</td>
+</tr>
+<tr class="odd">
+<td><strong>Región</strong></td>
+<td>El lugar físico, por ejemplo Brazil South o Canada Central, donde Azure ejecuta tu recurso.</td>
+</tr>
+<tr class="even">
+<td><strong>Servidor flexible de PostgreSQL</strong></td>
+<td>El servicio de Azure que ejecuta una base de datos PostgreSQL por ti, sin que instales nada.</td>
+</tr>
+<tr class="odd">
+<td><strong>Firewall</strong></td>
+<td>La lista de direcciones IP a las que el servidor deja entrar. Las demás son rechazadas.</td>
+</tr>
+<tr class="even">
+<td><strong>Punto de conexión</strong></td>
+<td>La dirección de tu servidor en internet, con la forma <code>&lt;nombre&gt;.postgres.database.azure.com</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Cadena de conexión</strong></td>
+<td>Una línea de texto con servidor, base, usuario y contraseña para que un programa entre a la base.</td>
+</tr>
+<tr class="even">
+<td><strong>Variable de entorno</strong></td>
+<td>Un valor que se guarda fuera del código, en la configuración del equipo o del servidor, y que el programa lee al arrancar.</td>
+</tr>
+<tr class="odd">
+<td><strong>Migración</strong></td>
+<td>Un archivo del proyecto que describe cómo crear o cambiar las tablas de la base de datos.</td>
+</tr>
+<tr class="even">
+<td><strong>App Service</strong></td>
+<td>El servicio de Azure que ejecuta tu aplicación web: recibe peticiones de internet y devuelve respuestas.</td>
+</tr>
+<tr class="odd">
+<td><strong>Plan de App Service</strong></td>
+<td>La máquina que usa tu aplicación y su precio. El plan <em>Gratis F1</em> no cuesta.</td>
+</tr>
+<tr class="even">
+<td><strong>DNS</strong></td>
+<td>El sistema que traduce un nombre como <code>mi-app.azurewebsites.net</code> en la dirección numérica del servidor.</td>
+</tr>
+<tr class="odd">
+<td><strong>Publicación continua (CI/CD)</strong></td>
+<td>Que cada cambio que subes a GitHub se compile y se publique solo, sin pasos manuales.</td>
+</tr>
+<tr class="even">
+<td><strong>GitHub Actions y flujo de trabajo</strong></td>
+<td>La herramienta de GitHub que ejecuta tareas automáticas, y el archivo <code>.yml</code> que describe cuáles.</td>
+</tr>
+<tr class="odd">
+<td><strong>Secreto de GitHub</strong></td>
+<td>Un valor guardado en el repositorio que los flujos de trabajo pueden usar pero que nadie puede leer.</td>
+</tr>
+<tr class="even">
+<td><strong>Autenticación básica (SCM)</strong></td>
+<td>Publicar en Azure con un usuario y una contraseña de despliegue. Viene desactivada y hay que habilitarla en esta guía.</td>
+</tr>
+<tr class="odd">
+<td><strong>OIDC e identidad asignada</strong></td>
+<td>La alternativa sin contraseñas para autenticar a GitHub en Azure. Con repositorios nuevos falló en esta práctica.</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="si-algo-sale-mal" class="level2">
 <h2 class="anchored" data-anchor-id="si-algo-sale-mal">Si algo sale mal</h2>
 <p>Estos son los problemas que aparecieron al preparar esta guía, con la causa y la solución de cada uno. Si algo te falla, busca aquí primero.</p>
@@ -1743,34 +2293,82 @@ Done.</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
+<td>Antes de empezar</td>
+<td><code>dotnet</code>, <code>git</code> o <code>dotnet ef</code> no se reconocen</td>
+<td>No están instalados, o PowerShell se abrió antes de instalarlos</td>
+<td>Instala el SDK de .NET 10 desde dotnet.microsoft.com/download y Git desde git-scm.com/download/win, o la herramienta de EF con el comando de <em>Antes de empezar</em>, y abre PowerShell de nuevo</td>
+</tr>
+<tr class="even">
 <td>Etapa 3, servidor</td>
 <td>El formulario propone <em>Producción</em> con 4 núcleos y, al cambiarlo, <em>B2s</em></td>
 <td>Los valores por defecto no son los gratuitos</td>
 <td>Elige <em>Desarrollo/pruebas</em>, luego <em>Configurar servidor</em> y el tamaño <strong>B1ms</strong></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 3, contraseña</td>
 <td>Errores rojos en los campos de contraseña</td>
 <td>Campo vacío o contraseña que no cumple: 8 a 128 caracteres, tres de cuatro categorías</td>
 <td>Escribe la contraseña en los dos campos y revisa los requisitos</td>
 </tr>
+<tr class="even">
+<td>Etapa 3, servidor</td>
+<td>El nombre del servidor se marca en rojo o no aparecen los tres checks verdes</td>
+<td>El nombre ya existe en Azure, o tiene mayúsculas, símbolos, o menos de 3 caracteres</td>
+<td>Elige otro: solo letras minúsculas, números y guiones, entre 3 y 63 caracteres, sin guion al principio ni al final. Agrega algo propio, como tus iniciales</td>
+</tr>
 <tr class="odd">
+<td>Etapa 3, contraseña</td>
+<td>Más adelante la cadena falla aunque la contraseña es la correcta</td>
+<td>La contraseña tiene <code>;</code>, comillas, <code>$</code>, <code>=</code> o espacios, que rompen la cadena o PowerShell</td>
+<td>Cámbiala por otra sin esos caracteres, con el apéndice <em>Cambiar la contraseña del servidor</em></td>
+</tr>
+<tr class="even">
 <td>Etapa 4, plan</td>
 <td>El formulario propone <em>Básico B1</em></td>
 <td>Plan de pago por defecto</td>
 <td>Elige <strong>Gratis F1</strong> después de elegir la región: al cambiar de región el plan vuelve a B1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 4, creación</td>
 <td><em>Operation cannot be completed without additional quota</em>, límite F1 igual a 0</td>
 <td>Tu suscripción no tiene cuota gratuita en esa región</td>
 <td>Cambia a otra región de la lista permitida (etapa 4)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Etapa 4, creación</td>
 <td><em>Resource was disallowed by Azure</em>, política de regiones</td>
 <td>La región no está entre las permitidas para tu suscripción</td>
 <td>Consulta la directiva <em>Allowed resource deployment regions</em> y elige una de esas</td>
+</tr>
+<tr class="odd">
+<td>Etapa 4, nombre</td>
+<td>El nombre de la aplicación web se marca en rojo</td>
+<td>Ya existe una aplicación con ese nombre en Azure, o tiene caracteres no permitidos</td>
+<td>Elige otro nombre: letras, números y guiones, con algo propio</td>
+</tr>
+<tr class="even">
+<td>Etapa 5, Git</td>
+<td><code>fatal: not a git repository</code></td>
+<td>La carpeta todavía no es un repositorio</td>
+<td>Sigue el Caso C de <em>Sube el proyecto</em></td>
+</tr>
+<tr class="odd">
+<td>Etapa 5, Git</td>
+<td><em>Author identity unknown</em> o <em>Please tell me who you are</em></td>
+<td>Git no sabe tu nombre y correo</td>
+<td>Ejecuta <code>git config --global user.name "Tu Nombre"</code> y <code>git config --global user.email "tu-correo@ejemplo.com"</code> y repite el commit</td>
+</tr>
+<tr class="even">
+<td>Etapa 5, Git</td>
+<td><code>error: remote origin already exists</code></td>
+<td>Ya habías enlazado un repositorio con el nombre <code>origin</code></td>
+<td>Mira cuál es con <code>git remote -v</code>. Si quieres cambiarlo: <code>git remote set-url origin &lt;nueva-dirección&gt;</code></td>
+</tr>
+<tr class="odd">
+<td>Etapa 5, Git</td>
+<td><code>git push</code> termina con un error de autenticación o de permisos</td>
+<td>Git no está autorizado en tu cuenta de GitHub, o iniciaste sesión con otra cuenta</td>
+<td>Acepta la ventana del navegador que abre Git e inicia sesión con la cuenta dueña del repositorio. Comprueba la dirección con <code>git remote -v</code></td>
 </tr>
 <tr class="even">
 <td>Etapa 6, cadena</td>
@@ -1779,22 +2377,46 @@ Done.</code></pre>
 <td>Pulsa también el <strong>Aplicar</strong> del pie de la página y confirma</td>
 </tr>
 <tr class="odd">
+<td>Etapa 6, cadena</td>
+<td><em>Los nombres de las cadenas de conexión deben ser únicos</em></td>
+<td>Ya existe una cadena con ese nombre, porque la guardaste antes</td>
+<td>No crees otra: haz clic en el nombre <code>Plaza</code> de la tabla, corrige <strong>Valor</strong> y guarda de nuevo</td>
+</tr>
+<tr class="even">
 <td>Etapa 7, migración</td>
 <td><code>Host desconocido</code></td>
 <td>Caché de DNS vieja en tu equipo</td>
 <td><code>ipconfig /flushdns</code> y repite el comando</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 7, migración</td>
 <td>Una línea con <code>fail:</code> al principio, pero termina en <code>Done.</code></td>
 <td>EF Core lee una tabla que aún no existe en una base nueva</td>
 <td>Nada: es normal</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Etapa 7, migración</td>
 <td><code>pg_hba.conf</code> o conexión que se agota</td>
 <td>Tu IP no está en el firewall del servidor</td>
 <td>Agrega tu IP actual en <strong>Redes</strong> del servidor</td>
+</tr>
+<tr class="odd">
+<td>Etapa 7, migración</td>
+<td><code>password authentication failed</code></td>
+<td>El usuario o la contraseña del comando no son los del servidor</td>
+<td>Revisa tu línea de conexión. Si olvidaste la contraseña, restablécela con el apéndice</td>
+</tr>
+<tr class="even">
+<td>Etapa 7, herramienta</td>
+<td><code>dotnet ef</code> no se reconoce o no encuentra el comando</td>
+<td>La herramienta de Entity Framework no está instalada, o PowerShell se abrió antes de instalarla</td>
+<td>Instálala (sección <em>Antes de empezar</em>), cierra y abre PowerShell y repite</td>
+</tr>
+<tr class="odd">
+<td>Etapa 7, proyecto</td>
+<td>Un error con <code>NETSDK1004</code> y <code>project.assets.json</code></td>
+<td>El proyecto no está restaurado</td>
+<td>Ejecuta <code>dotnet restore</code> dentro de la carpeta del proyecto y repite</td>
 </tr>
 <tr class="even">
 <td>Etapa 8, guardar</td>
@@ -1828,35 +2450,41 @@ Done.</code></pre>
 </tr>
 <tr class="odd">
 <td>Etapa 9, Plaza</td>
+<td>Error 500 o página en blanco al abrir una ruta que lee datos</td>
+<td>La aplicación no logra conectarse a la base de datos</td>
+<td>Sigue la sección <em>Si la página da error 500 o sale en blanco</em> de la etapa 9</td>
+</tr>
+<tr class="even">
+<td>Etapa 9, Plaza</td>
 <td>La primera visita tarda</td>
 <td>El plan F1 duerme la aplicación</td>
 <td>Espera: las siguientes responden rápido</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 9, cambio</td>
 <td><code>git push</code> rechazado, <em>fetch first</em></td>
 <td>Azure agregó un commit que tu copia local no tiene</td>
 <td><code>git pull origin main</code> y vuelve a subir</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Apéndice, contraseña</td>
 <td>Después de cambiar la contraseña del servidor, <code>/catalogo</code> responde con error 500 y la página queda en blanco</td>
 <td>La aplicación web sigue usando la contraseña vieja en su cadena <code>Plaza</code></td>
 <td>Actualiza la cadena <code>Plaza</code> con la contraseña nueva (apéndice, paso 2) y vuelve a abrir <code>/catalogo</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 10, GitHub</td>
 <td>Después de borrar los recursos, las ejecuciones de Actions fallan en <em>deploy</em></td>
 <td>La aplicación de destino ya no existe</td>
 <td>Borra el archivo del flujo de trabajo del repositorio o desactívalo desde la pestaña <em>Actions</em></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Etapa 9, Actions</td>
 <td>Avisos amarillos de <em>Node.js 20 is deprecated</em></td>
 <td>GitHub avisa de versiones de acciones</td>
 <td>Ignóralos: no bloquean la publicación</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Etapa 5 o 9, GitHub</td>
 <td>Subiste la cadena de conexión o la contraseña a tu repositorio, por ejemplo en un comentario</td>
 <td><code>git grep</code> no se ejecutó antes del <code>git push</code>, o el dato se copió a un archivo del proyecto</td>
