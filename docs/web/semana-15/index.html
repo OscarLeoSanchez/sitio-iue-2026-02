@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oscar Leonel Sánchez Conde">
+
+<title>Plaza en la nube: publicar en Azure App Service – Clases IUE 2026-02</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../estilos/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8713356167177fd77be9341a95314561.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0fc346ed9ba01018e56bfca9953d4238.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-15/index.html">Unidad 4. Servicios, despliegue y entornos</a></li><li class="breadcrumb-item"><a href="../../web/semana-15/index.html">Plaza en la nube: publicar en Azure</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Clases IUE 2026-02</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/definicion-proyecto/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Definición del proyecto</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 1. Entornos, versionado e IA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 1. Entornos de desarrollo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 2. Git y GitHub</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 2. Frontend</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 5. HTML5 y CSS3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 6. Bootstrap 5 y Tailwind CSS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 7. JavaScript ES6 y DOM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 8. Consumo de APIs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 3. Backend con ASP.NET Core</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 10. Mi servidor responde: rutas y respuestas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-10/mvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semana 10. POST, MVC, inyección y middleware</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/plaza-formularios-y-datos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plaza: formularios, validación y base de datos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-14/actividad/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plaza: actividad evaluativa</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/proyecto-entregable-1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyecto: entregable 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/proyecto-entregable-final/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proyecto: entregable final</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Unidad 4. Servicios, despliegue y entornos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../web/semana-15/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Plaza en la nube: publicar en Azure</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta guía</h2>
+   
+  <ul>
+  <li><a href="#lo-que-vas-a-lograr" id="toc-lo-que-vas-a-lograr" class="nav-link active" data-scroll-target="#lo-que-vas-a-lograr">Lo que vas a lograr</a></li>
+  <li><a href="#etapa-1.-entrar-al-portal-y-verificar-la-suscripción" id="toc-etapa-1.-entrar-al-portal-y-verificar-la-suscripción" class="nav-link" data-scroll-target="#etapa-1.-entrar-al-portal-y-verificar-la-suscripción">Etapa 1. Entrar al portal y verificar la suscripción</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr" id="toc-qué-vas-a-lograr" class="nav-link" data-scroll-target="#qué-vas-a-lograr">Qué vas a lograr</a></li>
+  <li><a href="#entra-al-portal" id="toc-entra-al-portal" class="nav-link" data-scroll-target="#entra-al-portal">Entra al portal</a></li>
+  <li><a href="#verifica-la-suscripción" id="toc-verifica-la-suscripción" class="nav-link" data-scroll-target="#verifica-la-suscripción">Verifica la suscripción</a></li>
+  <li><a href="#comprueba" id="toc-comprueba" class="nav-link" data-scroll-target="#comprueba">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-2.-crear-el-grupo-de-recursos" id="toc-etapa-2.-crear-el-grupo-de-recursos" class="nav-link" data-scroll-target="#etapa-2.-crear-el-grupo-de-recursos">Etapa 2. Crear el grupo de recursos</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-1" id="toc-qué-vas-a-lograr-1" class="nav-link" data-scroll-target="#qué-vas-a-lograr-1">Qué vas a lograr</a></li>
+  <li><a href="#qué-es-un-grupo-de-recursos" id="toc-qué-es-un-grupo-de-recursos" class="nav-link" data-scroll-target="#qué-es-un-grupo-de-recursos">Qué es un grupo de recursos</a></li>
+  <li><a href="#los-pasos" id="toc-los-pasos" class="nav-link" data-scroll-target="#los-pasos">Los pasos</a></li>
+  <li><a href="#comprueba-1" id="toc-comprueba-1" class="nav-link" data-scroll-target="#comprueba-1">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-3.-crear-el-servidor-postgresql" id="toc-etapa-3.-crear-el-servidor-postgresql" class="nav-link" data-scroll-target="#etapa-3.-crear-el-servidor-postgresql">Etapa 3. Crear el servidor PostgreSQL</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-2" id="toc-qué-vas-a-lograr-2" class="nav-link" data-scroll-target="#qué-vas-a-lograr-2">Qué vas a lograr</a></li>
+  <li><a href="#por-qué-hace-falta" id="toc-por-qué-hace-falta" class="nav-link" data-scroll-target="#por-qué-hace-falta">Por qué hace falta</a></li>
+  <li><a href="#abre-el-formulario-de-creación" id="toc-abre-el-formulario-de-creación" class="nav-link" data-scroll-target="#abre-el-formulario-de-creación">Abre el formulario de creación</a></li>
+  <li><a href="#pestaña-básico-proyecto-y-servidor" id="toc-pestaña-básico-proyecto-y-servidor" class="nav-link" data-scroll-target="#pestaña-básico-proyecto-y-servidor">Pestaña Básico: proyecto y servidor</a></li>
+  <li><a href="#pestaña-básico-autenticación" id="toc-pestaña-básico-autenticación" class="nav-link" data-scroll-target="#pestaña-básico-autenticación">Pestaña Básico: autenticación</a></li>
+  <li><a href="#pestaña-redes" id="toc-pestaña-redes" class="nav-link" data-scroll-target="#pestaña-redes">Pestaña Redes</a></li>
+  <li><a href="#pestaña-seguridad" id="toc-pestaña-seguridad" class="nav-link" data-scroll-target="#pestaña-seguridad">Pestaña Seguridad</a></li>
+  <li><a href="#revisar-y-crear" id="toc-revisar-y-crear" class="nav-link" data-scroll-target="#revisar-y-crear">Revisar y crear</a></li>
+  <li><a href="#revisa-el-servidor" id="toc-revisa-el-servidor" class="nav-link" data-scroll-target="#revisa-el-servidor">Revisa el servidor</a></li>
+  <li><a href="#crea-la-base-de-datos" id="toc-crea-la-base-de-datos" class="nav-link" data-scroll-target="#crea-la-base-de-datos">Crea la base de datos</a></li>
+  <li><a href="#comprueba-2" id="toc-comprueba-2" class="nav-link" data-scroll-target="#comprueba-2">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-4.-crear-la-aplicación-web" id="toc-etapa-4.-crear-la-aplicación-web" class="nav-link" data-scroll-target="#etapa-4.-crear-la-aplicación-web">Etapa 4. Crear la aplicación web</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-3" id="toc-qué-vas-a-lograr-3" class="nav-link" data-scroll-target="#qué-vas-a-lograr-3">Qué vas a lograr</a></li>
+  <li><a href="#qué-es-app-service" id="toc-qué-es-app-service" class="nav-link" data-scroll-target="#qué-es-app-service">Qué es App Service</a></li>
+  <li><a href="#abre-el-formulario-de-creación-1" id="toc-abre-el-formulario-de-creación-1" class="nav-link" data-scroll-target="#abre-el-formulario-de-creación-1">Abre el formulario de creación</a></li>
+  <li><a href="#pestaña-datos-básicos" id="toc-pestaña-datos-básicos" class="nav-link" data-scroll-target="#pestaña-datos-básicos">Pestaña Datos básicos</a></li>
+  <li><a href="#región-y-plan-los-valores-por-defecto-cuestan-dinero" id="toc-región-y-plan-los-valores-por-defecto-cuestan-dinero" class="nav-link" data-scroll-target="#región-y-plan-los-valores-por-defecto-cuestan-dinero">Región y plan: los valores por defecto cuestan dinero</a></li>
+  <li><a href="#las-pestañas-base-de-datos-implementación-redes-y-supervisión" id="toc-las-pestañas-base-de-datos-implementación-redes-y-supervisión" class="nav-link" data-scroll-target="#las-pestañas-base-de-datos-implementación-redes-y-supervisión">Las pestañas Base de datos, Implementación, Redes y Supervisión</a></li>
+  <li><a href="#revisar-y-crear-1" id="toc-revisar-y-crear-1" class="nav-link" data-scroll-target="#revisar-y-crear-1">Revisar y crear</a></li>
+  <li><a href="#si-azure-rechaza-la-creación-cuota-y-regiones" id="toc-si-azure-rechaza-la-creación-cuota-y-regiones" class="nav-link" data-scroll-target="#si-azure-rechaza-la-creación-cuota-y-regiones">Si Azure rechaza la creación: cuota y regiones</a></li>
+  <li><a href="#comprueba-3" id="toc-comprueba-3" class="nav-link" data-scroll-target="#comprueba-3">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-5.-preparar-plaza-y-subirla-a-github" id="toc-etapa-5.-preparar-plaza-y-subirla-a-github" class="nav-link" data-scroll-target="#etapa-5.-preparar-plaza-y-subirla-a-github">Etapa 5. Preparar Plaza y subirla a GitHub</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-4" id="toc-qué-vas-a-lograr-4" class="nav-link" data-scroll-target="#qué-vas-a-lograr-4">Qué vas a lograr</a></li>
+  <li><a href="#por-qué-github-y-no-copiar-la-carpeta" id="toc-por-qué-github-y-no-copiar-la-carpeta" class="nav-link" data-scroll-target="#por-qué-github-y-no-copiar-la-carpeta">Por qué GitHub y no copiar la carpeta</a></li>
+  <li><a href="#qué-cambia-en-el-proyecto-y-qué-no" id="toc-qué-cambia-en-el-proyecto-y-qué-no" class="nav-link" data-scroll-target="#qué-cambia-en-el-proyecto-y-qué-no">Qué cambia en el proyecto y qué no</a></li>
+  <li><a href="#comprueba-que-plaza-compila-y-publica-en-release" id="toc-comprueba-que-plaza-compila-y-publica-en-release" class="nav-link" data-scroll-target="#comprueba-que-plaza-compila-y-publica-en-release">Comprueba que Plaza compila y publica en Release</a></li>
+  <li><a href="#revisa-que-el-repositorio-esté-limpio" id="toc-revisa-que-el-repositorio-esté-limpio" class="nav-link" data-scroll-target="#revisa-que-el-repositorio-esté-limpio">Revisa que el repositorio esté limpio</a></li>
+  <li><a href="#sube-el-proyecto" id="toc-sube-el-proyecto" class="nav-link" data-scroll-target="#sube-el-proyecto">Sube el proyecto</a></li>
+  <li><a href="#comprueba-4" id="toc-comprueba-4" class="nav-link" data-scroll-target="#comprueba-4">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-6.-conectar-la-aplicación-con-la-base-de-datos" id="toc-etapa-6.-conectar-la-aplicación-con-la-base-de-datos" class="nav-link" data-scroll-target="#etapa-6.-conectar-la-aplicación-con-la-base-de-datos">Etapa 6. Conectar la aplicación con la base de datos</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-5" id="toc-qué-vas-a-lograr-5" class="nav-link" data-scroll-target="#qué-vas-a-lograr-5">Qué vas a lograr</a></li>
+  <li><a href="#qué-es-la-cadena-de-conexión" id="toc-qué-es-la-cadena-de-conexión" class="nav-link" data-scroll-target="#qué-es-la-cadena-de-conexión">Qué es la cadena de conexión</a></li>
+  <li><a href="#la-línea-que-vas-a-completar" id="toc-la-línea-que-vas-a-completar" class="nav-link" data-scroll-target="#la-línea-que-vas-a-completar">La línea que vas a completar</a></li>
+  <li><a href="#los-pasos-1" id="toc-los-pasos-1" class="nav-link" data-scroll-target="#los-pasos-1">Los pasos</a></li>
+  <li><a href="#cómo-llega-la-cadena-a-tu-código" id="toc-cómo-llega-la-cadena-a-tu-código" class="nav-link" data-scroll-target="#cómo-llega-la-cadena-a-tu-código">Cómo llega la cadena a tu código</a></li>
+  <li><a href="#comprueba-5" id="toc-comprueba-5" class="nav-link" data-scroll-target="#comprueba-5">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-7.-crear-las-tablas-en-la-base-de-datos" id="toc-etapa-7.-crear-las-tablas-en-la-base-de-datos" class="nav-link" data-scroll-target="#etapa-7.-crear-las-tablas-en-la-base-de-datos">Etapa 7. Crear las tablas en la base de datos</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-6" id="toc-qué-vas-a-lograr-6" class="nav-link" data-scroll-target="#qué-vas-a-lograr-6">Qué vas a lograr</a></li>
+  <li><a href="#qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo" id="toc-qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo" class="nav-link" data-scroll-target="#qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo">Qué es una migración y por qué se aplica desde tu equipo</a></li>
+  <li><a href="#el-comando" id="toc-el-comando" class="nav-link" data-scroll-target="#el-comando">El comando</a></li>
+  <li><a href="#qué-debes-ver" id="toc-qué-debes-ver" class="nav-link" data-scroll-target="#qué-debes-ver">Qué debes ver</a></li>
+  <li><a href="#si-falla" id="toc-si-falla" class="nav-link" data-scroll-target="#si-falla">Si falla</a></li>
+  <li><a href="#comprueba-6" id="toc-comprueba-6" class="nav-link" data-scroll-target="#comprueba-6">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-8.-enlazar-la-aplicación-con-github" id="toc-etapa-8.-enlazar-la-aplicación-con-github" class="nav-link" data-scroll-target="#etapa-8.-enlazar-la-aplicación-con-github">Etapa 8. Enlazar la aplicación con GitHub</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-7" id="toc-qué-vas-a-lograr-7" class="nav-link" data-scroll-target="#qué-vas-a-lograr-7">Qué vas a lograr</a></li>
+  <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">Cómo funciona</a></li>
+  <li><a href="#por-qué-no-usamos-la-identidad-asignada-por-el-usuario" id="toc-por-qué-no-usamos-la-identidad-asignada-por-el-usuario" class="nav-link" data-scroll-target="#por-qué-no-usamos-la-identidad-asignada-por-el-usuario">Por qué no usamos la identidad asignada por el usuario</a></li>
+  <li><a href="#paso-1.-habilitar-la-autenticación-básica-de-scm" id="toc-paso-1.-habilitar-la-autenticación-básica-de-scm" class="nav-link" data-scroll-target="#paso-1.-habilitar-la-autenticación-básica-de-scm">Paso 1. Habilitar la autenticación básica de SCM</a></li>
+  <li><a href="#paso-2.-abrir-el-centro-de-implementación" id="toc-paso-2.-abrir-el-centro-de-implementación" class="nav-link" data-scroll-target="#paso-2.-abrir-el-centro-de-implementación">Paso 2. Abrir el Centro de implementación</a></li>
+  <li><a href="#paso-3.-autorizar-a-azure-en-github" id="toc-paso-3.-autorizar-a-azure-en-github" class="nav-link" data-scroll-target="#paso-3.-autorizar-a-azure-en-github">Paso 3. Autorizar a Azure en GitHub</a></li>
+  <li><a href="#paso-4.-elegir-organización-repositorio-y-rama" id="toc-paso-4.-elegir-organización-repositorio-y-rama" class="nav-link" data-scroll-target="#paso-4.-elegir-organización-repositorio-y-rama">Paso 4. Elegir organización, repositorio y rama</a></li>
+  <li><a href="#paso-5.-elegir-la-autenticación-y-guardar" id="toc-paso-5.-elegir-la-autenticación-y-guardar" class="nav-link" data-scroll-target="#paso-5.-elegir-la-autenticación-y-guardar">Paso 5. Elegir la autenticación y guardar</a></li>
+  <li><a href="#qué-hizo-azure-en-tu-repositorio" id="toc-qué-hizo-azure-en-tu-repositorio" class="nav-link" data-scroll-target="#qué-hizo-azure-en-tu-repositorio">Qué hizo Azure en tu repositorio</a></li>
+  <li><a href="#comprueba-7" id="toc-comprueba-7" class="nav-link" data-scroll-target="#comprueba-7">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-9.-comprobar-que-plaza-está-publicada" id="toc-etapa-9.-comprobar-que-plaza-está-publicada" class="nav-link" data-scroll-target="#etapa-9.-comprobar-que-plaza-está-publicada">Etapa 9. Comprobar que Plaza está publicada</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-8" id="toc-qué-vas-a-lograr-8" class="nav-link" data-scroll-target="#qué-vas-a-lograr-8">Qué vas a lograr</a></li>
+  <li><a href="#la-primera-publicación" id="toc-la-primera-publicación" class="nav-link" data-scroll-target="#la-primera-publicación">La primera publicación</a></li>
+  <li><a href="#abre-plaza" id="toc-abre-plaza" class="nav-link" data-scroll-target="#abre-plaza">Abre Plaza</a></li>
+  <li><a href="#haz-un-cambio-y-míralo-publicarse" id="toc-haz-un-cambio-y-míralo-publicarse" class="nav-link" data-scroll-target="#haz-un-cambio-y-míralo-publicarse">Haz un cambio y míralo publicarse</a></li>
+  <li><a href="#comprueba-8" id="toc-comprueba-8" class="nav-link" data-scroll-target="#comprueba-8">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#etapa-10.-borrar-los-recursos-al-terminar" id="toc-etapa-10.-borrar-los-recursos-al-terminar" class="nav-link" data-scroll-target="#etapa-10.-borrar-los-recursos-al-terminar">Etapa 10. Borrar los recursos al terminar</a>
+  <ul class="collapse">
+  <li><a href="#qué-vas-a-lograr-9" id="toc-qué-vas-a-lograr-9" class="nav-link" data-scroll-target="#qué-vas-a-lograr-9">Qué vas a lograr</a></li>
+  <li><a href="#por-qué-hay-que-hacerlo" id="toc-por-qué-hay-que-hacerlo" class="nav-link" data-scroll-target="#por-qué-hay-que-hacerlo">Por qué hay que hacerlo</a></li>
+  <li><a href="#los-pasos-2" id="toc-los-pasos-2" class="nav-link" data-scroll-target="#los-pasos-2">Los pasos</a></li>
+  <li><a href="#lo-que-queda-en-github" id="toc-lo-que-queda-en-github" class="nav-link" data-scroll-target="#lo-que-queda-en-github">Lo que queda en GitHub</a></li>
+  <li><a href="#comprueba-9" id="toc-comprueba-9" class="nav-link" data-scroll-target="#comprueba-9">Comprueba</a></li>
+  </ul></li>
+  <li><a href="#apéndice.-cambiar-la-contraseña-del-servidor" id="toc-apéndice.-cambiar-la-contraseña-del-servidor" class="nav-link" data-scroll-target="#apéndice.-cambiar-la-contraseña-del-servidor">Apéndice. Cambiar la contraseña del servidor</a>
+  <ul class="collapse">
+  <li><a href="#paso-1.-restablecerla-en-el-servidor" id="toc-paso-1.-restablecerla-en-el-servidor" class="nav-link" data-scroll-target="#paso-1.-restablecerla-en-el-servidor">Paso 1. Restablecerla en el servidor</a></li>
+  <li><a href="#paso-2.-actualizar-la-cadena-de-la-aplicación-web" id="toc-paso-2.-actualizar-la-cadena-de-la-aplicación-web" class="nav-link" data-scroll-target="#paso-2.-actualizar-la-cadena-de-la-aplicación-web">Paso 2. Actualizar la cadena de la aplicación web</a></li>
+  <li><a href="#paso-3.-comprobar" id="toc-paso-3.-comprobar" class="nav-link" data-scroll-target="#paso-3.-comprobar">Paso 3. Comprobar</a></li>
+  <li><a href="#paso-4.-quitar-la-contraseña-vieja-del-repositorio" id="toc-paso-4.-quitar-la-contraseña-vieja-del-repositorio" class="nav-link" data-scroll-target="#paso-4.-quitar-la-contraseña-vieja-del-repositorio">Paso 4. Quitar la contraseña vieja del repositorio</a></li>
+  </ul></li>
+  <li><a href="#si-algo-sale-mal" id="toc-si-algo-sale-mal" class="nav-link" data-scroll-target="#si-algo-sale-mal">Si algo sale mal</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../web/semana-15/index.html">Unidad 4. Servicios, despliegue y entornos</a></li><li class="breadcrumb-item"><a href="../../web/semana-15/index.html">Plaza en la nube: publicar en Azure</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Plaza en la nube: publicar en Azure App Service</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oscar Leonel Sánchez Conde </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">21 de noviembre de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ficha">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Qué construyes</td>
+<td>Plaza publicada en una dirección pública de internet, con su base de datos PostgreSQL también en la nube, creada paso a paso desde el portal de Azure</td>
+</tr>
+<tr class="even">
+<td>Prerrequisitos</td>
+<td>Plaza funcionando en local con el catálogo en PostgreSQL, el proyecto subido a un repositorio de GitHub y una cuenta de <strong>Azure for Students</strong> activa con tu correo institucional</td>
+</tr>
+<tr class="odd">
+<td>Herramientas</td>
+<td>Un navegador, el portal de Azure (portal.azure.com), una cuenta de GitHub, .NET SDK 10, Git y PowerShell. No se usa Visual Studio: la publicación se hace desde GitHub</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cómo usar esta guía
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Las capturas son del portal de Azure en español. El portal cambia de aspecto con frecuencia: si un botón no está donde lo muestra la imagen, guíate por su <strong>nombre</strong>.</li>
+<li>En las capturas se taparon con gris o azul los datos personales: el correo, el identificador de la suscripción y otros códigos. En tu pantalla sí los verás.</li>
+<li>Cada etapa termina con una sección <strong>Comprueba</strong>. No sigas a la etapa siguiente hasta que se cumpla.</li>
+<li>Los recursos de Azure consumen el crédito de tu suscripción. La última etapa enseña a borrarlos todos de una vez.</li>
+</ul>
+</div>
+</div>
+<section id="lo-que-vas-a-lograr" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-vas-a-lograr">Lo que vas a lograr</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Etapa</th>
+<th>Qué haces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Entrar al portal de Azure y verificar que tu suscripción de estudiante está activa</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Crear el grupo de recursos <code>rg-plaza</code>, el contenedor de todo lo que vas a crear</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Crear el servidor PostgreSQL gratuito (B1ms) y abrir su firewall para tu equipo y para Azure</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Crear la aplicación web (App Service) con el plan gratuito y resolver los errores de cuota y de región</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Preparar Plaza en tu equipo y subirla a GitHub</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Guardar la cadena de conexión en la aplicación web para que llegue a la base de datos</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Aplicar la migración de Plaza para crear las tablas en la base de Azure</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Enlazar la aplicación con tu repositorio de GitHub para publicar con cada push</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Comprobar que Plaza está publicada y ver un cambio llegar a internet</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Borrar todos los recursos de Azure al terminar, y qué hacer con el flujo de trabajo de GitHub</td>
+</tr>
+</tbody>
+</table>
+<p>Al final hay un apéndice para cambiar la contraseña del servidor y una tabla con los problemas más frecuentes y su solución.</p>
+</section>
+<section id="etapa-1.-entrar-al-portal-y-verificar-la-suscripción" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-1.-entrar-al-portal-y-verificar-la-suscripción">Etapa 1. Entrar al portal y verificar la suscripción</h2>
+<section id="qué-vas-a-lograr" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr">Qué vas a lograr</h3>
+<p>Confirmar que tu cuenta de Azure for Students está activa y que eres el propietario de la suscripción. Sin esto no puedes crear recursos.</p>
+</section>
+<section id="entra-al-portal" class="level3">
+<h3 class="anchored" data-anchor-id="entra-al-portal">Entra al portal</h3>
+<ol type="1">
+<li>Abre <a href="https://portal.azure.com">portal.azure.com</a> en el navegador.</li>
+<li>Inicia sesión con tu <strong>correo institucional</strong>. Azure for Students se activa con ese correo, no con uno personal.</li>
+<li>Llegarás a la página de <strong>Inicio</strong>. Si es tu primera vez, no tienes recursos: la sección <em>Recursos</em> aparece vacía.</li>
+</ol>
+<p><img src="imagenes/01-portal-inicio.png" class="img-fluid" alt="Página de inicio del portal de Azure. Arriba, la lista de servicios de Azure con Crear un recurso, App Services, Bases de datos SQL y otros. En el centro, la sección Recursos vacía con el mensaje No se ha visto ningún recurso recientemente. Abajo, el bloque Navegar con Suscripciones, Grupos de recursos y Todos los recursos."></p>
+</section>
+<section id="verifica-la-suscripción" class="level3">
+<h3 class="anchored" data-anchor-id="verifica-la-suscripción">Verifica la suscripción</h3>
+<ol type="1">
+<li>En el bloque <strong>Navegar</strong>, al fondo de la página de inicio, haz clic en <strong>Suscripciones</strong>.</li>
+<li>Verás una lista con una sola suscripción llamada <strong>Azure for Students</strong>.</li>
+</ol>
+<p><img src="imagenes/02-lista-suscripciones.png" class="img-fluid" alt="Lista de suscripciones del directorio IUE. Hay una sola fila, Azure for Students. Sus columnas son nombre, identificador, rol y costo actual."></p>
+<ol start="3" type="1">
+<li>Haz clic en el nombre <strong>Azure for Students</strong> para abrir su detalle.</li>
+<li>En <em>Información esencial</em> revisa tres datos: <strong>Estado</strong> debe decir <em>Activo</em>, <strong>Mi rol</strong> debe decir <em>Propietario</em> y <strong>Directorio</strong> debe ser el de la institución.</li>
+</ol>
+<p><img src="imagenes/03-suscripcion-detalle.png" class="img-fluid" alt="Detalle de la suscripción Azure for Students. En Información esencial aparecen el directorio IUE, el estado Activo, el rol Propietario y el plan Plan de Azure. Debajo, los paneles de velocidad y previsión de gastos y costes por recurso."></p>
+</section>
+<section id="comprueba" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba">Comprueba</h3>
+<ul>
+<li>El estado de la suscripción es <strong>Activo</strong>.</li>
+<li>Tu rol es <strong>Propietario</strong>.</li>
+<li>Los paneles de costes muestran <strong>0.00</strong>: todavía no has creado nada.</li>
+</ul>
+<p>Si el estado no es <em>Activo</em> o no ves ninguna suscripción, tu cuenta de estudiante aún no se activó. Revisa el correo de verificación de Azure for Students antes de continuar.</p>
+</section>
+</section>
+<section id="etapa-2.-crear-el-grupo-de-recursos" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-2.-crear-el-grupo-de-recursos">Etapa 2. Crear el grupo de recursos</h2>
+<section id="qué-vas-a-lograr-1" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-1">Qué vas a lograr</h3>
+<p>Un <strong>grupo de recursos</strong> llamado <code>rg-plaza</code>.</p>
+</section>
+<section id="qué-es-un-grupo-de-recursos" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-un-grupo-de-recursos">Qué es un grupo de recursos</h3>
+<p>Es un contenedor lógico. Todo lo que crees para Plaza (la base de datos, la aplicación web) va dentro del mismo grupo. Esto sirve para algo muy práctico: al terminar la clase borras el grupo y desaparece todo lo que contiene, sin dejar recursos olvidados que sigan gastando tu crédito.</p>
+</section>
+<section id="los-pasos" class="level3">
+<h3 class="anchored" data-anchor-id="los-pasos">Los pasos</h3>
+<ol type="1">
+<li>En la página de <strong>Inicio</strong>, en el bloque <em>Navegar</em>, haz clic en <strong>Grupos de recursos</strong>.</li>
+<li>La lista está vacía. Haz clic en <strong>Crear</strong>.</li>
+</ol>
+<p><img src="imagenes/04-grupos-vacio.png" class="img-fluid" alt="Página Grupos de recursos con el mensaje No hay grupos de recursos para mostrar. Arriba a la izquierda, el botón azul Crear, y otro botón Crear en el centro de la página."></p>
+<ol start="3" type="1">
+<li>Se abre el formulario <strong>Crear un grupo de recursos</strong>, en la pestaña <em>Datos básicos</em>. Tiene tres campos:
+<ul>
+<li><strong>Suscripción</strong>: ya viene con <em>Azure for Students</em>.</li>
+<li><strong>Nombre del grupo de recursos</strong>: está vacío.</li>
+<li><strong>Región</strong>: viene con <em>(US) East US</em>.</li>
+</ul></li>
+</ol>
+<p><img src="imagenes/05-grupo-formulario-vacio.png" class="img-fluid" alt="Formulario Crear un grupo de recursos en la pestaña Datos básicos. La suscripción es Azure for Students, el nombre del grupo está vacío y la región es (US) East US. Abajo, los botones Anterior, Siguiente y Revisar y crear."></p>
+<ol start="4" type="1">
+<li>Escribe <code>rg-plaza</code> en <strong>Nombre del grupo de recursos</strong>. El prefijo <code>rg-</code> es una convención: indica que el recurso es un <em>resource group</em>.</li>
+<li>Deja la <strong>Región</strong> en <em>(US) East US</em>. Si abres la lista, verás todas las regiones disponibles.</li>
+</ol>
+<p><img src="imagenes/06-grupo-regiones.png" class="img-fluid" alt="Lista desplegable de regiones abierta. Se ven entre otras Brazil South, Chile Central, UK South, Central US, East US y West US 2. East US aparece resaltada."></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>La región del grupo no ata a sus recursos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La región del grupo solo indica dónde se guardan los metadatos del propio grupo. Los recursos que pongas dentro pueden estar en otra región. Más adelante, al crear la base de datos y la aplicación, elegirás la región según lo que tu suscripción de estudiante permita.</p>
+</div>
+</div>
+<p><img src="imagenes/07-grupo-formulario-lleno.png" class="img-fluid" alt="Formulario con el nombre rg-plaza escrito y la región (US) East US seleccionada."></p>
+<ol start="6" type="1">
+<li>Haz clic en <strong>Revisar y crear</strong>. Azure valida los datos y te muestra un resumen: suscripción, nombre, región y etiquetas (ninguna).</li>
+</ol>
+<p><img src="imagenes/08-grupo-revisar.png" class="img-fluid" alt="Pestaña Revisar y crear. Resume los datos básicos: suscripción Azure for Students, nombre rg-plaza y región East US. Etiquetas: ninguno. Abajo, el botón azul Crear."></p>
+<ol start="7" type="1">
+<li>Haz clic en <strong>Crear</strong>.</li>
+<li>Después de unos instantes, aparece una notificación verde: <strong>Grupo de recursos creado</strong>. La lista de grupos ya muestra <code>rg-plaza</code>.</li>
+</ol>
+<p><img src="imagenes/09-grupo-creado.png" class="img-fluid" alt="Página Grupos de recursos con una notificación verde arriba a la derecha que dice Grupo de recursos creado: la creación de rg-plaza en la suscripción Azure for Students se realizó correctamente. Tiene los botones Ir al grupo de recursos y Anclar al panel."></p>
+</section>
+<section id="comprueba-1" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-1">Comprueba</h3>
+<ul>
+<li>Recibiste la notificación <strong>Grupo de recursos creado</strong>.</li>
+<li>En <strong>Grupos de recursos</strong> aparece <code>rg-plaza</code> con la suscripción <em>Azure for Students</em>.</li>
+<li>Sigues con costo <strong>0.00</strong>: un grupo de recursos vacío no cuesta nada.</li>
+</ul>
+</section>
+</section>
+<section id="etapa-3.-crear-el-servidor-postgresql" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-3.-crear-el-servidor-postgresql">Etapa 3. Crear el servidor PostgreSQL</h2>
+<section id="qué-vas-a-lograr-2" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-2">Qué vas a lograr</h3>
+<p>Un servidor <strong>Azure Database for PostgreSQL, servidor flexible</strong>, dentro de <code>rg-plaza</code>. Es la base de datos que usará Plaza cuando esté publicada.</p>
+</section>
+<section id="por-qué-hace-falta" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-hace-falta">Por qué hace falta</h3>
+<p>En tu equipo, Plaza se conecta a un PostgreSQL local (<code>localhost</code>). Cuando la aplicación viva en internet, ese <code>localhost</code> no existe: la aplicación necesita una base de datos que también esté en la nube. Azure la ofrece administrada: tú no instalas ni actualizas nada, solo la configuras.</p>
+</section>
+<section id="abre-el-formulario-de-creación" class="level3">
+<h3 class="anchored" data-anchor-id="abre-el-formulario-de-creación">Abre el formulario de creación</h3>
+<ol type="1">
+<li>En el buscador de la parte superior del portal escribe <code>PostgreSQL</code> y elige <strong>Azure Database for PostgreSQL, servidores flexibles</strong>.</li>
+<li>Haz clic en <strong>Crear</strong>. Se abre el formulario con cuatro pestañas: <em>Básico</em>, <em>Redes</em>, <em>Seguridad</em> y <em>Etiquetas</em>.</li>
+</ol>
+</section>
+<section id="pestaña-básico-proyecto-y-servidor" class="level3">
+<h3 class="anchored" data-anchor-id="pestaña-básico-proyecto-y-servidor">Pestaña Básico: proyecto y servidor</h3>
+<ol type="1">
+<li><strong>Suscripción</strong>: <em>Azure for Students</em>, ya viene elegida.</li>
+<li><strong>Grupo de recursos</strong>: abre la lista y elige <code>rg-plaza</code>, el que creaste en la etapa anterior.</li>
+<li><strong>Nombre del servidor</strong>: debe ser único en todo Azure, porque pasa a formar parte de una dirección pública (<code>&lt;nombre&gt;.postgres.database.azure.com</code>). Usa <code>plaza-pg-</code> seguido de algo propio, por ejemplo tus iniciales o tu grupo. Solo admite letras minúsculas, números y guiones. Cuando el nombre sirve, el formulario marca tres checks verdes.</li>
+</ol>
+<p><img src="imagenes/10-pg-basico-arriba.png" class="img-fluid" alt="Parte superior del formulario del servidor PostgreSQL. La suscripción es Azure for Students, el grupo de recursos es rg-plaza y el nombre del servidor es plaza-pg-iue603. A la derecha, tres reglas del nombre con un check verde cada una, incluida la de que el nombre debe estar disponible."></p>
+<ol start="4" type="1">
+<li><strong>Región</strong>: deja la que trae el formulario (<em>Canada Central</em> en la cuenta de este ejemplo). Las suscripciones de estudiante solo permiten algunas regiones y la que el formulario propone suele ser una de ellas. Si al crear Azure rechaza la región, elige otra de la lista.</li>
+<li><strong>Versión de PostgreSQL</strong>: <em>18</em>, la misma que usas en local.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Los valores por defecto gastan crédito
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El formulario propone <strong>Producción</strong> con un servidor de 4 núcleos (<em>D4ads_v5</em>). Ese tamaño consume tu crédito de estudiante en pocos días. Para Plaza elige <strong>Desarrollo/pruebas</strong> y el tamaño más pequeño, como se explica a continuación.</p>
+</div>
+</div>
+<ol start="6" type="1">
+<li>En <strong>Tipo de carga de trabajo</strong> elige <strong>Desarrollo/pruebas</strong>. El formulario cambia el proceso a <em>B2s</em>, con dos núcleos. Todavía no es el nivel gratuito.</li>
+</ol>
+<p><img src="imagenes/11-pg-desarrollo-pruebas.png" class="img-fluid" alt="Formulario con el tipo de carga de trabajo Desarrollo/pruebas seleccionado. En Proceso y almacenamiento aparece Con capacidad de ráfaga, B2s, 2 núcleos virtuales, 4 GiB de RAM y 32 GiB de almacenamiento."></p>
+<ol start="7" type="1">
+<li>En <strong>Proceso y almacenamiento</strong> haz clic en <strong>Configurar servidor</strong>. Se abre un panel lateral.</li>
+<li>Abre la lista <strong>Tamaño de proceso</strong> y elige <strong>Standard_B1ms</strong> (1 núcleo virtual, 2 GiB de memoria).</li>
+</ol>
+<p><img src="imagenes/12-pg-tamanos-proceso.png" class="img-fluid" alt="Panel Proceso y almacenamiento con la lista Tamaño de proceso abierta. La primera opción es Standard_B1ms con 1 núcleo virtual y 2 GiB de memoria; después Standard_B2s, B2ms, B4ms y tamaños mayores."></p>
+<ol start="9" type="1">
+<li>Baja por el panel. El almacenamiento debe quedar en <strong>32 GiB</strong>, con <em>Crecimiento automático</em> sin marcar, copia de seguridad de <strong>7</strong> días y <em>Redundancia geográfica</em> sin marcar.</li>
+</ol>
+<p><img src="imagenes/13-pg-almacenamiento.png" class="img-fluid" alt="Sección Almacenamiento del panel. Tipo SSD Premium, tamaño 32 GiB, nivel de rendimiento P4 de 120 IOPS, crecimiento automático sin marcar, retención de la copia de seguridad de 7 días y redundancia geográfica sin marcar."></p>
+<ol start="10" type="1">
+<li>Baja hasta el cuadro <strong>Costes estimados</strong>. Debe decir <strong>Liberar hasta 750 horas</strong> para <em>Standard_B1ms</em> y <strong>Liberar hasta 32 GB</strong> para el almacenamiento. Esa es la confirmación de que el servidor entra en la capa gratuita para estudiantes y cuentas nuevas.</li>
+</ol>
+<p><img src="imagenes/14-pg-costes-gratis.png" class="img-fluid" alt="Cuadro Costes estimados. En Compute dice Liberar hasta 750 horas con Standard_B1ms de 1 vCore. En Almacenamiento dice Liberar hasta 32 GB y USD 0.00 por mes."></p>
+<ol start="11" type="1">
+<li>Haz clic en <strong>Guardar</strong>. Regresas al formulario y <em>Proceso y almacenamiento</em> ahora dice <strong>B1ms, 1 núcleo, 2 GiB de RAM, 32 GiB</strong>.</li>
+</ol>
+<p><img src="imagenes/15-pg-b1ms-elegido.png" class="img-fluid" alt="Formulario con Desarrollo/pruebas seleccionado y, en Proceso y almacenamiento, Con capacidad de ráfaga B1ms, 1 núcleo virtual, 2 GiB de RAM y 32 GiB de almacenamiento."></p>
+</section>
+<section id="pestaña-básico-autenticación" class="level3">
+<h3 class="anchored" data-anchor-id="pestaña-básico-autenticación">Pestaña Básico: autenticación</h3>
+<p>El formulario propone <em>PostgreSQL y autenticación de Microsoft Entra</em>, que obliga a designar un administrador de Entra. Para esta guía usamos solo usuario y contraseña.</p>
+<ol type="1">
+<li>En <strong>Método de autenticación</strong> elige <strong>Autenticación de PostgreSQL</strong>.</li>
+<li><strong>Inicio de sesión del administrador</strong>: escribe <code>plazaadmin</code>. Es el usuario con el que se conectará <code>dotnet ef</code> y la aplicación.</li>
+<li><strong>Contraseña</strong> y <strong>Confirmar contraseña</strong>: escribe la misma contraseña en los dos campos.</li>
+</ol>
+<p><img src="imagenes/16-pg-autenticacion.png" class="img-fluid" alt="Sección de autenticación con el método Autenticación de PostgreSQL seleccionado. El inicio de sesión del administrador es plazaadmin y los campos de contraseña están vacíos."></p>
+<p>La contraseña debe tener entre 8 y 128 caracteres y combinar al menos tres de estas cuatro categorías: mayúsculas, minúsculas, números y símbolos. Si no cumple, el formulario lo marca en rojo y no te deja crear el servidor.</p>
+<p><img src="imagenes/19-pg-contrasena-requisitos.png" class="img-fluid" alt="Campos de contraseña vacíos con tres errores en rojo: el valor no puede estar vacío, la contraseña debe tener un mínimo de 8 caracteres y un máximo de 128, y debe contener caracteres de tres de las cuatro categorías de mayúsculas, minúsculas, números y símbolos."></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Guarda esta contraseña
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Azure no la vuelve a mostrar. La necesitarás en la cadena de conexión de la aplicación y para aplicar la migración desde tu equipo. En esta guía aparece como <code>&lt;tu-contraseña&gt;</code>: nunca la escribas en el repositorio ni en un archivo que subas a GitHub.</p>
+</div>
+</div>
+</section>
+<section id="pestaña-redes" class="level3">
+<h3 class="anchored" data-anchor-id="pestaña-redes">Pestaña Redes</h3>
+<ol type="1">
+<li>En <strong>Método de conectividad</strong> deja <strong>Acceso público (direcciones IP permitidas) y puntos de conexión privados</strong>, que es el valor por defecto. Mantén marcada la casilla de permitir el acceso público.</li>
+</ol>
+<p><img src="imagenes/17-pg-redes-acceso-publico.png" class="img-fluid" alt="Pestaña Redes. Método de conectividad con Acceso público y puntos de conexión privados seleccionado. Más abajo, la casilla Permitir el acceso público a este recurso a través de Internet mediante una dirección IP pública marcada, y el título Reglas de firewall."></p>
+<ol start="2" type="1">
+<li>Baja hasta <strong>Reglas de firewall</strong>. Por defecto nadie puede entrar al servidor: hay que abrir dos puertas.
+<ul>
+<li>Marca <strong>Permitir acceso público a este servidor desde cualquier servicio de Azure dentro de Azure</strong>. Es la puerta por la que entrará tu aplicación publicada.</li>
+<li>Haz clic en <strong>Agregar dirección IP del cliente actual</strong>. Azure agrega una regla con la IP pública de tu equipo. Es la puerta por la que entrarás tú para aplicar la migración.</li>
+</ul></li>
+</ol>
+<p><img src="imagenes/18-pg-redes-firewall.png" class="img-fluid" alt="Reglas de firewall con la casilla Permitir acceso público desde cualquier servicio de Azure marcada. Debajo, una regla ClientIPAddress con la fecha de creación y la dirección IP del equipo, tapada en la captura."></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>No uses el rango completo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al lado de <em>Agregar dirección IP del cliente actual</em> hay otro enlace, <strong>Agregar 0.0.0.0 - 255.255.255.255</strong>. No lo uses: abre la base de datos a todo internet.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Si cambias de red, cambia tu IP
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tu IP pública cambia si te conectas desde otra red, por ejemplo la de la universidad o la de tu casa. Si más adelante <code>dotnet ef</code> no logra conectar, vuelve a esta regla en el servidor y agrega la IP nueva.</p>
+</div>
+</div>
+</section>
+<section id="pestaña-seguridad" class="level3">
+<h3 class="anchored" data-anchor-id="pestaña-seguridad">Pestaña Seguridad</h3>
+<p>No cambies nada. La <em>Clave de cifrado de datos</em> queda como <strong>Clave administrada por el servicio</strong>.</p>
+</section>
+<section id="revisar-y-crear" class="level3">
+<h3 class="anchored" data-anchor-id="revisar-y-crear">Revisar y crear</h3>
+<ol type="1">
+<li>Haz clic en <strong>Revisar y crear</strong>. Azure valida todos los datos. Si algo falla, la pestaña con el problema aparece marcada en rojo.</li>
+<li>Revisa el resumen: grupo <code>rg-plaza</code>, tu nombre de servidor, usuario <code>plazaadmin</code>, versión 18, <strong>B1ms</strong> y almacenamiento de 32 GiB.</li>
+</ol>
+<p><img src="imagenes/20-pg-revisar-resumen.png" class="img-fluid" alt="Pestaña Revisar y crear con el resumen: suscripción Azure for Students, grupo de recursos rg-plaza, servidor plaza-pg-iue603, usuario plazaadmin, ubicación Canada Central, PostgreSQL 18, B1ms de 1 núcleo y 2 GiB, copia de seguridad de 7 días, crecimiento automático y redundancia geográfica no habilitados."></p>
+<ol start="3" type="1">
+<li>Haz clic en <strong>Crear</strong>.</li>
+<li>El portal abre la página de la implementación con el mensaje <strong>La implementación está en curso</strong>. Espera: el servidor tarda en aprovisionarse. No cierres la pestaña.</li>
+</ol>
+<p><img src="imagenes/21-pg-implementacion-en-curso.png" class="img-fluid" alt="Página de implementación del servidor PostgreSQL con una notificación que dice Implementación en curso: se está realizando la implementación en el grupo de recursos rg-plaza."></p>
+<ol start="5" type="1">
+<li>La página no siempre se actualiza sola. Haz clic en <strong>Actualizar</strong> de vez en cuando. Cuando termine, el estado cambia a <strong>Se completó la implementación</strong>.</li>
+</ol>
+<p><img src="imagenes/22-pg-implementacion-completa.png" class="img-fluid" alt="Página de la implementación con un check verde y el mensaje Se completó la implementación. Debajo, el bloque Pasos siguientes y el botón azul Ir al recurso."></p>
+</section>
+<section id="revisa-el-servidor" class="level3">
+<h3 class="anchored" data-anchor-id="revisa-el-servidor">Revisa el servidor</h3>
+<ol type="1">
+<li>Haz clic en <strong>Ir al recurso</strong>. Se abre la página del servidor.</li>
+<li>En <em>Información esencial</em> comprueba que <strong>Estado</strong> dice <strong>Ready</strong>, que el servidor está en tu grupo <code>rg-plaza</code> y que el <strong>Inicio de sesión del administrador</strong> es <code>plazaadmin</code>.</li>
+<li>Fíjate en el <strong>Punto de conexión</strong>: es la dirección <code>&lt;tu-servidor&gt;.postgres.database.azure.com</code>. Es el valor que irá en <code>Host=</code> en la cadena de conexión de la etapa 6. Para copiarlo, pasa el cursor por encima y usa el icono de copiar.</li>
+</ol>
+<p><img src="imagenes/23-pg-servidor-listo.png" class="img-fluid" alt="Página del servidor flexible plaza-pg-iue603. Estado Ready, ubicación Canada Central, punto de conexión plaza-pg-iue603.postgres.database.azure.com, inicio de sesión del administrador plazaadmin, configuración con capacidad de ráfaga B1ms, versión de PostgreSQL 18.6 y alta disponibilidad no habilitada."></p>
+<p>El aviso naranja de arriba dice que el nivel de proceso ampliable es para desarrollo y pruebas. Es correcto: Plaza es un proyecto de clase, no una aplicación con usuarios reales.</p>
+</section>
+<section id="crea-la-base-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="crea-la-base-de-datos">Crea la base de datos</h3>
+<p>El servidor ya existe, pero está vacío: solo trae bases de datos del sistema y una llamada <code>postgres</code>. Plaza necesita la suya.</p>
+<ol type="1">
+<li>En el menú de la izquierda abre la sección <strong>Configuración</strong> y haz clic en <strong>Bases de datos</strong>.</li>
+</ol>
+<p><img src="imagenes/24-pg-menu-bases-de-datos.png" class="img-fluid" alt="Menú lateral del servidor con la sección Configuración desplegada. Sus opciones son Proceso y almacenamiento, Redes, Bases de datos, Conectar, Parámetros del servidor, Replicación y Mantenimiento."></p>
+<ol start="2" type="1">
+<li>La lista muestra tres bases: <code>azure_maintenance</code> y <code>azure_sys</code>, que son del sistema y no se pueden borrar, y <code>postgres</code>.</li>
+</ol>
+<p><img src="imagenes/25-pg-bases-de-datos-lista.png" class="img-fluid" alt="Página Bases de datos del servidor con una tabla de tres filas: azure_maintenance y azure_sys de tipo System, y postgres de tipo User. Arriba, los botones Agregar, Eliminar y Actualizar."></p>
+<ol start="3" type="1">
+<li>Haz clic en <strong>Agregar</strong>. Se abre el panel <strong>Crear base de datos</strong>.</li>
+<li>En <strong>Nombre</strong> escribe <code>plaza_campesina</code>. Es el mismo nombre que Plaza usa en tu equipo, en <code>appsettings.Development.json</code>, así que la cadena de conexión de la nube solo cambia el servidor y las credenciales. Deja el juego de caracteres y la colación como vienen (<em>UTF8</em> y <em>en_US.utf8</em>).</li>
+</ol>
+<p><img src="imagenes/26-pg-crear-base-datos.png" class="img-fluid" alt="Panel Crear base de datos con el nombre plaza_campesina escrito. El juego de caracteres es UTF8 y la colación es en_US.utf8, ambos bloqueados. Arriba, los botones Guardar y Cancelar."></p>
+<ol start="5" type="1">
+<li>Haz clic en <strong>Guardar</strong>. Aparece una notificación verde: <strong>Se creó correctamente PostgreSQL base de datos</strong>.</li>
+<li>Si la lista no cambia, haz clic en <strong>Actualizar</strong>. Ahora aparece <code>plaza_campesina</code> con tipo <em>User</em>.</li>
+</ol>
+<p><img src="imagenes/27-pg-base-creada.png" class="img-fluid" alt="Página Bases de datos con una notificación verde que dice Se creó correctamente PostgreSQL base de datos, se ha creado correctamente plaza_campesina. La tabla ahora tiene cuatro filas, y la nueva es plaza_campesina de tipo User."></p>
+</section>
+<section id="comprueba-2" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-2">Comprueba</h3>
+<ul>
+<li>El servidor está en estado <strong>Ready</strong>.</li>
+<li>La lista de bases de datos incluye <code>plaza_campesina</code>.</li>
+<li>Tienes anotados: el <strong>punto de conexión</strong> del servidor, el usuario <code>plazaadmin</code> y tu contraseña.</li>
+<li>El grupo <code>rg-plaza</code> ya contiene un recurso. Si abres el grupo, lo verás en la lista.</li>
+</ul>
+<p>Con esto la base de datos está lista, pero todavía está vacía: no tiene las tablas de Plaza. Esas se crean en la etapa de migraciones.</p>
+</section>
+</section>
+<section id="etapa-4.-crear-la-aplicación-web" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-4.-crear-la-aplicación-web">Etapa 4. Crear la aplicación web</h2>
+<section id="qué-vas-a-lograr-3" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-3">Qué vas a lograr</h3>
+<p>Una <strong>aplicación web de App Service</strong> dentro de <code>rg-plaza</code>, con el runtime de .NET 10 y el plan gratuito. Al terminar tendrá una dirección pública que responde con la página de bienvenida de Azure. Todavía no contiene Plaza: eso llega en las etapas siguientes.</p>
+</section>
+<section id="qué-es-app-service" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-app-service">Qué es App Service</h3>
+<p>App Service es el servicio de Azure que ejecuta tu aplicación web: recibe las peticiones de internet, arranca tu programa ASP.NET Core y devuelve las respuestas. Tú no administras el servidor ni el sistema operativo. Cada aplicación web vive dentro de un <strong>plan de App Service</strong>, que es el que define cuánta máquina te toca y cuánto cuesta.</p>
+</section>
+<section id="abre-el-formulario-de-creación-1" class="level3">
+<h3 class="anchored" data-anchor-id="abre-el-formulario-de-creación-1">Abre el formulario de creación</h3>
+<ol type="1">
+<li>En la página de <strong>Inicio</strong> del portal haz clic en <strong>Crear un recurso</strong> y busca <strong>Aplicación web</strong> (en inglés, <em>Web App</em>). También sirve escribir <code>App Services</code> en el buscador superior y pulsar <strong>Crear</strong>.</li>
+<li>Se abre el formulario <strong>Crear aplicación web</strong>, con siete pestañas: <em>Datos básicos</em>, <em>Base de datos</em>, <em>Implementación</em>, <em>Redes</em>, <em>Supervisión y protección</em>, <em>Etiquetas</em> y <em>Revisar y crear</em>.</li>
+</ol>
+</section>
+<section id="pestaña-datos-básicos" class="level3">
+<h3 class="anchored" data-anchor-id="pestaña-datos-básicos">Pestaña Datos básicos</h3>
+<ol type="1">
+<li><strong>Suscripción</strong>: <em>Azure for Students</em>.</li>
+<li><strong>Grupo de recursos</strong>: abre la lista y elige <code>rg-plaza</code>.</li>
+<li><strong>Nombre</strong>: es único en todo Azure y forma tu dirección pública. Usa <code>plaza-</code> seguido de algo propio, por ejemplo <code>plaza-iue603</code>. Solo admite letras, números y guiones.</li>
+</ol>
+<p><img src="imagenes/28-app-basico-nombre.png" class="img-fluid" alt="Formulario Crear aplicación web en la pestaña Datos básicos. La suscripción es Azure for Students, el grupo de recursos es rg-plaza y el nombre es plaza-iue603 con el sufijo .azurewebsites.net. Publicar está en Código."></p>
+<ol start="4" type="1">
+<li><strong>Publicar</strong>: deja <strong>Código</strong>. La otra opción, <em>Contenedor</em>, es para aplicaciones empaquetadas con Docker.</li>
+<li><strong>Pila del entorno en tiempo de ejecución</strong>: abre la lista y elige <strong>.NET 10 (LTS)</strong>, la misma versión con la que construiste Plaza. Si eliges otra, la aplicación no arranca.</li>
+</ol>
+<p><img src="imagenes/29-app-pila-runtime.png" class="img-fluid" alt="Lista desplegable de la pila de tiempo de ejecución abierta. En la sección .NET aparecen .NET 11 (STS), .NET 10 (LTS), ASP.NET V4.8 y ASP.NET V3.5. Más abajo hay opciones de Java, Node y PHP."></p>
+<ol start="6" type="1">
+<li><strong>Sistema operativo</strong>: <strong>Linux</strong>, que es lo que propone el formulario.</li>
+</ol>
+</section>
+<section id="región-y-plan-los-valores-por-defecto-cuestan-dinero" class="level3">
+<h3 class="anchored" data-anchor-id="región-y-plan-los-valores-por-defecto-cuestan-dinero">Región y plan: los valores por defecto cuestan dinero</h3>
+<p>Baja por el formulario hasta <strong>Planes de precios</strong>. Aquí hay dos cosas que revisar.</p>
+<p><img src="imagenes/30-app-region-plan-b1.png" class="img-fluid" alt="Formulario con la pila .NET 10 LTS, el sistema operativo Linux y la región Canada Central. En Planes de precios aparece un plan de Linux nuevo y el plan de precios Básico B1 con 1.75 GB de memoria y 1 vCPU."></p>
+<p>El plan que propone el formulario es <strong>Básico B1</strong>, que cuesta alrededor de 13 a 15 USD al mes y sale de tu crédito. Para esta guía elige el plan gratuito:</p>
+<ol type="1">
+<li>Abre la lista <strong>Plan de precios</strong>.</li>
+<li>Elige <strong>Gratis F1 (1 GB de memoria)</strong>. En la lista dice <em>0.00 USD/mes</em>.</li>
+</ol>
+<p><img src="imagenes/31-app-planes-precios.png" class="img-fluid" alt="Lista de planes de precios. Gratis F1 con 0.00 USD al mes y 1 GB de memoria, Básico B1 con 13.14 USD al mes, y varios planes Premium con precios entre 61 y 162 USD al mes."></p>
+<p><img src="imagenes/32-app-plan-gratis-elegido.png" class="img-fluid" alt="Formulario con el plan de precios Gratis F1 de 1 GB de memoria ya seleccionado."></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué te da el plan gratuito, y qué no
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>F1 es suficiente para una aplicación de clase, pero tiene límites: comparte la máquina con otras aplicaciones, tiene una cuota diaria de tiempo de CPU, no tiene <em>Always On</em> (la aplicación se duerme si nadie la visita y la primera petición después de un rato tarda más) y no tiene garantía de disponibilidad. Para la demo de la clase es lo correcto.</p>
+</div>
+</div>
+</section>
+<section id="las-pestañas-base-de-datos-implementación-redes-y-supervisión" class="level3">
+<h3 class="anchored" data-anchor-id="las-pestañas-base-de-datos-implementación-redes-y-supervisión">Las pestañas Base de datos, Implementación, Redes y Supervisión</h3>
+<p>Las cuatro se quedan como vienen. Hay un detalle que explicar en cada una.</p>
+<ul>
+<li><strong>Base de datos</strong>: no marques <em>Crear una base de datos</em>. Ya creaste la tuya en la etapa 3, y esta opción solo está disponible en planes de pago.</li>
+</ul>
+<p><img src="imagenes/33-app-pestana-base-datos.png" class="img-fluid" alt="Pestaña Base de datos con un aviso que dice que la base de datos solo está disponible para planes de App Service básicos o superiores. La casilla Crear una base de datos está desmarcada y bloqueada."></p>
+<ul>
+<li><strong>Implementación</strong>: aquí aparece la <em>implementación continua</em> con GitHub, deshabilitada. El portal avisa que con Linux y este plan no se puede configurar durante la creación. Se hace después, desde el <em>Deployment Center</em> de la aplicación ya creada, en una etapa posterior.</li>
+</ul>
+<p><img src="imagenes/34-app-pestana-implementacion.png" class="img-fluid" alt="Pestaña Implementación con la implementación continua en Deshabilitar y un aviso naranja que dice que no se puede configurar la implementación con Acciones de GitHub durante la creación con las selecciones de sistema operativo y plan de App Service. Debajo, los campos de cuenta, organización, repositorio y rama de GitHub, bloqueados."></p>
+<ul>
+<li><strong>Redes</strong>: deja el <strong>acceso público activado</strong>. Sin él nadie podría abrir tu aplicación desde internet.</li>
+<li><strong>Supervisión y protección</strong>: deja <strong>Application Insights en No</strong> y <strong>Defender sin marcar</strong>. El propio formulario avisa que ambos se facturan por separado.</li>
+</ul>
+<p><img src="imagenes/35-app-pestana-supervision.png" class="img-fluid" alt="Pestaña Supervisión y protección. Habilitar Application Insights está en No y la casilla Habilitar Defender para App Service está sin marcar. Un texto arriba dice que estas características son opcionales y se facturan por separado."></p>
+</section>
+<section id="revisar-y-crear-1" class="level3">
+<h3 class="anchored" data-anchor-id="revisar-y-crear-1">Revisar y crear</h3>
+<ol type="1">
+<li>Haz clic en <strong>Revisar y crear</strong>. El resumen debe mostrar: <em>SKU Gratis</em>, tu grupo <code>rg-plaza</code>, tu nombre, la pila <strong>.NET 10 (LTS)</strong>, sistema operativo <strong>Linux</strong> y <em>Application Insights: Sin habilitar</em>.</li>
+</ol>
+<p><img src="imagenes/36-app-revisar-resumen.png" class="img-fluid" alt="Pestaña Revisar y crear. El resumen indica SKU Gratis con precio estimado Gratis, el grupo de recursos rg-plaza, el nombre plaza-iue603, la pila .NET 10 LTS y el plan de App Service nuevo con Linux y región Canada Central."></p>
+<ol start="2" type="1">
+<li>En el resumen aparece un aviso: <em>la autenticación básica está deshabilitada</em>. Es lo normal en Azure hoy. Significa que no puedes publicar con un usuario y una contraseña de despliegue. No te afecta: en esta guía la publicación se hace desde GitHub, y de esa conexión se encarga el <em>Deployment Center</em> de la aplicación en una etapa posterior.</li>
+<li>Haz clic en <strong>Crear</strong>.</li>
+</ol>
+</section>
+<section id="si-azure-rechaza-la-creación-cuota-y-regiones" class="level3">
+<h3 class="anchored" data-anchor-id="si-azure-rechaza-la-creación-cuota-y-regiones">Si Azure rechaza la creación: cuota y regiones</h3>
+<p>Aquí es donde más estudiantes se atascan. Al pulsar <strong>Crear</strong>, Azure puede rechazar el despliegue con uno de estos dos errores. Los dos le pasaron al docente al preparar esta guía.</p>
+<p><strong>Error 1: cuota insuficiente.</strong> El mensaje empieza con <em>Operation cannot be completed without additional quota</em> y dice que el límite actual de instancias F1 en esa región es <strong>0</strong>. Quiere decir que tu suscripción no tiene permitido ningún plan gratuito en la región que elegiste.</p>
+<p><img src="imagenes/37-app-error-cuota.png" class="img-fluid" alt="Banner rojo de error con el texto Operation cannot be completed without additional quota. Detalles: Current Limit F1 App Service instances 0, Current Usage 0, Amount required for this deployment 1. Sugiere solicitar un aumento de cuota o probar otra región o un SKU menor."></p>
+<p><strong>Error 2: región no permitida.</strong> El mensaje dice <em>Resource was disallowed by Azure: this policy maintains a set of best available regions</em>. Quiere decir que la región elegida no está en la lista que tu suscripción de estudiante permite.</p>
+<p><img src="imagenes/40-app-error-politica-region.png" class="img-fluid" alt="Banner rojo de error que dice que el recurso fue rechazado por Azure y que la política mantiene un conjunto de mejores regiones disponibles donde la suscripción puede implementar recursos."></p>
+<p>La solución es <strong>probar otra región</strong>. Pero no vale cualquiera: tu suscripción solo permite unas pocas, y esa lista la define una directiva de Azure. Puedes verla tú mismo:</p>
+<ol type="1">
+<li>En el buscador superior escribe <code>Directiva</code> y entra al servicio.</li>
+<li>En <em>Tareas</em> verás una asignación llamada <strong>Allowed resource deployment regions</strong>. Ábrela.</li>
+</ol>
+<p><img src="imagenes/38-politica-regiones-asignacion.png" class="img-fluid" alt="Página Directiva, Tareas, con una asignación de directiva llamada Allowed resource deployment regions, con ámbito Azure for Students y tipo Policy."></p>
+<ol start="3" type="1">
+<li>En la pestaña <em>Parámetros</em> la fila <strong>Allowed locations</strong> muestra la lista de regiones permitidas.</li>
+</ol>
+<p><img src="imagenes/39-politica-regiones-permitidas.png" class="img-fluid" alt="Detalle de la asignación Allowed resource deployment regions. El parámetro listOfAllowedLocations tiene el valor chilecentral, canadacentral, francecentral, brazilsouth y northcentralus."></p>
+<p>En esta suscripción son cinco: <strong>Chile Central, Canada Central, France Central, Brazil South y North Central US</strong>. La base de datos de la etapa 3 funcionó en Canada Central, pero ahí la cuota de F1 era 0. La aplicación web se creó con éxito en <strong>Brazil South</strong>.</p>
+<p>Para probar otra región:</p>
+<ol type="1">
+<li>Vuelve a la pestaña <strong>Datos básicos</strong> del formulario y cambia la <strong>Región</strong> por otra de la lista permitida. Al cambiar de región, el plan de precios vuelve a <strong>Básico B1</strong>.</li>
+<li>Elige otra vez <strong>Gratis F1</strong>, haz clic en <strong>Revisar y crear</strong> y luego en <strong>Crear</strong>.</li>
+<li>Si falla de nuevo, repite con la siguiente región de la lista.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Si ninguna región te deja usar el plan gratuito
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes crear la aplicación con el plan <strong>Básico B1</strong>, que cuesta alrededor de 13 a 15 USD al mes. Sale de tu crédito de estudiante. Si la usas solo durante la clase y luego borras el grupo <code>rg-plaza</code>, el gasto es una fracción pequeña de ese valor. También puedes pedir un aumento de cuota desde la página <em>Cuotas</em> del portal, pero la respuesta puede tardar.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>La aplicación y la base de datos pueden estar en regiones distintas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En este ejemplo la base de datos está en Canada Central y la aplicación en Brazil South. Funciona, pero cada consulta viaja entre dos regiones, así que la aplicación responde un poco más lenta. Para una aplicación de clase no importa. En un proyecto real se ponen en la misma región.</p>
+</div>
+</div>
+</section>
+<section id="comprueba-3" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-3">Comprueba</h3>
+<ol type="1">
+<li>Cuando el despliegue termina, el portal muestra <strong>Se completó la implementación</strong>.</li>
+</ol>
+<p><img src="imagenes/41-app-implementacion-completa.png" class="img-fluid" alt="Página de la implementación con un check verde y el mensaje Se completó la implementación. Debajo, el grupo de recursos rg-plaza y el botón azul Ir al recurso."></p>
+<ol start="2" type="1">
+<li>Haz clic en <strong>Ir al recurso</strong>. En <em>Essentials</em> verifica que el <strong>Estado</strong> es <em>En ejecución</em>, que la <strong>Ubicación</strong> es la región donde se creó y que el <strong>Plan de App Service</strong> termina en <em>(F1: 1)</em>. En <strong>Dominio predeterminado</strong> está la dirección pública de tu aplicación, con la forma <code>&lt;nombre&gt;-&lt;código&gt;.&lt;región&gt;-01.azurewebsites.net</code>. Más abajo, en <em>Propiedades</em>, la <strong>Pila en tiempo de ejecución</strong> debe decir <em>.NET - 10.0</em>.</li>
+</ol>
+<p><img src="imagenes/42-app-recurso-listo.png" class="img-fluid" alt="Página de la aplicación web plaza-iue603. Estado En ejecución, ubicación Brazil South, plan de App Service con F1, sistema operativo Linux y un dominio predeterminado azurewebsites.net. En Propiedades, la pila en tiempo de ejecución es .NET 10.0."></p>
+<ol start="3" type="1">
+<li>Haz clic en el dominio predeterminado. Se abre una página de Azure que dice <strong>Your web app is running and waiting for your content</strong>. Eso significa que el servidor de la aplicación ya está vivo y esperando a que le publiques tu código.</li>
+</ol>
+<p><img src="imagenes/43-app-pagina-por-defecto.png" class="img-fluid" alt="Página de bienvenida de Microsoft Azure App Service en el navegador. Dice Your web app is running and waiting for your content, con un icono de monitor y el distintivo Built with .NET."></p>
+<p>Si ves esa página, la etapa 4 está terminada. Plaza todavía no está ahí: lo que ves es el contenido de relleno que Azure pone mientras tanto.</p>
+</section>
+</section>
+<section id="etapa-5.-preparar-plaza-y-subirla-a-github" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-5.-preparar-plaza-y-subirla-a-github">Etapa 5. Preparar Plaza y subirla a GitHub</h2>
+<section id="qué-vas-a-lograr-4" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-4">Qué vas a lograr</h3>
+<p>Plaza en un repositorio de GitHub, comprobada y limpia, lista para que Azure la tome desde ahí. En las etapas siguientes enlazarás la aplicación web de Azure con ese repositorio.</p>
+</section>
+<section id="por-qué-github-y-no-copiar-la-carpeta" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-github-y-no-copiar-la-carpeta">Por qué GitHub y no copiar la carpeta</h3>
+<p>Azure no recibe tu carpeta del equipo. Cuando enlazas la aplicación web con un repositorio, GitHub compila y publica el código <strong>cada vez que subes cambios a la rama <code>main</code></strong>, mediante una herramienta llamada <em>GitHub Actions</em>. Por eso lo que está en GitHub es lo que se publica: si no está en el repositorio, no llega a Azure.</p>
+</section>
+<section id="qué-cambia-en-el-proyecto-y-qué-no" class="level3">
+<h3 class="anchored" data-anchor-id="qué-cambia-en-el-proyecto-y-qué-no">Qué cambia en el proyecto y qué no</h3>
+<p><strong>Nada de código.</strong> Plaza no necesita ningún cambio para publicarse. Lo único que cambia es de dónde sale la cadena de conexión a la base de datos:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>En tu equipo</th>
+<th>En Azure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dónde está la cadena <code>Plaza</code></td>
+<td><code>appsettings.Development.json</code>, con el servidor <code>localhost</code></td>
+<td>La variable de entorno <code>Plaza</code> de la aplicación web (etapa 6)</td>
+</tr>
+<tr class="even">
+<td>Quién la lee</td>
+<td><code>GetConnectionString("Plaza")</code> en <code>Program.cs</code></td>
+<td>El mismo <code>GetConnectionString("Plaza")</code></td>
+</tr>
+</tbody>
+</table>
+<p>El código es idéntico en los dos sitios. Por eso la contraseña de la base de datos nunca debe estar en el repositorio: en Azure vive en la configuración de la aplicación, fuera del código.</p>
+</section>
+<section id="comprueba-que-plaza-compila-y-publica-en-release" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-que-plaza-compila-y-publica-en-release">Comprueba que Plaza compila y publica en Release</h3>
+<p>GitHub Actions va a ejecutar lo mismo que ejecutas tú ahora: compilar en modo <strong>Release</strong> y generar la carpeta de publicación. Si falla aquí, fallaría allí.</p>
+<ol type="1">
+<li>Abre PowerShell <strong>dentro de la carpeta <code>Plaza</code></strong>, la que contiene <code>Plaza.csproj</code>.</li>
+<li>Ejecuta el comando. Le pedimos que escriba la salida en una carpeta temporal, para no ensuciar el proyecto:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dotnet publish Plaza<span class="op">.</span><span class="fu">csproj</span> <span class="op">-</span>c Release <span class="op">-</span>o <span class="st">"</span><span class="va">$env</span><span class="op">:</span><span class="va">TEMP</span><span class="st">\plaza-publish"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Debe terminar sin errores y mostrar una línea como esta, con la ruta de la carpeta temporal:</li>
+</ol>
+<pre class="text"><code>Plaza -&gt; C:\Users\...\Temp\plaza-publish\</code></pre>
+<ol start="4" type="1">
+<li>En esa carpeta debe estar <code>Plaza.dll</code>. Puedes borrarla después.</li>
+</ol>
+</section>
+<section id="revisa-que-el-repositorio-esté-limpio" class="level3">
+<h3 class="anchored" data-anchor-id="revisa-que-el-repositorio-esté-limpio">Revisa que el repositorio esté limpio</h3>
+<p>Tres comprobaciones antes de subir. Todas se ejecutan en la carpeta <code>Plaza</code>.</p>
+<ol type="1">
+<li><strong>Que no se hayan subido archivos de compilación.</strong> No debe imprimir nada:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>git ls-files <span class="op">|</span> <span class="fu">Select-String</span> <span class="op">-</span>Pattern <span class="st">'(^|/)(bin|obj)/'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li><strong>Que no haya contraseñas en el código.</strong> No debe imprimir nada:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>git grep <span class="op">-</span>niE <span class="st">'password=|pwd='</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li><strong>Qué falta por subir.</strong> Debe decir <em>nothing to commit, working tree clean</em>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si el primer comando imprime algo, <code>bin/</code> u <code>obj/</code> se subieron por error: el archivo <code>.gitignore</code> de la plantilla de .NET ya los excluye, así que revisa que no lo hayas borrado. Si el segundo imprime algo, quita esa contraseña del archivo <strong>antes</strong> de subirlo. Una contraseña que llegó a GitHub se considera comprometida aunque la borres después: queda en el historial.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Esto incluye los comentarios
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es un error frecuente copiar la cadena de conexión o el comando de migración a un archivo como recordatorio, por ejemplo como comentario al final de <code>Program.cs</code>. Un comentario también se sube. En el repositorio de esta práctica ocurrió: la cadena con la contraseña quedó escrita en un comentario y se subió a un repositorio público. Guarda esos datos en un bloc de notas <strong>fuera</strong> de la carpeta del proyecto y ejecuta siempre <code>git grep</code> antes de cada <code>git push</code>. Si ya te pasó, mira la sección <em>Si algo sale mal</em>.</p>
+</div>
+</div>
+</section>
+<section id="sube-el-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="sube-el-proyecto">Sube el proyecto</h3>
+<p>Si <code>git status</code> mostró cambios, súbelos. Cambia el mensaje por uno que describa lo que hiciste:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"prepara Plaza para publicar en Azure"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si todavía no tienes repositorio en GitHub:</p>
+<ol type="1">
+<li>En github.com haz clic en <strong>New repository</strong>, dale un nombre (por ejemplo <code>iue-web-plaza</code>) y créalo <strong>vacío</strong>, sin README ni <code>.gitignore</code>.</li>
+<li>GitHub te muestra los comandos para un repositorio existente. En la carpeta <code>Plaza</code>, ejecútalos:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>git remote add origin https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/&lt;</span>tu-usuario<span class="op">&gt;/&lt;</span>tu-repositorio<span class="op">&gt;.</span><span class="fu">git</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>git branch <span class="op">-</span>M main</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>git push <span class="op">-</span>u origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="comprueba-4" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-4">Comprueba</h3>
+<ul>
+<li><code>dotnet publish</code> en Release terminó sin errores.</li>
+<li>Los dos comandos de revisión no imprimieron nada.</li>
+<li><code>git status</code> dice que el árbol de trabajo está limpio y que la rama está al día con <code>origin/main</code>.</li>
+<li>Al abrir tu repositorio en github.com, la rama es <code>main</code> y ves las carpetas <code>Controllers</code>, <code>Models</code>, <code>Views</code>, <code>Migrations</code> y el archivo <code>Plaza.csproj</code>.</li>
+</ul>
+</section>
+</section>
+<section id="etapa-6.-conectar-la-aplicación-con-la-base-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-6.-conectar-la-aplicación-con-la-base-de-datos">Etapa 6. Conectar la aplicación con la base de datos</h2>
+<section id="qué-vas-a-lograr-5" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-5">Qué vas a lograr</h3>
+<p>Que la aplicación web de Azure sepa dónde está la base de datos y con qué usuario entrar. Para eso le guardas una <strong>cadena de conexión</strong> en su configuración.</p>
+</section>
+<section id="qué-es-la-cadena-de-conexión" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-la-cadena-de-conexión">Qué es la cadena de conexión</h3>
+<p>Es una sola línea de texto con los datos para entrar a la base: en qué servidor está, cómo se llama la base, qué usuario usar y su contraseña. En tu equipo, Plaza la lee de <code>appsettings.Development.json</code>. En Azure no existe ese archivo con tus datos, y la contraseña no puede estar en el repositorio, así que la guardas en la configuración de la aplicación web, fuera del código.</p>
+</section>
+<section id="la-línea-que-vas-a-completar" class="level3">
+<h3 class="anchored" data-anchor-id="la-línea-que-vas-a-completar">La línea que vas a completar</h3>
+<p>Copia esta línea en un bloc de notas y <strong>cambia los dos textos entre <code>&lt;</code> y <code>&gt;</code></strong>:</p>
+<pre class="text"><code>Host=&lt;tu-servidor&gt;.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=&lt;tu-contraseña&gt;;SSL Mode=Require</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parte</th>
+<th>Qué escribir</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Host=</code></td>
+<td>El <strong>punto de conexión</strong> de tu servidor, el que anotaste en la etapa 3. Reemplaza <code>&lt;tu-servidor&gt;</code> por el nombre de tu servidor, por ejemplo <code>plaza-pg-iue603</code>.</td>
+</tr>
+<tr class="even">
+<td><code>Port=5432</code></td>
+<td>No cambia: es el puerto estándar de PostgreSQL.</td>
+</tr>
+<tr class="odd">
+<td><code>Database=</code></td>
+<td><code>plaza_campesina</code>, la base que creaste en la etapa 3.</td>
+</tr>
+<tr class="even">
+<td><code>Username=</code></td>
+<td><code>plazaadmin</code>, el usuario administrador de la etapa 3.</td>
+</tr>
+<tr class="odd">
+<td><code>Password=</code></td>
+<td>La contraseña que escribiste al crear el servidor. Reemplaza <code>&lt;tu-contraseña&gt;</code>, sin los signos <code>&lt;</code> ni <code>&gt;</code>.</td>
+</tr>
+<tr class="even">
+<td><code>SSL Mode=Require</code></td>
+<td>No cambia: Azure rechaza las conexiones sin cifrar.</td>
+</tr>
+</tbody>
+</table>
+<p>Todo va en <strong>una sola línea</strong>, sin saltos y sin espacios después de los punto y coma. Si te equivocas en un dato, la aplicación no falla al guardar: falla después, al intentar conectarse.</p>
+</section>
+<section id="los-pasos-1" class="level3">
+<h3 class="anchored" data-anchor-id="los-pasos-1">Los pasos</h3>
+<ol type="1">
+<li>Abre tu aplicación web en el portal. En el menú de la izquierda abre la sección <strong>Configuración</strong> y haz clic en <strong>Variables de entorno</strong>.</li>
+</ol>
+<p><img src="imagenes/44-app-menu-configuracion.png" class="img-fluid" alt="Página de la aplicación web plaza-iue603 con el menú lateral. La sección Configuración está desplegada y muestra Variables de entorno, Configuración, Instancias, Autenticación, Identidad, Copias de seguridad, Dominios personalizados y Certificados."></p>
+<ol start="2" type="1">
+<li>Se abre la página con dos pestañas: <em>Configuración de aplicación</em> y <em>Cadenas de conexión</em>. Haz clic en <strong>Cadenas de conexión</strong>.</li>
+</ol>
+<p><img src="imagenes/45-app-variables-entorno.png" class="img-fluid" alt="Página Variables de entorno de la aplicación web. Tiene dos pestañas, Configuración de aplicación y Cadenas de conexión. La pestaña activa es Configuración de aplicación y la tabla está vacía."></p>
+<p><img src="imagenes/46-app-cadenas-conexion-vacia.png" class="img-fluid" alt="Pestaña Cadenas de conexión con una tabla vacía de columnas Nombre, Valor y Configuración de ranura. Arriba, los botones Agregar, Actualizar y Mostrar valores."></p>
+<ol start="3" type="1">
+<li>Haz clic en <strong>Agregar</strong>. Se abre el panel <strong>Agregar o editar una cadena de conexión</strong>, con tres campos: <em>Nombre</em>, <em>Valor</em> y <em>Tipo</em>.</li>
+</ol>
+<p><img src="imagenes/47-app-cadena-panel-vacio.png" class="img-fluid" alt="Panel Agregar o editar una cadena de conexión con los campos Nombre, Valor y Tipo vacíos y la casilla de configuración de ranura de implementación sin marcar. Abajo, los botones Aplicar y Descartar."></p>
+<ol start="4" type="1">
+<li>En <strong>Nombre</strong> escribe exactamente <code>Plaza</code>, con la P mayúscula. Es el nombre que Plaza busca en <code>Program.cs</code>: si lo escribes distinto, la aplicación no encuentra la cadena.</li>
+<li>En <strong>Tipo</strong> abre la lista y elige <strong>PostgreSQL</strong>. No elijas <em>Custom</em> ni <em>SQLServer</em>: el tipo hace que Azure le ponga a la variable un prefijo que .NET reconoce como cadena de conexión.</li>
+</ol>
+<p><img src="imagenes/48-app-cadena-tipos.png" class="img-fluid" alt="Lista desplegable del tipo de cadena de conexión con las opciones MySQL, SQLServer, SQLAzure, PostgreSQL, Custom, Notification Hub, Service Bus, Event Hub, Document Db y Redis Cache."></p>
+<p><img src="imagenes/49-app-cadena-nombre-tipo.png" class="img-fluid" alt="Panel con el nombre Plaza escrito, el valor todavía vacío y el tipo PostgreSQL seleccionado."></p>
+<ol start="6" type="1">
+<li>En <strong>Valor</strong> pega la línea que completaste. Por seguridad el campo muestra puntos en vez de texto. Si quieres comprobar lo que escribiste, el icono del ojo lo muestra mientras lo tienes pulsado, pero hazlo sin nadie mirando tu pantalla.</li>
+</ol>
+<p><img src="imagenes/50-app-cadena-valor-oculto.png" class="img-fluid" alt="Panel con el nombre Plaza, el tipo PostgreSQL y el campo Valor lleno de puntos que ocultan la cadena de conexión. Al lado del campo hay un icono de ojo y uno de copiar."></p>
+<ol start="7" type="1">
+<li>Haz clic en <strong>Aplicar</strong>. El panel se cierra y la tabla muestra una fila con el nombre <code>Plaza</code> y el valor oculto.</li>
+</ol>
+<p><img src="imagenes/51-app-cadena-aplicada.png" class="img-fluid" alt="Pestaña Cadenas de conexión con una fila nueva, Plaza, y el valor oculto detrás del texto Mostrar valor. Abajo, los botones Aplicar y Descartar de la página, ahora activos."></p>
+<ol start="8" type="1">
+<li>Todavía <strong>no está guardada</strong>. Haz clic en el botón <strong>Aplicar</strong> de la parte inferior de la página. Azure avisa que la aplicación puede reiniciarse al actualizar las cadenas de conexión. Haz clic en <strong>Confirmar</strong>.</li>
+</ol>
+<p><img src="imagenes/52-app-cadena-confirmar.png" class="img-fluid" alt="Ventana Guardar cambios que dice que la aplicación puede reiniciarse si está actualizando cadenas de conexión y pregunta si se quiere continuar. Tiene los botones Confirmar y Cancelar."></p>
+<ol start="9" type="1">
+<li>Aparece una notificación verde: <strong>Se han actualizado correctamente las cadenas de conexión</strong>.</li>
+</ol>
+<p><img src="imagenes/53-app-cadena-guardada.png" class="img-fluid" alt="Notificación verde que dice Actualizando cadenas de conexión: se han actualizado correctamente las cadenas de conexión. Debajo, la tabla con la fila Plaza."></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Dos botones que se llaman Aplicar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hay dos: el del <strong>panel</strong>, que añade la fila a la lista, y el de la <strong>parte inferior de la página</strong>, que guarda los cambios en Azure. Si solo pulsas el primero, la cadena se pierde al salir de la página.</p>
+</div>
+</div>
+</section>
+<section id="cómo-llega-la-cadena-a-tu-código" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-llega-la-cadena-a-tu-código">Cómo llega la cadena a tu código</h3>
+<p>Para el tipo PostgreSQL, Azure crea una variable de entorno llamada <code>POSTGRESQLCONNSTR_Plaza</code>. .NET reconoce ese prefijo y la entrega a tu código como si fuera <code>ConnectionStrings:Plaza</code>, de modo que la línea de <code>Program.cs</code> no cambia:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>opciones<span class="op">.</span><span class="fu">UseNpgsql</span><span class="op">(</span>builder<span class="op">.</span><span class="fu">Configuration</span><span class="op">.</span><span class="fu">GetConnectionString</span><span class="op">(</span><span class="st">"Plaza"</span><span class="op">))</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="comprueba-5" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-5">Comprueba</h3>
+<ul>
+<li>En la pestaña <strong>Cadenas de conexión</strong> hay una fila llamada <code>Plaza</code>.</li>
+<li>La notificación de guardado salió en verde.</li>
+<li>Los datos de la línea coinciden con los de la etapa 3: mismo servidor, mismo usuario y la base <code>plaza_campesina</code>.</li>
+</ul>
+<p>Todavía no puedes ver Plaza funcionando: la base de datos está vacía y la aplicación todavía no tiene tu código. Eso se resuelve en las dos etapas siguientes.</p>
+</section>
+</section>
+<section id="etapa-7.-crear-las-tablas-en-la-base-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-7.-crear-las-tablas-en-la-base-de-datos">Etapa 7. Crear las tablas en la base de datos</h2>
+<section id="qué-vas-a-lograr-6" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-6">Qué vas a lograr</h3>
+<p>Que la base <code>plaza_campesina</code> de Azure tenga las tablas de Plaza. Hoy está vacía: solo existe la base, sin ninguna tabla.</p>
+</section>
+<section id="qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-una-migración-y-por-qué-se-aplica-desde-tu-equipo">Qué es una migración y por qué se aplica desde tu equipo</h3>
+<p>Una <strong>migración</strong> es un archivo del proyecto que describe cómo crear o cambiar las tablas. Plaza ya tiene una, llamada <code>Inicial</code>, en la carpeta <code>Migrations</code>: define la tabla <code>Productos</code> y cuatro productos de ejemplo. Entity Framework Core la ejecuta contra la base de datos que le indiques.</p>
+<p>Azure no aplica las migraciones por su cuenta: <code>Program.cs</code> no las ejecuta al arrancar. Las aplicas tú, <strong>desde tu equipo</strong>, apuntando a la base de Azure. Eso es posible porque en la etapa 3 abriste el firewall del servidor para tu dirección IP.</p>
+</section>
+<section id="el-comando" class="level3">
+<h3 class="anchored" data-anchor-id="el-comando">El comando</h3>
+<p>Abre PowerShell <strong>dentro de la carpeta <code>Plaza</code></strong>, la que contiene <code>Plaza.csproj</code>, y ejecuta este comando. Cambia <code>&lt;tu-servidor&gt;</code> y <code>&lt;tu-contraseña&gt;</code> por tus datos, igual que en la etapa 6:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dotnet ef database update <span class="op">--</span>connection <span class="st">"Host=&lt;tu-servidor&gt;.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=&lt;tu-contraseña&gt;;SSL Mode=Require"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La opción <code>--connection</code> le dice a <code>dotnet ef</code> que use <strong>esa base</strong> en lugar de la de <code>appsettings.Development.json</code>, que apunta a <code>localhost</code>. Sin ella, las tablas se crearían en tu PostgreSQL local y la base de Azure seguiría vacía.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>La contraseña queda en el historial de PowerShell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El comando lleva tu contraseña escrita, y PowerShell guarda lo que escribes. Para esta práctica, con una base que borrarás al terminar, es aceptable. En un proyecto real no se hace así: se usa una variable de entorno o un gestor de secretos, como verás en la semana de configuración de entornos.</p>
+</div>
+</div>
+</section>
+<section id="qué-debes-ver" class="level3">
+<h3 class="anchored" data-anchor-id="qué-debes-ver">Qué debes ver</h3>
+<p>El comando tarda unos segundos y escribe mucho texto. Estas son las líneas que importan, en el orden en que salen:</p>
+<pre class="text"><code>Build succeeded.
+fail: Microsoft.EntityFrameworkCore.Database.Command[20102]
+      Failed executing DbCommand
+      SELECT "MigrationId", "ProductVersion" FROM "__EFMigrationsHistory" ...
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" ( ... );
+info: Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20261107145524_Inicial'.
+      CREATE TABLE "Productos" ( ... );
+      INSERT INTO "Productos" ("Id", "Nombre", "Precio") VALUES (1, 'Tomate', 3500.0);
+      ...
+Done.</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>El <code>fail:</code> del principio es normal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lo primero que hace EF Core es leer la tabla <code>__EFMigrationsHistory</code>, donde anota qué migraciones ya aplicó. En una base nueva esa tabla todavía no existe, así que la lectura falla y aparece una línea con <code>fail:</code>. Enseguida EF Core la crea (<code>CREATE TABLE IF NOT EXISTS</code>) y sigue. Lo que importa es el final: si termina con <strong><code>Done.</code></strong>, todo salió bien.</p>
+</div>
+</div>
+<p>El identificador de la migración (<code>20261107145524_Inicial</code> en este ejemplo) cambia en tu proyecto, porque lleva la fecha y la hora en que se creó.</p>
+</section>
+<section id="si-falla" class="level3">
+<h3 class="anchored" data-anchor-id="si-falla">Si falla</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lo que ves</th>
+<th>Qué significa</th>
+<th>Qué hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Host desconocido</code></td>
+<td>Tu equipo no pudo traducir el nombre del servidor a una dirección: suele ser una caché de DNS vieja, de cuando el servidor era nuevo.</td>
+<td>Ejecuta <code>ipconfig /flushdns</code> y repite el comando. Revisa también que el nombre del servidor esté bien escrito.</td>
+</tr>
+<tr class="even">
+<td>Un mensaje con <code>pg_hba.conf</code> o que la conexión se agota</td>
+<td>El firewall del servidor no deja entrar a tu IP. Tu IP pública cambia si cambias de red.</td>
+<td>En el servidor, abre <strong>Redes</strong> y agrega tu IP actual, como en la etapa 3.</td>
+</tr>
+<tr class="odd">
+<td><code>password authentication failed</code></td>
+<td>El usuario o la contraseña no coinciden con los del servidor.</td>
+<td>Revisa <code>Username=</code> y <code>Password=</code>. Si olvidaste la contraseña, el botón <strong>Restablecer contraseña</strong> del servidor te deja poner otra.</td>
+</tr>
+<tr class="even">
+<td><code>database "plaza_campesina" does not exist</code></td>
+<td>La base de datos no existe en el servidor.</td>
+<td>Créala como en la etapa 3.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comprueba-6" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-6">Comprueba</h3>
+<ul>
+<li>El comando terminó con <code>Done.</code>.</li>
+<li>En la salida aparece <code>Applying migration</code> con el nombre de tu migración y el <code>CREATE TABLE "Productos"</code>.</li>
+<li>Aparecen los cuatro <code>INSERT INTO "Productos"</code>: Tomate, Aguacate, Papa y Panela.</li>
+</ul>
+<p>Ya tienes la base de datos lista con sus tablas y datos. Falta lo más importante: llevar el código de Plaza a la aplicación web, desde GitHub.</p>
+</section>
+</section>
+<section id="etapa-8.-enlazar-la-aplicación-con-github" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-8.-enlazar-la-aplicación-con-github">Etapa 8. Enlazar la aplicación con GitHub</h2>
+<section id="qué-vas-a-lograr-7" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-7">Qué vas a lograr</h3>
+<p>Que cada vez que subas cambios a la rama <code>main</code> de tu repositorio, GitHub compile Plaza y la publique en la aplicación web de Azure, sin que tengas que hacer nada más. Eso se llama <strong>publicación continua</strong> (CI/CD).</p>
+</section>
+<section id="cómo-funciona" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-funciona">Cómo funciona</h3>
+<p>Azure agrega al repositorio un archivo de <strong>flujo de trabajo</strong> (<code>.github/workflows/main_&lt;tu-aplicación&gt;.yml</code>) que le dice a GitHub Actions qué hacer en cada push: instalar .NET, compilar, publicar y desplegar en tu aplicación web. Para que GitHub pueda desplegar en tu nombre, necesita una forma de autenticarse en Azure. El Centro de implementación ofrece dos.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo de autenticación</th>
+<th>Cómo funciona</th>
+<th>Estado en esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Identidad asignada por el usuario</strong> (OIDC)</td>
+<td>Azure crea una identidad y GitHub la usa sin contraseñas.</td>
+<td><strong>Falla</strong> con repositorios nuevos (ver más abajo).</td>
+</tr>
+<tr class="even">
+<td><strong>Autenticación básica</strong></td>
+<td>Azure guarda en GitHub un <em>perfil de publicación</em> como secreto del repositorio.</td>
+<td><strong>Funciona.</strong> Es la que usamos.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="por-qué-no-usamos-la-identidad-asignada-por-el-usuario" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-no-usamos-la-identidad-asignada-por-el-usuario">Por qué no usamos la identidad asignada por el usuario</h3>
+<p>Es la opción que el portal propone por defecto y la más segura, pero con un repositorio recién creado falla al guardar con este mensaje: <em>“No pudimos verificar cómo GitHub Actions emite tokens OIDC para este repositorio”</em>.</p>
+<p><img src="imagenes/62-github-errores-guardar.png" class="img-fluid" alt="Panel de notificaciones del portal con dos errores de Guardar configuración de código. El primero dice que no se pudo configurar la implementación porque el rol ya existe. El segundo dice que no se pudo verificar cómo GitHub Actions emite tokens OIDC para el repositorio y que se compruebe la conexión de GitHub."></p>
+<p>La causa más probable es un cambio de GitHub: los repositorios creados después del <strong>15 de julio de 2026</strong> usan de forma obligatoria un formato nuevo de identidad para los tokens OIDC, que incluye los números internos del propietario y del repositorio. Los repositorios anteriores a esa fecha conservan el formato clásico. En esta práctica el portal falló con un repositorio nuevo; no está confirmado que el origen del fallo esté en Azure, pero lo cierto es que <strong>no se puede volver al formato clásico</strong> en un repositorio nuevo, así que esa ruta no sirve para la clase. Es posible que Azure lo corrija más adelante: si con tu repositorio funciona la identidad asignada por el usuario, también es válida.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>El primer intento fallido deja restos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si pulsas <strong>Guardar</strong> con la identidad asignada y falla, Azure ya creó una identidad (con un nombre como <code>oidc-msi-xxxx</code>) y su permiso. Un segundo intento con la misma opción da otro error: <em>“The role assignment already exists”</em>. No lo reintentes: cambia a <strong>Autenticación básica</strong> como se explica abajo. La identidad sobrante se borra junto con el grupo de recursos en la etapa final.</p>
+</div>
+</div>
+</section>
+<section id="paso-1.-habilitar-la-autenticación-básica-de-scm" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1.-habilitar-la-autenticación-básica-de-scm">Paso 1. Habilitar la autenticación básica de SCM</h3>
+<p>La autenticación básica viene <strong>deshabilitada</strong> en las aplicaciones nuevas. Si la eliges en el Centro de implementación sin habilitarla, el portal te lo avisa y no te deja guardar:</p>
+<p><img src="imagenes/63-github-basica-deshabilitada.png" class="img-fluid" alt="Sección Configuración de autenticación del Centro de implementación con Autenticación básica seleccionada y un mensaje de error en rojo que dice que la autenticación básica de SCM está deshabilitada para su aplicación y que se debe habilitar en Opciones de configuración o elegir identidad asignada por el usuario."></p>
+<p>Para habilitarla:</p>
+<ol type="1">
+<li>En tu aplicación web, abre <strong>Configuración</strong> y luego la pestaña <strong>Configuración general</strong>.</li>
+<li>Fíjate en <strong>Credenciales de publicación de autenticación básica de SCM</strong>: está sin marcar.</li>
+</ol>
+<p><img src="imagenes/64-app-configuracion-general.png" class="img-fluid" alt="Página Configuración, pestaña Configuración general, de la aplicación web. Las casillas de credenciales de publicación de autenticación básica de SCM y de FTP están sin marcar. Debajo, el estado de FTP en Solo FTPS, HTTP 1.1, SSH y HTTPS solamente marcados."></p>
+<ol start="3" type="1">
+<li>Marca la casilla de <strong>SCM</strong>. La de <strong>FTP</strong> déjala sin marcar: no la necesitas.</li>
+<li>Haz clic en <strong>Aplicar</strong> al pie de la página y confirma. El portal avisa: <strong>La configuración general se actualizó correctamente</strong>.</li>
+</ol>
+<p><img src="imagenes/65-app-basica-scm-habilitada.png" class="img-fluid" alt="Configuración general con la casilla de credenciales de publicación de autenticación básica de SCM marcada y la de FTP sin marcar. Los botones Aplicar y Descartar al pie están desactivados porque no quedan cambios pendientes."></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Qué estás aceptando al hacer esto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Habilitar la autenticación básica permite publicar con un usuario y una contraseña de despliegue, que es menos seguro que una identidad sin contraseñas. Para una aplicación de clase que borrarás al terminar es una decisión razonable. En un proyecto real conviene usar la identidad asignada, cuando funcione con tu repositorio.</p>
+</div>
+</div>
+</section>
+<section id="paso-2.-abrir-el-centro-de-implementación" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2.-abrir-el-centro-de-implementación">Paso 2. Abrir el Centro de implementación</h3>
+<ol type="1">
+<li>En el menú de tu aplicación web abre <strong>Implementación</strong> y luego <strong>Centro de implementación</strong>.</li>
+<li>Deja seleccionada <strong>Implementación continua (CI/CD)</strong>. En <strong>Origen</strong> elige <strong>GitHub</strong>. La compilación es con <em>Acciones de GitHub</em>.</li>
+</ol>
+<p><img src="imagenes/54-github-centro-implementacion.png" class="img-fluid" alt="Centro de implementación de la aplicación web con la opción Implementación continua CI/CD seleccionada, el origen GitHub y la compilación con Acciones de GitHub. Más abajo, el apartado GitHub con el texto Sesión iniciada como y el enlace Autorizar."></p>
+</section>
+<section id="paso-3.-autorizar-a-azure-en-github" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3.-autorizar-a-azure-en-github">Paso 3. Autorizar a Azure en GitHub</h3>
+<ol type="1">
+<li>Haz clic en <strong>Autorizar</strong>. Se abre una ventana de GitHub.</li>
+<li>Inicia sesión con <strong>tu</strong> cuenta de GitHub y acepta el acceso que pide Azure. Esa pantalla pide permisos sobre tu cuenta: léela antes de aceptar.</li>
+<li>Al volver al portal, junto a <strong>Sesión iniciada como</strong> aparece tu nombre de usuario de GitHub.</li>
+</ol>
+<p><img src="imagenes/55-github-sesion-iniciada.png" class="img-fluid" alt="Centro de implementación con Sesión iniciada como y el nombre de usuario de GitHub. Debajo, los campos Organización, Repositorio y Rama, todavía por elegir."></p>
+</section>
+<section id="paso-4.-elegir-organización-repositorio-y-rama" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4.-elegir-organización-repositorio-y-rama">Paso 4. Elegir organización, repositorio y rama</h3>
+<ol type="1">
+<li><strong>Organización</strong>: tu cuenta personal de GitHub es la única opción, a menos que pertenezcas a organizaciones.</li>
+</ol>
+<p><img src="imagenes/56-github-organizacion.png" class="img-fluid" alt="Lista de organizaciones con una sola opción, el nombre de usuario de GitHub."></p>
+<ol start="2" type="1">
+<li><strong>Repositorio</strong>: la lista muestra todos tus repositorios. Escribe <code>plaza</code> en el cuadro de búsqueda para filtrar y elige tu repositorio de Plaza.</li>
+</ol>
+<p><img src="imagenes/57-github-repositorio.png" class="img-fluid" alt="Lista de repositorios filtrada por la palabra plaza, con una sola opción: iue-web-plaza."></p>
+<ol start="3" type="1">
+<li><strong>Rama</strong>: elige <code>main</code>. Es la rama que el flujo de trabajo vigilará.</li>
+</ol>
+<p><img src="imagenes/58-github-rama.png" class="img-fluid" alt="Lista de ramas con una sola opción: main."></p>
+<ol start="4" type="1">
+<li><strong>Opción de flujo de trabajo</strong>: deja <strong>Agregar un flujo de trabajo</strong>. Azure creará el archivo <code>main_&lt;tu-aplicación&gt;.yml</code> en tu repositorio.</li>
+</ol>
+<p><img src="imagenes/59-github-flujo-autenticacion.png" class="img-fluid" alt="Formulario con el repositorio iue-web-plaza y la rama main elegidos. La opción Agregar un flujo de trabajo está marcada y dice que agregará el archivo main_plaza-iue603.yml. Más abajo, la información de compilación con la pila .NET y la versión 10.0, y la configuración de autenticación."></p>
+</section>
+<section id="paso-5.-elegir-la-autenticación-y-guardar" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5.-elegir-la-autenticación-y-guardar">Paso 5. Elegir la autenticación y guardar</h3>
+<ol type="1">
+<li>Baja hasta <strong>Configuración de autenticación</strong> y elige <strong>Autenticación básica</strong>. Ya no debe aparecer el mensaje de error en rojo.</li>
+</ol>
+<p><img src="imagenes/66-github-autenticacion-basica.png" class="img-fluid" alt="Configuración de autenticación con la opción Autenticación básica seleccionada y sin mensajes de error. Debajo, Configuración del flujo de trabajo con el botón Vista previa de archivo."></p>
+<ol start="2" type="1">
+<li>Sube al inicio de la página y haz clic en <strong>Guardar</strong>.</li>
+<li>Espera unos segundos. Aparece una notificación verde: <strong>Se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub</strong>.</li>
+</ol>
+<p><img src="imagenes/67-github-pipeline-configurado.png" class="img-fluid" alt="Panel de notificaciones con dos avisos verdes: Guardar configuración de código, se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub, y Actualizar la configuración general, la configuración general se actualizó correctamente. Más abajo, los dos errores anteriores de OIDC."></p>
+</section>
+<section id="qué-hizo-azure-en-tu-repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="qué-hizo-azure-en-tu-repositorio">Qué hizo Azure en tu repositorio</h3>
+<p>Al guardar, Azure hizo dos cosas en tu repositorio de GitHub y lanzó la primera publicación:</p>
+<ol type="1">
+<li><strong>Agregó un commit</strong> con el archivo <code>.github/workflows/main_&lt;tu-aplicación&gt;.yml</code>.</li>
+<li><strong>Creó un secreto</strong> de Actions llamado <code>AZUREAPPSERVICE_PUBLISHPROFILE_&lt;código&gt;</code>, con las credenciales de publicación. Es lo que permite a GitHub desplegar en tu aplicación.</li>
+</ol>
+<p>Este es el contenido del archivo, con los comentarios iniciales quitados:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and deploy ASP.Net Core app to Azure Web App - plaza-iue603</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">'main'</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> read</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up .NET Core</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-dotnet@v4</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">dotnet-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'10.x'</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build with dotnet</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet build --configuration Release</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> dotnet publish</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Upload artifact for deployment job</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-artifact@v4</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ${{env.DOTNET_ROOT}}/myapp</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy</span><span class="kw">:</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> build</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download artifact from build job</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/download-artifact@v4</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> .net-app</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to Azure Web App</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> deploy-to-webapp</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> azure/webapps-deploy@v3</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">app-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'plaza-iue603'</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">slot-name</span><span class="kw">:</span><span class="at"> </span><span class="st">'Production'</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">package</span><span class="kw">:</span><span class="at"> .</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish-profile</span><span class="kw">:</span><span class="at"> ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_&lt;código&gt; }}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se lee de arriba hacia abajo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parte</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>on: push: branches: main</code></td>
+<td>Se ejecuta cada vez que subes cambios a <code>main</code>.</td>
+</tr>
+<tr class="even">
+<td><code>workflow_dispatch</code></td>
+<td>Permite ejecutarlo a mano desde la pestaña <em>Actions</em> de GitHub.</td>
+</tr>
+<tr class="odd">
+<td><code>build</code></td>
+<td>Descarga tu código, instala .NET 10, ejecuta <code>dotnet build</code> y <code>dotnet publish</code> en Release, y guarda el resultado. Es lo mismo que comprobaste en la etapa 5.</td>
+</tr>
+<tr class="even">
+<td><code>deploy</code></td>
+<td>Toma lo que dejó <code>build</code> y lo envía a tu aplicación web con el perfil de publicación guardado como secreto.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comprueba-7" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-7">Comprueba</h3>
+<ul>
+<li>Apareció la notificación verde de la canalización.</li>
+<li>En GitHub, tu repositorio tiene la carpeta <code>.github/workflows</code> con el archivo del flujo de trabajo.</li>
+<li>En GitHub, en <strong>Settings, Secrets and variables, Actions</strong>, existe el secreto <code>AZUREAPPSERVICE_PUBLISHPROFILE_...</code>.</li>
+</ul>
+</section>
+</section>
+<section id="etapa-9.-comprobar-que-plaza-está-publicada" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-9.-comprobar-que-plaza-está-publicada">Etapa 9. Comprobar que Plaza está publicada</h2>
+<section id="qué-vas-a-lograr-8" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-8">Qué vas a lograr</h3>
+<p>Ver Plaza funcionando en una dirección pública de internet, con los datos que salen de la base de Azure.</p>
+</section>
+<section id="la-primera-publicación" class="level3">
+<h3 class="anchored" data-anchor-id="la-primera-publicación">La primera publicación</h3>
+<p>Al guardar la etapa anterior, el commit de Azure disparó el flujo de trabajo. Para verlo, abre tu repositorio en GitHub y entra a la pestaña <strong>Actions</strong>. Aparece una ejecución llamada <em>Add or update the Azure App Service build and deployment workflow config</em>. Un check verde indica que terminó bien.</p>
+<p><img src="imagenes/69-github-actions-ejecucion.png" class="img-fluid" alt="Pestaña Actions del repositorio iue-web-plaza en GitHub. Hay una ejecución del flujo de trabajo Build and deploy ASP.Net Core app to Azure Web App, llamada Add or update the Azure App Service build and deployment workflow config, con un check verde y la rama main."></p>
+<p>Si haces clic en la ejecución, verás los dos trabajos, <strong>build</strong> y <strong>deploy</strong>, cada uno con sus pasos en verde. Pueden aparecer avisos amarillos que dicen <em>Node.js 20 is deprecated</em>: son advertencias de GitHub sobre las versiones de las acciones y no impiden la publicación.</p>
+</section>
+<section id="abre-plaza" class="level3">
+<h3 class="anchored" data-anchor-id="abre-plaza">Abre Plaza</h3>
+<ol type="1">
+<li>En el portal, abre tu aplicación web y copia el <strong>Dominio predeterminado</strong>, la dirección que termina en <code>azurewebsites.net</code>.</li>
+<li>Ábrela en el navegador agregando al final <code>/catalogo</code>, porque esa es la ruta de Plaza que muestra los productos:</li>
+</ol>
+<pre class="text"><code>https://&lt;tu-dominio&gt;.azurewebsites.net/catalogo</code></pre>
+<ol start="3" type="1">
+<li>Debe aparecer la lista de productos con sus precios. Esos datos <strong>vienen de la base de datos de Azure</strong>: son los que creó la migración de la etapa 7.</li>
+</ol>
+<p><img src="imagenes/68-plaza-en-linea.png" class="img-fluid" alt="Página Catálogo de Plaza abierta desde la dirección pública azurewebsites.net. Muestra el título Catálogo y una lista con cuatro productos y sus precios: Aguacate 6000, Panela 4500, Papa 2800 y Tomate 3500."></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Dos cosas normales que pueden asustarte
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Si abres solo la dirección, sin <code>/catalogo</code>, ves un error 404.</strong> Plaza no define una página en la raíz: las rutas de tu proyecto son las que declaraste en los controladores. No es un problema de Azure.</li>
+<li><strong>La primera petición después de un rato tarda más.</strong> El plan gratuito F1 duerme la aplicación cuando nadie la usa, y la primera visita la vuelve a despertar. Las siguientes responden rápido.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="haz-un-cambio-y-míralo-publicarse" class="level3">
+<h3 class="anchored" data-anchor-id="haz-un-cambio-y-míralo-publicarse">Haz un cambio y míralo publicarse</h3>
+<p>Esta es la parte que da sentido a la publicación continua. Vas a cambiar algo en Plaza y verlo aparecer en internet sin tocar el portal.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Primero actualiza tu copia local
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Azure agregó un commit a tu repositorio (el archivo del flujo de trabajo), pero <strong>tu carpeta local no lo tiene</strong>. Si intentas subir un cambio sin traerlo, Git rechaza el push con un mensaje como <em>rejected</em> o <em>fetch first</em>. Antes de cualquier cambio, ejecuta en la carpeta <code>Plaza</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>git pull origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol type="1">
+<li>Abre <code>Views/Catalogo/Listar.cshtml</code> y cambia el título <code>&lt;h1&gt;Catálogo&lt;/h1&gt;</code> por otro texto, por ejemplo <code>&lt;h1&gt;Catálogo de la plaza&lt;/h1&gt;</code>.</li>
+<li>Sube el cambio:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"cambia el titulo del catalogo"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>git push origin main</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>En GitHub, abre la pestaña <strong>Actions</strong>: aparece una ejecución nueva. Cuando termine en verde, recarga <code>/catalogo</code> en el navegador: el título cambió.</li>
+</ol>
+<p>El cambio puede ser tan grande como quieras. Esta captura es Plaza después de subir una plantilla completa con estilos, el mismo mecanismo: un <code>git push</code> y, cuando termina la ejecución, el sitio público ya es otro.</p>
+<p><img src="imagenes/70-plaza-con-estilos.png" class="img-fluid" alt="Plaza Campesina abierta desde la dirección pública, con una plantilla de estilos. Un encabezado verde con el título Frescos, locales y llenos de sabor, y debajo el Catálogo de productos con tarjetas que muestran Aguacate por 6000 y Panela por 4500."></p>
+</section>
+<section id="comprueba-8" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-8">Comprueba</h3>
+<ul>
+<li>La pestaña <em>Actions</em> muestra la ejecución con un check verde.</li>
+<li><code>/catalogo</code> muestra los productos de la base de datos.</li>
+<li>Un cambio subido a <code>main</code> se refleja en la dirección pública después de que termina la ejecución.</li>
+</ul>
+</section>
+</section>
+<section id="etapa-10.-borrar-los-recursos-al-terminar" class="level2">
+<h2 class="anchored" data-anchor-id="etapa-10.-borrar-los-recursos-al-terminar">Etapa 10. Borrar los recursos al terminar</h2>
+<section id="qué-vas-a-lograr-9" class="level3">
+<h3 class="anchored" data-anchor-id="qué-vas-a-lograr-9">Qué vas a lograr</h3>
+<p>Eliminar todo lo que creaste en Azure para que no siga consumiendo tu crédito de estudiante y para cerrar el acceso a la base de datos.</p>
+</section>
+<section id="por-qué-hay-que-hacerlo" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-hay-que-hacerlo">Por qué hay que hacerlo</h3>
+<p>Los recursos de Azure siguen existiendo y cobrando (o gastando horas gratuitas) mientras no los borres, aunque nadie los use. Como todo está dentro del grupo <code>rg-plaza</code>, borrar ese grupo elimina todo de una vez: no tienes que ir recurso por recurso.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Esto no se puede deshacer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al borrar el grupo desaparecen la aplicación web, la base de datos <strong>con sus datos</strong> y la dirección pública. Borra los recursos solo después de que tu docente haya revisado tu publicación.</p>
+</div>
+</div>
+</section>
+<section id="los-pasos-2" class="level3">
+<h3 class="anchored" data-anchor-id="los-pasos-2">Los pasos</h3>
+<ol type="1">
+<li>En el portal abre <strong>Grupos de recursos</strong> y entra a <code>rg-plaza</code>. La pestaña <strong>Recursos</strong> muestra lo que contiene. Deben ser cuatro: el plan de App Service, la identidad <code>oidc-msi-...</code> (la que quedó del intento fallido de la etapa 8), la aplicación web y el servidor PostgreSQL.</li>
+</ol>
+<p><img src="imagenes/71-limpieza-recursos-del-grupo.png" class="img-fluid" alt="Página del grupo de recursos rg-plaza con la pestaña Recursos. La tabla lista cuatro recursos: ASP-rgplaza-a016, un plan de App Service en Brazil South; oidc-msi-8ecc, una identidad administrada en Brazil South; plaza-iue603, una aplicación web en Brazil South; y plaza-pg-iue603, un servidor flexible en Canada Central."></p>
+<ol start="2" type="1">
+<li>Haz clic en los tres puntos (<strong>…</strong>) de la barra de arriba y elige <strong>Eliminar grupo de recursos</strong>.</li>
+</ol>
+<p><img src="imagenes/72-limpieza-menu-eliminar.png" class="img-fluid" alt="Menú desplegable de la barra del grupo de recursos con las opciones Administrar vista, Eliminar grupo de recursos, Actualizar, Exportar a CSV, Abrir consulta y Compartir con dispositivo móvil."></p>
+<ol start="3" type="1">
+<li>Se abre un panel que dice que el grupo y <strong>todos sus recursos dependientes se eliminarán permanentemente</strong>, con la lista de los cuatro recursos. Para confirmar, escribe el nombre del grupo (<code>rg-plaza</code>) en el campo de abajo y haz clic en <strong>Eliminar</strong>.</li>
+</ol>
+<p><img src="imagenes/73-limpieza-confirmar-eliminacion.png" class="img-fluid" alt="Panel Eliminar un grupo de recursos que advierte que el grupo y todos sus recursos dependientes se eliminarán permanentemente. Lista cuatro recursos que se eliminan: el plan, la identidad administrada, la aplicación web y el servidor flexible. Abajo, un campo para escribir el nombre del grupo y los botones Eliminar, desactivado, y Cancelar."></p>
+<ol start="4" type="1">
+<li>El portal muestra una notificación mientras elimina. Cuando termina, <code>rg-plaza</code> ya no aparece en la lista de grupos de recursos.</li>
+</ol>
+</section>
+<section id="lo-que-queda-en-github" class="level3">
+<h3 class="anchored" data-anchor-id="lo-que-queda-en-github">Lo que queda en GitHub</h3>
+<p>Borrar el grupo de Azure <strong>no toca tu repositorio</strong>. Siguen ahí el archivo <code>.github/workflows/main_&lt;tu-aplicación&gt;.yml</code> y el secreto del perfil de publicación. Desde ese momento, cada <code>git push</code> a <code>main</code> ejecutará el flujo de trabajo y fallará en el paso <strong>deploy</strong>, porque la aplicación de destino ya no existe. Para evitarlo tienes dos opciones:</p>
+<ul>
+<li>Borrar el archivo <code>.github/workflows/main_&lt;tu-aplicación&gt;.yml</code> de tu repositorio y subir el cambio.</li>
+<li>O, en GitHub, desactivar el flujo de trabajo desde la pestaña <strong>Actions</strong>.</li>
+</ul>
+<p>Si quieres además eliminar el secreto, está en <strong>Settings, Secrets and variables, Actions</strong> de tu repositorio.</p>
+</section>
+<section id="comprueba-9" class="level3">
+<h3 class="anchored" data-anchor-id="comprueba-9">Comprueba</h3>
+<ul>
+<li><code>rg-plaza</code> ya no aparece en <strong>Grupos de recursos</strong>.</li>
+<li>La dirección pública de la aplicación ya no responde.</li>
+<li>Decidiste qué hacer con el flujo de trabajo en tu repositorio.</li>
+</ul>
+</section>
+</section>
+<section id="apéndice.-cambiar-la-contraseña-del-servidor" class="level2">
+<h2 class="anchored" data-anchor-id="apéndice.-cambiar-la-contraseña-del-servidor">Apéndice. Cambiar la contraseña del servidor</h2>
+<p>Necesitas este procedimiento si la contraseña se subió a GitHub por error, si la compartiste sin querer o si la olvidaste. El orden importa: si solo cambias la contraseña en el servidor, <strong>Plaza deja de mostrar datos</strong>, porque la aplicación web sigue usando la antigua.</p>
+<section id="paso-1.-restablecerla-en-el-servidor" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1.-restablecerla-en-el-servidor">Paso 1. Restablecerla en el servidor</h3>
+<ol type="1">
+<li>Abre el servidor PostgreSQL en el portal. En la barra de la página <strong>Información general</strong> haz clic en <strong>Restablecer contraseña</strong>.</li>
+<li>Escribe la contraseña nueva en los dos campos. Debe cumplir los mismos requisitos de la etapa 3: entre 8 y 128 caracteres y tres de las cuatro categorías.</li>
+<li>Haz clic en <strong>Guardar</strong>.</li>
+</ol>
+<p><img src="imagenes/74-apendice-restablecer-contrasena.png" class="img-fluid" alt="Panel Restablecer contraseña de administrador del servidor plaza-pg-iue603, con los campos Contraseña y Confirmar contraseña vacíos y los botones Guardar y Descartar arriba."></p>
+</section>
+<section id="paso-2.-actualizar-la-cadena-de-la-aplicación-web" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2.-actualizar-la-cadena-de-la-aplicación-web">Paso 2. Actualizar la cadena de la aplicación web</h3>
+<ol type="1">
+<li>En la aplicación web abre <strong>Configuración, Variables de entorno</strong> y la pestaña <strong>Cadenas de conexión</strong>.</li>
+<li>Haz clic en la fila <code>Plaza</code> para editarla y reemplaza el valor por la línea de la etapa 6 con la <strong>contraseña nueva</strong>.</li>
+<li>Haz clic en <strong>Aplicar</strong> del panel, luego en <strong>Aplicar</strong> de la parte inferior de la página y <strong>Confirmar</strong>.</li>
+</ol>
+</section>
+<section id="paso-3.-comprobar" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3.-comprobar">Paso 3. Comprobar</h3>
+<p>Abre <code>/catalogo</code> en la dirección pública. Si muestra los productos, la aplicación se conecta con la contraseña nueva. Si aparece un error, revisa que la cadena no tenga espacios ni la contraseña vieja.</p>
+</section>
+<section id="paso-4.-quitar-la-contraseña-vieja-del-repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4.-quitar-la-contraseña-vieja-del-repositorio">Paso 4. Quitar la contraseña vieja del repositorio</h3>
+<p>Borra del código cualquier línea que contenga la contraseña, ejecuta <code>git grep -niE 'password=|pwd='</code> (no debe imprimir nada) y sube el cambio. Que no quede en el código <strong>no la hace secreta otra vez</strong>: la versión anterior sigue en el historial de Git. Por eso el primer paso, cambiar la contraseña, es el que cuenta.</p>
+</section>
+</section>
+<section id="si-algo-sale-mal" class="level2">
+<h2 class="anchored" data-anchor-id="si-algo-sale-mal">Si algo sale mal</h2>
+<p>Estos son los problemas que aparecieron al preparar esta guía, con la causa y la solución de cada uno. Si algo te falla, busca aquí primero.</p>
+<div class="tabla-ancha">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dónde</th>
+<th>Lo que ves</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Etapa 3, servidor</td>
+<td>El formulario propone <em>Producción</em> con 4 núcleos y, al cambiarlo, <em>B2s</em></td>
+<td>Los valores por defecto no son los gratuitos</td>
+<td>Elige <em>Desarrollo/pruebas</em>, luego <em>Configurar servidor</em> y el tamaño <strong>B1ms</strong></td>
+</tr>
+<tr class="even">
+<td>Etapa 3, contraseña</td>
+<td>Errores rojos en los campos de contraseña</td>
+<td>Campo vacío o contraseña que no cumple: 8 a 128 caracteres, tres de cuatro categorías</td>
+<td>Escribe la contraseña en los dos campos y revisa los requisitos</td>
+</tr>
+<tr class="odd">
+<td>Etapa 4, plan</td>
+<td>El formulario propone <em>Básico B1</em></td>
+<td>Plan de pago por defecto</td>
+<td>Elige <strong>Gratis F1</strong> después de elegir la región: al cambiar de región el plan vuelve a B1</td>
+</tr>
+<tr class="even">
+<td>Etapa 4, creación</td>
+<td><em>Operation cannot be completed without additional quota</em>, límite F1 igual a 0</td>
+<td>Tu suscripción no tiene cuota gratuita en esa región</td>
+<td>Cambia a otra región de la lista permitida (etapa 4)</td>
+</tr>
+<tr class="odd">
+<td>Etapa 4, creación</td>
+<td><em>Resource was disallowed by Azure</em>, política de regiones</td>
+<td>La región no está entre las permitidas para tu suscripción</td>
+<td>Consulta la directiva <em>Allowed resource deployment regions</em> y elige una de esas</td>
+</tr>
+<tr class="even">
+<td>Etapa 6, cadena</td>
+<td>La cadena desaparece al salir de la página</td>
+<td>Solo pulsaste <em>Aplicar</em> del panel, no el de la página</td>
+<td>Pulsa también el <strong>Aplicar</strong> del pie de la página y confirma</td>
+</tr>
+<tr class="odd">
+<td>Etapa 7, migración</td>
+<td><code>Host desconocido</code></td>
+<td>Caché de DNS vieja en tu equipo</td>
+<td><code>ipconfig /flushdns</code> y repite el comando</td>
+</tr>
+<tr class="even">
+<td>Etapa 7, migración</td>
+<td>Una línea con <code>fail:</code> al principio, pero termina en <code>Done.</code></td>
+<td>EF Core lee una tabla que aún no existe en una base nueva</td>
+<td>Nada: es normal</td>
+</tr>
+<tr class="odd">
+<td>Etapa 7, migración</td>
+<td><code>pg_hba.conf</code> o conexión que se agota</td>
+<td>Tu IP no está en el firewall del servidor</td>
+<td>Agrega tu IP actual en <strong>Redes</strong> del servidor</td>
+</tr>
+<tr class="even">
+<td>Etapa 8, guardar</td>
+<td><em>No pudimos verificar cómo GitHub Actions emite tokens OIDC</em></td>
+<td>Repositorio nuevo con el formato inmutable de identidad</td>
+<td>Usa <strong>Autenticación básica</strong> (paso 1 a 5)</td>
+</tr>
+<tr class="odd">
+<td>Etapa 8, guardar</td>
+<td><em>The role assignment already exists</em></td>
+<td>Un intento anterior con identidad asignada dejó restos</td>
+<td>No reintentes con identidad: cambia a autenticación básica</td>
+</tr>
+<tr class="even">
+<td>Etapa 8, autenticación</td>
+<td><em>La autenticación básica de SCM está deshabilitada</em></td>
+<td>Viene deshabilitada en las aplicaciones nuevas</td>
+<td>Habilítala en <strong>Configuración general</strong> (paso 1)</td>
+</tr>
+<tr class="odd">
+<td>Etapa 9, navegador</td>
+<td>La dirección no abre o dice que el servidor no se encuentra</td>
+<td>Caché de DNS en tu equipo, porque el nombre es nuevo</td>
+<td><code>ipconfig /flushdns</code> y recarga</td>
+</tr>
+<tr class="even">
+<td>Etapa 9, Plaza</td>
+<td>Error 404 en la dirección sin <code>/catalogo</code></td>
+<td>Plaza no tiene página en la raíz</td>
+<td>Abre <code>/catalogo</code></td>
+</tr>
+<tr class="odd">
+<td>Etapa 9, Plaza</td>
+<td>La primera visita tarda</td>
+<td>El plan F1 duerme la aplicación</td>
+<td>Espera: las siguientes responden rápido</td>
+</tr>
+<tr class="even">
+<td>Etapa 9, cambio</td>
+<td><code>git push</code> rechazado, <em>fetch first</em></td>
+<td>Azure agregó un commit que tu copia local no tiene</td>
+<td><code>git pull origin main</code> y vuelve a subir</td>
+</tr>
+<tr class="odd">
+<td>Apéndice, contraseña</td>
+<td>Después de cambiar la contraseña del servidor, <code>/catalogo</code> responde con error 500 y la página queda en blanco</td>
+<td>La aplicación web sigue usando la contraseña vieja en su cadena <code>Plaza</code></td>
+<td>Actualiza la cadena <code>Plaza</code> con la contraseña nueva (apéndice, paso 2) y vuelve a abrir <code>/catalogo</code></td>
+</tr>
+<tr class="even">
+<td>Etapa 10, GitHub</td>
+<td>Después de borrar los recursos, las ejecuciones de Actions fallan en <em>deploy</em></td>
+<td>La aplicación de destino ya no existe</td>
+<td>Borra el archivo del flujo de trabajo del repositorio o desactívalo desde la pestaña <em>Actions</em></td>
+</tr>
+<tr class="odd">
+<td>Etapa 9, Actions</td>
+<td>Avisos amarillos de <em>Node.js 20 is deprecated</em></td>
+<td>GitHub avisa de versiones de acciones</td>
+<td>Ignóralos: no bloquean la publicación</td>
+</tr>
+<tr class="even">
+<td>Etapa 5 o 9, GitHub</td>
+<td>Subiste la cadena de conexión o la contraseña a tu repositorio, por ejemplo en un comentario</td>
+<td><code>git grep</code> no se ejecutó antes del <code>git push</code>, o el dato se copió a un archivo del proyecto</td>
+<td>Considera la contraseña <strong>comprometida</strong>. Cámbiala de inmediato siguiendo el apéndice <em>Cambiar la contraseña del servidor</em>: restablécela en el servidor, actualiza la cadena <code>Plaza</code> de la aplicación web y borra el texto del archivo. Borrarlo no basta: queda en el historial de Git de un repositorio público</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cuando algo falla y no está aquí
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lee el mensaje completo antes de buscar. En el portal, la campana de <strong>Notificaciones</strong> guarda los errores con su texto. En GitHub, la pestaña <strong>Actions</strong> muestra en qué paso exacto falló una publicación, y al hacer clic en el paso ves el detalle.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oscarleosanchez\.github\.io\/sitio-iue-2026-02\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Oscar Leonel Sánchez Conde</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Institución Universitaria de Envigado. Facultad de Ingenierías</p>
+</div>
+    <div class="nav-footer-right">
+<p>Semestre 2026-02</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
