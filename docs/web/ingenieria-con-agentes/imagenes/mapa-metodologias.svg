@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="400" viewBox="0 0 740 400" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Mapa de metodologías según la ceremonia antes de programar</title>
+<desc id="d">Un eje horizontal de menos a más ceremonia previa. De izquierda a derecha: vibe coding, que solo tiene el prompt y es la línea base; plan mode, con un plan que se aprueba antes de editar; TDD con augmented coding, con pruebas en rojo antes de cada regla; ciclo autónomo con autoauditoría, con criterios de parada y tope de vueltas; ODD, que no escribe nada si la tarea es pequeña y un documento si es grande; compound engineering, con un plan revisado y una nota de lo aprendido; y SDD, con constitución, especificación, plan y tareas. Una nota dice que la ceremonia no mide la calidad y que se elige según la tarea.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="400" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="28" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Qué escribes antes de que el agente programe</text>
+<path d="M 24 205 L 716 205" fill="none" stroke="#8795a3" stroke-width="2.2" marker-end="url(#f-gris)"/>
+<line x1="85" y1="152" x2="85" y2="205" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="1" y="52" width="168" height="100" rx="8" fill="#f6f8fa" stroke="#8795a3" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="85.0" y="74" font-size="13.5" fill="#3d4852" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Vibe coding</text>
+<text x="85.0" y="95" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Solo el prompt</text>
+<text x="85.0" y="112" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sin plan ni pruebas</text>
+<text x="85.0" y="129" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Línea base</text>
+<circle cx="85" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="178" y1="205" x2="178" y2="258" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="94" y="258" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="178.0" y="280" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Plan mode</text>
+<text x="178.0" y="301" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Un plan que apruebas</text>
+<text x="178.0" y="318" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">antes de que edite</text>
+<text x="178.0" y="335" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Explorar y planear</text>
+<circle cx="178" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="271" y1="152" x2="271" y2="205" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="187" y="52" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="271.0" y="74" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">TDD</text>
+<text x="271.0" y="95" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Pruebas en rojo</text>
+<text x="271.0" y="112" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">antes de cada regla</text>
+<text x="271.0" y="129" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Augmented coding</text>
+<circle cx="271" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="364" y1="205" x2="364" y2="258" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="280" y="258" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="364.0" y="280" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ciclo autónomo</text>
+<text x="364.0" y="301" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Criterios de parada</text>
+<text x="364.0" y="318" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y un tope de vueltas</text>
+<text x="364.0" y="335" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Auditoría en cada vuelta</text>
+<circle cx="364" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="457" y1="152" x2="457" y2="205" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="373" y="52" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="457.0" y="74" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ODD</text>
+<text x="457.0" y="95" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Nada si la tarea es</text>
+<text x="457.0" y="112" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">pequeña; un documento</text>
+<text x="457.0" y="129" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si es grande</text>
+<circle cx="457" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="550" y1="205" x2="550" y2="258" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="466" y="258" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="550.0" y="280" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Compound</text>
+<text x="550.0" y="301" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Un plan revisado y</text>
+<text x="550.0" y="318" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">una nota de lo</text>
+<text x="550.0" y="335" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">aprendido al cerrar</text>
+<circle cx="550" cy="205" r="4.5" fill="#8795a3"/>
+<line x1="643" y1="152" x2="643" y2="205" stroke="#8795a3" stroke-width="1.4"/>
+<rect x="559" y="52" width="168" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="643.0" y="74" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">SDD</text>
+<text x="643.0" y="95" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Constitución, spec,</text>
+<text x="643.0" y="112" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">plan y tareas:</text>
+<text x="643.0" y="129" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">varios documentos</text>
+<circle cx="643" cy="205" r="4.5" fill="#8795a3"/>
+<text x="20" y="386" font-size="12" fill="#3d4852" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Menos ceremonia</text>
+<text x="720" y="386" font-size="12" fill="#3d4852" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Más ceremonia</text>
+<text x="370" y="386" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La ceremonia no mide la calidad: se elige según la tarea</text>
+</g>
+</svg>

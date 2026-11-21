@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="430" viewBox="0 0 740 430" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Flujo de SDD con Spec Kit y el cambio C1</title>
+<desc id="d">Seis pasos de izquierda a derecha, cada uno un comando de Spec Kit: constitution, specify, clarify, plan, tasks e implement. Debajo de cada paso, el documento que produce: constitution.md con seis principios, spec.md con requisitos y criterios medibles, la sección Clarifications dentro de spec.md, plan.md con data-model.md y research.md, tasks.md con 22 tareas, y por último el código y las pruebas con evidencia. Una franja dice que el ingeniero revisa cada documento y que en esta prueba el agente respondió sus propias preguntas de clarify. Abajo, a la izquierda, el cambio C1 obligó a volver a la especificación y luego al plan, a las tareas y al código. A la derecha, lo medido: C1 tocó 7 documentos y 2 archivos de código, y C2 tocó 7 documentos para 1 línea de código.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="430" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="26" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cada paso es un comando /speckit-&lt;paso&gt;: el agente redacta y el ingeniero revisa</text>
+<rect x="12" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="66.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">constitution</text>
+<text x="66.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">principios</text>
+<text x="66.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">del proyecto</text>
+<path d="M 122 82 L 131 82" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 66 120 L 66 148" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-maiz)"/>
+<rect x="12" y="150" width="108" height="80" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="66.0" y="172" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Constitución</text>
+<text x="66.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">6 principios en</text>
+<text x="66.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">constitution.md</text>
+<rect x="133" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="187.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">specify</text>
+<text x="187.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">qué y por qué,</text>
+<text x="187.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">sin el cómo</text>
+<path d="M 243 82 L 252 82" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 187 120 L 187 148" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-maiz)"/>
+<rect x="133" y="150" width="108" height="80" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="187.0" y="172" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">spec.md</text>
+<text x="187.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">requisitos y</text>
+<text x="187.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">criterios</text>
+<rect x="254" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="308.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">clarify</text>
+<text x="308.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">preguntas</text>
+<text x="308.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y respuestas</text>
+<path d="M 364 82 L 373 82" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 308 120 L 308 148" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-maiz)"/>
+<rect x="254" y="150" width="108" height="80" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="308.0" y="172" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Clarifications</text>
+<text x="308.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en spec.md,</text>
+<text x="308.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">con decisiones</text>
+<rect x="375" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="429.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">plan</text>
+<text x="429.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cómo: archivos</text>
+<text x="429.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y decisiones</text>
+<path d="M 485 82 L 494 82" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 429 120 L 429 148" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-maiz)"/>
+<rect x="375" y="150" width="108" height="80" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="429.0" y="172" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">plan.md</text>
+<text x="429.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">data-model.md</text>
+<text x="429.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">research.md</text>
+<rect x="496" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="550.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tasks</text>
+<text x="550.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">lista de tareas</text>
+<text x="550.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">por historia</text>
+<path d="M 606 82 L 615 82" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 550 120 L 550 148" fill="none" stroke="#b7791f" stroke-width="1.6" marker-end="url(#f-maiz)"/>
+<rect x="496" y="150" width="108" height="80" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="550.0" y="172" font-size="11.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tasks.md</text>
+<text x="550.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">22 tareas</text>
+<text x="550.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en 7 fases</text>
+<rect x="617" y="46" width="108" height="72" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="671.0" y="68" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">implement</text>
+<text x="671.0" y="89" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ejecuta las</text>
+<text x="671.0" y="106" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tareas</text>
+<path d="M 671 120 L 671 148" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-hoja)"/>
+<rect x="617" y="150" width="108" height="80" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="671.0" y="172" font-size="11.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Código</text>
+<text x="671.0" y="193" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y pruebas, con</text>
+<text x="671.0" y="210" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">build y curl</text>
+<rect x="12" y="248" width="713" height="40" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.4"/>
+<text x="368" y="264" font-size="12" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El ingeniero revisa cada documento antes del paso siguiente.</text>
+<text x="368" y="281" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">En esta prueba el agente se respondió sus propias preguntas de clarify.</text>
+<rect x="12" y="306" width="352" height="112" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="188.0" y="330" font-size="12.5" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cambio C1: se vuelve a la especificación</text>
+<text x="188.0" y="351" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1. spec.md y Clarifications</text>
+<text x="188.0" y="368" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2. plan, modelo de datos, investigación y quickstart</text>
+<text x="188.0" y="385" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3. tasks.md, con una fase nueva</text>
+<text x="188.0" y="402" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">4. solo entonces, el código</text>
+<rect x="376" y="306" width="349" height="112" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="550.5" y="330" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Lo medido en el Carrito</text>
+<text x="550.5" y="351" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">C1: 7 documentos y 2 archivos de código</text>
+<text x="550.5" y="368" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">C2: 7 documentos para 1 línea de código</text>
+<text x="550.5" y="385" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">F1: 9 documentos, 22 tareas y 206.206 tokens</text>
+</g>
+</svg>

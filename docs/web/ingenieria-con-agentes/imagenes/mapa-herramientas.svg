@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="460" viewBox="0 0 740 460" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Mapa de herramientas y modelos</title>
+<desc id="d">Tres columnas por modalidad. IDE: Cursor, GitHub Copilot en VS Code y Trae. Terminal: Claude Code, Codex CLI, OpenCode, Qwen Code y Kimi Code. Nube: Codex cloud, Copilot cloud agent y Claude Code web. Algunas llevan una etiqueta gratis con límites o abierto por ser de código abierto. Debajo, dos grupos de modelos: cerrados (Claude, GPT, Gemini) y abiertos (DeepSeek, Qwen, Kimi, GLM, MiniMax). Una franja dice que el ingeniero elige por costo, licencia, privacidad y facilidad de verificar.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="460" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="16" width="220" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="130.0" y="39" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">IDE</text>
+<text x="130.0" y="61" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el agente vive en el editor</text>
+<rect x="20" y="80" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="30" y="100" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Cursor</text>
+<rect x="20" y="118" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="30" y="138" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">GitHub Copilot en VS Code</text>
+<rect x="182" y="124" width="52" height="18" rx="9.0" fill="#2e7d5b"/>
+<text x="208.0" y="137.0" font-size="10.5" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">gratis</text>
+<rect x="20" y="156" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="30" y="176" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Trae</text>
+<rect x="260" y="16" width="220" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="370.0" y="39" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Terminal</text>
+<text x="370.0" y="61" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el agente vive en la consola</text>
+<rect x="260" y="80" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="100" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Claude Code</text>
+<rect x="260" y="118" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="138" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Codex CLI</text>
+<rect x="422" y="124" width="52" height="18" rx="9.0" fill="#2e7d5b"/>
+<text x="448.0" y="137.0" font-size="10.5" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">gratis</text>
+<rect x="260" y="156" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="176" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">OpenCode</text>
+<rect x="418" y="162" width="56" height="18" rx="9.0" fill="#8795a3"/>
+<text x="446.0" y="175.0" font-size="10.5" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">abierto</text>
+<rect x="260" y="194" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="214" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Qwen Code</text>
+<rect x="418" y="200" width="56" height="18" rx="9.0" fill="#8795a3"/>
+<text x="446.0" y="213.0" font-size="10.5" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">abierto</text>
+<rect x="260" y="232" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="270" y="252" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Kimi Code</text>
+<rect x="422" y="238" width="52" height="18" rx="9.0" fill="#2e7d5b"/>
+<text x="448.0" y="251.0" font-size="10.5" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">gratis</text>
+<rect x="500" y="16" width="220" height="54" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="610.0" y="39" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Nube</text>
+<text x="610.0" y="61" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el agente trabaja aparte</text>
+<rect x="500" y="80" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="510" y="100" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Codex cloud</text>
+<rect x="500" y="118" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="510" y="138" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Copilot cloud agent</text>
+<rect x="500" y="156" width="220" height="30" rx="6" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="510" y="176" font-size="12" fill="#16202b" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Claude Code web</text>
+<text x="20" y="286" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">gratis: hay plan o uso gratuito, con límites. abierto: el programa es de código abierto.</text>
+<rect x="20" y="300" width="340" height="92" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="190.0" y="323" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Modelos cerrados</text>
+<text x="190.0" y="345" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Claude, GPT, Gemini</text>
+<text x="190.0" y="363" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">se usan por API o suscripción</text>
+<text x="190.0" y="381" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tus datos viajan al proveedor</text>
+<rect x="380" y="300" width="340" height="92" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="550.0" y="323" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Modelos abiertos</text>
+<text x="550.0" y="345" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">DeepSeek, Qwen, Kimi, GLM, MiniMax</text>
+<text x="550.0" y="363" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">licencia de pesos propia de cada uno</text>
+<text x="550.0" y="381" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">puedes correrlos en tu equipo</text>
+<rect x="20" y="406" width="700" height="40" rx="6" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.3"/>
+<text x="370.0" y="430.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Tú eliges por costo, licencia, privacidad de los datos y facilidad para verificar el resultado</text>
+</g>
+</svg>
