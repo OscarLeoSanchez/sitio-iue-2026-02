@@ -128,14 +128,14 @@ website:
               href: web/plaza-formularios-y-datos/index.qmd
         - text: "Plaza: actividad evaluativa"
           href: web/semana-14/actividad/index.html
-        - text: "Proyecto: entregable 1"
-          href: web/proyecto-entregable-1/index.qmd
-        - text: "Proyecto: entregable final"
-          href: web/proyecto-entregable-final/index.qmd
         - section: "Unidad 4. Servicios, despliegue y entornos"
           contents:
             - text: "Plaza en la nube: publicar en Azure"
               href: web/semana-15/index.qmd
+        - text: "Proyecto: entregable 1"
+          href: web/proyecto-entregable-1/index.qmd
+        - text: "Proyecto: entregable final"
+          href: web/proyecto-entregable-final/index.qmd
   page-footer:
     background: light
     left: "Oscar Leonel Sánchez Conde"

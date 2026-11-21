@@ -10,7 +10,7 @@ number-sections: false
 |                 |                                                                                     |
 |-----------------|-------------------------------------------------------------------------------------|
 | Qué construyes  | Plaza publicada en una dirección pública de internet, con su base de datos PostgreSQL también en la nube, creada paso a paso desde el portal de Azure |
-| Prerrequisitos  | Plaza funcionando en local con el catálogo en PostgreSQL, el proyecto subido a un repositorio de GitHub y una cuenta de **Azure for Students** activa con tu correo institucional |
+| Prerrequisitos  | Plaza (o tu proyecto) funcionando en local con PostgreSQL y Entity Framework Core, una cuenta de GitHub, una cuenta de **Azure for Students** activa con tu correo institucional y las herramientas que se comprueban en la sección *Antes de empezar* |
 | Herramientas    | Un navegador, el portal de Azure (portal.azure.com), una cuenta de GitHub, .NET SDK 10, Git y PowerShell. No se usa Visual Studio: la publicación se hace desde GitHub |
 :::
 
@@ -22,6 +22,69 @@ number-sections: false
 - Cada etapa termina con una sección **Comprueba**. No sigas a la etapa siguiente hasta que se cumpla.
 - Los recursos de Azure consumen el crédito de tu suscripción. La última etapa enseña a borrarlos todos de una vez.
 :::
+
+## Antes de empezar
+
+### Lo que necesitas instalado y activo
+
+Comprueba cada punto **antes** de la etapa 1. Los comandos se escriben en PowerShell. Si no sabes abrirlo dentro de la carpeta de tu proyecto: en el Explorador de archivos abre la carpeta, haz clic derecho en un espacio vacío y elige **Abrir en Terminal**. También sirve abrir PowerShell desde el menú Inicio y escribir `cd "C:\ruta\a\tu\carpeta"`.
+
+| Qué | Cómo comprobarlo | Qué debes ver |
+|---|---|---|
+| .NET SDK 10 | `dotnet --version` | Un número que empieza por `10.`, por ejemplo `10.0.302` |
+| Git | `git --version` | Una línea como `git version 2.50.0.windows.2` |
+| Herramienta de Entity Framework | `dotnet ef --version` | El texto *Entity Framework Core .NET Command-line Tools* y una versión `10.x` |
+| Tu proyecto compila | `dotnet build`, dentro de la carpeta de tu proyecto | Termina sin errores |
+| Cuenta de GitHub | Entra a [github.com](https://github.com) e inicia sesión | Ves tu página de inicio |
+| Cuenta de Azure for Students | Se verifica en la etapa 1 | Estado *Activo* |
+
+Si `dotnet ef --version` dice que el comando no existe o no se reconoce, instala la herramienta. Tiene que ser la versión 10 para que coincida con tu .NET:
+
+```powershell
+dotnet tool install --global dotnet-ef --version 10.*
+```
+
+Si ya la tenías instalada pero en otra versión, en lugar de `install` usa `update`:
+
+```powershell
+dotnet tool update --global dotnet-ef --version 10.*
+```
+
+Después **cierra PowerShell y ábrelo de nuevo** y repite `dotnet ef --version`.
+
+### Tu hoja de datos
+
+En esta guía vas a inventar varios nombres y una contraseña, y los vas a necesitar de nuevo en etapas posteriores. Abre un bloc de notas **fuera de la carpeta de tu proyecto** (por ejemplo en el Escritorio) y copia esta tabla. Irás completando la columna *Mi valor* a medida que avances.
+
+| Dato | Qué es | Se define en | Mi valor |
+|---|---|---|---|
+| Grupo de recursos | La carpeta de Azure donde vive todo | Etapa 2 | `rg-plaza` |
+| Nombre del servidor | Nombre de tu servidor PostgreSQL. Debe ser único en todo Azure | Etapa 3 | `plaza-pg-` más algo tuyo |
+| Punto de conexión | La dirección del servidor en internet | Etapa 3 | `<nombre del servidor>.postgres.database.azure.com` |
+| Usuario administrador | El usuario con el que se entra a la base | Etapa 3 | `plazaadmin` |
+| Contraseña del servidor | La que escribes al crear el servidor. Azure no la vuelve a mostrar | Etapa 3 | Solo tú la conoces |
+| Base de datos | Donde se guardan las tablas | Etapa 3 | `plaza_campesina` |
+| Nombre de la aplicación web | Forma parte de tu dirección pública. Debe ser único en todo Azure | Etapa 4 | `plaza-` más algo tuyo |
+| Dirección pública | La URL con la que se abre tu aplicación | Etapa 4 | `https://...azurewebsites.net` |
+| Repositorio de GitHub | Dónde está tu código | Etapa 5 | `<tu-usuario>/<tu-repositorio>` |
+
+::: {.callout-important}
+## Esa hoja no es para compartir ni para subir
+
+La contraseña y la cadena de conexión que armarás en la etapa 6 son secretos. No los pegues en chats, no los escribas en archivos dentro de tu proyecto y no los subas a GitHub.
+:::
+
+### Si trabajas con tu propio proyecto y no con Plaza
+
+La guía usa Plaza como ejemplo. Puedes seguirla con tu proyecto si es ASP.NET Core en .NET 10, usa Entity Framework Core con PostgreSQL (Npgsql), tiene al menos una migración y lee su cadena de conexión con `GetConnectionString`. Cada vez que veas un dato de Plaza, cámbialo por el de tu proyecto:
+
+| En la guía (Plaza) | En tu proyecto |
+|---|---|
+| Carpeta `Plaza` y archivo `Plaza.csproj` | La carpeta de tu proyecto y su archivo `.csproj` |
+| Cadena de conexión llamada `Plaza` | El texto que aparece dentro de `GetConnectionString("...")` en tu `Program.cs` |
+| Base de datos `plaza_campesina` | El valor de `Database=` en tu `appsettings.Development.json` |
+| Ruta `/catalogo` | Una ruta de tu proyecto que lea datos de la base |
+| Archivo `Views/Catalogo/Listar.cshtml` | Cualquier vista tuya |
 
 ## Lo que vas a lograr
 
@@ -38,7 +101,7 @@ number-sections: false
 | 9 | Comprobar que Plaza está publicada y ver un cambio llegar a internet |
 | 10 | Borrar todos los recursos de Azure al terminar, y qué hacer con el flujo de trabajo de GitHub |
 
-Al final hay un apéndice para cambiar la contraseña del servidor y una tabla con los problemas más frecuentes y su solución.
+Al final hay un apéndice para cambiar la contraseña del servidor, un glosario con los términos y una tabla con los problemas más frecuentes y su solución.
 
 ## Etapa 1. Entrar al portal y verificar la suscripción
 
@@ -51,6 +114,12 @@ Confirmar que tu cuenta de Azure for Students está activa y que eres el propiet
 1. Abre [portal.azure.com](https://portal.azure.com) en el navegador.
 2. Inicia sesión con tu **correo institucional**. Azure for Students se activa con ese correo, no con uno personal.
 3. Llegarás a la página de **Inicio**. Si es tu primera vez, no tienes recursos: la sección *Recursos* aparece vacía.
+
+::: {.callout-note}
+## Si todavía no tienes la cuenta de Azure for Students
+
+Actívala en [azure.microsoft.com/free/students](https://azure.microsoft.com/free/students) con tu correo institucional. Si la página no reconoce tu correo o no te deja continuar, avisa a tu docente antes de seguir: sin la suscripción no puedes hacer el resto de la guía.
+:::
 
 ![](imagenes/01-portal-inicio.png){fig-alt="Página de inicio del portal de Azure. Arriba, la lista de servicios de Azure con Crear un recurso, App Services, Bases de datos SQL y otros. En el centro, la sección Recursos vacía con el mensaje No se ha visto ningún recurso recientemente. Abajo, el bloque Navegar con Suscripciones, Grupos de recursos y Todos los recursos."}
 
@@ -138,8 +207,15 @@ En tu equipo, Plaza se conecta a un PostgreSQL local (`localhost`). Cuando la ap
 
 ### Abre el formulario de creación
 
-1. En el buscador de la parte superior del portal escribe `PostgreSQL` y elige **Azure Database for PostgreSQL, servidores flexibles**.
-2. Haz clic en **Crear**. Se abre el formulario con cuatro pestañas: *Básico*, *Redes*, *Seguridad* y *Etiquetas*.
+1. Haz clic en el buscador de la parte superior del portal (el icono de la lupa), escribe `PostgreSQL` y, en la sección **Servicios** de los resultados, elige **Servidores flexibles de Azure Database for PostgreSQL**. Ignora los resultados de *Microsoft Entra ID* y de *Marketplace*.
+
+![](imagenes/75-busqueda-postgresql.png){fig-alt="Cuadro de búsqueda del portal con la palabra PostgreSQL escrita. En la sección Servicios, el primer resultado es Servidores flexibles de Azure Database for PostgreSQL. Debajo hay otros resultados de Microsoft Entra ID, Marketplace y documentación."}
+
+2. Se abre la lista de tus servidores PostgreSQL. Haz clic en **+ Crear**, el botón azul de arriba a la izquierda. En la captura ya aparece el servidor de este ejemplo; en tu pantalla la lista estará vacía.
+
+![](imagenes/76-lista-servidores-postgresql.png){fig-alt="Página Servidores flexibles de Azure Database for PostgreSQL con el botón azul Crear arriba a la izquierda. La tabla muestra un servidor de ejemplo, plaza-pg-iue603, en estado Listo, versión 18.6, en Canada Central y en el grupo rg-plaza."}
+
+3. Se abre el formulario de creación, con cinco pestañas: *Básico*, *Redes*, *Seguridad*, *Etiquetas* y *Revisar y crear*.
 
 ### Pestaña Básico: proyecto y servidor
 
@@ -191,12 +267,14 @@ El formulario propone *PostgreSQL y autenticación de Microsoft Entra*, que obli
 
 La contraseña debe tener entre 8 y 128 caracteres y combinar al menos tres de estas cuatro categorías: mayúsculas, minúsculas, números y símbolos. Si no cumple, el formulario lo marca en rojo y no te deja crear el servidor.
 
+Además, para evitar problemas en las etapas 6 y 7, **no uses estos caracteres en la contraseña**: punto y coma `;`, comillas `"` o `'`, signo de dólar `$`, acento grave `` ` ``, signo igual `=` ni espacios. Tienen un significado especial dentro de la cadena de conexión o en PowerShell y la romperían. Usa letras, números y símbolos como `-`, `_`, `.`, `!` o `#`.
+
 ![](imagenes/19-pg-contrasena-requisitos.png){fig-alt="Campos de contraseña vacíos con tres errores en rojo: el valor no puede estar vacío, la contraseña debe tener un mínimo de 8 caracteres y un máximo de 128, y debe contener caracteres de tres de las cuatro categorías de mayúsculas, minúsculas, números y símbolos."}
 
 ::: {.callout-important}
 ## Guarda esta contraseña
 
-Azure no la vuelve a mostrar. La necesitarás en la cadena de conexión de la aplicación y para aplicar la migración desde tu equipo. En esta guía aparece como `<tu-contraseña>`: nunca la escribas en el repositorio ni en un archivo que subas a GitHub.
+Azure no la vuelve a mostrar. **Cópiala ahora en tu hoja de datos** (el bloc de notas que está fuera de tu proyecto). La necesitarás en la cadena de conexión de la aplicación y para aplicar la migración desde tu equipo. En esta guía aparece como `<tu-contraseña>`: nunca la escribas en el repositorio ni en un archivo que subas a GitHub. Si la pierdes, no pasa nada grave: se puede cambiar (apéndice al final de la guía).
 :::
 
 ### Pestaña Redes
@@ -247,9 +325,11 @@ No cambies nada. La *Clave de cifrado de datos* queda como **Clave administrada 
 
 1. Haz clic en **Ir al recurso**. Se abre la página del servidor.
 2. En *Información esencial* comprueba que **Estado** dice **Ready**, que el servidor está en tu grupo `rg-plaza` y que el **Inicio de sesión del administrador** es `plazaadmin`.
-3. Fíjate en el **Punto de conexión**: es la dirección `<tu-servidor>.postgres.database.azure.com`. Es el valor que irá en `Host=` en la cadena de conexión de la etapa 6. Para copiarlo, pasa el cursor por encima y usa el icono de copiar.
+3. Fíjate en el **Punto de conexión**. Es la dirección de tu servidor en internet y siempre tiene la forma `<nombre-del-servidor>.postgres.database.azure.com`; por ejemplo, si tu servidor se llama `plaza-pg-abc`, su punto de conexión es `plaza-pg-abc.postgres.database.azure.com`. En la pantalla se ve **cortado** con puntos suspensivos. Para copiarlo completo, pasa el cursor sobre el valor: a la derecha aparece un **icono de copiar** (dos hojas). Haz clic en él y pega el valor en tu hoja de datos.
 
-![](imagenes/23-pg-servidor-listo.png){fig-alt="Página del servidor flexible plaza-pg-iue603. Estado Ready, ubicación Canada Central, punto de conexión plaza-pg-iue603.postgres.database.azure.com, inicio de sesión del administrador plazaadmin, configuración con capacidad de ráfaga B1ms, versión de PostgreSQL 18.6 y alta disponibilidad no habilitada."}
+![](imagenes/77-servidor-datos-conexion.png){fig-alt="Página del servidor flexible plaza-pg-iue603. Estado Ready, ubicación Canada Central, nombre del servidor plaza-pg-iue603, punto de conexión plaza-pg-iue603.postgres.database.a seguido de puntos suspensivos y, a su derecha, el icono de copiar. Más abajo, el inicio de sesión del administrador plazaadmin, la configuración B1ms y la versión de PostgreSQL 18.6."}
+
+Esta misma pantalla te sirve para consultar después tres datos de tu hoja: el **nombre del servidor**, el **punto de conexión** y el **inicio de sesión del administrador**. La contraseña es la única que Azure no muestra.
 
 El aviso naranja de arriba dice que el nivel de proceso ampliable es para desarrollo y pruebas. Es correcto: Plaza es un proyecto de clase, no una aplicación con usuarios reales.
 
@@ -279,7 +359,7 @@ El servidor ya existe, pero está vacío: solo trae bases de datos del sistema y
 
 - El servidor está en estado **Ready**.
 - La lista de bases de datos incluye `plaza_campesina`.
-- Tienes anotados: el **punto de conexión** del servidor, el usuario `plazaadmin` y tu contraseña.
+- Tu **hoja de datos** tiene completos estos cinco datos: nombre del servidor, punto de conexión, usuario `plazaadmin`, base de datos `plaza_campesina` y tu contraseña. Sin ellos no puedes hacer la etapa 6.
 - El grupo `rg-plaza` ya contiene un recurso. Si abres el grupo, lo verás en la lista.
 
 Con esto la base de datos está lista, pero todavía está vacía: no tiene las tablas de Plaza. Esas se crean en la etapa de migraciones.
@@ -296,8 +376,8 @@ App Service es el servicio de Azure que ejecuta tu aplicación web: recibe las p
 
 ### Abre el formulario de creación
 
-1. En la página de **Inicio** del portal haz clic en **Crear un recurso** y busca **Aplicación web** (en inglés, *Web App*). También sirve escribir `App Services` en el buscador superior y pulsar **Crear**.
-2. Se abre el formulario **Crear aplicación web**, con siete pestañas: *Datos básicos*, *Base de datos*, *Implementación*, *Redes*, *Supervisión y protección*, *Etiquetas* y *Revisar y crear*.
+1. En la página de **Inicio** del portal haz clic en **Crear un recurso**, escribe `Aplicación web` (en inglés, *Web App*) en el buscador de esa pantalla y elige **Aplicación web** de Microsoft. Otra forma: en **Inicio**, abre **App Services** (o búscalo con la lupa), haz clic en **Crear** y elige **Aplicación web**. Los nombres de los menús pueden variar un poco; lo que buscas es el formulario titulado **Crear aplicación web**.
+2. Se abre ese formulario, con siete pestañas: *Datos básicos*, *Base de datos*, *Implementación*, *Redes*, *Supervisión y protección*, *Etiquetas* y *Revisar y crear*.
 
 ### Pestaña Datos básicos
 
@@ -462,7 +542,7 @@ Plaza -> C:\Users\...\Temp\plaza-publish\
 
 ### Revisa que el repositorio esté limpio
 
-Tres comprobaciones antes de subir. Todas se ejecutan en la carpeta `Plaza`.
+Tres comprobaciones antes de subir. Todas se ejecutan en la carpeta de tu proyecto y **necesitan que la carpeta ya sea un repositorio**. Si `git status` te sale con `fatal: not a git repository` (Caso C, que se explica más abajo en *Sube el proyecto*), haz primero solo `git init -b main` y `git add .`, ejecuta estas tres revisiones y recién después haz el `git commit`.
 
 1. **Que no se hayan subido archivos de compilación.** No debe imprimir nada:
 
@@ -476,7 +556,7 @@ git ls-files | Select-String -Pattern '(^|/)(bin|obj)/'
 git grep -niE 'password=|pwd='
 ```
 
-3. **Qué falta por subir.** Debe decir *nothing to commit, working tree clean*:
+3. **Qué cambios hay por subir.** Antes de subir es normal que `git status` liste archivos modificados o nuevos: los subirás en el paso siguiente. Lo que **no** debe aparecer en esa lista son carpetas `bin/` u `obj/` ni archivos que contengan contraseñas:
 
 ```powershell
 git status
@@ -492,18 +572,28 @@ Es un error frecuente copiar la cadena de conexión o el comando de migración a
 
 ### Sube el proyecto
 
-Si `git status` mostró cambios, súbelos. Cambia el mensaje por uno que describa lo que hiciste:
+Lo que tienes que hacer depende de en qué situación estés. Averígualo con estos dos comandos, dentro de la carpeta de tu proyecto:
+
+```powershell
+git status
+git remote -v
+```
+
+| Lo que ves | Qué significa | Sigue en |
+|---|---|---|
+| `git status` empieza con `On branch main` (o `En la rama main`) y `git remote -v` muestra una línea con `origin` y una dirección de github.com | Ya tienes repositorio local **y** está enlazado con GitHub | Caso A |
+| `git status` empieza con `On branch main`, pero `git remote -v` no imprime nada | Tienes repositorio local, pero **no** está enlazado con GitHub | Caso B |
+| `git status` dice `fatal: not a git repository` | Tu carpeta **todavía no es un repositorio** | Caso C |
+
+**Caso A: ya está enlazado.** Si `git status` mostró cambios, súbelos. Cambia el mensaje por uno que describa lo que hiciste:
 
 ```powershell
 git add .
-git commit -m "prepara Plaza para publicar en Azure"
+git commit -m "prepara el proyecto para publicar en Azure"
 git push origin main
 ```
 
-Si todavía no tienes repositorio en GitHub:
-
-1. En github.com haz clic en **New repository**, dale un nombre (por ejemplo `iue-web-plaza`) y créalo **vacío**, sin README ni `.gitignore`.
-2. GitHub te muestra los comandos para un repositorio existente. En la carpeta `Plaza`, ejecútalos:
+**Caso B: hay repositorio local pero no está en GitHub.** Primero crea el repositorio vacío en GitHub (ver más abajo) y luego, con la dirección que te muestra GitHub, ejecuta:
 
 ```powershell
 git remote add origin https://github.com/<tu-usuario>/<tu-repositorio>.git
@@ -511,11 +601,39 @@ git branch -M main
 git push -u origin main
 ```
 
+**Caso C: la carpeta no es un repositorio.** La primera vez que usas Git en un equipo debes decirle quién eres, con tu nombre y tu correo (se hace una sola vez por equipo):
+
+```powershell
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu-correo@ejemplo.com"
+```
+
+Después convierte la carpeta en repositorio y haz el primer commit. El comando `dotnet new gitignore` crea el archivo `.gitignore` que evita subir `bin/` y `obj/`; ejecútalo solo si tu carpeta no tiene ya un `.gitignore`:
+
+```powershell
+git init -b main
+dotnet new gitignore
+git add .
+git commit -m "primer commit"
+```
+
+Y sigue con el Caso B: crear el repositorio vacío en GitHub y enlazarlo.
+
+**Crear el repositorio vacío en GitHub** (casos B y C):
+
+1. Entra a [github.com](https://github.com), haz clic en el botón **+** de la esquina superior derecha y elige **New repository**.
+2. En **Repository name** escribe un nombre, por ejemplo `iue-web-plaza`.
+3. Elige **Public** o **Private**. Si es público, cualquier persona puede leer lo que subas: por eso importa la revisión de contraseñas de más arriba. Con un repositorio privado el Centro de implementación de Azure también funciona.
+4. **No marques** *Add a README file*, *Add .gitignore* ni *Choose a license*: el repositorio debe nacer **vacío**.
+5. Haz clic en **Create repository**. GitHub muestra la dirección del repositorio, con la forma `https://github.com/<tu-usuario>/<tu-repositorio>.git`. Esa es la dirección que va en `git remote add origin`.
+
+La primera vez que ejecutes `git push`, Git normalmente abre una ventana del navegador para que inicies sesión en GitHub y autorices el acceso. Acéptala; solo ocurre una vez.
+
 ### Comprueba
 
 - `dotnet publish` en Release terminó sin errores.
-- Los dos comandos de revisión no imprimieron nada.
-- `git status` dice que el árbol de trabajo está limpio y que la rama está al día con `origin/main`.
+- Los dos primeros comandos de revisión no imprimieron nada.
+- Después de subir, `git status` dice *nothing to commit, working tree clean* y que tu rama está al día con `origin/main`.
 - Al abrir tu repositorio en github.com, la rama es `main` y ves las carpetas `Controllers`, `Models`, `Views`, `Migrations` y el archivo `Plaza.csproj`.
 
 ## Etapa 6. Conectar la aplicación con la base de datos
@@ -524,28 +642,75 @@ git push -u origin main
 
 Que la aplicación web de Azure sepa dónde está la base de datos y con qué usuario entrar. Para eso le guardas una **cadena de conexión** en su configuración.
 
-### Qué es la cadena de conexión
+### Qué es la cadena de conexión y de dónde sale
 
-Es una sola línea de texto con los datos para entrar a la base: en qué servidor está, cómo se llama la base, qué usuario usar y su contraseña. En tu equipo, Plaza la lee de `appsettings.Development.json`. En Azure no existe ese archivo con tus datos, y la contraseña no puede estar en el repositorio, así que la guardas en la configuración de la aplicación web, fuera del código.
+Una **cadena de conexión** es una sola línea de texto con los datos que un programa necesita para entrar a una base de datos: en qué servidor está, cómo se llama la base, con qué usuario entrar y con qué contraseña. Está escrita como una lista de pares `nombre=valor` separados por punto y coma.
 
-### La línea que vas a completar
+Nadie te la entrega hecha: **la armas tú con los datos de tu hoja de datos**, que salieron de la etapa 3. El formato lo define Npgsql, la biblioteca que usa tu proyecto para hablar con PostgreSQL; por eso los nombres (`Host`, `Port`, `Database`, `Username`, `Password` y `SSL Mode`) son siempre esos, escritos igual.
 
-Copia esta línea en un bloc de notas y **cambia los dos textos entre `<` y `>`**:
+En tu equipo, el proyecto lee una línea así de `appsettings.Development.json`, con el servidor `localhost`. En Azure ese archivo no tiene tus datos, y la contraseña no puede estar en el repositorio. Por eso guardas la misma línea, pero con los datos de Azure, en la configuración de la aplicación web, fuera del código.
+
+### Los datos que necesitas
+
+La línea lleva seis datos. Cuatro salen de tu hoja de datos y dos son fijos. Antes de seguir, ten abierta tu hoja y comprueba que los cuatro están completos:
+
+| Dato | Qué escribirás | De dónde sale | Ejemplo de esta guía |
+|---|---|---|---|
+| Punto de conexión | La dirección completa de tu servidor | Etapa 3, sección *Revisa el servidor*, con el icono de copiar | `plaza-pg-abc.postgres.database.azure.com` |
+| Base de datos | El nombre de la base que creaste | Etapa 3, sección *Crea la base de datos* | `plaza_campesina` |
+| Usuario | El administrador del servidor | Etapa 3, sección *Pestaña Básico: autenticación* | `plazaadmin` |
+| Contraseña | La que escribiste al crear el servidor | Tú la escribiste en la etapa 3. Azure no la muestra; si la perdiste, mira el apéndice | La tuya, no la de este ejemplo |
+| Puerto | Siempre `5432` | Fijo: es el puerto estándar de PostgreSQL | `5432` |
+| Modo SSL | Siempre `Require` | Fijo: Azure rechaza las conexiones sin cifrar | `Require` |
+
+Si te falta alguno de los cuatro, vuelve a la etapa 3: ahí está. No sigas hasta tenerlos todos.
+
+### Arma la línea en tu bloc de notas
+
+Haz esto en el bloc de notas de tu hoja de datos, **no** en el portal ni en un archivo de tu proyecto.
+
+1. Copia esta plantilla. Tiene cuatro textos en MAYÚSCULAS entre `<` y `>` que debes reemplazar:
 
 ```text
-Host=<tu-servidor>.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=<tu-contraseña>;SSL Mode=Require
+Host=<PUNTO-DE-CONEXION>;Port=5432;Database=<BASE-DE-DATOS>;Username=<USUARIO>;Password=<CONTRASENA>;SSL Mode=Require
 ```
 
-| Parte | Qué escribir |
-|---|---|
-| `Host=` | El **punto de conexión** de tu servidor, el que anotaste en la etapa 3. Reemplaza `<tu-servidor>` por el nombre de tu servidor, por ejemplo `plaza-pg-iue603`. |
-| `Port=5432` | No cambia: es el puerto estándar de PostgreSQL. |
-| `Database=` | `plaza_campesina`, la base que creaste en la etapa 3. |
-| `Username=` | `plazaadmin`, el usuario administrador de la etapa 3. |
-| `Password=` | La contraseña que escribiste al crear el servidor. Reemplaza `<tu-contraseña>`, sin los signos `<` ni `>`. |
-| `SSL Mode=Require` | No cambia: Azure rechaza las conexiones sin cifrar. |
+2. Reemplaza cada texto en MAYÚSCULAS, **incluidos los signos `<` y `>`**, por el dato que le corresponde:
 
-Todo va en **una sola línea**, sin saltos y sin espacios después de los punto y coma. Si te equivocas en un dato, la aplicación no falla al guardar: falla después, al intentar conectarse.
+| Reemplaza | Por |
+|---|---|
+| `<PUNTO-DE-CONEXION>` | Tu punto de conexión, completo, con `.postgres.database.azure.com` al final |
+| `<BASE-DE-DATOS>` | El nombre de tu base de datos |
+| `<USUARIO>` | Tu usuario administrador |
+| `<CONTRASENA>` | Tu contraseña |
+
+3. Así debe verse la línea **ya completa**. Este ejemplo usa un servidor llamado `plaza-pg-abc` y una contraseña inventada solo para el ejemplo:
+
+```text
+Host=plaza-pg-abc.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=ClaveDeEjemplo.2026;SSL Mode=Require
+```
+
+4. Antes de seguir, revísala punto por punto contra esta lista:
+
+- Ya **no queda ningún** signo `<` ni `>` ni texto en MAYÚSCULAS de la plantilla.
+- Empieza con `Host=` y termina con `SSL Mode=Require`.
+- El valor de `Host=` termina en `.postgres.database.azure.com`.
+- Es **una sola línea**: tú no pusiste ningún salto de línea. Si el bloc de notas la parte en varios renglones solo porque la ventana es angosta, está bien.
+- **No tiene comillas** al principio, al final ni alrededor de ningún valor.
+- No hay espacios al principio ni al final, ni alrededor de los signos `=` y `;`. El único espacio que debe existir está dentro de `SSL Mode`.
+- Hay seis pares, separados por cinco punto y coma.
+
+Los errores más comunes y lo que provocan:
+
+| Error | Qué pasa después |
+|---|---|
+| Dejar los signos `<` `>` en un dato | La aplicación no encuentra el servidor o rechaza el usuario |
+| Escribir mal el punto de conexión o dejarlo sin `.postgres.database.azure.com` | `Host desconocido` al conectarse |
+| Contraseña distinta a la del servidor | `password authentication failed` |
+| Olvidar `SSL Mode=Require` | El servidor rechaza la conexión por no estar cifrada |
+| Poner comillas alrededor de la línea o de un valor | Los valores incluyen las comillas y no coinciden |
+
+Si te equivocas en un dato, la aplicación **no falla al guardar**: falla después, cuando intenta conectarse. Por eso conviene revisar la línea ahora.
 
 ### Los pasos
 
@@ -563,14 +728,19 @@ Todo va en **una sola línea**, sin saltos y sin espacios después de los punto 
 
 ![](imagenes/47-app-cadena-panel-vacio.png){fig-alt="Panel Agregar o editar una cadena de conexión con los campos Nombre, Valor y Tipo vacíos y la casilla de configuración de ranura de implementación sin marcar. Abajo, los botones Aplicar y Descartar."}
 
-4. En **Nombre** escribe exactamente `Plaza`, con la P mayúscula. Es el nombre que Plaza busca en `Program.cs`: si lo escribes distinto, la aplicación no encuentra la cadena.
+4. En **Nombre** escribe exactamente `Plaza`, con la P mayúscula. Es el nombre que Plaza busca en `Program.cs`, en la línea `GetConnectionString("Plaza")`: si lo escribes distinto, la aplicación no encuentra la cadena. Si trabajas con tu propio proyecto, abre tu `Program.cs`, busca `GetConnectionString(` y usa el texto que aparece entre comillas, escrito igual, con las mismas mayúsculas.
 5. En **Tipo** abre la lista y elige **PostgreSQL**. No elijas *Custom* ni *SQLServer*: el tipo hace que Azure le ponga a la variable un prefijo que .NET reconoce como cadena de conexión.
 
 ![](imagenes/48-app-cadena-tipos.png){fig-alt="Lista desplegable del tipo de cadena de conexión con las opciones MySQL, SQLServer, SQLAzure, PostgreSQL, Custom, Notification Hub, Service Bus, Event Hub, Document Db y Redis Cache."}
 
 ![](imagenes/49-app-cadena-nombre-tipo.png){fig-alt="Panel con el nombre Plaza escrito, el valor todavía vacío y el tipo PostgreSQL seleccionado."}
 
-6. En **Valor** pega la línea que completaste. Por seguridad el campo muestra puntos en vez de texto. Si quieres comprobar lo que escribiste, el icono del ojo lo muestra mientras lo tienes pulsado, pero hazlo sin nadie mirando tu pantalla.
+6. En **Valor** pega la línea completa que armaste en tu bloc de notas:
+    1. En el bloc de notas, haz clic dentro de la línea, pulsa **Ctrl+A** para seleccionarla toda y **Ctrl+C** para copiarla.
+    2. En el panel, haz clic dentro del campo **Valor** y pulsa **Ctrl+V** para pegar.
+    3. El campo muestra **puntos** en lugar de texto, como en la captura, porque se trata como una contraseña. Además es angosto: la línea tiene unos 140 caracteres y solo cabe una parte. Es normal.
+    4. Para comprobar lo que pegaste, haz clic en el icono del **ojo** que está a la derecha del campo. El texto se muestra y el aviso del icono pasa a *Ocultar contraseña*. Para ver el final de la línea, haz clic dentro del campo y pulsa la tecla **Fin** (*End*). Comprueba que empieza con `Host=` y termina con `SSL Mode=Require`.
+    5. Haz otro clic en el ojo para volver a ocultarla. Hazlo siempre sin nadie mirando tu pantalla, porque al mostrarla se ve tu contraseña.
 
 ![](imagenes/50-app-cadena-valor-oculto.png){fig-alt="Panel con el nombre Plaza, el tipo PostgreSQL y el campo Valor lleno de puntos que ocultan la cadena de conexión. Al lado del campo hay un icono de ojo y uno de copiar."}
 
@@ -592,6 +762,18 @@ Todo va en **una sola línea**, sin saltos y sin espacios después de los punto 
 Hay dos: el del **panel**, que añade la fila a la lista, y el de la **parte inferior de la página**, que guarda los cambios en Azure. Si solo pulsas el primero, la cadena se pierde al salir de la página.
 :::
 
+### Si algo no sale como esperabas
+
+**El panel dice *Los nombres de las cadenas de conexión deben ser únicos*.** Ya existe una cadena con ese nombre, porque la guardaste antes. No crees otra: edita la que ya está. En la tabla haz clic sobre el nombre `Plaza` para abrir su panel, reemplaza el contenido de **Valor** con la línea correcta y repite desde el paso 7.
+
+![](imagenes/79-app-cadena-nombre-repetido.png){fig-alt="Panel Agregar o editar una cadena de conexión con el nombre Plaza escrito y un mensaje de error en rojo que dice que los nombres de las cadenas de conexión deben ser únicos. El campo Valor muestra puntos y el tipo está vacío con un error."}
+
+**Te equivocaste en un dato después de guardar.** El procedimiento es el mismo: haz clic en el nombre `Plaza` en la tabla, corrige **Valor**, pulsa **Aplicar** en el panel, **Aplicar** en la parte inferior de la página y **Confirmar**.
+
+**No recuerdas qué escribiste en Valor.** En la tabla, el enlace *Mostrar valor* o el icono del ojo del panel lo muestran. Hazlo sin nadie mirando tu pantalla.
+
+**Nombre distinto al de tu código.** Si el nombre de la cadena no coincide exactamente con el de `GetConnectionString("...")`, la aplicación no encuentra la cadena y falla al consultar la base de datos. Corrige el nombre en la tabla y guarda de nuevo.
+
 ### Cómo llega la cadena a tu código
 
 Para el tipo PostgreSQL, Azure crea una variable de entorno llamada `POSTGRESQLCONNSTR_Plaza`. .NET reconoce ese prefijo y la entrega a tu código como si fuera `ConnectionStrings:Plaza`, de modo que la línea de `Program.cs` no cambia:
@@ -604,9 +786,10 @@ opciones.UseNpgsql(builder.Configuration.GetConnectionString("Plaza"))
 
 - En la pestaña **Cadenas de conexión** hay una fila llamada `Plaza`.
 - La notificación de guardado salió en verde.
-- Los datos de la línea coinciden con los de la etapa 3: mismo servidor, mismo usuario y la base `plaza_campesina`.
+- Los datos de la línea coinciden con los de tu hoja de datos de la etapa 3: mismo punto de conexión, mismo usuario, misma base de datos y la misma contraseña.
+- Puedes explicar con tus palabras de dónde salió cada uno de los seis datos de la línea.
 
-Todavía no puedes ver Plaza funcionando: la base de datos está vacía y la aplicación todavía no tiene tu código. Eso se resuelve en las dos etapas siguientes.
+Todavía no hay forma de comprobar que la conexión funciona: la base de datos está vacía y la aplicación todavía no tiene tu código. La primera prueba real de esta cadena llega en la etapa 9, cuando abras tu aplicación publicada. Si algo está mal, se verá entonces.
 
 ## Etapa 7. Crear las tablas en la base de datos
 
@@ -620,13 +803,36 @@ Una **migración** es un archivo del proyecto que describe cómo crear o cambiar
 
 Azure no aplica las migraciones por su cuenta: `Program.cs` no las ejecuta al arrancar. Las aplicas tú, **desde tu equipo**, apuntando a la base de Azure. Eso es posible porque en la etapa 3 abriste el firewall del servidor para tu dirección IP.
 
+### Antes del comando
+
+Comprueba estos cuatro puntos. Si alguno falla, el comando también fallará:
+
+1. **La herramienta de Entity Framework está instalada.** En PowerShell, `dotnet ef --version` debe mostrar una versión `10.x`. Si no, instálala como se explica en *Antes de empezar*.
+2. **Tu proyecto está restaurado.** Si acabas de descargar o clonar el proyecto y nunca lo compilaste, ejecuta una vez `dotnet restore` dentro de su carpeta. Sin eso, `dotnet ef` falla con un error que menciona `NETSDK1004` y `project.assets.json`.
+3. **Tu IP está permitida en el firewall del servidor.** Se agregó en la etapa 3, pero cambia si usas otra red. Si no estás seguro, mira *Si tu IP no está permitida*, más abajo.
+4. **Tienes a mano la línea de conexión** que armaste en la etapa 6, en tu bloc de notas.
+
 ### El comando
 
-Abre PowerShell **dentro de la carpeta `Plaza`**, la que contiene `Plaza.csproj`, y ejecuta este comando. Cambia `<tu-servidor>` y `<tu-contraseña>` por tus datos, igual que en la etapa 6:
+Abre PowerShell **dentro de la carpeta de tu proyecto**, la que contiene el archivo `.csproj`. Vas a ejecutar este comando, que usa **la misma línea de conexión de la etapa 6**:
 
 ```powershell
-dotnet ef database update --connection "Host=<tu-servidor>.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=<tu-contraseña>;SSL Mode=Require"
+dotnet ef database update --connection '<TU-LINEA-DE-CONEXION>'
 ```
+
+Para armarlo:
+
+1. Escribe `dotnet ef database update --connection '` (termina con una comilla simple, sin cerrarla).
+2. Pega, sin cambiar nada, la línea completa de tu bloc de notas.
+3. Cierra con otra comilla simple `'` y pulsa Enter.
+
+Con la línea de ejemplo de la etapa 6, el comando completo se ve así (con tus datos y tu contraseña en lugar de los del ejemplo):
+
+```powershell
+dotnet ef database update --connection 'Host=plaza-pg-abc.postgres.database.azure.com;Port=5432;Database=plaza_campesina;Username=plazaadmin;Password=ClaveDeEjemplo.2026;SSL Mode=Require'
+```
+
+Usa **comillas simples** (`'`), no dobles. En PowerShell las comillas simples entregan el texto tal cual; con comillas dobles, un símbolo como `$` en la contraseña se interpretaría y la cadena llegaría rota.
 
 La opción `--connection` le dice a `dotnet ef` que use **esa base** en lugar de la de `appsettings.Development.json`, que apunta a `localhost`. Sin ella, las tablas se crearían en tu PostgreSQL local y la base de Azure seguiría vacía.
 
@@ -668,9 +874,23 @@ El identificador de la migración (`20261107145524_Inicial` en este ejemplo) cam
 | Lo que ves | Qué significa | Qué hacer |
 |---|---|---|
 | `Host desconocido` | Tu equipo no pudo traducir el nombre del servidor a una dirección: suele ser una caché de DNS vieja, de cuando el servidor era nuevo. | Ejecuta `ipconfig /flushdns` y repite el comando. Revisa también que el nombre del servidor esté bien escrito. |
-| Un mensaje con `pg_hba.conf` o que la conexión se agota | El firewall del servidor no deja entrar a tu IP. Tu IP pública cambia si cambias de red. | En el servidor, abre **Redes** y agrega tu IP actual, como en la etapa 3. |
+| Un mensaje con `pg_hba.conf` o que la conexión se agota | El firewall del servidor no deja entrar a tu IP. Tu IP pública cambia si cambias de red. | Agrega tu IP actual, como se explica en *Si tu IP no está permitida*, justo debajo. |
 | `password authentication failed` | El usuario o la contraseña no coinciden con los del servidor. | Revisa `Username=` y `Password=`. Si olvidaste la contraseña, el botón **Restablecer contraseña** del servidor te deja poner otra. |
 | `database "plaza_campesina" does not exist` | La base de datos no existe en el servidor. | Créala como en la etapa 3. |
+| `dotnet ef` no se reconoce, o dice que no encontró el comando o archivo | La herramienta de Entity Framework no está instalada, o PowerShell se abrió antes de instalarla. | Instálala (sección *Antes de empezar*), cierra PowerShell, ábrelo de nuevo y repite. |
+| Un error con `NETSDK1004` y `project.assets.json` | El proyecto no está restaurado. | Ejecuta `dotnet restore` en la carpeta del proyecto y repite. |
+| `No project was found` o no encuentra el proyecto | PowerShell no está dentro de la carpeta correcta. | Muévete con `cd` a la carpeta que contiene el `.csproj` y repite. |
+
+### Si tu IP no está permitida
+
+El firewall del servidor solo deja entrar a las direcciones IP que le indicaste. Tu IP pública cambia cuando te conectas desde otra red (la de la universidad, la de tu casa, los datos del celular). Para agregar tu IP actual:
+
+1. En el portal abre tu servidor PostgreSQL. En el menú de la izquierda, dentro de **Configuración**, haz clic en **Redes**.
+2. Baja hasta **Reglas de firewall** y haz clic en **+ Agregar dirección IP del cliente actual**. Entre paréntesis aparece tu IP actual, y se agrega una fila nueva a la tabla. En la captura el enlace aparece en gris porque ese ejemplo ya tenía su IP agregada; en tu pantalla estará activo.
+3. Haz clic en **Guardar**, arriba a la izquierda de la página, y espera la confirmación. Sin este paso la regla no queda guardada.
+4. Repite el comando de migración.
+
+![](imagenes/78-servidor-redes-agregar-ip.png){fig-alt="Página Redes del servidor plaza-pg-iue603. Muestra la sección Acceso público, con la casilla marcada, y Reglas de firewall, con la casilla de permitir acceso desde servicios de Azure marcada. Debajo, el enlace para agregar la dirección IP del cliente actual y una tabla con una regla de firewall cuyas direcciones IP están tapadas en la captura. Arriba, los botones Guardar y Descartar."}
 
 ### Comprueba
 
@@ -685,6 +905,18 @@ Ya tienes la base de datos lista con sus tablas y datos. Falta lo más important
 ### Qué vas a lograr
 
 Que cada vez que subas cambios a la rama `main` de tu repositorio, GitHub compile Plaza y la publique en la aplicación web de Azure, sin que tengas que hacer nada más. Eso se llama **publicación continua** (CI/CD).
+
+### Resumen de lo que vas a hacer
+
+Necesitas tener hecha la etapa 4 (la aplicación web) y la etapa 5 (tu proyecto en un repositorio de GitHub). Los pasos de esta etapa son cinco:
+
+1. Habilitar la autenticación básica de SCM en tu aplicación web.
+2. Abrir el Centro de implementación de la aplicación web.
+3. Autorizar a Azure en tu cuenta de GitHub.
+4. Elegir tu repositorio, la rama `main` y la opción de flujo de trabajo.
+5. Elegir *Autenticación básica* y guardar.
+
+Antes de los pasos viene una explicación de por qué se usa la autenticación básica y no la opción que el portal propone. Puedes saltarla si solo quieres ejecutar los pasos, pero te ayudará a entender el error que verás si eliges la otra opción.
 
 ### Cómo funciona
 
@@ -723,7 +955,7 @@ Para habilitarla:
 ![](imagenes/64-app-configuracion-general.png){fig-alt="Página Configuración, pestaña Configuración general, de la aplicación web. Las casillas de credenciales de publicación de autenticación básica de SCM y de FTP están sin marcar. Debajo, el estado de FTP en Solo FTPS, HTTP 1.1, SSH y HTTPS solamente marcados."}
 
 3. Marca la casilla de **SCM**. La de **FTP** déjala sin marcar: no la necesitas.
-4. Haz clic en **Aplicar** al pie de la página y confirma. El portal avisa: **La configuración general se actualizó correctamente**.
+4. Haz clic en **Aplicar** al pie de la página. Si el portal pide confirmar el cambio, haz clic en **Confirmar**. El portal avisa: **La configuración general se actualizó correctamente**.
 
 ![](imagenes/65-app-basica-scm-habilitada.png){fig-alt="Configuración general con la casilla de credenciales de publicación de autenticación básica de SCM marcada y la de FTP sin marcar. Los botones Aplicar y Descartar al pie están desactivados porque no quedan cambios pendientes."}
 
@@ -742,7 +974,7 @@ Habilitar la autenticación básica permite publicar con un usuario y una contra
 
 ### Paso 3. Autorizar a Azure en GitHub
 
-1. Haz clic en **Autorizar**. Se abre una ventana de GitHub.
+1. Haz clic en **Autorizar**. Se abre una ventana o pestaña de GitHub. Si no se abre, tu navegador probablemente bloqueó las ventanas emergentes: permítelas para el portal de Azure y vuelve a hacer clic.
 2. Inicia sesión con **tu** cuenta de GitHub y acepta el acceso que pide Azure. Esa pantalla pide permisos sobre tu cuenta: léela antes de aceptar.
 3. Al volver al portal, junto a **Sesión iniciada como** aparece tu nombre de usuario de GitHub.
 
@@ -754,7 +986,7 @@ Habilitar la autenticación básica permite publicar con un usuario y una contra
 
 ![](imagenes/56-github-organizacion.png){fig-alt="Lista de organizaciones con una sola opción, el nombre de usuario de GitHub."}
 
-2. **Repositorio**: la lista muestra todos tus repositorios. Escribe `plaza` en el cuadro de búsqueda para filtrar y elige tu repositorio de Plaza.
+2. **Repositorio**: la lista muestra todos tus repositorios. Escribe parte del nombre del tuyo en el cuadro de búsqueda (en el ejemplo, `plaza`) y elige **el repositorio donde subiste tu proyecto en la etapa 5**. Si eliges otro, Azure publicaría un código distinto.
 
 ![](imagenes/57-github-repositorio.png){fig-alt="Lista de repositorios filtrada por la palabra plaza, con una sola opción: iue-web-plaza."}
 
@@ -773,7 +1005,7 @@ Habilitar la autenticación básica permite publicar con un usuario y una contra
 ![](imagenes/66-github-autenticacion-basica.png){fig-alt="Configuración de autenticación con la opción Autenticación básica seleccionada y sin mensajes de error. Debajo, Configuración del flujo de trabajo con el botón Vista previa de archivo."}
 
 2. Sube al inicio de la página y haz clic en **Guardar**.
-3. Espera unos segundos. Aparece una notificación verde: **Se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub**.
+3. Espera unos segundos. Aparece una notificación verde: **Se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub**. Si en cambio aparece un error en rojo, busca su texto en la tabla *Si algo sale mal*, al final de la guía.
 
 ![](imagenes/67-github-pipeline-configurado.png){fig-alt="Panel de notificaciones con dos avisos verdes: Guardar configuración de código, se configuró correctamente la canalización de compilación e implementación de Acciones de GitHub, y Actualizar la configuración general, la configuración general se actualizó correctamente. Más abajo, los dos errores anteriores de OIDC."}
 
@@ -872,14 +1104,14 @@ Si haces clic en la ejecución, verás los dos trabajos, **build** y **deploy**,
 
 ### Abre Plaza
 
-1. En el portal, abre tu aplicación web y copia el **Dominio predeterminado**, la dirección que termina en `azurewebsites.net`.
-2. Ábrela en el navegador agregando al final `/catalogo`, porque esa es la ruta de Plaza que muestra los productos:
+1. En el portal, abre tu aplicación web (en **Inicio**, en *Recursos*, o en **App Services**). En *Información esencial* busca **Dominio predeterminado**: es la dirección pública de tu aplicación, un enlace que termina en `azurewebsites.net`. Es el mismo enlace que usaste al final de la etapa 4.
+2. Ábrela en el navegador agregando al final `/catalogo`, porque esa es la ruta de Plaza que muestra los productos (si trabajas con tu propio proyecto, usa una ruta tuya que lea datos de la base):
 
 ```text
 https://<tu-dominio>.azurewebsites.net/catalogo
 ```
 
-3. Debe aparecer la lista de productos con sus precios. Esos datos **vienen de la base de datos de Azure**: son los que creó la migración de la etapa 7.
+3. Debe aparecer la lista de productos con sus precios. Esos datos **vienen de la base de datos de Azure**: son los que creó la migración de la etapa 7. Esta es la primera prueba real de la cadena de conexión de la etapa 6.
 
 ![](imagenes/68-plaza-en-linea.png){fig-alt="Página Catálogo de Plaza abierta desde la dirección pública azurewebsites.net. Muestra el título Catálogo y una lista con cuatro productos y sus precios: Aguacate 6000, Panela 4500, Papa 2800 y Tomate 3500."}
 
@@ -889,6 +1121,25 @@ https://<tu-dominio>.azurewebsites.net/catalogo
 - **Si abres solo la dirección, sin `/catalogo`, ves un error 404.** Plaza no define una página en la raíz: las rutas de tu proyecto son las que declaraste en los controladores. No es un problema de Azure.
 - **La primera petición después de un rato tarda más.** El plan gratuito F1 duerme la aplicación cuando nadie la usa, y la primera visita la vuelve a despertar. Las siguientes responden rápido.
 :::
+
+### Si la página da error 500 o sale en blanco
+
+Un error `500` o una página en blanco al abrir una ruta que lee datos casi siempre significa que la aplicación **no pudo conectarse a la base de datos**. Las causas más comunes, en este orden:
+
+1. La cadena de conexión tiene un dato mal escrito (etapa 6).
+2. La contraseña de la cadena no es la del servidor, por ejemplo porque la cambiaste en el servidor y no en la aplicación (apéndice).
+3. El nombre de la cadena en el portal no coincide con el de `GetConnectionString("...")` de tu código.
+4. Las tablas no existen porque no se aplicó la migración (etapa 7).
+
+Para ver el motivo exacto, mira el registro de la aplicación en vivo:
+
+1. En tu aplicación web, abre en el menú de la izquierda la sección **Supervisión** y haz clic en **Secuencia de registro**.
+2. Deja esa pantalla abierta y, en otra pestaña, recarga la página que da error. Aparecen líneas nuevas en el registro cada vez que la aplicación escribe algo.
+3. Escribe una palabra en el cuadro de búsqueda del registro, por ejemplo `authentication`, para filtrar las líneas. Si las líneas tienen texto como *password authentication failed*, el problema es la contraseña o el usuario de la cadena.
+
+![](imagenes/80-app-secuencia-registro.png){fig-alt="Pantalla Secuencia de registro de la aplicación web. Arriba, el intervalo de tiempo En vivo, un cuadro para buscar mensajes y los botones Filtros y Pantalla. En el centro, un panel negro con el texto Esperando entradas de registro: las nuevas entradas aparecerán aquí a medida que la aplicación las genere."}
+
+Cuando corrijas la causa, vuelve a cargar la página. Tras cambiar una cadena de conexión, la aplicación se reinicia y puede tardar unos segundos en responder.
 
 ### Haz un cambio y míralo publicarse
 
@@ -904,8 +1155,8 @@ git pull origin main
 ```
 :::
 
-1. Abre `Views/Catalogo/Listar.cshtml` y cambia el título `<h1>Catálogo</h1>` por otro texto, por ejemplo `<h1>Catálogo de la plaza</h1>`.
-2. Sube el cambio:
+1. Abre en tu editor un archivo de vista que se vea en el navegador. En Plaza es `Views/Catalogo/Listar.cshtml`, y puedes cambiar el título `<h1>Catálogo</h1>` por otro texto, por ejemplo `<h1>Catálogo de la plaza</h1>`. En tu proyecto, elige cualquier vista tuya y cambia un texto que se note.
+2. Guarda el archivo y sube el cambio. Antes de subir, ejecuta otra vez `git grep -niE 'password=|pwd='` (no debe imprimir nada):
 
 ```powershell
 git add .
@@ -998,6 +1249,30 @@ Abre `/catalogo` en la dirección pública. Si muestra los productos, la aplicac
 
 Borra del código cualquier línea que contenga la contraseña, ejecuta `git grep -niE 'password=|pwd='` (no debe imprimir nada) y sube el cambio. Que no quede en el código **no la hace secreta otra vez**: la versión anterior sigue en el historial de Git. Por eso el primer paso, cambiar la contraseña, es el que cuenta.
 
+## Glosario
+
+Los términos que aparecen en la guía, explicados en una línea. Si alguno no te queda claro, vuelve aquí.
+
+| Término | Qué significa |
+|---|---|
+| **Suscripción** | Tu cuenta de Azure con su crédito. Todo lo que creas se cobra de ahí. |
+| **Grupo de recursos** | Una carpeta lógica de Azure que reúne todo lo de un proyecto. Al borrarla se borra todo lo que contiene. |
+| **Región** | El lugar físico, por ejemplo Brazil South o Canada Central, donde Azure ejecuta tu recurso. |
+| **Servidor flexible de PostgreSQL** | El servicio de Azure que ejecuta una base de datos PostgreSQL por ti, sin que instales nada. |
+| **Firewall** | La lista de direcciones IP a las que el servidor deja entrar. Las demás son rechazadas. |
+| **Punto de conexión** | La dirección de tu servidor en internet, con la forma `<nombre>.postgres.database.azure.com`. |
+| **Cadena de conexión** | Una línea de texto con servidor, base, usuario y contraseña para que un programa entre a la base. |
+| **Variable de entorno** | Un valor que se guarda fuera del código, en la configuración del equipo o del servidor, y que el programa lee al arrancar. |
+| **Migración** | Un archivo del proyecto que describe cómo crear o cambiar las tablas de la base de datos. |
+| **App Service** | El servicio de Azure que ejecuta tu aplicación web: recibe peticiones de internet y devuelve respuestas. |
+| **Plan de App Service** | La máquina que usa tu aplicación y su precio. El plan *Gratis F1* no cuesta. |
+| **DNS** | El sistema que traduce un nombre como `mi-app.azurewebsites.net` en la dirección numérica del servidor. |
+| **Publicación continua (CI/CD)** | Que cada cambio que subes a GitHub se compile y se publique solo, sin pasos manuales. |
+| **GitHub Actions y flujo de trabajo** | La herramienta de GitHub que ejecuta tareas automáticas, y el archivo `.yml` que describe cuáles. |
+| **Secreto de GitHub** | Un valor guardado en el repositorio que los flujos de trabajo pueden usar pero que nadie puede leer. |
+| **Autenticación básica (SCM)** | Publicar en Azure con un usuario y una contraseña de despliegue. Viene desactivada y hay que habilitarla en esta guía. |
+| **OIDC e identidad asignada** | La alternativa sin contraseñas para autenticar a GitHub en Azure. Con repositorios nuevos falló en esta práctica. |
+
 ## Si algo sale mal
 
 Estos son los problemas que aparecieron al preparar esta guía, con la causa y la solución de cada uno. Si algo te falla, busca aquí primero.
@@ -1006,20 +1281,33 @@ Estos son los problemas que aparecieron al preparar esta guía, con la causa y l
 
 | Dónde | Lo que ves | Causa | Solución |
 |---|---|---|---|
+| Antes de empezar | `dotnet`, `git` o `dotnet ef` no se reconocen | No están instalados, o PowerShell se abrió antes de instalarlos | Instala el SDK de .NET 10 desde dotnet.microsoft.com/download y Git desde git-scm.com/download/win, o la herramienta de EF con el comando de *Antes de empezar*, y abre PowerShell de nuevo |
 | Etapa 3, servidor | El formulario propone *Producción* con 4 núcleos y, al cambiarlo, *B2s* | Los valores por defecto no son los gratuitos | Elige *Desarrollo/pruebas*, luego *Configurar servidor* y el tamaño **B1ms** |
 | Etapa 3, contraseña | Errores rojos en los campos de contraseña | Campo vacío o contraseña que no cumple: 8 a 128 caracteres, tres de cuatro categorías | Escribe la contraseña en los dos campos y revisa los requisitos |
+| Etapa 3, servidor | El nombre del servidor se marca en rojo o no aparecen los tres checks verdes | El nombre ya existe en Azure, o tiene mayúsculas, símbolos, o menos de 3 caracteres | Elige otro: solo letras minúsculas, números y guiones, entre 3 y 63 caracteres, sin guion al principio ni al final. Agrega algo propio, como tus iniciales |
+| Etapa 3, contraseña | Más adelante la cadena falla aunque la contraseña es la correcta | La contraseña tiene `;`, comillas, `$`, `=` o espacios, que rompen la cadena o PowerShell | Cámbiala por otra sin esos caracteres, con el apéndice *Cambiar la contraseña del servidor* |
 | Etapa 4, plan | El formulario propone *Básico B1* | Plan de pago por defecto | Elige **Gratis F1** después de elegir la región: al cambiar de región el plan vuelve a B1 |
 | Etapa 4, creación | *Operation cannot be completed without additional quota*, límite F1 igual a 0 | Tu suscripción no tiene cuota gratuita en esa región | Cambia a otra región de la lista permitida (etapa 4) |
 | Etapa 4, creación | *Resource was disallowed by Azure*, política de regiones | La región no está entre las permitidas para tu suscripción | Consulta la directiva *Allowed resource deployment regions* y elige una de esas |
+| Etapa 4, nombre | El nombre de la aplicación web se marca en rojo | Ya existe una aplicación con ese nombre en Azure, o tiene caracteres no permitidos | Elige otro nombre: letras, números y guiones, con algo propio |
+| Etapa 5, Git | `fatal: not a git repository` | La carpeta todavía no es un repositorio | Sigue el Caso C de *Sube el proyecto* |
+| Etapa 5, Git | *Author identity unknown* o *Please tell me who you are* | Git no sabe tu nombre y correo | Ejecuta `git config --global user.name "Tu Nombre"` y `git config --global user.email "tu-correo@ejemplo.com"` y repite el commit |
+| Etapa 5, Git | `error: remote origin already exists` | Ya habías enlazado un repositorio con el nombre `origin` | Mira cuál es con `git remote -v`. Si quieres cambiarlo: `git remote set-url origin <nueva-dirección>` |
+| Etapa 5, Git | `git push` termina con un error de autenticación o de permisos | Git no está autorizado en tu cuenta de GitHub, o iniciaste sesión con otra cuenta | Acepta la ventana del navegador que abre Git e inicia sesión con la cuenta dueña del repositorio. Comprueba la dirección con `git remote -v` |
 | Etapa 6, cadena | La cadena desaparece al salir de la página | Solo pulsaste *Aplicar* del panel, no el de la página | Pulsa también el **Aplicar** del pie de la página y confirma |
+| Etapa 6, cadena | *Los nombres de las cadenas de conexión deben ser únicos* | Ya existe una cadena con ese nombre, porque la guardaste antes | No crees otra: haz clic en el nombre `Plaza` de la tabla, corrige **Valor** y guarda de nuevo |
 | Etapa 7, migración | `Host desconocido` | Caché de DNS vieja en tu equipo | `ipconfig /flushdns` y repite el comando |
 | Etapa 7, migración | Una línea con `fail:` al principio, pero termina en `Done.` | EF Core lee una tabla que aún no existe en una base nueva | Nada: es normal |
 | Etapa 7, migración | `pg_hba.conf` o conexión que se agota | Tu IP no está en el firewall del servidor | Agrega tu IP actual en **Redes** del servidor |
+| Etapa 7, migración | `password authentication failed` | El usuario o la contraseña del comando no son los del servidor | Revisa tu línea de conexión. Si olvidaste la contraseña, restablécela con el apéndice |
+| Etapa 7, herramienta | `dotnet ef` no se reconoce o no encuentra el comando | La herramienta de Entity Framework no está instalada, o PowerShell se abrió antes de instalarla | Instálala (sección *Antes de empezar*), cierra y abre PowerShell y repite |
+| Etapa 7, proyecto | Un error con `NETSDK1004` y `project.assets.json` | El proyecto no está restaurado | Ejecuta `dotnet restore` dentro de la carpeta del proyecto y repite |
 | Etapa 8, guardar | *No pudimos verificar cómo GitHub Actions emite tokens OIDC* | Repositorio nuevo con el formato inmutable de identidad | Usa **Autenticación básica** (paso 1 a 5) |
 | Etapa 8, guardar | *The role assignment already exists* | Un intento anterior con identidad asignada dejó restos | No reintentes con identidad: cambia a autenticación básica |
 | Etapa 8, autenticación | *La autenticación básica de SCM está deshabilitada* | Viene deshabilitada en las aplicaciones nuevas | Habilítala en **Configuración general** (paso 1) |
 | Etapa 9, navegador | La dirección no abre o dice que el servidor no se encuentra | Caché de DNS en tu equipo, porque el nombre es nuevo | `ipconfig /flushdns` y recarga |
 | Etapa 9, Plaza | Error 404 en la dirección sin `/catalogo` | Plaza no tiene página en la raíz | Abre `/catalogo` |
+| Etapa 9, Plaza | Error 500 o página en blanco al abrir una ruta que lee datos | La aplicación no logra conectarse a la base de datos | Sigue la sección *Si la página da error 500 o sale en blanco* de la etapa 9 |
 | Etapa 9, Plaza | La primera visita tarda | El plan F1 duerme la aplicación | Espera: las siguientes responden rápido |
 | Etapa 9, cambio | `git push` rechazado, *fetch first* | Azure agregó un commit que tu copia local no tiene | `git pull origin main` y vuelve a subir |
 | Apéndice, contraseña | Después de cambiar la contraseña del servidor, `/catalogo` responde con error 500 y la página queda en blanco | La aplicación web sigue usando la contraseña vieja en su cadena `Plaza` | Actualiza la cadena `Plaza` con la contraseña nueva (apéndice, paso 2) y vuelve a abrir `/catalogo` |
