@@ -359,6 +359,16 @@ td, th {
   padding: 0.5rem 0.7rem;
 }
 
+/* Tabla con muchas columnas de texto: en telefono se desplaza dentro de su
+   propia caja en vez de ensanchar toda la pagina. */
+.tabla-ancha {
+  overflow-x: auto;
+
+  table {
+    min-width: 560px;
+  }
+}
+
 /* Callouts */
 .callout {
   border-radius: 7px;

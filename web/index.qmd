@@ -71,7 +71,7 @@ calendario completo para que planees tu trabajo.
 | Sem | Temática | Entregable independiente | % |
 |:---:|---|---|:---:|
 | 14 | Web APIs y consumo de servicios | API propia consumida desde el frontend | - |
-| 15 | Publicación en Azure App Service | Proyecto accesible desde una dirección pública en internet | - |
+| **[15](semana-15/index.qmd)** | Publicación en Azure App Service | Proyecto accesible desde una dirección pública en internet | - |
 | 16 | Configuración de entornos | Proyecto funcionando en local y en producción | **10%** |
 | 17 | **Evaluación final.** Sustentación técnica individual y demo de la aplicación publicada | Entrega del repositorio final documentado | **20%** |
 :::
