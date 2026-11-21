@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="390" viewBox="0 0 740 390" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Un bucle con condición de parada</title>
+<desc id="d">El ingeniero define antes de arrancar la meta, una condición de parada verificable y un tope de vueltas. El agente hace un cambio, una verificación externa compila y corre las pruebas, y la condición de parada evalúa el resultado. Si se cumple, termina con evidencia. Si no, vuelve a empezar con lo que falló. Si se agota el tope de vueltas, para y reporta. Abajo, ejemplos: /goal usa un evaluador tras cada turno y Ralph usa max-iterations y completion-promise.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="390" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="16" width="700" height="44" rx="6" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.3"/>
+<text x="370.0" y="34.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Antes de arrancar defines la meta, una condición de parada verificable</text>
+<text x="370.0" y="51.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y un tope de vueltas</text>
+<rect x="20" y="110" width="140" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="90.0" y="133" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Agente</text>
+<text x="90.0" y="155" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">hace un cambio</text>
+<text x="90.0" y="173" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">o escribe una prueba</text>
+<rect x="210" y="110" width="160" height="76" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="290.0" y="133" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Verificación</text>
+<text x="290.0" y="155" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">compila y corre</text>
+<text x="290.0" y="173" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">las pruebas</text>
+<rect x="420" y="110" width="170" height="76" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="505.0" y="133" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Condición de parada</text>
+<text x="505.0" y="155" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">evalúa el resultado</text>
+<text x="505.0" y="173" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">de la verificación</text>
+<rect x="630" y="110" width="90" height="76" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="675.0" y="133" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Termina</text>
+<text x="675.0" y="155" font-size="10" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">con evidencia</text>
+<path d="M 162 148 L 206 148" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 372 148 L 416 148" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-hoja)"/>
+<path d="M 592 148 L 626 148" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-hoja)"/>
+<text x="609" y="140" font-size="10" fill="#1f5c42" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cumple</text>
+<path d="M 505 188 L 505 236 L 90 236 L 90 190" fill="none" stroke="#8795a3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-gris)"/>
+<text x="300" y="228" font-size="11" fill="#5b6876" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">no cumple: otra vuelta con lo que falló</text>
+<rect x="420" y="286" width="300" height="78" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="570.0" y="309" font-size="13.5" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Tope de vueltas</text>
+<text x="570.0" y="331" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si se agota, para y reporta:</text>
+<text x="570.0" y="349" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">no hay vuelta infinita</text>
+<path d="M 560 238 L 560 282" fill="none" stroke="#a32d22" stroke-width="1.6" marker-end="url(#f-tomate)"/>
+<text x="568" y="262" font-size="10" fill="#7a1f17" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tope</text>
+<rect x="20" y="286" width="380" height="78" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="210.0" y="309" font-size="13.5" fill="#16202b" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Así se llama en las herramientas</text>
+<text x="210.0" y="331" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">/goal: un evaluador revisa la condición tras cada turno</text>
+<text x="210.0" y="349" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ralph: --max-iterations y --completion-promise</text>
+</g>
+</svg>

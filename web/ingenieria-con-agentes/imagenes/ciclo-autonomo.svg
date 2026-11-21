@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="440" viewBox="0 0 740 440" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Ciclo autónomo con autoauditoría</title>
+<desc id="d">Arriba, una franja del ingeniero: antes de arrancar fija los criterios de parada y un tope de vueltas, que en estas pruebas fue de cinco. El ciclo tiene seis pasos. En la fila de arriba, de izquierda a derecha: analizar, ejecutar y verificar. En la fila de abajo, de derecha a izquierda: auditar, corregir y volver a validar. Una flecha sube de volver a validar a analizar para empezar otra vuelta. Verificar y volver a validar usan una señal externa: compilador, pruebas y curl. Abajo, a la izquierda, las vueltas reales en Plaza: tres para R1 a R8, dos para C1 y dos para C2. A la derecha, el límite: autocorregirse sin una señal externa no mejora de forma confiable.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="440" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="30" y="14" width="680" height="48" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6"/>
+<text x="370" y="34" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El ingeniero fija antes: los criterios de parada y un tope de vueltas</text>
+<text x="370" y="52" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Aquí el ciclo para con una auditoría sin hallazgos o al llegar a 5 vueltas</text>
+<rect x="30" y="90" width="180" height="78" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="120.0" y="112" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">1. ANALIZAR</text>
+<text x="120.0" y="133" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">lee el código y</text>
+<text x="120.0" y="150" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">decide el alcance</text>
+<rect x="280" y="90" width="180" height="78" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="370.0" y="112" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2. EJECUTAR</text>
+<text x="370.0" y="133" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambia el código</text>
+<text x="370.0" y="150" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y las pruebas</text>
+<rect x="530" y="90" width="180" height="78" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="620.0" y="112" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">3. VERIFICAR</text>
+<text x="620.0" y="133" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">compilador, pruebas</text>
+<text x="620.0" y="150" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y curl</text>
+<rect x="530" y="214" width="180" height="78" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="620.0" y="236" font-size="13" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">4. AUDITAR</text>
+<text x="620.0" y="257" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">busca hallazgos con</text>
+<text x="620.0" y="274" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">la evidencia a la vista</text>
+<rect x="280" y="214" width="180" height="78" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="370.0" y="236" font-size="13" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">5. CORREGIR</text>
+<text x="370.0" y="257" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">arregla cada</text>
+<text x="370.0" y="274" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">hallazgo</text>
+<rect x="30" y="214" width="180" height="78" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="120.0" y="236" font-size="13" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">6. VOLVER A VALIDAR</text>
+<text x="120.0" y="257" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">repite la</text>
+<text x="120.0" y="274" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">verificación</text>
+<path d="M 212 129 L 278 129" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 462 129 L 528 129" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 620 170 L 620 212" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 528 253 L 462 253" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 278 253 L 212 253" fill="none" stroke="#2f7bb8" stroke-width="1.6" marker-end="url(#f-cielo)"/>
+<path d="M 120 212 L 120 170" fill="none" stroke="#8795a3" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-gris)"/>
+<text x="130" y="195" font-size="11" fill="#3d4852" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">otra vuelta si hubo hallazgos</text>
+<rect x="30" y="318" width="330" height="108" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="195.0" y="340" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Vueltas reales en Plaza</text>
+<text x="195.0" y="361" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">R1 a R8: 3 vueltas de 5</text>
+<text x="195.0" y="378" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">C1: 2 vueltas. C2: 2 vueltas</text>
+<text x="195.0" y="395" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Hallazgos: un enlace escrito a mano, el</text>
+<text x="195.0" y="412" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">formato de pesos y casos calculados a mano</text>
+<rect x="380" y="318" width="330" height="108" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="545.0" y="340" font-size="12.5" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El límite</text>
+<text x="545.0" y="361" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Auditar sin una señal externa no corrige</text>
+<text x="545.0" y="378" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">de forma confiable (Huang y otros, 2024).</text>
+<text x="545.0" y="395" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Por eso cada auditoría se apoya en pruebas,</text>
+<text x="545.0" y="412" font-size="11" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">curl y una comparación con el commit anterior</text>
+</g>
+</svg>

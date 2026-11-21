@@ -18,6 +18,8 @@ project:
     # Presentacion interactiva de la guia de Plaza (formularios, validacion y
     # base de datos), mismo motivo: solo la enlaza el boton de la guia.
     - web/plaza-formularios-y-datos/presentacion-interactiva.html
+    # Presentacion interactiva de la guia de ingenieria con agentes de IA: solo la enlaza el boton de la guia.
+    - web/ingenieria-con-agentes/presentacion-interactiva.html
     # Presentaciones interactivas de Movil (Semanas 7 y 8), mismo motivo.
     - movil/semana-07/presentacion-interactiva.html
     - movil/semana-07/presentacion-statefulwidget.html
@@ -132,6 +134,8 @@ website:
           contents:
             - text: "Plaza en la nube: publicar en Azure"
               href: web/semana-15/index.qmd
+        - text: "Ingeniería de software con agentes de IA"
+          href: web/ingenieria-con-agentes/index.qmd
         - text: "Proyecto: entregable 1"
           href: web/proyecto-entregable-1/index.qmd
         - text: "Proyecto: entregable final"

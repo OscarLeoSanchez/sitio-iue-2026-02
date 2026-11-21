@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="380" viewBox="0 0 740 380" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Del issue al pull request</title>
+<desc id="d">Cinco pasos. El ingeniero escribe un issue con el problema y los criterios. Lo asigna a Copilot, Codex o Claude mediante @claude. El agente en la nube trabaja en su propia rama y ejecuta pruebas. Abre un pull request en borrador. Las pruebas y la integración continua verifican antes de que el ingeniero revise el diff, pida cambios y decida. Los comentarios de revisión vuelven al agente. Una advertencia dice que el issue es una entrada no confiable. Abajo, Symphony de OpenAI, en vista previa.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="380" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="50" width="124" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="82.0" y="73" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Issue</text>
+<text x="82.0" y="95" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tú defines el</text>
+<text x="82.0" y="113" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">problema y los</text>
+<text x="82.0" y="131" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">criterios</text>
+<rect x="164" y="50" width="124" height="100" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="226.0" y="73" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Asignación</text>
+<text x="226.0" y="95" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">a Copilot, Codex</text>
+<text x="226.0" y="113" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">o Claude (@claude)</text>
+<rect x="308" y="50" width="124" height="100" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="370.0" y="73" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Agente</text>
+<text x="370.0" y="95" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">trabaja en su</text>
+<text x="370.0" y="113" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">propia rama y</text>
+<text x="370.0" y="131" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ejecuta pruebas</text>
+<rect x="452" y="50" width="124" height="100" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="514.0" y="73" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Pull request</text>
+<text x="514.0" y="95" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">en borrador, con</text>
+<text x="514.0" y="113" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el cambio y su</text>
+<text x="514.0" y="131" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">descripción</text>
+<rect x="596" y="50" width="124" height="100" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="658.0" y="73" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Revisión</text>
+<text x="658.0" y="95" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tú lees el diff,</text>
+<text x="658.0" y="113" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">pides cambios y</text>
+<text x="658.0" y="131" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">decides</text>
+<path d="M 146 100 L 160 100" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 290 100 L 304 100" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 434 100 L 448 100" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 578 100 L 592 100" fill="none" stroke="#8795a3" stroke-width="1.6" marker-end="url(#f-gris)"/>
+<path d="M 658 48 L 658 26 L 370 26 L 370 46" fill="none" stroke="#b7791f" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f-maiz)"/>
+<text x="514" y="20" font-size="10.5" fill="#8a5a12" font-weight="600" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">comentarios de revisión</text>
+<rect x="452" y="196" width="124" height="76" rx="8" fill="#f4faf7" stroke="#2e7d5b" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="514.0" y="219" font-size="13.5" fill="#1f5c42" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Pruebas y CI</text>
+<text x="514.0" y="241" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">verifican antes</text>
+<text x="514.0" y="259" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">de tu revisión</text>
+<path d="M 514 152 L 514 192" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-hoja)"/>
+<path d="M 578 234 L 658 234 L 658 154" fill="none" stroke="#2e7d5b" stroke-width="1.6" marker-end="url(#f-hoja)"/>
+<rect x="20" y="196" width="400" height="76" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="220.0" y="219" font-size="13.5" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El issue es una entrada no confiable</text>
+<text x="220.0" y="241" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">si un tercero puede escribirlo, puede</text>
+<text x="220.0" y="259" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">intentar dirigir al agente</text>
+<rect x="20" y="296" width="700" height="64" rx="6" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.3"/>
+<text x="370.0" y="324.5" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Symphony (OpenAI, 27 de abril de 2026), en vista previa: un tablero de Linear controla el trabajo,</text>
+<text x="370.0" y="341.5" font-size="11.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">un agente por tarea y un archivo WORKFLOW.md. OpenAI no lo mantendrá como producto.</text>
+</g>
+</svg>

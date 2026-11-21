@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="380" viewBox="0 0 740 380" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Lo que miden dos estudios</title>
+<desc id="d">Dos paneles. A la izquierda, METR 2025: los desarrolladores esperaban ir 24 por ciento más rápido, creían después haber ido 20 por ciento más rápido y fueron 19 por ciento más lentos. El seguimiento de 2026 midió menos 4 por ciento, con intervalo de menos 15 a más 9. A la derecha, Anthropic 2026: con asistente de IA el puntaje fue 50 por ciento y sin IA 67 por ciento, con la mayor brecha en depuración.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="380" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="20" width="350" height="292" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="390" y="20" width="330" height="292" rx="8" fill="#ffffff" stroke="#8795a3" stroke-width="1.2"/>
+<text x="36" y="46" font-size="13" fill="#16202b" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">METR 2025: desarrolladores experimentados</text>
+<text x="36" y="64" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">cambio en el tiempo de trabajo al usar IA</text>
+<line x1="225" y1="80" x2="225" y2="232" stroke="#8795a3" stroke-width="1.4"/>
+<text x="36" y="88" font-size="11.5" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Esperaban antes</text>
+<rect x="225" y="92" width="81.6" height="28" rx="4" fill="#b7791f"/>
+<text x="312.6" y="111" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">+24%</text>
+<text x="36" y="136" font-size="11.5" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Creían después</text>
+<rect x="225" y="140" width="68.0" height="28" rx="4" fill="#b7791f"/>
+<text x="299.0" y="159" font-size="12.5" fill="#8a5a12" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">+20%</text>
+<text x="36" y="184" font-size="11.5" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Medido</text>
+<rect x="160.4" y="188" width="64.6" height="28" rx="4" fill="#2e7d5b"/>
+<text x="154.4" y="207" font-size="12.5" fill="#1f5c42" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">-19%</text>
+<text x="219" y="252" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">más lento</text>
+<text x="231" y="252" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">más rápido</text>
+<text x="36" y="282" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Seguimiento de 2026: -4% (de -15% a +9%)</text>
+<text x="36" y="300" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">METR advierte sesgo de selección</text>
+<text x="406" y="46" font-size="13" fill="#16202b" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Anthropic 2026: aprender una librería</text>
+<text x="406" y="64" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">puntaje en el cuestionario posterior</text>
+<line x1="410" y1="82" x2="410" y2="204" stroke="#8795a3" stroke-width="1.4"/>
+<text x="416" y="98" font-size="11.5" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Con asistente de IA</text>
+<rect x="410" y="104" width="145.0" height="28" rx="4" fill="#2f7bb8"/>
+<text x="561.0" y="123" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">50%</text>
+<text x="416" y="154" font-size="11.5" fill="#5b6876" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sin IA</text>
+<rect x="410" y="160" width="194.29999999999998" height="28" rx="4" fill="#8795a3"/>
+<text x="610.3" y="179" font-size="12.5" fill="#16202b" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">67%</text>
+<text x="406" y="236" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">La mayor brecha apareció en depuración.</text>
+<text x="406" y="254" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Sin mejora significativa de velocidad.</text>
+<text x="406" y="272" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Importó más cómo se usó la IA que usarla o no.</text>
+<text x="406" y="296" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">52 ingenieros, mayormente junior</text>
+<rect x="20" y="326" width="700" height="36" rx="6" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.3"/>
+<text x="370.0" y="348.5" font-size="12" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Muestras pequeñas y contextos acotados: son señales, no leyes. Mide en tu propio proyecto.</text>
+</g>
+</svg>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="450" viewBox="0 0 740 450" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">Consumo de tokens por proyecto y fase</title>
+<desc id="d">Barras horizontales apiladas con los tokens que reportó el agente en cada proyecto, divididos en tres fases: F1 (reglas R1 a R8), C1 y C2. Vibe coding: 109.273, 92.216 y 91.280, total 292.769. Plan mode: 218.244, 196.119 y 191.690, total 606.053. SDD: 206.206, 160.161 y 130.190, total 496.557. ODD: 142.374, 112.023 y 99.498, total 353.895. TDD: 199.866, 120.777 y 112.543, total 433.186. Ciclo autónomo: 147.706, 123.453 y 115.687, total 386.846. Compound engineering: 448.083, 293.397 y 195.382, total 936.862.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="450" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<text x="20" y="26" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Tokens por proyecto y fase</text>
+<rect x="330" y="14" width="12" height="12" rx="2" fill="#a32d22" stroke="#a32d22" stroke-width="1"/>
+<text x="347" y="25" font-size="11" fill="#3d4852" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">F1: R1 a R8</text>
+<rect x="425" y="14" width="12" height="12" rx="2" fill="#d4766b" stroke="#a32d22" stroke-width="1"/>
+<text x="442" y="25" font-size="11" fill="#3d4852" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">C1: descuento orgánico</text>
+<rect x="583" y="14" width="12" height="12" rx="2" fill="#ecc0b9" stroke="#a32d22" stroke-width="1"/>
+<text x="600" y="25" font-size="11" fill="#3d4852" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">C2: botón y negrita</text>
+<text x="20" y="75" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Vibe coding</text>
+<rect x="160" y="56" width="60.1" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="190.1" y="76" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">109k</text>
+<rect x="220.1" y="56" width="50.7" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="245.5" y="76" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">92k</text>
+<rect x="270.8" y="56" width="50.2" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="295.9" y="76" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">91k</text>
+<text x="329.0" y="76" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">292.769</text>
+<text x="20" y="127" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Plan mode</text>
+<rect x="160" y="108" width="120.0" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="220.0" y="128" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">218k</text>
+<rect x="280.0" y="108" width="107.9" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="334.0" y="128" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">196k</text>
+<rect x="387.9" y="108" width="105.4" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="440.6" y="128" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">192k</text>
+<text x="501.3" y="128" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">606.053</text>
+<text x="20" y="179" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">SDD</text>
+<rect x="160" y="160" width="113.4" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="216.7" y="180" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">206k</text>
+<rect x="273.4" y="160" width="88.1" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="317.5" y="180" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">160k</text>
+<rect x="361.5" y="160" width="71.6" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="397.3" y="180" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">130k</text>
+<text x="441.1" y="180" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">496.557</text>
+<text x="20" y="231" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ODD</text>
+<rect x="160" y="212" width="78.3" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="199.2" y="232" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">142k</text>
+<rect x="238.3" y="212" width="61.6" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="269.1" y="232" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">112k</text>
+<rect x="299.9" y="212" width="54.7" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="327.3" y="232" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">99k</text>
+<text x="362.6" y="232" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">353.895</text>
+<text x="20" y="283" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">TDD</text>
+<rect x="160" y="264" width="109.9" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="215.0" y="284" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">200k</text>
+<rect x="269.9" y="264" width="66.4" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="303.1" y="284" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">121k</text>
+<rect x="336.4" y="264" width="61.9" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="367.3" y="284" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">113k</text>
+<text x="406.3" y="284" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">433.186</text>
+<text x="20" y="335" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ciclo autónomo</text>
+<rect x="160" y="316" width="81.2" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="200.6" y="336" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">148k</text>
+<rect x="241.2" y="316" width="67.9" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="275.2" y="336" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">123k</text>
+<rect x="309.1" y="316" width="63.6" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="341.0" y="336" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">116k</text>
+<text x="380.8" y="336" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">386.846</text>
+<text x="20" y="387" font-size="13" fill="#17456f" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Compound</text>
+<rect x="160" y="368" width="246.4" height="30" rx="2" fill="#a32d22" stroke="#ffffff" stroke-width="1"/>
+<text x="283.2" y="388" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">448k</text>
+<rect x="406.4" y="368" width="161.4" height="30" rx="2" fill="#d4766b" stroke="#ffffff" stroke-width="1"/>
+<text x="487.1" y="388" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">293k</text>
+<rect x="567.8" y="368" width="107.5" height="30" rx="2" fill="#ecc0b9" stroke="#ffffff" stroke-width="1"/>
+<text x="621.5" y="388" font-size="11" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">195k</text>
+<text x="683.3" y="388" font-size="12" fill="#7a1f17" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">936.862</text>
+<text x="20" y="436" font-size="11" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Las etiquetas dentro de cada barra están en miles de tokens. Una sola corrida por proyecto; el consumo no mide la calidad.</text>
+</g>
+</svg>

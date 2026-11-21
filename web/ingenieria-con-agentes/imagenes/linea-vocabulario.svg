@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="380" viewBox="0 0 740 380" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">La línea de tiempo del vocabulario</title>
+<desc id="d">Una línea de tiempo con seis estaciones y su estado. Prompt, de 2023 a 2024, consolidado. Context, de junio a septiembre de 2025, consolidado. Harness, de noviembre de 2025 a febrero de 2026, emergente. Loop, junio y julio de 2026, emergente. Graph, julio y agosto de 2026, emergente a experimental. Meta-harness y autoevolución, en 2026, experimental. Una franja dice que lo que permanece es especificar, dar contexto y verificar.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="380" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<path d="M 20 30 L 718 30" fill="none" stroke="#8795a3" stroke-width="1.4" marker-end="url(#f-gris)"/>
+<text x="718" y="20" font-size="10.5" fill="#5b6876" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">tiempo</text>
+<line x1="72" y1="30" x2="72" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="20" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="72.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Prompt</text>
+<text x="72.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2023 a 2024</text>
+<rect x="22" y="146" width="101" height="24" rx="12.0" fill="#2e7d5b"/>
+<text x="72.5" y="162.0" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Consolidado</text>
+<text x="72" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">escribir bien</text>
+<text x="72" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">la instrucción</text>
+<line x1="191" y1="30" x2="191" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="139" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="191.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Context</text>
+<text x="191.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">jun a sep 2025</text>
+<rect x="141" y="146" width="101" height="24" rx="12.0" fill="#2e7d5b"/>
+<text x="191.5" y="162.0" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Consolidado</text>
+<text x="191" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">decidir qué</text>
+<text x="191" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">ve el modelo</text>
+<line x1="310" y1="30" x2="310" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="258" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="310.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Harness</text>
+<text x="310.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">nov 2025 a</text>
+<text x="310.5" y="119" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">feb 2026</text>
+<rect x="260" y="146" width="101" height="24" rx="12.0" fill="#b7791f"/>
+<text x="310.5" y="162.0" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Emergente</text>
+<text x="310" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">guías, sensores</text>
+<text x="310" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">y controles</text>
+<line x1="429" y1="30" x2="429" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="377" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="429.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Loop</text>
+<text x="429.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">jun y jul 2026</text>
+<rect x="379" y="146" width="101" height="24" rx="12.0" fill="#b7791f"/>
+<text x="429.5" y="162.0" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Emergente</text>
+<text x="429" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">bucles con</text>
+<text x="429" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">condición de parada</text>
+<line x1="548" y1="30" x2="548" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="496" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="548.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Graph</text>
+<text x="548.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">jul y ago 2026</text>
+<rect x="498" y="146" width="101" height="32" rx="14" fill="#b7791f"/>
+<text x="548.5" y="159.5" font-size="10" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Emergente a</text>
+<text x="548.5" y="171.5" font-size="10" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">experimental</text>
+<text x="548" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">agentes como grafo</text>
+<text x="548" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">de estados</text>
+<line x1="667" y1="30" x2="667" y2="56" stroke="#8795a3" stroke-width="1.2"/>
+<rect x="615" y="56" width="105" height="76" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="667.5" y="79" font-size="12.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Meta-harness</text>
+<text x="667.5" y="101" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">2026</text>
+<rect x="617" y="146" width="101" height="24" rx="12.0" fill="#a32d22"/>
+<text x="667.5" y="162.0" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Experimental</text>
+<text x="667" y="196" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">el agente mejora</text>
+<text x="667" y="211" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">su propio harness</text>
+<text x="20" y="246" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">El estado es el criterio de esta guía según la solidez de las fuentes: documentación de fabricantes y práctica extendida,</text>
+<text x="20" y="262" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">frente a notas de analistas y artículos preliminares.</text>
+<rect x="20" y="290" width="700" height="62" rx="6" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.3"/>
+<text x="370.0" y="317.5" font-size="13.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Lo que permanece cuando cambia el nombre:</text>
+<text x="370.0" y="334.5" font-size="13.5" fill="#16202b" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">especificar, dar contexto y verificar</text>
+</g>
+</svg>

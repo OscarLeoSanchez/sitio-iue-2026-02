@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="740" height="450" viewBox="0 0 740 450" role="img" aria-labelledby="t d" xmlns="http://www.w3.org/2000/svg">
+<title id="t">La pila de extensión del agente</title>
+<desc id="d">Arriba, dos cajas: AGENTS.md o CLAUDE.md, siempre en el contexto, y el agente base con modelo, bucle y herramientas. En un marco punteado llamado plugin hay seis piezas: skills que se cargan bajo demanda, comandos que invoca el ingeniero, subagentes con contexto propio, hooks deterministas, servidores MCP para herramientas y datos externos, y servidores LSP y monitores. Debajo, un marketplace como repositorio git que lista plugins y una advertencia de que los plugins ejecutan código en tu equipo.</desc>
+<defs><marker id="f-cielo" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2f7bb8"/></marker><marker id="f-hoja" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2e7d5b"/></marker><marker id="f-maiz" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b7791f"/></marker><marker id="f-tomate" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a32d22"/></marker><marker id="f-uva" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#7a4fa0"/></marker><marker id="f-gris" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8795a3"/></marker><filter id="sombra" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#0f2540" flood-opacity="0.13"/></filter></defs>
+<rect x="0" y="0" width="740" height="450" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica Neue, Arial, sans-serif">
+<rect x="20" y="14" width="340" height="70" rx="8" fill="#fdf8ec" stroke="#b7791f" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="190.0" y="37" font-size="13.5" fill="#8a5a12" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">AGENTS.md o CLAUDE.md</text>
+<text x="190.0" y="59" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">siempre en el contexto:</text>
+<text x="190.0" y="77" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">instrucciones cortas del proyecto</text>
+<rect x="390" y="14" width="330" height="70" rx="8" fill="#f2f7fb" stroke="#2f7bb8" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="555.0" y="37" font-size="13.5" fill="#17456f" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Agente base</text>
+<text x="555.0" y="59" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">modelo, bucle y herramientas</text>
+<text x="555.0" y="77" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">integradas</text>
+<rect x="10" y="104" width="720" height="250" rx="12" fill="none" stroke="#7a4fa0" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="26" y="128" font-size="13" fill="#52307a" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Plugin: empaqueta varias piezas y se instala junto</text>
+<rect x="30" y="140" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="135.0" y="163" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Skills</text>
+<text x="135.0" y="185" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">se cargan bajo demanda</text>
+<text x="135.0" y="203" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">carpeta con SKILL.md</text>
+<rect x="260" y="140" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="365.0" y="163" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Comandos</text>
+<text x="365.0" y="185" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">los invocas tú</text>
+<text x="365.0" y="203" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">con una barra</text>
+<rect x="490" y="140" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="595.0" y="163" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Subagentes</text>
+<text x="595.0" y="185" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">contexto propio,</text>
+<text x="595.0" y="203" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">devuelven un resumen</text>
+<rect x="30" y="240" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="135.0" y="263" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Hooks</text>
+<text x="135.0" y="285" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">se ejecutan en eventos</text>
+<text x="135.0" y="303" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">sin que el modelo decida</text>
+<rect x="260" y="240" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="365.0" y="263" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Servidores MCP</text>
+<text x="365.0" y="285" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">herramientas y datos</text>
+<text x="365.0" y="303" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">de otros sistemas</text>
+<rect x="490" y="240" width="210" height="84" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="595.0" y="263" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">LSP y monitores</text>
+<text x="595.0" y="285" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">también viajan</text>
+<text x="595.0" y="303" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">dentro de un plugin</text>
+<rect x="20" y="376" width="340" height="62" rx="8" fill="#f7f3fa" stroke="#7a4fa0" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="190.0" y="399" font-size="13.5" fill="#52307a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Marketplace</text>
+<text x="190.0" y="421" font-size="11.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">repositorio git que lista plugins</text>
+<path d="M 190 374 L 190 358" fill="none" stroke="#7a4fa0" stroke-width="1.6" marker-end="url(#f-uva)"/>
+<text x="198" y="368" font-size="10.5" fill="#52307a" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">instalas</text>
+<rect x="390" y="376" width="330" height="62" rx="8" fill="#fdf3f1" stroke="#a32d22" stroke-width="1.6" filter="url(#sombra)"/>
+<text x="555.0" y="399" font-size="13.5" fill="#7a1f17" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">Ejecutan código en tu equipo</text>
+<text x="555.0" y="421" font-size="10.5" fill="#5b6876" font-weight="400" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" xml:space="preserve">revisa quién publica un plugin antes de instalarlo</text>
+</g>
+</svg>
